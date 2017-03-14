@@ -2,12 +2,32 @@
 // that are set in wyrm_core/wy_variables.sass. You'll find wyrm in bower_components if you're looking
 // for a reference.
 
+
+
+// Colors
+$background-color:                    #edf0f2
+$section-background-color:            #fff
+$dropdown-color:                      $section-background-color
+$dropdown-border-color:               darken($background-color, 10%)
+
+// Typography
+$text-color:                          #1C2024 !default
+$base-font-family-bold:               600
+$text-dark:                           lighten($text-color,15%) !default
+$text-medium:                         lighten($text-color,25%) !default
+$text-light:                          lighten($text-color,45%) !default
+$text-lighter:                        lighten($text-color,60%) !default
+
 // Links
 $link-color:                          #06c
 $link-color-visited:                  #06c
 $link-color-hover:                    #004D99
-// $link-color-hover:                    lighten($link-color, 6%) !default
 $link-color-alt:                      hsl(33, 100%, 51%)
+
+
+// Buttons
+$button-background-color:             $link-color
+$button-neutral-background-color:     $table-stripe-color
 
 
 $font-awesome-dir:                    "../fonts/"
@@ -74,3 +94,12 @@ $code-font-family:                    Consolas, "Andale Mono WT", "Andale Mono",
 $base-font-size:                      16px !default
 $small-font-size:                     14px
 $base-line-height:                    21px !default
+
+// Tables
+$table-background-color:              transparent
+$table-border-color:                  hsl(195, 7%, 89%)
+$table-stripe-color:                  #F6F9FC
+$table-bg-hover-color:                hsl(0,0%,85%)
+$table-head-background-color:         $table-border-color
+$table-font-size:                     90%
+$table-padding-size:                  $base-font-size / 2 $base-font-size

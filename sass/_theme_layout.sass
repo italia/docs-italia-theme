@@ -26,17 +26,18 @@
 .wy-menu-vertical
   width: $nav-desktop-width
   header, p.caption
-    height: $base-font-size * 2
+    // height: $base-font-size * 2
     display: inline-block
-    line-height: $base-font-size * 2
-    padding: 0 $gutter
+    line-height: $base-font-size * 1
+    font-size: $small-font-size
+    padding: 1rem 1.5rem .5rem 1.5rem
     margin-bottom: 0
     display: block
     font-weight: bold
     text-transform: uppercase
-    font-size: 80%
     color: $menu-color
-    white-space: nowrap
+    white-space: auto
+    color: #5A6772
 
   ul
     margin-bottom: 0
@@ -46,13 +47,14 @@
     &.divide-bottom
       border-bottom: solid 1px hsl(0, 0%, 25%)
     &.current
-      background: darken($menu-vertical-background-color, 10%)
+      background: darken($menu-vertical-background-color  , 10%)
       a
         color: $menu-link-medium
-        border-right: solid 1px darken($menu-vertical-background-color, 20%)
-        padding: $gutter / 4 $gutter * 1.5
+        // border-right: solid 1px darken($menu-vertical-background-color, 20%)
+        padding: $gutter / 2 $gutter * 1.5
         &:hover
           background: darken($menu-vertical-background-color, 15%)
+          color: #1C2024
     code
       border: none
       background: inherit
@@ -73,16 +75,17 @@
   // On state for the first level
   li.on a, li.current > a
     color: $menu-link-color
-    padding: $gutter / 4 $gutter
+    padding: $gutter / 2 $gutter
     font-weight: bold
     position: relative
     background: $menu-vertical-background-color
     border: none
-    border-bottom: solid 1px darken($menu-vertical-background-color, 20%)
-    border-top: solid 1px darken($menu-vertical-background-color, 20%)
+    // border-bottom: solid 1px darken($menu-vertical-background-color, 20%)
+    // border-top: solid 1px darken($menu-vertical-background-color, 20%)
     padding-left: $gutter -4px
     +font-smooth
     &:hover
+      color: #1C2024
       background: $menu-vertical-background-color
       span.toctree-expand
         color: $menu-link-medium
@@ -103,32 +106,32 @@
   li.toctree-l2
     &.current
       > a
-        background: darken($menu-vertical-background-color, 20%)
-        padding: $gutter / 4 $gutter * 1.5
+        background: darken($menu-vertical-background-color, 5%)
+        padding: $gutter / 2 $gutter * 1.5
       li.toctree-l3 > a
         display: block
-        background: darken($menu-vertical-background-color, 20%)
-        padding: $gutter / 4 $gutter * 2.5
+        background: darken($menu-vertical-background-color, 10%)
+        padding: $gutter / 2 $gutter * 2.5
     a:hover span.toctree-expand
       color: $menu-link-medium
     span.toctree-expand
-      color: darken($menu-vertical-background-color, 35%)
+      color: darken($menu-vertical-background-color, 15%)
   li.toctree-l3
     font-size: .9em
     &.current
       > a
-        background: darken($menu-vertical-background-color, 25%)
+        background: darken($menu-vertical-background-color, 10%)
         padding: $gutter / 4 $gutter * 2.5
       li.toctree-l4 > a
         display: block
-        background: darken($menu-vertical-background-color, 25%)
+        background: darken($menu-vertical-background-color, 10%)
         padding: $gutter / 4 $gutter * 3.5
         border-top: none
         border-bottom: none
     a:hover span.toctree-expand
       color: $menu-link-medium
     span.toctree-expand
-      color: darken($menu-vertical-background-color, 40%)
+      color: darken($menu-vertical-background-color, 20%)
   li.toctree-l4
     font-size: .9em
 
@@ -147,14 +150,16 @@
   a
     display: inline-block
     line-height: 18px
-    padding: $gutter / 4 $gutter
+    padding: $gutter / 2 $gutter
     display: block
     position: relative
     font-size: 90%
-    color: $menu-link-light
+    color: #65DDE0
     &:hover
       background-color: lighten($menu-background-color, 10%)
       cursor: pointer
+      text-decoration: none
+      color: #65DDE0
       span.toctree-expand
         color: $menu-link-light
     &:active
@@ -177,10 +182,10 @@
   color: $nav-search-color
   margin-bottom: $gutter / 2
   .branding
-    display: block
+    display: inline-block
     text-align: left
     .branding--logo
-      width: 72px
+      width: 64px
       float: left
       svg
         width: 100%
@@ -190,16 +195,17 @@
       padding: $base-font-size / 2
       h2
         font-size: $base-font-size
-        line-height: 26px
+        line-height: $base-font-size * 1.5
         float: left
         margin-bottom: 0
+        font-weight: 600
       span
         display: block
         &.branding--title--root
           opacity: .5
           font-weight: 300
         &.branding--title--branch
-          font-size: $base-font-size * 2
+          font-size: $base-font-size * 1.75
       a
         color: $white
       a:hover
@@ -209,9 +215,11 @@
       font-size: 14px
       line-height: 1rem
       font-weight: 300
+      display: none
   h1
     text-align: center
-    font-size: $base-font-size * 1.5
+    font-size: $base-font-size * 1.25
+    font-weight: 600
   a, a:visited
     color: $white
   input[type=text]
@@ -322,7 +330,7 @@
   color: $white
   padding: $gutter / 4 $gutter / 2
   position: relative
-  line-height: 50px
+  line-height: 48px
   text-align: center
   font-size: 100%
   +clearfix
@@ -335,10 +343,10 @@
     height: 45px
     width: 45px
     background-color: $menu-logo-color
-    padding: 5px
+    padding: 8px
     border-radius: 100%
   i
-    font-size: 30px
+    font-size: 32px
     float: left
     cursor: pointer
     padding-top: inherit
