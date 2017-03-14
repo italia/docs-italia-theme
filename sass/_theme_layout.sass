@@ -4,7 +4,7 @@
 
 .wy-menu
   a:hover
-    text-decoration: none
+    text-decoration: underline
 
 .wy-menu-horiz
   +clearfix
@@ -176,11 +176,51 @@
   display: block
   color: $nav-search-color
   margin-bottom: $gutter / 2
+  .branding
+    display: block
+    text-align: left
+    .branding--logo
+      width: 72px
+      float: left
+      svg
+        width: 100%
+        height: auto
+    .branding--content
+      float: left
+      padding: $base-font-size / 2
+      h2
+        font-size: $base-font-size
+        line-height: 26px
+        float: left
+        margin-bottom: 0
+      span
+        display: block
+        &.branding--title--root
+          opacity: .5
+          font-weight: 300
+        &.branding--title--branch
+          font-size: $base-font-size * 2
+      a
+        color: $white
+      a:hover
+        text-decoration: underline
+    h3
+      float: left
+      font-size: 14px
+      line-height: 1rem
+      font-weight: 300
+  h1
+    text-align: center
+    font-size: $base-font-size * 1.5
+  a, a:visited
+    color: $white
   input[type=text]
     width: 100%
-    border-radius: 50px
-    padding: 6px 12px
-    border-color: darken($link-color, 5%)
+    border-radius: 3px
+    padding: ($base-font-size / 2) $base-font-size
+    border: none
+    box-shadow: none
+    font-size: $base-font-size
   img
     display: block
     margin: auto auto $gutter / 2 auto
