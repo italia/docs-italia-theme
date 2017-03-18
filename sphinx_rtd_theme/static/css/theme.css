@@ -5282,7 +5282,7 @@ div[class^='highlight'] pre {
 }
 .wy-side-nav-search .branding .branding--logo svg {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 .wy-side-nav-search .branding .branding--content {
   float: left;
