@@ -1,0 +1,47 @@
+#slimheader
+	background-color: $italia-brand-color
+	position: absolute
+	top: 0
+	width: 100%
+	z-index: 999
+	font-size: 16px
+	line-height: 18.4px
+	color: #fff
+	text-decoration-line: none
+	text-decoration-skip: objects
+	text-decoration-style: solid
+	text-size-adjust: 100%
+	+media(max-width 994px)
+		display: none
+	a
+		color: #fff !important
+		text-decoration: none
+	.sh__wrapper
+		max-width: 94vw
+		margin: 0 auto
+		padding-top: 20px
+		padding-bottom: 20px
+	.sh__institutional
+		display: inline-block
+	.sh__tabs
+		display: inline-block
+		float: right
+	.sh__tabsul
+		margin: 0
+		li
+			display: inline-block
+			padding-right: 20px
+			padding-left: 20px
+			&.delimiter
+				border-right: 1px solid #127ae2
+			&.current
+				a
+					border-bottom: 4px solid #fff
+			a
+				padding-bottom: 14px
+
+//useful override, cause the absolute position of #slimheader obscure the logo
+.wy-side-nav-search
+	padding-top: 68px
+	+media(max-width 994px)
+		padding-top: 20px
