@@ -11,7 +11,16 @@
 	text-decoration-skip: objects
 	text-decoration-style: solid
 	text-size-adjust: 100%
-	
+	+media($tablet)
+		position: relative
+	&.shift
+		+media($tablet)
+			width: 80%
+		.sh__wrapper
+			+media($tablet)
+				max-width: none
+				padding-right: 13px
+				padding-left: 13px
 	a
 		color: #fff
 		text-decoration: none

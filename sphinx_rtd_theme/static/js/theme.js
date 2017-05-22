@@ -60,6 +60,7 @@ function ThemeNav () {
             .on('click', "[data-toggle='wy-nav-top']", function() {
                 $("[data-toggle='wy-nav-shift']").toggleClass("shift");
                 $("[data-toggle='rst-versions']").toggleClass("shift");
+                $("#slimheader").toggleClass("shift");
             })
 
             // Nav menu link click operations
