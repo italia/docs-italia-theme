@@ -101,7 +101,7 @@ ul.fas li .fa-large:before {
 .rst-versions {
   position: fixed;
   bottom: 0;
-  left: 0;
+  transform: translate3d(0, 0, 0);
   width: 300px;
   color: #fff;
   background: #0a0c0d;
@@ -210,11 +210,12 @@ ul.fas li .fa-large:before {
 
 @media screen and (max-width: 768px) {
   .rst-versions {
-    width: 85%;
-    display: none;
+    transition: transform 0.2s ease-out, visibility 0.2s, -webkit-transform 0.2s ease-out;
+    right: -300px;
   }
   .rst-versions.shift {
-    display: block;
+    width: 85%;
+    transform: translate3d(-300px, 0, 0);
   }
 }
 

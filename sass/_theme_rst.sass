@@ -165,10 +165,12 @@
       border: none
       background-color: transparent !important
       white-space: normal
+      word-break: break-word
     td.label
       padding-left: 0
       padding-right: 0
       vertical-align: top
+      word-break: normal
     code
       color: $gray
   table.docutils
@@ -176,6 +178,12 @@
     @extend .wy-table-bordered-all
     &:not(.field-list)
       @extend .wy-table-striped
+    p
+      font-size: inherit
+      margin-bottom: $base-line-height / 4
+    td
+      white-space: normal
+      word-break: normal
   // This table is what gets spit out for auto-generated API stuff. I style it smaller bits of padding.
   table.field-list
     @extend .wy-table

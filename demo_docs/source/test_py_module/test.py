@@ -98,7 +98,7 @@ class Foo:
 
         :returns: A 2-tuple.  The first element is the mean price of all dishes
                   across cuisines.  The second element is the total number of
-                  hats you own: :math:`a + b`.
+                  hats you.
         :rtype: tuple
 
         :raises ValueError: When ``a`` is not an integer.

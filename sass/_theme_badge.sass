@@ -1,7 +1,7 @@
 .rst-versions
   position: fixed
   bottom: 0
-  left: 0
+  transform: translate3d(0, 0, 0)
   width: $nav-desktop-width
   color: $section-background-color
   background: darken($menu-background-color, 8%)
@@ -82,7 +82,14 @@
 
 +media($tablet)
   .rst-versions
-    width: 85%
-    display: none
+    transition: transform .2s ease-out,visibility .2s,-webkit-transform .2s ease-out
+    @if $nav-desktop-position == left
+      left: -$nav-desktop-width
+    @else
+      right: -$nav-desktop-width
     &.shift
-      display: block
+      width: 85%
+      @if $nav-desktop-position == left
+        transform: translate3d(300px, 0, 0)
+      @else
+        transform: translate3d(-300px, 0, 0)
