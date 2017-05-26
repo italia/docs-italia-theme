@@ -5145,7 +5145,7 @@ div[class^='highlight'] pre {
   white-space: normal;
 }
 .wy-menu-vertical li span.toctree-expand {
-  display: none !important;
+  display: block !important;
   float: left;
   margin-left: -1.2em;
   font-size: 0.8em;
@@ -5171,13 +5171,13 @@ div[class^='highlight'] pre {
   color: gray;
 }
 .wy-menu-vertical li.on a span.toctree-expand, .wy-menu-vertical li.current > a span.toctree-expand {
-  display: none !important;
+  display: block !important;
   font-size: 0.8em;
   line-height: 1.6em;
   color: #333333;
 }
 .wy-menu-vertical li.toctree-l1.current li.toctree-l2 > ul, .wy-menu-vertical li.toctree-l2.current li.toctree-l3 > ul {
-  display: block;
+  display: none;
 }
 .wy-menu-vertical li.toctree-l1.current li.toctree-l2.current > ul, .wy-menu-vertical li.toctree-l2.current li.toctree-l3.current > ul {
   display: block;
@@ -5233,7 +5233,7 @@ div[class^='highlight'] pre {
 }
 .wy-menu-vertical li ul {
   margin-bottom: 0;
-  display: block;
+  display: none;
 }
 .wy-menu-vertical .local-toc li ul {
   display: block;
