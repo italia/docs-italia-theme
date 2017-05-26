@@ -6596,4 +6596,11 @@ body.pushy-open-left {
   padding-top: 68px;
 }
 
+.section:before {
+  content: "";
+  display: block;
+  height: 54px;
+  margin: -54px 0 0;
+}
+
 /*# sourceMappingURL=theme.css.map */
