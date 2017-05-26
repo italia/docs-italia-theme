@@ -61,9 +61,10 @@
       color: inherit
       padding-left: 0
       padding-right: 0
+      white-space: normal
     // Expand links
     span.toctree-expand
-      display: block
+      display: $nav-toc-expand-toggle !important
       float: left
       margin-left: -1.2em
       @extend .fa
@@ -73,16 +74,17 @@
       color: darken($menu-link-medium, 20%)
 
   // On state for the first level
+  li > a
+    padding: $gutter / 2 $gutter
+    padding-left: $gutter -4px
   li.on a, li.current > a
     color: $menu-link-color
-    padding: $gutter / 2 $gutter
     font-weight: bold
     position: relative
     background: $menu-vertical-background-color
     border: none
     // border-bottom: solid 1px darken($menu-vertical-background-color, 20%)
     // border-top: solid 1px darken($menu-vertical-background-color, 20%)
-    padding-left: $gutter -4px
     +font-smooth
     &:hover
       color: #1C2024
@@ -92,7 +94,7 @@
     span.toctree-expand
       @extend .fa
       @extend .fa-minus-square-o
-      display: block
+      display: $nav-toc-expand-toggle !important
       font-size: .8em
       line-height: 1.6em
       color: darken($menu-link-medium, 30%)
@@ -100,32 +102,36 @@
   // This is the on state for pages beyond second level
   li.toctree-l1.current li.toctree-l2, li.toctree-l2.current li.toctree-l3
     > ul
-      display: none
+      display: $nav-toc-expanded-display
     &.current > ul
       display: block
   li.toctree-l2
+    > a
+      padding: $gutter / 2 $gutter * 1.5
+    li.toctree-l3 > a
+      padding: $gutter / 2 $gutter * 2.5
     &.current
       > a
         background: darken($menu-vertical-background-color, 5%)
-        padding: $gutter / 2 $gutter * 1.5
       li.toctree-l3 > a
         display: block
         background: darken($menu-vertical-background-color, 10%)
-        padding: $gutter / 2 $gutter * 2.5
     a:hover span.toctree-expand
       color: $menu-link-medium
     span.toctree-expand
       color: darken($menu-vertical-background-color, 15%)
   li.toctree-l3
     font-size: .9em
+    > a
+      padding: $gutter / 4 $gutter * 2.5
+    li.toctree-l4 > a
+      padding: $gutter / 4 $gutter * 3.5
     &.current
       > a
         background: darken($menu-vertical-background-color, 10%)
-        padding: $gutter / 4 $gutter * 2.5
       li.toctree-l4 > a
         display: block
         background: darken($menu-vertical-background-color, 10%)
-        padding: $gutter / 4 $gutter * 3.5
         border-top: none
         border-bottom: none
     a:hover span.toctree-expand
@@ -139,7 +145,7 @@
     display: block
   li ul
     margin-bottom: 0
-    display: none
+    display: $nav-toc-expanded-display
   .local-toc
     li ul
       display: block
@@ -173,14 +179,10 @@
   display: block
   width: $nav-desktop-width
   padding: $gutter / 2
-  margin-bottom: $gutter / 2
   z-index: $z-index-popover
   background-color: $nav-search-background-color
   text-align: center
-  padding: $gutter / 2
-  display: block
   color: $nav-search-color
-  margin-bottom: $gutter / 2
   .branding
     display: inline-block
     text-align: left
@@ -221,6 +223,14 @@
     text-align: center
     font-size: $base-font-size * 1.5
     font-weight: 600
+    line-height: 1.2
+    > span.version
+      border-radius: 2em
+      background-color: #004c99
+      vertical-align: middle
+      padding: 0 $gutter / 2
+      font-size: $base-font-size * 0.8
+      font-weight: 400
   a, a:visited
     color: $white
   input[type=text]
@@ -259,12 +269,6 @@
     &.icon
       img.logo
         margin-top: 0.85em  // space it away from the title text
-  > div.version
-    margin-top: -1 * ($gutter / 4)
-    margin-bottom: $gutter / 2
-    font-weight: normal
-    color: rgba(255,255,255,.3)
-
 
 .wy-nav .wy-menu-vertical
   header
@@ -309,7 +313,7 @@
   position: fixed
   top: 0
   bottom: 0
-  left: 0
+  transform: translate3d(0, 0, 0)
   padding-bottom: 2em
   width: $nav-desktop-width
   overflow-x: hidden
@@ -317,12 +321,14 @@
   min-height: 100%
   background: $nav-background-color
   z-index: $z-index-popover
+  transition: transform .2s ease-out,visibility .2s,-webkit-transform .2s ease-out
 
 .wy-side-scroll
   width: $nav-desktop-width + 20px
   position: relative
   overflow-x: hidden
   overflow-y: scroll
+  -webkit-overflow-scrolling: touch
   height: 100%
 
 .wy-nav-top
@@ -331,21 +337,30 @@
   color: $white
   padding: $gutter / 4 $gutter / 2
   position: relative
-  line-height: 48px
-  text-align: center
-  font-size: 100%
+  text-align: left
+  align-items: center
+  line-height: 1
+  font-size: 20px
   +clearfix
   a
     color: $white
     font-weight: bold
     +font-smooth
-  img
-    margin-right: $base-line-height / 2
-    height: 45px
-    width: 45px
-    background-color: $menu-logo-color
-    padding: 8px
-    border-radius: 100%
+  .logo
+    margin-right: 10px
+    flex-basis: auto!important
+    width: 16.66667%!important
+  .burger
+    margin-left: auto!important
+    flex-basis: auto!important
+    width: 16.66667%!important
+    text-align: right
+    img
+      width: 32px
+  .title
+    flex-basis: auto!important
+    width: 60%!important
+    padding-left: 8px
   i
     font-size: 32px
     float: left
@@ -362,6 +377,7 @@
   height: 100%
   max-width: 800px
   margin: auto
+  word-break: break-word
 
 .wy-body-mask
   position: fixed
@@ -412,7 +428,7 @@ footer
   .wy-body-for-nav
     background: $section-background-color
   .wy-nav-top
-    display: block
+    display: flex
   .wy-nav-side
     @if $nav-desktop-position == left
       left: -$nav-desktop-width
@@ -420,7 +436,10 @@ footer
       right: -$nav-desktop-width
     &.shift
       width: 85%
-      left: 0
+      @if $nav-desktop-position == left
+        transform: translate3d(300px, 0, 0)
+      @else
+        transform: translate3d(-300px, 0, 0)
   .wy-side-scroll
     width: auto
   .wy-side-nav-search
@@ -433,11 +452,22 @@ footer
       padding: $gutter
     &.shift
       position: fixed
-      min-width: 100%
-      left: 85%
-      top: 0
+      width: 100%
+      top: 54px
       height: 100%
       overflow: hidden
+      .nav-overlay
+        cursor: pointer
+        display: block
+        position: fixed
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        z-index: 9998
+        background-color: rgba(0, 0, 0, 0.5)
+        -webkit-animation: fade 500ms
+        animation: fade 500ms
 
 +media($desktop-wider)
   .wy-nav-content-wrap

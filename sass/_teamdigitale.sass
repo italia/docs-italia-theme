@@ -1,11 +1,11 @@
 #slimheader
 	background-color: $italia-brand-color
-	position: absolute
+	position: fixed
 	top: 0
 	width: 100%
 	z-index: 999
 	font-size: 16px
-	line-height: 18.4px
+	line-height: 16.1px
 	color: #fff
 	text-decoration-line: none
 	text-decoration-skip: objects
@@ -13,22 +13,28 @@
 	text-size-adjust: 100%
 	+media($tablet)
 		position: relative
+		font-size: 16px
+	.burger
+		display: none
+		width: 32px
+		margin-top: -6px
 	&.shift
-		+media($tablet)
-			width: 80%
-		.sh__wrapper
+		position: fixed
+		.burger
 			+media($tablet)
-				max-width: none
-				padding-right: 13px
-				padding-left: 13px
+				display: inline-block
+				float: right
 	a
 		color: #fff
 		text-decoration: none
 	.sh__wrapper
 		max-width: 94vw
-		margin: 0 auto
-		padding-top: 20px
-		padding-bottom: 20px
+		margin-left: 20px
+		margin-right: 20px
+		padding-top: 18px
+		padding-bottom: 18px
+		+media($tablet)
+			border-bottom: 1px solid #127ae2
 	.sh__institutional
 		display: inline-block
 	.sh__tabs
@@ -40,19 +46,24 @@
 		margin: 0
 		li
 			display: inline-block
-			padding-right: 20px
-			padding-left: 20px
+			padding-right: 10px
+			padding-left: 10px
 			&.delimiter
 				border-right: 1px solid #127ae2
 			&.current
 				a
-					border-bottom: 4px solid #fff
+					border-bottom: 3px solid #fff
+			&:hover
+				a
+					border-bottom: 3px solid #fff
 			a
-				padding-bottom: 14px
+				padding-bottom: 11px
+				padding-right: 10px
+				padding-left: 10px
 
 .pushy-menu-btn
 	display: none
-	padding-right: 6px
+	padding-right: 13px
 	margin-right: 6px 
 	border-right: 1px solid #127ae2
 	+media(max-width 994px)
@@ -64,3 +75,13 @@
 //useful override, cause the absolute position of #slimheader obscure the logo
 .wy-side-nav-search
 	padding-top: 68px
+
+.wy-nav-content
+	padding-top: 68px
+
+.section
+	&:before
+		content: ''
+		display: block
+		height: 54px
+		margin: -54px 0 0
