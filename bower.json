@@ -1,11 +1,11 @@
 {
-  "name": "sphinx-rtd-theme",
+  "name": "sphinx-italia-theme",
   "version": "0.2.4",
-  "homepage": "https://github.com/rtfd/sphinx_rtd_theme",
+  "homepage": "https://github.com/italia/sphinx_italia_theme",
   "authors": [
-    "Dave Snider <dave.snider@gmail.com>"
+    "AgID"
   ],
-  "description": "Sphinx theme for readthedocs.org.",
+  "description": "Sphinx Italia theme for readthedocs.org.",
   "license": "MIT",
   "main": [
     "js/theme.js"
@@ -30,9 +30,6 @@
     "wyrm": "~1.0.x"
   },
   "dependencies": {
-    "lato-googlefont": "*",
-    "robotoslab-googlefont": "*",
-    "inconsolata-googlefont": "*",
     "font-awesome": "~4.7"
   },
   "resolutions": {
