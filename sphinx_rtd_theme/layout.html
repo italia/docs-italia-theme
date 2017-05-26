@@ -99,7 +99,7 @@
                     {% if theme_display_version %} {%- set nav_version = version %} {% if READTHEDOCS and current_version %} {%- set nav_version = current_version
                     %}{% endif %}
                     {% if nav_version %}
-                    <span class="version">v.{{ nav_version }}</span>
+                    <span class="version">v: {{ nav_version }}</span>
                     </h1>
                     {% endif %} {% endif %} {% endif %} {% include "searchbox.html" %} {% endblock %}
                 </div>
