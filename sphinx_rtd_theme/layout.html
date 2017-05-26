@@ -87,23 +87,21 @@
                         </div>
                     </div>
 
-            {% if logo %}
-            <a href="{{ pathto(master_doc) }}">
-            {# Not strictly valid HTML, but it's the only way to display/scale it properly, without weird scripting or heaps of work #}
-            <img src="{{ pathto('_static/' + logo, 1) }}" class="logo" />
-            </a>
-            {% endif %}
-            {% if theme_logo_only %}
-            {% else %}
-            <h1 class="project-title"><a href="{{ pathto(master_doc) }}" > {{ project }} </a></h1>
-            {% endif %}
-
-
+                    {% if logo %}
+                    <a href="{{ pathto(master_doc) }}">
+                    {# Not strictly valid HTML, but it's the only way to display/scale it properly, without weird scripting or heaps of work #}
+                    <img src="{{ pathto('_static/' + logo, 1) }}" class="logo" />
+                    </a>
+                    {% endif %}
+                    {% if theme_logo_only %}
+                    {% else %}
+                    <h1 class="project-title"><a href="{{ pathto(master_doc) }}" > {{ project }} </a>
                     {% if theme_display_version %} {%- set nav_version = version %} {% if READTHEDOCS and current_version %} {%- set nav_version = current_version
                     %}{% endif %}
                     {% if nav_version %}
-                    <div class="version">{{ nav_version }}</div>
-                    {% endif %} {% endif %} {% include "searchbox.html" %} {% endblock %}
+                    <span class="version">v.{{ nav_version }}</span>
+                    </h1>
+                    {% endif %} {% endif %} {% endif %} {% include "searchbox.html" %} {% endblock %}
                 </div>
 
                 <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">

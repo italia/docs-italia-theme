@@ -5329,6 +5329,15 @@ div[class^='highlight'] pre {
   text-align: center;
   font-size: 24px;
   font-weight: 600;
+  line-height: 1.2;
+}
+.wy-side-nav-search h1 > span.version {
+  border-radius: 2em;
+  background-color: #004c99;
+  vertical-align: middle;
+  padding: 0 0.809em;
+  font-size: 12.8px;
+  font-weight: 400;
 }
 .wy-side-nav-search a, .wy-side-nav-search a:visited {
   color: #fff;
@@ -5372,12 +5381,6 @@ div[class^='highlight'] pre {
 }
 .wy-side-nav-search > a.icon img.logo, .wy-side-nav-search .wy-dropdown > a.icon img.logo {
   margin-top: 0.85em;
-}
-.wy-side-nav-search > div.version {
-  margin-top: -0.4045em;
-  margin-bottom: 0.809em;
-  font-weight: normal;
-  color: rgba(255, 255, 255, 0.3);
 }
 
 .wy-nav .wy-menu-vertical header {

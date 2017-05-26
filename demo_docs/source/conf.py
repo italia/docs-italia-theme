@@ -12,10 +12,10 @@
 # serve to show the default.
 
 # -- PROJECT Variables ----------------------------------------------------
-settings_project_name = 'Digital project Docs'
+settings_project_name = 'This is a very very long title for a simple'
 settings_copyright_year = '2017'
 settings_copyright_name = 'AgID - Agenzia per l\'Italia Digitale'
-settings_doc_version = '1'
+settings_doc_version = '1.0'
 settings_doc_release = '1.0'
 settings_basename = 'DigitalProject'
 settings_file_name = 'Digital-Project'

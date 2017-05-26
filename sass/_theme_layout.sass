@@ -222,6 +222,14 @@
     text-align: center
     font-size: $base-font-size * 1.5
     font-weight: 600
+    line-height: 1.2
+    > span.version
+      border-radius: 2em
+      background-color: #004c99
+      vertical-align: middle
+      padding: 0 $gutter / 2
+      font-size: $base-font-size * 0.8
+      font-weight: 400
   a, a:visited
     color: $white
   input[type=text]
@@ -260,12 +268,6 @@
     &.icon
       img.logo
         margin-top: 0.85em  // space it away from the title text
-  > div.version
-    margin-top: -1 * ($gutter / 4)
-    margin-bottom: $gutter / 2
-    font-weight: normal
-    color: rgba(255,255,255,.3)
-
 
 .wy-nav .wy-menu-vertical
   header
