@@ -6511,6 +6511,7 @@ body.pushy-open-left {
 #slimheader .burger {
   display: none;
   width: 32px;
+  margin-top: -6px;
 }
 #slimheader.shift {
   position: fixed;

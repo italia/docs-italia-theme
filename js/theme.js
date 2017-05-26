@@ -65,7 +65,8 @@ function ThemeNav () {
                 var target = $(this);
                 // Close menu when you click a link.
                 $("[data-toggle='wy-nav-shift']").removeClass("shift");
-                $("[data-toggle='rst-versions']").toggleClass("shift");
+                $("[data-toggle='rst-versions']").removeClass("shift");
+                $("#slimheader").removeClass("shift");
                 // Handle dynamic display of l3 and l4 nav lists
                 self.toggleCurrent(target);
                 self.hashChange();
