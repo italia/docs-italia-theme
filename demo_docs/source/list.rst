@@ -6,12 +6,15 @@ A list
 ======
 
 - here
+
   - is
   - some
+  
     - list
     - items
     - `yahoo <http://www.yahoo.com>`_
     - ``huh``
+    
 - how
 - ``inline literall``
 - ``inline literall``

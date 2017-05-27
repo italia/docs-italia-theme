@@ -5294,6 +5294,7 @@ div[class^='highlight'] pre {
 .wy-side-nav-search .branding .branding--content {
   float: left;
   padding: 8px;
+  margin-top: 16px;
 }
 .wy-side-nav-search .branding .branding--content h2, .wy-side-nav-search .branding .branding--content .rst-content .toctree-wrapper p.caption, .rst-content .toctree-wrapper .wy-side-nav-search .branding .branding--content p.caption {
   font-size: 16px;
@@ -5830,6 +5831,12 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
 }
 .rst-content .line-block {
   margin-left: 24px;
+}
+.rst-content .section li {
+  margin-bottom: 4px;
+}
+.rst-content .section ul li ol, .rst-content .section ol li ol {
+  margin-bottom: 0;
 }
 .rst-content .topic-title {
   font-weight: bold;
