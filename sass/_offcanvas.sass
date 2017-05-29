@@ -1,0 +1,183 @@
+.pushy
+  position: fixed
+  width: 400px
+  max-width: 85vw
+  height: 100%
+  top: 0
+  z-index: 9999
+  background: #fff
+  overflow: auto
+  -webkit-overflow-scrolling: touch
+  font-size: 18px
+  line-height: 21px
+  .pushy-close-button
+    padding: 6px 16px 6px 16px
+    background-color: $italia-brand-color
+    .pushy-link
+      margin: 0
+      padding: 0
+    +media(max-width 768px)
+      padding: 16px 16px 16px 16px
+    img
+      +media(max-width 768px)
+        width: 40px
+  a
+    display: block
+    color: $italia-brand-color !important
+    padding: 15px 30px
+    text-decoration: none
+    &:hover
+      color: #FFF
+  ul:first-child
+    margin-top: 10px
+  &.pushy-left
+    left: 0
+  &.pushy-right
+    right: 0
+  .pushy-link
+    a
+      padding: 18px 0 18px 16px
+      &:hover
+        text-decoration: underline !important
+        background-color: #d9e6f2 !important
+        color: #00264d !important
+    &.delimiter
+      border-bottom: 1px solid #ddd
+    &.current
+      a
+        border-left: 10px solid #0066cc !important
+        font-size: 1.5em
+
+.pushy-content
+  visibility: hidden
+.pushy_subtitle
+  display: block
+  color: #5a6772
+  padding: 16px
+  font-size: 16px
+  line-height: 21px
+  margin-top: 8px
+
+.pushy-left
+  -webkit-transform: translate3d(-400px, 0, 0)
+  -ms-transform: translate3d(-400px, 0, 0)
+  transform: translate3d(-400px, 0, 0)
+
+.pushy-open-left
+  #container, .push
+    -webkit-transform: translate3d(400px, 0, 0)
+    -ms-transform: translate3d(400px, 0, 0)
+    transform: translate3d(400px, 0, 0)
+
+.pushy-right
+  -webkit-transform: translate3d(400px, 0, 0)
+  -ms-transform: translate3d(400px, 0, 0)
+  transform: translate3d(400px, 0, 0)
+
+.pushy-open-right
+  #container, .push
+    -webkit-transform: translate3d(-400px, 0, 0)
+    -ms-transform: translate3d(-400px, 0, 0)
+    transform: translate3d(-400px, 0, 0)
+
+.pushy-open-left .pushy, .pushy-open-right .pushy
+  -webkit-transform: translate3d(0, 0, 0)
+  -ms-transform: translate3d(0, 0, 0)
+  transform: translate3d(0, 0, 0)
+
+.pushy-open-left .pushy-content, .pushy-open-right .pushy-content
+  visibility: visible
+
+#container, .pushy, .push
+  transition: transform 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99)
+
+.pushy-content
+  transition: visibility 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99)
+
+
+.site-overlay
+  display: none
+
+.pushy-open-left .site-overlay, .pushy-open-right .site-overlay
+  display: block
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  z-index: 9998
+  background-color: rgba(0, 0, 0, 0.5)
+  -webkit-animation: fade 500ms
+  animation: fade 500ms
+
+@keyframes fade
+  0%
+    opacity: 0
+
+  100%
+    opacity: 1
+
+
+@-webkit-keyframes fade
+  0%
+    opacity: 0
+
+  100%
+    opacity: 1
+
+
+.pushy-submenu
+  ul
+    padding-left: 15px
+    transition: max-height 0.2s ease-in-out, visibility 0.2s ease-in-out
+    .pushy-link
+      transition: opacity 0.2s ease-in-out
+  button
+    width: 100%
+    color: #b3b3b1
+    padding: 15px 30px
+    text-align: left
+    background: transparent
+    border: 0
+    &:hover
+      color: #FFF
+  >
+    a, button
+      position: relative
+    a::after, button::after
+      content: ''
+      display: block
+      height: 11px
+      width: 8px
+      position: absolute
+      top: 50%
+      right: 15px
+      background: url("../img/arrow.svg") no-repeat
+      -webkit-transform: translateY(-50%)
+      -ms-transform: translateY(-50%)
+      transform: translateY(-50%)
+      transition: transform 0.2s
+
+.pushy-submenu-closed
+  ul
+    max-height: 0
+    overflow: hidden
+    visibility: hidden
+  .pushy-link
+    opacity: 0
+
+.pushy-submenu-open
+  ul
+    max-height: 1000px
+    visibility: visible
+  .pushy-link
+    opacity: 1
+  a::after, button::after
+    -webkit-transform: translateY(-50%) rotate(90deg)
+    -ms-transform: translateY(-50%) rotate(90deg)
+    transform: translateY(-50%) rotate(90deg)
+
+body.pushy-open-left
+  overflow-x: hidden
+  height: 100%
+  -webkit-overflow-scrolling: touch
