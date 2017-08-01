@@ -6267,6 +6267,7 @@ button[disabled] {
   clear: both;
 }
 
+/* ADV Banner Remove */
 div.rst-pro {
    display: none !important;
 }
