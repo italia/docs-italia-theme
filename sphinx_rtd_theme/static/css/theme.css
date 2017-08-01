@@ -6267,4 +6267,8 @@ button[disabled] {
   clear: both;
 }
 
+div.rst-pro {
+   display: none !important;
+}
+
 /*# sourceMappingURL=theme.css.map */
