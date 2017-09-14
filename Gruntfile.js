@@ -23,35 +23,87 @@ module.exports = function(grunt) {
       fonts: {
         files: [
           {
-              expand: true,
-              flatten: true,
-              src: ['bower_components/font-awesome/fonts/*'],
-              dest: 'sphinx_rtd_theme/static/fonts/',
-              filter: 'isFile'
+            expand: true,
+            flatten: true,
+            src: ['bower_components/font-awesome/fonts/*'],
+            dest: 'sphinx_italia_theme/static/fonts/',
+            filter: 'isFile'
           },
           {
-              expand: true,
-              flatten: true,
-              src: ['bower_components/lato-googlefont/Lato-Bold.ttf',
-                    'bower_components/lato-googlefont/Lato-Regular.ttf'],
-              dest: 'sphinx_rtd_theme/static/fonts/',
-              filter: 'isFile'
+            expand: true,
+            flatten: true,
+            src: [
+              'bower_components/lato-googlefont/Lato-Bold.ttf',
+              'bower_components/lato-googlefont/Lato-Regular.ttf'
+            ],
+            dest: 'sphinx_italia_theme/static/fonts/',
+            filter: 'isFile'
           },
           {
-              expand: true,
-              flatten: true,
-              src: ['bower_components/robotoslab-googlefont/RobotoSlab-Bold.ttf',
-                    'bower_components/robotoslab-googlefont/RobotoSlab-Regular.ttf'],
-              dest: 'sphinx_rtd_theme/static/fonts/',
-              filter: 'isFile'
+            expand: true,
+            flatten: true,
+            src: [
+              'bower_components/robotoslab-googlefont/RobotoSlab-Bold.ttf',
+              'bower_components/robotoslab-googlefont/RobotoSlab-Regular.ttf'
+            ],
+            dest: 'sphinx_italia_theme/static/fonts/',
+            filter: 'isFile'
           },
           {
-              expand: true,
-              flatten: true,
-              src: ['bower_components/inconsolata-googlefont/Inconsolata-Bold.ttf',
-                    'bower_components/inconsolata-googlefont/Inconsolata-Regular.ttf'],
-              dest: 'sphinx_rtd_theme/static/fonts/',
-              filter: 'isFile'
+            expand: true,
+            flatten: true,
+            src: [
+              'bower_components/inconsolata-googlefont/Inconsolata-Bold.ttf',
+              'bower_components/inconsolata-googlefont/Inconsolata-Regular.ttf'
+            ],
+            dest: 'sphinx_italia_theme/static/fonts/',
+            filter: 'isFile'
+          }
+        ]
+      },
+      developers: {
+        files: [
+          {
+            expand: true,
+            cwd: 'developers/assets/icons/',
+            src: '**',
+            dest: 'sphinx_italia_theme/static/icons/'
+          },
+          {
+            expand: true,
+            cwd: 'developers/assets/images/',
+            src: '**',
+            dest: 'sphinx_italia_theme/static/images/'
+          },
+          {
+            expand: true,
+            cwd: 'developers/assets/toolkit/vendor/',
+            src: '**',
+            dest: 'sphinx_italia_theme/static/toolkit/vendor/'
+          },
+          {
+            expand: true,
+            cwd: 'developers/assets/toolkit/',
+            src: ['*.css'],
+            dest: 'sphinx_italia_theme/static/css/',
+          },
+          {
+            expand: true,
+            cwd: 'developers/assets/toolkit/src/',
+            src: ['**'],
+            dest: 'sphinx_italia_theme/static/css/src/',
+          },
+          {
+            expand: true,
+            cwd: 'developers/assets/toolkit/',
+            src: ['*.js'],
+            dest: 'sphinx_italia_theme/static/js/',
+          },
+          {
+            expand: true,
+            cwd: 'developers/',
+            src: ['_config.yml', '_data/**/*.yml'],
+            dest: 'sphinx_italia_theme/data/',
           }
         ]
       }
@@ -66,8 +118,8 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'sass',
-          src: ['*.sass'],
-          dest: 'sphinx_rtd_theme/static/css',
+          src: ['*.sass', 'developers/assets/main.scss'],
+          dest: 'sphinx_italia_theme/static/css',
           ext: '.css'
         }]
       },
@@ -79,8 +131,8 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'sass',
-          src: ['*.sass'],
-          dest: 'sphinx_rtd_theme/static/css',
+          src: ['*.sass', 'developers/assets/main.scss'],
+          dest: 'sphinx_italia_theme/static/css',
           ext: '.css'
         }]
       }
@@ -95,7 +147,7 @@ module.exports = function(grunt) {
           }
         },
         src: ['js/*.js'],
-        dest: 'sphinx_rtd_theme/static/js/theme.js'
+        dest: 'sphinx_italia_theme/static/js/theme.js'
       },
       build: {
         options: {
@@ -105,7 +157,7 @@ module.exports = function(grunt) {
           }
         },
         src: ['js/*.js'],
-        dest: 'sphinx_rtd_theme/static/js/theme.js'
+        dest: 'sphinx_italia_theme/static/js/theme.js'
       }
     },
 
@@ -119,18 +171,22 @@ module.exports = function(grunt) {
     },
     clean: {
       build: ["demo_docs/build"],
-      fonts: ["sphinx_rtd_theme/static/fonts"]
+      fonts: ["sphinx_italia_theme/static/fonts"]
     },
 
     watch: {
       /* Compile sass changes into theme directory */
       sass: {
-        files: ['sass/*.sass', 'bower_components/**/*.sass'],
+        files: [
+          'sass/*.sass',
+          'bower_components/**/*.sass',
+          'developers/assets/main.scss',
+        ],
         tasks: ['sass:dev']
       },
       /* Changes in theme dir rebuild sphinx */
       sphinx: {
-        files: ['sphinx_rtd_theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
+        files: ['sphinx_italia_theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
         tasks: ['clean:build','exec:build_sphinx']
       },
       /* JavaScript */
@@ -157,7 +213,23 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('fonts', ['clean:fonts','copy:fonts']);
-  grunt.registerTask('default', ['exec:bower_update','clean:build','sass:dev','browserify:dev','exec:build_sphinx','connect','open','watch']);
-  grunt.registerTask('build', ['exec:bower_update','clean:build','sass:build','browserify:build','exec:build_sphinx']);
+  grunt.registerTask('default', [
+    'exec:bower_update',
+    'clean:build',
+    'sass:dev',
+    'copy:developers',
+    'browserify:dev',
+    'exec:build_sphinx',
+    'connect',
+    'open',
+    'watch'
+  ]);
+  grunt.registerTask('build', [
+    'exec:bower_update',
+    'clean:build',
+    'sass:build',
+    'copy:developers',
+    'browserify:build',
+    'exec:build_sphinx'
+  ]);
 }
-

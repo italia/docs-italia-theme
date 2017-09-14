@@ -1,11 +1,8 @@
 {
-  "name": "sphinx-rtd-theme",
-  "version": "0.2.4",
-  "homepage": "https://github.com/rtfd/sphinx_rtd_theme",
-  "authors": [
-    "Dave Snider <dave.snider@gmail.com>"
-  ],
-  "description": "Sphinx theme for readthedocs.org.",
+  "name": "sphinx-italia-theme",
+  "version": "1.0",
+  "homepage": "https://github.com/italia/sphinx_italia_theme",
+  "description": "Sphinx Team Digitale theme",
   "license": "MIT",
   "main": [
     "js/theme.js"
