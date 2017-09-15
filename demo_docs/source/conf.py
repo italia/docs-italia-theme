@@ -113,7 +113,7 @@ html_theme = 'sphinx_italia_theme'
 html_theme_options = {
     # If the project is meant to be a landing page style project, enable this
     # layout instead of the default one
-    'layout': 'landing',
+    # 'layout': 'landing',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.

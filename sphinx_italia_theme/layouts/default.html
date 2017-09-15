@@ -1,28 +1,43 @@
-{% include 'layouts/landing/head.html' %}
+{% include 'layouts/head.html' %}
 
 <div class="u-background-95">
   <div id="main" class="u-layout-wide u-layoutCenter">
-    {% include 'layouts/landing/header.html' %}
-    {# include 'layouts/landing/offcanvas.html' #}
-    {# include 'layouts/landing/network.html' #}
+    {% include 'layouts/header.html' %}
+    {# include 'layouts/offcanvas.html' #}
+    {# include 'layouts/network.html' #}
 
     <section class="u-nbfc u-background-grey-15 u-layout-r-withGutter u-padding-r-top u-padding-r-bottom u-posRelative u-zindex-30">
       <div class="u-layout-wide u-layoutCenter">
 
         <h2 class="u-text-r-l u-textWeight-300 u-color-50 u-padding-r-bottom">{{ _('Documentazione') }}</h2>
 
-        {% block body %}{% endblock %}
+        <div class="Grid Grid--withGutter">
+          <div class="Grid-cell u-md-size1of4 u-lg-size1of4 u-margin-r-bottom u-layout-matchHeight">
+            {% if 'singlehtml' not in builder %}
+              {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation, includehidden=True) %}
+            {% endif %}
+            {% if global_toc %}
+              {{ global_toc }}
+            {% else %}
+              <!-- Local TOC -->
+              <div class="local-toc">{{ toc }}</div>
+            {% endif %}
+          </div>
+          <div class="Grid-cell u-md-size3of4 u-lg-size3of4 u-margin-r-bottom u-layout-matchHeight">
+            {% block body %}{% endblock %}
+          </div>
+        </div>
 
       </div>
     </section>
   </div>
 </div>
 
-{% include 'layouts/landing/scrolltop.html' %}
+{% include 'layouts/scrolltop.html' %}
 
 <div class="u-background-95">
   <div class="u-layout-wide u-layoutCenter u-layout-r-withGutter u-hiddenPrint">
-    {% include 'layouts/landing/footer--simple.html' %}
+    {% include 'layouts/footer--simple.html' %}
   </div>
 </div>
 
