@@ -21,7 +21,7 @@
     <div class="u-sizeFull {% if flat != true %}u-padding-r-all u-xs-padding-all-none{% endif %}">
       <h3 class="u-padding-bottom-xs">
         <a class="u-textClean u-textWeight-600 u-text-r-l u-color-50" href="{{ link }}">
-          {{ title }}
+          {{ _(title) }}
 
           {% if kwargs.comingsoon %}
           <div class="u-inlineBlock u-padding-left-xs">
@@ -41,13 +41,13 @@
 
       {% if subtitle %}
       <h4 class="u-textWeight-400 u-lineHeight-l u-text-r-xs u-color-grey-60 u-padding-bottom-xs">
-          {{ subtitle }}
+          {{ _(subtitle) }}
       </h4>
       {% endif %}
 
       {% if text %}
         <p class="Content u-text-p u-textSecondary u-padding-r-bottom">
-          {{ text }}
+          {{ _(text) }}
         </p>
       {% endif %}
 

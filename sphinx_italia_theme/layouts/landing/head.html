@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html lang="{{ active_lang }}" class="no-js ie89 ie8"><![endif]-->
-<!--[if IE 9]><html lang="{{ active_lang }}" class="no-js ie89 ie9"><![endif]-->
+<!--[if IE 8]><html lang="{{ language }}" class="no-js ie89 ie8"><![endif]-->
+<!--[if IE 9]><html lang="{{ language }}" class="no-js ie89 ie9"><![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<html lang="{{ active_lang }}" class="no-js" prefix="og: http://ogp.me/ns#">
+<html lang="{{ language }}" class="no-js" prefix="og: http://ogp.me/ns#">
 <!--<![endif]-->
 
 <head>
@@ -11,13 +11,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="8IbTZ-PnSdvOnC8S4q-wjSiZ2B-90cVugO04xMu6vug" />
 
-  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ t.site_title | default: site.title | escape }}{% endif %}</title>
+  <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
 
-  {% seo %}
-
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
-
-  <link rel="preload" href="{{ '/assets/toolkit/IWT.min.js' | relative_url }}" as="script">
+  <link rel="preload" href="{{ pathto('_static/js/IWT.min.js', 1) }}" as="script">
 
   <script type="text/javascript">
     WebFontConfig = {
@@ -36,24 +32,23 @@
   </script>
 
   <!-- include html5shim per Explorer 8 -->
-  <script src="{{ '/assets/toolkit/vendor/modernizr.js' | relative_url }}"></script>
+  <script src="{{ pathto('_static/toolkit/vendor/modernizr.js', 1) }}"></script>
 
-  <link media="all" rel="stylesheet" href="{{ '/assets/toolkit/vendor.css' | relative_url }}">
-  <link media="all" rel="stylesheet" href="{{ '/assets/toolkit/build.css' | relative_url }}">
-  <link media="all" rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
+  <link media="all" rel="stylesheet" href="{{ pathto('_static/css/vendor.css', 1) }}">
+  <link media="all" rel="stylesheet" href="{{ pathto('_static/css/build.css', 1) }}">
+  <link media="all" rel="stylesheet" href="{{ pathto('_static/css/developers.css', 1) }}">
 
-  <script src="{{ '/assets/toolkit/vendor/jquery.min.js' | relative_url }}"></script>
+  <script src="{{ pathto('_static/toolkit/vendor/jquery.min.js', 1) }}"></script>
 
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/icons/apple-touch-icon.png' | relative_url }}">
-  <link rel="icon" type="image/png" href="{{ '/assets/icons/favicon-32x32.png' | relative_url }}" sizes="32x32">
-  <link rel="icon" type="image/png" href="{{ '/assets/icons/favicon-16x16.png' | relative_url }}" sizes="16x16">
-  <link rel="manifest" href="{{ '/assets/icons/manifest.json' | relative_url }}">
-  <link rel="mask-icon" href="{{ '/assets/icons/safari-pinned-tab.svg' | relative_url }}">
-  <link rel="shortcut icon" href="{{ '/assets/icons/favicon.ico' | relative_url }}">
-  <meta name="apple-mobile-web-app-title" content="{{ site.title }}">
-  <meta name="application-name" content="{{ site.title }}">
-  <meta name="msapplication-config" content="{{ '/assets/icons/browserconfig.xml' | relative_url }}">
-  <meta name="theme-color" content="{{ site.theme_color }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ pathto('/_static/icons/apple-touch-icon.png', 1) }}">
+  <link rel="icon" type="image/png" href="{{ pathto('/_static/icons/favicon-32x32.png', 1) }}" sizes="32x32">
+  <link rel="icon" type="image/png" href="{{ pathto('/_static/icons/favicon-16x16.png', 1) }}" sizes="16x16">
+  <link rel="manifest" href="{{ pathto('/_static/icons/manifest.json', 1) }}">
+  <link rel="mask-icon" href="{{ pathto('/_static/icons/safari-pinned-tab.svg', 1) }}">
+  <link rel="shortcut icon" href="{{ pathto('/_static/icons/favicon.ico', 1) }}">
+  <meta name="apple-mobile-web-app-title" content="{{ title|striptags|e }}{{ titlesuffix }}">
+  <meta name="application-name" content="{{ title|striptags|e }}{{ titlesuffix }}">
+  <meta name="msapplication-config" content="{{ pathto('/_static/icons/browserconfig.xml', 1) }}">
 
 </head>
-<body class="{{ site.css_theme }}">
+<body role="document" class="{{ site.css_theme }}">

@@ -54,7 +54,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Sphinx RTD theme demo'
+project = u'Sphinx theme demo'
 copyright = u'2017, Team Digitale'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -111,13 +111,39 @@ html_theme = 'sphinx_italia_theme'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    # 'sticky_navigation': True  # Set to False to disable the sticky nav while scrolling.
-    # 'logo_only': True,  # if we have a html_logo below, this shows /only/ the logo with no title text
+    # If the project is meant to be a landing page style project, enable this
+    # layout instead of the default one
     'layout': 'landing',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../.."]
+
+html_context = {
+    'subproject_data': [
+        {
+            'id': 1,
+            'name': 'Project A',
+            'slug': 'project-a',
+            'description': '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non lectus ut elit consectetur posuere. Maecenas euismod lorem vitae libero porttitor hendrerit.''',
+            'url': '//',
+        },
+        {
+            'id': 2,
+            'name': 'Project B',
+            'slug': 'project-b',
+            'description': '''Duis lobortis dui non justo vulputate luctus. Donec lorem nunc, tempus sodales urna in, porttitor condimentum nisl. Vivamus non est egestas, tristique est id, rhoncus orci.''',
+            'url': '//',
+        },
+        {
+            'id': 3,
+            'name': 'Project C',
+            'slug': 'project-c',
+            'description': '''Integer tempus, mi eget rhoncus mattis, leo felis commodo nunc, a porttitor nisi lorem nec mi. Donec hendrerit cursus lorem. Maecenas cursus dui at risus ornare, nec vehicula ligula condimentum.''',
+            'url': '//',
+        },
+    ]
+}
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
