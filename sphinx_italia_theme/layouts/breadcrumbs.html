@@ -1,29 +1,47 @@
 <div class="u-layout-wide u-layoutCenter u-padding-r-bottom">
-  <nav aria-label="sei qui:" role="navigation">
-    <ul class="Breadcrumb">
-      <li class="Breadcrumb-item"><a class="Breadcrumb-link u-color-50" href="{{ site.baseurl }}">Home</a></li>
+  <div class="Grid Grid--withGutter">
+    <div class="Grid-cell u-md-size2of4 u-lg-size2of4">
+      <nav aria-label="sei qui:" role="navigation">
+        <ul class="Breadcrumb">
 
-      {% assign page_url_without_index_html = page.url | remove: "/index.html" | remove: '/index' %}
-      {% assign splitted_url_parts = page_url_without_index_html | split: '/' %}
-      {% assign forLoopMaxInt = splitted_url_parts.size - 1 %}
+          <li class="Breadcrumb-item">
+            <a class="Breadcrumb-link u-color-50" href="{{ pathto(master_doc) }}">{{ _('Docs') }}</a>
+          </li>
 
-      {% for i in (1..forLoopMaxInt) %}
-          {% assign current_breadcrumb_url = next_prepender | append: '/' | append: splitted_url_parts[i] | append: '/index/' %}
-          {% assign current_breadcrumb_md_url = next_prepender | append: '/' | append: splitted_url_parts[i] | append: '/' %}
-          {% assign next_prepender = next_prepender | append: '/' | append: splitted_url_parts[i] %}
-          {% for breadcrumb_page in site.pages %}
-              {% if current_breadcrumb_url == breadcrumb_page.url or current_breadcrumb_md_url == breadcrumb_page.url  %}
-               <li class="Breadcrumb-item">
-                    {% assign breadcrumb_page_page_url_without_index_html = breadcrumb_page.url | remove: "index.html" %}
-                    <a class="Breadcrumb-link u-color-50"
-                      href="{{ site.baseurl }}{{breadcrumb_page_page_url_without_index_html}}">
-                      {{breadcrumb_page.title}}
-                    </a>
-                </li>
-              {% endif %}
+          {% if theme_superproject %}
+            <li class="Breadcrumb-item">
+              <a class="Breadcrumb-link u-color-50" href="{{ theme_superproject.url }}">
+                {{ theme_superproject.name }}
+              </a>
+            </li>
+          {% endif %}
+
+          {% for doc in parents %}
+            <li class="Breadcrumb-item">
+              <a class="Breadcrumb-link u-color-50" href="{{ doc.link|e }}">
+                {{ doc.title }}
+              </a>
+            </li>
           {% endfor %}
-      {% endfor %}
 
-    </ul>
-  </nav>
+          <li class="Breadcrumb-item">
+            {{ title }}
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+
+    <div class="Grid-cell u-md-size2of4 u-lg-size2of4 u-layout-centerRight">
+      {% if hasdoc(pagename) %}
+        {% if display_github %}
+          <a href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"> {{ _('Proponi modifica su GitHub') }}</a>
+        {% elif show_source and source_url_prefix %}
+          <a href="{{ source_url_prefix }}{{ pagename }}{{ suffix }}">{{ _('View page source') }}</a>
+        {% elif show_source and has_source and sourcename %}
+          <a href="{{ pathto('_sources/' + sourcename, true)|e }}" rel="nofollow"> {{ _('View page source') }}</a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
 </div>

@@ -114,6 +114,16 @@ html_theme_options = {
     # If the project is meant to be a landing page style project, enable this
     # layout instead of the default one
     # 'layout': 'landing',
+    'versions': {
+        '0.2.4': '0.2.4',
+        '4.0': '4.0',
+    },
+    'superproject': {
+        'id': 8,
+        'name': 'ANPR',
+        'slug': 'anpr',
+        'url': '//docs/anpr',
+    }
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -142,7 +152,7 @@ html_context = {
             'description': '''Integer tempus, mi eget rhoncus mattis, leo felis commodo nunc, a porttitor nisi lorem nec mi. Donec hendrerit cursus lorem. Maecenas cursus dui at risus ornare, nec vehicula ligula condimentum.''',
             'url': '//',
         },
-    ]
+    ],
 }
 
 # The name for this set of Sphinx documents.  If None, it defaults to
