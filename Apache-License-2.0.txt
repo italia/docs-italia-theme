@@ -1,5 +1,5 @@
-sphinx_rtd_theme/static/fonts/RobotoSlab-Bold.ttf
-sphinx_rtd_theme/static/fonts/RobotoSlab-Regular.tt/
+sphinx_italia_theme/static/fonts/RobotoSlab-Bold.ttf
+sphinx_italia_theme/static/fonts/RobotoSlab-Regular.tt/
 
 
                                  Apache License

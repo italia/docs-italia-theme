@@ -1,0 +1,42 @@
+{% include 'layouts/head.html' %}
+
+<div class="u-background-95">
+  <div id="main" class="u-layout-wide u-layoutCenter">
+    {% include 'layouts/header.html' %}
+    {# include 'layouts/offcanvas.html' #}
+    {# include 'layouts/network.html' #}
+
+    <section class="u-nbfc u-background-grey-15 u-layout-r-withGutter u-padding-r-top u-padding-r-bottom u-posRelative u-zindex-30">
+      <div class="u-layout-wide u-layoutCenter">
+
+        <h2 class="u-text-r-l u-textWeight-300 u-color-50 u-padding-r-bottom">{{ _('Documentazione') }}</h2>
+
+        {% from 'layouts/card.html' import card with context %}
+
+        <div class="Grid Grid--withGutter">
+
+          {% for subproject in subproject_data %}
+            <div
+                class="Grid-cell u-md-size1of3 u-lg-size1of3 u-margin-r-bottom u-layout-matchHeight"
+                id="subproject-{{ subproject.id }}">
+              {{ card(subproject.name, None, subproject.url, subproject.description) }}
+            </div>
+          {% endfor %}
+
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>
+
+{% include 'layouts/scrolltop.html' %}
+
+<div class="u-background-95">
+  <div class="u-layout-wide u-layoutCenter u-layout-r-withGutter u-hiddenPrint">
+    {% include 'layouts/footer--simple.html' %}
+  </div>
+</div>
+
+</body>
+</html>

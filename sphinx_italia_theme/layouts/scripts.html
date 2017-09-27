@@ -1,0 +1,29 @@
+<!--[if IE 8]>
+ <script src="{{ pathto('_static/toolkit/vendor/respond.min.js', 1) }}"></script>
+ <script src="{{ pathto('_static/toolkit/vendor/rem.min.js', 1) }}"></script>
+ <script src="{{ pathto('_static/toolkit/vendor/selectivizr.js', 1) }}"></script>
+ <script src="{{ pathto('_static/toolkit/vendor/slice.js', 1) }}"></script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <script src="{{ pathto('_static/toolkit/vendor/polyfill.min.js', 1) }}"></script>
+ <![endif]-->
+
+<script src="{{ pathto('_static/toolkit/IWT.min.js', 1) }}"></script>
+
+<script src="{{ pathto('_static/js/main.js', 1) }}"></script>
+
+<script>
+  $(document).on('keydown', function(e) {
+    if (e.keyCode === 9) {
+      $('body').removeClass('hide-focus');
+    } else if (e.keyCode == 191) { // slash
+      $('#cerca').focus();
+      e.preventDefault();
+    }
+  })
+
+  $(document).on('click', function(e) {
+    $('body').addClass('hide-focus');
+  })
+</script>

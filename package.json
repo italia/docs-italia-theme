@@ -1,8 +1,12 @@
 {
-  "name": "sphinx_rtd_theme",
-  "version": "0.0.11",
+  "name": "sphinx_italia_theme",
+  "version": "1.0.0",
+  "license": "MIT",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "bower": "^1.8.2",
+    "grunt-cli": "^1.2.0"
+  },
   "devDependencies": {
     "browserify": "^11.0.0",
     "connect-livereload": "~0.3.0",

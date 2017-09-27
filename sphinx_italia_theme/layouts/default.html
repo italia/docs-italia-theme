@@ -1,0 +1,37 @@
+{% include 'layouts/head.html' %}
+
+<div class="u-background-95">
+  <div id="main" class="u-layout-wide u-layoutCenter">
+    {% include 'layouts/header.html' %}
+    {# include 'layouts/offcanvas.html' #}
+    {# include 'layouts/network.html' #}
+
+    <section class="u-nbfc u-background-grey-15 u-layout-r-withGutter u-padding-r-top u-padding-r-bottom u-posRelative u-zindex-30">
+      <div class="u-layout-wide u-layoutCenter">
+
+        {% include 'layouts/breadcrumbs.html' %}
+
+        <div class="Grid Grid--withGutter">
+          <div id="rst-menu" class="Grid-cell u-md-size1of4 u-lg-size1of4 u-margin-r-bottom">
+            {% include 'layouts/docmenu.html' %}
+          </div>
+          <div id="rst-content" class="Grid-cell u-md-size3of4 u-lg-size3of4 u-margin-r-bottom rst-content">
+            {% block body %}{% endblock %}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>
+
+{% include 'layouts/scrolltop.html' %}
+
+<div class="u-background-95">
+  <div class="u-layout-wide u-layoutCenter u-layout-r-withGutter u-hiddenPrint">
+    {% include 'layouts/footer--simple.html' %}
+  </div>
+</div>
+
+</body>
+</html>

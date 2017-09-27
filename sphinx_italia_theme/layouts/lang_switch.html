@@ -1,0 +1,21 @@
+{% if site.data.l10n | length > 1 %}
+<li>
+<a href="#languages" data-menu-trigger="languages" class="Header-language u-border-none u-zindex-max u-inlineBlock">
+    <span class="u-hiddenVisually">{{ language }}:</span>
+    <span class="">{{ site.data.l10n[language].code | upper }}</span>
+    <span class="Icon Icon-expand u-padding-left-xs"></span>
+  </a>
+</li>
+
+  <div id="languages" data-menu class="Dropdown-menu Header-language-other u-jsVisibilityHidden u-nojsDisplayNone">
+    <span class="Icon-drop-down Dropdown-arrow u-color-white"></span>
+    <ul class="Linklist">
+      {% for lang_id, lang in site.data.l10n.items() %}
+      <li><a href="{{ '/' ~ lang_id }}"
+        class="u-padding-r-all"><span lang="{{ lang_id }}">{{ lang.name }}</span></a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+
+{% endif %}

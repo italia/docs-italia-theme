@@ -1,30 +1,32 @@
 # -*- coding: utf-8 -*-
-"""`sphinx_rtd_theme` lives on `Github`_.
 
-.. _github: https://www.github.com/snide/sphinx_rtd_theme
+"""Sphinx Team Digitale theme"""
 
-"""
+import codecs
+import json
+
 from setuptools import setup
-from sphinx_rtd_theme import __version__
+
+package_file = codecs.open('package.json', 'r', 'utf-8')
+package_data = json.load(package_file)
 
 
 setup(
-    name='sphinx_rtd_theme',
-    version=__version__,
-    url='https://github.com/rtfd/sphinx_rtd_theme/',
-    license='MIT',
-    author='Dave Snider',
-    author_email='dave.snider@gmail.com',
-    description='Read the Docs theme for Sphinx',
-    long_description=open('README.rst').read(),
+    name='sphinx_italia_theme',
+    version=package_data['version'],
+    license=package_data['license'],
+    author='Team Digitale',
+    description=__doc__,
+    long_description=codecs.open('README.rst', 'r', 'utf-8').read(),
     zip_safe=False,
-    packages=['sphinx_rtd_theme'],
-    package_data={'sphinx_rtd_theme': [
+    packages=['sphinx_italia_theme'],
+    package_data={'sphinx_italia_theme': [
         'theme.conf',
         '*.html',
         'static/css/*.css',
         'static/js/*.js',
-        'static/font/*.*'
+        'static/font/*.*',
+        'data/*.*',
     ]},
     include_package_data=True,
     classifiers=[
