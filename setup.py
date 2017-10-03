@@ -26,6 +26,8 @@ setup(
         'static/css/*.css',
         'static/icons/*.*',
         'static/js/*.js',
+        'static/*.png',
+        'static/*.svg',
         'static/font/*.*',
         'data/*.*',
     ]},
