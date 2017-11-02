@@ -221,10 +221,10 @@ td {
 }
 
 .chromeframe {
-  margin: 0.2em 0;
+  margin: .2em 0;
   background: #ccc;
   color: black;
-  padding: 0.2em 0;
+  padding: .2em 0;
 }
 
 .ir {
@@ -317,7 +317,7 @@ big, small {
   }
 
   @page {
-    margin: 0.5cm;
+    margin: .5cm;
   }
   p, h2, .rst-content .toctree-wrapper p.caption, h3 {
     orphans: 3;
@@ -367,7 +367,7 @@ big, small {
 
 /* makes the font 33% larger relative to the icon container */
 .fa-lg {
-  font-size: 1.33333em;
+  font-size: 1.3333333333em;
   line-height: 0.75em;
   vertical-align: -15%;
 }
@@ -389,13 +389,13 @@ big, small {
 }
 
 .fa-fw {
-  width: 1.28571em;
+  width: 1.2857142857em;
   text-align: center;
 }
 
 .fa-ul {
   padding-left: 0;
-  margin-left: 2.14286em;
+  margin-left: 2.1428571429em;
   list-style-type: none;
 }
 .fa-ul > li {
@@ -404,13 +404,13 @@ big, small {
 
 .fa-li {
   position: absolute;
-  left: -2.14286em;
-  width: 2.14286em;
-  top: 0.14286em;
+  left: -2.1428571429em;
+  width: 2.1428571429em;
+  top: 0.1428571429em;
   text-align: center;
 }
 .fa-li.fa-lg {
-  left: -1.85714em;
+  left: -1.8571428571em;
 }
 
 .fa-border {
@@ -3406,17 +3406,17 @@ a .fa, a .wy-menu-vertical li span.toctree-expand, .wy-menu-vertical li a span.t
   display: inline;
 }
 .btn .fa.fa-large, .btn .wy-menu-vertical li span.fa-large.toctree-expand, .wy-menu-vertical li .btn span.fa-large.toctree-expand, .btn .rst-content .fa-large.admonition-title, .rst-content .btn .fa-large.admonition-title, .btn .rst-content h1 .fa-large.headerlink, .rst-content h1 .btn .fa-large.headerlink, .btn .rst-content h2 .fa-large.headerlink, .rst-content h2 .btn .fa-large.headerlink, .btn .rst-content h3 .fa-large.headerlink, .rst-content h3 .btn .fa-large.headerlink, .btn .rst-content h4 .fa-large.headerlink, .rst-content h4 .btn .fa-large.headerlink, .btn .rst-content h5 .fa-large.headerlink, .rst-content h5 .btn .fa-large.headerlink, .btn .rst-content h6 .fa-large.headerlink, .rst-content h6 .btn .fa-large.headerlink, .btn .rst-content dl dt .fa-large.headerlink, .rst-content dl dt .btn .fa-large.headerlink, .btn .rst-content p.caption .fa-large.headerlink, .rst-content p.caption .btn .fa-large.headerlink, .btn .rst-content tt.download span.fa-large:first-child, .rst-content tt.download .btn span.fa-large:first-child, .btn .rst-content code.download span.fa-large:first-child, .rst-content code.download .btn span.fa-large:first-child, .btn .fa-large.icon, .nav .fa.fa-large, .nav .wy-menu-vertical li span.fa-large.toctree-expand, .wy-menu-vertical li .nav span.fa-large.toctree-expand, .nav .rst-content .fa-large.admonition-title, .rst-content .nav .fa-large.admonition-title, .nav .rst-content h1 .fa-large.headerlink, .rst-content h1 .nav .fa-large.headerlink, .nav .rst-content h2 .fa-large.headerlink, .rst-content h2 .nav .fa-large.headerlink, .nav .rst-content h3 .fa-large.headerlink, .rst-content h3 .nav .fa-large.headerlink, .nav .rst-content h4 .fa-large.headerlink, .rst-content h4 .nav .fa-large.headerlink, .nav .rst-content h5 .fa-large.headerlink, .rst-content h5 .nav .fa-large.headerlink, .nav .rst-content h6 .fa-large.headerlink, .rst-content h6 .nav .fa-large.headerlink, .nav .rst-content dl dt .fa-large.headerlink, .rst-content dl dt .nav .fa-large.headerlink, .nav .rst-content p.caption .fa-large.headerlink, .rst-content p.caption .nav .fa-large.headerlink, .nav .rst-content tt.download span.fa-large:first-child, .rst-content tt.download .nav span.fa-large:first-child, .nav .rst-content code.download span.fa-large:first-child, .rst-content code.download .nav span.fa-large:first-child, .nav .fa-large.icon {
-  line-height: 0.9em;
+  line-height: .9em;
 }
 .btn .fa.fa-spin, .btn .wy-menu-vertical li span.fa-spin.toctree-expand, .wy-menu-vertical li .btn span.fa-spin.toctree-expand, .btn .rst-content .fa-spin.admonition-title, .rst-content .btn .fa-spin.admonition-title, .btn .rst-content h1 .fa-spin.headerlink, .rst-content h1 .btn .fa-spin.headerlink, .btn .rst-content h2 .fa-spin.headerlink, .rst-content h2 .btn .fa-spin.headerlink, .btn .rst-content h3 .fa-spin.headerlink, .rst-content h3 .btn .fa-spin.headerlink, .btn .rst-content h4 .fa-spin.headerlink, .rst-content h4 .btn .fa-spin.headerlink, .btn .rst-content h5 .fa-spin.headerlink, .rst-content h5 .btn .fa-spin.headerlink, .btn .rst-content h6 .fa-spin.headerlink, .rst-content h6 .btn .fa-spin.headerlink, .btn .rst-content dl dt .fa-spin.headerlink, .rst-content dl dt .btn .fa-spin.headerlink, .btn .rst-content p.caption .fa-spin.headerlink, .rst-content p.caption .btn .fa-spin.headerlink, .btn .rst-content tt.download span.fa-spin:first-child, .rst-content tt.download .btn span.fa-spin:first-child, .btn .rst-content code.download span.fa-spin:first-child, .rst-content code.download .btn span.fa-spin:first-child, .btn .fa-spin.icon, .nav .fa.fa-spin, .nav .wy-menu-vertical li span.fa-spin.toctree-expand, .wy-menu-vertical li .nav span.fa-spin.toctree-expand, .nav .rst-content .fa-spin.admonition-title, .rst-content .nav .fa-spin.admonition-title, .nav .rst-content h1 .fa-spin.headerlink, .rst-content h1 .nav .fa-spin.headerlink, .nav .rst-content h2 .fa-spin.headerlink, .rst-content h2 .nav .fa-spin.headerlink, .nav .rst-content h3 .fa-spin.headerlink, .rst-content h3 .nav .fa-spin.headerlink, .nav .rst-content h4 .fa-spin.headerlink, .rst-content h4 .nav .fa-spin.headerlink, .nav .rst-content h5 .fa-spin.headerlink, .rst-content h5 .nav .fa-spin.headerlink, .nav .rst-content h6 .fa-spin.headerlink, .rst-content h6 .nav .fa-spin.headerlink, .nav .rst-content dl dt .fa-spin.headerlink, .rst-content dl dt .nav .fa-spin.headerlink, .nav .rst-content p.caption .fa-spin.headerlink, .rst-content p.caption .nav .fa-spin.headerlink, .nav .rst-content tt.download span.fa-spin:first-child, .rst-content tt.download .nav span.fa-spin:first-child, .nav .rst-content code.download span.fa-spin:first-child, .rst-content code.download .nav span.fa-spin:first-child, .nav .fa-spin.icon {
   display: inline-block;
 }
 
 .btn.fa:before, .wy-menu-vertical li span.btn.toctree-expand:before, .rst-content .btn.admonition-title:before, .rst-content h1 .btn.headerlink:before, .rst-content h2 .btn.headerlink:before, .rst-content h3 .btn.headerlink:before, .rst-content h4 .btn.headerlink:before, .rst-content h5 .btn.headerlink:before, .rst-content h6 .btn.headerlink:before, .rst-content dl dt .btn.headerlink:before, .rst-content p.caption .btn.headerlink:before, .rst-content tt.download span.btn:first-child:before, .rst-content code.download span.btn:first-child:before, .btn.icon:before {
-  opacity: 0.5;
-  -webkit-transition: opacity 0.05s ease-in;
-  -moz-transition: opacity 0.05s ease-in;
-  transition: opacity 0.05s ease-in;
+  opacity: .5;
+  -webkit-transition: opacity .05s ease-in;
+  -moz-transition: opacity .05s ease-in;
+  transition: opacity .05s ease-in;
 }
 
 .btn.fa:hover:before, .wy-menu-vertical li span.btn.toctree-expand:hover:before, .rst-content .btn.admonition-title:hover:before, .rst-content h1 .btn.headerlink:hover:before, .rst-content h2 .btn.headerlink:hover:before, .rst-content h3 .btn.headerlink:hover:before, .rst-content h4 .btn.headerlink:hover:before, .rst-content h5 .btn.headerlink:hover:before, .rst-content h6 .btn.headerlink:hover:before, .rst-content dl dt .btn.headerlink:hover:before, .rst-content p.caption .btn.headerlink:hover:before, .rst-content tt.download span.btn:first-child:hover:before, .rst-content code.download span.btn:first-child:hover:before, .btn.icon:hover:before {
@@ -3508,9 +3508,9 @@ a .fa, a .wy-menu-vertical li span.toctree-expand, .wy-menu-vertical li a span.t
   height: 0;
   line-height: 56px;
   overflow: hidden;
-  -webkit-transition: all 0.3s ease-in;
-  -moz-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
+  -webkit-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  transition: all .3s ease-in;
 }
 .wy-tray-container li.wy-tray-item-success {
   background: #27AE60;
@@ -3585,9 +3585,9 @@ button[disabled] {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  transition: all 0.1s linear;
+  -webkit-transition: all .1s linear;
+  -moz-transition: all .1s linear;
+  transition: all .1s linear;
 }
 
 .btn-hover {
@@ -3614,7 +3614,7 @@ button[disabled] {
   background-image: none;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   filter: alpha(opacity=40);
-  opacity: 0.4;
+  opacity: .4;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -3623,7 +3623,7 @@ button[disabled] {
   background-image: none;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   filter: alpha(opacity=40);
-  opacity: 0.4;
+  opacity: .4;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -3631,7 +3631,7 @@ button[disabled] {
   background-image: none;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   filter: alpha(opacity=40);
-  opacity: 0.4;
+  opacity: .4;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -3926,7 +3926,7 @@ input, select, textarea {
 .wy-control-group .wy-form-full {
   float: left;
   display: block;
-  margin-right: 2.35765%;
+  margin-right: 2.3576515979%;
   width: 100%;
   margin-right: 0;
 }
@@ -3937,8 +3937,8 @@ input, select, textarea {
 .wy-control-group .wy-form-halves {
   float: left;
   display: block;
-  margin-right: 2.35765%;
-  width: 48.82117%;
+  margin-right: 2.3576515979%;
+  width: 48.821174201%;
 }
 .wy-control-group .wy-form-halves:last-child {
   margin-right: 0;
@@ -3953,8 +3953,8 @@ input, select, textarea {
 .wy-control-group .wy-form-thirds {
   float: left;
   display: block;
-  margin-right: 2.35765%;
-  width: 31.76157%;
+  margin-right: 2.3576515979%;
+  width: 31.7615656014%;
 }
 .wy-control-group .wy-form-thirds:last-child {
   margin-right: 0;
@@ -3983,7 +3983,7 @@ input, select, textarea {
 
 .wy-form-message-inline {
   display: inline-block;
-  padding-left: 0.3em;
+  padding-left: .3em;
   color: #666;
   vertical-align: middle;
   font-size: 90%;
@@ -4024,9 +4024,9 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
   font-family: "Titillium Web", sans-serif;
   box-shadow: inset 0 1px 3px #ddd;
   border-radius: 0;
-  -webkit-transition: border 0.3s linear;
-  -moz-transition: border 0.3s linear;
-  transition: border 0.3s linear;
+  -webkit-transition: border .3s linear;
+  -moz-transition: border .3s linear;
+  transition: border .3s linear;
 }
 input[type="datetime-local"] {
   padding: 0.34375em 0.625em;
@@ -4099,9 +4099,9 @@ select, textarea {
   border: 1px solid #ccc;
   font-size: 80%;
   box-shadow: inset 0 1px 3px #ddd;
-  -webkit-transition: border 0.3s linear;
-  -moz-transition: border 0.3s linear;
-  transition: border 0.3s linear;
+  -webkit-transition: border .3s linear;
+  -moz-transition: border .3s linear;
+  transition: border .3s linear;
 }
 
 select {
@@ -4180,9 +4180,9 @@ input[type="radio"][disabled], input[type="checkbox"][disabled] {
   height: 12px;
   border-radius: 4px;
   background: #ccc;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 .wy-switch:after {
   position: absolute;
@@ -4194,9 +4194,9 @@ input[type="radio"][disabled], input[type="checkbox"][disabled] {
   background: #999;
   left: -3px;
   top: -3px;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 .wy-switch span {
   position: absolute;
@@ -4217,7 +4217,7 @@ input[type="radio"][disabled], input[type="checkbox"][disabled] {
 
 .wy-switch.disabled {
   cursor: not-allowed;
-  opacity: 0.8;
+  opacity: .8;
 }
 
 .wy-control-group.wy-control-group-error .wy-form-message, .wy-control-group.wy-control-group-error > label {
@@ -4310,14 +4310,14 @@ input[type="radio"][disabled], input[type="checkbox"][disabled] {
 
 @media only screen and (max-width: 480px) {
   .wy-form button[type="submit"] {
-    margin: 0.7em 0 0;
+    margin: .7em 0 0;
   }
   .wy-form input[type="text"], .wy-form input[type="password"], .wy-form input[type="email"], .wy-form input[type="url"], .wy-form input[type="date"], .wy-form input[type="month"], .wy-form input[type="time"], .wy-form input[type="datetime"], .wy-form input[type="datetime-local"], .wy-form input[type="week"], .wy-form input[type="number"], .wy-form input[type="search"], .wy-form input[type="tel"], .wy-form input[type="color"] {
-    margin-bottom: 0.3em;
+    margin-bottom: .3em;
     display: block;
   }
   .wy-form label {
-    margin-bottom: 0.3em;
+    margin-bottom: .3em;
     display: block;
   }
 
@@ -4326,7 +4326,7 @@ input[type="radio"][disabled], input[type="checkbox"][disabled] {
   }
 
   .wy-form-aligned .wy-control-group label {
-    margin-bottom: 0.3em;
+    margin-bottom: .3em;
     text-align: left;
     display: block;
     width: 100%;
@@ -4478,7 +4478,7 @@ input[type="radio"][disabled], input[type="checkbox"][disabled] {
   margin-bottom: 0 !important;
 }
 .wy-table-responsive table td, .wy-table-responsive table th {
-  white-space: normal;
+  white-space: nowrap;
 }
 
 a {
@@ -5071,6 +5071,10 @@ div[class^='highlight'] pre {
   text-decoration: underline;
 }
 
+div.rst-pro {
+  display: none !important;
+}
+
 .wy-menu-horiz {
   *zoom: 1;
 }
@@ -5107,7 +5111,7 @@ div[class^='highlight'] pre {
   display: inline-block;
   line-height: 16px;
   font-size: 14px;
-  padding: 1rem 1.5rem 0.5rem 1.5rem;
+  padding: 1rem 1.5rem .5rem 1.5rem;
   margin-bottom: 0;
   display: block;
   font-weight: bold;
@@ -5147,7 +5151,7 @@ div[class^='highlight'] pre {
   display: block;
   float: left;
   margin-left: -1.2em;
-  font-size: 0.8em;
+  font-size: .8em;
   line-height: 1.6em;
   color: #4d4d4d;
 }
@@ -5169,7 +5173,7 @@ div[class^='highlight'] pre {
 }
 .wy-menu-vertical li.on a span.toctree-expand, .wy-menu-vertical li.current > a span.toctree-expand {
   display: block;
-  font-size: 0.8em;
+  font-size: .8em;
   line-height: 1.6em;
   color: #333333;
 }
@@ -5195,7 +5199,7 @@ div[class^='highlight'] pre {
   color: #d9d9d9;
 }
 .wy-menu-vertical li.toctree-l3 {
-  font-size: 0.9em;
+  font-size: .9em;
 }
 .wy-menu-vertical li.toctree-l3.current > a {
   background: #e6e6e6;
@@ -5215,7 +5219,7 @@ div[class^='highlight'] pre {
   color: #cccccc;
 }
 .wy-menu-vertical li.toctree-l4 {
-  font-size: 0.9em;
+  font-size: .9em;
 }
 .wy-menu-vertical li.current ul {
   display: block;
@@ -5299,7 +5303,7 @@ div[class^='highlight'] pre {
   display: block;
 }
 .wy-side-nav-search .branding .branding--content span.branding--title--root {
-  opacity: 0.5;
+  opacity: .5;
   font-weight: 300;
 }
 .wy-side-nav-search .branding .branding--content span.branding--title--branch {
@@ -5361,10 +5365,10 @@ div[class^='highlight'] pre {
   width: auto;
   border-radius: 0;
   max-width: 100%;
-  background: transparent;
+  background: rgba(0, 0, 0, 0);
 }
 .wy-side-nav-search > a.icon img.logo, .wy-side-nav-search .wy-dropdown > a.icon img.logo {
-  margin-top: 0.85em;
+  margin-top: .85em;
 }
 .wy-side-nav-search > div.version {
   margin-top: -0.4045em;
@@ -5385,9 +5389,9 @@ div[class^='highlight'] pre {
 }
 
 [data-menu-wrap] {
-  -webkit-transition: all 0.2s ease-in;
-  -moz-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
+  -webkit-transition: all .2s ease-in;
+  -moz-transition: all .2s ease-in;
+  transition: all .2s ease-in;
   position: absolute;
   opacity: 1;
   width: 100%;
@@ -6124,9 +6128,9 @@ button[disabled] {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  transition: all 0.1s linear;
+  -webkit-transition: all .1s linear;
+  -moz-transition: all .1s linear;
+  transition: all .1s linear;
 }
 
 .btn-hover {
@@ -6153,7 +6157,7 @@ button[disabled] {
   background-image: none;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   filter: alpha(opacity=40);
-  opacity: 0.4;
+  opacity: .4;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -6162,7 +6166,7 @@ button[disabled] {
   background-image: none;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   filter: alpha(opacity=40);
-  opacity: 0.4;
+  opacity: .4;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -6170,7 +6174,7 @@ button[disabled] {
   background-image: none;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   filter: alpha(opacity=40);
-  opacity: 0.4;
+  opacity: .4;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -6265,11 +6269,6 @@ button[disabled] {
 }
 .wy-btn-group:after {
   clear: both;
-}
-
-/* ADV Banner Remove */
-div.rst-pro {
-   display: none !important;
 }
 
 /*# sourceMappingURL=theme.css.map */
