@@ -1,9 +1,13 @@
 {%- if builder != 'singlehtml' %}
   <div role="search">
-    <form id="rtd-search-form" action="{{ pathto('search') }}" method="get">
-      <input type="text" name="q" placeholder="{{ _('Search docs') }}" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+    <form class="Form" id="rtd-search-form" action="{{ pathto('search') }}" method="get">
+      <div class="Form-field Form-field--withPlaceholder Grid u-background-white u-color-grey-30 u-borderRadius-s" role="search">
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+        <input class="Form-input Form-input--ultraLean Grid-cell u-sizeFill u-text-r-s u-color-black u-text-r-xs u-borderHideFocus u-borderRadius-s" required="" id="cerca" value="" type="text" name="q" placeholder="{{ _('Search docs') }}">
+        <button class="Grid-cell u-sizeFit Icon-search Icon--rotated u-color-grey-50 u-padding-all-s u-textWeight-700" title="avvia la ricerca" aria-label="avvia la ricerca">
+        </button>
+      </div>
     </form>
   </div>
 {%- endif %}

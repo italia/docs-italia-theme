@@ -1,17 +1,8 @@
-{% include "layouts/searchbox.html" %}
+<h1 class="u-padding-r-all">
+  <a href="{{ pathto(master_doc) }}" class="u-color-white u-text-r-m">{{ project }}</a>
+</h1>
 
-{% if 'singlehtml' not in builder %}
-  {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation, includehidden=True) %}
-{% endif %}
-{% if global_toc %}
-  {{ global_toc }}
-{% else %}
-  <!-- Local TOC -->
-  <div class="local-toc">{{ toc }}</div>
-{% endif %}
-
-<div id="rst-menu-links" role="note" aria-label="versions">
-  <dl>
+<div class="u-padding-r-all" role="note" aria-label="versions">
     <dt>{{ _('Versions') }}</dt>
     {%- set nav_version = version %}
     {% if READTHEDOCS and current_version %}
@@ -35,7 +26,24 @@
         {% endif %}
       </dd>
     {% endif %}
+</div>
 
+<div class="u-padding-r-all">
+    {% include "layouts/searchbox.html" %}
+</div>
+
+{% if 'singlehtml' not in builder %}
+  {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation, includehidden=True) %}
+{% endif %}
+{% if global_toc %}
+  {{ global_toc }}
+{% else %}
+  <!-- Local TOC -->
+  <div class="local-toc">{{ toc }}</div>
+{% endif %}
+
+<div id="rst-menu-links">
+  <dl>
     {% if downloads %}
       <dt>{{ _('Downloads') }}</dt>
       {% for type, url in downloads %}

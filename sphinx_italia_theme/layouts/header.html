@@ -1,6 +1,6 @@
 <header class="Header u-hiddenPrint">
 
-  <div class="Header-banner u-background-50">
+  <div class="Header-banner u-background-60">
     <div class="Header-owner Headroom-hideme u-flex u-flexJustifyBetween u-flexAlignItemsCenter">
       <div class="Header-owner__institutions">
       <div class="u-md-hidden u-lg-hidden u-border-right-xxs u-margin-right-xs u-padding-right-xs u-inlineBlock u-alignMiddle">
@@ -58,6 +58,7 @@
       </div>
 
       <div class="Header-utils Grid-cell">
+        {#
         <div class="Header-social Headroom-hideme">
           <p>{{ _(t.follow_us | capitalize) }}</p>
           <ul class="Header-socialIcons">
@@ -67,7 +68,7 @@
             {% endfor %}
           </ul>
         </div>
-
+        #}
         <div class="Header-search" id="header-search">
           {% include 'layouts/search_form.html' %}
         </div>
