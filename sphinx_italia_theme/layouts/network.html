@@ -8,20 +8,19 @@
       </a>
     </div>
     <nav>
-      {% assign items = include.network_items  %}
+      {% set items = site.data.network_links %}
       <ul class="Linklist Linklist--padded u-layout-prose u-text-r-xs">
       {% for item in items %}
-        <li class="{{ item[1].class }}">
-          {% assign _url = item[1].url %}
-          {% assign item_name = item[1].title %}
-          {{ item[1].li_markup_pre }}
-          <a href="{{ _url }}" class="Linklist-link">
-            {{ t[item_name] | default: item_name }}
+        <li class="{{ item.class }}">
+          {% set _url = item.url %}
+          {% set item_name = item.title %}
+          {{ item.li_markup_pre }}
+          <a href="{{ item.url }}" class="Linklist-link">
+              {{ _(t[item_name] | default(item_name)) }}
           </a>
-          {{ item[1].li_markup_post }}
+          {{ item.li_markup_post }}
         </li>
       {% endfor %}
-
       </ul>
     </nav>
   </div>
