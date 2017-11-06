@@ -4748,15 +4748,8 @@ div[class^='highlight'] pre {
   text-decoration: underline;
 }
 
-div.rst-pro {
+.rst-pro {
   display: none !important;
-}
-
-.Header a:hover {
-  text-decoration: none;
-}
-.Header a:visited {
-  color: #fff;
 }
 
 .wy-menu-horiz {
@@ -5917,6 +5910,19 @@ button[disabled] {
 }
 .wy-btn-group:after {
   clear: both;
+}
+
+.Header a:hover {
+  text-decoration: none;
+}
+.Header a:visited {
+  color: #fff;
+}
+.Header .Header-banner {
+  border-bottom: 1px solid #127ae2;
+}
+.Header .Header-owner {
+  border-bottom: 0;
 }
 
 /*# sourceMappingURL=theme.css.map */
