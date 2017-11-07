@@ -5,7 +5,7 @@
     <img src="{{ kwargs.image | default('//placehold.it/400x220') }}" class="u-sizeFull" alt="{{ kwargs.alt }}" />
   </div>
   {% endif %}
-  <div class="Card__bookBackground u-flexWrap u-flex u-flexAlignSelfStretch u-sizeFill u-padding-all-xs">
+  <div class="Card__book u-flexWrap u-flex u-flexCol u-flexJustifyBetween u-sizeFill u-padding-all-xs">
 
     {% if kwargs.date %}
     {# <time datetime="{{ kwargs.date | date_to_xmlschema }}" #}
@@ -16,71 +16,45 @@
       </time>
     {% endif %}
 
-    <div class="u-sizeFull u-padding-r-top">
-      <h3 class="u-padding-r-left u-padding-bottom-xs u-border-bottom-xxs">
-        <a class="u-textClean u-textWeight-600 u-text-r-xxs u-color-grey-50" href="{{ link }}">
-          {{ _(title) }}
+    <div class="Grid u-sizeFull u-padding-r-top">
+      <div class="Grid-cell u-size5of8 u-border-bottom-xxs">
+          <h3 class="u-padding-r-left u-padding-bottom-xs">
+            <a class="u-textClean u-textWeight-600 u-text-r-xxs u-color-grey-50" href="{{ link }}">
+              {{ _(title) }}
 
-          {% if kwargs.comingsoon %}
-          <div class="u-inlineBlock u-padding-left-xs">
-            <span class="u-inlineBlock u-textWeight-600 u-alignMiddle u-padding-top-xxs u-padding-bottom-xxs u-padding-r-right u-padding-r-left
-              u-borderRadius-xl u-background-grey-20 u-color-50 u-text-xxs">
-            {{ _(t.coming_soon) }}</span>
-          </div>
-          {% endif %}
-        </a>
-      </h3>
-
-      {% if kwargs.author %}
-        <div class="u-padding-r-bottom">
-          <span itemprop="name" class="u-text-r-xs u-textSecondary">{{ _(t.by) }} {{ kwargs.author | capitalize }}</span>
-        </div>
-      {% endif %}
-
-      {% if subtitle %}
-      <h4 class="u-textWeight-400 u-lineHeight-l u-text-r-xs u-color-grey-60 u-padding-bottom-xs">
-          {{ _(subtitle) }}
-      </h4>
-      {% endif %}
-
-      {% if text %}
-        <p class="Content u-text-p u-textSecondary u-padding-r-bottom">
-          {{ _(text) }}
-        </p>
-      {% endif %}
-
+              {% if kwargs.comingsoon %}
+              <div class="u-inlineBlock u-padding-left-xs">
+                <span class="u-inlineBlock u-textWeight-600 u-alignMiddle u-padding-top-xxs u-padding-bottom-xxs u-padding-r-right u-padding-r-left
+                  u-borderRadius-xl u-background-grey-20 u-color-50 u-text-xxs">
+                {{ _(t.coming_soon) }}</span>
+              </div>
+              {% endif %}
+            </a>
+          </h3>
+      </div>
+      <div class="Grid-cell u-size3of8 u-padding-r-right u-textRight">
+          <span class="u-padding-right-xs u-padding-left-xs u-color-white u-text-xxs u-borderRadius-m u-background-teal-30">v1.0</span>
+      </div>
     </div>
+    
 
-    <div class="Grid u-sizeFull u-padding-r-top u-flexAlignSelfEnd
-      {% if kwargs.flat != true %}u-margin-r-left u-margin-r-right u-xs-margin-all-none{% endif %}">
+    {% if kwargs.author %}
+      <div class="u-padding-r-bottom">
+        <span itemprop="name" class="u-text-r-xs u-textSecondary">{{ _(t.by) }} {{ kwargs.author | capitalize }}</span>
+      </div>
+    {% endif %}
 
-        {% if kwargs.hasMore != false %}
-        <p class="Grid-cell u-layout-centerLeft u-flexAlignItemsCenter u-padding-r-bottom">
-          <a href="{{ link }}" class="u-color-50 u-text-r-xxs u-textWeight-600 u-textClean">{{ _(t.home_projects_expand)
-          }}&nbsp;<span class="Icon Icon-chevron-right u-margin-left-xxs u-text-xxs u-alignBottom"></span>
-          </a>
-        </p>
-        {% endif %}
+    {% if subtitle %}
+    <h4 class="u-textWeight-400 u-lineHeight-l u-text-r-xs u-color-grey-60 u-padding-bottom-xs">
+        {{ _(subtitle) }}
+    </h4>
+    {% endif %}
 
-        {% if kwargs.hasSocial != false %}
-        <p class="Grid-cell u-layout-centerRight u-padding-r-bottom">
-          {% for social in kwargs.socials %}
-
-          <a href="{{ social.link }}" class="u-linkClean">
-            <span class="Icon Icon-{{ social.icon }} u-inlineBlock u-text-r-xs u-padding-all-xxs u-borderRadius-circle
-            u-background-50 u-color-white u-margin-right-xs"></span><span class="u-hiddenVisually">{{ social.name }}</span></a>
-
-          {% endfor %}
-        </p>
-        {% endif %}
-
-    </div>
-
-    {% if kwargs.categories %}
-    <div class="u-flex u-flexAlignItemsCenter u-flexAlignContentCenter u-margin-top-l">
-      <p class="u-color-grey-50 u-margin-r-right">{{ _(t.news_categories) }}</p>
-      {# include 'layouts/pills.html' items=kwargs.categories small=true #}
-    </div>
+    {% if text %}
+      <div class="Content u-textSecondary u-padding-r-all">
+        <h4 class="u-text-h4 u-color-50 u-padding-bottom-xxs">About the project</h4>
+        <span class="u-text-xxs">{{ _(text) }}</span>
+      </div>
     {% endif %}
 
   </div>
