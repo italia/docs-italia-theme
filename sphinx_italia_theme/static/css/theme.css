@@ -5933,13 +5933,18 @@ button[disabled] {
   border-bottom: 0;
 }
 
-.Card__book {
-  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0.8rem, white 0.8rem, white 100%), linear-gradient(to bottom, #0f65cb 0, #0f65cb 5.6rem, #5a6772 5.6rem, #5a6772 100%);
-}
 @media only screen and (min-width: 992px) {
   .Card__book {
     min-height: 20em;
   }
+}
+
+.u-background-book {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0.8rem, white 0.8rem, white 100%), linear-gradient(to bottom, #0f65cb 0, #0f65cb 5.6rem, #5a6772 5.6rem, #5a6772 100%);
+}
+
+.u-background-half-grey-80-to-15 {
+  background: linear-gradient(90deg, #30373d 50%, #f6f9fc 50%) !important;
 }
 
 /*# sourceMappingURL=theme.css.map */

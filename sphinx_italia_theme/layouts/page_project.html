@@ -52,7 +52,7 @@
                 <div class="Grid Grid--withGutter">
                   {% for subproject in subproject_data %}
                     <div class="Grid-cell u-md-size1of2 u-lg-size1of2 u-margin-r-bottom u-layout-matchHeight" id="subproject-1">
-                        {{ card(subproject.name, None, subproject.url, subproject.description) }}
+                        {{ card(subproject.name, subproject.title, subproject.url, subproject.description, subproject.version) }}
                     </div>
                   {% endfor %}
                 </div>
