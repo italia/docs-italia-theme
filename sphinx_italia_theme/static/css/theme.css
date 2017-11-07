@@ -5912,6 +5912,14 @@ button[disabled] {
   clear: both;
 }
 
+.u-background-gradient-t-b-blue-50 {
+  background: linear-gradient(to bottom, #06c 0%, #0c5cb2 100%);
+}
+
+.u-minHeight-80 {
+  min-height: 80px;
+}
+
 .Header a:hover {
   text-decoration: none;
 }
@@ -5932,10 +5940,6 @@ button[disabled] {
   .Card__book {
     min-height: 20em;
   }
-}
-
-.u-background-gradient-t-b-blue-50 {
-  background: linear-gradient(to bottom, #06c 0%, #0c5cb2 100%);
 }
 
 /*# sourceMappingURL=theme.css.map */

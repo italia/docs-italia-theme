@@ -113,7 +113,7 @@ html_theme = 'sphinx_italia_theme'
 html_theme_options = {
     # If the project is meant to be a different style project, enable this
     # layout instead of the default one.
-    # Available options are: 'page_home', 'page_project', 'page_serp'
+    # Available options are: (default), 'page_home', 'page_project'
     'layout': 'page_project',
     'versions': {
         '0.2.4': '0.2.4',
