@@ -7,7 +7,7 @@
     {% include 'layouts/network.html' %}
 
     <div class="u-background-50 u-padding-r-bottom u-padding-r-top u-textLeft">
-        <div class="u-layout-wide u-layoutCenter">
+        <div class="u-layout-r-withGutter u-layoutCenter">
             <div class="u-layout-r u-posRelative u-zindex-30">
                 <span class="u-text-r-xs u-padding-r-top u-color-10 u-layout-prose">{{ _('Più visti questo mese') }}</span>
             </div>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="u-background-grey-15 u-padding-r-bottom u-textLeft">
-      <section class="u-layout-wide u-layoutCenter u-padding-r-top u-padding-r-bottom u-posRelative u-zindex-30">
+      <section class="u-layout-r-withGutter u-layoutCenter u-padding-r-top u-padding-r-bottom u-posRelative u-zindex-30">
         <div class="u-pullUp">
           {% from 'layouts/card.html' import card with context %}
           <div class="Grid Grid--withGutter">
@@ -32,11 +32,11 @@
         </div>
       </section>
 
-      <div class="u-layout-wide u-layoutCenter u-posRelative u-zindex-30 ">
+      <div class="u-layout-r-withGutter u-layoutCenter u-posRelative u-zindex-30 ">
           <span class="u-text-r-xs u-padding-r-top u-color-grey-40 u-layout-prose">{{ _('Più recenti') }}</span>
       </div>
 
-      <section class="u-layout-wide u-layoutCenter u-padding-r-top u-posRelative u-zindex-40">
+      <section class="u-layout-r-withGutter u-layoutCenter u-padding-r-top u-posRelative u-zindex-40">
 
           {% from 'layouts/card.html' import card with context %}
 
@@ -54,31 +54,28 @@
     </div>
     
     <div class="u-background-50 u-padding-r-bottom u-padding-r-top u-textCenter">
-        <section class="u-layout-wide u-layoutCenter u-posRelative u-zindex-40 ">
-            <h1 class="u-text-r-l u-textWeight-300 u-color-white u-margin-top-xxl u-lineHeight-l">Search for more</h1>
-            <form class="Form" id="search-form">
-              <div class="Form-field Form-field--withPlaceholder Grid u-background-white u-color-grey-30 u-borderRadius-s" role="search">
-                <input data-menu-trigger="projects" class="Form-input Form-input--ultraLean Grid-cell u-sizeFill u-text-r-s u-color-black u-text-r-xs u-borderHideFocus u-borderRadius-s" required id="cerca" autocomplete="off" value="" />
-                <label class="Form-label u-color-grey-50 u-text-r-xxs" for="cerca">{{ t.search_form_label }}...</label>
-            
-                <div id="projects" data-menu class="Dropdown-menu Header-language-other u-jsVisibilityHidden u-nojsDisplayNone u-sizeFull">
-                  <span class="Icon-drop-down Dropdown-arrow u-color-white"></span>
-                  <ul class="Linklist">
-                    {% for project in site.projects %}
-                    <li><a href="{{ project.url }}" class="u-padding-r-all u-textLeft"><span lang="{{ active_lang }}">{{
-                      project.title }}</span></a></li>
-                    {% endfor %}
-                  </ul>
-                </div>
-
-                <button class="Grid-cell u-sizeFit Icon-search Icon--rotated u-color-grey-50 u-padding-all-s u-textWeight-700" title="{{  t.search_form_start }}" aria-label="{{ t.search_form_start }}">
-                </button>
-              </div>
-            </form>
-        </section>
-
-        <hr class="Separator-room">
-        <hr class="Separator Separator--up u-background-grey-15">
+      <section class="u-layout-wide u-layoutCenter u-posRelative u-zindex-40 ">
+        <h1 class="u-text-r-l u-textWeight-300 u-color-white u-margin-top-xxl u-lineHeight-l">Search for more</h1>
+        <form class="Form" id="search-form">
+          <div class="Form-field Form-field--withPlaceholder Grid u-background-white u-color-grey-30 u-borderRadius-s" role="search">
+            <input data-menu-trigger="projects" class="Form-input Form-input--ultraLean Grid-cell u-sizeFill u-text-r-s u-color-black u-text-r-xs u-borderHideFocus u-borderRadius-s" required id="cerca" autocomplete="off" value="" />
+            <label class="Form-label u-color-grey-50 u-text-r-xxs" for="cerca">{{ t.search_form_label }}...</label>
+            <div id="projects" data-menu class="Dropdown-menu Header-language-other u-jsVisibilityHidden u-nojsDisplayNone u-sizeFull">
+              <span class="Icon-drop-down Dropdown-arrow u-color-white"></span>
+              <ul class="Linklist">
+                {% for project in site.projects %}
+                <li><a href="{{ project.url }}" class="u-padding-r-all u-textLeft"><span lang="{{ active_lang }}">{{
+                  project.title }}</span></a></li>
+                {% endfor %}
+              </ul>
+            </div>
+            <button class="Grid-cell u-sizeFit Icon-search Icon--rotated u-color-grey-50 u-padding-all-s u-textWeight-700" title="{{  t.search_form_start }}" aria-label="{{ t.search_form_start }}">
+            </button>
+          </div>
+        </form>
+      </section>
+      <hr class="Separator-room">
+      <hr class="Separator Separator--up u-background-grey-15">
     </div>
 
     <div class="u-background-grey-15 u-padding-r-top u-textCenter">

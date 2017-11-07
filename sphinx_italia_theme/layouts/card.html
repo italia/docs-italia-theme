@@ -1,13 +1,11 @@
 {% macro card(title, subtitle, link, text) %}
-<div class="u-nbfc u-flexWrap u-flex u-color-grey-30 u-xs-padding-all-none
-  {% if kwargs.flat != true %}u-borderShadow-m u-xs-borderShadow-none u-borderRadius-m{% endif %}
-  {{ kwargs.classes | default('u-background-white') }} u-sizeFill">
+<div class="u-nbfc u-flexWrap u-flex u-color-grey-30 u-xs-padding-all-none u-borderRadius-m u-sizeFill">
   {% if kwargs.hasImage %}
   <div class="u-sizeFull">
     <img src="{{ kwargs.image | default('//placehold.it/400x220') }}" class="u-sizeFull" alt="{{ kwargs.alt }}" />
   </div>
   {% endif %}
-  <div class="u-flexWrap u-flex u-flexAlignSelfStretch u-sizeFill {% if kwargs.flat != true %}u-padding-r-all{% endif %}">
+  <div class="Card__bookBackground u-flexWrap u-flex u-flexAlignSelfStretch u-sizeFill u-padding-all-xs">
 
     {% if kwargs.date %}
     {# <time datetime="{{ kwargs.date | date_to_xmlschema }}" #}
@@ -18,9 +16,9 @@
       </time>
     {% endif %}
 
-    <div class="u-sizeFull {% if flat != true %}u-padding-r-all u-xs-padding-all-none{% endif %}">
-      <h3 class="u-padding-bottom-xs">
-        <a class="u-textClean u-textWeight-600 u-text-r-l u-color-50" href="{{ link }}">
+    <div class="u-sizeFull u-padding-r-top">
+      <h3 class="u-padding-r-left u-padding-bottom-xs u-border-bottom-xxs">
+        <a class="u-textClean u-textWeight-600 u-text-r-xxs u-color-grey-50" href="{{ link }}">
           {{ _(title) }}
 
           {% if kwargs.comingsoon %}
