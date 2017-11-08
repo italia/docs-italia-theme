@@ -114,7 +114,7 @@ html_theme_options = {
     # If the project is meant to be a different style project, enable this
     # layout instead of the default one.
     # Available options are: (default), 'page_home', 'page_project'
-    'layout': 'page_project',
+    # 'layout': 'page_project',
     'versions': {
         '0.2.4': '0.2.4',
         '4.0': '4.0',

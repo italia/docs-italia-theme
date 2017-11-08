@@ -1,17 +1,15 @@
 {% include 'layouts/head.html' %}
 
-<div class="u-background-grey-80">
+<div class="u-background-grey-80 u-background-half-white-0-to-100">
   <div id="main">
           {% include 'layouts/header.html' %}
           {% include 'layouts/offcanvas.html' %}
           {% include 'layouts/network.html' %}
 
-    <section class="u-layout-wide u-layoutCenter u-padding-r-all u-posRelative u-zindex-30">
-      <div class="u-layout-wide u-layoutCenter">
-
+    <section class="u-layout-wide u-layoutCenter u-posRelative u-zindex-30">
         {# {% include 'layouts/breadcrumbs.html' %} #}
 
-        <div class="Grid Grid--withGutter">
+        <div class="Grid Grid--withGutter u-layout-wide u-layoutCenter">
           <div id="rst-menu" class="wy-menu wy-menu-vertical u-hidden u-md-block u-lg-block u-md-size1of4 u-lg-size1of4 u-padding-r-top u-padding-r-bottom u-color-white">
             {% include 'layouts/docmenu.html' %}
           </div>
@@ -19,8 +17,6 @@
             {% block body %}{% endblock %}
           </div>
         </div>
-
-      </div>
     </section>
   </div>
 </div>

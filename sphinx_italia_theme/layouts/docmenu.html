@@ -1,5 +1,5 @@
 <h1 class="u-padding-r-all">
-  <a href="{{ pathto(master_doc) }}" class="u-color-white u-text-r-m">{{ project }}</a>
+  <a href="{{ pathto(master_doc) }}" class="u-color-white u-text-r-m u-padding-left-none">{{ project }}</a>
 </h1>
 
 <div class="u-padding-r-all" role="note" aria-label="versions">
@@ -42,7 +42,7 @@
   <div class="local-toc">{{ toc }}</div>
 {% endif %}
 
-<div id="rst-menu-links">
+<div id="rst-menu-links" class="u-padding-left-m">
   <dl>
     {% if downloads %}
       <dt>{{ _('Downloads') }}</dt>

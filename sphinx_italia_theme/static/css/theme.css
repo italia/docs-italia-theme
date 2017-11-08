@@ -5944,7 +5944,22 @@ button[disabled] {
 }
 
 .u-background-half-grey-80-to-15 {
-  background: linear-gradient(90deg, #30373d 50%, #f6f9fc 50%) !important;
+  background: linear-gradient(to bottom, #30373d 50%, #f6f9fc 50%) !important;
+}
+
+.u-background-half-white-0-to-100 {
+  background: linear-gradient(to right, rgba(246, 249, 252, 0) 0%, rgba(246, 249, 252, 0) 50%, #f6f9fc 50%, #f6f9fc 100%);
+}
+
+.wy-menu-vertical li.current,
+.wy-menu-vertical li.current > a {
+  border-top-left-radius: 4px;
+}
+
+.wy-menu-vertical li.current,
+.wy-menu-vertical li.current > ul > li:last-child,
+.wy-menu-vertical li.current > ul > li:last-child > a {
+  border-bottom-left-radius: 4px;
 }
 
 /*# sourceMappingURL=theme.css.map */
