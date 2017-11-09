@@ -5968,5 +5968,9 @@ button[disabled] {
     border-bottom-left-radius: 4px;
   }
 }
+.rst-versions {
+  position: relative !important;
+  width: 100%;
+}
 
 /*# sourceMappingURL=theme.css.map */

@@ -1,23 +1,41 @@
 {% include 'layouts/head.html' %}
 
-<div class="u-background-grey-80 u-background-half-white-0-to-100">
+<div class="u-background-grey-80">
   <div id="main">
           {% include 'layouts/header.html' %}
           {% include 'layouts/offcanvas.html' %}
           {% include 'layouts/network.html' %}
-
-    <section class="u-layout-wide u-layoutCenter u-posRelative u-zindex-30">
-        {# {% include 'layouts/breadcrumbs.html' %} #}
-
-        <div class="Grid Grid--withGutter u-layout-wide u-layoutCenter">
-          <div id="rst-menu" class="wy-menu wy-menu-vertical u-hidden u-md-block u-lg-block u-md-size1of4 u-lg-size1of4 u-padding-r-top u-padding-r-bottom u-color-white">
-            {% include 'layouts/docmenu.html' %}
+          
+          <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch">
+            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>
+            <div class="Grid-cell u-layout-wide u-layoutCenter u-posRelative">
+              <div class="Grid">
+                <div id="rst-menu" class="wy-menu wy-menu-vertical u-hidden u-md-block u-lg-block u-md-size1of4 u-lg-size1of4 u-padding-r-top u-padding-r-bottom u-color-white">
+                  {% include 'layouts/docmenu.html' %}
+                </div>
+                <div id="rst-content" class="Grid-cell u-layout-r-withGutter u-background-grey-15 u-md-size3of4 u-lg-size3of4 u-padding-r-top u-padding-r-bottom rst-content">
+                  {% include 'layouts/breadcrumbs.html' %}
+                  {% block body %}{% endblock %}
+                </div>
+              </div>
+            </div>
+            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-15"></div>
           </div>
-          <div id="rst-content" class="Grid-cell u-layout-r-withGutter u-background-grey-15 u-md-size3of4 u-lg-size3of4 u-padding-r-top u-padding-r-bottom rst-content">
-            {% block body %}{% endblock %}
+
+          <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch" style="position: fixed; bottom: 0; width: 100%"><!-- todo -->
+            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>
+            <div class="Grid-cell u-layout-wide u-layoutCenter u-posRelative">
+              <div class="Grid">
+                <div id="rst-menu" class="u-md-size1of4 u-lg-size1of4 u-color-white">
+                  {% include 'layouts/versions.html' %}
+                </div>
+                <div id="rst-content" class="u-md-size3of4 u-lg-size3of4"></div>
+              </div>
+            </div>
+            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>
           </div>
-        </div>
-    </section>
+          
+    
   </div>
 </div>
 

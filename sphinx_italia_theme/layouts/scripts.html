@@ -11,7 +11,7 @@
 
 <script src="{{ pathto('_static/js/IWT.min.js', 1) }}"></script>
 
-{# <script src="{{ pathto('_static/js/main.js', 1) }}"></script> #}
+<script src="{{ pathto('_static/js/theme.js', 1) }}"></script>
 
 <script>
   $(document).on('keydown', function(e) {
@@ -27,3 +27,12 @@
     $('body').addClass('hide-focus');
   })
 </script>
+
+{# STICKY NAVIGATION #}
+{% if theme_sticky_navigation %}
+<script type="text/javascript">
+    jQuery(function () {
+        SphinxRtdTheme.StickyNav.enable();
+    });
+</script>
+{% endif %}
