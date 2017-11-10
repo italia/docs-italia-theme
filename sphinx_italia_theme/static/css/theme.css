@@ -5932,6 +5932,11 @@ button[disabled] {
   min-height: 80px;
 }
 
+.u-fixedBottom {
+  position: fixed;
+  bottom: 0;
+}
+
 .Header a:hover {
   text-decoration: none;
 }
@@ -5955,6 +5960,10 @@ button[disabled] {
   .wy-menu-vertical {
     width: auto;
   }
+
+  .rst-versions {
+    display: none;
+  }
 }
 @media only screen and (min-width: 1366px) {
   .wy-menu-vertical li.current,
@@ -5968,9 +5977,32 @@ button[disabled] {
     border-bottom-left-radius: 4px;
   }
 }
+.versions-bar {
+  height: 100px;
+  pointer-events: none;
+}
+
+.versions-bar-content {
+  height: 100px;
+  width: 100%;
+}
+
 .rst-versions {
   position: relative !important;
+  background: none !important;
+  border-top: 0 !important;
   width: 100%;
+  pointer-events: initial;
+}
+.rst-versions .rst-current-version {
+  background-color: transparent !important;
+}
+.rst-versions .rst-other-versions {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.rst-versions .rst-other-versions .rst-versions--terms {
+  line-height: 50px;
 }
 
 /*# sourceMappingURL=theme.css.map */

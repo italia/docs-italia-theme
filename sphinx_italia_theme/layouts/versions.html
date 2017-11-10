@@ -1,25 +1,24 @@
 {# if READTHEDOCS #}
 {# Add rst-badge after rst-versions for small badge style. #}
-  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
+  <div class="rst-versions shift-up" role="note" aria-label="versions">
+    {#<span class="rst-current-version">
       <span class="fa fa-book"> Read the Docs</span>
       v: {{ current_version }}
-      <span class="fa fa-caret-down"></span>
-    </span>
+    </span>#}
     <div class="rst-other-versions">
       <dl>
-        <dt>{{ _('Versions') }}</dt>
+        <dt class="rst-versions--terms">{{ _('Versions') }}</dt>
         {% for slug, url in versions %}
           <dd><a href="{{ url }}">{{ slug }}</a></dd>
         {% endfor %}
       </dl>
       <dl>
-        <dt>{{ _('Downloads') }}</dt>
+        <dt class="rst-versions--terms">{{ _('Downloads') }}</dt>
         {% for type, url in downloads %}
           <dd><a href="{{ url }}">{{ type }}</a></dd>
         {% endfor %}
       </dl>
-      <dl>
+      {#<dl>
         <dt>{{ _('On Read the Docs') }}</dt>
           <dd>
             <a href="//{{ PRODUCTION_DOMAIN }}/projects/{{ slug }}/?fromdocs={{ slug }}">{{ _('Project Home') }}</a>
@@ -27,13 +26,7 @@
           <dd>
             <a href="//{{ PRODUCTION_DOMAIN }}/builds/{{ slug }}/?fromdocs={{ slug }}">{{ _('Builds') }}</a>
           </dd>
-      </dl>
-      <hr/>
-      {% trans %}Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.{% endtrans %}
-
+      </dl>#}
     </div>
   </div>
 {# endif #}
-
-
-

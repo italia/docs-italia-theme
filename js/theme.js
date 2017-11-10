@@ -49,6 +49,8 @@ function ThemeNav () {
             self = this;
 
         this.navBar = $('div.wy-side-scroll:first');
+        this.versionsBar = $('.versions-bar-content');
+        this.footer = $('.Footer');
         this.win = $(window);
 
         // Set up javascript UX bits
@@ -88,6 +90,8 @@ function ThemeNav () {
             });
             link.prepend(expand);
         });
+
+        this.stickyVersion();
     };
 
     nav.reset = function () {
@@ -133,6 +137,7 @@ function ThemeNav () {
         }
         this.navBar.scrollTop(newNavPosition);
         this.winPosition = newWinPosition;
+        this.stickyVersion();
     };
 
     nav.onResize = function () {
@@ -154,6 +159,12 @@ function ThemeNav () {
         parent_li.siblings().find('li.current').removeClass('current');
         parent_li.find('> ul li.current').removeClass('current');
         parent_li.toggleClass('current');
+    }
+
+    nav.stickyVersion = function () {
+        $(window).scrollTop() + $(window).height() > $(document).height() - this.footer.outerHeight() ?
+            this.versionsBar.removeClass('u-fixedBottom') :
+            this.versionsBar.addClass('u-fixedBottom');
     }
 
     return nav;
