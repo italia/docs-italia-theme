@@ -2,51 +2,46 @@
 
 <div class="u-background-grey-15">
   <div id="main">
-          {% include 'layouts/header.html' %}
-          {% include 'layouts/offcanvas.html' %}
-          {% include 'layouts/network.html' %}
-          
-          <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch">
-            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-80"></div>{# background spacer #}
-            <div class="Grid-cell u-layout-wide u-layoutCenter u-posRelative">
-              <div class="Grid">
-                <div id="rst-menu" class="wy-menu wy-menu-vertical u-hidden u-background-grey-80 u-md-block u-lg-block u-md-size1of4 u-lg-size1of4 u-padding-r-top u-padding-r-bottom u-color-white">
-                  {% include 'layouts/docmenu.html' %}
-                </div>
-                <div id="rst-content" class="Grid-cell u-layout-r-withGutter u-md-size3of4 u-lg-size3of4 u-padding-r-top u-padding-r-bottom rst-content">
-                  {% include 'layouts/breadcrumbs.html' %}
-                  {% block body %}{% endblock %}
-                </div>
-              </div>
+      {% include 'layouts/header.html' %}
+      {% include 'layouts/offcanvas.html' %}
+      {% include 'layouts/network.html' %}
+      
+      <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch">
+        <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-80"></div>{# background spacer #}
+        <div class="Grid-cell u-layout-wide u-layoutCenter u-posRelative">
+          <div class="Grid">
+            <div id="rst-menu" class="wy-menu wy-menu-vertical u-hidden u-background-grey-80 u-md-block u-lg-block u-md-size1of4 u-lg-size1of4 u-padding-r-top u-padding-r-bottom u-color-white">
+              {% include 'layouts/docmenu.html' %}
             </div>
-            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>{# background spacer #}
+            <div id="rst-content" class="Grid-cell u-layout-r-withGutter u-md-size3of4 u-lg-size3of4 u-padding-r-top u-padding-r-bottom rst-content">
+              {% include 'layouts/breadcrumbs.html' %}
+              {% block body %}{% endblock %}
+            </div>
           </div>
+        </div>
+        <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>{# background spacer #}
+      </div>
 
-          <div class="versions-bar">
-            <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch versions-bar-content">
-              <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-90"></div>{# background spacer #}
-              <div class="Grid-cell u-layout-wide u-layoutCenter u-posRelative">
-                <div class="Grid">
-                  <div id="rst-menu" class="u-md-size1of4 u-lg-size1of4 u-color-white u-background-grey-90">
-                    {% include 'layouts/versions.html' %}
-                  </div>
-                  <div id="rst-content" class="u-md-size3of4 u-lg-size3of4"></div>
-                </div>
+      <div class="versions-bar">
+        <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch versions-bar-content">
+          <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-90"></div>{# background spacer #}
+          <div class="Grid-cell u-layout-wide u-layoutCenter u-posRelative">
+            <div class="Grid">
+              <div id="rst-menu" class="u-md-size1of4 u-lg-size1of4 u-color-white u-background-grey-90">
+                {% include 'layouts/versions.html' %}
               </div>
-              <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>{# background spacer #}
+              <div id="rst-content" class="u-md-size3of4 u-lg-size3of4"></div>
             </div>
           </div>
-          
+          <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>{# background spacer #}
+        </div>
+      </div>
+
   </div>
 </div>
 
 {% include 'layouts/scrolltop.html' %}
-
-<div class="u-background-95">
-  <div class="u-layout-wide u-layoutCenter u-layout-r-withGutter u-hiddenPrint">
-    {% include 'layouts/footer--simple.html' %}
-  </div>
-</div>
+{% include 'layouts/footer.html' %}
 
 </body>
 </html>
