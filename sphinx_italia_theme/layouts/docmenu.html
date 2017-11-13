@@ -2,16 +2,16 @@
   <a href="{{ pathto(master_doc) }}" class="u-color-white u-text-r-m u-padding-left-none">{{ project }}</a>
 </h1>
 
-<div class="u-padding-r-all" role="note" aria-label="versions">
-    <dt>{{ _('Versions') }}</dt>
+<dl class="u-padding-r-all" role="note" aria-label="versions">
+    <dt class="u-inline">{{ _('Version') }}</dt>
     {%- set nav_version = version %}
     {% if READTHEDOCS and current_version %}
       {%- set nav_version = current_version %}
     {% endif %}
     {% if nav_version %}
-      <dd class="version">
+      <dd class="u-inline version">
         {% if not READTHEDOCS and theme_versions|length > 1 %}
-          <div class="version-dropdown">
+          <span class="version-dropdown">
             <select class="version-list" id="version-list">
               <option value=''>{{ nav_version }}</option>
               {% for key, val in theme_versions.items() %}
@@ -20,13 +20,13 @@
                 {% endif %}
               {% endfor %}
             </select>
-          </div>
+          </span>
         {% else %}
           {{ nav_version }}
         {% endif %}
       </dd>
     {% endif %}
-</div>
+</dl>
 
 <div class="u-padding-r-all">
     {% include "layouts/searchbox.html" %}
