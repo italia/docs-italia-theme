@@ -1,4 +1,3 @@
-#[submodule "developers"]
-#	path = developers
-#	url = git@github.com:italia/developers.italia.it.git
-# temporarily commenting out submodule
+[submodule "developers"]
+	path = developers
+	url = git@github.com:italia/developers.italia.it.git
