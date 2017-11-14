@@ -1,6 +1,9 @@
 #
 # This file generates the sidebar/toctree for all Docs projects and should
 # be copied to each project when it is updated
+# .. include:: _sidebar.rst.inc
+# @Anthony: this can be safely removed if not necessary - it's just a porting of
+# https://github.com/robotpy/robotpy-docs/blob/master/gensidebar.py
 #
 
 import os
@@ -17,7 +20,7 @@ def write_if_changed(fname, contents):
         with open(fname, 'w') as fp:
             fp.write(contents)
 
-def generate_sidebar(conf, conf_api):
+def generate_sidebar(conf):
     
     # determine 'latest' or 'stable'
     # if not conf.do_gen:
@@ -37,17 +40,7 @@ def generate_sidebar(conf, conf_api):
     def endl():
         lines.append('')
     
-    def write(desc, link):
-        if conf_api == 'template-super':
-            args = desc, link
-        elif not do_gen:
-            return
-        else:
-            args = desc, 'http://template-super.readthedocs.io/en/%s/%s.html' % (version, link)
-            
-        lines.append('    %s <%s>' % args)
-    
-    def write_api(project, desc):
+    def write(project, desc):
         if do_gen:
             args = desc, project, version
             lines.append('    %s <http://template-super.readthedocs.io/projects/%s/en/%s/>' % args)
@@ -57,7 +50,7 @@ def generate_sidebar(conf, conf_api):
     #
     
     toctree('Sub Projects')
-    write_api('template-sub', 'Template Sub')
+    write('template-sub', 'Template Sub')
     endl()
     
     write_if_changed('_sidebar.rst.inc', '\n'.join(lines))

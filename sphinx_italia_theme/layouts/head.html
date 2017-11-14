@@ -13,8 +13,6 @@
 
   <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
 
-  {#<link rel="preload" href="{{ pathto('_static/js/IWT.min.js', 1) }}" as="script">#}
-
   <script type="text/javascript">
     WebFontConfig = {
       google: {
@@ -40,14 +38,6 @@
   
   <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
 
-  {% for cssfile in css_files %}
-    <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
-  {% endfor %}
-{#
-  {% for cssfile in extra_css_files %}
-    <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
-  {% endfor %}
-#}
   <script src="{{ pathto('_static/toolkit/vendor/jquery.min.js', 1) }}"></script>
 
   <link rel="apple-touch-icon" sizes="180x180" href="{{ pathto('/_static/icons/apple-touch-icon.png', 1) }}">

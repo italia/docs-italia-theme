@@ -58,17 +58,6 @@
       </div>
 
       <div class="Header-utils Grid-cell">
-        {#
-        <div class="Header-social Headroom-hideme">
-          <p>{{ _(t.follow_us | capitalize) }}</p>
-          <ul class="Header-socialIcons">
-            {% for social_id, social in site.data.social.items() %}
-            <li><a href="{{ social.link }}" title="{{ social.name }}"><span class="Icon-{{ social_id }}"></span>
-                <span class="u-hiddenVisually">{{ social.name | capitalize }}</span></a></li>
-            {% endfor %}
-          </ul>
-        </div>
-        #}
         <div class="Header-search" id="header-search">
           {% include 'layouts/search_form.html' %}
         </div>
