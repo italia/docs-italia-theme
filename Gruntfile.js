@@ -60,52 +60,6 @@ module.exports = function(grunt) {
             filter: 'isFile'
           }
         ]
-      },
-      developers: {
-        files: [
-          {
-            expand: true,
-            cwd: 'developers/assets/icons/',
-            src: '**',
-            dest: 'sphinx_italia_theme/static/icons/'
-          },
-          {
-            expand: true,
-            cwd: 'developers/assets/images/',
-            src: '**',
-            dest: 'sphinx_italia_theme/static/images/'
-          },
-          {
-            expand: true,
-            cwd: 'developers/assets/toolkit/vendor/',
-            src: '**',
-            dest: 'sphinx_italia_theme/static/toolkit/vendor/'
-          },
-          {
-            expand: true,
-            cwd: 'developers/assets/toolkit/',
-            src: ['*.css'],
-            dest: 'sphinx_italia_theme/static/css/',
-          },
-          {
-            expand: true,
-            cwd: 'developers/assets/toolkit/src/',
-            src: ['**'],
-            dest: 'sphinx_italia_theme/static/css/src/',
-          },
-          {
-            expand: true,
-            cwd: 'developers/assets/toolkit/',
-            src: ['*.js'],
-            dest: 'sphinx_italia_theme/static/js/',
-          },
-          {
-            expand: true,
-            cwd: 'developers/',
-            src: ['_config.yml', '_data/**/*.yml'],
-            dest: 'sphinx_italia_theme/data/',
-          }
-        ]
       }
     },
 
@@ -118,7 +72,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'sass',
-          src: ['*.sass', 'developers/assets/main.scss'],
+          src: ['*.sass'],
           dest: 'sphinx_italia_theme/static/css',
           ext: '.css'
         }]
@@ -131,7 +85,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'sass',
-          src: ['*.sass', 'developers/assets/main.scss'],
+          src: ['*.sass'],
           dest: 'sphinx_italia_theme/static/css',
           ext: '.css'
         }]
@@ -217,7 +171,6 @@ module.exports = function(grunt) {
     'exec:bower_update',
     'clean:build',
     'sass:dev',
-    'copy:developers',
     'browserify:dev',
     'exec:build_sphinx',
     'connect',
@@ -228,7 +181,6 @@ module.exports = function(grunt) {
     'exec:bower_update',
     'clean:build',
     'sass:build',
-    'copy:developers',
     'browserify:build',
     'exec:build_sphinx'
   ]);

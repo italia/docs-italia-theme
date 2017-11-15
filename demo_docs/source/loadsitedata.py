@@ -76,6 +76,12 @@ def load_site_data(html_theme):
         network_links.append(link_data)
     context['data']['network_links'] = network_links
 
+    footer_links = []
+    for link in ['privacy', 'legal']:
+        link_data = context['data']['footer_links'].get(link, {}).copy()
+        footer_links.append(link_data)
+    context['data']['footer_links'] = footer_links
+
     return context
 
 def html_page_context_listener(app, pagename, templatename, context, doctree):
