@@ -33,7 +33,7 @@
 </div>
 
 {% if 'singlehtml' not in builder %}
-  {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation, includehidden=True) %}
+  {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=collapse_navigation, includehidden=True) %}
 {% endif %}
 {% if global_toc %}
   {{ global_toc }}

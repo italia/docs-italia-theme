@@ -5253,7 +5253,7 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
   }
 
   .wy-nav-side {
-    left: -300px;
+    right: -300px;
   }
   .wy-nav-side.shift {
     width: 85%;
@@ -5965,7 +5965,7 @@ button[disabled] {
     display: none;
   }
 }
-@media only screen and (min-width: 1366px) {
+@media only screen and (min-width: 1460px) {
   .wy-menu-vertical li.current,
   .wy-menu-vertical li.current > a {
     border-top-left-radius: 4px;
@@ -6003,6 +6003,19 @@ button[disabled] {
 }
 .rst-versions .rst-other-versions .rst-versions--terms {
   line-height: 50px;
+}
+
+.wy-menu-vertical .toctree-expand {
+  display: none !important;
+}
+.wy-menu-vertical a, .wy-menu-vertical a:hover {
+  text-decoration: none !important;
+}
+.wy-menu-vertical li.current a {
+  background-color: transparent !important;
+}
+.wy-menu-vertical li.current a:hover, .wy-menu-vertical li.current a:active {
+  background-color: #f6f9fc !important;
 }
 
 /*# sourceMappingURL=theme.css.map */

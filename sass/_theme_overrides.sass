@@ -38,7 +38,7 @@
   .rst-versions
     display: none
 
-@media only screen and (min-width: 1366px)
+@media only screen and (min-width: 1460px)
   .wy-menu-vertical li.current,
   .wy-menu-vertical li.current > a
     border-top-left-radius: 4px
@@ -60,9 +60,19 @@
   width: 100%
   pointer-events: initial
   .rst-current-version
-    background-color: transparent!important
+    background-color: transparent !important
   .rst-other-versions
     padding-top: 0
     padding-bottom: 0
     .rst-versions--terms
       line-height: 50px
+
+.wy-menu-vertical
+  .toctree-expand
+    display: none !important
+  a, a:hover
+    text-decoration: none !important
+  li.current a
+    background-color: transparent !important
+    &:hover, &:active
+      background-color: #f6f9fc !important
