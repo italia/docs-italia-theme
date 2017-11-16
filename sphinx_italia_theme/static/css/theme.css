@@ -4908,12 +4908,9 @@ div[class^='highlight'] pre {
 .wy-menu-vertical li.toctree-l4 {
   font-size: 0.9em;
 }
-.wy-menu-vertical li.current ul {
-  display: block;
-}
 .wy-menu-vertical li ul {
   margin-bottom: 0;
-  display: none;
+  display: block;
 }
 .wy-menu-vertical .local-toc li ul {
   display: block;
