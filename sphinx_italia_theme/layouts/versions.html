@@ -5,28 +5,39 @@
       <span class="fa fa-book"> Read the Docs</span>
       v: {{ current_version }}
     </span>#}
-    <div class="rst-other-versions">
-      <dl>
+    <div class="rst-other-versions--no-inject">
+      <!--<dl>
+        <dt class="u-inline rst-versions--terms">{{ _('Downloads') }}</dt>
+        {% for type, url in downloads %}
+          <dd><a href="{{ url }}">{{ type }}</a></dd>
+        {% endfor %}
+      </dl><dl>
         <dt class="u-inline rst-versions--terms">{{ _('Versions') }}</dt>
         {% for slug, url in versions %}
           <dd><a href="{{ url }}">{{ slug }}</a></dd>
         {% endfor %}
       </dl>
-      <dl>
-        <dt class="u-inline rst-versions--terms">{{ _('Downloads') }}</dt>
+      -->
+      <dl class="Grid rst-versions--container">
+        <dt class="Grid-cell u-size1of4 u-inline rst-versions--terms">
+          <span>{{ _('Downloads') }}</span>
+        </dt>
         {% for type, url in downloads %}
-          <dd><a href="{{ url }}">{{ type }}</a></dd>
+        <dd class="Grid-cell u-size1of4 rst-versions--terms">
+          <a class="Button Button--default Button--version u-borderRadius-m" href="{{ url }}">{{ type }}</a>
+        </dd>
         {% endfor %}
       </dl>
-      {#<dl>
-        <dt class="u-inline">{{ _('On Read the Docs') }}</dt>
-        <dd>
-          <a href="//{{ PRODUCTION_DOMAIN }}/projects/{{ slug }}/?fromdocs={{ slug }}">{{ _('Project Home') }}</a>
+      <dl class="Grid rst-versions--container">
+        <dt class="Grid-cell u-size1of4 u-inline rst-versions--terms">
+          <span>{{ _('Versions') }}</span>
+        </dt>
+        {% for slug, url in versions %}
+        <dd class="Grid-cell u-size1of4 rst-versions--terms">
+          <a href="{{ url }}">{{ slug }}</a>
         </dd>
-        <dd>
-          <a href="//{{ PRODUCTION_DOMAIN }}/builds/{{ slug }}/?fromdocs={{ slug }}">{{ _('Builds') }}</a>
-        </dd>
-      </dl>#}
+        {% endfor %}
+      </dl>
     </div>
   </div>
 {# endif #}

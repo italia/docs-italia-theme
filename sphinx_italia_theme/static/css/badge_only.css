@@ -150,16 +150,16 @@ ul.fas li .fa-large:before {
   background-color: #F1C40F;
   color: #000;
 }
-.rst-versions.shift-up .rst-other-versions {
+.rst-versions.shift-up .rst-other-versions--no-inject {
   display: block;
 }
-.rst-versions .rst-other-versions {
+.rst-versions .rst-other-versions--no-inject {
   font-size: 90%;
   padding: 12px;
   color: gray;
   display: none;
 }
-.rst-versions .rst-other-versions hr {
+.rst-versions .rst-other-versions--no-inject hr {
   display: block;
   height: 1px;
   border: 0;
@@ -167,14 +167,17 @@ ul.fas li .fa-large:before {
   padding: 0;
   border-top: solid 1px #272d32;
 }
-.rst-versions .rst-other-versions dd {
+.rst-versions .rst-other-versions--no-inject dd {
   display: inline-block;
   margin: 0;
 }
-.rst-versions .rst-other-versions dd a {
+.rst-versions .rst-other-versions--no-inject dd a {
   display: inline-block;
   padding: 6px;
-  color: #fff;
+  color: #65dde0;
+}
+.rst-versions .rst-other-versions--no-inject dd a.Button--version {
+  color: #000;
 }
 .rst-versions.rst-badge {
   width: auto;

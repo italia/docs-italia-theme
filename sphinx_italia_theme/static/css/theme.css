@@ -5365,16 +5365,16 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
   background-color: #F1C40F;
   color: #000;
 }
-.rst-versions.shift-up .rst-other-versions {
+.rst-versions.shift-up .rst-other-versions--no-inject {
   display: block;
 }
-.rst-versions .rst-other-versions {
+.rst-versions .rst-other-versions--no-inject {
   font-size: 90%;
   padding: 12px;
   color: gray;
   display: none;
 }
-.rst-versions .rst-other-versions hr {
+.rst-versions .rst-other-versions--no-inject hr {
   display: block;
   height: 1px;
   border: 0;
@@ -5382,14 +5382,17 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
   padding: 0;
   border-top: solid 1px #272d32;
 }
-.rst-versions .rst-other-versions dd {
+.rst-versions .rst-other-versions--no-inject dd {
   display: inline-block;
   margin: 0;
 }
-.rst-versions .rst-other-versions dd a {
+.rst-versions .rst-other-versions--no-inject dd a {
   display: inline-block;
   padding: 6px;
-  color: #fff;
+  color: #65dde0;
+}
+.rst-versions .rst-other-versions--no-inject dd a.Button--version {
+  color: #000;
 }
 .rst-versions.rst-badge {
   width: auto;
@@ -6004,25 +6007,40 @@ button[disabled] {
 .rst-versions .rst-current-version {
   background-color: transparent !important;
 }
-.rst-versions .rst-other-versions {
-  padding-top: 0;
-  padding-bottom: 0;
+.rst-versions .rst-other-versions--no-inject {
+  padding: 0;
 }
-.rst-versions .rst-other-versions .rst-versions--terms {
-  line-height: 50px;
+.rst-versions .rst-other-versions--no-inject .rst-versions--terms {
+  margin: 10px 0;
+}
+.rst-versions .rst-other-versions--no-inject .rst-versions--terms span {
+  color: #f6f9fc;
+  font-weight: 300;
+  display: inline-block;
+  padding: 6px 0;
+}
+.rst-versions .rst-other-versions--no-inject .rst-versions--terms a {
+  display: inline-block;
+  width: 80%;
 }
 
 .wy-menu-vertical .toctree-expand {
   display: none !important;
-}
-.wy-menu-vertical a, .wy-menu-vertical a:hover {
-  text-decoration: none !important;
 }
 .wy-menu-vertical li.current a {
   background-color: transparent !important;
 }
 .wy-menu-vertical li.current a:hover, .wy-menu-vertical li.current a:active {
   background-color: #f6f9fc !important;
+}
+
+a, a:hover {
+  text-decoration: none !important;
+}
+
+.Button--version {
+  color: #000;
+  font-size: 14px;
 }
 
 /*# sourceMappingURL=theme.css.map */
