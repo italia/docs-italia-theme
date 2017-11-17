@@ -63,8 +63,10 @@
     background-color: transparent !important
   .rst-other-versions--no-inject
     padding: 0
-    .rst-versions--terms
+    .rst-versions--terms, .rst-versions--definitions
       margin: 10px 0
+    .rst-versions--terms
+      text-align: center
       span
         color: #f6f9fc
         font-weight: 300
@@ -85,9 +87,10 @@
 a, a:hover
   text-decoration: none !important
 
-.injected // hiding rtd-injected code
-  display:none
-
 .Button--version
   color: #000
   font-size: 14px
+
+// hiding rtd-injected code
+.injected
+  display: none

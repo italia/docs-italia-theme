@@ -6,34 +6,22 @@
       v: {{ current_version }}
     </span>#}
     <div class="rst-other-versions--no-inject">
-      <!--<dl>
-        <dt class="u-inline rst-versions--terms">{{ _('Downloads') }}</dt>
-        {% for type, url in downloads %}
-          <dd><a href="{{ url }}">{{ type }}</a></dd>
-        {% endfor %}
-      </dl><dl>
-        <dt class="u-inline rst-versions--terms">{{ _('Versions') }}</dt>
-        {% for slug, url in versions %}
-          <dd><a href="{{ url }}">{{ slug }}</a></dd>
-        {% endfor %}
-      </dl>
-      -->
       <dl class="Grid rst-versions--container">
-        <dt class="Grid-cell u-size1of4 u-inline rst-versions--terms">
+        <dt class="Grid-cell u-size1of4 u-inline u-md-hidden rst-versions--terms">
           <span>{{ _('Downloads') }}</span>
         </dt>
         {% for type, url in downloads %}
-        <dd class="Grid-cell u-size1of4 rst-versions--terms">
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms">
           <a class="Button Button--default Button--version u-borderRadius-m" href="{{ url }}">{{ type }}</a>
         </dd>
         {% endfor %}
       </dl>
       <dl class="Grid rst-versions--container">
-        <dt class="Grid-cell u-size1of4 u-inline rst-versions--terms">
+        <dt class="Grid-cell u-size1of4 u-md-hidden u-inline rst-versions--terms">
           <span>{{ _('Versions') }}</span>
         </dt>
         {% for slug, url in versions %}
-        <dd class="Grid-cell u-size1of4 rst-versions--terms">
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms">
           <a href="{{ url }}">{{ slug }}</a>
         </dd>
         {% endfor %}
