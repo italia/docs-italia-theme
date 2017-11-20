@@ -6,4 +6,11 @@ $(function(){
             versionsBar.removeClass('u-fixedBottom') :
             versionsBar.addClass('u-fixedBottom');
     });
+    $('.version-list').on('change', function(e) {
+        window.location = $(this).val();
+    });
+    $('.js-preventOffCanvasClose').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    })
 });

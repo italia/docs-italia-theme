@@ -1,31 +1,51 @@
-{# if READTHEDOCS #}
 {# Add rst-badge after rst-versions for small badge style. #}
-  <div class="rst-versions shift-up" role="note" aria-label="versions">
-    {#<span class="rst-current-version">
-      <span class="fa fa-book"> Read the Docs</span>
-      v: {{ current_version }}
-    </span>#}
-    <div class="rst-other-versions--no-inject">
-      <dl class="Grid rst-versions--container">
-        <dt class="Grid-cell u-size1of4 u-inline u-md-hidden rst-versions--terms u-padding-left-s">
-          <span>{{ _('Downloads') }}</span>
-        </dt>
+<div class="rst-versions shift-up" role="note" aria-label="versions">
+  <div class="rst-other-versions--no-inject">
+    <dl class="Grid rst-versions--container">
+      <dt class="Grid-cell u-size1of4 u-inline u-md-hidden rst-versions--terms u-padding-left-s">
+        <span>{{ _('Downloads') }}</span>
+      </dt>
+      {% if READTHEDOCS %}
         {% for type, url in downloads %}
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
           <a class="Button Button--default Button--version u-borderRadius-m" href="{{ url }}">{{ type }}</a>
         </dd>
         {% endfor %}
-      </dl>
-      <dl class="Grid rst-versions--container">
-        <dt class="Grid-cell u-size1of4 u-md-hidden u-inline rst-versions--terms u-padding-left-s">
-          <span>{{ _('Versions') }}</span>
-        </dt>
+      {% else %}
+        {# test content #}
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
+          <a class="Button Button--default Button--version u-borderRadius-m" href="#">source 1</a>
+        </dd>
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
+          <a class="Button Button--default Button--version u-borderRadius-m" href="#">source 2</a>
+        </dd>
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
+          <a class="Button Button--default Button--version u-borderRadius-m" href="#">source 3</a>
+        </dd>
+      {% endif %}
+    </dl>
+    <dl class="Grid rst-versions--container">
+      <dt class="Grid-cell u-size1of4 u-md-hidden u-inline rst-versions--terms u-padding-left-s">
+        <span>{{ _('Versions') }}</span>
+      </dt>
+      {% if READTHEDOCS %}
         {% for slug, url in versions %}
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
           <a href="{{ url }}">{{ slug }}</a>
         </dd>
         {% endfor %}
-      </dl>
-    </div>
+      {% else %}
+        {# test content #}
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms">
+          <a href="#">test 1</a>
+        </dd>
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms">
+          <a href="#">test 2</a>
+        </dd>
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms">
+          <a href="#">test 3</a>
+        </dd>
+      {% endif %}
+    </dl>
   </div>
-{# endif #}
+</div>
