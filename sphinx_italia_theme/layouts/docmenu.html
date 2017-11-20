@@ -31,17 +31,18 @@
 <div class="u-padding-r-all">
     {% include "layouts/searchbox.html" %}
 </div>
-
-{% if 'singlehtml' not in builder %}
-  {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=collapse_navigation, includehidden=True) %}
-{% endif %}
-{% if global_toc %}
-  {{ global_toc }}
-{% else %}
-  <!-- Local TOC -->
-  <div class="local-toc">{{ toc }}</div>
-{% endif %}
-
+<div class="wy-menu wy-menu-vertical">
+  {% if 'singlehtml' not in builder %}
+    {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=collapse_navigation, includehidden=True) %}
+  {% endif %}
+  {% if global_toc %}
+    {{ global_toc }}
+  {% else %}
+    <!-- Local TOC -->
+    <div class="local-toc">{{ toc }}</div>
+  {% endif %}
+</div>
+<!--
 <div id="rst-menu-links" class="u-padding-left-m">
   <dl>
     {% if downloads %}
@@ -60,3 +61,4 @@
     {% endif %}
   </dl>
 </div>
+-->

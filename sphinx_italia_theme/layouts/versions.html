@@ -7,21 +7,21 @@
     </span>#}
     <div class="rst-other-versions--no-inject">
       <dl class="Grid rst-versions--container">
-        <dt class="Grid-cell u-size1of4 u-inline u-md-hidden rst-versions--terms">
+        <dt class="Grid-cell u-size1of4 u-inline u-md-hidden rst-versions--terms u-padding-left-s">
           <span>{{ _('Downloads') }}</span>
         </dt>
         {% for type, url in downloads %}
-        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms">
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
           <a class="Button Button--default Button--version u-borderRadius-m" href="{{ url }}">{{ type }}</a>
         </dd>
         {% endfor %}
       </dl>
       <dl class="Grid rst-versions--container">
-        <dt class="Grid-cell u-size1of4 u-md-hidden u-inline rst-versions--terms">
+        <dt class="Grid-cell u-size1of4 u-md-hidden u-inline rst-versions--terms u-padding-left-s">
           <span>{{ _('Versions') }}</span>
         </dt>
         {% for slug, url in versions %}
-        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms">
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
           <a href="{{ url }}">{{ slug }}</a>
         </dd>
         {% endfor %}

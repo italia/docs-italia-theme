@@ -74,7 +74,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Sphinx theme demo'
+project = u'Sphinx theme demo - very long title to fill many lines'
 copyright = u'2017, Team Digitale'
 
 # The version info for the project you're documenting, acts as replacement for
