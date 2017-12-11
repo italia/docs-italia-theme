@@ -49,7 +49,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
-    # 'sphinx_italia_theme',
+    'sphinx_italia_theme',
 ]
 
 # Math
