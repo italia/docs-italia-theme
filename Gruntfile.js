@@ -133,8 +133,7 @@ module.exports = function(grunt) {
       sass: {
         files: [
           'sass/*.sass',
-          'bower_components/**/*.sass',
-          'developers/assets/main.scss',
+          'bower_components/**/*.sass'
         ],
         tasks: ['sass:dev']
       },
@@ -170,8 +169,8 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'exec:bower_update',
     'clean:build',
-    'sass:dev',
-    'browserify:dev',
+    'sass:build',
+    'browserify:build',
     'exec:build_sphinx',
     'connect',
     'open',
