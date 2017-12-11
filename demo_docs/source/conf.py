@@ -19,12 +19,6 @@ sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('./test_py_module'))
 sys.path.insert(0, os.path.abspath('../..'))
 
-# sidebar generator
-import gensidebar
-
-# data loader
-import loadsitedata
-
 # -- RTD configuration ------------------------------------------------
 
 # on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
@@ -321,8 +315,3 @@ texinfo_documents = [
 intersphinx_mapping = {
     'template-sub': ('http://template-sub.readthedocs.io/en/%s/' % rtd_version, None),
 }
-
-def setup(app):
-    gensidebar.generate_sidebar(globals())
-    app.site_data = loadsitedata.load_site_data('../' + html_theme)
-    app.connect('html-page-context', loadsitedata.html_page_context_listener)

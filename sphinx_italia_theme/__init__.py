@@ -1,4 +1,5 @@
-import sys
+"""Sphinx theme for Team Digitale"""
+
 import os
 import re
 import yaml
@@ -22,10 +23,10 @@ def deep_merge(source, destination):
     return destination
 
 
-def load_site_data(html_theme):
+def load_site_data():
     """Load data from Team Digitale Jekyll site config"""
     source_path = os.path.abspath(
-        os.path.join(get_html_theme_path(), html_theme, 'data')
+        os.path.join(os.path.dirname(__file__), 'data')
     )
     config_path = os.path.join(source_path, '_config.yml')
     overrides_path = os.path.join(source_path, '_overrides.yml')
@@ -90,3 +91,7 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
     # The translation context is pinned to the Italian sources, as Sphinx has
     # it's own translation mechanism built in
     context['t'] = app.site_data['data']['l10n']['it']['t']
+
+def setup(app):
+    app.site_data = load_site_data('../' + html_theme)
+    app.connect('html-page-context', loadsitedata.html_page_context_listener)
