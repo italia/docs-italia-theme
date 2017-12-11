@@ -7,20 +7,20 @@
       </dt>
       {% if READTHEDOCS %}
         {% for type, url in downloads %}
-        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
-          <a class="Button Button--default Button--version u-borderRadius-m" href="{{ url }}">{{ type }}</a>
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs">
+          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull" href="{{ url }}">{{ type }}</a>
         </dd>
         {% endfor %}
       {% else %}
         {# test content #}
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
-          <a class="Button Button--default Button--version u-borderRadius-m  u-sizeFull" href="#">source 1</a>
+          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull" href="#">source 1</a>
         </dd>
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
-          <a class="Button Button--default Button--version u-borderRadius-m  u-sizeFull" href="#">source 2</a>
+          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull" href="#">source 2</a>
         </dd>
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
-          <a class="Button Button--default Button--version u-borderRadius-m  u-sizeFull" href="#">source 3</a>
+          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull" href="#">source 3</a>
         </dd>
       {% endif %}
     </dl>
