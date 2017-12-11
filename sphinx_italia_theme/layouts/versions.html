@@ -13,14 +13,14 @@
         {% endfor %}
       {% else %}
         {# test content #}
-        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
-          <a class="Button Button--default Button--version u-borderRadius-m" href="#">source 1</a>
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
+          <a class="Button Button--default Button--version u-borderRadius-m  u-sizeFull" href="#">source 1</a>
         </dd>
-        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
-          <a class="Button Button--default Button--version u-borderRadius-m" href="#">source 2</a>
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
+          <a class="Button Button--default Button--version u-borderRadius-m  u-sizeFull" href="#">source 2</a>
         </dd>
-        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
-          <a class="Button Button--default Button--version u-borderRadius-m" href="#">source 3</a>
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
+          <a class="Button Button--default Button--version u-borderRadius-m  u-sizeFull" href="#">source 3</a>
         </dd>
       {% endif %}
     </dl>
@@ -29,21 +29,33 @@
         <span>{{ _('Versions') }}</span>
       </dt>
       {% if READTHEDOCS %}
+        {# here add versions showing "stable", "latest" and a dropdown maybe? #}
         {% for slug, url in versions %}
-        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter">
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
           <a href="{{ url }}">{{ slug }}</a>
         </dd>
         {% endfor %}
       {% else %}
         {# test content #}
-        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms">
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
           <a href="#">test 1</a>
         </dd>
-        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms">
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
           <a href="#">test 2</a>
         </dd>
-        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms">
-          <a href="#">test 3</a>
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
+          <select class="version-list Button Button--default Button--version u-borderRadius-m u-sizeFull" id="version-list">
+            <option value=''>{{ nav_version }}</option>
+            {% for key, val in theme_versions.items() %}
+            {% if key != nav_version %}
+            <option value="{{ val }}">{{ key }}</option>
+            {% endif %}
+            {% endfor %}
+            {% for slug, url in versions %}
+            <option value="{{ url }}">{{ slug }}</option>
+            {% endfor %}
+            <option value="/en/stable/">test</option>
+          </select>
         </dd>
       {% endif %}
     </dl>
