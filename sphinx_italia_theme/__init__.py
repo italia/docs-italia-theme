@@ -93,5 +93,5 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
     context['t'] = app.site_data['data']['l10n']['it']['t']
 
 def setup(app):
-    app.site_data = load_site_data('../' + html_theme)
-    app.connect('html-page-context', loadsitedata.html_page_context_listener)
+    app.site_data = load_site_data()
+    app.connect('html-page-context', html_page_context_listener)
