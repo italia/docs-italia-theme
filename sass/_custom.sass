@@ -1,3 +1,12 @@
+// Vertical menu
+.wy-menu-vertical
+  width: auto !important
+  .toctree-expand
+    display: none !important
+  li.current a
+    &:hover, &:active
+      background-color: #f6f9fc !important
+
 // sphinx_rtd_theme overrides
 @media only screen and (max-width: 992px)
   .wy-menu-vertical
@@ -6,19 +15,17 @@
     display: none
 
 @media only screen and (min-width: 1460px)
-  .wy-menu-vertical li.current,
-  .wy-menu-vertical li.current > a
-    border-top-left-radius: 4px
-  .wy-menu-vertical li.current,
-  .wy-menu-vertical li.current > ul > li:last-child,
-  .wy-menu-vertical li.current > ul > li:last-child > a
-    border-bottom-left-radius: 4px
+  .wy-menu-vertical
+    li.current, li.current > a
+      border-top-left-radius: 4px
+    li.current, li.current > ul > li:last-child, li.current > ul > li:last-child > a
+      border-bottom-left-radius: 4px
 
+// Versions bar
 .versions-bar
   height: 100px
   pointer-events: none
-.js-versions-bar
-  width: 100%
+
 .rst-versions
   height: 100px
   position: relative !important
@@ -41,19 +48,11 @@
         display: inline-block
         width: 80%
 
-.wy-menu-vertical
-  width: auto !important
-  .toctree-expand
-    display: none !important
-  li.current a
-    //background-color: transparent !important
-    &:hover, &:active
-      background-color: #f6f9fc !important
-
-// hiding rtd-injected code
+// Hiding rtd-injected code
 .injected
   display: none
 
+// Page styling
 .rst-menu
   padding-right: 0 !important
   @media only screen and (min-width: 1648px)
@@ -67,6 +66,7 @@
   @media only screen and (min-width: 1648px)
     max-width: 144rem !important
 
+// Custom styling
 .clear
   clear: both
   margin-bottom: 24px
