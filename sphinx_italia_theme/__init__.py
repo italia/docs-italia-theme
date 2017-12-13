@@ -3,8 +3,18 @@
 import os
 import re
 import yaml
+import json
+from urllib2 import urlopen
 
+def get_latest_release(owner, repo):
+	url = "https://api.github.com/repos/%s/%s/releases/latest" % (owner, repo)
+	response = urlopen(url)
+	string = response.read().decode('utf-8')
+	json_obj = json.loads(string)
+	return (json_obj['tag_name'])
 
+# This part would be better placed as an extension:
+# It loads yaml data files to set them as variables
 def get_html_theme_path():
     """Return list of HTML theme paths."""
     cur_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
@@ -76,8 +86,13 @@ def load_site_data():
         network_links.append(link_data)
     context['data']['network_links'] = network_links
 
-    return context
+    footer_links = []
+    for link in ['privacy', 'legal']:
+        link_data = context['data']['footer_links'].get(link, {}).copy()
+        footer_links.append(link_data)
+    context['data']['footer_links'] = footer_links
 
+    return context
 
 def html_page_context_listener(app, pagename, templatename, context, doctree):
     """Add site data to Sphinx context, to make porting templates easier"""
@@ -86,7 +101,8 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
     # it's own translation mechanism built in
     context['t'] = app.site_data['data']['l10n']['it']['t']
 
-
 def setup(app):
+    settings_doc_version = get_latest_release('italia', 'design-doc')
+    settings_doc_release = settings_doc_version
     app.site_data = load_site_data()
     app.connect('html-page-context', html_page_context_listener)

@@ -1,6 +1,6 @@
 <header class="Header u-hiddenPrint">
 
-  <div class="Header-banner u-background-50">
+  <div class="Header-banner u-background-60">
     <div class="Header-owner Headroom-hideme u-flex u-flexJustifyBetween u-flexAlignItemsCenter">
       <div class="Header-owner__institutions">
       <div class="u-md-hidden u-lg-hidden u-border-right-xxs u-margin-right-xs u-padding-right-xs u-inlineBlock u-alignMiddle">
@@ -19,10 +19,10 @@
         </a>
         <span class="u-color-white">&nbsp;+&nbsp;</span>
         <a href="{{ site.partner_link }}">
-          <span class="u-inline u-md-hidden u-lg-hidden u-sm-hidden">
+          <span class="u-inline u-md-inline u-lg-hidden u-sm-hidden">
             {{ site.partner_short }}
           </span>
-          <span class="u-hidden u-md-inline u-lg-inline u-sm-inline">
+          <span class="u-hidden u-md-hidden u-lg-inline u-sm-inline">
             {{ site.partner_full }}
           </span>
         </a>
@@ -58,16 +58,6 @@
       </div>
 
       <div class="Header-utils Grid-cell">
-        <div class="Header-social Headroom-hideme">
-          <p>{{ _(t.follow_us | capitalize) }}</p>
-          <ul class="Header-socialIcons">
-            {% for social_id, social in site.data.social.items() %}
-            <li><a href="{{ social.link }}" title="{{ social.name }}"><span class="Icon-{{ social_id }}"></span>
-                <span class="u-hiddenVisually">{{ social.name | capitalize }}</span></a></li>
-            {% endfor %}
-          </ul>
-        </div>
-
         <div class="Header-search" id="header-search">
           {% include 'layouts/search_form.html' %}
         </div>
@@ -84,11 +74,4 @@
     </div>
   </div>
   <!-- Header-navbar -->
-
-
-  <div class="Headroom-hideme u-textCenter u-hidden u-sm-hidden u-md-block u-lg-block">
-    <nav class="Megamenu Megamenu--default js-megamenu u-background-50" data-rel=".Offcanvas .Treeview"></nav>
-  </div>
-
-
 </header>

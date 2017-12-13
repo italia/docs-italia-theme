@@ -18,7 +18,7 @@ it:
     navigation_menu_label: Menu di navigazione
     navigation_menu_esc: esci dalla navigazione
     scrolltop_label: torna all'inizio dei contenuti
-    search_form_label: Vai a progetto...
+    search_form_label: Cerca nei documenti
     search_form_off: disattiva il form di ricerca
     search_form_on: attiva il form di ricerca
     search_form_start: avvia la ricerca

@@ -1,0 +1,431 @@
+/** PinWheel
+ *  =====================
+.Header-PinWheel
+  -webkit-animation: spin 6s ease-in-out infinite
+  -moz-animation: spin 6s ease-in-out infinite
+  animation: spin 6s ease-in-out infinite
+
+@-moz-keyframes spin
+  100%,
+  20%
+    -moz-transform: rotate(360deg)
+
+@-webkit-keyframes spin
+  100%,
+  20%
+    -webkit-transform: rotate(360deg)
+
+@keyframes spin
+  100%,
+  20%
+    -webkit-transform: rotate(360deg)
+    transform: rotate(360deg)
+
+/** Header slim
+ * ================
+.Header-banner
+  padding-left: 2rem !important
+  padding-right: 2rem !important
+
+@media screen and (min-width: 992px)
+  .Header-logo img
+    height: 9rem
+    width: 9rem
+
+.Header-socialIcons [class*=" Icon-"],
+.Header-socialIcons [class^=Icon-]
+  padding: 0.4em !important
+
+.Header-owner > div > a,
+.Header-slim a
+  text-decoration: none
+  padding: 1.6rem 1.4rem !important
+  display: inline-block !important
+  vertical-align: middle !important
+
+@media screen and (max-width: 991px)
+  .Header-titleLink a
+    font-size: 2rem !important
+
+  .Header-titleLink small
+    display: inline-block !important
+    font-size: 1.4rem !important
+
+.Header-slim a:hover
+  text-decoration: none !important
+
+.Header-slim li
+  display: inline-block !important
+  vertical-align: middle !important
+  margin-bottom: 0.2rem
+
+.Header-slim li:hover
+  border-bottom: 0.2rem solid white
+  margin-bottom: 0
+
+.Header-slim li.current
+  border-bottom: 0.2rem solid white
+  font-weight: 600
+  margin-bottom: 0
+
+.Header-slim li.delimiter a
+  border-right: 0.1rem solid #127ae2
+
+.Header-slim-toggle a
+  text-decoration: none !important
+
+.Network .current a
+  font-size: 1.5em
+  border-left: 1rem solid #0066cc !important
+
+/** Header tweaks
+ *  =====================
+
+.Hamburger-toggle.is-active
+  background: transparent !important
+
+.Hamburger-toggle.is-active:after,
+.Hamburger-toggle.is-active:before
+  background: white !important
+
+.Header-owner
+  padding-bottom: 0 !important
+  padding-top: 0 !important
+
+/** Megamenu tweaks
+ *  =====================
+.Megamenu.js-megamenu
+  margin-left: -3.2rem !important
+
+.Megamenu-item:first-child > a
+  padding-left: 3.2rem !important
+
+.Megamenu--default
+  padding-right: 0 !important
+
+.Megamenu--default .Megamenu-item > a
+  color: #06c !important
+
+.Megamenu--default .Megamenu-item > a.is-current
+  border-bottom: 2px solid #06c !important
+
+/** Utilities
+ *================
+.u-letterSpace-l
+  letter-spacing: 0.03em !important
+
+.u-color-teal-60
+  color: #00C5CA !important
+
+.u-background-teal-60
+  background-color: #00C5CA !important
+
+.u-color-teal-65
+  color: #06A3A8 !important
+
+.u-background-teal-65
+  background-color: #06A3A8
+
+.u-borderShadow-xl
+  box-shadow: 1px 1px 60px 1px rgba(0, 0, 0, 0.2) !important
+
+/** Badge
+ *===================
+.Badges
+  margin: 0
+  list-style: none
+
+  li
+    display: inline-block
+    position: relative
+    padding: 0.3em 1.5em 0.3em 1em
+
+    &:after
+      content: '\02022'
+      font-family: 'Arial', 'Verdana', Sans serif
+      font-size: 2em
+      line-height: 0
+      position: absolute
+      right: 0.1em
+      top: 50%
+
+.Category
+  margin: 0
+  list-style: none
+
+  li
+    display: inline-block
+    margin-right: 1rem
+
+/** Roadmap
+ *======================
+.Roadmap
+  margin-top: 1rem
+  margin-bottom: 4rem
+  margin-left: 4rem
+  position: relative
+
+  &:after
+    content: ''
+    border-left: 1px solid #ddd
+    height: 100%
+    z-index: 100
+    top: 1rem
+    left: -2rem
+    position: absolute
+
+  dt
+    margin-top: 1rem
+    margin-bottom: 2rem
+    font-size: 2rem
+    line-height: 2.5rem
+    font-weight: 700
+    position: relative
+
+    &:after
+      content: ''
+      background-color: #5a6772
+      height: 2rem
+      width: 2rem
+      z-index: 101
+      top: 0.5rem
+      left: -3rem
+      position: absolute
+      border-radius: 2rem
+
+  dd
+    margin-top: 1rem
+    margin-bottom: 2rem
+    position: relative
+    font-weight: 300
+
+    &:after
+      content: ''
+      background-color: #ddd
+      height: 1.2rem
+      width: 1.2rem
+      z-index: 101
+      top: 1rem
+      left: -2.5rem
+      position: absolute
+      border-radius: 2rem
+
+/* CHECKLISTS
+ *==============
+*[data-checklist]
+  color: #00C5CA
+  position: relative
+
+  &:before
+    content: attr(data-checklist) ". "
+
+    @media screen and (min-width: 992px)
+      position: absolute
+      font-size: 10rem
+      width: 14rem
+      left: -15rem
+      text-align: right
+      bottom: 3.2rem
+
+/* RELATEDS
+ *===============
+.Relateds
+  .Badges
+    display: inline-block !important
+    position: relative
+    bottom: 0.3rem
+
+  .relateds-last-string
+    position: relative
+
+    &:after
+      content: ''
+      border-bottom: 1px solid #ddd
+      width: 50%
+      right: 0
+      bottom: 0
+      position: absolute
+      z-index: 100
+
+.Download
+  background-color: #fff
+
+  .Download-wrapper
+    position: relative
+    text-align: center
+
+    .download-button
+      color: #fff !important
+      background-color: #00C5CA !important
+
+      &--float
+        position: absolute
+        top: -3rem
+        left: 50%
+        transform: translateX(-50%)
+        z-index: 100
+
+  .Download-caption
+    text-transform: initial
+
+/* OVERRIDES ============
+.Person-content.u-background-white
+  width: 100%
+
+  h4
+    padding-right: 24px
+    padding-left: 24px
+
+.Megamenu-item > a
+  padding-right: 2.5rem !important
+  padding-left: 2.5rem !important
+
+body.layout-download .Breadcrumb-item--deactivated
+  font-size: 1.8rem !important
+  color: rgba(255, 255, 255, 0.5) !important
+
+body.layout-download
+  .Prose
+    // img {
+    //   position: relative;
+    //   max-width: calc(100% + 40rem) !important;
+    //   width: calc(100% + 40rem) !important;
+    //   margin-left: -20rem;
+    //   margin-right: -20rem;
+    //   @media screen and (max-width: 991px) {
+    //      margin: 2rem 0;
+    //      width: auto  !important;
+    //      max-width: 100% !important;
+    //     }
+    // }
+
+  .Breadcrumb
+    display: inline-block
+
+    .Breadcrumb-item
+      color: #fff
+
+    a
+      color: #fff !important
+      font-weight: 300 !important
+
+    .Breadcrumb-item:after
+      content: ' / '
+
+    & > li:nth-child(1),
+    & > li:nth-last-child(1)
+      display: none !important
+
+.Prose
+  a
+    color: #0066CC
+    text-decoration: none
+
+  img
+    max-width: 100%
+
+  & > ol > li,
+  & > p,
+  & > ul > li
+    color: #5a6772
+
+  & > ul
+    list-style-type: disc
+    color: #5a6772
+
+    li > a
+      color: #0066CC
+      font-size: 2rem
+      font-weight: 400
+
+  & > h2
+    font-size: 5.5rem !important
+    line-height: 6rem !important
+
+    @media screen and (max-width: 991px)
+      font-size: 4.5rem !important
+      line-height: 5rem !important
+
+  & > h3
+    font-size: 4rem !important
+    line-height: 4.5rem !important
+    margin-top: 3rem !important
+    margin-bottom: 3rem !important
+
+    @media screen and (max-width: 991px)
+      font-size: 3rem !important
+      line-height: 3.5rem !important
+
+    &:after
+      content: ''
+      display: block
+      width: 12%
+      border-top: 1px solid #ddd
+      margin-top: 1rem
+
+    img
+      max-height: 3.5rem
+      width: auto
+      margin-right: 0.5rem
+
+      @media screen and (max-width: 991px)
+        display: none
+
+.Grid--gallery
+  margin: 5rem -15rem
+  position: relative
+
+  @media screen and (max-width: 991px)
+    margin-right: 0
+    margin-left: 0
+
+  .Grid-cell:nth-child(3n)
+    padding-top: 8px
+    padding-bottom: 8px
+    width: 100% !important
+
+  figure
+    position: relative
+
+    figcaption
+      position: absolute
+      z-index: 100
+      bottom: 2rem
+      left: 2rem
+      right: 2rem
+      font-size: 1.25rem
+      line-height: 1.75rem
+      color: #ccc
+
+      span
+        background-color: #fff
+        display: inline
+        box-shadow: 10px 0 0 #fff, -10px 0 0 #fff
+
+  img
+    max-width: 100%
+    height: auto
+
+.credits-text
+  line-height: 2.2rem
+
+  p
+    margin-bottom: 1rem
+
+  a
+    color: #0066CC
+    text-decoration: none
+
+/*
+.lg-showcase img
+  max-width: 100%
+  width: 25rem
+  height: 20rem
+  padding-top: 1em
+  padding-bottom: 1em
+  padding-right: 2em
+
+.iPress-blockquote
+  a
+    &:after
+      display: none !important

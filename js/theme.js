@@ -32,7 +32,7 @@ function ThemeNav () {
                         self.winScroll = true;
                     }
                 });
-                setInterval(function () { if (self.winScroll) self.onScroll(); }, 25);
+                setInterval(function () { self.onScroll(); }, 25);
 
                 // Set resize monitor
                 self.win.on('resize', function () {

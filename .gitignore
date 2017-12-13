@@ -1,6 +1,7 @@
 *.pyc
 *.egg-info
 *.egg
+*.inc
 *build/
 .tox
 .coverage
@@ -8,6 +9,7 @@
 *.sass-cache
 .ropeproject/
 .ruby-version
+.idea/
 dist/
 bower_components/
 node_modules/
