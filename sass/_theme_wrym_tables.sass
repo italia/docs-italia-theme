@@ -1,0 +1,91 @@
+.wy-table
+  border-collapse: collapse
+  border-spacing: 0
+  empty-cells: show
+  margin-bottom: $base-line-height
+  caption
+    color: #000
+    font: italic 85%/1 arial, sans-serif
+    padding: 1em 0
+    text-align: center
+  td, th
+    font-size: $table-font-size
+    margin: 0
+    overflow: visible
+    padding: $table-padding-size
+  td:first-child, th:first-child
+    border-left-width: 0
+  thead
+    color: #000
+    text-align: left
+    vertical-align: bottom
+    white-space: nowrap
+    th
+      font-weight: $base-font-family-bold
+      border-bottom: solid 2px $table-border-color
+  td
+    background-color: transparent
+    vertical-align: middle
+    p
+      line-height: $base-line-height * .75
+      &:last-child
+        margin-bottom: 0
+  .wy-table-cell-min
+    width: 1%
+    padding-right: 0
+    input[type=checkbox], input[type=checkbox]
+      margin: 0
+
+.wy-table-secondary
+  color: $text-medium
+  font-size: 90%
+.wy-table-tertiary
+  color: $text-medium
+  font-size: 80%
+
+// Striped
+
+.wy-table-odd td, .wy-table-striped tr:nth-child(2n-1) td
+  background-color: $table-stripe-color
+
+.wy-table-backed
+  background-color: $table-stripe-color
+
+
+/* BORDERED TABLES
+
+.wy-table-bordered-all
+  border: 1px solid $table-border-color
+  td
+    border-bottom: 1px solid $table-border-color
+    border-left: 1px solid $table-border-color
+  tbody > tr:last-child td
+    border-bottom-width: 0
+
+.wy-table-bordered
+  border: 1px solid $table-border-color
+
+.wy-table-bordered-rows
+  td
+    border-bottom: 1px solid $table-border-color
+  tbody > tr:last-child td
+    border-bottom-width: 0
+
+.wy-table-horizontal
+  tbody > tr:last-child td
+    border-bottom-width: 0
+  td, th
+    border-width: 0 0 1px 0
+    border-bottom: 1px solid $table-border-color
+  tbody > tr:last-child td
+    border-bottom-width: 0
+/* RESPONSIVE TABLES
+
+.wy-table-responsive
+  margin-bottom: $base-line-height
+  max-width: 100%
+  overflow: auto
+  table
+    margin-bottom: 0 !important
+    td, th
+      white-space: nowrap

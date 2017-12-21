@@ -1,12 +1,12 @@
 .rst-versions
-  position: fixed
   bottom: 0
   left: 0
-  width: $nav-desktop-width
   color: $section-background-color
-  background: darken($menu-background-color, 8%)
-  border-top: solid 10px $menu-background-color
   font-family: $base-font-family
+  font-size: .8em
+  height: 100px
+  width: 100%
+  pointer-events: initial
   z-index: $z-index-tray
   a
     color: $link_color
@@ -15,7 +15,6 @@
     display: none
   .rst-current-version
     padding: $base-line-height / 2
-    background-color: darken($menu-background-color, 5%)
     display: block
     text-align: right
     font-size: 90%
@@ -38,7 +37,7 @@
     display: block
   .rst-other-versions--no-inject
     font-size: 90%
-    padding: $base-line-height / 2
+    padding: 0
     color: $text-medium
     display: none
     hr
@@ -48,9 +47,6 @@
       margin: 20px 0
       padding: 0
       border-top: solid 1px lighten($menu-background-color, 5%)
-    dd
-      display: inline-block
-      margin: 0
       a
         display: inline-block
         padding: $base-line-height / 4
@@ -81,6 +77,17 @@
       padding: 0 $base-line-height / 4
       display: block
       text-align: center
+  .rst-versions--terms, .rst-versions--definitions
+    margin: 10px 0
+    span
+      color: #f6f9fc
+      font-weight: 300
+      display: inline-block
+      padding: 6px 0
+    a
+      display: inline-block
+  @media only screen and (max-width: 992px)
+    display: none
 
 @media screen and (max-width: 768px)
   .rst-versions
@@ -88,3 +95,7 @@
     display: none
     &.shift
       display: block
+
+// Hiding rtd-injected code
+.injected
+  display: none !important

@@ -1,17 +1,11 @@
-// ------------------------------------------------------------
-// CONTRIBUTORS, PLEASE READ THIS!
-// ------------------------------------------------------------
-// This theme pulls from other frontend projects. The only
-// things you should edit are the sass files that start with
-// "theme_*.sass".
-// ------------------------------------------------------------
-
-// Theme specific variables.
+// Theme specific variables
 @import theme_variables
-// TODO this has to go
-@import theme_wrym_leftovers
 
-// Theme specific styles. These are likely the files you want to edit.
+// Unfortunately these can't go because RTD we already have seems very attached to wrym class names
+@import theme_wrym_leftovers
+@import theme_wrym_tables
+
+// Theme specific styles
 @import theme_breadcrumbs
 @import theme_layout
 @import theme_badge
@@ -19,11 +13,14 @@
 @import theme_mathjax
 @import theme_button
 
-// Designers and Developers websites inherited styling
-// TODO this has to go
-@import designers
-// TODO this has to go
-@import developers
+// Developers related styles (mainly header, footer, and custom home pages)
+@import custom/custom_header
+@import custom/custom_pages
+@import custom/custom_footer
 
-// Custom styles
-@import custom
+// RST document related styles
+@import document/document_admonitions
+@import document/document_typography
+@import document/document_palettes
+@import document/document_example
+@import document/document_links

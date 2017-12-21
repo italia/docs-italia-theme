@@ -9,7 +9,7 @@
               {% include 'layouts/slim_icon.html' %}
           </a>
         </div>
-      <a href="{{ site.owner_link }}">
+        <a href="{{ site.owner_link }}" class="u-linkClean">
           <span class="u-inline u-md-hidden u-lg-hidden u-sm-hidden">
             {{ site.owner_short }}
           </span>
@@ -18,7 +18,7 @@
           </span>
         </a>
         <span class="u-color-white">&nbsp;+&nbsp;</span>
-        <a href="{{ site.partner_link }}">
+        <a href="{{ site.partner_link }}" class="u-linkClean">
           <span class="u-inline u-md-inline u-lg-hidden u-sm-hidden">
             {{ site.partner_short }}
           </span>
@@ -34,14 +34,14 @@
   <div class="Header-navbar u-background-50">
     <div class="u-layout-wide Grid Grid--alignMiddle u-layoutCenter">
       <div class="Header-logo Grid-cell" aria-hidden="true">
-        <a href="/" tabindex="-1">
+        <a href="/" tabindex="-1" class="u-linkClean">
           <img src="{{ pathto('_static/icons/logo-it.png', 1) }}" alt="">
         </a>
       </div>
 
       <div class="Header-title Grid-cell">
         <h1 class="Header-titleLink">
-          <a href="/">{{ _(t.site_title | default(site.title) | escape) }}
+          <a href="/" class="u-linkClean">{{ _(t.site_title | default(site.title) | escape) }}
             {% if site.pill %}
               <span class="u-lg-hidden u-md-hidden u-sm-hidden u-cf u-padding-top-xxs u-block"></span>
               <span class="u-color-20 u-text-xxs
@@ -50,6 +50,8 @@
         </h1>
       </div>
 
+      {#
+      Temporarily hidden
       <div class="Header-searchTrigger Grid-cell">
         <button aria-controls="header-search" class="js-Header-search-trigger Icon Icon-search u-background-50" title="{{ _(t.search_form_on) }}" aria-label="{{ _(t.search_form_on) }}" aria-hidden="false">
         </button>
@@ -61,8 +63,8 @@
         <div class="Header-search" id="header-search">
           {% include 'layouts/search_form.html' %}
         </div>
-
       </div>
+      #}
 
       <div class="Header-toggle Grid-cell">
         <a class="Hamburger-toggleContainer js-fr-offcanvas-open u-nojsDisplayInlineBlock u-lg-hidden u-md-hidden" href="#menu" aria-controls="menu" aria-label="{{ t.toggle_menu_label }}" title="{{ t.toggle_menu_label }}">

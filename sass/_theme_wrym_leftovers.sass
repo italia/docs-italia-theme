@@ -18,40 +18,43 @@
     border: 1px solid $table-border-color
     margin-bottom: $base-line-height
 
-.codeblock, div[class^='highlight']
+.codeblock,
+div[class^='highlight']
   border: 1px solid $table-border-color
   padding: 0px
   overflow-x: auto
   background: $white
   // 1px hack otherwise border won't show. lame
   margin: 1px 0 $base-line-height 0
-  div[class^='highlight']
-    border: none
-    background: none
+
+div[class='highlight']
+  border: none
+  background: none
+  margin: 0
+  td.code
+    width: 100%
+  pre
+    white-space: pre
     margin: 0
-// Needs 100% width for line highlighting to work properly
-div[class^='highlight'] td.code
-  width: 100%
-.linenodiv pre
-  border-right: solid 1px lighten($table-border-color, 2%)
-  margin: 0
-  padding: $base-line-height / 2 $base-line-height / 2
-  font-family: $code-font-family
-  font-size: 12px
-  line-height: 1.5
-  color: $text-lighter
-div[class^='highlight'] pre
-  white-space: pre
-  margin: 0
-  padding: $base-line-height / 2 $base-line-height / 2
-  font-family: $code-font-family
-  font-size: 12px
-  line-height: 1.5
-  display: block
-  overflow: auto
-  color: $text-color
-pre.literal-block
-  @extend .codeblock
+    padding: $base-line-height / 2 $base-line-height / 2
+    font-family: $code-font-family
+    font-size: 12px
+    line-height: 1.5
+    display: block
+    overflow: auto
+    color: $text-color
+    &.literal-block
+      @extend .codeblock
+
+.linenodiv
+  pre
+    border-right: solid 1px lighten($table-border-color, 2%)
+    margin: 0
+    padding: $base-line-height / 2 $base-line-height / 2
+    font-family: $code-font-family
+    font-size: 12px
+    line-height: 1.5
+    color: $text-lighter
 
 @media print
   .codeblock, div[class^='highlight'], div[class^='highlight'] pre
@@ -63,6 +66,30 @@ pre.literal-block
   margin-bottom: $base-line-height
   background: lighten($blue, 50%)
   +font-smooth
+  &.wy-alert-danger
+    background: lighten($red, 40%)
+    .wy-alert-title
+      background: lighten($red,20%)
+  &.wy-alert-warning
+    background: lighten(orange,40%)
+    .wy-alert-title
+      background: lighten($orange,20%)
+  &.wy-alert-info
+    background: lighten($blue, 50%)
+    .wy-alert-title
+      background: lighten($blue,20%)
+  &.wy-alert-success
+    background: lighten($offgreen, 50%)
+    .wy-alert-title
+      background: lighten($offgreen,0%)
+  &.wy-alert-neutral
+    background: $table-stripe-color
+    .wy-alert-title
+      color: $text-color
+      background: $table-border-color
+    a
+      color: $link-color
+
 .wy-alert-title
   color: $white
   font-weight: bold
@@ -72,37 +99,6 @@ pre.literal-block
   margin: -$base-line-height / 2
   padding: $base-line-height / 4 $base-line-height / 2
   margin-bottom: $base-line-height / 2
-
-.wy-alert.wy-alert-danger
-  background: lighten($red, 40%)
-  .wy-alert-title
-    background: lighten($red,20%)
-.wy-alert.wy-alert-warning
-  background: lighten(orange,40%)
-  .wy-alert-title
-    background: lighten($orange,20%)
-
-.wy-alert.wy-alert-info
-  background: lighten($blue, 50%)
-  .wy-alert-title
-    background: lighten($blue,20%)
-
-.wy-alert.wy-alert-success
-  background: lighten($offgreen, 50%)
-  .wy-alert-title
-    background: lighten($offgreen,0%)
-
-.wy-alert.wy-alert-neutral
-  background: $table-stripe-color
-  .wy-alert-title
-    color: $text-color
-    background: $table-border-color
-  a
-    color: $link-color
-
-.wy-alert p:last-child
-  margin-bottom: 0
-
 
 %wy-plain-list-disc
   list-style: disc
@@ -136,102 +132,7 @@ pre.literal-block
       li
         list-style: disc
 
-
 .wy-plain-list-disc, article ul
   @extend %wy-plain-list-disc
 .wy-plain-list-decimal, article ol
   @extend %wy-plain-list-decimal
-
-
-.wy-table
-  border-collapse: collapse
-  border-spacing: 0
-  empty-cells: show
-  margin-bottom: $base-line-height
-  caption
-    color: #000
-    font: italic 85%/1 arial, sans-serif
-    padding: 1em 0
-    text-align: center
-  td, th
-    font-size: $table-font-size
-    margin: 0
-    overflow: visible
-    padding: $table-padding-size
-  td:first-child, th:first-child
-    border-left-width: 0
-  thead
-    color: #000
-    text-align: left
-    vertical-align: bottom
-    white-space: nowrap
-    th
-      font-weight: $base-font-family-bold
-      border-bottom: solid 2px $table-border-color
-  td
-    background-color: transparent
-    vertical-align: middle
-
-.wy-table td p
-  line-height: $base-line-height * .75
-  &:last-child
-    margin-bottom: 0
-.wy-table .wy-table-cell-min
-  width: 1%
-  padding-right: 0
-  input[type=checkbox], input[type=checkbox]
-    margin: 0
-
-.wy-table-secondary
-  color: $text-medium
-  font-size: 90%
-.wy-table-tertiary
-  color: $text-medium
-  font-size: 80%
-
-// Striped
-
-.wy-table-odd td, .wy-table-striped tr:nth-child(2n-1) td
-  background-color: $table-stripe-color
-
-.wy-table-backed
-  background-color: $table-stripe-color
-
-
-/* BORDERED TABLES
-
-.wy-table-bordered-all
-  border: 1px solid $table-border-color
-  td
-    border-bottom: 1px solid $table-border-color
-    border-left: 1px solid $table-border-color
-  tbody > tr:last-child td
-    border-bottom-width: 0
-
-.wy-table-bordered
-  border: 1px solid $table-border-color
-
-.wy-table-bordered-rows
-  td
-    border-bottom: 1px solid $table-border-color
-  tbody > tr:last-child td
-    border-bottom-width: 0
-
-.wy-table-horizontal
-  tbody > tr:last-child td
-    border-bottom-width: 0
-  td, th
-    border-width: 0 0 1px 0
-    border-bottom: 1px solid $table-border-color
-  tbody > tr:last-child td
-    border-bottom-width: 0
-/* RESPONSIVE TABLES
-
-.wy-table-responsive
-  margin-bottom: $base-line-height
-  max-width: 100%
-  overflow: auto
-  table
-    margin-bottom: 0 !important
-    td, th
-      white-space: nowrap

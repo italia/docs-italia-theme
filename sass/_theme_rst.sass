@@ -1,3 +1,8 @@
+.rst-menu
+  padding-right: 0 !important
+  @media only screen and (min-width: 1648px)
+    padding-left: 0 !important
+
 .rst-content
   // Sphinx by default applies HxW style attributes to images. This fixes that oversite.
   img
@@ -302,10 +307,8 @@
     margin: auto $base-line-height / 12
   .versionmodified
     font-style: italic
-
-
-// Mobile specific
-@media screen and (max-width: 480px)
-  .rst-content
+  @media screen and (max-width: 480px)
     .sidebar
       width: 100%
+  @media screen and (min-width: 1648px)
+    padding-right: 0 !important
