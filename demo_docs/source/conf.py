@@ -125,9 +125,9 @@ html_theme = 'sphinx_italia_theme'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    # If the project is meant to be a different style project, enable this
-    # layout instead of the default one.
+    # If the project is meant to be a different style project, enable this layout instead of the default one.
     # Available options are: (default), 'page_home', 'page_project'
+    'layout': 'default',
     'versions': {
         '0.2.4': '0.2.4',
         '4.0': '4.0',

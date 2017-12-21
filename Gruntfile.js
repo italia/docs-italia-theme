@@ -19,55 +19,10 @@ module.exports = function(grunt) {
         }
       }
     },
-    copy: {
-      fonts: {
-        files: [
-          {
-            expand: true,
-            flatten: true,
-            src: ['bower_components/font-awesome/fonts/*'],
-            dest: 'sphinx_italia_theme/static/fonts/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            flatten: true,
-            src: [
-              'bower_components/lato-googlefont/Lato-Bold.ttf',
-              'bower_components/lato-googlefont/Lato-Regular.ttf'
-            ],
-            dest: 'sphinx_italia_theme/static/fonts/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            flatten: true,
-            src: [
-              'bower_components/robotoslab-googlefont/RobotoSlab-Bold.ttf',
-              'bower_components/robotoslab-googlefont/RobotoSlab-Regular.ttf'
-            ],
-            dest: 'sphinx_italia_theme/static/fonts/',
-            filter: 'isFile'
-          },
-          {
-            expand: true,
-            flatten: true,
-            src: [
-              'bower_components/inconsolata-googlefont/Inconsolata-Bold.ttf',
-              'bower_components/inconsolata-googlefont/Inconsolata-Regular.ttf'
-            ],
-            dest: 'sphinx_italia_theme/static/fonts/',
-            filter: 'isFile'
-          }
-        ]
-      }
-    },
-
     sass: {
       dev: {
         options: {
-          style: 'expanded',
-          loadPath: ['bower_components/bourbon/dist', 'bower_components/neat/app/assets/stylesheets', 'bower_components/font-awesome/scss', 'bower_components/wyrm/sass']
+          style: 'expanded'
         },
         files: [{
           expand: true,
@@ -79,8 +34,7 @@ module.exports = function(grunt) {
       },
       build: {
         options: {
-          style: 'compressed',
-          loadPath: ['bower_components/bourbon/dist', 'bower_components/neat/app/assets/stylesheets', 'bower_components/font-awesome/scss', 'bower_components/wyrm/sass']
+          style: 'compressed'
         },
         files: [{
           expand: true,
@@ -116,24 +70,19 @@ module.exports = function(grunt) {
     },
 
     exec: {
-      bower_update: {
-        cmd: 'bower update'
-      },
       build_sphinx: {
         cmd: 'sphinx-build demo_docs/source demo_docs/build'
       }
     },
     clean: {
-      build: ["demo_docs/build"],
-      fonts: ["sphinx_italia_theme/static/fonts"]
+      build: ["demo_docs/build"]
     },
 
     watch: {
       /* Compile sass changes into theme directory */
       sass: {
         files: [
-          'sass/*.sass',
-          'bower_components/**/*.sass'
+          'sass/*.sass'
         ],
         tasks: ['sass:dev']
       },
@@ -165,19 +114,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('fonts', ['clean:fonts','copy:fonts']);
   grunt.registerTask('default', [
-    //'exec:bower_update',
     'clean:build',
-    'sass:build',
-    'browserify:build',
+    'sass:dev',
+    'browserify:dev',
     'exec:build_sphinx',
     'connect',
     'open',
     'watch'
   ]);
   grunt.registerTask('build', [
-    'exec:bower_update',
     'clean:build',
     'sass:build',
     'browserify:build',

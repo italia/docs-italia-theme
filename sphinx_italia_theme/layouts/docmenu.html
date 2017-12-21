@@ -32,7 +32,7 @@
     {% include "layouts/searchbox.html" %}
 </div>
 
-<div class="wy-menu wy-menu-vertical">
+<div class="doc-menu doc-menu doc-menu-vertical js-doc-menu-vertical">
   {% if 'singlehtml' not in builder %}
     {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=collapse_navigation, includehidden=True) %}
   {% endif %}
@@ -43,6 +43,7 @@
     <div class="local-toc">{{ toc }}</div>
   {% endif %}
 </div>
+
 <!--
 <div id="rst-menu-links" class="u-md-hidden u-padding-left-m">
   <dl>

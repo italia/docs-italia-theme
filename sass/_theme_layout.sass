@@ -2,14 +2,14 @@
   position: fixed
   top: $gutter
 
-.wy-menu
+.doc-menu
   a:hover
     text-decoration: underline
   
 .rst-pro 
     display: none !important
 
-.wy-menu-horiz
+.doc-menu-horiz
   +clearfix
   ul, li
     display: inline-block
@@ -26,7 +26,7 @@
     line-height: $base-font-size * 2
     padding: 0 $base-font-size
 
-.wy-menu-vertical
+.doc-menu-vertical
   width: $nav-desktop-width
   header, p.caption
     // height: $base-font-size * 2
@@ -67,8 +67,8 @@
       display: none !important
       float: left
       margin-left: -1.2em
-      @extend .fa
-      @extend .fa-plus-square-o
+      //@extend .fa
+      //@extend .fa-plus-square-o
       font-size: .8em
       line-height: 1.6em
       color: darken($menu-link-medium, 20%)
@@ -92,8 +92,8 @@
       span.toctree-expand
         color: $menu-link-medium
     span.toctree-expand
-      @extend .fa
-      @extend .fa-minus-square-o
+      //@extend .fa
+      //@extend .fa-minus-square-o
       display: none !important
       font-size: .8em
       line-height: 1.6em
@@ -273,7 +273,7 @@
     color: rgba(255,255,255,.3)
 
 
-.wy-nav .wy-menu-vertical
+.wy-nav .doc-menu-vertical
   header
     color: $link-color
   a
@@ -432,7 +432,7 @@ footer
     width: auto
   .wy-side-nav-search
     width: auto
-  .wy-menu.wy-menu-vertical
+  .doc-menu.doc-menu-vertical
     width: auto
   .wy-nav-content-wrap
     margin-left: 0

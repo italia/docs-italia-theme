@@ -1,18 +1,3 @@
-// -------------------------------------------------------------------------------------------------------------------
-// CONTRIBUTORS, PLEASE READ THIS!
-// -------------------------------------------------------------------------------------------------------------------
-// Couple things...
-//    1. Lots of this @extends from wyrm_core/_type.sass (http://www.github.com/snide/wyrm/.
-//        * Try not to replace any @extends code. It's pretty generic stuff meant to work together.
-//        * That said, know that I'm very unlikely to accept PRs from wyrm just to change style here.
-//    2. I plan to remove the !importants in here. Part of it is due to lazyness, part to sphinx's fondness for nesting.
-//    3. Try to use variables from wyrm_core/wy_variables.sass. Notable are...
-//        * $base-line-height // All margins, padding and line-height should use this in .25 increments.
-//        * $text-color, $text-light, $text-dark...etc
-//        * $base-font-family, $custom-font-family, $code-font-family
-//    4. If you have changes for mobile/tablet, put them at the bottom of the sass file.
-// --------------------------------------------------------------------------------------------------------------------
-
 .rst-content
   // Sphinx by default applies HxW style attributes to images. This fixes that oversite.
   img
@@ -56,8 +41,8 @@
       margin-bottom: 0
   .admonition-title
     @extend .wy-alert-title
-    @extend .fa
-    @extend .fa-exclamation-circle
+    //@extend .fa
+    //@extend .fa-exclamation-circle
     &:before
       margin-right: 4px
   .note, .seealso
@@ -115,7 +100,7 @@
       display: none
       visibility: hidden
       font-size: 14px
-      @extend .fa
+      //@extend .fa
       &:after
         visibility: visible
         content: "\f0c1"
@@ -303,8 +288,8 @@
     white-space: inherit
     span:first-child
       -webkit-font-smoothing: subpixel-antialiased
-      @extend .fa
-      @extend .fa-download
+      //@extend .fa
+      //@extend .fa-download
       &:before
         margin-right: 4px
   .guilabel
