@@ -167,7 +167,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('fonts', ['clean:fonts','copy:fonts']);
   grunt.registerTask('default', [
-    'exec:bower_update',
+    //'exec:bower_update',
     'clean:build',
     'sass:build',
     'browserify:build',

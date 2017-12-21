@@ -2,6 +2,21 @@
 // that are set in wyrm_core/wy_variables.sass. You'll find wyrm in bower_components if you're looking
 // for a reference.
 
+@mixin clearfix
+  &:after
+    content: ""
+    display: table
+    clear: both
+
+@mixin font-smooth
+  -webkit-font-smoothing: antialiased
+
+@mixin transition($args...)
+  -webkit-transition: $args
+  -moz-transition: $args
+  -ms-transition: $args
+  -o-transition: $args
+  transition: $args
 
 
 // Colors
@@ -28,7 +43,7 @@ $link-color-alt:                      hsl(33, 100%, 51%)
 
 // Buttons
 $button-background-color:             $link-color
-$button-neutral-background-color:     $table-stripe-color
+$button-neutral-background-color:     #F6F9FC
 
 
 $font-awesome-dir:                    "../fonts/"
@@ -107,3 +122,6 @@ $table-bg-hover-color:                hsl(0,0%,85%)
 $table-head-background-color:         $table-border-color
 $table-font-size:                     90%
 $table-padding-size:                  $base-font-size / 2 $base-font-size
+
+
+$gutter: 1.618em
