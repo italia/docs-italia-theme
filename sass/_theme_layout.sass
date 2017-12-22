@@ -438,6 +438,19 @@ footer
     color: $text-medium
     font-size: 90%
 
+@media screen and (min-width: 990px)
+  .Offcanvas-override
+    padding-right: 0 !important
+    z-index: 0
+    .Offcanvas
+      visibility: visible !important
+      max-width: none !important
+      width: 100%
+      .Offcanvas-toggleContainer
+        display: none !important
+      .Offcanvas-content
+        position: relative !important
+        left: auto !important
 
 @media screen and (max-width: 768px)
   .wy-body-for-nav

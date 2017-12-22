@@ -102,7 +102,7 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
     context['t'] = app.site_data['data']['l10n']['it']['t']
 
 def setup(app):
-    settings_doc_version = get_latest_release('italia', 'design-doc')
-    settings_doc_release = settings_doc_version
+    # settings_doc_version = get_latest_release('italia', 'design-doc')
+    # settings_doc_release = settings_doc_version
     app.site_data = load_site_data()
     app.connect('html-page-context', html_page_context_listener)

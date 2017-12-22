@@ -116,8 +116,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [
     'clean:build',
-    'sass:dev',
-    'browserify:dev',
+    'sass:build',
+    'browserify:build',
     'exec:build_sphinx',
     'connect',
     'open',
