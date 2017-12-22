@@ -13,24 +13,6 @@
 
   <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
 
-  <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
-
-  <script type="text/javascript">
-    WebFontConfig = {
-      google: {
-        families: ['Titillium+Web:300,400,600,700,400italic:latin']
-      }
-    };
-    (function() {
-      var wf = document.createElement('script');
-      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-      wf.type = 'text/javascript';
-      wf.async = 'true';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(wf, s);
-    })();
-  </script>
-
   <meta charset="utf-8">
   {{ metatags }}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,12 +36,13 @@
   {% if use_opensearch %}
   <link rel="search" type="application/opensearchdescription+xml" title="{% trans docstitle=docstitle|e %}Search within {{ docstitle }}{% endtrans %}" href="{{ pathto('_static/opensearch.xml', 1) }}"/>
   {% endif %}
-
   {% endif %}
 
   {# RTD hosts this file, so just load on non RTD builds #}
   <link rel="stylesheet" href="{{ pathto('_static/toolkit/build.css', 1) }}" type="text/css" />
 
+  {# Titillium Font #}
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,600,700,900" rel="stylesheet">
 
   {% if not READTHEDOCS %}
   <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
@@ -105,9 +88,9 @@
   {%- block extrahead %} {% endblock %}
 
   {# Keep modernizr in head - http://modernizr.com/docs/#installing #}
+  <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
   <script src="{{ pathto('_static/js/modernizr.min.js', 1) }}"></script>
   <script src="{{ pathto('_static/toolkit/vendor/jquery.min.js', 1) }}"></script>
-
 
   <link rel="apple-touch-icon" sizes="180x180" href="{{ pathto('/_static/icons/apple-touch-icon.png', 1) }}">
   <link rel="icon" type="image/png" href="{{ pathto('/_static/icons/favicon-32x32.png', 1) }}" sizes="32x32">

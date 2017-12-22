@@ -35,7 +35,7 @@
     <div class="u-layout-wide Grid Grid--alignMiddle u-layoutCenter">
       <div class="Header-logo Grid-cell" aria-hidden="true">
         <a href="/" tabindex="-1" class="u-linkClean">
-          <img src="{{ pathto('_static/icons/logo-it.png', 1) }}" alt="">
+          <svg style="height:54px;" xmlns="http://www.w3.org/2000/svg" height="78.187" width="97.387" viewBox="0 0 91.300002 73.300002"><g fill="#fff"><path d="M31.799 71.9V15.7h15.1V72h-15.1zM91.099 28.5h-13.8v23.1c0 2.3.1 3.8.2 4.8.1.9.5 1.7 1.2 2.4s1.8 1 3.3 1l8.6-.2.7 12c-5 1.1-8.9 1.7-11.5 1.7-6.8 0-11.4-1.5-13.8-4.6-2.5-3-3.7-8.6-3.7-16.8V0h15.1v15.6h13.8v12.9zM9.099 32.8c-2.6 0-4.8-.9-6.5-2.7s-2.6-4-2.6-6.6.9-4.8 2.5-6.6c1.7-1.8 3.9-2.6 6.5-2.6s4.8.9 6.5 2.7 2.5 4 2.5 6.7-.8 4.8-2.5 6.6c-1.6 1.6-3.7 2.5-6.4 2.5z"/></g></svg>
         </a>
       </div>
 
@@ -50,8 +50,6 @@
         </h1>
       </div>
 
-      {#
-      Temporarily hidden
       <div class="Header-searchTrigger Grid-cell">
         <button aria-controls="header-search" class="js-Header-search-trigger Icon Icon-search u-background-50" title="{{ _(t.search_form_on) }}" aria-label="{{ _(t.search_form_on) }}" aria-hidden="false">
         </button>
@@ -64,7 +62,6 @@
           {% include 'layouts/search_form.html' %}
         </div>
       </div>
-      #}
 
       <div class="Header-toggle Grid-cell">
         <a class="Hamburger-toggleContainer js-fr-offcanvas-open u-nojsDisplayInlineBlock u-lg-hidden u-md-hidden" href="#menu" aria-controls="menu" aria-label="{{ t.toggle_menu_label }}" title="{{ t.toggle_menu_label }}">
