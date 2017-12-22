@@ -88,9 +88,10 @@
   {%- block extrahead %} {% endblock %}
 
   {# Keep modernizr in head - http://modernizr.com/docs/#installing #}
-  <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
   <script src="{{ pathto('_static/js/modernizr.min.js', 1) }}"></script>
-  <script src="{{ pathto('_static/toolkit/vendor/jquery.min.js', 1) }}"></script>
+
+  {# Fontawesome #}
+  <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 
   <link rel="apple-touch-icon" sizes="180x180" href="{{ pathto('/_static/icons/apple-touch-icon.png', 1) }}">
   <link rel="icon" type="image/png" href="{{ pathto('/_static/icons/favicon-32x32.png', 1) }}" sizes="32x32">
