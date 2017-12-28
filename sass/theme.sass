@@ -1,9 +1,11 @@
 // Theme specific variables
 @import theme_variables
 
-// Unfortunately these can't go because RTD we already have seems very attached to wrym class names
-@import theme_wrym_leftovers
-@import theme_wrym_tables
+// Unfortunately these can't go because existing RTD theme is very tight to wrym class names
+@import wyrm_core/alert
+@import wyrm_core/pygments
+@import wyrm_core/lists
+@import wyrm_core/tables
 
 // Theme specific styles
 @import theme_breadcrumbs
@@ -18,29 +20,10 @@
 @import custom/custom_pages
 @import custom/custom_footer
 
-// RST document related styles
+// RST document related styles (everything related to the main document)
 @import document/document_admonitions
 @import document/document_typography
 @import document/document_palettes
 @import document/document_example
 @import document/document_links
 
-body
-  color: #404040
-h1
-  font-size: 4rem
-  line-height: 4.8rem
-h2
-  font-size: 3.2rem
-  line-height: 4rem
-h3
-  font-size: 2.4rem
-  line-height: 2.8rem
-h4
-  font-size: 2rem
-  line-height: 2.4rem
-  font-weight: 400
-p
-  font-size: 1.6rem
-  line-height: 2.4rem
-  margin-bottom: 2.4rem

@@ -1,7 +1,7 @@
 .rst-versions
   bottom: 0
   left: 0
-  color: $section-background-color
+  color: $white
   font-family: $base-font-family
   font-size: .8em
   height: 100px
@@ -19,19 +19,19 @@
     text-align: right
     font-size: 90%
     cursor: pointer
-    color: $green
+    color: $italia-green-color
     +clearfix
     .fa
-      color: $section-background-color
+      color: $white
     .fa-book
       float: left
     .icon-book
       float: left
     &.rst-out-of-date
-      background-color: $red
+      background-color: $italia-red-color
       color: $white
     &.rst-active-old-version
-      background-color: $yellow
+      background-color: $italia-orange-color
       color: $black
   &.shift-up .rst-other-versions--no-inject
     display: block
@@ -46,11 +46,11 @@
       border: 0
       margin: 20px 0
       padding: 0
-      border-top: solid 1px lighten($menu-background-color, 5%)
+      border-top: solid 1px lighten($italia-turquoise-color, 5%)
       a
         display: inline-block
         padding: $base-line-height / 4
-        color: #65dde0
+        color: $italia-turquoise-color
         &.Button--version
           color: #000
   &.rst-badge
@@ -83,6 +83,7 @@
     span
       display: inline-block
       padding: 6px 0
+      color: $white
     a, a:hover
       display: inline-block
       padding: 6px 0

@@ -46,8 +46,6 @@
       margin-bottom: 0
   .admonition-title
     @extend .wy-alert-title
-    //@extend .fa
-    //@extend .fa-exclamation-circle
     &:before
       margin-right: 4px
   .note, .seealso
@@ -104,13 +102,13 @@
     .headerlink
       display: none
       visibility: hidden
-      font-size: 14px
-      //@extend .fa
       &:after
+        display: inline-block
         visibility: visible
         content: "\f0c1"
         font-family: FontAwesome
-        display: inline-block
+        font-size: 1.4rem
+        vertical-align: top
     &:hover .headerlink
       display: inline-block
 
@@ -121,7 +119,7 @@
     display: block
     margin: 0 0 $base-line-height $base-line-height
     padding: $base-line-height
-    background: $sidebar-background-color
+    background: $background-color
     border: solid 1px $sidebar-border-color
     // Sidebar content is usually less relevant, so adjust the margins and sizes.
     p, ul, dl
@@ -139,7 +137,7 @@
       font-size: 100%
   // Sphinx can highlight searched text with ?highlighted=searchterm
   .highlighted
-    background: $highlight-color
+    background: rgba($italia-orange-color, .6)
     display: inline-block
     font-weight: bold
     padding: 0 $base-line-height / 4
@@ -198,10 +196,10 @@
       line-height: normal
 
     &.literal
-      color: $text-code-color
+      color: $text-color
     &.xref, a &
       font-weight: bold
-      color: $text-codexref-color
+      color: $text-color
   // If the literal is inside an a tag, let's color it like a link
   a tt, a code
     color: $link-color
@@ -228,13 +226,8 @@
       margin: $base-line-height / 4 0
       font-size: 90%
       line-height: normal
-      background: lighten($class-color, 50%)
-      color: $class-color
-      border-top: solid 3px lighten($class-color, 20%)
       padding: $base-line-height / 4
       position: relative
-      &:before
-        color: lighten($class-color, 20%)
       .headerlink
         color: $text-color
         font-size: 100% !important
@@ -244,9 +237,9 @@
       border: none
       border-left: solid 3px hsl(0,0%,80%)
       background: hsl(0,0%,94%)
-      color: $method-color
+      color: $gray
       .headerlink
-        color: $headerlink-color
+        color: $text-color
         font-size: 100% !important
     dt:first-child
       margin-top: 0
@@ -272,7 +265,7 @@
   // Doc links to sourcecode
   .viewcode-link, .viewcode-back
     display: inline-block
-    color: $text-viewcode-color
+    color: $text-color
     font-size: 80%
     padding-left: $base-line-height
   .viewcode-back
@@ -292,14 +285,12 @@
     border: inherit
     white-space: inherit
     span:first-child
-      -webkit-font-smoothing: subpixel-antialiased
-      //@extend .fa
-      //@extend .fa-download
+      +font-smooth
       &:before
         margin-right: 4px
   .guilabel
-    border: 1px solid lighten($guilabel-color, 25%)
-    background: lighten($guilabel-color, 50%)
+    border: 1px solid lighten($text-color, 25%)
+    background: lighten($text-color, 50%)
     font-size: 80%
     font-weight: 700
     border-radius: $base-line-height / 6

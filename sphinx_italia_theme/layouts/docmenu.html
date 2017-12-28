@@ -1,8 +1,8 @@
-<h1 class="u-padding-r-all">
-  <a href="{{ pathto(master_doc) }}" class="u-color-white u-text-r-m u-padding-left-none">{{ project }}</a>
-</h1>
+<h2 class="u-padding-all-s">
+  <a href="{{ pathto(master_doc) }}" class="u-color-white">{{ project }}</a>
+</h2>
 
-<dl class="js-preventOffCanvasClose u-padding-r-all" role="note" aria-label="versions">
+<dl class="js-preventOffCanvasClose u-padding-all-s" role="note" aria-label="versions">
     <dt class="u-inline">{{ _('Versione') }}:</dt>
     {%- set nav_version = version %}
     {% if READTHEDOCS and current_version %}
@@ -28,7 +28,7 @@
     {% endif %}
 </dl>
 
-<div class="js-preventOffCanvasClose u-padding-r-all">
+<div class="js-preventOffCanvasClose u-padding-all-s">
     {% include "layouts/searchbox.html" %}
 </div>
 
@@ -44,7 +44,7 @@
   {% endif %}
 </div>
 
-<!--
+{#
 <div id="rst-menu-links" class="u-md-hidden u-padding-left-m">
   <dl>
     {% if downloads %}
@@ -62,4 +62,4 @@
     {% endif %}
   </dl>
 </div>
--->
+#}

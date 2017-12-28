@@ -54,7 +54,7 @@ button[disabled]
   padding: $base-line-height / 4 $base-line-height / 2 ($base-line-height / 4 + 2) $base-line-height / 2
   color: $white
   border: 1px solid rgba(0,0,0,0.1)
-  background-color: $button-background-color
+  background-color: $italia-blue-color
   text-decoration: none
   font-weight: normal
   font-family: $base-font-family
@@ -66,8 +66,8 @@ button[disabled]
   zoom: 1
   -webkit-user-drag: none
   user-select: none
+  transition: all 0.1s linear
   +font-smooth
-  +transition(all 0.1s linear)
 
 .btn-hover
   background: darken($link-color, 5%)
@@ -75,10 +75,10 @@ button[disabled]
 
 .btn
   &:hover
-    background: darken($button-background-color, 5%)
+    background: darken($italia-blue-color, 5%)
     color: $white
   &:focus
-    background: darken($button-background-color, 5%)
+    background: darken($italia-blue-color, 5%)
     outline: 0
   &:active
     box-shadow: none
@@ -117,33 +117,33 @@ button[disabled]
   font-size: 80%
 
 .btn-info
-  background-color: $blue !important
+  background-color: $italia-blue-color !important
   &:hover
-    background-color: lighten($blue, 5%) !important
+    background-color: lighten($italia-blue-color, 5%) !important
 
 .btn-neutral
   background-color: $white !important
   color: $link-color !important
   &:hover
-    background-color: darken($button-neutral-background-color, 5%) !important
+    background-color: darken($background-color, 5%) !important
     color: $text-color
   &:visited
     color: $text-color !important
 
 .btn-success
-  background-color: $green !important
+  background-color: $italia-green-color !important
   &:hover
-    background-color: darken($green, 5%) !important
+    background-color: darken($italia-green-color, 5%) !important
 
 .btn-danger
-  background-color: $red !important
+  background-color: $italia-red-color !important
   &:hover
-    background-color: lighten($red, 5%) !important
+    background-color: lighten($italia-red-color, 5%) !important
 
 .btn-warning
-  background-color: $orange !important
+  background-color: $italia-orange-color !important
   &:hover
-    background-color: lighten($orange, 5%) !important
+    background-color: lighten($italia-orange-color, 5%) !important
 .btn-invert
   background-color: $gray-darker
   &:hover
