@@ -8,19 +8,19 @@
       {% if READTHEDOCS %}
         {% for type, url in downloads %}
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
-          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull" href="{{ url }}">{{ type }}</a>
+          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull u-color-darkGray" href="{{ url }}">{{ type }}</a>
         </dd>
         {% endfor %}
       {% else %}
         {# test content #}
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
-          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull" href="#">source 1</a>
+          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull u-color-darkGray" href="#">source 1</a>
         </dd>
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
-          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull" href="#">source 2</a>
+          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull u-color-darkGray" href="#">source 2</a>
         </dd>
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
-          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull" href="#">source 3</a>
+          <a class="Button Button--default Button--version u-borderRadius-m u-sizeFull u-color-darkGray" href="#">source 3</a>
         </dd>
       {% endif %}
     </dl>
@@ -32,19 +32,19 @@
         {# here add versions showing "stable", "latest" and a dropdown maybe? #}
         {% for slug, url in versions %}
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
-          <a href="{{ url }}">{{ slug }}</a>
+          <a href="{{ url }}" class="u-color-white">{{ slug }}</a>
         </dd>
         {% endfor %}
       {% else %}
         {# test content #}
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
-          <a href="#">test 1</a>
+          <a href="#" class="u-color-white">test 1</a>
         </dd>
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
-          <a href="#">test 2</a>
+          <a href="#" class="u-color-white">test 2</a>
         </dd>
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
-          <select class="version-list Button Button--default Button--version u-borderRadius-m u-sizeFull" id="version-list">
+          <select class="version-list Button Button--default Button--version u-borderRadius-m u-sizeFull u-color-darkGray" id="version-list">
             <option value=''>{{ nav_version }}</option>
             {% for key, val in theme_versions.items() %}
             {% if key != nav_version %}

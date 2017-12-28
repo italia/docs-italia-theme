@@ -33,18 +33,19 @@
   text-decoration: none !important
 
 .Header-slim li
-  display: inline-block !important
-  vertical-align: middle !important
+  display: inline-block
+  vertical-align: middle
   margin-bottom: 0.2rem
+  &:hover
+    border-bottom: 0.2rem solid white
+    margin-bottom: 0
+  &.current
+    border-bottom: 0.2rem solid white
+    font-weight: 600
+    margin-bottom: 0
 
-.Header-slim li:hover
-  border-bottom: 0.2rem solid white
-  margin-bottom: 0
-
-.Header-slim li.current
-  border-bottom: 0.2rem solid white
-  font-weight: 600
-  margin-bottom: 0
+.Header-slim #languages .Linklist li
+  display: block
 
 .Header-slim li.delimiter a
   border-right: 0.1rem solid #127ae2

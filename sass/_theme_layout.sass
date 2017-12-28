@@ -440,7 +440,6 @@ footer
 
 @media screen and (min-width: 990px)
   .Offcanvas-override
-    padding-right: 0 !important
     z-index: 0
     .Offcanvas
       visibility: visible !important
@@ -451,6 +450,8 @@ footer
       .Offcanvas-content
         position: relative !important
         left: auto !important
+        max-width: none !important
+        width: 100%
 
 @media screen and (max-width: 768px)
   .wy-body-for-nav
@@ -496,6 +497,11 @@ footer
   .wy-nav-content-wrap
     margin-left: 0
 
+.u-color-white
+  color: #FFF !important
+
+.u-color-darkGray
+  color: $gray-dark !important
 
 .u-max-144
   @media only screen and (min-width: 1648px)
@@ -576,3 +582,7 @@ footer
 
 .u-noPointerEvents
   pointer-events: none
+
+@media screen and (min-width: 990px)
+  .u-layout-r-withGutter--noRight
+    padding-right: 0 !important

@@ -67,7 +67,7 @@ it:
     header_link_design: Designers
     header_link_forum: Forum
     header_link_docs: Docs
-    header_link_github: Github
+    header_link_github: GitHub
 
 en:
   code: eng
@@ -138,4 +138,4 @@ en:
     header_link_design: Designers
     header_link_forum: Forum
     header_link_docs: Docs
-    header_link_github: Github
+    header_link_github: GitHub
