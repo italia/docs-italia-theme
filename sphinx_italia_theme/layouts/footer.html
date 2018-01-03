@@ -35,7 +35,7 @@
           <div class="Grid-cell u-md-size1of2 u-lg-size1of2">
             {% for link in site.data.footer_links %}
               {% set link_name = link.title %}
-              <li class="u-color-80"><a href="/{{ language }}{{ link.url }}">{% if t[link_name] %}{{ _(t[link_name]) }}{% else %}{{ _(link_name) }}{% endif %}</a></li>
+              <li class="u-color-80"><a href="{{ link.url }}">{% if t[link_name] %}{{ _(t[link_name]) }}{% else %}{{ _(link_name) }}{% endif %}</a></li>
             {% endfor %}
           </div>
           <div class="Grid-cell u-md-size1of2 u-lg-size1of2">
