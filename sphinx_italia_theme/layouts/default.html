@@ -40,9 +40,10 @@
           </div>
         </div>
       {% else %}
-        {% if not READTHEDOCS %} {# RTD automatically injects this #}
-          {# test content #}
+        {% if not READTHEDOCS %}
+          {# test content - RTD automatically injects this #}
           {% include 'layouts/versions_local.html' %}
+        {% endif %}
       {% endif %}
 
   </div>
