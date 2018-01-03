@@ -35,9 +35,11 @@
       &.rst-active-old-version
         background-color: $italia-orange-color
         color: $black
-    &.shift-up .rst-other-versions
+    &.shift-up .rst-other-versions,
+    &.shift-up .rst-other-versions--no-inject
       display: block
-    .rst-other-versions
+    .rst-other-versions,
+    .rst-other-versions--no-inject
       font-size: 90%
       padding: $base-line-height / 2
       color: $text-medium
@@ -93,7 +95,8 @@
     font-size: .8em
     height: 100px
     pointer-events: initial
-  .rst-other-versions
+  .rst-other-versions,
+  .rst-other-versions--no-inject
     padding: 0
     a.Button--version
       color: $black

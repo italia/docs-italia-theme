@@ -1,6 +1,6 @@
 {# Add rst-badge after rst-versions for small badge style. #}
 <div class="rst-versions" role="note" aria-label="versions">
-  <div class="rst-other-versions">
+  <div class="rst-other-versions--no-inject">{# RTD hosted instance injects stuff into .rst-other-versions (using class name...), hence the need for a rename #}
     <dl class="Grid rst-versions--container">
       <dt class="Grid-cell u-size1of4 u-inline u-md-hidden rst-versions--terms u-padding-left-s">
         <span>{{ _('Downloads') }}</span>

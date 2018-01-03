@@ -141,7 +141,7 @@ html_theme_options = {
     # This option can be used with sphinx_italia_theme to customise how the versions "badge" is shown:
     # 'False': default (alabaster) badge
     # 'True': custom (italia) badge
-    'custom_versions_badge': 'False',
+    'custom_versions_badge': 'True',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
