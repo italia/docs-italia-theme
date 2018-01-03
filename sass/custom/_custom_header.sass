@@ -1,13 +1,22 @@
 /** Header slim
  * ================
+
+.Header-owner>a:hover,
+.Header-titleLink a:hover,
+.Header-titleLink small:hover,
+.Header-toggleText:hover
+  text-decoration: none !important
+
 .Header-banner
   padding-left: 2rem !important
   padding-right: 2rem !important
 
-@media screen and (min-width: 992px)
-  .Header-logo img
-    height: 9rem
-    width: 9rem
+.Header-logo
+  min-width: 10rem
+  @media screen and (min-width: 992px)
+    img
+      height: 9rem
+      width: 9rem
 
 .Header-socialIcons [class*=" Icon-"],
 .Header-socialIcons [class^=Icon-]
@@ -21,38 +30,49 @@
   text-decoration: none
   vertical-align: middle !important
 
-@media screen and (max-width: 992px)
-  .Header-titleLink a
-    font-size: 2rem !important
-
-  .Header-titleLink small
+.Header-titleLink
+  margin: 0 !important
+  line-height: 2.4rem !important
+  small
     display: inline-block !important
-    font-size: 1.4rem !important
+    font-size: 1.5rem !important
+    font-weight: 200 !important
+  span
+    color: $italia-blue-color
+    background-color: rgba(255,255,255,.2)
+    font-size: 1rem !important
+    padding: .2rem .8rem !important
+  & &--mainLink
+    font-size: 36px !important
+    font-weight: 600 !important
+  & &--bottomLine
+    display: none
+    @media screen and (min-width: 992px)
+      display: block
+      margin-bottom: 0 !important
 
-.Header-slim a:hover
-  text-decoration: none !important
-
-.Header-slim li
-  display: inline-block
-  vertical-align: middle
-  margin-bottom: 0.2rem
-  &:hover
-    border-bottom: 0.2rem solid white
+.Header-slim
+  a:hover
+    text-decoration: none !important
+  li
+    display: inline-block
+    vertical-align: middle
+    margin-bottom: 0.2rem
+    &:hover
+      border-bottom: 0.2rem solid white
+      margin-bottom: 0
+    &.current
+      border-bottom: 0.2rem solid white
+      font-weight: 600
+      margin-bottom: 0
+    &.delimiter a
+      border-right: 0.1rem solid #127ae2
+  #languages .Linklist li
+    display: block
     margin-bottom: 0
-  &.current
-    border-bottom: 0.2rem solid white
-    font-weight: 600
-    margin-bottom: 0
-
-.Header-slim #languages .Linklist li
-  display: block
-  margin-bottom: 0
-  a
-    padding: 1.6rem 1.4rem !important
-    margin: 0
-
-.Header-slim li.delimiter a
-  border-right: 0.1rem solid #127ae2
+    a
+      padding: 1.6rem 1.4rem !important
+      margin: 0
 
 .Header-slim-toggle a
   text-decoration: none !important
@@ -64,12 +84,12 @@
 /** Header tweaks
  *  =====================
 
-.Hamburger-toggle.is-active
-  background: transparent !important
-
-.Hamburger-toggle.is-active:after,
-.Hamburger-toggle.is-active:before
-  background: white !important
+.Hamburger-toggle
+  &.is-active
+    background: transparent !important
+    &:after,
+    &:before
+      background: white !important
 
 .Header-owner
   padding-bottom: 0 !important
@@ -101,3 +121,5 @@
 .Megamenu-item > a
   padding-right: 2.5rem !important
   padding-left: 2.5rem !important
+
+

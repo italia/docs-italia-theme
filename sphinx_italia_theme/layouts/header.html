@@ -41,12 +41,13 @@
 
       <div class="Header-title Grid-cell">
         <h1 class="Header-titleLink">
-          <a href="/" class="u-linkClean">{{ _(t.site_title | default(site.title) | escape) }}
+          <a href="/" class="Header-titleLink--mainLink u-linkClean">
+            {{ _(t.site_title | default(site.title) | escape) }}
             {% if site.pill %}
-              <span class="u-lg-hidden u-md-hidden u-sm-hidden u-cf u-padding-top-xxs u-block"></span>
-              <span class="u-color-20 u-text-xxs
-              u-alignMiddle u-padding-right-xxs u-padding-left-xxs">{{ _(site.pill) }}</span>{%
-                endif %}<br><small>{{ _(t.site_subtitle | default(site.subtitle) | escape) }}</small></a>
+              <span class="u-text-xxs u-alignMiddle u-padding-right-xxs u-padding-left-xxs u-borderRadius-xl">{{ _(site.pill) }}</span>
+            {% endif %}
+          </a>
+          <p class="Header-titleLink--bottomLine"><small>{{ _(t.site_subtitle | default(site.subtitle) | escape) }}</small></p>
         </h1>
       </div>
 
@@ -63,12 +64,14 @@
         </div>
       </div>
 
+      {% if layout == 'default' %}
       <div class="Header-toggle Grid-cell">
         <a class="Hamburger-toggleContainer js-fr-offcanvas-open u-nojsDisplayInlineBlock u-lg-hidden u-md-hidden" href="#menu" aria-controls="menu" aria-label="{{ t.toggle_menu_label }}" title="{{ t.toggle_menu_label }}">
           <span class="Hamburger-toggle" role="presentation"></span>
           <span class="Header-toggleText" role="presentation">Menu</span>
         </a>
       </div>
+      {% endif %}
 
     </div>
   </div>
