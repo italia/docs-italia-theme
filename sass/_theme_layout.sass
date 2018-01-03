@@ -22,9 +22,9 @@ a, a:hover
   li.current a
     &:hover, &:active
       background-color: #f6f9fc !important
-  @media only screen and (max-width: 992px)
+  @media screen and (max-width: 992px)
     width: auto
-  @media only screen and (min-width: 1460px)
+  @media screen and (min-width: 1460px)
     li.current, li.current > a
       border-top-left-radius: 4px
     li.current, li.current > ul > li:last-child, li.current > ul > li:last-child > a
@@ -434,7 +434,7 @@ footer
     color: $text-medium
     font-size: 90%
 
-@media screen and (min-width: 990px)
+@media screen and (min-width: 992px)
   .Offcanvas-override
     z-index: $z-index-none
     .Offcanvas
@@ -579,7 +579,7 @@ footer
 .u-noPointerEvents
   pointer-events: none
 
-@media screen and (min-width: 990px)
+@media screen and (min-width: 992px)
   .u-layout-r-withGutter--noRight
     padding-right: 0 !important
 

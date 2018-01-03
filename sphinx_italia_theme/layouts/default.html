@@ -18,21 +18,32 @@
         </div>
         <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>{# background spacer #}
       </div>
-
-      <div style="height: 100px"> {# needed to avoid jumping layout when scrolling #}
-        <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch u-sizeFull u-noPointerEvents js-versions-bar">
-          <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-90"></div>{# background spacer #}
-          <div class="Grid-cell u-layout-wide u-layoutCenter u-posRelative">
-            <div class="Grid">
-              <div class="u-md-size4of12 u-lg-size4of12 u-color-white u-background-grey-90 u-layout-r-withGutter u-layout-r-withGutter--noRight">
-                {% include 'layouts/versions.html' %}
+      {% if theme_custom_versions_badge == 'True' %}
+        <style>
+          /* Hides RTD injected html to display versions */
+          .injected {
+            display: none !important
+          }
+        </style>
+        <div class="injected-customised shift-up">
+          <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch u-sizeFull u-noPointerEvents js-versions-bar">
+            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-90"></div>{# background spacer #}
+            <div class="Grid-cell u-layout-wide u-layoutCenter u-posRelative">
+              <div class="Grid">
+                <div class="u-md-size4of12 u-lg-size4of12 u-color-white u-background-grey-90 u-layout-r-withGutter u-layout-r-withGutter--noRight">
+                  {% include 'layouts/versions.html' %}
+                </div>
+                <div class="u-md-size8of12 u-lg-size8of12"></div>
               </div>
-              <div class="u-md-size8of12 u-lg-size8of12"></div>
             </div>
+            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>{# background spacer #}
           </div>
-          <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>{# background spacer #}
         </div>
-      </div>
+      {% else %}
+        {% if not READTHEDOCS %} {# RTD automatically injects this #}
+          {# test content #}
+          {% include 'layouts/versions_local.html' %}
+      {% endif %}
 
   </div>
 </div>
@@ -42,6 +53,5 @@
 {% include 'layouts/scripts.html' %}
 
 {%- block footer %}{% endblock %}
-
 </body>
 </html>
