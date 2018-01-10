@@ -3,15 +3,6 @@
 import os
 import re
 import yaml
-import json
-from urllib2 import urlopen
-
-def get_latest_release(owner, repo):
-	url = "https://api.github.com/repos/%s/%s/releases/latest" % (owner, repo)
-	response = urlopen(url)
-	string = response.read().decode('utf-8')
-	json_obj = json.loads(string)
-	return (json_obj['tag_name'])
 
 # This part would be better placed as an extension:
 # It loads yaml data files to set them as variables
@@ -102,7 +93,5 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
     context['t'] = app.site_data['data']['l10n']['it']['t']
 
 def setup(app):
-    # settings_doc_version = get_latest_release('italia', 'design-doc')
-    # settings_doc_release = settings_doc_version
     app.site_data = load_site_data()
     app.connect('html-page-context', html_page_context_listener)
