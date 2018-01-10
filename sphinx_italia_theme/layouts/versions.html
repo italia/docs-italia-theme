@@ -26,17 +26,33 @@
     </dl>
     <dl class="Grid rst-versions--container">
       <dt class="Grid-cell u-size1of4 u-md-hidden u-inline rst-versions--terms u-padding-left-s">
-        <span>{{ _('Versions') }}</span>
+        <span>{{ _('Versioni') }}</span>
       </dt>
       {% if READTHEDOCS %}
         {# here add versions showing "stable", "latest" and a dropdown maybe? #}
         {% for slug, url in versions %}
+          {%- if slug == 'latest' or slug == 'stable' %}
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
           <a href="{{ url }}" class="u-color-white">{{ slug }}</a>
         </dd>
+          {%- endif %}
         {% endfor %}
+        {% if versions|length > 2 %}
+        <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
+          <span class="version-dropdown">
+            <select class="version-list Button Button--default Button--version u-borderRadius-m" id="version-list">
+              {% for slug, url in versions %}
+                {%- if slug != 'latest' and slug != 'stable' %}
+              <option value="{{ url }}">{{ slug }}</option>
+              {%- endif %}
+            {% endfor %}
+            </select>
+          </span>
+        </dd>
+        {% endif %}
       {% else %}
         {# test content #}
+        {%- set nav_version = version %}
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
           <a href="#" class="u-color-white">test 1</a>
         </dd>
