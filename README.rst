@@ -18,20 +18,12 @@ Download the package or add it to your ``requirements.txt`` file:
 
     $ pip install git+https://github.com/italia/sphinx_italia_theme.git
 
-In your ``conf.py`` file, you'll need to specify the theme, but also this theme
-should be enabled as an extension in order to drop in the template context data:
+In your ``conf.py`` file, you'll need to specify the theme as follows:
 
 .. code:: python
 
-    import sphinx_italia_theme
-
-    extensions = [
-        ...
-        'sphinx_italia_theme',
-    ]
-
     html_theme = "sphinx_italia_theme"
-    html_theme_path = [sphinx_italia_theme.get_html_theme_path()]
+
 
 Configuration
 =============
@@ -52,10 +44,10 @@ file of this repository, and can be defined in your project's ``conf.py`` via
         'layout': 'landing',
     }
 
-This theme has two different layouts included: documentation page layout and
-landing page layout. Both use the same style sheets and included templates. The
-landing page doesn't show content, and instead only relies on a special data
-syntax from Read the Docs to populate.
+This theme has three different layouts included: documentation page layout (default),
+home page layout and landing page layout. Both use the same style sheets and included
+templates. The home page and landing page don't show content, and instead only relies
+on a special data syntax from Read the Docs to populate.
 
 Contributing or modifying the theme
 ===================================

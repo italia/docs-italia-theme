@@ -2,58 +2,54 @@
 // that are set in wyrm_core/wy_variables.sass. You'll find wyrm in bower_components if you're looking
 // for a reference.
 
+@mixin clearfix
+  &:after
+    content: ""
+    display: table
+    clear: both
 
+@mixin font-smooth
+  -moz-osx-font-smoothing: auto
+  -webkit-font-smoothing: antialiased
+  font-smooth: auto
+
+@function hsb($h-hsb, $s-hsb, $b-hsb, $a: 1)
+  @if $b-hsb == 0
+    @return hsla(0, 0, 0, $a)
+  @else
+    $l-hsl: ($b-hsb/2) * (2 - ($s-hsb/100))
+    $s-hsl: ($b-hsb * $s-hsb) / if($l-hsl < 50, $l-hsl * 2, 200 - $l-hsl * 2)
+    @return hsla($h-hsb, $s-hsl, $l-hsl, $a)
+
+// Primary Colors
+$black:                               #000 !default
+$gray-darker:                         #222 !default
+$gray-dark:                           #333 !default
+$gray:                                #555 !default
+$gray-light:                          #999 !default
+$gray-lighter:                        #ccc !default
+$white:                               #fff !default
 
 // Colors
-$background-color:                    #edf0f2
-$section-background-color:            #fff
-$dropdown-color:                      $section-background-color
-$dropdown-border-color:               darken($background-color, 10%)
+$background-color:                    hsb(210, 5, 99)     //#edf0f2
+$italia-blue-color:			          hsb(210, 100, 80)  // #0066cc
+$italia-turquoise-color:			  hsb(178, 100, 100) // #00fff7
+$italia-red-color:                    hsb(351, 75, 97)   // #f73e5a
+$italia-orange-color:                 hsb(36, 100, 100)  // #ff9900
+$italia-green-color:                  hsb(159, 100, 100) // #00ffa6
+
 
 // Typography
-$text-color:                          #1C2024 !default
 $base-font-family-bold:               600
+
+$text-color:                          hsl(0,0%,25%) !default
 $text-dark:                           lighten($text-color,15%) !default
 $text-medium:                         lighten($text-color,25%) !default
 $text-light:                          lighten($text-color,45%) !default
 $text-lighter:                        lighten($text-color,60%) !default
 
-// Links
-$link-color:                          #06c
-$link-color-visited:                  #06c
-$link-color-hover:                    #004D99
-$link-color-alt:                      hsl(33, 100%, 51%)
-
-
-// Buttons
-$button-background-color:             $link-color
-$button-neutral-background-color:     $table-stripe-color
-
-
-$font-awesome-dir:                    "../fonts/"
-$static-img:                          "../img/"
-$mathjax-color:                       $text-color
-
-$headerlink-color:                    $text-color
-
-// Code colors
-$text-viewcode-color:                 $green
-$text-codexref-color:                 $text-color
-
-// Definition list colors
-$class-color:                         $blue
-$method-color:                        $gray
-
-// GUI label color
-$guilabel-color:                         $blue
-
-// Footer colors
-$footer-color:                        $gray-light
-
 // Menu colors
-$menu-vertical-background-color:      $section-background-color
 $menu-background-color:               #1C2024
-
 
 // Menu text colors
 $menu-color:                          $gray
@@ -69,37 +65,53 @@ $menu-link-medium:                    $text-medium
 $menu-link-light:                     $text-light
 $menu-link-active:                    $white
 
-// Navigation colors
-$nav-background-color:                $menu-background-color
-$nav-search-background-color:         #06c
-$nav-search-color:                    $section-background-color
-$nav-link-color:                      $blue
-$nav-link-color-visited:              $purple
-$nav-link-color-hover:                lighten($nav-link-color, 6%) !default
-$nav-link-color-alt:                  hsl(33, 100%, 51%)
-
-// Sidebar colors
-$sidebar-background-color:            $table-stripe-color
-$sidebar-border-color:                $table-border-color
-$sidebar-title-background-color:      $table-border-color
-
-// Sphinx highlight color
-$highlight-color:                     $yellow
-
 $base-font-family:                    "Titillium Web", sans-serif
 $custom-font-family:                  "Titillium Web", sans-serif
-$custom-font-family2:                 Georgia, serif
 $code-font-family:                    Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace
+$icon-font-family:                    "FontAwesome"
 
-$base-font-size:                      16px !default
-$small-font-size:                     14px
-$base-line-height:                    21px !default
+$base-font-size:                      1.6rem !default
+$small-font-size:                     1.4rem
+$base-line-height:                    2.4rem !default
 
 // Tables
 $table-background-color:              transparent
 $table-border-color:                  hsl(195, 7%, 89%)
-$table-stripe-color:                  #F6F9FC
 $table-bg-hover-color:                hsl(0,0%,85%)
 $table-head-background-color:         $table-border-color
 $table-font-size:                     90%
 $table-padding-size:                  $base-font-size / 2 $base-font-size
+$table-stripe-color:                  $background-color
+
+// Forms
+$input-text-color:                    #cad2d3 !default
+$input-background-color:              $white !default
+$input-border-color:                  #ccc !default
+$input-shadow-color:                  #ddd !default
+$input-focus-color:                   $gray-dark
+
+// Links
+$link-color:                          $italia-blue-color
+$link-color-visited:                  $italia-blue-color
+$link-color-hover:                    lighten($italia-blue-color, 6%) !default
+
+
+$nav-desktop-width:                   30rem
+
+// Z-index master list
+$z-index-none:                        0 !default
+$z-index-dropdown:                    100 !default
+$z-index-popover:                     200 !default
+$z-index-tooltip:                     300 !default
+$z-index-tray:                        400 !default
+$z-index-modal:                       500 !default
+$z-index-alert:                       600 !default
+
+$nav-desktop-position:                right
+
+// Sidebar colors
+$sidebar-background-color:            $background-color
+$sidebar-border-color:                $table-border-color
+$sidebar-title-background-color:      $table-border-color
+
+$gutter: 1.618em

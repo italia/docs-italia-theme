@@ -4,7 +4,8 @@ import os
 import re
 import yaml
 
-
+# This part would be better placed as an extension:
+# It loads yaml data files to set them as variables
 def get_html_theme_path():
     """Return list of HTML theme paths."""
     cur_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
@@ -76,8 +77,13 @@ def load_site_data():
         network_links.append(link_data)
     context['data']['network_links'] = network_links
 
-    return context
+    footer_links = []
+    for link in ['privacy', 'legal']:
+        link_data = context['data']['footer_links'].get(link, {}).copy()
+        footer_links.append(link_data)
+    context['data']['footer_links'] = footer_links
 
+    return context
 
 def html_page_context_listener(app, pagename, templatename, context, doctree):
     """Add site data to Sphinx context, to make porting templates easier"""
@@ -85,7 +91,6 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
     # The translation context is pinned to the Italian sources, as Sphinx has
     # it's own translation mechanism built in
     context['t'] = app.site_data['data']['l10n']['it']['t']
-
 
 def setup(app):
     app.site_data = load_site_data()

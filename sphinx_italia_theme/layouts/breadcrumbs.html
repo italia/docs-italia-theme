@@ -1,47 +1,96 @@
-<div class="u-layout-wide u-layoutCenter u-padding-r-bottom">
-  <div class="Grid Grid--withGutter">
-    <div class="Grid-cell u-md-size2of4 u-lg-size2of4">
-      <nav aria-label="sei qui:" role="navigation">
-        <ul class="Breadcrumb">
+{# Support for Sphinx 1.3+ page_source_suffix, but don't break old builds. #}
 
-          <li class="Breadcrumb-item">
-            <a class="Breadcrumb-link u-color-50" href="//">{{ _('Docs') }}</a>
-          </li>
+{% if page_source_suffix %}
+{% set suffix = page_source_suffix %}
+{% else %}
+{% set suffix = source_suffix %}
+{% endif %}
 
-          {% if theme_superproject %}
-            <li class="Breadcrumb-item">
-              <a class="Breadcrumb-link u-color-50" href="{{ theme_superproject.url }}">
-                {{ theme_superproject.name }}
-              </a>
-            </li>
-          {% endif %}
+{% if meta is defined and meta is not none %}
+{% set check_meta = True %}
+{% else %}
+{% set check_meta = False %}
+{% endif %}
 
-          {% for doc in parents %}
-            <li class="Breadcrumb-item">
-              <a class="Breadcrumb-link u-color-50" href="{{ doc.link|e }}">
-                {{ doc.title }}
-              </a>
-            </li>
-          {% endfor %}
+{% if check_meta and 'github_url' in meta %}
+{% set display_github = True %}
+{% endif %}
 
-          <li class="Breadcrumb-item">
-            {{ title }}
-          </li>
+{% if check_meta and 'bitbucket_url' in meta %}
+{% set display_bitbucket = True %}
+{% endif %}
 
-        </ul>
-      </nav>
-    </div>
+{% if check_meta and 'gitlab_url' in meta %}
+{% set display_gitlab = True %}
+{% endif %}
 
-    <div class="Grid-cell u-md-size2of4 u-lg-size2of4 u-layout-centerRight">
-      {% if hasdoc(pagename) %}
-        {% if display_github %}
-          <a href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"> {{ _('Proponi modifica su GitHub') }}</a>
-        {% elif show_source and source_url_prefix %}
-          <a href="{{ source_url_prefix }}{{ pagename }}{{ suffix }}">{{ _('View page source') }}</a>
-        {% elif show_source and has_source and sourcename %}
-          <a href="{{ pathto('_sources/' + sourcename, true)|e }}" rel="nofollow"> {{ _('View page source') }}</a>
-        {% endif %}
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="rst-breadcrumbs">
+    {% block breadcrumbs %}
+    <li class="Breadcrumb-item">
+      <a class="Breadcrumb-link u-color-50" href="#">{{ _('Docs') }}</a>
+    </li>
+    {% if theme_superproject %}
+    <li class="Breadcrumb-item">
+      <a class="Breadcrumb-link u-color-50" href="{{ theme_superproject.url }}">
+        {{ theme_superproject.name }}
+      </a>
+    </li>
+    {% endif %}
+    <li class="Breadcrumb-item">
+      <a class="Breadcrumb-link u-color-50" href="{{ pathto(master_doc) }}">{{ _('Indice') }}</a>
+    </li>
+    {% for doc in parents %}
+    <li class="Breadcrumb-item">
+      <a class="Breadcrumb-link u-color-50" href="{{ doc.link|e }}">{{ doc.title }}</a>
+    </li>
+    {% endfor %}
+    <li>{{ title }}</li>
+    {% endblock %}
+    {% block breadcrumbs_aside %}
+    <li class="rst-breadcrumbs-aside">
+      {% if pagename != "search" %}
+      {% if display_github %}
+      {% if check_meta and 'github_url' in meta %}
+      <!-- User defined GitHub URL -->
+      <a href="{{ meta['github_url'] }}"><i class="fab fa-github"></i> {{ _('Vedi su GitHub') }}</a>
+      {% else %}
+      <a href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"><i class="fab fa-github"></i> {{ _('Vedi su GitHub') }}</a>
       {% endif %}
-    </div>
+      {% elif display_bitbucket %}
+      {% if check_meta and 'bitbucket_url' in meta %}
+      <!-- User defined Bitbucket URL -->
+      <a href="{{ meta['bitbucket_url'] }}"><i class="fab fa-bitbucket"></i> {{ _('Edit on Bitbucket') }}</a>
+      {% else %}
+      <a href="https://bitbucket.org/{{ bitbucket_user }}/{{ bitbucket_repo }}/src/{{ bitbucket_version}}{{ conf_py_path }}{{ pagename }}{{ suffix }}"><i class="fab fa-bitbucket"></i> {{ _('Edit on Bitbucket') }}</a>
+      {% endif %}
+      {% elif display_gitlab %}
+      {% if check_meta and 'gitlab_url' in meta %}
+      <!-- User defined GitLab URL -->
+      <a href="{{ meta['gitlab_url'] }}"><i class="fab fa-gitlab"></i> {{ _('Edit on GitLab') }}</a>
+      {% else %}
+      <a href="https://{{ gitlab_host|default("gitlab.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/blob/{{ gitlab_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"><i class="fab fa-gitlab"></i> {{ _('Edit on GitLab') }}</a>
+      {% endif %}
+      {% elif show_source and source_url_prefix %}
+      <a href="{{ source_url_prefix }}{{ pagename }}{{ suffix }}">{{ _('Vedi sorgente pagina') }}</a>
+      {% elif show_source and has_source and sourcename %}
+      <a href="{{ pathto('_sources/' + sourcename, true)|e }}" rel="nofollow"> {{ _('Vedi sorgente pagina') }}</a>
+      {% endif %}
+      {% endif %}
+    </li>
+    {% endblock %}
+  </ul>
+
+  {% if (theme_prev_next_buttons_location == 'top' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+    {% if next %}
+    <a href="{{ next.link|e }}" class="btn btn-neutral float-right" title="{{ next.title|striptags|e }}" accesskey="n">Successivo <i class="fas fa-arrow-circle-right"></i></a>
+    {% endif %}
+    {% if prev %}
+    <a href="{{ prev.link|e }}" class="btn btn-neutral" title="{{ prev.title|striptags|e }}" accesskey="p"><i class="fas fa-arrow-circle-right"></i> Precedente</a>
+    {% endif %}
   </div>
+  {% endif %}
+  <hr/>
 </div>

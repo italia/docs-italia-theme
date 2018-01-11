@@ -1,37 +1,58 @@
 {% include 'layouts/head.html' %}
 
-<div class="u-background-95">
-  <div id="main" class="u-layout-wide u-layoutCenter">
-    {% include 'layouts/header.html' %}
-    {# include 'layouts/offcanvas.html' #}
-    {# include 'layouts/network.html' #}
-
-    <section class="u-nbfc u-background-grey-15 u-layout-r-withGutter u-padding-r-top u-padding-r-bottom u-posRelative u-zindex-30">
-      <div class="u-layout-wide u-layoutCenter">
-
-        {% include 'layouts/breadcrumbs.html' %}
-
-        <div class="Grid Grid--withGutter">
-          <div id="rst-menu" class="Grid-cell u-md-size1of4 u-lg-size1of4 u-margin-r-bottom">
-            {% include 'layouts/docmenu.html' %}
-          </div>
-          <div id="rst-content" class="Grid-cell u-md-size3of4 u-lg-size3of4 u-margin-r-bottom rst-content">
-            {% block body %}{% endblock %}
+<div class="u-background-grey-15">
+  <div id="main">
+      {% include 'layouts/header.html' %}
+      {% include 'layouts/network.html' %}
+      
+      <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch">
+        <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-80"></div>{# background spacer #}
+        <div class="Grid-cell u-max-144 u-layoutCenter u-posRelative">
+          <div class="Grid">
+            {% include 'layouts/offcanvas.html' %}
+            <div id="rst-content" class="rst-content Grid-cell u-layout-r-withGutter u-md-size8of12 u-lg-size8of12 u-padding-r-top u-padding-r-bottom rst-content">
+              {% include 'layouts/breadcrumbs.html' %}
+              {% block body %}{% endblock %}
+            </div>
           </div>
         </div>
-
+        <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>{# background spacer #}
       </div>
-    </section>
+      {% if theme_custom_versions_badge == 'True' %}
+        <style>
+          /* Hides RTD injected html to display versions */
+          .injected {
+            display: none !important
+          }
+        </style>
+        <div class="injected-customised shift-up">
+          <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch u-sizeFull u-noPointerEvents js-versions-bar">
+            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-90"></div>{# background spacer #}
+            <div class="Grid-cell u-layout-wide u-layoutCenter u-posRelative">
+              <div class="Grid">
+                <div class="u-md-size4of12 u-lg-size4of12 u-color-white u-background-grey-90 u-layout-r-withGutter u-layout-r-withGutter--noRight">
+                  {% include 'layouts/versions.html' %}
+                </div>
+                <div class="u-md-size8of12 u-lg-size8of12"></div>
+              </div>
+            </div>
+            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>{# background spacer #}
+          </div>
+        </div>
+      {% else %}
+        {% if not READTHEDOCS %}
+          {# test content - RTD automatically injects this #}
+          {% include 'layouts/versions_local.html' %}
+        {% endif %}
+      {% endif %}
+
   </div>
 </div>
 
 {% include 'layouts/scrolltop.html' %}
+{% include 'layouts/footer.html' %}
+{% include 'layouts/scripts.html' %}
 
-<div class="u-background-95">
-  <div class="u-layout-wide u-layoutCenter u-layout-r-withGutter u-hiddenPrint">
-    {% include 'layouts/footer--simple.html' %}
-  </div>
-</div>
-
+{%- block footer %}{% endblock %}
 </body>
 </html>

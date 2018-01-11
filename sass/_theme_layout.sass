@@ -2,20 +2,38 @@
   position: fixed
   top: $gutter
 
-.wy-menu
+.clear
+  clear: both
+  margin-bottom: 24px
+
+code
+  white-space: normal !important
+
+a, a:hover
+  text-decoration: none
+
+.doc-menu
+  width: auto !important
   a:hover
     text-decoration: underline
 
-div.rst-pro
-  display: none !important
+  .toctree-expand
+    display: none !important
+  li.current a
+    &:hover, &:active
+      background-color: #f6f9fc !important
+  @media screen and (max-width: 992px)
+    width: auto
+  @media screen and (min-width: 1460px)
+    li.current, li.current > a
+      border-top-left-radius: 4px
+    li.current, li.current > ul > li:last-child, li.current > ul > li:last-child > a
+      border-bottom-left-radius: 4px
 
-.Header
-  a:hover
-    text-decoration: none
-  a:visited
-    color: #fff
+.rst-pro 
+    display: none !important
 
-.wy-menu-horiz
+.doc-menu-horiz
   +clearfix
   ul, li
     display: inline-block
@@ -32,7 +50,7 @@ div.rst-pro
     line-height: $base-font-size * 2
     padding: 0 $base-font-size
 
-.wy-menu-vertical
+.doc-menu-vertical
   width: $nav-desktop-width
   header, p.caption
     // height: $base-font-size * 2
@@ -44,7 +62,7 @@ div.rst-pro
     display: block
     font-weight: bold
     text-transform: uppercase
-    color: $menu-color
+    color: $gray
     white-space: auto
     color: #5A6772
 
@@ -56,13 +74,11 @@ div.rst-pro
     &.divide-bottom
       border-bottom: solid 1px hsl(0, 0%, 25%)
     &.current
-      background: darken($menu-vertical-background-color  , 10%)
+      background: darken($white, 10%)
       a
         color: $menu-link-medium
-        // border-right: solid 1px darken($menu-vertical-background-color, 20%)
-        padding: $gutter / 2 $gutter * 1.5
         &:hover
-          background: darken($menu-vertical-background-color, 15%)
+          background: darken($white, 15%)
           color: #1C2024
     code
       border: none
@@ -72,36 +88,33 @@ div.rst-pro
       padding-right: 0
     // Expand links
     span.toctree-expand
-      display: block
+      display: none !important
       float: left
       margin-left: -1.2em
-      @extend .fa
-      @extend .fa-plus-square-o
+      //@extend .fa
+      //@extend .fa-plus-square-o
       font-size: .8em
       line-height: 1.6em
       color: darken($menu-link-medium, 20%)
 
   // On state for the first level
+  li > a
+    padding: $gutter / 2 $gutter
+    padding-left: $gutter -4px
   li.on a, li.current > a
     color: $menu-link-color
-    padding: $gutter / 2 $gutter
     font-weight: bold
     position: relative
-    background: $menu-vertical-background-color
+    background: $white
     border: none
-    // border-bottom: solid 1px darken($menu-vertical-background-color, 20%)
-    // border-top: solid 1px darken($menu-vertical-background-color, 20%)
-    padding-left: $gutter -4px
     +font-smooth
     &:hover
       color: #1C2024
-      background: $menu-vertical-background-color
+      background: $white
       span.toctree-expand
         color: $menu-link-medium
     span.toctree-expand
-      @extend .fa
-      @extend .fa-minus-square-o
-      display: block
+      display: none !important
       font-size: .8em
       line-height: 1.6em
       color: darken($menu-link-medium, 30%)
@@ -109,46 +122,52 @@ div.rst-pro
   // This is the on state for pages beyond second level
   li.toctree-l1.current li.toctree-l2, li.toctree-l2.current li.toctree-l3
     > ul
-      display: none
+      display: block
     &.current > ul
       display: block
   li.toctree-l2
+    > a
+      padding: $gutter / 2 $gutter * 1.5
+  li.toctree-l2
+    li.toctree-l3 > a
+      padding: $gutter / 2 $gutter * 2.5
+  li.toctree-l2
     &.current
       > a
-        background: darken($menu-vertical-background-color, 5%)
-        padding: $gutter / 2 $gutter * 1.5
+        background: darken($white, 5%)
       li.toctree-l3 > a
         display: block
-        background: darken($menu-vertical-background-color, 10%)
-        padding: $gutter / 2 $gutter * 2.5
+        background: darken($white, 10%)
     a:hover span.toctree-expand
       color: $menu-link-medium
     span.toctree-expand
-      color: darken($menu-vertical-background-color, 15%)
+      color: darken($white, 15%)
   li.toctree-l3
     font-size: .9em
+    > a
+      padding: $gutter / 4 $gutter * 2.5
+  li.toctree-l3
+    li.toctree-l4 > a
+      padding: $gutter / 4 $gutter * 3.5
+  li.toctree-l3
     &.current
       > a
-        background: darken($menu-vertical-background-color, 10%)
-        padding: $gutter / 4 $gutter * 2.5
+        background: darken($white, 10%)
       li.toctree-l4 > a
         display: block
-        background: darken($menu-vertical-background-color, 10%)
-        padding: $gutter / 4 $gutter * 3.5
+        background: darken($white, 10%)
         border-top: none
         border-bottom: none
     a:hover span.toctree-expand
       color: $menu-link-medium
     span.toctree-expand
-      color: darken($menu-vertical-background-color, 20%)
+      color: darken($white, 20%)
   li.toctree-l4
     font-size: .9em
 
-  li.current ul
-    display: block
   li ul
     margin-bottom: 0
-    display: none
+    display: block
   .local-toc
     li ul
       display: block
@@ -163,16 +182,16 @@ div.rst-pro
     display: block
     position: relative
     font-size: 90%
-    color: #65DDE0
+    color: $italia-turquoise-color
     &:hover
       background-color: lighten($menu-background-color, 10%)
       cursor: pointer
       text-decoration: none
-      color: #65DDE0
+      color: $italia-turquoise-color
       span.toctree-expand
         color: $menu-link-light
     &:active
-      background-color: $menu-logo-color
+      background-color: $link-color
       cursor: pointer
       color: $menu-link-active
       span.toctree-expand
@@ -184,11 +203,11 @@ div.rst-pro
   padding: $gutter / 2
   margin-bottom: $gutter / 2
   z-index: $z-index-popover
-  background-color: $nav-search-background-color
+  background-color: $italia-blue-color
   text-align: center
   padding: $gutter / 2
   display: block
-  color: $nav-search-color
+  color: $white
   margin-bottom: $gutter / 2
   .branding
     display: inline-block
@@ -243,11 +262,11 @@ div.rst-pro
     margin: auto auto $gutter / 2 auto
     height: 45px
     width: 45px
-    background-color: $menu-logo-color
+    background-color: $link-color
     padding: 5px
     border-radius: 100%
   > a, .wy-dropdown > a
-    color: $nav-search-color
+    color: $white
     font-size: 100%
     font-weight: bold
     display: inline-block
@@ -274,7 +293,7 @@ div.rst-pro
     color: rgba(255,255,255,.3)
 
 
-.wy-nav .wy-menu-vertical
+.wy-nav .doc-menu-vertical
   header
     color: $link-color
   a
@@ -284,7 +303,7 @@ div.rst-pro
       color: $white
 
 [data-menu-wrap]
-  +transition(all .2s ease-in)
+  transition: all .2s ease-in
   position: absolute
   opacity: 1
   width: 100%
@@ -304,7 +323,7 @@ div.rst-pro
 
 
 .wy-body-for-nav
-  background: left repeat-y $section-background-color
+  background: left repeat-y $white
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxOERBMTRGRDBFMUUxMUUzODUwMkJCOThDMEVFNURFMCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxOERBMTRGRTBFMUUxMUUzODUwMkJCOThDMEVFNURFMCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjE4REExNEZCMEUxRTExRTM4NTAyQkI5OEMwRUU1REUwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjE4REExNEZDMEUxRTExRTM4NTAyQkI5OEMwRUU1REUwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+EwrlwAAAAA5JREFUeNpiMDU0BAgwAAE2AJgB9BnaAAAAAElFTkSuQmCC)
   background-size: $nav-desktop-width 1px
 
@@ -323,11 +342,11 @@ div.rst-pro
   overflow-x: hidden
   overflow-y: hidden
   min-height: 100%
-  background: $nav-background-color
+  background: $menu-background-color
   z-index: $z-index-popover
 
 .wy-side-scroll
-  width: $nav-desktop-width + 20px
+  width: $nav-desktop-width + 2rem
   position: relative
   overflow-x: hidden
   overflow-y: scroll
@@ -351,7 +370,7 @@ div.rst-pro
     margin-right: $base-line-height / 2
     height: 45px
     width: 45px
-    background-color: $menu-logo-color
+    background-color: $link-color
     padding: 8px
     border-radius: 100%
   i
@@ -362,7 +381,7 @@ div.rst-pro
 
 .wy-nav-content-wrap
   margin-left: $nav-desktop-width
-  background: $section-background-color
+  background: $white
   min-height: 100%
 
 .wy-nav-content
@@ -381,7 +400,7 @@ div.rst-pro
   &.on
     display: block
 footer
-  color: $footer-color
+  color: $gray-light
   p
     margin-bottom: $base-line-height / 2
   span.commit code
@@ -390,7 +409,7 @@ footer
     font-size: 1em
     background: none
     border: none
-    color: $footer-color
+    color: $gray-light
 
 .rst-footer-buttons
   +clearfix
@@ -415,10 +434,24 @@ footer
     color: $text-medium
     font-size: 90%
 
+@media screen and (min-width: 992px)
+  .Offcanvas-override
+    z-index: $z-index-none
+    .Offcanvas
+      visibility: visible !important
+      max-width: none !important
+      width: 100%
+      .Offcanvas-toggleContainer
+        display: none !important
+      .Offcanvas-content
+        position: relative !important
+        left: auto !important
+        max-width: none !important
+        width: 100%
 
-+media($tablet)
+@media screen and (max-width: 768px)
   .wy-body-for-nav
-    background: $section-background-color
+    background: $white
   .wy-nav-top
     display: block
   .wy-nav-side
@@ -433,7 +466,7 @@ footer
     width: auto
   .wy-side-nav-search
     width: auto
-  .wy-menu.wy-menu-vertical
+  .doc-menu.doc-menu-vertical
     width: auto
   .wy-nav-content-wrap
     margin-left: 0
@@ -447,15 +480,130 @@ footer
       height: 100%
       overflow: hidden
 
-+media($desktop-wider)
+@media screen and (min-width: 1400px)
   .wy-nav-content-wrap
     background: rgba(0,0,0,.05)
   .wy-nav-content
     margin: 0
-    background: $section-background-color
+    background: $white
 
 @media print
   .rst-versions, footer, .wy-nav-side
     display: none
   .wy-nav-content-wrap
     margin-left: 0
+
+.u-color-white
+  color: #FFF !important
+
+.u-color-darkGray
+  color: $gray-dark !important
+
+.u-max-144
+  @media only screen and (min-width: 1648px)
+    max-width: 144rem !important
+.u-background-gradient-t-b-blue-50
+  background: linear-gradient(to bottom, #06c 0%, #0c5cb2 100%)
+
+.u-background-book
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) .8rem, rgba(255, 255, 255, 1) .8rem, rgba(255, 255, 255, 1) 100%), linear-gradient(to bottom, #0f65cb 0, #0f65cb 5.6rem, #5a6772 5.6rem, #5a6772 100%)
+
+.u-background-half-grey-80-to-15
+  background: linear-gradient(to bottom, #30373d 50%, #f6f9fc 50%) !important
+
+.u-background-half-white-0-to-100
+  background: linear-gradient(to right, rgba(246,249,252, 0) 0%, rgba(246,249,252, 0) 50%, rgba(246,249,252, 1) 50%, rgba(246,249,252, 1) 100%)
+
+.u-minHeight-80
+  min-height: 80px
+
+.u-fixedBottom
+  position: fixed
+  bottom: 0
+
+.Card__book
+  @media only screen and (min-width: 992px)
+    min-height: 20em
+
+.Button--version
+  color: #000
+
+/* Utilities
+ *==========
+
+.hide-focus :focus,
+.hide-focus :focus:focus
+  outline: none !important
+  box-shadow: none !important
+
+.u-pullUp
+  margin-top: -60px
+  @media screen and (max-width: 767px)
+    margin-top: 0
+
+.u-pullUp-10
+  margin-top: -10em
+  @media screen and (max-width: 767px)
+    margin-top: 0
+
+.u-minHeight-250
+  min-height: 250px
+  @media screen and (max-width: 767px)
+    min-height: 0
+
+.Separator-room, .Separator
+  @media screen and (max-width: 767px)
+    display: none !important
+
+.is-selected
+  outline: 3px solid #06c
+
+.u-letterSpace-l
+  letter-spacing: 0.03em !important
+
+.u-color-teal-60
+  color: #00C5CA !important
+
+.u-background-teal-60
+  background-color: #00C5CA !important
+
+.u-color-teal-65
+  color: #06A3A8 !important
+
+.u-background-teal-65
+  background-color: #06A3A8
+
+.u-borderShadow-xl
+  box-shadow: 1px 1px 60px 1px rgba(0, 0, 0, 0.2) !important
+
+.u-noPointerEvents
+  pointer-events: none
+
+@media screen and (min-width: 992px)
+  .u-layout-r-withGutter--noRight
+    padding-right: 0 !important
+
+
+body
+  color: $text-color
+h1
+  font-size: 4rem
+  line-height: 4.8rem
+  margin: 2.4rem 0
+h2
+  font-size: 3.2rem
+  line-height: 4rem
+  margin: 1.2rem 0
+h3
+  font-size: 2.4rem
+  line-height: 2.8rem
+  margin: 0.6rem 0
+h4
+  font-size: 2rem
+  line-height: 2.4rem
+  font-weight: 400
+  margin: 0.6rem 0
+p
+  font-size: 1.6rem
+  line-height: 2.4rem
+  margin-bottom: 2.4rem

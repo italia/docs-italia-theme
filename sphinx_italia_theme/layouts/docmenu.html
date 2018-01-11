@@ -1,41 +1,51 @@
-{% include "layouts/searchbox.html" %}
+<h2 class="u-padding-all-s">
+  <a href="{{ pathto(master_doc) }}" class="u-color-white">{{ project }}</a>
+</h2>
 
-{% if 'singlehtml' not in builder %}
-  {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation, includehidden=True) %}
-{% endif %}
-{% if global_toc %}
-  {{ global_toc }}
-{% else %}
-  <!-- Local TOC -->
-  <div class="local-toc">{{ toc }}</div>
-{% endif %}
-
-<div id="rst-menu-links" role="note" aria-label="versions">
-  <dl>
-    <dt>{{ _('Versions') }}</dt>
+<dl class="js-preventOffCanvasClose u-padding-all-s" role="note" aria-label="versions">
+    <dt class="u-inline">{{ _('Versione') }}:</dt>
     {%- set nav_version = version %}
     {% if READTHEDOCS and current_version %}
+      {%- if current_version == 'stable' and last_stable_version %}
+        {%- set current_version = last_stable_version %}
+      {%- endif %}
       {%- set nav_version = current_version %}
     {% endif %}
     {% if nav_version %}
-      <dd class="version">
-        {% if not READTHEDOCS and theme_versions|length > 1 %}
-          <div class="version-dropdown">
-            <select class="version-list" id="version-list">
-              <option value=''>{{ nav_version }}</option>
-              {% for key, val in theme_versions.items() %}
-                {% if key != nav_version %}
-                  <option value="{{ val }}">{{ key }}</option>
-                {% endif %}
-              {% endfor %}
-            </select>
-          </div>
-        {% else %}
-          {{ nav_version }}
-        {% endif %}
+      <dd class="u-inline version">
+        <span class="version-dropdown">
+          <select class="version-list Button Button--default Button--version u-borderRadius-m" id="version-list">
+            <option value=''>{{ nav_version }}</option>
+            {% for slug, url in versions %}
+              {% if slug != nav_version %}
+                <option value="{{ url }}">{{ slug }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </span>
       </dd>
     {% endif %}
+</dl>
 
+<div class="js-preventOffCanvasClose u-padding-all-s">
+    {% include "layouts/searchbox.html" %}
+</div>
+
+<div class="doc-menu doc-menu doc-menu-vertical js-doc-menu-vertical">
+  {% if 'singlehtml' not in builder %}
+    {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=collapse_navigation, includehidden=True) %}
+  {% endif %}
+  {% if global_toc %}
+    {{ global_toc }}
+  {% else %}
+    <!-- Local TOC -->
+    <div class="local-toc">{{ toc }}</div>
+  {% endif %}
+</div>
+
+{#
+<div id="rst-menu-links" class="u-md-hidden u-padding-left-m">
+  <dl>
     {% if downloads %}
       <dt>{{ _('Downloads') }}</dt>
       {% for type, url in downloads %}
@@ -45,10 +55,10 @@
 
     <dt>{{ _('Vai a') }}</dt>
     <dd><a href="http://github.com">{{ _('Documento su GitHub') }}</a></dd>
-
     {% if theme_superproject %}
       <dt>{{ _('Pubblicato da') }}</dt>
       <dd><a href="{{ theme_superproject.url }}">{{ theme_superproject.name }}</a></dd>
     {% endif %}
   </dl>
 </div>
+#}

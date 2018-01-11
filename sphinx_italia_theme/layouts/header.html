@@ -1,6 +1,6 @@
 <header class="Header u-hiddenPrint">
 
-  <div class="Header-banner u-background-50">
+  <div class="Header-banner u-background-60">
     <div class="Header-owner Headroom-hideme u-flex u-flexJustifyBetween u-flexAlignItemsCenter">
       <div class="Header-owner__institutions">
       <div class="u-md-hidden u-lg-hidden u-border-right-xxs u-margin-right-xs u-padding-right-xs u-inlineBlock u-alignMiddle">
@@ -9,7 +9,7 @@
               {% include 'layouts/slim_icon.html' %}
           </a>
         </div>
-      <a href="{{ site.owner_link }}">
+        <a href="{{ site.owner_link }}" class="u-linkClean">
           <span class="u-inline u-md-hidden u-lg-hidden u-sm-hidden">
             {{ site.owner_short }}
           </span>
@@ -18,11 +18,11 @@
           </span>
         </a>
         <span class="u-color-white">&nbsp;+&nbsp;</span>
-        <a href="{{ site.partner_link }}">
-          <span class="u-inline u-md-hidden u-lg-hidden u-sm-hidden">
+        <a href="{{ site.partner_link }}" class="u-linkClean">
+          <span class="u-inline u-md-inline u-lg-hidden u-sm-hidden">
             {{ site.partner_short }}
           </span>
-          <span class="u-hidden u-md-inline u-lg-inline u-sm-inline">
+          <span class="u-hidden u-md-hidden u-lg-inline u-sm-inline">
             {{ site.partner_full }}
           </span>
         </a>
@@ -34,19 +34,20 @@
   <div class="Header-navbar u-background-50">
     <div class="u-layout-wide Grid Grid--alignMiddle u-layoutCenter">
       <div class="Header-logo Grid-cell" aria-hidden="true">
-        <a href="/" tabindex="-1">
-          <img src="{{ pathto('_static/icons/logo-it.png', 1) }}" alt="">
+        <a href="/" tabindex="-1" class="u-linkClean">
+          <svg style="height:54px;" xmlns="http://www.w3.org/2000/svg" height="78.187" width="97.387" viewBox="0 0 91.300002 73.300002"><g fill="#fff"><path d="M31.799 71.9V15.7h15.1V72h-15.1zM91.099 28.5h-13.8v23.1c0 2.3.1 3.8.2 4.8.1.9.5 1.7 1.2 2.4s1.8 1 3.3 1l8.6-.2.7 12c-5 1.1-8.9 1.7-11.5 1.7-6.8 0-11.4-1.5-13.8-4.6-2.5-3-3.7-8.6-3.7-16.8V0h15.1v15.6h13.8v12.9zM9.099 32.8c-2.6 0-4.8-.9-6.5-2.7s-2.6-4-2.6-6.6.9-4.8 2.5-6.6c1.7-1.8 3.9-2.6 6.5-2.6s4.8.9 6.5 2.7 2.5 4 2.5 6.7-.8 4.8-2.5 6.6c-1.6 1.6-3.7 2.5-6.4 2.5z"/></g></svg>
         </a>
       </div>
 
       <div class="Header-title Grid-cell">
         <h1 class="Header-titleLink">
-          <a href="/">{{ _(t.site_title | default(site.title) | escape) }}
+          <a href="/" class="Header-titleLink--mainLink u-linkClean">
+            {{ _(t.site_title | default(site.title) | escape) }}
             {% if site.pill %}
-              <span class="u-lg-hidden u-md-hidden u-sm-hidden u-cf u-padding-top-xxs u-block"></span>
-              <span class="u-color-20 u-text-xxs
-              u-alignMiddle u-padding-right-xxs u-padding-left-xxs">{{ _(site.pill) }}</span>{%
-                endif %}<br><small>{{ _(t.site_subtitle | default(site.subtitle) | escape) }}</small></a>
+              <span class="u-text-xxs u-alignMiddle u-padding-right-xxs u-padding-left-xxs u-borderRadius-xl">{{ _(site.pill) }}</span>
+            {% endif %}
+          </a>
+          <p class="Header-titleLink--bottomLine"><small>{{ _(t.site_subtitle | default(site.subtitle) | escape) }}</small></p>
         </h1>
       </div>
 
@@ -58,37 +59,21 @@
       </div>
 
       <div class="Header-utils Grid-cell">
-        <div class="Header-social Headroom-hideme">
-          <p>{{ _(t.follow_us | capitalize) }}</p>
-          <ul class="Header-socialIcons">
-            {% for social_id, social in site.data.social.items() %}
-            <li><a href="{{ social.link }}" title="{{ social.name }}"><span class="Icon-{{ social_id }}"></span>
-                <span class="u-hiddenVisually">{{ social.name | capitalize }}</span></a></li>
-            {% endfor %}
-          </ul>
-        </div>
-
         <div class="Header-search" id="header-search">
-          {% include 'layouts/search_form.html' %}
+          {% include 'layouts/searchbox_head.html' %}
         </div>
-
       </div>
 
+      {% if layout == 'default' %}
       <div class="Header-toggle Grid-cell">
         <a class="Hamburger-toggleContainer js-fr-offcanvas-open u-nojsDisplayInlineBlock u-lg-hidden u-md-hidden" href="#menu" aria-controls="menu" aria-label="{{ t.toggle_menu_label }}" title="{{ t.toggle_menu_label }}">
           <span class="Hamburger-toggle" role="presentation"></span>
           <span class="Header-toggleText" role="presentation">Menu</span>
         </a>
       </div>
+      {% endif %}
 
     </div>
   </div>
   <!-- Header-navbar -->
-
-
-  <div class="Headroom-hideme u-textCenter u-hidden u-sm-hidden u-md-block u-lg-block">
-    <nav class="Megamenu Megamenu--default js-megamenu u-background-50" data-rel=".Offcanvas .Treeview"></nav>
-  </div>
-
-
 </header>

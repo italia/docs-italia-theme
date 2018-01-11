@@ -12,11 +12,24 @@
 # serve to show the default.
 
 import sys, os
+from os.path import abspath, join, dirname
 
+sys.path.insert(0, os.path.abspath(join(dirname(__file__))))
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('./test_py_module'))
 sys.path.insert(0, os.path.abspath('../..'))
 
+# -- RTD configuration ------------------------------------------------
+
+# on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
+# This is used for linking and such so we link to the thing we're building
+rtd_version = os.environ.get('READTHEDOCS_VERSION', 'latest')
+if rtd_version not in ['stable', 'latest']:
+    rtd_version = 'stable'
+
+rtd_project = os.environ.get('READTHEDOCS_PROJECT', '')
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -34,12 +47,13 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
-    'sphinxcontrib.httpdomain',
+    'sphinx.ext.doctest',
+    'sphinx.ext.intersphinx',
     'sphinx_italia_theme',
 ]
 
 # Math
-mathjax_path = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+mathjax_path = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -54,7 +68,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Sphinx theme demo'
+project = u'Sphinx theme demo - very long title to fill many lines'
 copyright = u'2017, Team Digitale'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -111,9 +125,9 @@ html_theme = 'sphinx_italia_theme'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    # If the project is meant to be a landing page style project, enable this
-    # layout instead of the default one
-    # 'layout': 'landing',
+    # If the project is meant to be a different style project, enable this layout instead of the default one.
+    # Available options are: (default), 'page_home', 'page_project'
+    'layout': 'default',
     'versions': {
         '0.2.4': '0.2.4',
         '4.0': '4.0',
@@ -123,7 +137,11 @@ html_theme_options = {
         'name': 'ANPR',
         'slug': 'anpr',
         'url': '//docs/anpr',
-    }
+    },
+    # This option can be used with sphinx_italia_theme to customise how the versions "badge" is shown:
+    # 'False': default (alabaster) badge
+    # 'True': custom (italia) badge
+    'custom_versions_badge': 'True',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -136,6 +154,7 @@ html_context = {
             'name': 'Project A',
             'slug': 'project-a',
             'description': '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non lectus ut elit consectetur posuere. Maecenas euismod lorem vitae libero porttitor hendrerit.''',
+            'version': 'v1.0',
             'url': '//',
         },
         {
@@ -143,6 +162,7 @@ html_context = {
             'name': 'Project B',
             'slug': 'project-b',
             'description': '''Duis lobortis dui non justo vulputate luctus. Donec lorem nunc, tempus sodales urna in, porttitor condimentum nisl. Vivamus non est egestas, tristique est id, rhoncus orci.''',
+            'version': 'v1.0',
             'url': '//',
         },
         {
@@ -150,6 +170,7 @@ html_context = {
             'name': 'Project C',
             'slug': 'project-c',
             'description': '''Integer tempus, mi eget rhoncus mattis, leo felis commodo nunc, a porttitor nisi lorem nec mi. Donec hendrerit cursus lorem. Maecenas cursus dui at risus ornare, nec vehicula ligula condimentum.''',
+            'version': 'v1.0',
             'url': '//',
         },
     ],
@@ -294,3 +315,7 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+intersphinx_mapping = {
+    'template-sub': ('http://template-sub.readthedocs.io/en/%s/' % rtd_version, None),
+}
