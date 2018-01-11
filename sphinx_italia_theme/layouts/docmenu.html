@@ -6,6 +6,9 @@
     <dt class="u-inline">{{ _('Versione') }}:</dt>
     {%- set nav_version = version %}
     {% if READTHEDOCS and current_version %}
+      {%- if current_version == 'stable' and last_stable_version %}
+        {%- set current_version = last_stable_version %}
+      {%- endif %}
       {%- set nav_version = current_version %}
     {% endif %}
     {% if nav_version %}
@@ -13,15 +16,11 @@
         <span class="version-dropdown">
           <select class="version-list Button Button--default Button--version u-borderRadius-m" id="version-list">
             <option value=''>{{ nav_version }}</option>
-            {% for key, val in theme_versions.items() %}
-              {% if key != nav_version %}
-                <option value="{{ val }}">{{ key }}</option>
+            {% for slug, url in versions %}
+              {% if slug != nav_version %}
+                <option value="{{ url }}">{{ slug }}</option>
               {% endif %}
             {% endfor %}
-            {% for slug, url in versions %}
-                <option value="{{ url }}">{{ slug }}</option>
-            {% endfor %}
-            <option value="/en/stable/">test</option>
           </select>
         </span>
       </dd>
