@@ -22,4 +22,3 @@ docs:
 github:
   title: header_link_github
   url: 'https://github.com/italia/'
-  class: delimiter

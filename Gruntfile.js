@@ -82,7 +82,7 @@ module.exports = function (grunt) {
             /* Compile sass changes into theme directory */
             sass: {
                 files: [
-                    'sass/*.sass'
+                    'sass/**/*.sass'
                 ],
                 tasks: ['sass:dev']
             },
