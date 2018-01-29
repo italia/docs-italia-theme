@@ -51,6 +51,8 @@
         </h1>
       </div>
 
+      {#
+      TODO : Hidden search box
       <div class="Header-searchTrigger Grid-cell">
         <button aria-controls="header-search" class="js-Header-search-trigger Icon Icon-search u-background-50" title="{{ _(t.search_form_on) }}" aria-label="{{ _(t.search_form_on) }}" aria-hidden="false">
         </button>
@@ -59,13 +61,11 @@
       </div>
 
       <div class="Header-utils Grid-cell">
-        {#
-        TODO : Hidden search box
         <div class="Header-search" id="header-search">
           {% include 'layouts/searchbox_head.html' %}
         </div>
-        #}
       </div>
+      #}
 
       {% if layout == 'default' %}
       <div class="Header-toggle Grid-cell">

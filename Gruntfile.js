@@ -115,16 +115,16 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-browserify');
 
     grunt.registerTask('default', [
-        'clean:build',
-        'sass:build',
-        'browserify:build',
+        'clean',
+        'sass:dev',
+        'browserify:dev',
         'exec:build_sphinx',
         'connect',
         'open',
         'watch'
     ]);
     grunt.registerTask('build', [
-        'clean:build',
+        'clean',
         'sass:build',
         'browserify:build',
         'exec:build_sphinx'

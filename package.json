@@ -8,7 +8,8 @@
   },
   "author": "Presidenza del Consiglio dei Ministri",
   "scripts": {
-    "start": "grunt"
+    "start": "grunt",
+    "build": "grunt build"
   },
   "dependencies": {
     "grunt-cli": "^1.2.0"

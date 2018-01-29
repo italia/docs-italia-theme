@@ -85,9 +85,9 @@ This will compile static assets and watch files required for the theme to reload
 
 To make a release that can be installed via pip:
 
-    grunt build
-    git add -u
-    git commit
+    ```
+    npm build
+    ```
 
 This builds the final release forms of the theme and static assets, and copies
 everything to the template path. You can then commit these files to the
