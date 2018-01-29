@@ -4,9 +4,14 @@
   <ul class="Header-links u-cf">
     {% for link in site.data.network_links %}
       {% set link_name = link.title %}
-      <li class="{{ link.class }}"><a class="u-color-white" href="{{ link.url }}">{% if t[link_name] %}{{ _(t[link_name]) }}{% else %}{{ _(link_name) }}{% endif %}</a></li>
+      <li class="{{ link.class }}">
+        <a class="u-color-white" href="{{ link.url }}">{% if t[link_name] %}{{ _(t[link_name]) }}{% else %}{{ _(link_name) }}{% endif %}</a>
+      </li>
     {% endfor %}
+    {#
+    TODO : Hidden language switch
     {% include 'layouts/lang_switch.html' %}
+    #}
   </ul>
 
 </div>

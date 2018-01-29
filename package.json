@@ -1,8 +1,16 @@
 {
   "name": "sphinx_italia_theme",
+  "description": "Sphinx Italia è il tema sphinx di riferimento per Docs Italia",
   "version": "1.0.0",
   "license": "MIT",
-  "private": true,
+  "engines": {
+    "node": ">=6"
+  },
+  "author": "Presidenza del Consiglio dei Ministri",
+  "scripts": {
+    "start": "grunt",
+    "build": "grunt build"
+  },
   "dependencies": {
     "grunt-cli": "^1.2.0"
   },
