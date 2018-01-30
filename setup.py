@@ -17,7 +17,7 @@ setup(
     license=package_data['license'],
     author='Team Digitale',
     description=__doc__,
-    long_description=codecs.open('README.rst', 'r', 'utf-8').read(),
+    long_description=codecs.open('README.md', 'r', 'utf-8').read(),
     zip_safe=False,
     packages=['sphinx_italia_theme'],
     package_data={'sphinx_italia_theme': [
