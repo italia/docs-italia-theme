@@ -53,8 +53,8 @@
     {% endblock %}
     {% block breadcrumbs_aside %}
     <li class="rst-breadcrumbs-aside">
-      {% if pagename != "search" or True %}
-      {% if display_github or True %}
+      {% if pagename != "search" %}
+      {% if display_github %}
       {% if check_meta and 'github_url' in meta %}
       <!-- User defined GitHub URL -->
       <a class="Button Button--default u-borderRadius-m u-linkClean" href="{{ meta['github_url'] }}"><i class="fab fa-github"></i><span class="u-padding-left-xs">{{ _('modifica su GitHub') }}</span></a>
