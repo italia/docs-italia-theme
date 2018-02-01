@@ -31,7 +31,7 @@
         <span>{{ _('Versioni') }}</span>
       </dt>
       {% if READTHEDOCS %}
-        {# here add versions showing "stable", "latest" and a dropdown maybe? #}
+        COMMENT: -- here add versions showing "stable", "latest" and a dropdown maybe? --
         {% for slug, url in versions %}
           {%- if slug == 'latest' or slug == 'stable' %}
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
@@ -53,7 +53,7 @@
         </dd>
         {% endif %}
       {% else %}
-        {# test content #}
+        COMMENT: -- test content --
         {%- set nav_version = version %}
         <dd class="Grid-cell u-size1of4 u-md-size1of3 rst-versions--terms u-textCenter u-padding-left-xs u-padding-right-xs">
           <a href="#" class="u-color-white">test 1</a>
