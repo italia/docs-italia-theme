@@ -4,12 +4,15 @@
     display: inline-block
     &.rst-breadcrumbs-aside
       float: right
+      margin-top: 10px
       @media screen and (max-width: 480px)
         display: none
       @media print
         display: none
+    &.Breadcrumb-item--last
+      &:after
+        content: ''
     &.Breadcrumb-item a
-      display: inline-block
       text-decoration: none
       color: $italia-blue-color
       padding: 5px

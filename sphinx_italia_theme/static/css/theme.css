@@ -295,6 +295,7 @@ div[class^='highlight'] pre {
 }
 .rst-breadcrumbs li.rst-breadcrumbs-aside {
   float: right;
+  margin-top: 10px;
 }
 @media screen and (max-width: 480px) {
   .rst-breadcrumbs li.rst-breadcrumbs-aside {
@@ -306,8 +307,10 @@ div[class^='highlight'] pre {
     display: none;
   }
 }
+.rst-breadcrumbs li.Breadcrumb-item--last:after {
+  content: "";
+}
 .rst-breadcrumbs li.Breadcrumb-item a {
-  display: inline-block;
   text-decoration: none;
   color: #0066cc;
   padding: 5px;

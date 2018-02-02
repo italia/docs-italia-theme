@@ -45,7 +45,7 @@
       <a class="Breadcrumb-link u-color-50" href="{{ pathto(master_doc) }}">{{ _('Indice') }}</a>
     </li>
     {% for doc in parents %}
-    <li class="Breadcrumb-item">
+    <li class="Breadcrumb-item {{ "Breadcrumb-item--last" if loop.last }}">
       <a class="Breadcrumb-link u-color-50" href="{{ doc.link|e }}">{{ doc.title }}</a>
     </li>
     {% endfor %}
@@ -57,9 +57,9 @@
       {% if display_github %}
       {% if check_meta and 'github_url' in meta %}
       <!-- User defined GitHub URL -->
-      <a class="Button Button--default u-borderRadius-m u-linkClean" href="{{ meta['github_url'] }}"><i class="fab fa-github"></i><span class="u-padding-left-xs">{{ _('modifica su GitHub') }}</span></a>
+      <a class="Button Button--default u-borderRadius-m u-linkClean" href="{{ meta['github_url'] }}"><i class="fa fa-github"></i><span class="u-padding-left-xs">{{ _('modifica su GitHub') }}</span></a>
       {% else %}
-      <a class="Button Button--default u-borderRadius-m u-linkClean" href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"><i class="fab fa-github"></i><span class="u-padding-left-xs">{{ _('modifica su GitHub') }}</span></a>
+      <a class="Button Button--default u-borderRadius-m u-linkClean" href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"><i class="fa fa-github"></i><span class="u-padding-left-xs">{{ _('modifica su GitHub') }}</span></a>
       {% endif %}
       {% elif display_bitbucket %}
       {% if check_meta and 'bitbucket_url' in meta %}
