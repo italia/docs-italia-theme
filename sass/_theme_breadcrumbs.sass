@@ -1,17 +1,6 @@
 .rst-breadcrumbs
-  overflow: auto
   li
     display: inline-block
-    &.rst-breadcrumbs-aside
-      float: right
-      margin-top: 10px
-      @media screen and (max-width: 480px)
-        display: none
-      @media print
-        display: none
-    &.Breadcrumb-item--last
-      &:after
-        content: ''
     &.Breadcrumb-item a
       text-decoration: none
       color: $italia-blue-color
@@ -25,6 +14,10 @@
       &.literal
         color: $text-color
 
+.rst-breadcrumbs-aside
+  float: right
+  margin-top: 10px
+  
 .rst-breadcrumbs-extra
   margin-bottom: 0
   color: $text-light
