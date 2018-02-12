@@ -49,17 +49,20 @@
       <a class="Breadcrumb-link u-color-50" href="{{ doc.link|e }}">{{ doc.title }}</a>
     </li>
     {% endfor %}
-    <li>{{ title }}</li>
     {% endblock %}
-    {% block breadcrumbs_aside %}
-    <li class="rst-breadcrumbs-aside">
+  </ul>
+  {% block breadcrumbs_aside %}
+  <div class="u-cf">
+    <div class="rst-breadcrumbs-aside">
       {% if pagename != "search" %}
       {% if display_github %}
       {% if check_meta and 'github_url' in meta %}
       <!-- User defined GitHub URL -->
-      <a href="{{ meta['github_url'] }}"><i class="fab fa-github"></i> {{ _('Vedi su GitHub') }}</a>
+      <a class="Button Button--default u-borderRadius-m u-linkClean u-hidden u-sm-block u-md-block u-lg-block" href="{{ meta['github_url'] }}"><i class="fa fa-github"></i><span class="u-padding-left-xs">{{ _('modifica su GitHub') }}</span></a>
+      <a class="u-sm-hidden u-md-hidden u-lg-hidden u-linkClean u-color-50" href="{{ meta['github_url'] }}"><span class="u-padding-left-xs">{{ _('modifica su GitHub') }}</span></a>
       {% else %}
-      <a href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"><i class="fab fa-github"></i> {{ _('Vedi su GitHub') }}</a>
+      <a class="Button Button--default u-borderRadius-m u-linkClean u-hidden u-sm-block u-md-block u-lg-block" href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"><i class="fa fa-github"></i><span class="u-padding-left-xs">{{ _('modifica su GitHub') }}</span></a>
+      <a class="u-sm-hidden u-md-hidden u-lg-hidden u-linkClean u-color-50" href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"><span class="u-padding-left-xs">{{ _('modifica su GitHub') }}</span></a>
       {% endif %}
       {% elif display_bitbucket %}
       {% if check_meta and 'bitbucket_url' in meta %}
@@ -81,9 +84,9 @@
       <a href="{{ pathto('_sources/' + sourcename, true)|e }}" rel="nofollow"> {{ _('Vedi sorgente pagina') }}</a>
       {% endif %}
       {% endif %}
-    </li>
-    {% endblock %}
-  </ul>
+    </div>
+  </div>
+  {% endblock %}
 
   {% if (theme_prev_next_buttons_location == 'top' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">

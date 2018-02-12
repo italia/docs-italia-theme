@@ -10,9 +10,19 @@
         <div class="Grid-cell u-max-144 u-layoutCenter u-posRelative">
           <div class="Grid">
             {% include 'layouts/offcanvas.html' %}
-            <div id="rst-content" class="rst-content Grid-cell u-layout-r-withGutter u-md-size8of12 u-lg-size8of12 u-padding-r-top u-padding-r-bottom rst-content">
+            <div id="rst-content" class="rst-content Grid-cell u-layout-r-withGutter u-md-size9of12 u-lg-size9of12 u-padding-r-top u-padding-r-bottom rst-content">
               {% include 'layouts/breadcrumbs.html' %}
               {% block body %}{% endblock %}
+              {% if (theme_prev_next_buttons_location == 'bottom' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
+                <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+                  {% if next %}
+                    <a href="{{ next.link|e }}" class="Button Button--default u-borderRadius-m u-floatRight u-linkClean" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ _('Successivo') }} <span class="fa fa-arrow-circle-right"></span></a>
+                  {% endif %}
+                  {% if prev %}
+                    <a href="{{ prev.link|e }}" class="Button Button--default u-borderRadius-m u-linkClean" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> {{ _('Precedente') }}</a>
+                  {% endif %}
+                </div>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -30,7 +40,7 @@
             <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-90"></div>{# background spacer #}
             <div class="Grid-cell u-layout-wide u-layoutCenter u-posRelative">
               <div class="Grid">
-                <div class="u-md-size4of12 u-lg-size4of12 u-color-white u-background-grey-90 u-layout-r-withGutter u-layout-r-withGutter--noRight">
+                <div class="u-md-size3of12 u-lg-size3of12 u-color-white u-background-grey-90">
                   {% include 'layouts/versions.html' %}
                 </div>
                 <div class="u-md-size8of12 u-lg-size8of12"></div>

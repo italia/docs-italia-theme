@@ -14,7 +14,7 @@
     {% if nav_version %}
       <dd class="u-inline version">
         <span class="version-dropdown">
-          <select class="version-list Button Button--default Button--version u-borderRadius-m" id="version-list">
+          <select class="version-list Button Button--default Button--version u-borderRadius-m u-text-xs" id="version-list">
             <option value=''>{{ nav_version }}</option>
             {% for slug, url in versions %}
               {% if slug != nav_version %}
