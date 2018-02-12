@@ -6,8 +6,7 @@
       {% include 'layouts/network.html' %}
       
       <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch">
-        <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-80"></div>{# background spacer #}
-        <div class="Grid-cell u-max-144 u-layoutCenter u-posRelative">
+        <div class="Grid-cell u-layoutCenter u-posRelative">
           <div class="Grid">
             {% include 'layouts/offcanvas.html' %}
             <div id="rst-content" class="rst-content Grid-cell u-layout-r-withGutter u-md-size9of12 u-lg-size9of12 u-padding-r-top u-padding-r-bottom rst-content">
@@ -26,7 +25,6 @@
             </div>
           </div>
         </div>
-        <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>{# background spacer #}
       </div>
       {% if theme_custom_versions_badge == 'True' %}
         <style>
@@ -37,8 +35,7 @@
         </style>
         <div class="injected-customised shift-up">
           <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch u-sizeFull u-noPointerEvents js-versions-bar">
-            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto u-background-grey-90"></div>{# background spacer #}
-            <div class="Grid-cell u-layout-wide u-layoutCenter u-posRelative">
+            <div class="Grid-cell u-posRelative">
               <div class="Grid">
                 <div class="u-md-size3of12 u-lg-size3of12 u-color-white u-background-grey-90">
                   {% include 'layouts/versions.html' %}
@@ -46,7 +43,6 @@
                 <div class="u-md-size8of12 u-lg-size8of12"></div>
               </div>
             </div>
-            <div class="Grid-cell u-flexGrow1 u-flexShrink0 u-flexBasisAuto"></div>{# background spacer #}
           </div>
         </div>
       {% else %}
