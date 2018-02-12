@@ -187,7 +187,7 @@
       padding-left: 0
 
   // These are the "literals" that get spit out when you mark stuff as ``code`` as your write.
-  tt, code
+  code
     @extend code
     color: $black
     padding: 2px 5px
@@ -201,7 +201,7 @@
       font-weight: bold
       color: $text-color
   // If the literal is inside an a tag, let's color it like a link
-  a, a tt, a code
+  .section a, .section a code
     color: $link-color
   dl
     margin-bottom: $base-line-height
