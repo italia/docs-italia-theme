@@ -49,7 +49,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
-    'sphinx_italia_theme',
+    'docs-italia-theme',
 ]
 
 # Math
@@ -68,8 +68,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Sphinx theme demo - very long title to fill many lines'
-copyright = u'2017, Team Digitale'
+project = u'Docs Italia theme demo docs'
+copyright = u'2018, Team Digitale'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -119,7 +119,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_italia_theme'
+html_theme = 'docs-italia-theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -138,7 +138,7 @@ html_theme_options = {
         'slug': 'anpr',
         'url': '//docs/anpr',
     },
-    # This option can be used with sphinx_italia_theme to customise how the versions "badge" is shown:
+    # This option can be used with docs-italia-theme to customise how the versions "badge" is shown:
     # 'False': default (alabaster) badge
     # 'True': custom (italia) badge
     'custom_versions_badge': 'True',

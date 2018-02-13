@@ -12,18 +12,19 @@ package_data = json.load(package_file)
 
 
 setup(
-    name='sphinx_italia_theme',
+    name='docs-italia-theme',
     version=package_data['version'],
     license=package_data['license'],
     author='Team Digitale',
     description=__doc__,
     long_description=codecs.open('README.md', 'r', 'utf-8').read(),
     zip_safe=False,
-    packages=['sphinx_italia_theme'],
-    package_data={'sphinx_italia_theme': [
+    packages=['docs-italia-theme'],
+    package_data={'docs-italia-theme': [
         'theme.conf',
         '*.html',
         'static/css/*.css',
+        'static/icons/*.*',
         'static/js/*.js',
         'static/font/*.*',
         'data/*.*',

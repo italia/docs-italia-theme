@@ -1,4 +1,4 @@
-# Sphinx Italia theme
+# Docs Italia theme
 
 This is (going to be) the official theme for any piece of documentation hosted on the
 upcoming Docs Italia.
@@ -8,19 +8,19 @@ upcoming Docs Italia.
 * Add the following line to your documentation `requirements.txt` file:
 
     ```
-    $ pip install git+https://github.com/italia/sphinx_italia_theme.git@v2
+    $ pip install git+https://github.com/italia/docs-italia-theme.git@v2
     ```
 
 * In your `conf.py` file, you'll need to specify the theme as follows:
 
     ```
-    html_theme = "sphinx_italia_theme"
+    html_theme = "docs-italia-theme"
     ```
 
 
 ## Configuration
 
-The theme's project-wide options are defined in the `sphinx_italia_theme/theme.conf`
+The theme's project-wide options are defined in the `docs-italia-theme/theme.conf`
 file of this repository, and can be defined in your project's `conf.py` via
 `html_theme_options`. For example:
 
@@ -45,7 +45,7 @@ syntax from Read the Docs to populate.
 * Clone the repository and fetch the submodules:
     
     ```
-    git clone git+https://github.com/italia/sphinx_italia_theme.git
+    git clone git+https://github.com/italia/docs-italia-theme.git
     ```
 
 * If needed, install [Sphinx](http://www.sphinx-doc.org/en/stable/) into a virtual environment:
