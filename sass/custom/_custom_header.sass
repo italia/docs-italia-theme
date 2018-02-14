@@ -1,0 +1,125 @@
+/** Header slim
+ * ================
+
+.Header-owner>a:hover,
+.Header-titleLink a:hover,
+.Header-titleLink small:hover,
+.Header-toggleText:hover
+  text-decoration: none !important
+
+.Header-banner
+  padding-left: 2rem !important
+  padding-right: 2rem !important
+
+.Header-logo
+  min-width: 10rem
+  @media screen and (min-width: 992px)
+    img
+      height: 9rem
+      width: 9rem
+
+.Header-socialIcons [class*=" Icon-"],
+.Header-socialIcons [class^=Icon-]
+  padding: 0.4em !important
+
+.Header-owner > div > a,
+.Header-slim a
+  display: inline-block !important
+  margin: 1.05rem 0
+  padding: 0.35rem 1.4rem !important
+  text-decoration: none
+  vertical-align: middle !important
+
+.Header-titleLink
+  margin: 0 !important
+  line-height: 2.4rem !important
+  small
+    display: inline-block !important
+    font-size: 1.5rem !important
+    font-weight: 200 !important
+  span
+    color: $italia-blue-color
+    background-color: rgba(255,255,255,.2)
+    font-size: 1rem !important
+    padding: .2rem .8rem !important
+  & &--mainLink
+    font-size: 36px !important
+    font-weight: 600 !important
+  & &--bottomLine
+    display: none
+    @media screen and (min-width: 992px)
+      display: block
+      margin-bottom: 0 !important
+
+.Header-slim
+  a:hover
+    text-decoration: none !important
+  li
+    display: inline-block
+    vertical-align: middle
+    margin-bottom: 0.2rem
+    &:hover
+      border-bottom: 0.2rem solid white
+      margin-bottom: 0
+    &.current
+      border-bottom: 0.2rem solid white
+      font-weight: 600
+      margin-bottom: 0
+    &.delimiter a
+      border-right: 0.1rem solid #127ae2
+  #languages .Linklist li
+    display: block
+    margin-bottom: 0
+    a
+      padding: 1.6rem 1.4rem !important
+      margin: 0
+
+.Header-slim-toggle a
+  text-decoration: none !important
+
+.Network .current a
+  font-size: 1.5em
+  border-left: 1rem solid #0066cc !important
+
+/** Header tweaks
+ *  =====================
+
+.Hamburger-toggle
+  &.is-active
+    background: transparent !important
+    &:after,
+    &:before
+      background: white !important
+
+.Header-owner
+  padding-bottom: 0 !important
+  padding-top: 0 !important
+
+.Header
+  a
+    font-size: 1.4rem
+    font-weight: 300
+    color: #fff
+
+/** Megamenu tweaks
+ *  =====================
+.Megamenu.js-megamenu
+  margin-left: -3.2rem !important
+
+.Megamenu-item:first-child > a
+  padding-left: 3.2rem !important
+
+.Megamenu--default
+  padding-right: 0 !important
+
+.Megamenu--default .Megamenu-item > a
+  color: #06c !important
+
+.Megamenu--default .Megamenu-item > a.is-current
+  border-bottom: 2px solid #06c !important
+
+.Megamenu-item > a
+  padding-right: 2.5rem !important
+  padding-left: 2.5rem !important
+
+
