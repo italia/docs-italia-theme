@@ -85,12 +85,12 @@ This will compile static assets and watch files required for the theme to reload
 
 To make a release that can be installed via pip:
 
-    ```
-    npm build
-    ```
+```
+npm build
+```
 
 This builds the final release forms of the theme and static assets, and copies
 everything to the template path. You can then commit these files to the
 repository.
 
-TODO: versioning system to enable automatic update on Docs Italia / ReadTheDocs
+**TODO:** versioning system to enable automatic update on Docs Italia / ReadTheDocs
