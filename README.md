@@ -8,7 +8,7 @@ upcoming Docs Italia.
 * Add the following line to your documentation `requirements.txt` file:
 
     ```
-    $ pip install git+https://github.com/italia/docs-italia-theme.git@v2
+    $ pip install git+https://github.com/italia/docs-italia-theme.git
     ```
 
 * In your `conf.py` file, you'll need to specify the theme as follows:
