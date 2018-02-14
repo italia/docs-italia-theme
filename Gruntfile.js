@@ -28,7 +28,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: 'sass',
                     src: ['*.sass'],
-                    dest: 'sphinx_italia_theme/static/css',
+                    dest: 'docs-italia-theme/static/css',
                     ext: '.css'
                 }]
             },
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: 'sass',
                     src: ['*.sass'],
-                    dest: 'sphinx_italia_theme/static/css',
+                    dest: 'docs-italia-theme/static/css',
                     ext: '.css'
                 }]
             }
@@ -51,21 +51,21 @@ module.exports = function (grunt) {
                 options: {
                     external: ['jquery'],
                     alias: {
-                        'sphinx-italia-theme': './js/theme.js'
+                        'docs-italia-theme': './js/theme.js'
                     }
                 },
                 src: ['js/*.js'],
-                dest: 'sphinx_italia_theme/static/js/theme.js'
+                dest: 'docs-italia-theme/static/js/theme.js'
             },
             build: {
                 options: {
                     external: ['jquery'],
                     alias: {
-                        'sphinx-italia-theme': './js/theme.js'
+                        'docs-italia-theme': './js/theme.js'
                     }
                 },
                 src: ['js/*.js'],
-                dest: 'sphinx_italia_theme/static/js/theme.js'
+                dest: 'docs-italia-theme/static/js/theme.js'
             }
         },
 
@@ -88,7 +88,7 @@ module.exports = function (grunt) {
             },
             /* Changes in theme dir rebuild sphinx */
             sphinx: {
-                files: ['sphinx_italia_theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
+                files: ['docs-italia-theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
                 tasks: ['clean:build', 'exec:build_sphinx']
             },
             /* JavaScript */

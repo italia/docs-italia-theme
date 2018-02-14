@@ -1,4 +1,4 @@
-"""Sphinx theme for Team Digitale"""
+"""Docs Italia theme - Team Digitale"""
 
 import os
 import re

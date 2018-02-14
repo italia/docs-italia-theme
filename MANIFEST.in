@@ -1,14 +1,14 @@
 include *.txt
 include LICENSE
-recursive-include sphinx_italia_theme *.conf
-recursive-include sphinx_italia_theme *.css
-recursive-include sphinx_italia_theme *.eot
-recursive-include sphinx_italia_theme *.html
-recursive-include sphinx_italia_theme *.js
-recursive-include sphinx_italia_theme *.svg
-recursive-include sphinx_italia_theme *.ttf
-recursive-include sphinx_italia_theme *.woff
-recursive-include sphinx_italia_theme *.woff2
-recursive-include sphinx_italia_theme/data *.yaml
-recursive-include sphinx_italia_theme/data *.yml
-recursive-include sphinx_italia_theme/data *.json
+recursive-include docs-italia-theme *.conf
+recursive-include docs-italia-theme *.css
+recursive-include docs-italia-theme *.eot
+recursive-include docs-italia-theme *.html
+recursive-include docs-italia-theme *.js
+recursive-include docs-italia-theme *.svg
+recursive-include docs-italia-theme *.ttf
+recursive-include docs-italia-theme *.woff
+recursive-include docs-italia-theme *.woff2
+recursive-include docs-italia-theme/data *.yaml
+recursive-include docs-italia-theme/data *.yml
+recursive-include docs-italia-theme/data *.json
