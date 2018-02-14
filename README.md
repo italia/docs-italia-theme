@@ -1,6 +1,9 @@
+[![Join the #design channel](https://img.shields.io/badge/Slack%20channel-%23design-blue.svg)](https://developersitalia.slack.com/messages/C7658JRJR)
+[![Get invited](https://slack.developers.italia.it/badge.svg)](https://slack.developers.italia.it/)
+
 # Docs Italia theme
 
-This is (going to be) the official theme for any piece of documentation hosted on the
+This is the official theme for any piece of documentation hosted on the
 upcoming Docs Italia.
 
 ## How to use Sphinx Italia on your documentation 
