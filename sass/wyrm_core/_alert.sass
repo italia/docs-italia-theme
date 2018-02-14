@@ -1,0 +1,45 @@
+.wy-alert
+  padding: $base-line-height / 2
+  line-height: $base-line-height
+  margin-bottom: $base-line-height
+  background: lighten(blue, 50%)
+  +font-smooth
+.wy-alert-title
+  color: $white
+  font-weight: bold
+  display: block
+  background: lighten(blue,20%)
+  margin: -$base-line-height / 2
+  padding: $base-line-height / 4 $base-line-height / 2
+  margin-bottom: $base-line-height / 2
+
+.wy-alert.wy-alert-danger
+  background: lighten(red, 40%)
+  .wy-alert-title
+    background: lighten(red,20%)
+.wy-alert.wy-alert-warning
+  background: lighten(orange,40%)
+  .wy-alert-title
+    background: lighten(orange,20%)
+
+.wy-alert.wy-alert-info
+  background: lighten(blue, 50%)
+  .wy-alert-title
+    background: lighten(blue,20%)
+
+.wy-alert.wy-alert-success
+  background: lighten(green, 50%)
+  .wy-alert-title
+    background: lighten(green,0%)
+
+.wy-alert.wy-alert-neutral
+  background: $table-stripe-color
+  .wy-alert-title
+    color: $text-color
+    background: $table-border-color
+  a
+    color: $link-color
+
+.wy-alert p:last-child
+  margin-bottom: 0
+

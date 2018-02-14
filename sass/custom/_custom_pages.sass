@@ -1,0 +1,32 @@
+.Content
+  a, a:visited,
+  p a, p a:visited,
+  li a
+    color: #06c !important
+    font-size: inherit !important
+  p
+    em,
+    strong
+      font-size: inherit !important
+
+.Project
+  ul
+    margin-bottom: 2em !important
+  a
+    color: #06c !important
+    text-decoration: none !important
+  a[href^="//"]:not([href*="italia.it"]):after,
+  a[href^="http://"]:not([href*="italia.it"]):after,
+  a[href^="https://"]:not([href*="italia.it"]):after
+    content: ' \2192'
+  h3
+    margin-top: 1em !important
+    font-weight: 400 !important
+    font-size: 1.5em !important
+  h2
+    margin-top: 1em !important
+    font-weight: 600 !important
+    font-size: 1.5em !important
+
+.ScrollTop
+  z-index: 300
