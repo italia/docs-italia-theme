@@ -17,31 +17,42 @@ upcoming Docs Italia.
 * In your `conf.py` file, you'll need to specify the theme as follows:
 
     ```
+    # Add this line at the top of the file within the "import" section
+    docs_italia_theme = __import__("docs-italia-theme")
+    
+    # Add the Sphinx extension 'docs-italia-theme' in the extensions list
+    extensions = [
+      ...,
+      'docs-italia-theme'
+    ]
+    
+    # Edit these lines
     html_theme = "docs-italia-theme"
+    html_theme_path = [docs_italia_theme.get_html_theme_path()]
     ```
 
 
-## Configuration
+## Advanced Configuration
 
 The theme's project-wide options are defined in the `docs-italia-theme/theme.conf`
 file of this repository, and can be defined in your project's `conf.py` via
-`html_theme_options`. For example:
-
-```
-html_theme_options = {
-    # Enable the landing page template, instead of a doc template layout
-    'layout': 'landing',
-}
-```
+`html_theme_options`.
 
 This theme has three different layouts included:
 
-* documentation page layout (default),
-* home page layout
-* landing page layout
+* (default) **documentation page** layout, for documentation
+* **home page** layout, for the docs.italia.it homepage
+* **landing page** layout, for the docs.italia.it project homepages
 
-The home page and landing page don't show content, and instead only relies on a special data
-syntax from Read the Docs to populate.
+Home page and landing page don't display any documentation content, and instead only
+relies on a special data syntax from Read the Docs to populate.
+
+```
+html_theme_options = {
+    # To enable the landing page template, instead of the default documentation template
+    'layout': 'landing',
+}
+```
 
 ## Contributing or modifying the theme
 
@@ -84,16 +95,4 @@ syntax from Read the Docs to populate.
 
 This will compile static assets and watch files required for the theme to reload at runtime.
 
-## Building a release
-
-To make a release that can be installed via pip:
-
-```
-npm build
-```
-
-This builds the final release forms of the theme and static assets, and copies
-everything to the template path. You can then commit these files to the
-repository.
-
-**TODO:** versioning system to enable automatic update on Docs Italia / ReadTheDocs
+**TODO:** building a release, handling versioning system to enable automatic update on Docs Italia platform
