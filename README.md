@@ -56,7 +56,7 @@ html_theme_options = {
 
 ## Contributing or modifying the theme
 
-* Clone the repository and fetch the submodules:
+* Clone the repository:
     
     ```
     git clone git+https://github.com/italia/docs-italia-theme.git
