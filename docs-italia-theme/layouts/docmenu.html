@@ -33,7 +33,7 @@
 
 <div class="doc-menu doc-menu doc-menu-vertical js-doc-menu-vertical">
   {% if 'singlehtml' not in builder %}
-    {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=collapse_navigation, includehidden=True) %}
+    {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation, includehidden=theme_includehidden) %}
   {% endif %}
   {% if global_toc %}
     {{ global_toc }}
