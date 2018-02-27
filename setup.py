@@ -46,4 +46,7 @@ setup(
         'Topic :: Documentation',
         'Topic :: Software Development :: Documentation',
     ],
+    install_requires=[
+        'PyYAML==3.12',
+    ]
 )
