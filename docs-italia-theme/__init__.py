@@ -84,9 +84,14 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
     context['site'] = app.site_data
     # The translation context is pinned to the Italian sources, as Sphinx has
     # it's own translation mechanism built in
-    context['t'] = app.site_data['data']['l10n'][context['language']]['t']
+    if 'language' in context:
+        language = context['language']
+    else:
+        language = app.site_data['default_language']
+    context['t'] = app.site_data['data']['l10n'][language]['t']
 
 def setup(app):
     app.site_data = load_site_data()
     app.connect('html-page-context', html_page_context_listener)
     app.add_stylesheet('css/theme.css')
+    app.add_stylesheet('css/badge_only.css')
