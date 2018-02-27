@@ -3,7 +3,7 @@
 </h2>
 
 <dl class="js-preventOffCanvasClose u-padding-all-s" role="note" aria-label="versions">
-    <dt class="u-inline">{{ _('Versione') }}:</dt>
+    <dt class="u-inline">{{ t.version }}:</dt>
     {%- set nav_version = version %}
     {% if READTHEDOCS and current_version %}
       {%- if current_version == 'stable' and last_stable_version %}
@@ -42,23 +42,3 @@
     <div class="local-toc">{{ toc }}</div>
   {% endif %}
 </div>
-
-{#
-<div id="rst-menu-links" class="u-md-hidden u-padding-left-m">
-  <dl>
-    {% if downloads %}
-      <dt>{{ _('Downloads') }}</dt>
-      {% for type, url in downloads %}
-        <dd><a href="{{ url }}">{{ type }}</a></dd>
-      {% endfor %}
-    {% endif %}
-
-    <dt>{{ _('Vai a') }}</dt>
-    <dd><a href="http://github.com">{{ _('Documento su GitHub') }}</a></dd>
-    {% if theme_superproject %}
-      <dt>{{ _('Pubblicato da') }}</dt>
-      <dd><a href="{{ theme_superproject.url }}">{{ theme_superproject.name }}</a></dd>
-    {% endif %}
-  </dl>
-</div>
-#}

@@ -3,7 +3,7 @@
   <div class="rst-other-versions--no-inject">{# RTD hosted instance injects stuff into .rst-other-versions (using class name...), hence the need for a rename #}
     <dl class="Grid rst-versions--container">
       <dt class="Grid-cell u-size1of4 u-inline u-md-hidden rst-versions--terms u-padding-left-s">
-        <span>{{ _('Downloads') }}</span>
+        <span>{{ t.downloads }}</span>
       </dt>
       {% if READTHEDOCS %}
         {% for type, url in downloads %}
@@ -28,7 +28,7 @@
     TODO: Define dropdown behaviour
     <dl class="Grid rst-versions--container">
       <dt class="Grid-cell u-size1of4 u-md-hidden u-inline rst-versions--terms u-padding-left-s">
-        <span>{{ _('Versioni') }}</span>
+        <span>{{ t.versions }}</span>
       </dt>
       {% if READTHEDOCS %}
         COMMENT: -- here add versions showing "stable", "latest" and a dropdown maybe? --

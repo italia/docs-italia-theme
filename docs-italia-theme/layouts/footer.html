@@ -5,10 +5,9 @@
       <div class="Grid Grid--withGutter u-padding-top-xl">
 
         <div class="Grid-cell u-md-size1of2 u-lg-size1of2 u-padding-r-bottom">
-          <img class="Footer-logo u-xs-padding-right-none" src="{{ site.owner_logo | d('//placehold.it/75x80?text=placeholder') }}"
-            alt="" style="height: 80px; max-width: 100%">
+          <img class="Footer-logo u-xs-padding-right-none" src="{{ site.owner_logo }}"
+            alt="{{ site.owner_full }}" style="height: 80px; max-width: 100%">
           <p class="Footer-siteName">
-            {{ _(t.footer_title | default(site.owner) | default(t.site_title) | default(site.title) | escape) }}
           </p>
         </div>
 
