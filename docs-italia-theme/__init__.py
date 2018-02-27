@@ -89,3 +89,4 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
 def setup(app):
     app.site_data = load_site_data()
     app.connect('html-page-context', html_page_context_listener)
+    app.add_stylesheet('css/theme.css')
