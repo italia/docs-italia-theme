@@ -107,6 +107,19 @@ pygments_style = 'sphinx'
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
 
+# -- ReadTheDoc requirements and local template generation-----------------
+
+# on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
+# override css_files to prevent injection of css files on rtd
+if on_rtd:
+    html_context = {
+        'css_files': [
+            '_static/css/theme.css',
+            '_static/css/badge_only.css',
+        ],
+    }
 
 # -- Options for HTML output ---------------------------------------------------
 
