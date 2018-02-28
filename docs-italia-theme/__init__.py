@@ -29,7 +29,6 @@ def load_site_data():
         os.path.join(os.path.dirname(__file__), 'data')
     )
     config_path = os.path.join(source_path, '_config.yml')
-    overrides_path = os.path.join(source_path, '_overrides.yml')
     data_path = os.path.join(source_path, '_data')
     context = {}
 
@@ -48,11 +47,6 @@ def load_site_data():
             datafile_h = open(datafile_path)
             datafile_data = yaml.load(datafile_h)
             context['data'].update({datafile_source: datafile_data})
-
-    # Load overrides
-    overrides_h = open(overrides_path)
-    overrides_data = yaml.load(overrides_h)
-    context = deep_merge(overrides_data, context)
 
     # Transform network links to ordered mapping. Doing this dynamically
     # instead of with overrides to alter mapping into an ordered list and keep
@@ -90,7 +84,11 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
     context['site'] = app.site_data
     # The translation context is pinned to the Italian sources, as Sphinx has
     # it's own translation mechanism built in
-    context['t'] = app.site_data['data']['l10n']['it']['t']
+    if 'language' in context:
+        language = context['language']
+    else:
+        language = app.site_data['default_language']
+    context['t'] = app.site_data['data']['l10n'][language]['t']
 
 def setup(app):
     app.site_data = load_site_data()

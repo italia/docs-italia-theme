@@ -8,7 +8,7 @@ Template for the search page.
 :license: BSD, see LICENSE for details.
 #}
 {%- extends "layouts/default.html" %}
-{% set title = _('Search') %}
+{% set title = t.search %}
 {% set script_files = script_files + ['_static/searchtools.js'] %}
 {% block footer %}
 <script type="text/javascript">
@@ -30,9 +30,9 @@ such as on Chrome for documents on localhost #}
 </noscript>
 
 {% if search_performed %}
-<h2>{{ _('Search Results') }}</h2>
+<h2>{{ t.search_results }}</h2>
 {% if not search_results %}
-<p>{{ _('Your search did not match any documents. Please make sure that all words are spelled correctly and that you\'ve selected enough categories.') }}</p>
+<p>{{ t.search_no_results }}</p>
 {% endif %}
 {% endif %}
 <div id="search-results">

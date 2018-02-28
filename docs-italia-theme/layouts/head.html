@@ -46,10 +46,8 @@
 
   {% if not READTHEDOCS %}
   <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
-  {% endif %}
-
   <link rel="stylesheet" href="{{ pathto('_static/css/badge_only.css', 1) }}" type="text/css" />
-  <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
+  {% endif %}
 
   {% for cssfile in css_files %}
   <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
@@ -61,18 +59,18 @@
 
   {%- block linktags %}
   {%- if hasdoc('about') %}
-  <link rel="author" title="{{ _('About these documents') }}"
+  <link rel="author" title="{{ t.about_these_documents }}"
         href="{{ pathto('about') }}"/>
   {%- endif %}
   {%- if hasdoc('genindex') %}
-  <link rel="index" title="{{ _('Index') }}"
+  <link rel="index" title="{{ t.index }}"
         href="{{ pathto('genindex') }}"/>
   {%- endif %}
   {%- if hasdoc('search') %}
-  <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}"/>
+  <link rel="search" title="{{ t.search }}" href="{{ pathto('search') }}"/>
   {%- endif %}
   {%- if hasdoc('copyright') %}
-  <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}"/>
+  <link rel="copyright" title="{{ t.copyright }}" href="{{ pathto('copyright') }}"/>
   {%- endif %}
   <link rel="top" title="{{ docstitle|e }}" href="{{ pathto('index') }}"/>
   {%- if parents %}
