@@ -26,7 +26,6 @@ settings_editor_name = "AgID - Agenzia per l'Italia Digitale"
 settings_doc_version = '1'
 settings_doc_release = '1.0'
 settings_doc_language = 'en'
-settings_basename = 'docs-italia-demo'
 settings_file_name = 'docs-italia-demo'
 
 # -- General configuration -----------------------------------------------------
@@ -206,7 +205,7 @@ html_show_sourcelink = True
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = settings_basename + 'doc'
+htmlhelp_basename = settings_file_name + 'doc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
