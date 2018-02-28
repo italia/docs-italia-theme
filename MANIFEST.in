@@ -6,6 +6,7 @@ recursive-include docs-italia-theme *.eot
 recursive-include docs-italia-theme *.html
 recursive-include docs-italia-theme *.js
 recursive-include docs-italia-theme *.svg
+recursive-include docs-italia-theme *.png
 recursive-include docs-italia-theme *.ttf
 recursive-include docs-italia-theme *.woff
 recursive-include docs-italia-theme *.woff2
