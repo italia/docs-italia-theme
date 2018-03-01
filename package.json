@@ -1,6 +1,7 @@
 {
   "name": "docs-italia-theme",
   "description": "Docs Italia theme è il tema Sphinx di riferimento per Docs Italia",
+  "repository": "https://github.com/italia/docs-italia-theme",
   "version": "1.0.0-beta",
   "license": "MIT",
   "engines": {
@@ -23,6 +24,7 @@
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-exec": "^3.0.0",
     "grunt-open": "^0.2.3",

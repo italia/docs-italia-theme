@@ -1,7 +1,10 @@
+var resizeListener = require("./resize-listener.js");
+
+
 var jQuery = (typeof(window) != 'undefined') ? window.jQuery : require('jquery');
 
 // Sphinx theme nav state
-function ThemeNav () {
+function ThemeNav() {
 
     var nav = {
         navBar: null,
@@ -32,16 +35,22 @@ function ThemeNav () {
                         self.winScroll = true;
                     }
                 });
-                setInterval(function () { self.onScroll(); }, 25);
+                setInterval(function () {
+                    self.onScroll();
+                }, 25);
+
 
                 // Set resize monitor
                 self.win.on('resize', function () {
                     self.winResize = true;
                 });
-                setInterval(function () { if (self.winResize) self.onResize(); }, 25);
+                setInterval(function () {
+                    if (self.winResize) self.onResize();
+                }, 25);
                 self.onResize();
             });
-        };
+        }
+        ;
     };
 
     nav.init = function ($) {
@@ -53,14 +62,14 @@ function ThemeNav () {
 
         // Set up javascript UX bits
         $(document)
-            // Shift nav in mobile when clicking the menu.
-            .on('click', "[data-toggle='wy-nav-top']", function() {
+        // Shift nav in mobile when clicking the menu.
+            .on('click', "[data-toggle='wy-nav-top']", function () {
                 $("[data-toggle='wy-nav-shift']").toggleClass("shift");
                 $("[data-toggle='rst-versions']").toggleClass("shift");
             })
 
             // Nav menu link click operations
-            .on('click', ".wy-menu-vertical .current ul li a", function() {
+            .on('click', ".wy-menu-vertical .current ul li a", function () {
                 var target = $(this);
                 // Close menu when you click a link.
                 $("[data-toggle='wy-nav-shift']").removeClass("shift");
@@ -69,7 +78,7 @@ function ThemeNav () {
                 self.toggleCurrent(target);
                 self.hashChange();
             })
-            .on('click', "[data-toggle='rst-current-version']", function() {
+            .on('click', "[data-toggle='rst-current-version']", function () {
                 $("[data-toggle='rst-versions']").toggleClass("shift-up");
             })
 
@@ -80,7 +89,7 @@ function ThemeNav () {
         // Add expand links to all parents of nested ul
         $('.wy-menu-vertical ul').not('.simple').siblings('a').each(function () {
             var link = $(this);
-                expand = $('<span class="toctree-expand"></span>');
+            expand = $('<span class="toctree-expand"></span>');
             expand.on('click', function (ev) {
                 self.toggleCurrent(link);
                 ev.stopPropagation();
@@ -103,11 +112,11 @@ function ThemeNav () {
                 // aren't picked up and placed in the toctree). So let's find
                 // the closest header in the document and try with that one.
                 if (link.length === 0) {
-                  var doc_link = $('.document a[href="' + anchor + '"]');
-                  var closest_section = doc_link.closest('div.section');
-                  // Try again with the closest section entry.
-                  link = $('.wy-menu-vertical')
-                    .find('[href="#' + closest_section.attr("id") + '"]');
+                    var doc_link = $('.document a[href="' + anchor + '"]');
+                    var closest_section = doc_link.closest('div.section');
+                    // Try again with the closest section entry.
+                    link = $('.wy-menu-vertical')
+                        .find('[href="#' + closest_section.attr("id") + '"]');
 
                 }
                 $('.wy-menu-vertical li.toctree-l1 li.current')
@@ -162,5 +171,77 @@ function ThemeNav () {
 module.exports.ThemeNav = ThemeNav();
 
 if (typeof(window) != 'undefined') {
-    window.SphinxRtdTheme = { StickyNav: module.exports.ThemeNav };
+    window.SphinxRtdTheme = {StickyNav: module.exports.ThemeNav};
 }
+
+$(function () {
+
+    var versionsBar = $('.js-versions-bar');
+    var footer = $('.Footer');
+    var header = $('.Header');
+
+    var menuContainerElement = $('.js-menu-container');
+    var menuElement = $('.js-menu');
+    var menuInnerElement = $('.js-menu-inner');
+
+    var myElement = document.getElementById('rst-content');
+    var onResize = function (e) {
+
+        if (window.innerWidth > 992) {
+            var versionsBarHeight = versionsBar.outerHeight();
+            var headerHeight = header.outerHeight();
+            var sidebarWidth = menuContainerElement.width();
+
+            var headerScrollHeight = (window.scrollY < headerHeight) ? window.scrollY : headerHeight;
+            var headerScrollAmount = headerHeight - headerScrollHeight;
+
+            var footerVisibleAmount = $(window).scrollTop() + $(window).height() - ($(document).height() - footer.outerHeight());
+            var footerOffset = Math.max(0, footerVisibleAmount);
+
+            // menu height è il valore minimo tra:
+            // - lo spazio disponibile senza header, versionsBar e footer
+            // - l'altezza di menuContainerElement (necessario quando lo schermo è molto grande e il footer è sopra la baseline del viewport)
+            var menuHeight = Math.min(menuContainerElement.height(), window.innerHeight - headerScrollAmount - versionsBarHeight - footerOffset);
+
+            menuElement.css({
+                top: Math.floor(headerScrollAmount) + 'px',
+                width: Math.floor(sidebarWidth) + 'px',
+                height: Math.floor(menuHeight) + 'px'
+            });
+
+            versionsBar.toggleClass('u-fixedBottom', footerVisibleAmount < 0);
+
+            if (e.type === "load") {
+
+                // riposizionamento menu selezionato
+                var currentElement = $('.toctree-l1.current');
+                if (currentElement.length) {
+                    menuInnerElement.animate({
+                        scrollTop: currentElement.offset().top - menuInnerElement.offset().top
+                    });
+                }
+            }
+        } else {
+            menuElement.css({
+                top: 'auto',
+                width: 'auto',
+                height: 'auto'
+            });
+        }
+    }
+
+    resizeListener.addResizeListener(myElement, onResize);
+
+    $(window).on('load resize scroll', onResize);
+
+
+    $('.version-list').on('change', function (e) {
+        window.location = $(this).val();
+    });
+
+    $('.js-preventOffCanvasClose').on('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+    
+});
