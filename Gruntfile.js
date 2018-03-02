@@ -47,6 +47,16 @@ module.exports = function (grunt) {
         },
 
         browserify: {
+            dev: {
+                options: {
+                    external: ['jquery'],
+                    alias: {
+                        'docs-italia-theme': './js/theme.js'
+                    }
+                },
+                src: ['js/*.js'],
+                dest: 'docs-italia-theme/static/js/theme.js'
+            },
             build: {
                 options: {
                     external: ['jquery'],
@@ -56,16 +66,6 @@ module.exports = function (grunt) {
                 },
                 src: ['js/*.js'],
                 dest: 'docs-italia-theme/static/js/theme.js'
-            }
-        },
-
-        uglify: {
-            options: {
-                banner: '/*! Docs Italia Theme <%= grunt.template.today("yyyy-mm-dd") %> */ '
-            },
-            build: {
-                src: 'docs-italia-theme/static/js/theme.js',
-                dest: 'docs-italia-theme/static/js/theme.min.js'
             }
         },
 
@@ -113,13 +113,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-browserify');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     grunt.registerTask('default', [
         'clean',
         'sass:dev',
-        'browserify:build',
-        'uglify',
+        'browserify:dev',
         'exec:build_sphinx',
         'connect',
         'open',
@@ -129,7 +127,6 @@ module.exports = function (grunt) {
         'clean',
         'sass:build',
         'browserify:build',
-        'uglify',
         'exec:build_sphinx'
     ]);
 }
