@@ -8,8 +8,9 @@ $(function () {
     var menuElement = $('.js-menu');
     var menuInnerElement = $('.js-menu-inner');
 
-    var onResize = function (e) {
+    $(window).on('load resize scroll', function (e) {
 
+        // menu is positioned "fixed" for bigger screens only
         if (window.innerWidth > 992) {
             var versionsBarHeight = versionsBar.outerHeight();
             var sidebarWidth = menuContainerElement.width();
@@ -49,10 +50,7 @@ $(function () {
                 height: 'auto'
             });
         }
-    }
-
-    $(window).on('load resize scroll', onResize);
-
+    });
 
     $('.version-list').on('change', function (e) {
         window.location = $(this).val();
