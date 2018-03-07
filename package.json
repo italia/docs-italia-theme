@@ -1,6 +1,7 @@
 {
   "name": "docs-italia-theme",
   "description": "Docs Italia theme è il tema Sphinx di riferimento per Docs Italia",
+  "repository": "https://github.com/italia/docs-italia-theme",
   "version": "1.0.0-beta",
   "license": "MIT",
   "engines": {

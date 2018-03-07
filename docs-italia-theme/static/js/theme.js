@@ -2,7 +2,7 @@ require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=
 var jQuery = (typeof(window) != 'undefined') ? window.jQuery : require('jquery');
 
 // Sphinx theme nav state
-function ThemeNav () {
+function ThemeNav() {
 
     var nav = {
         navBar: null,
@@ -33,16 +33,22 @@ function ThemeNav () {
                         self.winScroll = true;
                     }
                 });
-                setInterval(function () { self.onScroll(); }, 25);
+                setInterval(function () {
+                    self.onScroll();
+                }, 25);
+
 
                 // Set resize monitor
                 self.win.on('resize', function () {
                     self.winResize = true;
                 });
-                setInterval(function () { if (self.winResize) self.onResize(); }, 25);
+                setInterval(function () {
+                    if (self.winResize) self.onResize();
+                }, 25);
                 self.onResize();
             });
-        };
+        }
+        ;
     };
 
     nav.init = function ($) {
@@ -54,14 +60,14 @@ function ThemeNav () {
 
         // Set up javascript UX bits
         $(document)
-            // Shift nav in mobile when clicking the menu.
-            .on('click', "[data-toggle='wy-nav-top']", function() {
+        // Shift nav in mobile when clicking the menu.
+            .on('click', "[data-toggle='wy-nav-top']", function () {
                 $("[data-toggle='wy-nav-shift']").toggleClass("shift");
                 $("[data-toggle='rst-versions']").toggleClass("shift");
             })
 
             // Nav menu link click operations
-            .on('click', ".wy-menu-vertical .current ul li a", function() {
+            .on('click', ".wy-menu-vertical .current ul li a", function () {
                 var target = $(this);
                 // Close menu when you click a link.
                 $("[data-toggle='wy-nav-shift']").removeClass("shift");
@@ -70,7 +76,7 @@ function ThemeNav () {
                 self.toggleCurrent(target);
                 self.hashChange();
             })
-            .on('click', "[data-toggle='rst-current-version']", function() {
+            .on('click', "[data-toggle='rst-current-version']", function () {
                 $("[data-toggle='rst-versions']").toggleClass("shift-up");
             })
 
@@ -81,7 +87,7 @@ function ThemeNav () {
         // Add expand links to all parents of nested ul
         $('.wy-menu-vertical ul').not('.simple').siblings('a').each(function () {
             var link = $(this);
-                expand = $('<span class="toctree-expand"></span>');
+            expand = $('<span class="toctree-expand"></span>');
             expand.on('click', function (ev) {
                 self.toggleCurrent(link);
                 ev.stopPropagation();
@@ -104,11 +110,11 @@ function ThemeNav () {
                 // aren't picked up and placed in the toctree). So let's find
                 // the closest header in the document and try with that one.
                 if (link.length === 0) {
-                  var doc_link = $('.document a[href="' + anchor + '"]');
-                  var closest_section = doc_link.closest('div.section');
-                  // Try again with the closest section entry.
-                  link = $('.wy-menu-vertical')
-                    .find('[href="#' + closest_section.attr("id") + '"]');
+                    var doc_link = $('.document a[href="' + anchor + '"]');
+                    var closest_section = doc_link.closest('div.section');
+                    // Try again with the closest section entry.
+                    link = $('.wy-menu-vertical')
+                        .find('[href="#' + closest_section.attr("id") + '"]');
 
                 }
                 $('.wy-menu-vertical li.toctree-l1 li.current')
@@ -163,7 +169,6 @@ function ThemeNav () {
 module.exports.ThemeNav = ThemeNav();
 
 if (typeof(window) != 'undefined') {
-    window.SphinxRtdTheme = { StickyNav: module.exports.ThemeNav };
+    window.SphinxRtdTheme = {StickyNav: module.exports.ThemeNav};
 }
-
 },{"jquery":"jquery"}]},{},["docs-italia-theme"]);

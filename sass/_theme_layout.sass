@@ -99,7 +99,7 @@ a, a:hover
 
   // On state for the first level
   li > a
-    padding: $gutter / 2 $gutter
+    padding: $gutter / 2 $gutter / 2
     padding-left: $gutter -4px
   li.on a, li.current > a
     color: $menu-link-color
@@ -127,10 +127,10 @@ a, a:hover
       display: block
   li.toctree-l2
     > a
-      padding: $gutter / 2 $gutter * 1.5
+      padding: $gutter / 2 $gutter / 2 $gutter / 2 $gutter
   li.toctree-l2
     li.toctree-l3 > a
-      padding: $gutter / 2 $gutter * 2.5
+      padding: $gutter / 2 $gutter / 2 $gutter / 2 $gutter * 1.5
   li.toctree-l2
     &.current
       > a
@@ -145,10 +145,10 @@ a, a:hover
   li.toctree-l3
     font-size: .9em
     > a
-      padding: $gutter / 4 $gutter * 2.5
+      padding: $gutter / 4 $gutter / 2 $gutter / 4 $gutter * 1.5
   li.toctree-l3
     li.toctree-l4 > a
-      padding: $gutter / 4 $gutter * 3.5
+      padding: $gutter / 4 $gutter / 2 $gutter / 4 $gutter * 2.5
   li.toctree-l3
     &.current
       > a
@@ -437,18 +437,24 @@ footer
 
 @media screen and (min-width: 992px)
   .Offcanvas-override
-    z-index: $z-index-none
     .Offcanvas
+      z-index: $z-index-none
       visibility: visible !important
       max-width: none !important
       width: 100%
-      .Offcanvas-toggleContainer
-        display: none !important
+      position: fixed
+      height: auto // set by JS
+      top: auto // set by JS
+      width: 0 // set by JS
       .Offcanvas-content
         position: relative !important
         left: auto !important
+        overflow: auto
         max-width: none !important
+        height: 100%
         width: 100%
+      .Offcanvas-toggleContainer
+        display: none !important
 
 @media screen and (max-width: 768px)
   .wy-body-for-nav
@@ -595,17 +601,25 @@ h2
   line-height: 4rem
   margin: 1.2rem 0
 h3
+  font-size: 2.8rem
+  line-height: 3.2rem
+  margin: 0.6rem 0
+h4
   font-size: 2.4rem
   line-height: 2.8rem
   margin: 0.6rem 0
-h4
+h5
   font-size: 2rem
   line-height: 2.4rem
   font-weight: 400
-  margin: 0.6rem 0
+h6
+  font-size: 1.6rem
+  line-height: 2.4rem
 p
   font-size: 1.6rem
   line-height: 2.4rem
   margin-bottom: 2.4rem
+  @media screen and (min-width: 992px)
+    font-size: 1.8rem
 p, li, h1, h2, h3, h4, h5, h6, .figure, 
   max-width: 40em
