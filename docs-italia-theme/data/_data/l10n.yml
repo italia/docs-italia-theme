@@ -27,7 +27,7 @@ it:
     search_results: Risultati della ricerca
     search_no_results: La tua ricerca non ha prodotto documenti. Assicurati di non aver commesso errori di digitazione.
     site_subtitle: Documenti pubblici, digitali.
-    site_title: /docs
+    site_title: Docs Italia
     share_msg: condividi
     skiplink_goto_content: vai ai contenuti
     skiplink_goto_navigation: vai alla navigazione del sito
@@ -80,7 +80,7 @@ en:
     search_results: Search Results
     search_no_results: Your search did not match any documents. Please make sure that all words are spelled correctly.
     site_subtitle: Public Documents, digital.
-    site_title: /docs
+    site_title: Docs Italia
     share_msg: share
     skiplinks_goto_content: go to content
     skiplinks_goto_navigation: go to site navigation
