@@ -92,7 +92,7 @@ en:
     edit_on_gitlab: Edit on GitLab
     view_page_source: View page source
 
-    page: previous
+    previous: previous
     next: next
 
     in_collaboration_with: In collaboration with
