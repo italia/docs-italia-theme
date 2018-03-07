@@ -1,70 +1,4 @@
-require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
-var attachEvent = document.attachEvent;
-var isIE = navigator.userAgent.match(/Trident/);
-var requestFrame = (function(){
-    var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
-        function(fn){ return window.setTimeout(fn, 20); };
-    return function(fn){ return raf(fn); };
-})();
-
-var cancelFrame = (function(){
-    var cancel = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame ||
-        window.clearTimeout;
-    return function(id){ return cancel(id); };
-})();
-
-function resizeListener(e){
-    var win = e.target || e.srcElement;
-    if (win.__resizeRAF__) cancelFrame(win.__resizeRAF__);
-    win.__resizeRAF__ = requestFrame(function(){
-        var trigger = win.__resizeTrigger__;
-        trigger.__resizeListeners__.forEach(function(fn){
-            fn.call(trigger, e);
-        });
-    });
-}
-
-function objectLoad(e){
-    this.contentDocument.defaultView.__resizeTrigger__ = this.__resizeElement__;
-    this.contentDocument.defaultView.addEventListener('resize', resizeListener);
-}
-
-module.exports = {
-    removeResizeListener: function(element, fn){
-        element.__resizeListeners__.splice(element.__resizeListeners__.indexOf(fn), 1);
-        if (!element.__resizeListeners__.length) {
-            if (attachEvent) element.detachEvent('onresize', resizeListener);
-            else {
-                element.__resizeTrigger__.contentDocument.defaultView.removeEventListener('resize', resizeListener);
-                element.__resizeTrigger__ = !element.removeChild(element.__resizeTrigger__);
-            }
-        }
-    },
-
-    addResizeListener: function(element, fn){
-        if (!element.__resizeListeners__) {
-            element.__resizeListeners__ = [];
-            if (attachEvent) {
-                element.__resizeTrigger__ = element;
-                element.attachEvent('onresize', resizeListener);
-            }
-            else {
-                if (getComputedStyle(element).position == 'static') element.style.position = 'relative';
-                var obj = element.__resizeTrigger__ = document.createElement('object');
-                obj.setAttribute('style', 'display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;');
-                obj.__resizeElement__ = element;
-                obj.onload = objectLoad;
-                obj.type = 'text/html';
-                if (isIE) element.appendChild(obj);
-                obj.data = 'about:blank';
-                if (!isIE) element.appendChild(obj);
-            }
-        }
-        element.__resizeListeners__.push(fn);
-    }
-};
-
-},{}],"docs-italia-theme":[function(require,module,exports){
+require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({"docs-italia-theme":[function(require,module,exports){
 var jQuery = (typeof(window) != 'undefined') ? window.jQuery : require('jquery');
 
 // Sphinx theme nav state
@@ -237,4 +171,4 @@ module.exports.ThemeNav = ThemeNav();
 if (typeof(window) != 'undefined') {
     window.SphinxRtdTheme = {StickyNav: module.exports.ThemeNav};
 }
-},{"jquery":"jquery"}]},{},[1,"docs-italia-theme"]);
+},{"jquery":"jquery"}]},{},["docs-italia-theme"]);
