@@ -78,11 +78,9 @@ $(function () {
 
         if (window.innerWidth > 992) {
             var versionsBarHeight = versionsBar.outerHeight();
-            var headerHeight = header.outerHeight();
             var sidebarWidth = menuContainerElement.width();
 
-            var headerScrollHeight = (window.scrollY < headerHeight) ? window.scrollY : headerHeight;
-            var headerScrollAmount = headerHeight - headerScrollHeight;
+            var headerVisibleAmount = Math.max(0, header.outerHeight() - window.pageYOffset);
 
             var footerVisibleAmount = $(window).scrollTop() + $(window).height() - ($(document).height() - footer.outerHeight());
             var footerOffset = Math.max(0, footerVisibleAmount);
@@ -90,10 +88,10 @@ $(function () {
             // menu height è il valore minimo tra:
             // - lo spazio disponibile senza header, versionsBar e footer
             // - l'altezza di menuContainerElement (necessario quando lo schermo è molto grande e il footer è sopra la baseline del viewport)
-            var menuHeight = Math.min(menuContainerElement.height(), window.innerHeight - headerScrollAmount - versionsBarHeight - footerOffset);
+            var menuHeight = Math.min(menuContainerElement.height(), window.innerHeight - headerVisibleAmount - versionsBarHeight - footerOffset);
 
             menuElement.css({
-                top: Math.floor(headerScrollAmount) + 'px',
+                top: Math.floor(headerVisibleAmount) + 'px',
                 width: Math.floor(sidebarWidth) + 'px',
                 height: Math.floor(menuHeight) + 'px'
             });
