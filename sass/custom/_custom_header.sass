@@ -68,11 +68,15 @@
     &.delimiter a
       border-right: 0.1rem solid #127ae2
   #languages .Linklist li
-    display: block
     margin-bottom: 0
+    border: 0 !important
+    &:not(:last-child)
+      border-bottom: .1rem solid currentColor !important
     a
+      display: block !important
       padding: 1.6rem 1.4rem !important
       margin: 0
+      text-align: center
 
 .Header-slim-toggle a
   text-decoration: none !important

@@ -8,10 +8,7 @@
         <a class="u-color-white" href="{{ link.url }}">{% if t[link_name] %}{{ _(t[link_name]) }}{% else %}{{ _(link_name) }}{% endif %}</a>
       </li>
     {% endfor %}
-    {#
-    TODO : Hidden language switch
     {% include 'layouts/lang_switch.html' %}
-    #}
   </ul>
 
 </div>
