@@ -1,6 +1,6 @@
 .wy-affix
   position: fixed
-  top: $gutter
+  top: $gutter / 2
 
 .clear
   clear: both
@@ -13,6 +13,7 @@ a, a:hover
   text-decoration: none
 
 .doc-menu
+  padding: $gutter 0
   width: auto !important
   a:hover
     text-decoration: underline
@@ -24,11 +25,6 @@ a, a:hover
       background-color: #f6f9fc !important
   @media screen and (max-width: 992px)
     width: auto
-  @media screen and (min-width: 1460px)
-    li.current, li.current > a
-      border-top-left-radius: 4px
-    li.current, li.current > ul > li:last-child, li.current > ul > li:last-child > a
-      border-bottom-left-radius: 4px
 
 .rst-pro 
     display: none !important
@@ -57,7 +53,7 @@ a, a:hover
     display: inline-block
     line-height: $base-font-size * 1
     font-size: $small-font-size
-    padding: 1rem 1.5rem .5rem 1.5rem
+    padding: 1rem 1.6rem
     margin-bottom: 0
     display: block
     font-weight: bold
@@ -99,8 +95,7 @@ a, a:hover
 
   // On state for the first level
   li > a
-    padding: $gutter / 2 $gutter / 2
-    padding-left: $gutter -4px
+    padding: $gutter
   li.on a, li.current > a
     color: $menu-link-color
     font-weight: bold
@@ -127,10 +122,10 @@ a, a:hover
       display: block
   li.toctree-l2
     > a
-      padding: $gutter / 2 $gutter / 2 $gutter / 2 $gutter
+      padding: $gutter $gutter $gutter $gutter * 2
   li.toctree-l2
     li.toctree-l3 > a
-      padding: $gutter / 2 $gutter / 2 $gutter / 2 $gutter * 1.5
+      padding: $gutter $gutter $gutter $gutter * 3
   li.toctree-l2
     &.current
       > a
@@ -145,10 +140,10 @@ a, a:hover
   li.toctree-l3
     font-size: .9em
     > a
-      padding: $gutter / 4 $gutter / 2 $gutter / 4 $gutter * 1.5
+      padding: $gutter / 2 $gutter $gutter / 2 $gutter * 3
   li.toctree-l3
     li.toctree-l4 > a
-      padding: $gutter / 4 $gutter / 2 $gutter / 4 $gutter * 2.5
+      padding: $gutter / 2 $gutter $gutter / 2 $gutter * 5
   li.toctree-l3
     &.current
       > a
@@ -178,7 +173,7 @@ a, a:hover
   a
     display: inline-block
     line-height: 18px
-    padding: $gutter / 2 $gutter
+    padding: $gutter $gutter * 2
     display: block
     position: relative
     font-size: 90%
@@ -200,15 +195,15 @@ a, a:hover
 .wy-side-nav-search
   display: block
   width: $nav-desktop-width
-  padding: $gutter / 2
-  margin-bottom: $gutter / 2
+  padding: $gutter
+  margin-bottom: $gutter
   z-index: $z-index-popover
   background-color: $italia-blue-color
   text-align: center
-  padding: $gutter / 2
+  padding: $gutter
   display: block
   color: $white
-  margin-bottom: $gutter / 2
+  margin-bottom: $gutter
   .branding
     display: inline-block
     text-align: left
@@ -252,14 +247,14 @@ a, a:hover
     color: $white
   input[type=text]
     width: 100%
-    border-radius: 3px
+    border-radius: 4px
     padding: ($base-font-size / 2) $base-font-size
     border: none
     box-shadow: none
     font-size: $base-font-size
   img
     display: block
-    margin: auto auto $gutter / 2 auto
+    margin: auto auto $gutter auto
     height: 45px
     width: 45px
     background-color: $link-color
@@ -271,7 +266,7 @@ a, a:hover
     font-weight: bold
     display: inline-block
     padding: $base-line-height / 6 $base-line-height / 4
-    margin-bottom: $gutter / 2
+    margin-bottom: $gutter
     +font-smooth
     &:hover
       background: rgba(255,255,255,.1)
@@ -287,8 +282,8 @@ a, a:hover
       img.logo
         margin-top: 0.85em  // space it away from the title text
   > div.version
-    margin-top: -1 * ($gutter / 4)
-    margin-bottom: $gutter / 2
+    margin-top: -1 * ($gutter / 2)
+    margin-bottom: $gutter
     font-weight: normal
     color: rgba(255,255,255,.3)
 
@@ -356,7 +351,7 @@ a, a:hover
   display: none
   background: $link-color
   color: $white
-  padding: $gutter / 4 $gutter / 2
+  padding: $gutter / 2 $gutter
   position: relative
   line-height: 48px
   text-align: center
@@ -385,7 +380,7 @@ a, a:hover
   min-height: 100%
 
 .wy-nav-content
-  padding: $gutter $gutter * 2
+  padding: $gutter / 2 $gutter
   height: 100%
   max-width: 800px
   margin: auto
@@ -435,17 +430,23 @@ footer
     color: $text-medium
     font-size: 90%
 
+.rst-content, .Offcanvas-override
+    flex-basis: auto!important
 @media screen and (min-width: 992px)
+  .rst-content
+    width: calc(100% - 360px) !important
   .Offcanvas-override
+    min-width: 360px
+    width: 360px
+    position: relative
     .Offcanvas
       z-index: $z-index-none
       visibility: visible !important
       max-width: none !important
-      width: 100%
+      width: inherit !important
       position: fixed
       height: auto // set by JS
       top: auto // set by JS
-      width: 0 // set by JS
       .Offcanvas-content
         position: relative !important
         left: auto !important
@@ -478,7 +479,7 @@ footer
   .wy-nav-content-wrap
     margin-left: 0
     .wy-nav-content
-      padding: $gutter
+      padding: $gutter / 2
     &.shift
       position: fixed
       min-width: 100%
