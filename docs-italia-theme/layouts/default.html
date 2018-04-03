@@ -6,12 +6,11 @@
       {% include 'layouts/network.html' %}
       
       <div class="u-layoutCenter u-layout-wide">
-        <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch">
-          <div class="Grid-cell u-layoutCenter u-posRelative">
+
             <div class="Grid">
 
               {% include 'layouts/offcanvas.html' %}
-              <div id="rst-content" class="Grid-cell rst-content u-layout-r-withGutter u-padding-r-top u-padding-r-bottom">
+              <div id="rst-content" class="Grid-cell rst-content u-padding-r-top u-padding-r-bottom u-padding-left-xxl u-padding-right-xxl u-background-grey-15">
                 {% include 'layouts/breadcrumbs.html' %}
                 {% block body %}{% endblock %}
                 {% if (theme_prev_next_buttons_location == 'bottom' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
@@ -26,8 +25,7 @@
                 {% endif %}
               </div>
             </div>
-          </div>
-        </div>
+
       </div>
   </div>
 </div>
