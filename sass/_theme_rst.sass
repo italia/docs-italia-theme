@@ -44,7 +44,7 @@
   .literal-block, pre.literal-block
     @extend .codeblock
   // These are the various note pullouts that sphinx applies
-  .note, .attention, .caution, .danger, .error, .hint, .important, .tip, .warning, .seealso, .admonition-todo
+  .note, .attention, .caution, .danger, .error, .hint, .important, .tip, .warning, .seealso, [class^="admonition-"]
     @extend .wy-alert
     .last
       margin-bottom: 0
@@ -228,7 +228,6 @@
     dt
       display: table
       margin: $base-line-height / 4 0
-      font-size: 90%
       line-height: normal
       padding: $base-line-height / 4
       position: relative
