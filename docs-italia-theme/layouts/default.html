@@ -5,53 +5,28 @@
       {% include 'layouts/header.html' %}
       {% include 'layouts/network.html' %}
       
-      <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch">
-        <div class="Grid-cell u-layoutCenter u-posRelative">
-          <div class="Grid">
-            {% include 'layouts/offcanvas.html' %}
-            <div id="rst-content" class="rst-content Grid-cell u-layout-r-withGutter u-md-size9of12 u-lg-size9of12 u-padding-r-top u-padding-r-bottom rst-content">
-              {% include 'layouts/breadcrumbs.html' %}
-              {% block body %}{% endblock %}
-              {% if (theme_prev_next_buttons_location == 'bottom' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
-                <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-                  {% if next %}
-                    <a href="{{ next.link|e }}" class="Button Button--default u-borderRadius-m u-floatRight u-linkClean" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ t.next }} <span class="fa fa-arrow-circle-right"></span></a>
-                  {% endif %}
-                  {% if prev %}
-                    <a href="{{ prev.link|e }}" class="Button Button--default u-borderRadius-m u-linkClean" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> {{ t.previous }}</a>
-                  {% endif %}
-                </div>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-      {% if theme_custom_versions_badge == 'True' %}
-        <style>
-          /* Hides RTD injected html to display versions */
-          .injected {
-            display: none !important
-          }
-        </style>
-        <div class="injected-customised shift-up">
-          <div class="Grid u-flexJustifyAround u-flexAlignItemsStretch u-sizeFull u-noPointerEvents js-versions-bar">
-            <div class="Grid-cell u-posRelative">
-              <div class="Grid">
-                <div class="u-md-size3of12 u-lg-size3of12 u-color-white u-background-grey-90">
-                  {% include 'layouts/versions.html' %}
-                </div>
-                <div class="u-md-size8of12 u-lg-size8of12"></div>
+      <div class="u-layoutCenter u-layout-wide">
+
+            <div class="Grid">
+
+              {% include 'layouts/offcanvas.html' %}
+              <div id="rst-content" class="Grid-cell rst-content u-padding-r-top u-padding-r-bottom u-padding-left-xxl u-padding-right-xxl u-background-grey-15">
+                {% include 'layouts/breadcrumbs.html' %}
+                {% block body %}{% endblock %}
+                {% if (theme_prev_next_buttons_location == 'bottom' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
+                  <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+                    {% if next %}
+                      <a href="{{ next.link|e }}" class="Button Button--default u-borderRadius-m u-floatRight u-linkClean" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ t.next }} <span class="fa fa-arrow-circle-right"></span></a>
+                    {% endif %}
+                    {% if prev %}
+                      <a href="{{ prev.link|e }}" class="Button Button--default u-borderRadius-m u-linkClean" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> {{ t.previous }}</a>
+                    {% endif %}
+                  </div>
+                {% endif %}
               </div>
             </div>
-          </div>
-        </div>
-      {% else %}
-        {% if not READTHEDOCS %}
-          {# test content - RTD automatically injects this #}
-          {% include 'layouts/versions_local.html' %}
-        {% endif %}
-      {% endif %}
 
+      </div>
   </div>
 </div>
 

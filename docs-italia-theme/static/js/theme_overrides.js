@@ -12,8 +12,7 @@ $(function () {
 
         // menu is positioned "fixed" for bigger screens only
         if (window.innerWidth > 992) {
-            var versionsBarHeight = versionsBar.outerHeight();
-            var sidebarWidth = menuContainerElement.width();
+            var versionsBarHeight = versionsBar.outerHeight() || 0;
 
             var headerVisibleAmount = Math.max(0, header.outerHeight() - window.pageYOffset);
 
@@ -27,11 +26,11 @@ $(function () {
 
             menuElement.css({
                 top: Math.floor(headerVisibleAmount) + 'px',
-                width: Math.floor(sidebarWidth) + 'px',
                 height: Math.floor(menuHeight) + 'px'
             });
 
             versionsBar.toggleClass('u-fixedBottom', footerVisibleAmount < 0);
+            versionsBar.toggleClass('u-posAbsolute', footerVisibleAmount > 0);
 
             if (e.type === "load") {
 
@@ -46,7 +45,6 @@ $(function () {
         } else {
             menuElement.css({
                 top: 'auto',
-                width: 'auto',
                 height: 'auto'
             });
         }

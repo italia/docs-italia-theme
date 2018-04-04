@@ -82,11 +82,11 @@ List tables
 
 .. list-table:: This is a list table with images in it.
 
-    * - .. figure:: static/yi_jing_01_chien.jpg
+    * - .. figure:: static/image.jpg
 
            This is a short caption for a figure.
 
-      - .. figure:: static/yi_jing_01_chien.jpg
+      - .. figure:: static/image.jpg
 
            This is a long caption for a figure. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
            Donec porttitor dolor in odio posuere, vitae ornare libero mattis. In lobortis justo vestibulum nibh aliquet, non.
@@ -109,11 +109,11 @@ Hlists
 .. hlist::
     :columns: 2
 
-    - .. figure:: static/yi_jing_01_chien.jpg
+    - .. figure:: static/image.jpg
 
          This is a short caption for a figure.
 
-    - .. figure:: static/yi_jing_01_chien.jpg
+    - .. figure:: static/image.jpg
 
          This is a long caption for a figure. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
          Donec porttitor dolor in odio posuere, vitae ornare libero mattis. In lobortis justo vestibulum nibh aliquet, non.
@@ -194,7 +194,7 @@ Sidebar
 
 .. sidebar:: Ch'ien / The Creative
 
-    .. image:: static/yi_jing_01_chien.jpg
+    .. image:: static/image.jpg
 
     *Above* CH'IEN THE CREATIVE, HEAVEN
 
@@ -301,7 +301,7 @@ Here I am making a citation [1]_, another [2]_ and another [3]_
 Images
 ======
 
-.. figure:: static/yi_jing_01_chien.jpg
+.. figure:: static/image.jpg
     :align: right
 
     This is a caption for a figure. It can be very long and span several lines.

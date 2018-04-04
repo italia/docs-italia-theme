@@ -1,4 +1,4 @@
-<div class="Offcanvas-override Grid-cell u-layout-r-withGutter u-padding-right-none u-background-grey-80 u-md-size3of12 u-lg-size3of12 u-color-white js-menu-container">
+<div class="Grid-cell Offcanvas-override u-padding-right-none u-background-grey-80 u-color-white js-menu-container">
   <section id="menu" class="Offcanvas Offcanvas--right Offcanvas--modal js-fr-offcanvas u-jsVisibilityHidden u-nojsDisplayNone u-hiddenPrint js-menu">
     <h2 class="u-hiddenVisually">{{ _(t.navigation_menu_label) }}</h2>
     <div class="Offcanvas-content u-background-grey-80 js-menu-inner">
@@ -13,4 +13,21 @@
       </div>
     </div>
   </section>
+  {# when theme_custom_versions_badge is True the custom versions bar is shown in place of the standard RTD panel #}
+  {% if theme_custom_versions_badge == 'True' %}
+    <style>
+      /* Hides RTD injected html to display versions */
+      .injected {
+        display: none !important
+      }
+    </style>
+    <div class="injected-customised shift-up u-fixedBottom js-versions-bar u-background-grey-80" style="bottom: 0; width: inherit;">
+      {% include 'layouts/versions.html' %}
+    </div>
+  {% else %}
+    {% if not READTHEDOCS %}
+      {# test content - RTD automatically injects this #}
+      {% include 'layouts/versions_local.html' %}
+    {% endif %}
+  {% endif %}
 </div>
