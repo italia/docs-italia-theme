@@ -1,5 +1,14 @@
 <h2 class="u-padding-all-s">
-  <a href="{{ pathto(master_doc) }}" class="u-color-white">{{ project }}</a>
+
+  {% if logo and theme_logo_only %}
+  <a href="{{ pathto(master_doc) }}">
+  {% else %}
+  <a href="{{ pathto(master_doc) }}" class="u-color-white icon icon-home"> {{ project }}
+  {% endif %}
+  {% if logo %}
+  <img src="{{ pathto('_static/' + logo, 1) }}" class="logo" alt="Logo"/>
+  {% endif %}
+  </a>
 </h2>
 
 <dl class="js-preventOffCanvasClose u-padding-all-s" role="note" aria-label="versions">
