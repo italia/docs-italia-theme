@@ -10,7 +10,7 @@
             <div class="Grid">
 
               {% include 'layouts/offcanvas.html' %}
-              <div id="rst-content" class="Grid-cell rst-content u-padding-r-top u-padding-r-bottom u-padding-left-xxl u-padding-right-xxl u-background-grey-15">
+              <div id="rst-content" class="Grid-cell rst-content u-padding-all-xxl u-background-grey-15">
                 {% include 'layouts/breadcrumbs.html' %}
                 {% block body %}{% endblock %}
                 {% if (theme_prev_next_buttons_location == 'bottom' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
