@@ -9,7 +9,7 @@ H1 Titolo del documento, molto probabile su 2/3 righe
 :Publisher: Team per la Trasformazione Digitale
 :Licenza: CC-BY 4.0
 
-.. admonition:: consultation
+.. admonition:: Consultazione
 
    Questo documento è in consultazione pubblica dal 3 aprile al 4 maggio 2018,
    come previsto dall'`art. 71 comma 1 del decreto legislativo 7 marzo 2005, n.
@@ -48,4 +48,5 @@ H1 Titolo del documento, molto probabile su 2/3 righe
    :hidden:
 
    capitolo_1.rst
+   capitolo_2.rst
    glossario.rst

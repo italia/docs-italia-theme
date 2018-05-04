@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="777px" height="419px" viewBox="0 0 777 419" style="enable-background:new 0 0 777 419;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.5;fill:#D1E7FF;enable-background:new    ;}
+	.st1{fill:#5A6772;}
+	.st2{font-family:'TitilliumWeb-Bold';}
+	.st3{font-size:12px;}
+	.st4{fill:#00264D;}
+	.st5{font-family:'TitilliumWeb-Regular';}
+	.st6{font-size:20px;}
+	.st7{fill:none;stroke:#9ED0FB;stroke-width:2;}
+	.st8{fill:#008AF3;}
+	.st9{filter:url(#filter-2);}
+	.st10{fill:#FFFFFF;}
+	.st11{fill:#003366;}
+	.st12{font-size:30px;}
+	.st13{fill:#0066CC;}
+</style>
+<filter  filterUnits="objectBoundingBox" height="172.8%" id="filter-2" width="172.8%" x="-36.4%" y="-33.5%">
+	<feOffset  dx="0" dy="10" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+	<feGaussianBlur  in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="40"></feGaussianBlur>
+	<feColorMatrix  in="shadowBlurOuter1" type="matrix" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.08 0"></feColorMatrix>
+</filter>
+<title>Group 42</title>
+<desc>Created with Sketch.</desc>
+<g id="_x2D_--New-Docs-layouts">
+	<g id="docs_article_nav_2-cap_03" transform="translate(-520.000000, -2730.000000)">
+		<g id="Group-60" transform="translate(512.000000, 295.000000)">
+			<g id="Group-42" transform="translate(8.000000, 2473.000581)">
+				<g id="Group-41">
+					<path id="Rectangle-11-Copy" class="st0" d="M24,103.5h277c2.2,0,4,1.8,4,4v24c0,2.2-1.8,4-4,4H24c-2.2,0-4-1.8-4-4v-24
+						C20,105.3,21.8,103.5,24,103.5z"/>
+					<text transform="matrix(1 0 0 1 20 -6.1971)" class="st1 st2 st3">CONTESTO NORMATIVO</text>
+					<text transform="matrix(1 0 0 1 20.2234 222)" class="st1 st2 st3">PUBBLICHE AMMINISTRAZIONI</text>
+					<text transform="matrix(1 0 0 1 20 88)" class="st1 st2 st3">INDIRIZZI AGID</text>
+					<g id="Group-35" transform="translate(0.000000, 29.000000)">
+						<path id="Rectangle-11" class="st0" d="M24-19.2h144c2.2,0,4,1.8,4,4v24c0,2.2-1.8,4-4,4H24c-2.2,0-4-1.8-4-4v-24
+							C20-17.4,21.8-19.2,24-19.2z"/>
+						<text transform="matrix(1 0 0 1 28 2.8029)" class="st4 st5 st6">Legge di stablità</text>
+					</g>
+					<g id="Group-38" transform="translate(0.000000, 257.197068)">
+						<g id="Group-34">
+							<path id="Rectangle-11-Copy-3" class="st0" d="M24-19.2h89c2.2,0,4,1.8,4,4v24c0,2.2-1.8,4-4,4H24c-2.2,0-4-1.8-4-4v-24
+								C20-17.4,21.8-19.2,24-19.2z"/>
+							<text transform="matrix(1 0 0 1 27.58 2.8029)" class="st4 st5 st6">Strategia</text>
+						</g>
+					</g>
+					<g id="Group-37" transform="translate(0.000000, 298.197068)">
+						<path id="Rectangle-11-Copy-4" class="st0" d="M24-19.2h104c2.2,0,4,1.8,4,4v24c0,2.2-1.8,4-4,4H24c-2.2,0-4-1.8-4-4v-24
+							C20-17.4,21.8-19.2,24-19.2z"/>
+						<text transform="matrix(1 0 0 1 27.44 2.8029)" class="st4 st5 st6">Fabbisogni</text>
+					</g>
+					<g id="Group-36" transform="translate(0.000000, 339.197068)">
+						<path id="Rectangle-11-Copy-5" class="st0" d="M24-19.2h76c2.2,0,4,1.8,4,4v24c0,2.2-1.8,4-4,4H24c-2.2,0-4-1.8-4-4v-24
+							C20-17.4,21.8-19.2,24-19.2z"/>
+						<text transform="matrix(1 0 0 1 27.94 2.8029)" class="st4 st5 st6">Priorità</text>
+					</g>
+					<text transform="matrix(1 0 0 1 28 129.5)" class="st4 st5 st6">Strategia per la Crescita Digitale</text>
+					<g id="Group-39" transform="translate(0.000000, 165.000000)">
+						<path id="Rectangle-11-Copy-2" class="st0" d="M24-21h228c2.2,0,4,1.8,4,4V7c0,2.2-1.8,4-4,4H24c-2.2,0-4-1.8-4-4v-24
+							C20-19.2,21.8-21,24-21z"/>
+						<text transform="matrix(1 0 0 1 28 6)" class="st4 st5 st6">Stratega di evoluzione ICT</text>
+					</g>
+					
+						<g id="flowchart_x2F_arrows-_x2F_-Basic-_x2F_-_x23_13" transform="translate(257.852054, 341.197068) scale(-1, -1) translate(-257.852054, -341.197068) translate(81.852054, 323.197068)">
+						
+							<g id="_x23_13" transform="translate(176.000000, 17.590909) scale(-1, 1) translate(-176.000000, -17.590909) translate(0.000000, 0.000000)">
+							<path id="Line" class="st7" d="M22.5,23.5h339c3.3,0,6,2.7,6,6v20.2"/>
+							<circle id="Oval-3" class="st8" cx="22.5" cy="23.5" r="2.5"/>
+							<path id="Shape" class="st8" d="M371,50c0.3-0.5,0.1-0.9-0.5-0.9h-6c-0.5,0-0.8,0.4-0.5,0.9l2.9,4.8c0.3,0.5,0.8,0.5,1,0
+								L371,50z"/>
+						</g>
+					</g>
+					
+						<g id="flowchart-_x2F_-arrows-_x2F_-Basic-_x2F_-_x23_13-Copy-2" transform="translate(260.000000, 307.000000) scale(1, -1) translate(-260.000000, -307.000000) translate(110.500000, 293.000000)">
+						<g id="_x23_13_1_" transform="translate(149.500000, 14.000000) scale(-1, 1) translate(-149.500000, -14.000000) ">
+							<path id="Line_1_" class="st7" d="M-17.4,45l-0.1-14c0-3.3,2.7-6,6-6c0,0,0,0,0,0l285.9,0.1"/>
+							<circle id="Oval-3_1_" class="st8" cx="-17.5" cy="46.5" r="2.5"/>
+							<path id="Shape_1_" class="st8" d="M273.3,21.6c-0.5-0.3-0.9-0.1-0.9,0.5v6c0,0.5,0.4,0.8,0.9,0.5l4.8-2.9
+								c0.5-0.3,0.5-0.8,0-1L273.3,21.6z"/>
+						</g>
+					</g>
+					
+						<g id="flowchart_x2F_arrows-_x2F_-Basic-_x2F_-_x23_13_1_" transform="translate(289.500000, 66.500000) scale(-1, 1) translate(-289.500000, -66.500000) translate(150.000000, 45.000000)">
+						
+							<g id="_x23_13_2_" transform="translate(139.500000, 21.011364) scale(-1, 1) translate(-139.500000, -21.011364) translate(0.000000, 0.000000)">
+							<path id="Line_2_" class="st7" d="M22.5-18.5h266c3.3,0,6,2.7,6,6v27"/>
+							<circle id="Oval-3_2_" class="st8" cx="22.5" cy="-18.5" r="2.5"/>
+							<path id="Shape_2_" class="st8" d="M298,14.9c0.3-0.5,0.1-0.9-0.5-0.9h-6c-0.5,0-0.8,0.4-0.5,0.9l2.9,4.8
+								c0.3,0.5,0.8,0.5,1,0L298,14.9z"/>
+						</g>
+					</g>
+					<g id="flowchart_x2F_arrows-_x2F_-Basic-_x2F_-_x23_1" transform="translate(95.000000, 270.697068)">
+						<g id="_x23_1">
+							<path id="Line_3_" class="st7" d="M22.5-16.5h296"/>
+							<circle id="Oval-3_3_" class="st8" cx="22.5" cy="-16.5" r="2.5"/>
+							<path id="Shape_3_" class="st8" d="M318.8-19.9c-0.5-0.3-0.8-0.1-0.8,0.4v6.7c0,0.6,0.4,0.8,0.8,0.4l4.9-3.3
+								c0.5-0.3,0.5-0.8,0-1.1L318.8-19.9z"/>
+						</g>
+					</g>
+				</g>
+				<g id="Group-40" transform="translate(383.000000, 29.000000)">
+					<g id="Oval-3_4_">
+						<g class="st9">
+							<circle id="path-1_2_" cx="192" cy="151.2" r="171.8"/>
+						</g>
+						<g>
+							<circle id="path-1_1_" class="st10" cx="192" cy="151.2" r="171.8"/>
+						</g>
+					</g>
+					<g id="Group-44" transform="translate(63.452766, 64.224333)">
+						<text transform="matrix(1 0 0 1 28.3478 112)" class="st11 st2 st12">Piano Triennale</text>
+						<text transform="matrix(1 0 0 1 228.5645 112)" class="st11 st2 st12"> </text>
+						<text transform="matrix(1 0 0 1 20.9528 150)" class="st11 st2 st12">per l’informatica</text>
+						<text transform="matrix(1 0 0 1 235.9594 150)" class="st11 st2 st12"> </text>
+						<text transform="matrix(1 0 0 1 75.8828 188)" class="st11 st2 st12">nelle PA</text>
+						<path id="Page-1" class="st13" d="M144.2-18v-2.8h2.8v2.8h2.8c1.6,0,2.9,0.5,3.9,1.6c1.1,1.1,1.6,2.4,1.6,3.9v58.2
+							c0,1.6-0.5,2.9-1.6,3.9c-1.1,1.1-2.4,1.6-3.9,1.6h-41.5c-1.6,0-2.9-0.5-3.9-1.6s-1.6-2.4-1.6-3.9v-58.2c0-1.6,0.5-2.9,1.6-3.9
+							c1.1-1.1,2.4-1.6,3.9-1.6h2.8v-2.8h2.8v2.8h8.3v-2.8h2.8v2.8h8.3v-2.8h2.8v2.8H144.2z M144.2-15.2h-8.3v2.8h-2.8v-2.8h-8.3
+							v2.8H122v-2.8h-8.3v2.8H111v-2.8h-2.8c-0.8,0-1.4,0.3-1.9,0.8c-0.5,0.5-0.8,1.2-0.8,1.9v58.2c0,0.8,0.3,1.4,0.8,1.9
+							c0.5,0.5,1.2,0.8,1.9,0.8h41.5c0.8,0,1.4-0.3,1.9-0.8c0.5-0.5,0.8-1.2,0.8-1.9v-58.2c0-0.8-0.3-1.4-0.8-1.9
+							c-0.5-0.5-1.2-0.8-1.9-0.8H147v2.8h-2.8V-15.2z M124.8,4.2v2.8H147V4.2H124.8z M111,1.4h8.3v8.3H111V1.4z M113.7,4.2v2.8h2.8
+							V4.2H113.7z M111,15.2h8.3v8.3H111V15.2z M113.7,18v2.8h2.8V18H113.7z M124.8,18v2.8H147V18H124.8z M111,29.1h8.3v8.3H111
+							V29.1z M113.7,31.8v2.8h2.8v-2.8H113.7z M124.8,31.8v2.8H147v-2.8H124.8z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

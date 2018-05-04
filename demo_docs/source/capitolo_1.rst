@@ -12,8 +12,9 @@ incididunt ut labore et dolore magna aliqua. **Ut enim ad minim veniam, quis
 nostrud exercitation ullamco laboris nisi ut aliquip** ex ea commodo consequat.
 
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-fugiat nulla pariatur. Excepteur `sint occaecat cupidatat <#>`_ non proident,
-sunt in culpa qui officia deserunt mollit anim id est laborum.
+fugiat nulla pariatur. Excepteur `sint occaecat cupidatat
+<#titolo-del-sottoparagrafo>`_ non proident, sunt in culpa qui officia deserunt
+mollit anim id est laborum.
 
 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
 doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
@@ -35,6 +36,8 @@ dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
 .. table:: Didascalia testo do eiusmod tempor incididunt ut labore et dolore
    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
    laboris nisi ut aliquea commodo consequat dearen musol caolin neste.
+   :class: first-column
+   :name: quattro colonne
    
    +---------------------+-----------------------+-------------+---------------+
    | COLONNA 1           | COLONNA 2             | COLONNA 3   | COLONNA 4     |
@@ -75,7 +78,9 @@ dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
    |                     | ut aliquip ex ea      |             |               |
    |                     | commodo consequat.    |             |               |
    +---------------------+-----------------------+-------------+---------------+
-   
+
+:ref:`copia link <quattro colonne>`
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. **Ut enim ad minim veniam, quis
 nostrud exercitation ullamco laboris nisi ut aliquip** ex ea commodo consequat.
@@ -90,9 +95,7 @@ molestias excepturi sint occaecati cupiditate non provident, similique sunt in
 culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
 harum quidem rerum facilis est et expedita distinctio.
 
-..
-
-  Direttiva per i commenti da implementare.
+.. Direttiva per i commenti da implementare.
 
 ****
 
@@ -113,13 +116,17 @@ dolore magnam aliquam quaerat voluptatem:
   amministrazioni centrali (PAC) e 14.000 nelle Pubbliche amministrazioni locali
   (PAL), a cui si aggiungono circa 6.000 dipendenti delle società in house
   locali e più di 4.000 nelle società in house centrali;
+
 - stima di circa 5,7 miliardi di Euro di spesa esterna ICT;
+
 - stima di circa 11.000 data center delle Pubbliche amministrazioni;
+
 - circa 160.000 basi di dati presenti nel catalogo delle basi di dati della
   Pubblica amministrazione di AgID e oltre 200.000 applicazioni che utilizzano
   tali dati secondo quanto rilevato dal censimento svolto su 13.822
   Amministrazioni; la precisione di questi dati non è tanto importante quanto
   le dimensioni che sottolineano la complessità del problema;
+
 - oltre 25.000 siti web
 
 Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
@@ -232,7 +239,7 @@ reprehendunt cour deiro sant.
    eum ad. Ferri nonumy eos in, quem noster facete vim at, no epicurei mandamus
    duo.
 
-   `Lorem ipsum sit dolor est <#>`_
+   `Lorem ipsum sit dolor est`_
 
 ****
 
@@ -242,6 +249,8 @@ Secondo paragrafo che potrebbe andare su diverse righe fino ad un max di 3
 Sea ei copiosae constituam. Odio idque delicatissimi nec an, mel ne fabulas
 vocibus, verear interpretaris qui ne. Ius assum meliore volutpat no, quis
 delenit lobortis ad usu. Sea ea animal perfecto, sit in exerci utinam suscipit.
+
+.. _`qui inani vivendo`:
 
 Qui inani vivendo erroribus in, zril persius no quo. Wisi eripuit vim ne, ad
 quem equidem eos, eos id `labitur labores appetere <https://www.example.com>`_.
@@ -264,6 +273,8 @@ Nunc varius ultrices felis, eget efficitur sapien pulvinar sed. Morbi semper
 iaculis pulvinar. Donec sapien purus, commodo in aliquam quis, ullamcorper vitae
 diam. Donec a nibh suscipit, semper ante non, consectetur nunc. Phasellus non
 feugiat ante. Quisque nec ante eu purus ornare dignissim.
+
+.. _`lorem ipsum sit dolor est`:
 
 Nunc viverra, sapien ut sagittis bibendum, ante elit eleifend nisl, vitae semper
 purus odio sed erat. Maecenas a orci nulla. Mauris consectetur ligula justo, eu
