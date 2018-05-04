@@ -25,7 +25,7 @@ settings_copyright_copyleft = 'CC-BY 3.0 - Agenzia per l\'Italia Digitale'
 settings_editor_name = "AgID - Agenzia per l'Italia Digitale"
 settings_doc_version = '1'
 settings_doc_release = '1.0'
-settings_doc_language = 'en'
+settings_doc_language = 'it'
 settings_file_name = 'docs-italia-demo'
 
 # -- General configuration -----------------------------------------------------
@@ -52,6 +52,8 @@ mathjax_path = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?
 
 # The suffix of source filenames.
 source_suffix = '.rst'
+
+numfig = True
 
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
