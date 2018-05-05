@@ -420,7 +420,7 @@ dolore magnam aliquam quaerat voluptatem [5]_.
   `File publisher_settings.yml tratto dallo Starter
   kit`:admonition-internal-title:
 
-  .. code-block::
+  .. code-block:: xml
      :linenos:
      
      <md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
