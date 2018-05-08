@@ -1,9 +1,16 @@
-.rst-menu
-  padding-right: 0 !important
-  @media screen and (min-width: 1648px)
-    padding-left: 0 !important
+.logo
+  display: block
+  margin: 0 auto
+  height: auto
+  width: auto
+  border-radius: 0
+  max-width: 100%
+  background: transparent
 
 .rst-content
+  padding: 2rem 1rem
+  @media screen and (min-width: 768px)
+    padding: 4rem
   // Sphinx by default applies HxW style attributes to images. This fixes that oversite.
   img
     max-width: 100%
@@ -40,7 +47,7 @@
   .literal-block, pre.literal-block
     @extend .codeblock
   // These are the various note pullouts that sphinx applies
-  .note, .attention, .caution, .danger, .error, .hint, .important, .tip, .warning, .seealso, .admonition-todo
+  .note, .attention, .caution, .danger, .error, .hint, .important, .tip, .warning, .seealso, [class^="admonition-"]
     @extend .wy-alert
     .last
       margin-bottom: 0
@@ -224,7 +231,6 @@
     dt
       display: table
       margin: $base-line-height / 4 0
-      font-size: 90%
       line-height: normal
       padding: $base-line-height / 4
       position: relative

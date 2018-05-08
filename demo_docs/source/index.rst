@@ -82,11 +82,11 @@ List tables
 
 .. list-table:: This is a list table with images in it.
 
-    * - .. figure:: static/image.jpg
+    * - .. figure:: _static/image.png
 
            This is a short caption for a figure.
 
-      - .. figure:: static/image.jpg
+      - .. figure:: _static/image.png
 
            This is a long caption for a figure. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
            Donec porttitor dolor in odio posuere, vitae ornare libero mattis. In lobortis justo vestibulum nibh aliquet, non.
@@ -109,11 +109,11 @@ Hlists
 .. hlist::
     :columns: 2
 
-    - .. figure:: static/image.jpg
+    - .. figure:: _static/image.png
 
          This is a short caption for a figure.
 
-    - .. figure:: static/image.jpg
+    - .. figure:: _static/image.png
 
          This is a long caption for a figure. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
          Donec porttitor dolor in odio posuere, vitae ornare libero mattis. In lobortis justo vestibulum nibh aliquet, non.
@@ -194,7 +194,7 @@ Sidebar
 
 .. sidebar:: Ch'ien / The Creative
 
-    .. image:: static/image.jpg
+    .. image:: _static/image.png
 
     *Above* CH'IEN THE CREATIVE, HEAVEN
 
@@ -301,7 +301,7 @@ Here I am making a citation [1]_, another [2]_ and another [3]_
 Images
 ======
 
-.. figure:: static/image.jpg
+.. figure:: _static/image.png
     :align: right
 
     This is a caption for a figure. It can be very long and span several lines.

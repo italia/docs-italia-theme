@@ -2,46 +2,33 @@
   <div class="u-layout-wide u-layoutCenter u-layout-r-withGutter u-hiddenPrint">
     <footer class="Footer">
 
-      <div class="Grid Grid--withGutter u-padding-top-xl">
-
-        <div class="Grid-cell u-md-size1of2 u-lg-size1of2 u-padding-r-bottom">
-          <img class="Footer-logo u-xs-padding-right-none" src="{{ site.owner_logo }}"
-            alt="{{ site.owner_full }}" style="height: 80px; max-width: 100%">
-          <p class="Footer-siteName">
-          </p>
+      <div class="Grid Grid--withGutter">
+        <div class="Footer-logo-container--owner Grid-cell u-md-size1of2 u-lg-size5of12 u-padding-r-bottom">
+            <a href="{{ site.owner_link }}" class="u-linkClean u-text-sm-s u-text-md-m u-text-lg-m u-inlineBlock u-color-white">
+                <img class="Footer-logo u-padding-all-none" src="{{ site.owner_logo }}" alt="{{ site.owner_full }}">
+                <span class="Footer-logo-separator"></span>
+                <span class="Owner-name">{{ site.owner_full }}</span>
+            </a>
         </div>
-
-        <div class="Grid-cell u-md-size1of2 u-lg-size1of2 u-padding-r-bottom td-footer">
-          <p class="u-text-r-xxs">{{ _(t.in_collaboration_with) }}</p>
-          <div class="Grid">
-            <div class="u-inlineBlock">
-              <img class="u-padding-top-xxs u-padding-right-xs" src="{{ site.gov_logo | d('//placehold.it/75x80?text=placeholder') }}" alt=""
-                style="height: 4em; max-width: 100%">
-              <img class="u-padding-top-xxs u-padding-right-xxs" src="{{ site.partner_logo | d('//placehold.it/75x80?text=placeholder') }}" alt=""
-                style="height: 4em; max-width: 100%">
-            </div>
-            <div class="Grid-cell u-size1of12 u-padding-left-none team-bar"></div>
-            <p class="Grid-cell u-size5of12 Footer-siteName u-padding-left-xs u-text-r-xs">
-              {{ site.partner_full | upper }}
-            </p>
-          </div>
+        <div class="Footer-logo-container--partner Grid-cell u-md-size1of2 u-lg-size1of3 u-padding-r-bottom">
+            <p class="u-padding-bottom-l" style="opacity: 0.5">{{ _(t.in_collaboration_with) }}</p>
+            <a href="{{ site.partner_link }}" class="u-linkClean u-text-r-m u-inlineBlock u-color-white">
+                <img class="Footer-logo u-padding-all-none u-margin-right-s" src="{{ site.gov_logo }}" alt="{{ site.partner_full }}">
+                <img class="Footer-logo u-padding-all-none" src="{{ site.partner_logo }}" alt="{{ site.partner_full }}">
+                <span class="Footer-logo-separator--partner"></span>
+                <span class="Partner-name">{{ site.partner_full }}</span>
+            </a>
         </div>
-
       </div>
 
-      <ul class="Footer-links u-cf">
-        <div class="Grid">
-          <div class="Grid-cell u-md-size1of2 u-lg-size1of2">
-            {% for link in site.data.footer_links %}
-              {% set link_name = link.title %}
-              <li class="u-color-80"><a href="{{ link.url }}">{% if t[link_name] %}{{ _(t[link_name]) }}{% else %}{{ _(link_name) }}{% endif %}</a></li>
-            {% endfor %}
-          </div>
-          <div class="Grid-cell u-md-size1of2 u-lg-size1of2">
-            <p></p>
-          </div>
-        </div>
-      </ul>
+      <div class="Footer-links u-cf u-color-80">
+        <ul class="u-floatLeft">
+          {% for link in site.data.footer_links %}
+            {% set link_name = link.title %}
+            <li><a href="{{ link.url }}">{% if t[link_name] %}{{ _(t[link_name]) }}{% else %}{{ _(link_name) }}{% endif %}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
 
     </footer>
   </div>

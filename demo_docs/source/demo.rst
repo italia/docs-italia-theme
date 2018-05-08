@@ -452,12 +452,12 @@ Images
 
 An image directive (also clickable -- a hyperlink reference):
 
-.. image:: images/title.png
+.. image:: _static/image.png
    :target: directives_
 
 A figure directive:
 
-.. figure:: static/image.jpg
+.. figure:: _static/image.png
    :alt: reStructuredText, the markup syntax
 
    A figure is an image with a caption and/or a legend:
@@ -474,7 +474,7 @@ A figure directive:
 
 A figure directive with center alignment
 
-.. figure:: static/image.jpg
+.. figure:: _static/image.png
    :align: center
    :width: 300
 
@@ -565,7 +565,7 @@ Substitution Definitions
 
 An inline image (|example|) example:
 
-.. |EXAMPLE| image:: images/biohazard.png
+.. |EXAMPLE| image:: _static/image.png
 
 (Substitution definitions are not visible in the HTML source.)
 

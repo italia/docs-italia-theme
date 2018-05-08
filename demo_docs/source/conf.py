@@ -132,11 +132,9 @@ html_theme = 'docs-italia-theme'
 html_theme_options = {
     # If the project is meant to be a different style project, enable this layout instead of the default one.
     # Available options are: (default), 'page_home', 'page_project'
-    'layout': 'default',
-    # This option can be used with docs-italia-theme to customise how the versions "badge" is shown:
-    # 'False': default (alabaster) badge
-    # 'True': custom (italia) badge
-    'custom_versions_badge': 'True',
+    #'layout': 'default',
+    # Display logo instead of project name on the sidebar
+    #'logo_only': True
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -151,7 +149,7 @@ html_theme_path = ["../.."]
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = "static/logo-wordmark-light.svg"
+#html_logo = "_static/logo-wordmark-light.svg"
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -161,7 +159,7 @@ html_logo = "static/logo-wordmark-light.svg"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['static']
+html_static_path = ['_static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
