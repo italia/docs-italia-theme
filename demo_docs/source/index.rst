@@ -28,19 +28,41 @@ H1 Titolo del documento, molto probabile su 2/3 righe
       Quote di domanda dell’utente. Lorem ipsum dolor sit amet, adipisici elit,
       sed aiusmod tempo soiu incidunt labore et aliqua sumen fortes crauden?
 
-     - Keyword 1
-     - Keyword 2
-     - Keyword 3
-     - Keyword 4
+     - :term:`Keyword 1`
+     - :term:`Keyword 2`
+     - :term:`Keyword 3`
+     - :term:`Keyword 4`
 
    .. pull-quote:: amministrazione
 
       Quote di risposta dall’Amministrazione. Quod sale ius, id volumus invidunt
       conclusionemque mea, vis no ipsum quaeque minimum tritani adipisci.
 
-     - Keyword 1
-     - Keyword 2
-     - Keyword 3
+     - :term:`Keyword 1`
+     - :term:`Keyword 2`
+     - :term:`Keyword 3`
+
+   .. glossary::
+      
+      Keyword 1
+         Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+         consectetur, adipisci velit, sed quia non numquam eius modi tempora
+         incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+
+      Keyword 2
+         Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+         consectetur, adipisci velit, sed quia non numquam eius modi tempora
+         incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+
+      Keyword 3
+         Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+         consectetur, adipisci velit, sed quia non numquam eius modi tempora
+         incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+
+      Keyword 4
+         Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+         consectetur, adipisci velit, sed quia non numquam eius modi tempora
+         incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
 
 .. toctree::
    :maxdepth: 3
