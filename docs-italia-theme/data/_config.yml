@@ -4,11 +4,11 @@ css_theme: t-Pac
 owner_short: AgID
 owner_full: Agenzia per l'Italia Digitale
 owner_link: http://www.agid.gov.it
-owner_logo: /_static/images/logo-agid.svg
+owner_logo: _static/images/logo-agid.svg
 partner_short: Team Digitale
 partner_full: Team per la Trasformazione Digitale
-partner_logo: /_static/images/logo-team-digitale.svg
-gov_logo: /_static/images/logo-repubblica-italiana.svg
+partner_logo: _static/images/logo-team-digitale.svg
+gov_logo: _static/images/logo-repubblica-italiana.svg
 partner_link: https://teamdigitale.governo.it
 privacy_link: https://developers.italia.it/it/privacy-policy
 pill: beta
