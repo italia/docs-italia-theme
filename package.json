@@ -27,6 +27,9 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-exec": "^3.0.0",
     "grunt-open": "^0.2.3",
-    "matchdep": "^2.0.0"
+    "grunt-stylelint": "^0.10.0",
+    "matchdep": "^2.0.0",
+    "stylelint": "^9.2.0",
+    "stylelint-config-standard": "^18.2.0"
   }
 }
