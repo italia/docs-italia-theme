@@ -1,0 +1,36 @@
+.chapter-nav
+  position: relative
+
+.chapter-nav__list--hidden
+  visibility: hidden
+  opacity: 0
+  transition: visibility .35s,  opacity .35s
+  &.active
+    visibility: visible
+    opacity: 1
+
+.chapter-nav__wrap
+  position: absolute
+  left: 1rem
+  top: 0
+
+.chapter-link
+  background: none
+  border: none
+  color: $blue
+  text-transform: capitalize
+  padding: 0
+  display: inline-block
+  font-size: .9em
+  cursor: pointer
+  &:hover
+    text-decoration: underline
+.Icon
+  margin-right: 0.5rem
+  vertical-align: middle
+  color: $blue
+
+.chapter-nav__list
+  list-style-type: none
+  padding-left: 0
+  margin-bottom: 0

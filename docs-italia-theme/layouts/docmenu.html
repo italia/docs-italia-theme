@@ -1,9 +1,9 @@
-<h2 class="u-padding-all-s">
+<!-- <h2 class="u-padding-all-s">
   <a href="{{ pathto(master_doc) }}" class="u-color-white">{{ project }}</a>
-</h2>
+</h2> -->
 
-<dl class="js-preventOffCanvasClose u-padding-all-s" role="note" aria-label="versions">
-    <dt class="u-inline">{{ t.version }}:</dt>
+<dl class="badge badge-pill bg-primary" role="note" aria-label="versions">
+    <!-- <dt class="">{{ t.version }}:</dt> -->
     {%- set nav_version = version %}
     {% if READTHEDOCS and current_version %}
       {%- if current_version == 'stable' and last_stable_version %}
@@ -12,10 +12,10 @@
       {%- set nav_version = current_version %}
     {% endif %}
     {% if nav_version %}
-      <dd class="u-inline version">
-        <span class="version-dropdown">
-          <select class="version-list Button Button--default Button--version u-borderRadius-m u-text-xs" id="version-list">
-            <option value=''>{{ nav_version }}</option>
+      <dd class="">
+        <span class="">
+          <select class="" id="version-list">
+            <option value=''>{{ t.version }} {{ nav_version }}</option>
             {% for slug, url in versions %}
               {% if slug != nav_version %}
                 <option value="{{ url }}">{{ slug }}</option>
@@ -26,19 +26,3 @@
       </dd>
     {% endif %}
 </dl>
-
-<div class="js-preventOffCanvasClose u-padding-all-s">
-    {% include "layouts/searchbox.html" %}
-</div>
-
-<div class="doc-menu doc-menu doc-menu-vertical js-doc-menu-vertical">
-  {% if 'singlehtml' not in builder %}
-    {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation|tobool, includehidden=theme_includehidden|tobool) %}
-  {% endif %}
-  {% if global_toc %}
-    {{ global_toc }}
-  {% else %}
-    <!-- Local TOC -->
-    <div class="local-toc">{{ toc }}</div>
-  {% endif %}
-</div>
