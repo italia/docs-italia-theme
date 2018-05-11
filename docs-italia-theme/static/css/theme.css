@@ -86,12 +86,26 @@ img {
   flex: 0 0 auto;
 }
 
+.col--nav {
+  width: 100%;
+}
 @media (min-width: 992px) {
   .col--nav {
-    flex: 0 0 370px;
+    width: 320px;
+    float: left;
+    padding-right: 3rem;
   }
 }
 
+#doc-content {
+  width: 100%;
+}
+@media (min-width: 992px) {
+  #doc-content {
+    width: calc(100% - 320px);
+    float: left;
+  }
+}
 #doc-content .section {
   clear: both;
 }

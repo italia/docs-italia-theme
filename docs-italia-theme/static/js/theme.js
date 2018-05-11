@@ -89,7 +89,7 @@ var ThemeMarkupModifier = (function ($) {
 
     $: {
       title: $('#doc-content h1, #doc-content h2, #doc-content h3'),
-      $table: $('table.docutils')
+      $table: $('table')
     },
 
     init: function() {
@@ -126,6 +126,7 @@ var ThemeMarkupModifier = (function ($) {
 
     tableModifier: function() {
       that.$table.wrap('<div class="table-responsive">');
+      that.$table.addClass('table');
     }
   }
 })(jQuery);
