@@ -1,6 +1,6 @@
 {% include 'layouts/head.html' %}
 
-<div class="u-background-grey-15">
+<div class="">
   <div id="main">
       {% include 'layouts/header.html' %}
       <!-- {% include 'layouts/network.html' %} -->
@@ -10,19 +10,20 @@
           <div class="col--nav">
             {% include 'layouts/offcanvas.html' %}
           </div>
-          <div id="rst-content" class="col">
+          <div id="doc-content" class="col">
             {% include 'layouts/breadcrumbs.html' %}
-            {% block body %}{% endblock %}
-            {% if (theme_prev_next_buttons_location == 'bottom' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
-              <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-                {% if next %}
-                  <a href="{{ next.link|e }}" class="" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ t.next }}</a>
-                {% endif %}
-                {% if prev %}
-                  <a href="{{ prev.link|e }}" class="" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"> {{ t.previous }}</a>
-                {% endif %}
+            {% if prev %}
+              <div class="footer-buttons footer-buttons--prev" role="navigation" aria-label="footer navigation">
+                  <a href="{{ prev.link|e }}" class="" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"> {{ prev.title }}</a>
               </div>
             {% endif %}
+            {% block body %}{% endblock %}
+            {% if next %}
+              <div class="footer-buttons footer-buttons--next" role="navigation" aria-label="footer navigation">
+                  <a href="{{ next.link|e }}" class="" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ next.title }}</a>
+              </div>
+            {% endif %}
+
           </div>
         </div>
       </div>

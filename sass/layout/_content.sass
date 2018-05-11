@@ -1,5 +1,5 @@
 // General width
-#rst-content
+#doc-content
   .section
     clear: both
     &::after
@@ -7,72 +7,118 @@
       display: table
       clear: both
 
-    .title-wrap,
     > p,
     > blockquote,
     > div:not(.section):not(.chapter-header),
     > ul,
     > hr,
     > .docutils.footnote
-      width: 80%
-      float: left
-      clear: left
-
-    .chapter-nav
-      width: 20%
-      float: left
+      @media (min-width: 576px)
+        width: calc(100% - #{$chapter-nav-width})
+        float: left
+        clear: left
 
 // Title H1/H2.
 .chapter-header
   margin-bottom: 1rem
 
+.chapter-nav
+  position: relative
+  @media (min-width: 576px)
+    width: $chapter-nav-width
+    float: left
+
+#doc-content
+  .title-wrap
+    @media (min-width: 576px)
+      width: calc(100% - #{$chapter-nav-width})
+      float: left
+      clear: left
+      position: relative
+
+      // line-height is defined in px instead rem for background element crossbrowser
+      h1
+        line-height: 70px
+      h2
+        line-height: 60px
+      h3
+        line-height: 45px
+
+      h1,
+      h2,
+      h3
+        display: inline
+        cursor: pointer
+        position: relative
+        display: inline
+        margin-left: .5rem
+        color: $black
+        box-shadow: .5rem 0 0 $white, -.5rem 0 0 $white
+        -webkit-box-decoration-break: clone
+        -ms-box-decoration-break: clone
+        -o-box-decoration-break: clone
+        box-decoration-break: clone
+        left: -.5rem
+        .title__chapter
+          position: relative
+          color: $blue
+
+      h1
+        .title__chapter
+          position: relative
+          background-color: $blue
+          color: $white
+          margin-right: .5rem
+          padding-left: 0.5rem
+          padding-right: 0.5rem
+          &:after,
+          &:before
+            content: ''
+            top: 0
+            bottom: 0
+            width: .5rem
+            background-color: $blue
+            position: absolute
+          &::after
+            right: 100%
+          &::before
+            left: 100%
+
+    &.active
+      h1,
+      h2,
+      h3
+        box-shadow: .5rem 0 0 $light-blue, -.5rem 0 0 $light-blue
+        background-color: $light-blue
+      .title__background
+        display: block
+
 
 // Title nav
-#rst-content
-  h1,
-  h2,
-  h3
-    line-height: 1.4
-    display: inline
-    cursor: pointer
-    position: relative
-    display: inline
-    margin-left: .5rem
-    color: $black
-    box-shadow: .5rem 0 0 $white, -.5rem 0 0 $white
-    -webkit-box-decoration-break: clone
-    -ms-box-decoration-break: clone
-    -o-box-decoration-break: clone
-    box-decoration-break: clone
-    left: -.5rem
+.title__background
+  width: 100%
+  background-color: $light-blue
+  position: absolute
+  top: -2px
+  height: auto
+  left: 0
+  display: none
+  right: 0
+  z-index: -1
+  &::after
+    content: ''
+    position: absolute
+    left: 100%
+    transform: translateX(-50%)
+    top: 0
+    bottom: 0
+    width: 0
+    height: 0
+    border-left: 20px solid transparent
+    border-right: 20px solid transparent
+    border-top: 20px solid $light-blue
 
-    &:hover,
-    &:focus
-      box-shadow: .5rem 0 0 $light-blue, -.5rem 0 0 $light-blue
-      background-color: $light-blue
-
-    .title__chapter
-      position: relative
-      color: $blue
-  h1
-    .title__chapter
-      position: relative
-      background-color: $blue
-      color: $white
-      margin-right: .5rem
-      &:after,
-      &:before
-        content: ''
-        top: 0
-        bottom: 0
-        width: .5rem
-        background-color: $blue
-        position: absolute
-      &::after
-        right: 100%
-      &::before
-        left: 100%
-
+#doc-content
   .headerlink
     display: none
 
@@ -83,7 +129,7 @@
     font-family: $titillium-font
 
 // Publisher / Licenza.
-#rst-content
+#doc-content
   .docutils.field-list
     width: 100%
     margin-bottom: 2rem
@@ -104,13 +150,13 @@
       text-decoration: underline
 
 // Block quote.
-#rst-content
+#doc-content
   .highlights
     font-size: 1.5rem
     font-family: $stack-font
 
 // Admonition.
-#rst-content
+#doc-content
   .admonition
     margin-bottom: 2rem
 
@@ -163,7 +209,7 @@
 
 
 // Pool quote.
-#rst-content
+#doc-content
   .question-and-answers
     blockquote
       margin-top: .5rem
@@ -214,12 +260,12 @@
           border-right: 5px $light-blue-01 solid
 
 // Keywords
-#rst-content
+#doc-content
   .glossary.docutils
     display: none
 
 
-#rst-content
+#doc-content
   .useful-docs
     ul
       list-style-type: none
@@ -242,7 +288,7 @@
   border: 1px $dark-blue-border solid
 
 // Footer btn
-.rst-footer-buttons
+.footer-buttons--next
   clear: both
   margin-top: 4rem
   a
@@ -252,3 +298,6 @@
     border-radius: .2rem
     font-weight: 800
     text-transform: capitalize
+
+.footer-buttons--prev
+  margin-bottom: 2.5rem
