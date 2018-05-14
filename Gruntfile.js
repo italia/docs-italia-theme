@@ -23,6 +23,49 @@ module.exports = function(grunt) {
     stylelint: {
       all: ['sass/**/*.scss']
     },
+    
+    postcss: {
+      dev: {
+        options: {
+          map: {
+              inline: false,
+              annotation: 'docs-italia-theme/static/css'
+          },
+          processors: [
+            require('pixrem')(),
+            require('autoprefixer')({browsers: 'last 2 versions'})
+          ]
+        },
+        files: [{
+          expand: true,
+          cwd: 'docs-italia-theme/static/css',
+          src: ['**/*.css'],
+          dest: 'docs-italia-theme/static/css',
+          ext: '.css'
+        }]
+      },
+      
+      build: {
+        options: {
+          map: {
+              inline: false,
+              annotation: 'docs-italia-theme/static/css'
+          },
+          processors: [
+            require('pixrem')(),
+            require('autoprefixer')({browsers: 'last 2 versions'}),
+            require('cssnano')()
+          ]
+        },
+        files: [{
+          expand: true,
+          cwd: 'docs-italia-theme/static/css',
+          src: ['**/*.css'],
+          dest: 'docs-italia-theme/static/css',
+          ext: '.css'
+        }]
+      }
+    },
 
     sass: {
       dev: {
@@ -93,6 +136,13 @@ module.exports = function(grunt) {
         ],
         tasks: ['sass:dev']
       },
+      /* Process css into theme directory */
+      postcss: {
+        files: [
+          'docs-italia-theme/static/css/**/*.css'
+        ],
+        tasks: ['postcss:dev']
+      },
       /* Changes in theme dir rebuild sphinx */
       sphinx: {
         files: ['docs-italia-theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
@@ -117,6 +167,7 @@ module.exports = function(grunt) {
     'clean',
     'stylelint',
     'sass:dev',
+    'postcss:dev',
     'browserify:dev',
     'exec:build_sphinx',
     'connect',
@@ -128,6 +179,7 @@ module.exports = function(grunt) {
     'clean',
     'stylelint',
     'sass:build',
+    'postcss:build',
     'browserify:build',
     'exec:build_sphinx'
   ]);
