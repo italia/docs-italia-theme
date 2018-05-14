@@ -657,4 +657,26 @@ img {
   background-position: center;
 }
 
+#doc-content table {
+  border: 0;
+}
+#doc-content thead .head {
+  border-right: 0;
+  border-left: 0;
+  text-transform: uppercase;
+  color: #000;
+  font-size: 0.75rem;
+}
+#doc-content td {
+  border-right: 0;
+  border-left: 0;
+}
+#doc-content tr {
+  font-size: 0.75rem;
+}
+#doc-content tr td:nth-of-type(1) {
+  font-weight: 800;
+  color: #002b4d;
+}
+
 /*# sourceMappingURL=theme.css.map */
