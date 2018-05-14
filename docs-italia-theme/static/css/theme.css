@@ -117,7 +117,7 @@ img {
 @media (min-width: 992px) {
   #doc-content .section > p,
   #doc-content .section > blockquote,
-  #doc-content .section > div:not(.section):not(.chapter-header):not(.caption-wrap),
+  #doc-content .section > div:not(.section):not(.chapter-header):not(.caption-wrap):not(.table-responsive),
   #doc-content .section > ul,
   #doc-content .section > hr,
   #doc-content .section > .docutils.footnote {
@@ -658,10 +658,10 @@ img {
   background-position: center;
 }
 
-#doc-content table {
+#doc-content table:not(.footnote) {
   border: 0;
 }
-#doc-content thead .head {
+#doc-content table:not(.footnote) thead .head {
   border-right: 0;
   border-left: 0;
   text-transform: uppercase;
@@ -669,16 +669,19 @@ img {
   font-size: 0.75rem;
   vertical-align: top;
 }
-#doc-content td {
+#doc-content table:not(.footnote) td {
   border-right: 0;
   border-left: 0;
 }
-#doc-content tr {
+#doc-content table:not(.footnote) tr {
   font-size: 0.75rem;
 }
-#doc-content tr td:nth-of-type(1) {
+#doc-content table:not(.footnote) tr td:nth-of-type(1) {
   font-weight: 800;
   color: #002b4d;
+}
+#doc-content table:not(.highlighttable):not(.footnote) td {
+  min-width: 240px;
 }
 
 /*# sourceMappingURL=theme.css.map */

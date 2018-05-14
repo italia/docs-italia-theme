@@ -15,12 +15,10 @@
 
     > p,
     > blockquote,
-    > div:not(.section):not(.chapter-header):not(.caption-wrap),
+    > div:not(.section):not(.chapter-header):not(.caption-wrap):not(.table-responsive),
     > ul,
     > hr,
     > .docutils.footnote
-
-
       @media (min-width: 992px)
         width: calc(100% - #{$chapter-nav-width})
         float: left

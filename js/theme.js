@@ -88,7 +88,7 @@ var ThemeMarkupModifier = (function ($) {
 
     $: {
       title: $('#doc-content h1, #doc-content h2, #doc-content h3'),
-      $table: $('table'),
+      $table: $('table:not(.footnote)'),
       $captionReference: $('table, .figure')
     },
 
