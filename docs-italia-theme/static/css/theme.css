@@ -164,9 +164,9 @@ img {
     cursor: pointer;
     position: relative;
     display: inline;
-    margin-left: 0.5rem;
     color: #000;
     box-shadow: 0.5rem 0 0 #fff, -0.5rem 0 0 #fff;
+    -webkit-box-shadow: 0.5rem 0 0 #fff, -0.5rem 0 0 #fff;
     -webkit-box-decoration-break: clone;
     -ms-box-decoration-break: clone;
     -o-box-decoration-break: clone;
@@ -186,6 +186,8 @@ img {
     margin-right: 0.5rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    display: inline-block;
+    z-index: 1;
   }
   #doc-content .title-wrap h1 .title__chapter:after, #doc-content .title-wrap h1 .title__chapter:before {
     content: "";
@@ -216,9 +218,9 @@ img {
   width: 100%;
   background-color: #e6f3fe;
   position: absolute;
-  top: -2px;
+  top: -1px;
   height: auto;
-  left: 0;
+  left: -0.5rem;
   display: none;
   right: 0;
   z-index: -1;

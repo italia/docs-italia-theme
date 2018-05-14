@@ -191,7 +191,7 @@ var ThemeChapterNav = (function ($) {
           if( that.$window.outerWidth() > 576 ) {
             var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
             $wrap = $(this).find('.title-wrap');
-            lineHeight = parseInt($(this).find('.has-nav').css('line-height'))+4;
+            lineHeight = parseInt($(this).find('.has-nav').css('line-height'))+2;
 
             $nav.addClass('active');
             $wrap.addClass('active');

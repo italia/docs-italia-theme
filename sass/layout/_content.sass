@@ -57,9 +57,9 @@
         cursor: pointer
         position: relative
         display: inline
-        margin-left: .5rem
         color: $black
         box-shadow: .5rem 0 0 $white, -.5rem 0 0 $white
+        -webkit-box-shadow: .5rem 0 0 $white, -.5rem 0 0 $white
         -webkit-box-decoration-break: clone
         -ms-box-decoration-break: clone
         -o-box-decoration-break: clone
@@ -77,6 +77,8 @@
           margin-right: .5rem
           padding-left: 0.5rem
           padding-right: 0.5rem
+          display: inline-block
+          z-index: 1
           &:after,
           &:before
             content: ''
@@ -105,9 +107,9 @@
   width: 100%
   background-color: $light-blue
   position: absolute
-  top: -2px
+  top: -1px
   height: auto
-  left: 0
+  left: -.5rem
   display: none
   right: 0
   z-index: -1
