@@ -203,7 +203,7 @@ var ThemeChapterNav = (function ($) {
           "<li class='chapter-nav__item'>" +
           "<span class='u-text-r-l Icon Icon-share'></span>" +
           "<button type='button' class='chapter-link'>Confronta versioni</button></li>" +
-          "<li class='chapter-link chapter-nav__item'>" +
+          "<li class='chapter-nav__item'>" +
           "<span class='u-text-r-l Icon Icon-share'></span>" +
           "<button type='button' class='chapter-link'>Condividi</button>" +
           "</li></ul></div></div></div>";

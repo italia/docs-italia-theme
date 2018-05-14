@@ -165,6 +165,7 @@ img {
 
 .chapter-header {
   margin-bottom: 1rem;
+  margin-left: 0.5rem;
 }
 
 .chapter-nav {
@@ -626,7 +627,7 @@ img {
 }
 @media (min-width: 992px) {
   .chapter-nav__list--visible {
-    margin-top: 0;
+    margin-top: -0.5rem;
   }
 }
 .chapter-nav__list--visible .chapter-nav__item {
@@ -666,6 +667,7 @@ img {
   text-transform: uppercase;
   color: #000;
   font-size: 0.75rem;
+  vertical-align: top;
 }
 #doc-content td {
   border-right: 0;
