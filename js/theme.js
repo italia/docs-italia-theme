@@ -1,3 +1,4 @@
+require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({"docs-italia-theme":[function(require,module,exports){
 // Keywords Tolltip
 var ThemeToolTip = (function ($) {
   var that;
@@ -87,7 +88,7 @@ var ThemeMarkupModifier = (function ($) {
 
     $: {
       title: $('#doc-content h1, #doc-content h2, #doc-content h3'),
-      $table: $('table.docutils')
+      $table: $('table')
     },
 
     init: function() {
@@ -107,6 +108,7 @@ var ThemeMarkupModifier = (function ($) {
         if( !ThemeMarkupModifier.dotNumberValidator(number) ) {
           $element.html(title.replace(number , '<span class="title__chapter">' + number + '</span>'));
           $element.addClass('has-nav');
+          $element.closest('.title-wrap').append('<span class="title__background">');
         }
       })
     },
@@ -123,6 +125,7 @@ var ThemeMarkupModifier = (function ($) {
 
     tableModifier: function() {
       that.$table.wrap('<div class="table-responsive">');
+      that.$table.addClass('table');
     }
   }
 })(jQuery);
@@ -183,44 +186,64 @@ var ThemeChapterNav = (function ($) {
     addHandler: function(element) {
       var $expanded = $('.chapter-link--expand');
 
-      if (!that.$html.hasClass('touch') && that.$window.outerWidth() > 576) {
+      if (!that.$html.hasClass('touch')) {
         $('.chapter-header').on('mouseover' , function(){
-          var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden');
-          $nav.addClass('active');
-        });
+          if( that.$window.outerWidth() > 576 ) {
+            var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
+            $wrap = $(this).find('.title-wrap');
+            lineHeight = parseInt($(this).find('.has-nav').css('line-height'))+4;
 
-        $('.chapter-header').on('mouseout' , function(){
-          var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden');
-          $nav.removeClass('active');
+            $nav.addClass('active');
+            $wrap.addClass('active');
+            $wrap.find('.title__background').css('height',lineHeight);
+          }
         });
-      } else if (that.$html.hasClass('touch') && that.$window.outerWidth() <= 576) {
-        $('.chapter-nav__list--hidden').on('click' , function(event){
-          if($(event.target).is($('.chapter-nav__list--hidden'))) {
-            $(this).removeClass('active');
-            that.$body.removeClass('no-scroll');
+        $('.chapter-header').on('mouseout' , function(){
+          if( that.$window.outerWidth() > 576 ) {
+            var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
+                $wrap = $(this).find('.title-wrap');
+            $nav.removeClass('active');
+            $wrap.removeClass('active');
           }
         });
       }
 
-      if (that.$html.hasClass('touch')) {
+      else if (that.$html.hasClass('touch')) {
+        // Close lightbox on click ( toch monitor)
+        $('.chapter-nav__list--hidden').on('click' , function(event){
+          if( $(event.target).is( $('.chapter-nav__list--hidden'))){
+            var $wrap = $(this).closest('.chapter-header').find('.title-wrap');
+            $(this).removeClass('active');
+            that.$body.removeClass('no-scroll');
+            $wrap.removeClass('active');
+          }
+        });
+
+        // Open nav ( toch monitor)
         $expanded.on('click' , function(){
-          var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden');
+          var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
+              $wrap = $(this).closest('.chapter-header').find('.title-wrap'),
+              lineHeight = parseInt($(this).closest('.chapter-header').find('.has-nav').css('line-height'))+4;
           if( $nav.hasClass('active') ) {
             $nav.removeClass('active');
+            $wrap.removeClass('active');
           } else {
             $nav.addClass('active');
+            $wrap.addClass('active');
+            $wrap.find('.title__background').css('height',lineHeight);
             if(that.$window.outerWidth() <= 576) {
               that.$body.addClass('no-scroll');
             }
           }
-
         });
-      };
+      }
 
+      // Close when bosy is clikked.
       that.$body.on('click' , function(){
         var $nav = that.$title.closest('.chapter-header').find('.chapter-nav__list--hidden');
         if( !$('.chapter-header').has(event.target).length > 0 ) {
           $('.chapter-nav__list--hidden').removeClass('active');
+          $('.title-wrap').removeClass('active');
         }
       });
 
@@ -229,3 +252,5 @@ var ThemeChapterNav = (function ($) {
 })(jQuery);
 
 ThemeChapterNav.init();
+
+},{}]},{},["docs-italia-theme"]);
