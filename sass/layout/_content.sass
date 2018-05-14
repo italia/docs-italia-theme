@@ -15,14 +15,44 @@
 
     > p,
     > blockquote,
-    > div:not(.section):not(.chapter-header),
+    > div:not(.section):not(.chapter-header):not(.caption-wrap),
     > ul,
     > hr,
     > .docutils.footnote
-      @media (min-width: 576px)
+
+
+      @media (min-width: 992px)
         width: calc(100% - #{$chapter-nav-width})
         float: left
         clear: left
+
+// Caption
+.caption-wrap
+  clear: both
+  .caption--table
+    margin-top: 2rem
+    margin-bottom: 2rem
+    display: block
+    font-family: $stack-font
+    font-style: italic
+    font-size: .75rem
+    padding: 0
+    @media (min-width: 992px)
+      width: calc(100% - #{$chapter-nav-width})
+      float: left
+  .reference--wrap
+    font-family: $titillium-font
+    margin-top: 1.5rem
+    margin-bottom: 2rem
+    @media (min-width: 992px)
+      width: $chapter-nav-width
+      float: right
+      padding-left: 2rem
+
+.caption-number
+  font-weight: 800
+  color: $black
+
 
 // Title H1/H2.
 .chapter-header
@@ -30,13 +60,13 @@
 
 .chapter-nav
   position: relative
-  @media (min-width: 576px)
+  @media (min-width: 992px)
     width: $chapter-nav-width
     float: left
 
 #doc-content
   .title-wrap
-    @media (min-width: 576px)
+    @media (min-width: 992px)
       width: calc(100% - #{$chapter-nav-width})
       float: left
       clear: left
@@ -309,3 +339,11 @@
 
 .footer-buttons--prev
   margin-bottom: 2.5rem
+
+
+// Reference icon
+.reference.internal
+  vertical-align: middle
+
+.reference-icon
+  display: inline-block

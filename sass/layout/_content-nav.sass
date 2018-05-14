@@ -1,5 +1,5 @@
 .chapter-nav__list--hidden
-  @media (max-width: 575px)
+  @media (max-width: 991px)
     display: none
     position: fixed
     top: 0
@@ -20,7 +20,7 @@
     &.active
       display: block
 
-  @media (min-width: 576px)
+  @media (min-width: 992px)
     visibility: hidden
     opacity: 0
     transition: visibility .35s,  opacity .35s
@@ -29,7 +29,7 @@
       opacity: 1
 
 .chapter-nav__wrap
-  @media (min-width: 576px)
+  @media (min-width: 992px)
     position: absolute
     left: 2rem
     top: 0
@@ -57,14 +57,14 @@
 
 .chapter-nav__item:not(:last-child)
   margin-bottom: 1rem
-  @media (min-width: 576px)
+  @media (min-width: 992px)
     margin-bottom: 0
 
 .chapter-nav__list--visible
   margin-top: 1rem
-  @media (min-width: 576px)
+  @media (min-width: 992px)
     margin-top: 0
   .chapter-nav__item
     display: inline-block
-    @media (min-width: 576px)
+    @media (min-width: 992px)
       display: block

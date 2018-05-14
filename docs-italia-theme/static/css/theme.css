@@ -114,10 +114,10 @@ img {
   display: table;
   clear: both;
 }
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   #doc-content .section > p,
   #doc-content .section > blockquote,
-  #doc-content .section > div:not(.section):not(.chapter-header),
+  #doc-content .section > div:not(.section):not(.chapter-header):not(.caption-wrap),
   #doc-content .section > ul,
   #doc-content .section > hr,
   #doc-content .section > .docutils.footnote {
@@ -127,6 +127,42 @@ img {
   }
 }
 
+.caption-wrap {
+  clear: both;
+}
+.caption-wrap .caption--table {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: block;
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-size: 0.75rem;
+  padding: 0;
+}
+@media (min-width: 992px) {
+  .caption-wrap .caption--table {
+    width: calc(100% - 200px);
+    float: left;
+  }
+}
+.caption-wrap .reference--wrap {
+  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 992px) {
+  .caption-wrap .reference--wrap {
+    width: 200px;
+    float: right;
+    padding-left: 2rem;
+  }
+}
+
+.caption-number {
+  font-weight: 800;
+  color: #000;
+}
+
 .chapter-header {
   margin-bottom: 1rem;
 }
@@ -134,14 +170,14 @@ img {
 .chapter-nav {
   position: relative;
 }
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   .chapter-nav {
     width: 200px;
     float: left;
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   #doc-content .title-wrap {
     width: calc(100% - 200px);
     float: left;
@@ -425,6 +461,14 @@ img {
   margin-bottom: 2.5rem;
 }
 
+.reference.internal {
+  vertical-align: middle;
+}
+
+.reference-icon {
+  display: inline-block;
+}
+
 .footer-menu__link:hover {
   color: #fff;
 }
@@ -497,7 +541,7 @@ img {
   color: #0073e6;
 }
 
-@media (max-width: 575px) {
+@media (max-width: 991px) {
   .chapter-nav__list--hidden {
     display: none;
     position: fixed;
@@ -522,7 +566,7 @@ img {
     display: block;
   }
 }
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   .chapter-nav__list--hidden {
     visibility: hidden;
     opacity: 0;
@@ -534,7 +578,7 @@ img {
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   .chapter-nav__wrap {
     position: absolute;
     left: 2rem;
@@ -571,7 +615,7 @@ img {
 .chapter-nav__item:not(:last-child) {
   margin-bottom: 1rem;
 }
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   .chapter-nav__item:not(:last-child) {
     margin-bottom: 0;
   }
@@ -580,7 +624,7 @@ img {
 .chapter-nav__list--visible {
   margin-top: 1rem;
 }
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   .chapter-nav__list--visible {
     margin-top: 0;
   }
@@ -588,7 +632,7 @@ img {
 .chapter-nav__list--visible .chapter-nav__item {
   display: inline-block;
 }
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   .chapter-nav__list--visible .chapter-nav__item {
     display: block;
   }

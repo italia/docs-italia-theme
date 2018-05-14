@@ -88,13 +88,15 @@ var ThemeMarkupModifier = (function ($) {
 
     $: {
       title: $('#doc-content h1, #doc-content h2, #doc-content h3'),
-      $table: $('table')
+      $table: $('table'),
+      $captionReference: $('table, .figure')
     },
 
     init: function() {
       that = this.$;
       ThemeMarkupModifier.titleModifier();
       ThemeMarkupModifier.tableModifier()
+      ThemeMarkupModifier.captionModifier()
     },
 
     titleModifier: function() {
@@ -107,8 +109,9 @@ var ThemeMarkupModifier = (function ($) {
         $element.wrap('<div class="chapter-header clearfix"><div class="title-wrap">');
         if( !ThemeMarkupModifier.dotNumberValidator(number) ) {
           $element.html(title.replace(number , '<span class="title__chapter">' + number + '</span>'));
-          $element.addClass('has-nav');
+          $element.addClass('title-has-nav');
           $element.closest('.title-wrap').append('<span class="title__background">');
+          $element.closest('.chapter-header').addClass('has-nav');
         }
       })
     },
@@ -124,8 +127,33 @@ var ThemeMarkupModifier = (function ($) {
     },
 
     tableModifier: function() {
+      // Wrap table into 'table-responsive'.
       that.$table.wrap('<div class="table-responsive">');
       that.$table.addClass('table');
+    },
+
+    captionModifier: function() {
+      // Move caption after table.
+      var $caption = that.$captionReference.find('caption, .caption');
+      if ( $caption.length ) {
+        $caption.each(function(index) {
+        var $caption = $(this),
+            $table = $caption.closest('.table-responsive, .figure');
+            $p = $table.next(),
+            $reference = $p.find('.reference.internal');
+
+        $table.after($caption);
+        $caption.addClass('caption--table');
+        // check if there is a copy link after cation
+        if($reference.length) {
+          $reference.prepend('<div class="reference-icon u-text-r-l Icon Icon-link"></div>')
+          $p.addClass('reference--wrap')
+          $caption.wrap('<div class="caption-wrap">');
+          $caption.closest('.caption-wrap').append($p);
+        }
+        });
+
+      }
     }
   }
 })(jQuery);
@@ -140,7 +168,7 @@ var ThemeChapterNav = (function ($) {
   return {
 
     $: {
-      $title: $('h1.has-nav, h2.has-nav, h3.has-nav'),
+      $title: $('.chapter-header.has-nav h1,.chapter-header.has-nav h2,.chapter-header.has-nav h3'),
       $body: $('body'),
       $html: $('html'),
       $window: $(window)
@@ -187,19 +215,19 @@ var ThemeChapterNav = (function ($) {
       var $expanded = $('.chapter-link--expand');
 
       if (!that.$html.hasClass('touch')) {
-        $('.chapter-header').on('mouseover' , function(){
-          if( that.$window.outerWidth() > 576 ) {
+        $('.chapter-header.has-nav').on('mouseover' , function(){
+          if( that.$window.outerWidth() > 992 ) {
             var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
             $wrap = $(this).find('.title-wrap');
-            lineHeight = parseInt($(this).find('.has-nav').css('line-height'))+2;
+            lineHeight = parseInt($(this).find('.title-has-nav').css('line-height'))+2;
 
             $nav.addClass('active');
             $wrap.addClass('active');
             $wrap.find('.title__background').css('height',lineHeight);
           }
         });
-        $('.chapter-header').on('mouseout' , function(){
-          if( that.$window.outerWidth() > 576 ) {
+        $('.chapter-header.has-nav').on('mouseout' , function(){
+          if( that.$window.outerWidth() > 992 ) {
             var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
                 $wrap = $(this).find('.title-wrap');
             $nav.removeClass('active');
@@ -208,38 +236,37 @@ var ThemeChapterNav = (function ($) {
         });
       }
 
-      else if (that.$html.hasClass('touch')) {
-        // Close lightbox on click ( toch monitor)
-        $('.chapter-nav__list--hidden').on('click' , function(event){
-          if( $(event.target).is( $('.chapter-nav__list--hidden'))){
-            var $wrap = $(this).closest('.chapter-header').find('.title-wrap');
-            $(this).removeClass('active');
-            that.$body.removeClass('no-scroll');
-            $wrap.removeClass('active');
-          }
-        });
+      // Close lightbox on click ( toch monitor)
+      $('.chapter-nav__list--hidden').on('click' , function(event){
+        if( $(event.target).is( $('.chapter-nav__list--hidden'))){
+          var $wrap = $(this).closest('.chapter-header').find('.title-wrap');
+          $(this).removeClass('active');
+          that.$body.removeClass('no-scroll');
+          $wrap.removeClass('active');
+        }
+      });
 
-        // Open nav ( toch monitor)
-        $expanded.on('click' , function(){
-          var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
-              $wrap = $(this).closest('.chapter-header').find('.title-wrap'),
-              lineHeight = parseInt($(this).closest('.chapter-header').find('.has-nav').css('line-height'))+4;
-          if( $nav.hasClass('active') ) {
-            $nav.removeClass('active');
-            $wrap.removeClass('active');
-          } else {
-            $nav.addClass('active');
-            $wrap.addClass('active');
-            $wrap.find('.title__background').css('height',lineHeight);
-            if(that.$window.outerWidth() <= 576) {
-              that.$body.addClass('no-scroll');
-            }
+      // Open nav ( toch monitor)
+      $expanded.on('click' , function(){
+        var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
+            $wrap = $(this).closest('.chapter-header').find('.title-wrap'),
+            lineHeight = parseInt($(this).closest('.chapter-header').find('.title-has-nav').css('line-height'))+4;
+        if( $nav.hasClass('active') ) {
+          $nav.removeClass('active');
+          $wrap.removeClass('active');
+        } else {
+          $nav.addClass('active');
+          $wrap.addClass('active');
+          $wrap.find('.title__background').css('height',lineHeight);
+          if(that.$window.outerWidth() <= 576) {
+            that.$body.addClass('no-scroll');
           }
-        });
-      }
+        }
+      });
+
 
       // Close when bosy is clikked.
-      that.$body.on('click' , function(){
+      that.$body.on('click' , function(event){
         var $nav = that.$title.closest('.chapter-header').find('.chapter-nav__list--hidden');
         if( !$('.chapter-header').has(event.target).length > 0 ) {
           $('.chapter-nav__list--hidden').removeClass('active');
