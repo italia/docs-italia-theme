@@ -1,0 +1,72 @@
+.doc-tooltip {
+  background-color: $white;
+  font-family: $stack-font;
+  box-shadow: (-1px) 0px 112px -14px rgba($black, 0.15);
+
+  &:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-left: 30px solid $white;
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    z-index: -1;
+  }
+}
+
+.tooltip__wrap {
+  overflow: hidden;
+  width: 330px;
+  padding: 2rem;
+}
+
+.tooltip__title {
+  overflow: hidden;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  font-size: 1em;
+}
+
+.tooltip__content {
+  font-size: 0.9em;
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+.tooltip__close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 1px;
+    background-color: $blue;
+    top: 0;
+    left: 50%;
+  }
+
+  &::after {
+    transform: rotate(45deg) translateX(-50%);
+  }
+
+  &::before {
+    transform: rotate(-45deg) translateX(-50%);
+  }
+}
+
+#rst-content .tooltip__link {
+  color: $blue;
+}
