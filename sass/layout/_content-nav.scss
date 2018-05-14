@@ -1,0 +1,97 @@
+.chapter-nav__list--hidden {
+  @media (max-width: 991px) {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba($black, 0.6);
+
+    .chapter-nav__list {
+      background-color: $white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 2rem;
+      border-radius: 0.5rem;
+      width: 100%;
+      max-width: 250px;
+    }
+
+    &.active {
+      display: block;
+    }
+  }
+
+  @media (min-width: 992px) {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.35s, opacity 0.35s;
+
+    &.active {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.chapter-nav__wrap {
+  @media (min-width: 992px) {
+    position: absolute;
+    left: 2rem;
+    top: 0;
+  }
+}
+
+.chapter-link {
+  background: none;
+  border: none;
+  color: $blue;
+  text-transform: capitalize;
+  padding: 0;
+  display: inline-block;
+  font-size: 0.9em;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.Icon {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  color: $blue;
+}
+
+.chapter-nav__list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.chapter-nav__item:not(:last-child) {
+  margin-bottom: 1rem;
+
+  @media (min-width: 992px) {
+    margin-bottom: 0;
+  }
+}
+
+.chapter-nav__list--visible {
+  margin-top: 1rem;
+
+  @media (min-width: 992px) {
+    margin-top: -0.5rem;
+  }
+
+  .chapter-nav__item {
+    display: inline-block;
+
+    @media (min-width: 992px) {
+      display: block;
+    }
+  }
+}
