@@ -1,5 +1,9 @@
 body {
   color: $grey-mid;
+
+  &.no-scroll {
+    overflow-y: hidden;
+  }
 }
 
 p {
@@ -13,4 +17,9 @@ h4,
 h5 {
   color: $black;
   margin-bottom: 2rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
