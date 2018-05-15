@@ -1,9 +1,9 @@
 .doc-tooltip {
   background-color: $white;
   font-family: $stack-font;
-  box-shadow: (-1px) 0px 112px -14px rgba($black, 0.15);
+  box-shadow: (-1px) 0 112px -14px rgba($black, 0.15);
 
-  &:after {
+  &::after {
     content: "";
     width: 0;
     height: 0;

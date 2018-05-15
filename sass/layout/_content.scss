@@ -16,74 +16,111 @@
       clear: both;
     }
 
-    > p,
-    > blockquote,
-    > div:not(.section):not(.chapter-header):not(.caption-wrap):not(.table-responsive),
-    > ul,
-    > hr,
-    > .docutils.footnote {
+    // Content width
+    > * {
       @media (min-width: 992px) {
         width: calc(100% - #{$chapter-nav-width});
         float: left;
         clear: left;
       }
     }
+
+    // Exeption
+    .section,
+    .chapter-header,
+    .caption-wrap,
+    .table-responsive {
+      @media (min-width: 992px) {
+        width: 100%;
+        float: none;
+      }
+    }
   }
-}
 
-/* Caption */
-.caption-wrap {
-  clear: both;
+  // Procedure
+  .procedure.topic {
+    margin-bottom: 3rem;
 
-  .caption--table {
+    em {
+      font-weight: 800;
+    }
+  }
+
+  .procedure__img {
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+    margin-left: .5rem;
     margin-top: 2rem;
-    margin-bottom: 2rem;
-    display: block;
-    font-family: $stack-font;
-    font-style: italic;
-    font-size: 0.75rem;
-    padding: 0;
+    border-left: 1px $medium-blue-01 solid;
 
-    @media (min-width: 992px) {
-      width: calc(100% - #{$chapter-nav-width});
-      float: left;
+    img {
+      box-shadow: 0 0 61px 0 rgba($black, 0.15);
     }
   }
 
-  .reference--wrap {
+  .procedure-internal-title {
+    text-transform: uppercase;
+    color: $black;
     font-family: $titillium-font;
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
 
-    @media (min-width: 992px) {
-      width: $chapter-nav-width;
-      float: right;
-      padding-left: 2rem;
+  ol {
+    padding-left: 1rem;
+
+    li {
+      position: relative;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      counter-increment: list;
+      list-style-type: none;
+      font-family: $stack-font;
+
+      &::before {
+        display: inline-block;
+        width: 0;
+        top: 1.5rem;
+        height: 0;
+        left: -1rem;
+        position: absolute;
+        border-left: 0.55rem solid transparent;
+        border-right: 0.55rem solid transparent;
+        border-top: 0.45rem solid $mid-dark-blue;
+        content: '';
+      }
+
+      &::after {
+        position: absolute;
+        left: -1rem;
+        top: 0;
+        width: 1.1rem;
+        background-color: $mid-dark-blue;
+        height: 1.5rem;
+        z-index: -1;
+        content: counter(list);
+        color: $white;
+        text-align: center;
+        font-family: $titillium-font;
+        font-weight: 600;
+      }
     }
   }
-}
 
-.caption-number {
-  font-weight: 800;
-  color: $black;
-}
+  .useful-docs {
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
 
-/* Title H1/H2 */
-.chapter-header {
-  margin-bottom: 1rem;
-  margin-left: 0.5rem;
-}
-
-.chapter-nav {
-  position: relative;
-
-  @media (min-width: 992px) {
-    width: $chapter-nav-width;
-    float: left;
+    li {
+      border-top: 1px $grey solid;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
   }
-}
 
-#doc-content {
+  // Title
   .title-wrap {
     @media (min-width: 992px) {
       width: calc(100% - #{$chapter-nav-width});
@@ -110,7 +147,6 @@
         display: inline;
         cursor: pointer;
         position: relative;
-        display: inline;
         color: $black;
         box-shadow: 0.5rem 0 0 $white, -0.5rem 0 0 $white;
         -webkit-box-shadow: 0.5rem 0 0 $white, -0.5rem 0 0 $white;
@@ -137,8 +173,8 @@
           display: inline-block;
           z-index: 1;
 
-          &:after,
-          &:before {
+          &::after,
+          &::before {
             content: "";
             top: 0;
             bottom: 0;
@@ -171,36 +207,7 @@
       }
     }
   }
-}
 
-/* Title nav */
-.title__background {
-  width: 100%;
-  background-color: $light-blue;
-  position: absolute;
-  top: -1px;
-  height: auto;
-  left: -0.5rem;
-  display: none;
-  right: 0;
-  z-index: -1;
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 100%;
-    transform: translateX(-50%);
-    top: 0;
-    bottom: 0;
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid $light-blue;
-  }
-}
-
-#doc-content {
   .headerlink {
     display: none;
   }
@@ -211,10 +218,8 @@
     font-size: 1.4rem;
     font-family: $titillium-font;
   }
-}
 
-/* Publisher / License */
-#doc-content {
+  // Publisher / Licenza.
   .docutils.field-list {
     width: 100%;
     margin-bottom: 2rem;
@@ -243,18 +248,14 @@
       text-decoration: underline;
     }
   }
-}
 
-/* Block quote */
-#doc-content {
+  // Block quote.
   .highlights {
     font-size: 1.5rem;
     font-family: $stack-font;
   }
-}
 
-/* Admonition */
-#doc-content {
+  // Admonition.
   .admonition {
     margin-bottom: 2rem;
 
@@ -325,10 +326,8 @@
       }
     }
   }
-}
 
-/* Pool quote */
-#doc-content {
+  // Pool quote.
   .question-and-answers {
     blockquote {
       margin-top: 0.5rem;
@@ -395,27 +394,89 @@
       }
     }
   }
-}
 
-/* Keywords */
-#doc-content {
+  // Keywords
   .glossary.docutils {
     display: none;
   }
 }
 
-#doc-content {
-  .useful-docs {
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
+/* Caption */
+.caption-wrap {
+  clear: both;
 
-    li {
-      border-top: 1px $grey solid;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
+  .caption--table {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: block;
+    font-family: $stack-font;
+    font-style: italic;
+    font-size: 0.75rem;
+    padding: 0;
+
+    @media (min-width: 992px) {
+      width: calc(100% - #{$chapter-nav-width});
+      float: left;
     }
+  }
+
+  .reference--wrap {
+    font-family: $titillium-font;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+
+    @media (min-width: 992px) {
+      width: $chapter-nav-width;
+      float: right;
+      padding-left: 2rem;
+    }
+  }
+}
+
+.caption-number {
+  font-weight: 800;
+  color: $black;
+}
+
+/* Title H1/H2 */
+.chapter-header {
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+}
+
+.chapter-nav {
+  position: relative;
+
+  @media (min-width: 992px) {
+    width: $chapter-nav-width;
+    float: left;
+  }
+}
+
+/* Title nav */
+.title__background {
+  width: 100%;
+  background-color: $light-blue;
+  position: absolute;
+  top: -1px;
+  height: auto;
+  left: -0.5rem;
+  display: none;
+  right: 0;
+  z-index: -1;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid $light-blue;
   }
 }
 

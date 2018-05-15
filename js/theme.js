@@ -88,15 +88,16 @@ var ThemeMarkupModifier = (function ($) {
 
     $: {
       title: $('#doc-content h1, #doc-content h2, #doc-content h3'),
-      $table: $('table:not(.footnote)'),
+      $table: $('table:not(.footnote):not(.docutils.field-list)'),
       $captionReference: $('table, .figure')
     },
 
     init: function() {
       that = this.$;
       ThemeMarkupModifier.titleModifier();
-      ThemeMarkupModifier.tableModifier()
-      ThemeMarkupModifier.captionModifier()
+      ThemeMarkupModifier.tableModifier();
+      ThemeMarkupModifier.captionModifier();
+      ThemeMarkupModifier.procedureModifier();
     },
 
     titleModifier: function() {
@@ -154,6 +155,12 @@ var ThemeMarkupModifier = (function ($) {
         });
 
       }
+    },
+
+    procedureModifier: function() {
+      // Wrap procedure img
+      var $img = $('.procedure.topic').find('img');
+      $img.wrap('<div class="procedure__img">');
     }
   }
 })(jQuery);
@@ -256,10 +263,12 @@ var ThemeChapterNav = (function ($) {
           $wrap.removeClass('active');
         } else {
           $nav.addClass('active');
-          $wrap.addClass('active');
-          $wrap.find('.title__background').css('height',lineHeight);
-          if(that.$window.outerWidth() <= 576) {
-            that.$body.addClass('no-scroll');
+          if( that.$window.outerWidth() > 992 ) {
+            $wrap.addClass('active');
+            $wrap.find('.title__background').css('height',lineHeight);
+            if(that.$window.outerWidth() <= 576) {
+              that.$body.addClass('no-scroll');
+            }
           }
         }
       });

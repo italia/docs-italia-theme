@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    
+
     stylelint: {
       all: ['sass/**/*.scss']
     },
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'sass',
-          src: ['*.sass'],
+          src: ['*.scss'],
           dest: 'docs-italia-theme/static/css',
           ext: '.css'
         }]
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'sass',
-          src: ['*.sass'],
+          src: ['*.scss'],
           dest: 'docs-italia-theme/static/css',
           ext: '.css'
         }]
@@ -89,7 +89,7 @@ module.exports = function(grunt) {
       /* Compile sass changes into theme directory */
       sass: {
         files: [
-          'sass/**/*.sass'
+          'sass/**/*.scss'
         ],
         tasks: ['sass:dev']
       },

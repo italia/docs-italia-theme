@@ -1,4 +1,4 @@
-require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({"docs-italia-theme":[function(require,module,exports){
+require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"docs-italia-theme":[function(require,module,exports){
 require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({"docs-italia-theme":[function(require,module,exports){
 // Keywords Tolltip
 var ThemeToolTip = (function ($) {
@@ -89,15 +89,16 @@ var ThemeMarkupModifier = (function ($) {
 
     $: {
       title: $('#doc-content h1, #doc-content h2, #doc-content h3'),
-      $table: $('table:not(.footnote)'),
+      $table: $('table:not(.footnote):not(.docutils.field-list)'),
       $captionReference: $('table, .figure')
     },
 
     init: function() {
       that = this.$;
       ThemeMarkupModifier.titleModifier();
-      ThemeMarkupModifier.tableModifier()
-      ThemeMarkupModifier.captionModifier()
+      ThemeMarkupModifier.tableModifier();
+      ThemeMarkupModifier.captionModifier();
+      ThemeMarkupModifier.procedureModifier();
     },
 
     titleModifier: function() {
@@ -155,6 +156,12 @@ var ThemeMarkupModifier = (function ($) {
         });
 
       }
+    },
+
+    procedureModifier: function() {
+      // Wrap procedure img
+      var $img = $('.procedure.topic').find('img');
+      $img.wrap('<div class="procedure__img">');
     }
   }
 })(jQuery);
@@ -257,10 +264,12 @@ var ThemeChapterNav = (function ($) {
           $wrap.removeClass('active');
         } else {
           $nav.addClass('active');
-          $wrap.addClass('active');
-          $wrap.find('.title__background').css('height',lineHeight);
-          if(that.$window.outerWidth() <= 576) {
-            that.$body.addClass('no-scroll');
+          if( that.$window.outerWidth() > 992 ) {
+            $wrap.addClass('active');
+            $wrap.find('.title__background').css('height',lineHeight);
+            if(that.$window.outerWidth() <= 576) {
+              that.$body.addClass('no-scroll');
+            }
           }
         }
       });

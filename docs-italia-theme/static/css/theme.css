@@ -1,3 +1,8 @@
+/* Theme variables */
+/* Color */
+/* Font */
+/* Base */
+/* Background colors */
 .bg-primary--dark {
   background-color: #06c;
 }
@@ -10,6 +15,7 @@
   background-color: #002b4d;
 }
 
+/* Text colors */
 .text-grey {
   color: #ccc;
 }
@@ -18,10 +24,12 @@
   color: #e6f3fe;
 }
 
+/* Border colors */
 .border-dark-blue {
   border-color: #193e5e !important;
 }
 
+/* Theme layout */
 body {
   color: #596771;
 }
@@ -86,23 +94,28 @@ img {
   flex: 0 0 auto;
 }
 
+.info--header {
+  /* background */
+}
+
 .col--nav {
   width: 100%;
 }
 @media (min-width: 992px) {
   .col--nav {
-    width: 320px;
+    width: 350px;
     float: left;
     padding-right: 3rem;
   }
 }
 
+/* General width */
 #doc-content {
   width: 100%;
 }
 @media (min-width: 992px) {
   #doc-content {
-    width: calc(100% - 320px);
+    width: calc(100% - 350px);
     float: left;
   }
 }
@@ -115,75 +128,97 @@ img {
   clear: both;
 }
 @media (min-width: 992px) {
-  #doc-content .section > p,
-  #doc-content .section > blockquote,
-  #doc-content .section > div:not(.section):not(.chapter-header):not(.caption-wrap):not(.table-responsive),
-  #doc-content .section > ul,
-  #doc-content .section > hr,
-  #doc-content .section > .docutils.footnote {
+  #doc-content .section > * {
     width: calc(100% - 200px);
     float: left;
     clear: left;
   }
 }
-
-.caption-wrap {
-  clear: both;
-}
-.caption-wrap .caption--table {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  display: block;
-  font-family: "Lora", serif;
-  font-style: italic;
-  font-size: 0.75rem;
-  padding: 0;
-}
 @media (min-width: 992px) {
-  .caption-wrap .caption--table {
-    width: calc(100% - 200px);
-    float: left;
+  #doc-content .section .section,
+  #doc-content .section .chapter-header,
+  #doc-content .section .caption-wrap,
+  #doc-content .section .table-responsive {
+    width: 100%;
+    float: none;
   }
 }
-.caption-wrap .reference--wrap {
-  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
+#doc-content .procedure.topic {
+  margin-bottom: 3rem;
 }
-@media (min-width: 992px) {
-  .caption-wrap .reference--wrap {
-    width: 200px;
-    float: right;
-    padding-left: 2rem;
-  }
-}
-
-.caption-number {
+#doc-content .procedure.topic em {
   font-weight: 800;
+}
+#doc-content .procedure__img {
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+  margin-left: .5rem;
+  margin-top: 2rem;
+  border-left: 1px #799ebc solid;
+}
+#doc-content .procedure__img img {
+  box-shadow: 0 0 61px 0 rgba(0, 0, 0, 0.15);
+}
+#doc-content .procedure-internal-title {
+  text-transform: uppercase;
   color: #000;
+  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
 }
-
-.chapter-header {
-  margin-bottom: 1rem;
-  margin-left: 0.5rem;
+#doc-content ol {
+  padding-left: 1rem;
 }
-
-.chapter-nav {
+#doc-content ol li {
   position: relative;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  counter-increment: list;
+  list-style-type: none;
+  font-family: "Lora", serif;
 }
-@media (min-width: 992px) {
-  .chapter-nav {
-    width: 200px;
-    float: left;
-  }
+#doc-content ol li::before {
+  display: inline-block;
+  width: 0;
+  top: 1.5rem;
+  height: 0;
+  left: -1rem;
+  position: absolute;
+  border-left: 0.55rem solid transparent;
+  border-right: 0.55rem solid transparent;
+  border-top: 0.45rem solid #004e95;
+  content: '';
 }
-
+#doc-content ol li::after {
+  position: absolute;
+  left: -1rem;
+  top: 0;
+  width: 1.1rem;
+  background-color: #004e95;
+  height: 1.5rem;
+  z-index: -1;
+  content: counter(list);
+  color: #fff;
+  text-align: center;
+  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+}
+#doc-content .useful-docs ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+#doc-content .useful-docs li {
+  border-top: 1px #ccc solid;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 @media (min-width: 992px) {
   #doc-content .title-wrap {
     width: calc(100% - 200px);
     float: left;
     clear: left;
     position: relative;
+    /* line-height is defined in px instead rem for background element crossbrowser */
   }
   #doc-content .title-wrap h1 {
     line-height: 70px;
@@ -200,7 +235,6 @@ img {
     display: inline;
     cursor: pointer;
     position: relative;
-    display: inline;
     color: #000;
     box-shadow: 0.5rem 0 0 #fff, -0.5rem 0 0 #fff;
     -webkit-box-shadow: 0.5rem 0 0 #fff, -0.5rem 0 0 #fff;
@@ -226,7 +260,7 @@ img {
     display: inline-block;
     z-index: 1;
   }
-  #doc-content .title-wrap h1 .title__chapter:after, #doc-content .title-wrap h1 .title__chapter:before {
+  #doc-content .title-wrap h1 .title__chapter::after, #doc-content .title-wrap h1 .title__chapter::before {
     content: "";
     top: 0;
     bottom: 0;
@@ -250,32 +284,6 @@ img {
 #doc-content .title-wrap.active .title__background {
   display: block;
 }
-
-.title__background {
-  width: 100%;
-  background-color: #e6f3fe;
-  position: absolute;
-  top: -1px;
-  height: auto;
-  left: -0.5rem;
-  display: none;
-  right: 0;
-  z-index: -1;
-}
-.title__background::after {
-  content: "";
-  position: absolute;
-  left: 100%;
-  transform: translateX(-50%);
-  top: 0;
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid #e6f3fe;
-}
-
 #doc-content .headerlink {
   display: none;
 }
@@ -285,7 +293,6 @@ img {
   font-size: 1.4rem;
   font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
 #doc-content .docutils.field-list {
   width: 100%;
   margin-bottom: 2rem;
@@ -311,12 +318,10 @@ img {
   color: #06c;
   text-decoration: underline;
 }
-
 #doc-content .highlights {
   font-size: 1.5rem;
   font-family: "Lora", serif;
 }
-
 #doc-content .admonition {
   margin-bottom: 2rem;
 }
@@ -364,7 +369,6 @@ img {
 #doc-content .admonition.hint .reference.internal::after {
   content: "";
 }
-
 #doc-content .question-and-answers blockquote {
   margin-top: 0.5rem;
   margin-bottom: 0;
@@ -419,32 +423,103 @@ img {
   padding-right: 1.5rem;
   border-right: 5px #00c4c8 solid;
 }
-
 #doc-content .glossary.docutils {
   display: none;
 }
 
-#doc-content .useful-docs ul {
-  list-style-type: none;
-  padding-left: 0;
+/* Caption */
+.caption-wrap {
+  clear: both;
 }
-#doc-content .useful-docs li {
-  border-top: 1px #ccc solid;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.caption-wrap .caption--table {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: block;
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-size: 0.75rem;
+  padding: 0;
+}
+@media (min-width: 992px) {
+  .caption-wrap .caption--table {
+    width: calc(100% - 200px);
+    float: left;
+  }
+}
+.caption-wrap .reference--wrap {
+  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 992px) {
+  .caption-wrap .reference--wrap {
+    width: 200px;
+    float: right;
+    padding-left: 2rem;
+  }
 }
 
+.caption-number {
+  font-weight: 800;
+  color: #000;
+}
+
+/* Title H1/H2 */
+.chapter-header {
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+}
+
+.chapter-nav {
+  position: relative;
+}
+@media (min-width: 992px) {
+  .chapter-nav {
+    width: 200px;
+    float: left;
+  }
+}
+
+/* Title nav */
+.title__background {
+  width: 100%;
+  background-color: #e6f3fe;
+  position: absolute;
+  top: -1px;
+  height: auto;
+  left: -0.5rem;
+  display: none;
+  right: 0;
+  z-index: -1;
+}
+.title__background::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  transform: translateX(-50%);
+  top: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #e6f3fe;
+}
+
+/* Term */
 .std-term {
   background-color: #e6f3fe;
   color: #000;
   padding: 0.2rem;
 }
 
+/* Note */
 .footnote-reference {
   color: #193e5e;
   border: 1px #193e5e solid;
 }
 
+/* Footer btn */
 .footer-buttons--next {
   clear: both;
   margin-top: 4rem;
@@ -462,6 +537,7 @@ img {
   margin-bottom: 2.5rem;
 }
 
+/* Reference icon */
 .reference.internal {
   vertical-align: middle;
 }
@@ -477,9 +553,9 @@ img {
 .doc-tooltip {
   background-color: #fff;
   font-family: "Lora", serif;
-  box-shadow: -1px 0px 112px -14px rgba(0, 0, 0, 0.15);
+  box-shadow: -1px 0 112px -14px rgba(0, 0, 0, 0.15);
 }
-.doc-tooltip:after {
+.doc-tooltip::after {
   content: "";
   width: 0;
   height: 0;
