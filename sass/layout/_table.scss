@@ -2,6 +2,17 @@
   table:not(.footnote) {
     border: 0;
 
+    td {
+      border-right: 0;
+      border-left: 0;
+    }
+
+    &:not(.highlighttable) {
+      td {
+        min-width: 240px;
+      }
+    }
+
     thead {
       .head {
         border-right: 0;
@@ -13,11 +24,6 @@
       }
     }
 
-    td {
-      border-right: 0;
-      border-left: 0;
-    }
-
     tr {
       font-size: 0.75rem;
 
@@ -25,12 +31,6 @@
         font-weight: 800;
         color: $dark-blue;
       }
-    }
-  }
-
-  table:not(.highlighttable):not(.footnote) {
-    td {
-      min-width: 240px;
     }
   }
 }

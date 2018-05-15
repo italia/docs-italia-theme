@@ -75,4 +75,18 @@
   font-weight: 100;
   text-transform: uppercase;
   letter-spacing: 0;
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 30px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAGCAYAAAAVMmT4AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gUPDDQNy1r5IQAAAH5JREFUGNNj+I8HTD704v+ZR1/gfCYGPODNlz8MLv3XGc4+/srAwMDAwHjx6df//jNuYVX84esfhg9f/jAI8LAw3G4yYGD8+vPv/ztvfmBVPP3wK4YZ+14wdIfJM5Q4SzIw/v///z8uZzRsf8rAw8bEUOIsCRHA58EXn36h8AF2435mx6vmAAAAAABJRU5ErkJggg==');
+    background-repeat: no-repeat;
+    bottom: 0;
+    background-position: center;
+  }
 }

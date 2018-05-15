@@ -74,7 +74,6 @@ var ThemeToolTip = (function ($) {
       };
 
       for (var index = 0; index < that.toolTipArrayKeywords.length; ++index) {
-
         var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
             "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArrayKeywords[index].ref + "></button>" +
             "<h2 class='tooltip__title'>" + that.toolTipArrayKeywords[index].title + "</h2>" +
@@ -82,7 +81,7 @@ var ThemeToolTip = (function ($) {
             "<h2 class='tooltip__link'>" + "vai al Glossario"+ "</h2>" +
             "</div></div>",
             btn = that.toolTipArrayKeywords[index].btn;
-        btn.popover({template:toolTipTemplate,offset:'115px , 40px',container: btn});
+        btn.popover({template:toolTipTemplate,offset:'125px , 40px',container: btn});
       };
 
       that.$btnKeywords.on('click' , function(event){
