@@ -41,7 +41,7 @@ var ThemeToolTip = (function ($) {
     addhandler: function() {
       for (var index = 0; index < that.toolTipArray.length; ++index) {
         var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
-            "<button type='button' role='button' class='tooltip__close-btn'data-ref=" + that.toolTipArray[index].ref + "></button>" +
+            "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArray[index].ref + "></button>" +
             "<h2 class='tooltip__title'>" + that.toolTipArray[index].title + "</h2>" +
             "<p class='tooltip__content'>" + that.toolTipArray[index].body + "</p>" +
             "</div></div>";
@@ -54,13 +54,10 @@ var ThemeToolTip = (function ($) {
         event.preventDefault();
       });
 
-      $(document).on('click','.tooltip__close-btn', function(){
-        var ref = $(this).attr('data-ref');
-            btn = that.btn.filter(function(){
-              return ($(this).attr("data-ref") == ref)
-             });
-        btn.popover('hide');
+      $(document).on('click','.tooltip__close-btn', function(e){
+        $(e.target).blur();
       });
+
     }
   }
 })(jQuery);

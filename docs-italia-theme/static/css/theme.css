@@ -335,13 +335,13 @@ img {
     /* line-height is defined in px instead rem for background element crossbrowser */
   }
   #doc-content .title-wrap h1 {
-    line-height: 70px;
+    line-height: 71px;
   }
   #doc-content .title-wrap h2 {
     line-height: 60px;
   }
   #doc-content .title-wrap h3 {
-    line-height: 45px;
+    line-height: 46px;
   }
   #doc-content .title-wrap h1,
   #doc-content .title-wrap h2,
@@ -449,6 +449,7 @@ img {
 #doc-content .admonition.admonition-consultazione {
   padding-bottom: 1rem;
   border-bottom: 1px #ccc solid;
+  position: relative;
 }
 #doc-content .admonition.admonition-consultazione a {
   text-decoration: underline;
@@ -459,6 +460,9 @@ img {
 #doc-content .admonition.admonition-consultazione .admonition-title {
   color: #000;
   font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#doc-content .admonition.admonition-consultazione .admonition-title span {
+  color: inherit;
 }
 #doc-content .admonition.important, #doc-content .admonition.error, #doc-content .admonition.hint, #doc-content .admonition.note, #doc-content .admonition.attention {
   margin-top: 2rem;

@@ -128,7 +128,7 @@
 
       /* line-height is defined in px instead rem for background element crossbrowser */
       h1 {
-        line-height: 70px;
+        line-height: 71px;
       }
 
       h2 {
@@ -136,7 +136,7 @@
       }
 
       h3 {
-        line-height: 45px;
+        line-height: 46px;
       }
 
       h1,
@@ -269,6 +269,7 @@
     &.admonition-consultazione {
       padding-bottom: 1rem;
       border-bottom: 1px $grey solid;
+      position: relative;
 
       a {
         text-decoration: underline;
@@ -281,6 +282,10 @@
       .admonition-title {
         color: $black;
         font-family: $titillium-font;
+
+        span {
+          color: inherit;
+        }
       }
     }
 
