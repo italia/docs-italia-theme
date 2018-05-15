@@ -121,7 +121,7 @@ module.exports = function(grunt) {
         files: [
           'sass/**/*.scss'
         ],
-        tasks: ['sass:dev']
+        tasks: ['sass']
       },
       /* Process css into theme directory */
       postcss: {
