@@ -23,9 +23,9 @@ module.exports = function(grunt) {
     stylelint: {
       all: ['sass/**/*.scss']
     },
-
+    
     sass: {
-      dev: {
+      all: {
         options: {
           style: 'expanded'
         },
@@ -36,16 +36,46 @@ module.exports = function(grunt) {
           dest: 'docs-italia-theme/static/css',
           ext: '.css'
         }]
-      },
-
-      build: {
+      }
+    },
+    
+    postcss: {
+      dev: {
         options: {
-          style: 'compressed'
+          map: {
+              inline: false,
+              annotation: 'docs-italia-theme/static/css'
+          },
+          processors: [
+            require('pixrem')(),
+            require('autoprefixer')({browsers: 'last 2 versions'})
+          ]
         },
         files: [{
           expand: true,
-          cwd: 'sass',
-          src: ['*.scss'],
+          cwd: 'docs-italia-theme/static/css',
+          src: ['**/*.css'],
+          dest: 'docs-italia-theme/static/css',
+          ext: '.css'
+        }]
+      },
+      
+      build: {
+        options: {
+          map: {
+              inline: false,
+              annotation: 'docs-italia-theme/static/css'
+          },
+          processors: [
+            require('pixrem')(),
+            require('autoprefixer')({browsers: 'last 2 versions'}),
+            require('cssnano')()
+          ]
+        },
+        files: [{
+          expand: true,
+          cwd: 'docs-italia-theme/static/css',
+          src: ['**/*.css'],
           dest: 'docs-italia-theme/static/css',
           ext: '.css'
         }]
@@ -93,6 +123,13 @@ module.exports = function(grunt) {
         ],
         tasks: ['sass:dev']
       },
+      /* Process css into theme directory */
+      postcss: {
+        files: [
+          'docs-italia-theme/static/css/**/*.css'
+        ],
+        tasks: ['postcss:dev']
+      },
       /* Changes in theme dir rebuild sphinx */
       sphinx: {
         files: ['docs-italia-theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
@@ -116,7 +153,8 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'clean',
     'stylelint',
-    'sass:dev',
+    'sass',
+    'postcss:dev',
     'browserify:dev',
     'exec:build_sphinx',
     'connect',
@@ -127,7 +165,8 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'clean',
     'stylelint',
-    'sass:build',
+    'sass',
+    'postcss:build',
     'browserify:build',
     'exec:build_sphinx'
   ]);
