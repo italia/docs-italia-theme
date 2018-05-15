@@ -24,6 +24,21 @@ module.exports = function(grunt) {
       all: ['sass/**/*.scss']
     },
     
+    sass: {
+      all: {
+        options: {
+          style: 'expanded'
+        },
+        files: [{
+          expand: true,
+          cwd: 'sass',
+          src: ['*.scss'],
+          dest: 'docs-italia-theme/static/css',
+          ext: '.css'
+        }]
+      }
+    },
+    
     postcss: {
       dev: {
         options: {
@@ -61,34 +76,6 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'docs-italia-theme/static/css',
           src: ['**/*.css'],
-          dest: 'docs-italia-theme/static/css',
-          ext: '.css'
-        }]
-      }
-    },
-
-    sass: {
-      dev: {
-        options: {
-          style: 'expanded'
-        },
-        files: [{
-          expand: true,
-          cwd: 'sass',
-          src: ['*.scss'],
-          dest: 'docs-italia-theme/static/css',
-          ext: '.css'
-        }]
-      },
-
-      build: {
-        options: {
-          style: 'compressed'
-        },
-        files: [{
-          expand: true,
-          cwd: 'sass',
-          src: ['*.scss'],
           dest: 'docs-italia-theme/static/css',
           ext: '.css'
         }]
@@ -166,7 +153,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'clean',
     'stylelint',
-    'sass:dev',
+    'sass',
     'postcss:dev',
     'browserify:dev',
     'exec:build_sphinx',
@@ -178,7 +165,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'clean',
     'stylelint',
-    'sass:build',
+    'sass',
     'postcss:build',
     'browserify:build',
     'exec:build_sphinx'
