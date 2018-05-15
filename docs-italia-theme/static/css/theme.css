@@ -457,6 +457,18 @@ img {
   font-size: 1.5rem;
   font-family: "Lora", serif;
 }
+#doc-content blockquote.epigraph {
+  margin-top: 2rem;
+  padding-left: 2rem;
+  border-left: 4px #00c4c8 solid;
+  color: #596771;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+#doc-content blockquote.epigraph .attribution {
+  margin-bottom: 0;
+  font-size: 1rem;
+}
 #doc-content .admonition {
   margin-bottom: 2rem;
 }

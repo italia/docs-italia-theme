@@ -13,7 +13,7 @@
     li{
       position: relative;
       margin-bottom: .5rem;
-      
+
       &::after {
         content: '';
         width: 0;
@@ -275,6 +275,21 @@
   .highlights {
     font-size: 1.5rem;
     font-family: $stack-font;
+  }
+
+  // Quote
+  blockquote.epigraph {
+    margin-top: 2rem;
+    padding-left: 2rem;
+    border-left: 4px $light-blue-01 solid;
+    color: $grey-mid;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+
+    .attribution {
+      margin-bottom: 0;
+      font-size: 1rem;
+    }
   }
 
   // Admonition.
