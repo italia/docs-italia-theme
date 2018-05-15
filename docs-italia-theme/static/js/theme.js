@@ -99,6 +99,7 @@ var ThemeMarkupModifier = (function ($) {
       ThemeMarkupModifier.tableModifier();
       ThemeMarkupModifier.captionModifier();
       ThemeMarkupModifier.procedureModifier();
+      ThemeMarkupModifier.addIcon();
     },
 
     titleModifier: function() {
@@ -148,7 +149,7 @@ var ThemeMarkupModifier = (function ($) {
         $caption.addClass('caption--table');
         // check if there is a copy link after cation
         if($reference.length) {
-          $reference.prepend('<div class="reference-icon u-text-r-l Icon Icon-link"></div>')
+          $reference.prepend('<div class="reference-icon Icon it-icon-link"></div>')
           $p.addClass('reference--wrap')
           $caption.wrap('<div class="caption-wrap">');
           $caption.closest('.caption-wrap').append($p);
@@ -162,6 +163,24 @@ var ThemeMarkupModifier = (function ($) {
       // Wrap procedure img
       var $img = $('.procedure.topic').find('img');
       $img.wrap('<div class="procedure__img">');
+    },
+
+    addIcon: function() {
+      var $note = $('.admonition.note .admonition-title'),
+          $error = $('.admonition.error .admonition-title'),
+          $consiglio = $('.admonition.hint .admonition-title'),
+          $attention = $('.admonition.attention .admonition-title'),
+          $important = $('.admonition.important .admonition-title'),
+          $usefulDocs = $('.useful-docs li'),
+          $numericList = $('#doc-content ol li');
+
+      $note.prepend('<span class="Icon it-icon-note"></span>');
+      $error.prepend('<span class="Icon it-icon-procedure"></span>');
+      $consiglio.prepend('<span class="Icon it-icon-hint"></span>');
+      $attention.prepend('<span class="Icon it-icon-attention"></span>');
+      $important.prepend('<span class="Icon it-icon-hint"></span>');
+      $usefulDocs.prepend('<span class="Icon it-icon-pdf"></span>');
+      $numericList.prepend('<span class="Icon it-icon-step Icon--ol"></span>');
     }
   }
 })(jQuery);
@@ -195,24 +214,24 @@ var ThemeChapterNav = (function ($) {
       var nav = "<div class='chapter-nav'><div class='chapter-nav__wrap'>" +
           "<ul class='chapter-nav__list chapter-nav__list--visible'>" +
           "<li class='chapter-nav__item'>" +
-          "<span class='u-text-r-l Icon Icon-comment'></span>" +
+          "<span class='Icon it-icon-comment'></span>" +
           "<button type='button' class='chapter-link'><span>4</span> commenti</button></li>" +
           "<li class='chapter-nav__item'>" +
-          "<span class='u-text-r-l Icon Icon-more-items'></span>" +
+          "<span class='Icon it-icon-more'></span>" +
           "<button type='button' class='chapter-link chapter-link--expand'>Vedi Azioni</button></li>" +
           "<li class='chapter-nav__item'>" +
-          "<span class='u-text-r-l Icon Icon-more-items'></span>" +
+          "<span class='Icon it-icon-more'></span>" +
           "<button type='button' class='chapter-link chapter-link--expand'>Altre Azioni</button></li></ul>" +
           "<div class='chapter-nav__list--hidden'>" +
           "<ul class='chapter-nav__list'>" +
           "<li class='chapter-nav__item'>" +
-          "<span class='u-text-r-l Icon Icon-link'></span>" +
+          "<span class='Icon it-icon-link'></span>" +
           "<button type='button' class='chapter-link'>Copia link</button></li>" +
           "<li class='chapter-nav__item'>" +
-          "<span class='u-text-r-l Icon Icon-share'></span>" +
+          "<span class='Icon it-icon-compare'></span>" +
           "<button type='button' class='chapter-link'>Confronta versioni</button></li>" +
           "<li class='chapter-nav__item'>" +
-          "<span class='u-text-r-l Icon Icon-share'></span>" +
+          "<span class='Icon it-icon-share'></span>" +
           "<button type='button' class='chapter-link'>Condividi</button>" +
           "</li></ul></div></div></div>";
       container = element.closest('.chapter-header');

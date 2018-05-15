@@ -29,6 +29,123 @@
   border-color: #193e5e !important;
 }
 
+@font-face {
+  font-family: 'docs-italia';
+  src: url("../fonts/docs-italia.eot");
+  src: url("../fonts/docs-italia.eot#iefix") format("embedded-opentype"), url("../fonts/docs-italia.ttf") format("truetype"), url("../fonts/docs-italia.woff") format("woff"), url("../fonts/docs-italia.svg#docs-italia") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="it-icon-"], [class*=" it-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'docs-italia' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.it-icon-more:before {
+  content: "\e900";
+}
+
+.it-icon-expand:before {
+  content: "\e901";
+}
+
+.it-icon-collapse:before {
+  content: "\e902";
+}
+
+.it-icon-plus:before {
+  content: "\e903";
+}
+
+.it-icon-minus:before {
+  content: "\e904";
+}
+
+.it-icon-document:before {
+  content: "\e905";
+}
+
+.it-icon-edit:before {
+  content: "\e906";
+}
+
+.it-icon-download:before {
+  content: "\e907";
+}
+
+.it-icon-info:before {
+  content: "\e908";
+}
+
+.it-icon-compare:before {
+  content: "\e909";
+}
+
+.it-icon-github:before {
+  content: "\e90a";
+}
+
+.it-icon-share:before {
+  content: "\e90b";
+}
+
+.it-icon-search:before {
+  content: "\e90c";
+}
+
+.it-icon-link:before {
+  content: "\e90d";
+}
+
+.it-icon-external-link:before {
+  content: "\e90e";
+}
+
+.it-icon-comment:before {
+  content: "\e90f";
+}
+
+.it-icon-attention:before {
+  content: "\e910";
+}
+
+.it-icon-example:before {
+  content: "\e911";
+}
+
+.it-icon-procedure:before {
+  content: "\e912";
+}
+
+.it-icon-hint:before {
+  content: "\e913";
+}
+
+.it-icon-note:before {
+  content: "\e914";
+}
+
+.it-icon-step:before {
+  content: "\e915";
+}
+
+.it-icon-pdf:before {
+  content: "\e916";
+}
+
+.it-icon-html:before {
+  content: "\e917";
+}
+
 /* Theme layout */
 body {
   color: #596771;
@@ -166,6 +283,12 @@ img {
   font-size: 0.8rem;
   font-weight: 800;
 }
+#doc-content .Icon--ol {
+  color: #004e95;
+  position: absolute;
+  left: -1.5rem;
+  font-size: 2rem;
+}
 #doc-content ol {
   padding-left: 1rem;
 }
@@ -177,31 +300,21 @@ img {
   list-style-type: none;
   font-family: "Lora", serif;
 }
-#doc-content ol li::before {
-  display: inline-block;
-  width: 0;
-  top: 1.5rem;
-  height: 0;
-  left: -1rem;
-  position: absolute;
-  border-left: 0.55rem solid transparent;
-  border-right: 0.55rem solid transparent;
-  border-top: 0.45rem solid #004e95;
-  content: '';
-}
 #doc-content ol li::after {
   position: absolute;
   left: -1rem;
   top: 0;
   width: 1.1rem;
-  background-color: #004e95;
   height: 1.5rem;
-  z-index: -1;
+  z-index: 1;
   content: counter(list);
   color: #fff;
   text-align: center;
   font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 600;
+}
+#doc-content .useful-docs .mimetype {
+  display: none;
 }
 #doc-content .useful-docs ul {
   list-style-type: none;
@@ -211,6 +324,7 @@ img {
   border-top: 1px #ccc solid;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  vertical-align: middle;
 }
 @media (min-width: 992px) {
   #doc-content .title-wrap {
@@ -329,6 +443,9 @@ img {
   text-transform: uppercase;
   font-weight: 800;
 }
+#doc-content .admonition .admonition-title span {
+  font-size: 1.5rem;
+}
 #doc-content .admonition.admonition-consultazione {
   padding-bottom: 1rem;
   border-bottom: 1px #ccc solid;
@@ -343,20 +460,26 @@ img {
   color: #000;
   font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-#doc-content .admonition.important, #doc-content .admonition.error, #doc-content .admonition.hint, #doc-content .admonition.note {
+#doc-content .admonition.important, #doc-content .admonition.error, #doc-content .admonition.hint, #doc-content .admonition.note, #doc-content .admonition.attention {
   margin-top: 2rem;
   padding-left: 2rem;
   border-left: 1px #ccc solid;
   color: #596771;
 }
-#doc-content .admonition.important .admonition-title, #doc-content .admonition.error .admonition-title, #doc-content .admonition.hint .admonition-title, #doc-content .admonition.note .admonition-title {
+#doc-content .admonition.important .admonition-title, #doc-content .admonition.error .admonition-title, #doc-content .admonition.hint .admonition-title, #doc-content .admonition.note .admonition-title, #doc-content .admonition.attention .admonition-title {
   font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#doc-content .admonition.important .admonition-title span, #doc-content .admonition.error .admonition-title span, #doc-content .admonition.hint .admonition-title span, #doc-content .admonition.note .admonition-title span, #doc-content .admonition.attention .admonition-title span {
+  color: inherit;
 }
 #doc-content .admonition.error .admonition-title {
   color: #d83750;
 }
 #doc-content .admonition.note .admonition-title {
   color: #004e95;
+}
+#doc-content .admonition.attention .admonition-title {
+  color: #df7d26;
 }
 #doc-content .admonition.important .last {
   font-weight: 800;

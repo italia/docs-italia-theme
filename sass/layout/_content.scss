@@ -66,6 +66,13 @@
     font-weight: 800;
   }
 
+  .Icon--ol {
+    color: $mid-dark-blue;
+    position: absolute;
+    left: -1.5rem;
+    font-size: 2rem;
+  }
+
   ol {
     padding-left: 1rem;
 
@@ -77,27 +84,13 @@
       list-style-type: none;
       font-family: $stack-font;
 
-      &::before {
-        display: inline-block;
-        width: 0;
-        top: 1.5rem;
-        height: 0;
-        left: -1rem;
-        position: absolute;
-        border-left: 0.55rem solid transparent;
-        border-right: 0.55rem solid transparent;
-        border-top: 0.45rem solid $mid-dark-blue;
-        content: '';
-      }
-
       &::after {
         position: absolute;
         left: -1rem;
         top: 0;
         width: 1.1rem;
-        background-color: $mid-dark-blue;
         height: 1.5rem;
-        z-index: -1;
+        z-index: 1;
         content: counter(list);
         color: $white;
         text-align: center;
@@ -108,6 +101,10 @@
   }
 
   .useful-docs {
+    .mimetype {
+      display: none;
+    }
+
     ul {
       list-style-type: none;
       padding-left: 0;
@@ -117,6 +114,7 @@
       border-top: 1px $grey solid;
       padding-top: 1rem;
       padding-bottom: 1rem;
+      vertical-align: middle;
     }
   }
 
@@ -262,6 +260,10 @@
     .admonition-title {
       text-transform: uppercase;
       font-weight: 800;
+
+      span {
+        font-size: 1.5rem;
+      }
     }
 
     &.admonition-consultazione {
@@ -285,7 +287,8 @@
     &.important,
     &.error,
     &.hint,
-    &.note {
+    &.note,
+    &.attention {
       margin-top: 2rem;
       padding-left: 2rem;
       border-left: 1px $grey solid;
@@ -293,6 +296,10 @@
 
       .admonition-title {
         font-family: $titillium-font;
+
+        span {
+          color: inherit;
+        }
       }
     }
 
@@ -305,6 +312,12 @@
     &.note {
       .admonition-title {
         color: $mid-dark-blue;
+      }
+    }
+
+    &.attention {
+      .admonition-title {
+        color: $orange;
       }
     }
 
