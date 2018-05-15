@@ -79,6 +79,7 @@ var ThemeToolTip = (function ($) {
             "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArrayKeywords[index].ref + "></button>" +
             "<h2 class='tooltip__title'>" + that.toolTipArrayKeywords[index].title + "</h2>" +
             // "<p class='tooltip__content'>" + that.toolTipArrayKeywords[index].body + "</p>" +
+            "<h2 class='tooltip__link'>" + "vai al Glossario"+ "</h2>" +
             "</div></div>",
             btn = that.toolTipArrayKeywords[index].btn;
         btn.popover({template:toolTipTemplate,offset:'115px , 40px',container: btn});

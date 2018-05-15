@@ -21,6 +21,7 @@
   overflow: hidden;
   width: 330px;
   padding: 2rem;
+  font-family: $titillium-font;
 }
 
 .tooltip__title {
@@ -28,10 +29,11 @@
   font-style: italic;
   margin-bottom: 0.5rem;
   font-size: 1em;
+  letter-spacing: 0;
 }
 
 .tooltip__content {
-  font-size: 0.9em;
+  font-size: 0.9rem;
   font-style: italic;
   margin-bottom: 0;
 }
@@ -67,6 +69,10 @@
   }
 }
 
-#rst-content .tooltip__link {
+.tooltip__link {
   color: $blue;
+  font-size: 0.8rem;
+  font-weight: 100;
+  text-transform: uppercase;
+  letter-spacing: 0;
 }

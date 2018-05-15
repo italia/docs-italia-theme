@@ -7,6 +7,27 @@
     float: left;
   }
 
+  ul.simple {
+    list-style-type: none;
+
+    li{
+      position: relative;
+      margin-bottom: .5rem;
+      
+      &::after {
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 5px solid $grey-mid;
+        position: absolute;
+        left: -1rem;
+        top: 0.4rem;
+      }
+    }
+  }
+
   .section {
     clear: both;
 
@@ -115,6 +136,9 @@
       padding-top: 1rem;
       padding-bottom: 1rem;
       vertical-align: middle;
+      &::after {
+        display: none;
+      }
     }
   }
 
