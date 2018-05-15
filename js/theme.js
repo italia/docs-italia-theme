@@ -21,7 +21,7 @@ var ThemeToolTip = (function ($) {
     addAttribute: function() {
       that.btn.each(function(index) {
         var title = $(this).find('span').html();
-        $(this).attr('data-toggle','tooltip').attr('data-html','true').attr('title',title).attr('data-ref',index);
+        $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
         that.toolTipArray.push(new ThemeToolTip.setData($(this),index));
       });
       ThemeToolTip.addhandler();
@@ -40,38 +40,25 @@ var ThemeToolTip = (function ($) {
     addhandler: function() {
       for (var index = 0; index < that.toolTipArray.length; ++index) {
         var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
-            "<button type='button' class='tooltip__close-btn' data-ref=" + that.toolTipArray[index].ref + "></button>" +
+            "<button type='button' role='button' class='tooltip__close-btn'data-ref=" + that.toolTipArray[index].ref + "></button>" +
             "<h2 class='tooltip__title'>" + that.toolTipArray[index].title + "</h2>" +
             "<p class='tooltip__content'>" + that.toolTipArray[index].body + "</p>" +
             "</div></div>";
             btn = that.toolTipArray[index].btn;
-        btn.tooltip({template:toolTipTemplate,trigger:'click', placement:'top',offset:'115px , 40px'});
+        btn.popover({template:toolTipTemplate,offset:'115px , 40px',container: btn});
       };
 
-      // Close toolTip from button.
+      // Close other btn when one is active.
+      that.btn.on('click' , function(event){
+        event.preventDefault();
+      });
+
       $(document).on('click','.tooltip__close-btn', function(){
         var ref = $(this).attr('data-ref');
             btn = that.btn.filter(function(){
               return ($(this).attr("data-ref") == ref)
              });
-        btn.tooltip('hide');
-      });
-
-      // Close other btn when one is active.
-      that.btn.on('click' , function(){
-        that.btn.not($(this)).tooltip('hide');
-      });
-
-      // Hide tool tip on resize
-      that.docWindow.resize(function() {
-        that.btn.tooltip('hide');
-      });
-
-      // Hide tool tip when body is clickked
-      that.$body.on('click' , function(event) {
-        if( !$('.tooltip').has(event.target).length > 0 && !$(event.target).is($('.std-term'))) {
-          that.btn.tooltip('hide');
-        }
+        btn.popover('hide');
       });
     }
   }
