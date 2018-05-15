@@ -1,8 +1,8 @@
 <form class="Form" id="search-form">
-  <div class="Form-field Form-field--withPlaceholder Grid u-background-white u-color-grey-30 u-borderRadius-s" role="search">
-    <input data-menu-trigger="projects" class="Form-input Form-input--ultraLean Grid-cell u-sizeFill u-text-r-s u-color-black u-borderHideFocus u-borderRadius-s" required id="cerca" autocomplete="off" value="" />
-    <label class="Form-label u-color-grey-50 u-text-r-xxs" for="cerca">{{ t.search_form_label }}...</label>
-    <div id="projects" data-menu class="Dropdown-menu Header-language-other u-jsVisibilityHidden u-nojsDisplayNone u-sizeFull">
+  <div class="Form-field" role="search">
+    <input data-menu-trigger="projects" class="" required id="cerca" autocomplete="off" value="" />
+    <label class="" for="cerca">{{ t.search_form_label }}...</label>
+    <div id="projects" data-menu class="">
       <span class="Icon-drop-down Dropdown-arrow u-color-white"></span>
       <ul class="Linklist">
         {% for project in site.projects %}

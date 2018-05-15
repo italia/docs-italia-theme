@@ -1,0 +1,593 @@
+
+/* Caption */
+.caption-wrap {
+  clear: both;
+
+  .caption--table {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: block;
+    font-family: $stack-font;
+    font-style: italic;
+    font-size: 0.75rem;
+    padding: 0;
+
+    @media (min-width: 992px) {
+      width: calc(100% - #{$chapter-nav-width});
+      float: left;
+    }
+  }
+
+  .reference--wrap {
+    font-family: $titillium-font;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+
+    @media (min-width: 992px) {
+      width: $chapter-nav-width;
+      float: right;
+      padding-left: 2rem;
+    }
+  }
+}
+
+.caption-number {
+  font-weight: 800;
+  color: $black;
+}
+
+/* Title H1/H2 */
+.chapter-header {
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+}
+
+.chapter-nav {
+  position: relative;
+
+  @media (min-width: 992px) {
+    width: $chapter-nav-width;
+    float: left;
+  }
+}
+
+/* Title nav */
+.title__background {
+  width: 100%;
+  background-color: $light-blue;
+  position: absolute;
+  top: -1px;
+  height: auto;
+  left: -0.5rem;
+  display: none;
+  right: 0;
+  z-index: -1;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid $light-blue;
+  }
+}
+
+/* Term */
+.std-term {
+  background-color: $light-blue;
+  color: $black;
+  padding: 0.2rem;
+}
+
+/* Note */
+.footnote-reference {
+  color: $dark-blue-border;
+  border: 1px $dark-blue-border solid;
+}
+
+/* Footer btn */
+.footer-buttons--next {
+  clear: both;
+  margin-top: 4rem;
+
+  a {
+    background-color: $blue;
+    color: $white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+    font-weight: 800;
+    text-transform: capitalize;
+  }
+}
+
+.footer-buttons--prev {
+  margin-bottom: 2.5rem;
+}
+
+/* Reference icon */
+.reference.internal {
+  vertical-align: middle;
+}
+
+.reference-icon {
+  display: inline-block;
+}
+
+/* General width */
+#doc-content {
+  width: 100%;
+
+  @media (min-width: 992px) {
+    width: calc(100% - #{$sidebar-width});
+    float: left;
+  }
+
+  ol {
+    padding-left: 1rem;
+
+    li {
+      position: relative;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      counter-increment: list;
+      list-style-type: none;
+      font-family: $stack-font;
+
+      &::after {
+        position: absolute;
+        left: -1rem;
+        top: 0;
+        width: 1.1rem;
+        height: 1.5rem;
+        z-index: 1;
+        content: counter(list);
+        color: $white;
+        text-align: center;
+        font-family: $titillium-font;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .useful-docs {
+    .mimetype {
+      display: none;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      border-top: 1px $grey solid;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      vertical-align: middle;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  ul.simple {
+    list-style-type: none;
+
+    li {
+      position: relative;
+      margin-bottom: 0.5rem;
+
+      &::after {
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 5px solid $grey-mid;
+        position: absolute;
+        left: -1rem;
+        top: 0.4rem;
+      }
+    }
+  }
+
+  .section {
+    clear: both;
+
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    // Content width
+    > * {
+      @media (min-width: 992px) {
+        width: calc(100% - #{$chapter-nav-width});
+        float: left;
+        clear: left;
+      }
+    }
+
+    // Exeption
+    .section,
+    .chapter-header,
+    .caption-wrap,
+    .table-responsive {
+      @media (min-width: 992px) {
+        width: 100%;
+        float: none;
+      }
+    }
+  }
+
+  // Procedure
+  .procedure.topic {
+    margin-bottom: 3rem;
+
+    em {
+      font-weight: 800;
+    }
+  }
+
+  .procedure__img {
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+    margin-left: 0.5rem;
+    margin-top: 2rem;
+    border-left: 1px $medium-blue-01 solid;
+
+    img {
+      box-shadow: 0 0 61px 0 rgba($black, 0.15);
+    }
+  }
+
+  .procedure-internal-title {
+    text-transform: uppercase;
+    color: $black;
+    font-family: $titillium-font;
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  .Icon--ol {
+    color: $mid-dark-blue;
+    position: absolute;
+    left: -1.5rem;
+    font-size: 2rem;
+  }
+
+  // Title
+  .title-wrap {
+    @media (min-width: 992px) {
+      width: calc(100% - #{$chapter-nav-width});
+      float: left;
+      clear: left;
+      position: relative;
+
+      /* line-height is defined in px instead rem for background element crossbrowser */
+      h1 {
+        line-height: 71px;
+      }
+
+      h2 {
+        line-height: 60px;
+      }
+
+      h3 {
+        line-height: 46px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        display: inline;
+        cursor: pointer;
+        position: relative;
+        color: $black;
+        box-shadow: 0.5rem 0 0 $white, -0.5rem 0 0 $white;
+        -webkit-box-shadow: 0.5rem 0 0 $white, -0.5rem 0 0 $white;
+        -webkit-box-decoration-break: clone;
+        -ms-box-decoration-break: clone;
+        -o-box-decoration-break: clone;
+        box-decoration-break: clone;
+        left: -0.5rem;
+
+        .title__chapter {
+          position: relative;
+          color: $blue;
+        }
+      }
+
+      h1 {
+        .title__chapter {
+          position: relative;
+          background-color: $blue;
+          color: $white;
+          margin-right: 0.5rem;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+          display: inline-block;
+          z-index: 1;
+
+          &::after,
+          &::before {
+            content: "";
+            top: 0;
+            bottom: 0;
+            width: 0.5rem;
+            background-color: $blue;
+            position: absolute;
+          }
+
+          &::after {
+            right: 100%;
+          }
+
+          &::before {
+            left: 100%;
+          }
+        }
+      }
+    }
+
+    &.active {
+      h1,
+      h2,
+      h3 {
+        box-shadow: 0.5rem 0 0 $light-blue, -0.5rem 0 0 $light-blue;
+        background-color: $light-blue;
+      }
+
+      .title__background {
+        display: block;
+      }
+    }
+  }
+
+  .headerlink {
+    display: none;
+  }
+
+  .topic-title {
+    color: $black;
+    font-weight: 800;
+    font-size: 1.4rem;
+    font-family: $titillium-font;
+  }
+
+  // Publisher / Licenza.
+  .docutils.field-list {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-bottom: 1px $grey solid;
+    font-family: $titillium-font;
+
+    tr {
+      display: block;
+
+      @media (min-width: 576px) {
+        width: 50%;
+        float: left;
+      }
+
+      margin-bottom: 2rem;
+    }
+
+    .field-name,
+    .field-body {
+      display: block;
+      font-weight: 400;
+    }
+
+    .field-body {
+      color: $medium-blue;
+      text-decoration: underline;
+    }
+  }
+
+  // Block quote.
+  .highlights {
+    font-size: 1.5rem;
+    font-family: $stack-font;
+  }
+
+  // Quote
+  blockquote.epigraph {
+    margin-top: 2rem;
+    padding-left: 2rem;
+    border-left: 4px $light-blue-01 solid;
+    color: $grey-mid;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+
+    .attribution {
+      margin-bottom: 0;
+      font-size: 1rem;
+    }
+  }
+
+  // Admonition.
+  .admonition {
+    margin-bottom: 2rem;
+
+    .admonition-title {
+      text-transform: uppercase;
+      font-weight: 800;
+
+      span {
+        font-size: 1.5rem;
+      }
+    }
+
+    &.admonition-consultazione {
+      padding-bottom: 1rem;
+      border-bottom: 1px $grey solid;
+      position: relative;
+
+      a {
+        text-decoration: underline;
+      }
+
+      .last {
+        font-family: $stack-font;
+      }
+
+      .admonition-title {
+        color: $black;
+        font-family: $titillium-font;
+
+        span {
+          color: inherit;
+        }
+      }
+    }
+
+    &.important,
+    &.error,
+    &.hint,
+    &.note,
+    &.attention {
+      margin-top: 2rem;
+      padding-left: 2rem;
+      border-left: 1px $grey solid;
+      color: $grey-mid;
+
+      .admonition-title {
+        font-family: $titillium-font;
+
+        span {
+          color: inherit;
+        }
+      }
+    }
+
+    &.error {
+      .admonition-title {
+        color: $red;
+      }
+    }
+
+    &.note {
+      .admonition-title {
+        color: $mid-dark-blue;
+      }
+    }
+
+    &.attention {
+      .admonition-title {
+        color: $orange;
+      }
+    }
+
+    &.important {
+      .last {
+        font-weight: 800;
+        font-size: 1.2rem;
+      }
+    }
+
+    &.hint {
+      .reference.internal {
+        font-size: 0.8rem;
+        position: relative;
+
+        &::after {
+          content: '';
+          width: 0.4rem;
+          height: 0.4rem;
+          border-top: 1px $blue solid;
+          border-right: 1px $blue solid;
+          left: 100%;
+          transform: rotate(45deg) translateY(-50%);
+          position: absolute;
+          top: 50%;
+        }
+      }
+    }
+  }
+
+  // Pool quote.
+  .question-and-answers {
+    blockquote {
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+
+      > div {
+        font-weight: 800;
+        font-family: $stack-font;
+      }
+    }
+
+    .pull-quote {
+      max-width: 490px;
+      margin-bottom: 2rem;
+
+      ul {
+        list-style-type: none;
+        padding-left: 1.5rem;
+
+        li {
+          display: inline-block;
+          margin-top: 1rem;
+
+          &::after {
+            display: none;
+          }
+
+          a {
+            padding: 0.2rem 0.5rem;
+            margin-right: 0.2rem;
+            background-color: $light-blue;
+            color: $black;
+            font-family: $titillium-font;
+            border-bottom: 2px dotted $grey;
+          }
+        }
+      }
+
+      > div > p {
+        text-transform: uppercase;
+        font-family: $titillium-font;
+        color: $grey-dark;
+        margin-bottom: 0;
+        font-weight: 100;
+      }
+
+      &:nth-of-type(odd) {
+        float: left;
+        clear: right;
+
+        blockquote > div,
+        ul {
+          padding-left: 1.5rem;
+          border-left: 5px $light-blue-01 solid;
+        }
+      }
+
+      &:nth-of-type(even) {
+        float: right;
+        text-align: right;
+        clear: left;
+
+        blockquote > div,
+        ul {
+          padding-right: 1.5rem;
+          border-right: 5px $light-blue-01 solid;
+        }
+      }
+    }
+  }
+
+  // Keywords
+  .glossary.docutils {
+    display: none;
+  }
+}

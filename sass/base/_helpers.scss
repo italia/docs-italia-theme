@@ -1,0 +1,26 @@
+/* Background colors */
+.bg-primary--dark {
+  background-color: $medium-blue;
+}
+
+.bg-primary--mid-dark {
+  background-color: $mid-dark-blue;
+}
+
+.bg-primary--darken {
+  background-color: $dark-blue;
+}
+
+/* Text colors */
+.text-grey {
+  color: $grey;
+}
+
+.text-light-blue {
+  color: $light-blue;
+}
+
+/* Border colors */
+.border-dark-blue {
+  border-color: $dark-blue-border !important;
+}
