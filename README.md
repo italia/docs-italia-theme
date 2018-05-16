@@ -11,7 +11,7 @@ upcoming Docs Italia.
 * Add the following line to your documentation `requirements.txt` file:
 
     ```
-    $ pip install git+https://github.com/italia/docs_italia_theme.git
+    $ pip install git+https://github.com/italia/docs-italia-theme.git
     ```
 
 * In your `conf.py` file, you'll need to specify the theme as follows:
@@ -36,7 +36,7 @@ upcoming Docs Italia.
 * Clone the repository:
     
     ```
-    git clone git+https://github.com/italia/docs_italia_theme.git
+    git clone git+https://github.com/italia/docs-italia.theme.git
     ```
 
 * If needed, install [Sphinx](http://www.sphinx-doc.org/en/stable/) into a virtual environment:
