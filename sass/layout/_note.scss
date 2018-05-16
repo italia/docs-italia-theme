@@ -1,0 +1,40 @@
+#doc-content {
+  .footnote-reference {
+    color: $dark-blue-border;
+    border: 1px $dark-blue-border solid;
+    border-radius: 3px;
+    padding-right: 0.8rem;
+  }
+
+  .docutils.footnote {
+    color: $black;
+    font-size: 0.8rem;
+    display: none;
+
+    td {
+      width: 100%;
+      float: left;
+    }
+
+    .fn-backref {
+      color: $dark-blue-border;
+      border: 1px $dark-blue-border solid;
+      border-radius: 3px;
+      padding: 0.2rem;
+      line-height: 1;
+      display: inline-block;
+    }
+
+    &.active {
+      // opacity: 1;
+      // height: auto;
+    }
+
+    @media (min-width: 992px) {
+      // width: $chapter-nav-width;
+      // padding-left: 2rem;
+      // position: absolute;
+      // right: 0;
+    }
+  }
+}

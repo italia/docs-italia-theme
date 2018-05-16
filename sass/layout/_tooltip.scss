@@ -15,6 +15,12 @@
     left: 0;
     z-index: -1;
   }
+
+  &.doc-tooltip--note {
+    &::after {
+      content: none;
+    }
+  }
 }
 
 .tooltip__wrap {

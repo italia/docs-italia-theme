@@ -1,5 +1,7 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"docs-italia-theme":[function(require,module,exports){
 require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({"docs-italia-theme":[function(require,module,exports){
+
+
 // Keywords Tolltip
 var ThemeToolTip = (function ($) {
   var that;
@@ -13,18 +15,32 @@ var ThemeToolTip = (function ($) {
       docWindow: $( window ),
       $body: $('body'),
       toolTipArray: [],
-      toolTipArrayKeywords: []
+      toolTipArrayKeywords: [],
+      toolTipNote: [],
+
+      $noteBtn: $('.footnote-reference'),
+      $note: $('.docutils.footnote'),
+      $tableNoteBtn: {}
     },
 
     init: function() {
       that = this.$;
+      // Tolltip keywords
       that.$btnKeywords = that.btn.filter(function(){
         return ($(this).closest('.pull-quote').length)
       });
+      // Tolltip glossary
       that.$btnGlossay = that.btn.filter(function(){
         return ($(this).closest('.pull-quote').length == 0)
       });
+      // Tolltip inside Table
+      that.$tableNoteBtn = that.$noteBtn.filter(function(){
+        return ( $(this).closest('table').length  )
+      });
+
       ThemeToolTip.addAttribute();
+
+      // ThemeNote.setTollTip();
     },
 
     // Add atribute to keywords btn for enable tooltip
@@ -39,6 +55,12 @@ var ThemeToolTip = (function ($) {
         var title = $(this).find('span').html();
         $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
         that.toolTipArrayKeywords.push(new ThemeToolTip.setDataKeywords($(this),index,title));
+      });
+
+      that.$tableNoteBtn.each(function(index) {
+        var title = $(this).text();
+        $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
+        that.toolTipNote.push(new ThemeToolTip.setDataNote($(this),index));
       });
 
       ThemeToolTip.addhandler();
@@ -58,6 +80,16 @@ var ThemeToolTip = (function ($) {
       this.btn = item;
       this.term = item.attr('href');
       this.title = title;
+      this.ref = index
+    },
+
+    // Set array whith note info
+    setDataNote: function(item , index) {
+      this.btn = item;
+      this.href = item.attr('href').replace('#','');
+      this.note = $('#' + this.href );
+      this.title = this.note.find('.fn-backref').text();
+      this.body = this.note.find('td:nth-of-type(2)').html();
       this.ref = index
     },
 
@@ -84,6 +116,20 @@ var ThemeToolTip = (function ($) {
         btn.popover({template:toolTipTemplate,offset:'125px , 40px',container: btn});
       };
 
+      for (var index = 0; index < that.toolTipNote.length; ++index) {
+        var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip doc-tooltip--note' role='tooltip'><div class='tooltip__wrap'>" +
+            "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipNote[index].ref + "></button>" +
+            "<h2 class='tooltip__title'>" + that.toolTipNote[index].title + "</h2>" +
+            "<p class='tooltip__content'>" + that.toolTipNote[index].body + "</p>" +
+            "</div></div>",
+            btn = that.toolTipNote[index].btn;
+        btn.popover({template:toolTipTemplate,container: btn});
+      };
+
+      that.$tableNoteBtn.on('click' , function(event){
+        event.preventDefault();
+      });
+
       that.$btnKeywords.on('click' , function(event){
         event.preventDefault();
       });
@@ -100,7 +146,7 @@ var ThemeToolTip = (function ($) {
   }
 })(jQuery);
 
-ThemeToolTip.init();
+
 
 
 /// Modify DOM via JS.
@@ -112,7 +158,11 @@ var ThemeMarkupModifier = (function ($) {
     $: {
       title: $('#doc-content h1, #doc-content h2, #doc-content h3'),
       $table: $('table:not(.footnote):not(.docutils.field-list)'),
-      $captionReference: $('table, .figure')
+      $captionReference: $('table, .figure'),
+      $noteBtn: $('.footnote-reference'),
+      $note: $('.docutils.footnote'),
+      $noteBackref: $('.fn-backref'),
+      titleReady: false
     },
 
     init: function() {
@@ -122,6 +172,7 @@ var ThemeMarkupModifier = (function ($) {
       ThemeMarkupModifier.captionModifier();
       ThemeMarkupModifier.procedureModifier();
       ThemeMarkupModifier.addIcon();
+      ThemeMarkupModifier.noteModifier();
     },
 
     titleModifier: function() {
@@ -138,7 +189,8 @@ var ThemeMarkupModifier = (function ($) {
           $element.closest('.title-wrap').append('<span class="title__background">');
           $element.closest('.chapter-header').addClass('has-nav');
         }
-      })
+      });
+      that.titleReady = true;
     },
 
     startingNumber: function(string) {
@@ -203,11 +255,32 @@ var ThemeMarkupModifier = (function ($) {
       $important.prepend('<span class="Icon it-icon-hint"></span>');
       $usefulDocs.prepend('<span class="Icon it-icon-pdf"></span>');
       $numericList.prepend('<span class="Icon it-icon-step Icon--ol"></span>');
+    },
+
+    noteModifier: function() {
+      that.$noteBtn.each(function(index) {
+        var str =  $(this).text(),
+            newStr = str.replace(/[\[\]]/g,'');
+        $(this).text(newStr);
+      });
+
+      that.$noteBackref.each(function(index) {
+        var str =  $(this).text(),
+            newStr = str.replace(/[\[\]]/g,'');
+            stringToAppend = "<div class='note-action'>" +
+                             "<button type='button' class='note-close-btn'>X</button>" +
+                             "<button type='button'>torna al testo</button>" +
+                             "</div>";
+
+        $(this).text('Note ' + newStr);
+        $(this).closest('td').next().append(stringToAppend);
+      });
     }
+
   }
 })(jQuery);
 
-ThemeMarkupModifier.init();
+
 
 
 /// Paragraph navigation
@@ -217,7 +290,7 @@ var ThemeChapterNav = (function ($) {
   return {
 
     $: {
-      $title: $('.chapter-header.has-nav h1,.chapter-header.has-nav h2,.chapter-header.has-nav h3'),
+      $title: {},
       $body: $('body'),
       $html: $('html'),
       $window: $(window)
@@ -225,6 +298,7 @@ var ThemeChapterNav = (function ($) {
 
     init: function() {
       that = this.$;
+      that.$title = $('.chapter-header.has-nav h1,.chapter-header.has-nav h2,.chapter-header.has-nav h3'),
       that.$title.each(function(index) {
         $element = $(this);
         ThemeChapterNav.addNav($element);
@@ -273,6 +347,10 @@ var ThemeChapterNav = (function ($) {
             $nav.addClass('active');
             $wrap.addClass('active');
             $wrap.find('.title__background').css('height',lineHeight);
+
+            // if (typeof ThemeNote != "undefined") {
+            //   ThemeNote.closeAllNote();
+            // }
           }
         });
         $('.chapter-header.has-nav').on('mouseout' , function(){
@@ -311,10 +389,13 @@ var ThemeChapterNav = (function ($) {
             if(that.$window.outerWidth() <= 576) {
               that.$body.addClass('no-scroll');
             }
+
+            if (typeof ThemeNote != "undefined") {
+              ThemeNote.closeAllNote();
+            }
           }
         }
       });
-
 
       // Close when bosy is clikked.
       that.$body.on('click' , function(event){
@@ -329,7 +410,97 @@ var ThemeChapterNav = (function ($) {
   }
 })(jQuery);
 
-ThemeChapterNav.init();
+
+
+
+// Keywords Tolltip
+var ThemeNote = (function ($) {
+  var that;
+
+  return {
+
+    $: {
+      $noteBtn: $('.footnote-reference'),
+      $note: $('.docutils.footnote'),
+      $noteStandardBtn: {},
+      $body: $('body'),
+      $window: $(window),
+      dataObj: {}
+    },
+
+    init: function() {
+      that = this.$;
+
+      ThemeNote.calcPosition();
+      that.$window.resize(function() {
+        ThemeNote.calcPosition();
+      });
+
+      that.$noteStandardBtn = that.$noteBtn.filter(function(){
+        return ( $(this).closest('table').length == 0 )
+      });
+      that.$noteStandardBtn.on('click' , ThemeNote.shownoteStandardBtn);
+
+      $('.note-close-btn').on('click' , ThemeNote.closeNote)
+    },
+
+    calcPosition: function() {
+      that.$note.css('display' , 'block');
+      that.$noteBtn.each(function(index) {
+        var idDest = $(this).attr('href').replace('#','');
+        that.dataObj[idDest] = {
+          ypos: $('#' + idDest).offset().top,
+          height: $('#' + idDest).outerHeight()
+        }
+      });
+      that.$note.slideUp(0);
+    },
+
+    setData: function(item) {
+      this.item = item;
+      this.ypos = item.position().top;
+    },
+
+    shownoteStandardBtn: function(event) {
+      event.preventDefault();
+
+      var $btn = $(event.target),
+          noteid = $btn.attr('href').replace('#', ''),
+          $note = $('#' +  noteid),
+          Ypos = that.dataObj[noteid].ypos - that.dataObj[noteid].height;
+
+      if( $note.hasClass('active') ) {
+        $note.removeClass('active');
+        $note.slideUp();
+      } else {
+        $("html, body").animate({ scrollTop: Ypos }, 400 , function(){
+          $note.slideDown();
+          $note.addClass('active');
+        });
+      }
+    },
+
+    closeNote: function(event) {
+      var $target = $(event.target),
+          $note = $target.closest('.docutils.footnote.active');
+
+      // $note.removeClass('active').slideUp();
+      that.$note.removeClass('active').slideUp()
+    }
+
+    // closeAllNote: function() {
+    //   that.$note.removeClass('active');
+    // }
+  }
+})(jQuery);
+
+
+$( document ).ready(function() {
+  ThemeMarkupModifier.init();
+  ThemeToolTip.init();
+  ThemeChapterNav.init();
+  ThemeNote.init();
+});
 
 },{}]},{},["docs-italia-theme"]);
 
