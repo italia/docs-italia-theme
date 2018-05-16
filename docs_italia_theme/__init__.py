@@ -1,8 +1,12 @@
-"""Docs Italia theme - Team Digitale"""
+"""Docs Italia theme"""
 
 import os
 import re
 import yaml
+
+__version__ = '1.0.0-beta'
+__version_full__ = __version__
+__license__ = 'MIT'
 
 # This part would be better placed as an extension:
 # It loads yaml data files to set them as variables
@@ -24,7 +28,7 @@ def deep_merge(source, destination):
 
 
 def load_site_data():
-    """Load data from Team Digitale Jekyll site config"""
+    """Load data from YAML config file"""
     source_path = os.path.abspath(
         os.path.join(os.path.dirname(__file__), 'data')
     )
@@ -84,7 +88,7 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
     context['site'] = app.site_data
     # The translation context is pinned to the Italian sources, as Sphinx has
     # it's own translation mechanism built in
-    if 'language' in context:
+    if 'language' in context and context['language'] != None:
         language = context['language']
     else:
         language = app.site_data['default_language']
@@ -93,3 +97,4 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
 def setup(app):
     app.site_data = load_site_data()
     app.connect('html-page-context', html_page_context_listener)
+    app.add_html_theme('docs_italia_theme', os.path.abspath(os.path.dirname(__file__)))
