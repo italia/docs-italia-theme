@@ -4,10 +4,6 @@ import os
 import re
 import yaml
 
-__version__ = '1.0.0-beta'
-__version_full__ = __version__
-__license__ = 'MIT'
-
 # This part would be better placed as an extension:
 # It loads yaml data files to set them as variables
 def get_html_theme_path():
