@@ -8,6 +8,7 @@ before_install:
   - source ~/.nvm/nvm.sh
 install:
   - pip install tox-travis
+  - gem install sass
   - sass --version
   - nvm install --lts
   - nvm use --lts
