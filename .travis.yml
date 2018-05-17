@@ -3,12 +3,14 @@ python:
   - 2.7
   - 3.6
 sudo: false
-install:
-  - pip install tox-travis
+before_install:
   - rvm default
-  - gem install sass
+  - source ~/.rvm/scripts/rvm
   - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
   - source ~/.nvm/nvm.sh
+install:
+  - pip install tox-travis
+  - gem install sass
   - nvm install --lts
   - nvm use --lts
   - npm install
