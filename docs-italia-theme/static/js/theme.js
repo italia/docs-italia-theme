@@ -13,7 +13,7 @@ $(document).ready(function() {
 });
 
 },{"./markup_modifier.js":2,"./note.js":3,"./section_navigation.js":4,"./tooltip.js":5}],2:[function(require,module,exports){
-/// Modify DOM via JS.
+// Modify DOM via JS.
 module.exports = ThemeMarkupModifier = (function ($) {
   var that;
 
@@ -203,7 +203,7 @@ module.exports = ThemeNote = (function ($) {
 })(jQuery);
 
 },{}],4:[function(require,module,exports){
-/// Section navigation
+// Section navigation
 module.exports = ThemeChapterNav = (function ($) {
   var that;
 
@@ -331,7 +331,7 @@ module.exports = ThemeChapterNav = (function ($) {
 })(jQuery);
 
 },{}],5:[function(require,module,exports){
-// Keywords Tooltip
+// Tooltips
 module.exports = ThemeToolTip = (function ($) {
   var that;
 
