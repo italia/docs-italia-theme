@@ -1053,11 +1053,41 @@ img {
   padding-right: 12.8px;
   padding-right: 0.8rem;
 }
+#doc-content .note-action {
+  margin-top: 8px;
+  margin-top: 0.5rem;
+}
+#doc-content .note-close-btn,
+#doc-content .note-back-btn {
+  background: none;
+  border: 0;
+  display: inline-block;
+  color: #0073e6;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+#doc-content .note-back-btn {
+  position: relative;
+}
+#doc-content .note-back-btn::before {
+  content: '';
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  position: absolute;
+  background-color: #0073e6;
+  left: 0;
+}
+#doc-content .note-back-btn:hover {
+  text-decoration: underline;
+}
 #doc-content .docutils.footnote {
   color: #000;
   font-size: 12.8px;
   font-size: 0.8rem;
   display: none;
+  margin-bottom: 32px;
+  margin-bottom: 2rem;
 }
 #doc-content .docutils.footnote td {
   width: 100%;
@@ -1071,6 +1101,8 @@ img {
   padding: 0.2rem;
   line-height: 1;
   display: inline-block;
+  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 /*# sourceMappingURL=theme.css.map */

@@ -268,7 +268,7 @@ var ThemeMarkupModifier = (function ($) {
             newStr = str.replace(/[\[\]]/g,'');
             stringToAppend = "<div class='note-action'>" +
                              "<button type='button' class='note-close-btn'>X</button>" +
-                             "<button type='button'>torna al testo</button>" +
+                             "<button type='button' class='note-back-btn'>torna al testo</button>" +
                              "</div>";
 
         $(this).text('Note ' + newStr);
@@ -429,52 +429,53 @@ var ThemeNote = (function ($) {
 
     init: function() {
       that = this.$;
-
       ThemeNote.calcPosition();
-      that.$window.resize(function() {
-        ThemeNote.calcPosition();
-      });
 
       that.$noteStandardBtn = that.$noteBtn.filter(function(){
         return ( $(this).closest('table').length == 0 )
       });
       that.$noteStandardBtn.on('click' , ThemeNote.shownoteStandardBtn);
-
-      $('.note-close-btn').on('click' , ThemeNote.closeNote)
+      $('.note-close-btn').on('click' , ThemeNote.closeNote);
+      $('.note-back-btn').on('click' , ThemeNote.backToBtn);
     },
 
     calcPosition: function() {
-      that.$note.css('display' , 'block');
       that.$noteBtn.each(function(index) {
-        var idDest = $(this).attr('href').replace('#','');
+        var idDest = $(this).attr('href').replace('#',''),
+            $targetNote = $('#' + idDest);
+
+        that.$note.css('display' , 'none');
+        $targetNote.css('display' , 'block');
         that.dataObj[idDest] = {
-          ypos: $('#' + idDest).offset().top,
-          height: $('#' + idDest).outerHeight()
+          ypos: parseInt($targetNote.offset().top),
+          height: parseInt($targetNote.outerHeight()),
+          btnYpos: parseInt($(this).offset().top)
+        }
+
+        if(!$targetNote.hasClass('active')) {
+          $targetNote.slideUp(0);
         }
       });
-      that.$note.slideUp(0);
-    },
-
-    setData: function(item) {
-      this.item = item;
-      this.ypos = item.position().top;
     },
 
     shownoteStandardBtn: function(event) {
       event.preventDefault();
 
+      ThemeNote.calcPosition();
+
       var $btn = $(event.target),
           noteid = $btn.attr('href').replace('#', ''),
           $note = $('#' +  noteid),
-          Ypos = that.dataObj[noteid].ypos - that.dataObj[noteid].height;
+          Ypos = that.dataObj[noteid].ypos ;
 
       if( $note.hasClass('active') ) {
         $note.removeClass('active');
         $note.slideUp();
       } else {
-        $("html, body").animate({ scrollTop: Ypos }, 400 , function(){
-          $note.slideDown();
-          $note.addClass('active');
+        that.$note.not($note).removeClass('active').slideUp();
+        $("html, body").animate({ scrollTop: Ypos }, 300 , function(){
+          $note.addClass('active').slideDown();
+          $("html, body").animate({ scrollTop: Ypos - 10 }, 300);
         });
       }
     },
@@ -483,13 +484,16 @@ var ThemeNote = (function ($) {
       var $target = $(event.target),
           $note = $target.closest('.docutils.footnote.active');
 
-      // $note.removeClass('active').slideUp();
-      that.$note.removeClass('active').slideUp()
+      that.$note.removeClass('active').slideUp();
+    },
+
+    backToBtn: function(event) {
+      var $target = $(event.target),
+          id = $target.closest('.footnote.active').attr('id');
+
+      $("html, body").animate({ scrollTop: that.dataObj[id].btnYpos }, 200);
     }
 
-    // closeAllNote: function() {
-    //   that.$note.removeClass('active');
-    // }
   }
 })(jQuery);
 
@@ -498,7 +502,9 @@ $( document ).ready(function() {
   ThemeMarkupModifier.init();
   ThemeToolTip.init();
   ThemeChapterNav.init();
-  ThemeNote.init();
+  setTimeout(function(){
+    ThemeNote.init();
+  }, 1000);
 });
 
 },{}]},{},["docs-italia-theme"]);

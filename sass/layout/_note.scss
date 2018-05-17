@@ -6,10 +6,43 @@
     padding-right: 0.8rem;
   }
 
+  .note-action {
+    margin-top: 0.5rem;
+  }
+
+  .note-close-btn,
+  .note-back-btn {
+    background: none;
+    border: 0;
+    display: inline-block;
+    color: $blue;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+
+  .note-back-btn {
+    position: relative;
+
+    &::before {
+      content: '';
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      position: absolute;
+      background-color: $blue;
+      left: 0;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .docutils.footnote {
     color: $black;
     font-size: 0.8rem;
     display: none;
+    margin-bottom: 2rem;
 
     td {
       width: 100%;
@@ -23,18 +56,7 @@
       padding: 0.2rem;
       line-height: 1;
       display: inline-block;
-    }
-
-    &.active {
-      // opacity: 1;
-      // height: auto;
-    }
-
-    @media (min-width: 992px) {
-      // width: $chapter-nav-width;
-      // padding-left: 2rem;
-      // position: absolute;
-      // right: 0;
+      margin-bottom: 0.5rem;
     }
   }
 }
