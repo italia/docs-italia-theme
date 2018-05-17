@@ -36,7 +36,7 @@ upcoming Docs Italia.
 * Clone the repository:
     
     ```
-    git clone git+https://github.com/italia/docs-italia.theme.git
+    git clone git+https://github.com/italia/docs-italia-theme.git
     ```
 
 * If needed, install [Sphinx](http://www.sphinx-doc.org/en/stable/) into a virtual environment:
