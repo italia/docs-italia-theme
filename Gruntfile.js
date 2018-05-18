@@ -85,20 +85,14 @@ module.exports = function(grunt) {
     browserify: {
       dev: {
         options: {
-          external: ['jquery'],
-          alias: {
-            'docs-italia-theme': './js/theme.js'
-          }
+          external: ['jquery']
         },
         src: ['js/*.js'],
         dest: 'docs-italia-theme/static/js/theme.js'
       },
       build: {
         options: {
-          external: ['jquery'],
-          alias: {
-            'docs-italia-theme': './js/theme.js'
-          }
+          external: ['jquery']
         },
         src: ['js/*.js'],
         dest: 'docs-italia-theme/static/js/theme.js'
