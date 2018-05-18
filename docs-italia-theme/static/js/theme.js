@@ -1,6 +1,20 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+var ThemeMarkupModifier = require('./markup_modifier.js');
+var ThemeToolTip = require('./tooltip.js');
+var ThemeChapterNav = require('./section_navigation.js');
+var ThemeNote = require('./note.js');
+
+// Init all 
+$(document).ready(function() {
+  ThemeMarkupModifier.init();
+  ThemeToolTip.init();
+  ThemeChapterNav.init();
+  ThemeNote.init();
+});
+
+},{"./markup_modifier.js":2,"./note.js":3,"./section_navigation.js":4,"./tooltip.js":5}],2:[function(require,module,exports){
 /// Modify DOM via JS.
-var ThemeMarkupModifier = (function ($) {
+module.exports = ThemeMarkupModifier = (function ($) {
   var that;
 
   return {
@@ -128,13 +142,9 @@ var ThemeMarkupModifier = (function ($) {
   }
 })(jQuery);
 
-$(document).ready(function() {
-  ThemeMarkupModifier.init();
-});
-
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 // Notes
-var ThemeNote = (function ($) {
+module.exports = ThemeNote = (function ($) {
   var that;
 
   return {
@@ -150,7 +160,6 @@ var ThemeNote = (function ($) {
 
     init: function() {
       that = this.$;
-      //ThemeNote.calcPosition();
 
       that.$noteStandardBtn = that.$noteBtn.filter(function() {
         return ($(this).closest('table').length == 0)
@@ -161,29 +170,8 @@ var ThemeNote = (function ($) {
       $('.note-back-btn').on('click', ThemeNote.backToBtn);
     },
 
-    // calcPosition: function() {
-    //   that.$noteBtn.each(function(index) {
-    //     var idDest = $(this).attr('href').replace('#',''),
-    //         $targetNote = $('#' + idDest);
-    // 
-    //     that.$note.css('display', 'none');
-    //     $targetNote.css('display', 'block');
-    //     that.dataObj[idDest] = {
-    //       ypos: parseInt($targetNote.offset().top),
-    //       height: parseInt($targetNote.outerHeight()),
-    //       btnYpos: parseInt($(this).offset().top)
-    //     }
-    // 
-    //     if(!$targetNote.hasClass('active')) {
-    //       $targetNote.slideUp(0);
-    //     }
-    //   });
-    // },
-
     shownoteStandardBtn: function(event) {
       event.preventDefault();
-
-      // ThemeNote.calcPosition();
 
       var $btn = $(event.target),
           noteid = $btn.attr('href').replace('#', ''),
@@ -214,14 +202,9 @@ var ThemeNote = (function ($) {
   }
 })(jQuery);
 
-$(document).ready(function() {
-  setTimeout(function(){
-    ThemeNote.init();
-  }, 1000);
-});
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /// Section navigation
-var ThemeChapterNav = (function ($) {
+module.exports = ThemeChapterNav = (function ($) {
   var that;
 
   return {
@@ -347,12 +330,9 @@ var ThemeChapterNav = (function ($) {
   }
 })(jQuery);
 
-$(document).ready(function() {  
-  ThemeChapterNav.init();
-});
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 // Keywords Tooltip
-var ThemeToolTip = (function ($) {
+module.exports = ThemeToolTip = (function ($) {
   var that;
 
   return {
@@ -495,8 +475,4 @@ var ThemeToolTip = (function ($) {
   }
 })(jQuery);
 
-$(document).ready(function() {
-  ThemeToolTip.init();
-});
-
-},{}]},{},[1,2,3,4]);
+},{}]},{},[1,2,3,4,5]);

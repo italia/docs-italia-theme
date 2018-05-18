@@ -1,5 +1,5 @@
-/// Section navigation
-var ThemeChapterNav = (function ($) {
+// Section navigation
+module.exports = ThemeChapterNav = (function ($) {
   var that;
 
   return {
@@ -124,7 +124,3 @@ var ThemeChapterNav = (function ($) {
     }
   }
 })(jQuery);
-
-$(document).ready(function() {  
-  ThemeChapterNav.init();
-});

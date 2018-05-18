@@ -1,5 +1,5 @@
-// Keywords Tooltip
-var ThemeToolTip = (function ($) {
+// Tooltips
+module.exports = ThemeToolTip = (function ($) {
   var that;
 
   return {
@@ -141,7 +141,3 @@ var ThemeToolTip = (function ($) {
     }
   }
 })(jQuery);
-
-$(document).ready(function() {
-  ThemeToolTip.init();
-});

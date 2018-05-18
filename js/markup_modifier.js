@@ -1,5 +1,5 @@
-/// Modify DOM via JS.
-var ThemeMarkupModifier = (function ($) {
+// Modify DOM via JS.
+module.exports = ThemeMarkupModifier = (function ($) {
   var that;
 
   return {
@@ -126,7 +126,3 @@ var ThemeMarkupModifier = (function ($) {
     }
   }
 })(jQuery);
-
-$(document).ready(function() {
-  ThemeMarkupModifier.init();
-});

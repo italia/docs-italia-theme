@@ -1,5 +1,5 @@
 // Notes
-var ThemeNote = (function ($) {
+module.exports = ThemeNote = (function ($) {
   var that;
 
   return {
@@ -56,7 +56,3 @@ var ThemeNote = (function ($) {
 
   }
 })(jQuery);
-
-$(document).ready(function() {
-  ThemeNote.init();
-});
