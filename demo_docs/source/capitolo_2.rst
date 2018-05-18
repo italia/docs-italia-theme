@@ -158,7 +158,7 @@ Sottoparagrafo con tabella
 Nunc varius ultrices felis, eget efficitur sapien pulvinar sed. Morbi semper
 iaculis pulvinar. Donec sapien purus, commodo in aliquam quis, ullamcorper vitae
 diam. Donec a nibh suscipit, semper ante non, consectetur nunc. **Phasellus non
-feugiat ante. Quisque nec ante eu purus ornare dignissim**. 
+feugiat ante. Quisque nec ante eu purus ornare dignissim**.
 
 Nunc viverra, sapien ut sagittis bibendum, ante elit eleifend nisl, vitae semper
 purus odio sed erat. Maecenas a orci nulla. Mauris consectetur ligula justo, eu
@@ -212,7 +212,7 @@ nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 Dicit everti tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis
 choro reprehendunt cour deiro sant. Ius eu amet verear graecis, ne quot posse
-sea, quod aeterno utroque est in. Sit comprehen sam, timeam reprimique cum ne. 
+sea, quod aeterno utroque est in. Sit comprehen sam, timeam reprimique cum ne.
 
 Ex cum stet omittam oportere, nerou set quas audire splendide. Nam no esse
 eleifend, vis an wisi fali dignissim. Vim ad augue vidisse, adhuc everti eos te.
@@ -223,18 +223,19 @@ Sottoparagrafo con altro grafico
 Nunc varius ultrices felis, eget efficitur sapien pulvinar sed. Morbi semper
 iaculis pulvinar. Donec sapien purus, commodo in aliquam quis, ullamcorper vitae
 diam. **Donec a nibh suscipit, semper ante non, consectetur nunc**. Phasellus
-non feugiat ante. Quisque nec ante eu purus ornare dignissim. 
+non feugiat ante. Quisque nec ante eu purus ornare dignissim.
 
 Nunc viverra, sapien ut sagittis bibendum, ante elit eleifend nisl, vitae semper
 purus odio sed erat. Maecenas a orci nulla. Mauris consectetur ligula justo, eu
 sagittis nisl accumsan ac. :ref:`Phasellus lacus velit <approfondimento>`,
 convallis vel venenatis ac, posuere quis erat. Phasellus commodo lectus sit amet
-risus elementum porttitor. 
+risus elementum porttitor.
 
 In pharetra est ut eros sagittis feugiat. Cras nec suscipit odio. Duis in orci
 sed ante convallis varius.
 
 .. figure:: images/modello-strategico.svg
+   :class: figure-fixed
    :name: modello strategico
 
    Didascalia testo do eiusmod tempor incididunt ut labore et dolore magna
@@ -264,7 +265,7 @@ dolore magnam aliquam quaerat voluptatem [4]_.
    veniam, quis nostrud neste.
    :class: no-header
    :name: senza intestazione
-  
+
    +-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+
    | Lorem     | Vivamus   | Phasellus | Maecenas  | Vivamus   | Lorem     | Vivamus   | Lorem     |
    | ipsum sit | elementum | viverra   | nec odio  | elementum | ipsum sit | elementum | ipsum sit |
@@ -347,7 +348,7 @@ eleifend, vis an wisi fali dignissim. Vim ad augue vidisse, adhuc everti eos te.
 
 Sottoparagrafo con procedura
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
+
 Nunc varius ultrices felis, eget efficitur sapien pulvinar sed. Morbi semper
 iaculis pulvinar. Donec sapien purus, commodo in aliquam quis, ullamcorper vitae
 diam. Donec a nibh suscipit, semper ante non, consectetur nunc. **Phasellus non
@@ -379,7 +380,7 @@ sed ante convallis varius.
 
    .. role:: procedure-internal-title
       :class: procedure-internal-title
-   
+
    :procedure-internal-title:`Da linea di comando, esegui`
 
    1. :code:`cd` alla cartella con i file della documentazione
@@ -422,7 +423,7 @@ dolore magnam aliquam quaerat voluptatem [5]_.
 
   .. code-block:: xml
      :linenos:
-     
+
      <md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
          entityID="https://spid.serviceprovider.it"
          ID="_0j40cj0848d8e3jncjdjss...">
