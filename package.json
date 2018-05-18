@@ -35,7 +35,8 @@
     "matchdep": "^2.0.0",
     "pixrem": "^4.0.1",
     "stylelint": "^9.2.1",
-    "stylelint-config-standard": "^18.2.0"
+    "stylelint-config-standard": "^18.2.0",
+    "uglifyify": "^5.0.0"
   },
   "husky": {
     "hooks": {
