@@ -21,25 +21,25 @@ module.exports = ThemeToolTip = (function ($) {
 
     init: function() {
       that = this.$;
-      // Tolltip keywords
+      // Tooltip keywords
       that.$btnKeywords = that.btn.filter(function(){
         return ($(this).closest('.pull-quote').length)
       });
-      // Tolltip glossary
+      // Tooltip glossary
       that.$btnGlossay = that.btn.filter(function(){
         return ($(this).closest('.pull-quote').length == 0)
       });
-      // Tolltip inside Table
+      // Tooltip inside Table
       that.$tableNoteBtn = that.$noteBtn.filter(function(){
         return ( $(this).closest('table').length  )
       });
 
       ThemeToolTip.addAttribute();
 
-      // ThemeNote.setTollTip();
+      // ThemeNote.setToolTip();
     },
 
-    // Add atribute to keywords btn for enable tooltip
+    // Add attribute to keywords btn for enable tooltip
     addAttribute: function() {
       that.$btnKeywords.each(function(index) {
         var title = $(this).find('span').html();
@@ -89,7 +89,7 @@ module.exports = ThemeToolTip = (function ($) {
       this.ref = index
     },
 
-    // Enable toottip custom
+    // Enable tooltip custom
     addhandler: function() {
       for (var index = 0; index < that.toolTipArray.length; ++index) {
         var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +

@@ -31,7 +31,7 @@ def build(root, builder='html', **kwargs):
     })
 
     confoverrides = kwargs.pop('confoverrides', {})
-    confoverrides['html_theme'] = 'sphinx_rtd_theme'
+    confoverrides['html_theme'] = 'docs_italia_theme'
     extensions = confoverrides.get('extensions', [])
     extensions.append('readthedocs_ext.readthedocs')
     confoverrides['extensions'] = extensions

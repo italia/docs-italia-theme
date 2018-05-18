@@ -4,6 +4,7 @@
 *.inc
 *build/
 .tox
+.pytest_cache
 .coverage
 *.DS_Store
 *.sass-cache

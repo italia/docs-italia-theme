@@ -21,7 +21,14 @@ module.exports = function(grunt) {
     },
 
     stylelint: {
-      all: ['sass/**/*.scss']
+      dev: {
+        options: {
+          failOnError: false
+        },
+        src: ['sass/**/*.scss']
+      },
+      
+      build: ['sass/**/*.scss']
     },
     
     sass: {
@@ -33,7 +40,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'sass',
           src: ['*.scss'],
-          dest: 'docs-italia-theme/static/css',
+          dest: 'docs_italia_theme/static/css',
           ext: '.css'
         }]
       }
@@ -44,7 +51,7 @@ module.exports = function(grunt) {
         options: {
           map: {
               inline: false,
-              annotation: 'docs-italia-theme/static/css'
+              annotation: 'docs_italia_theme/static/css'
           },
           processors: [
             require('pixrem')(),
@@ -53,9 +60,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'docs-italia-theme/static/css',
+          cwd: 'docs_italia_theme/static/css',
           src: ['**/*.css'],
-          dest: 'docs-italia-theme/static/css',
+          dest: 'docs_italia_theme/static/css',
           ext: '.css'
         }]
       },
@@ -64,7 +71,7 @@ module.exports = function(grunt) {
         options: {
           map: {
               inline: false,
-              annotation: 'docs-italia-theme/static/css'
+              annotation: 'docs_italia_theme/static/css'
           },
           processors: [
             require('pixrem')(),
@@ -74,9 +81,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'docs-italia-theme/static/css',
+          cwd: 'docs_italia_theme/static/css',
           src: ['**/*.css'],
-          dest: 'docs-italia-theme/static/css',
+          dest: 'docs_italia_theme/static/css',
           ext: '.css'
         }]
       }
@@ -88,14 +95,14 @@ module.exports = function(grunt) {
           external: ['jquery']
         },
         src: ['js/*.js'],
-        dest: 'docs-italia-theme/static/js/theme.js'
+        dest: 'docs_italia_theme/static/js/theme.js'
       },
       build: {
         options: {
           external: ['jquery']
         },
         src: ['js/*.js'],
-        dest: 'docs-italia-theme/static/js/theme.js'
+        dest: 'docs_italia_theme/static/js/theme.js'
       }
     },
 
@@ -120,13 +127,13 @@ module.exports = function(grunt) {
       /* Process css into theme directory */
       postcss: {
         files: [
-          'docs-italia-theme/static/css/**/*.css'
+          'docs_italia_theme/static/css/**/*.css'
         ],
         tasks: ['postcss:dev']
       },
       /* Changes in theme dir rebuild sphinx */
       sphinx: {
-        files: ['docs-italia-theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
+        files: ['docs_italia_theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
         tasks: ['clean:build', 'exec:build_sphinx']
       },
       /* JavaScript */
@@ -146,7 +153,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [
     'clean',
-    'stylelint',
+    'stylelint:dev',
     'sass',
     'postcss:dev',
     'browserify:dev',
@@ -158,7 +165,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean',
-    'stylelint',
+    'stylelint:build',
     'sass',
     'postcss:build',
     'browserify:build',

@@ -40,7 +40,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
-    'docs-italia-theme',
+    'docs_italia_theme',
 ]
 
 # Math
@@ -117,7 +117,6 @@ if on_rtd:
     html_context = {
         'css_files': [
             '_static/css/theme.css',
-            '_static/css/badge_only.css',
         ],
     }
 
@@ -125,20 +124,7 @@ if on_rtd:
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'docs-italia-theme'
-
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
-# documentation.
-html_theme_options = {
-    # If the project is meant to be a different style project, enable this layout instead of the default one.
-    # Available options are: (default), 'page_home', 'page_project'
-    'layout': 'default',
-    # This option can be used with docs-italia-theme to customise how the versions "badge" is shown:
-    # 'False': default (alabaster) badge
-    # 'True': custom (italia) badge
-    'custom_versions_badge': 'True',
-}
+html_theme = 'docs_italia_theme'
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../.."]
@@ -211,7 +197,7 @@ htmlhelp_basename = settings_file_name + 'doc'
 
 # -- Options for LaTeX output --------------------------------------------------
 
-latex_elements = {
+#latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
 #'papersize': 'letterpaper',
 
@@ -220,7 +206,7 @@ latex_elements = {
 
 # Additional stuff for the LaTeX preamble.
 #'preamble': '',
-}
+#}
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).

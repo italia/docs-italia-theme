@@ -18,41 +18,18 @@ upcoming Docs Italia.
 
     ```
     # Add this line at the top of the file within the "import" section
-    docs_italia_theme = __import__("docs-italia-theme")
+    import docs_italia_theme
     
-    # Add the Sphinx extension 'docs-italia-theme' in the extensions list
+    # Add the Sphinx extension 'docs_italia_theme' in the extensions list
     extensions = [
       ...,
-      'docs-italia-theme'
+      'docs_italia_theme'
     ]
     
     # Edit these lines
-    html_theme = "docs-italia-theme"
+    html_theme = "docs_italia_theme"
     html_theme_path = [docs_italia_theme.get_html_theme_path()]
     ```
-
-
-## Advanced Configuration
-
-The theme's project-wide options are defined in the `docs-italia-theme/theme.conf`
-file of this repository, and can be defined in your project's `conf.py` via
-`html_theme_options`.
-
-This theme has three different layouts included:
-
-* (default) **documentation page** layout, for documentation
-* **home page** layout, for the docs.italia.it homepage
-* **landing page** layout, for the docs.italia.it project homepages
-
-Home page and landing page don't display any documentation content, and instead only
-relies on a special data syntax from Read the Docs to populate.
-
-```
-html_theme_options = {
-    # To enable the landing page template, instead of the default documentation template
-    'layout': 'landing',
-}
-```
 
 ## Contributing or modifying the theme
 

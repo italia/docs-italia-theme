@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Sphinx Team Digitale theme"""
+"""Sphinx Docs Italia theme"""
 
 import codecs
 import json
@@ -12,15 +12,15 @@ package_data = json.load(package_file)
 
 
 setup(
-    name='docs-italia-theme',
-    version=package_data['version'],
-    license=package_data['license'],
-    author='Team Digitale',
-    description=__doc__,
-    long_description=codecs.open('README.md', 'r', 'utf-8').read(),
-    zip_safe=False,
-    packages=['docs-italia-theme'],
-    package_data={'docs-italia-theme': [
+    name = 'docs_italia_theme',
+    version = package_data['version'],
+    license = package_data['license'],
+    author = 'Team per la Trasformazione Digitale - AgID',
+    description = __doc__,
+    long_description = codecs.open('README.md', 'r', 'utf-8').read(),
+    zip_safe = False,
+    packages = ['docs_italia_theme'],
+    package_data = {'docs_italia_theme': [
         'theme.conf',
         '*.html',
         'static/css/*.css',
@@ -31,8 +31,14 @@ setup(
         'static/font/*.*',
         'data/*.*',
     ]},
-    include_package_data=True,
-    classifiers=[
+    include_package_data = True,
+    # See http://www.sphinx-doc.org/en/stable/theming.html#distribute-your-theme-as-a-python-package
+    entry_points = {
+        'sphinx.html_themes': [
+            'docs_italia_theme = docs_italia_theme'
+        ]
+    },
+    classifiers = [
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: MIT License',
         'Environment :: Console',
@@ -46,9 +52,9 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Operating System :: OS Independent',
         'Topic :: Documentation',
-        'Topic :: Software Development :: Documentation',
+        'Topic :: Software Development :: Documentation'
     ],
-    install_requires=[
-        'PyYAML==3.12',
+    install_requires = [
+        'PyYAML'
     ]
 )
