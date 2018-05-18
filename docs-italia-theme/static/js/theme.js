@@ -503,9 +503,7 @@ $( document ).ready(function() {
   ThemeMarkupModifier.init();
   ThemeToolTip.init();
   ThemeChapterNav.init();
-  setTimeout(function(){
-    ThemeNote.init();
-  }, 1000);
+  ThemeNote.init();
 });
 
 },{}]},{},["docs-italia-theme"]);
