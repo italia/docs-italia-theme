@@ -49,15 +49,27 @@
   background: none;
   border: none;
   color: $blue;
-  text-transform: capitalize;
   padding: 0;
   display: inline-block;
   font-size: 0.9em;
   cursor: pointer;
+  text-transform: capitalize;
+  vertical-align: middle;
 
   &:hover {
     text-decoration: underline;
   }
+}
+
+.chapter-link__title {
+  text-transform: capitalize;
+  float: left;
+}
+
+.chapter-link__counter {
+  margin-right: 0.3rem;
+  display: inline-block;
+  float: left;
 }
 
 .Icon {
