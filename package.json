@@ -31,9 +31,15 @@
     "grunt-open": "^0.2.3",
     "grunt-postcss": "^0.9.0",
     "grunt-stylelint": "^0.10.0",
+    "husky": "^1.0.0-rc.6",
     "matchdep": "^2.0.0",
     "pixrem": "^4.0.1",
-    "stylelint": "^9.2.0",
+    "stylelint": "^9.2.1",
     "stylelint-config-standard": "^18.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "grunt build"
+    }
   }
 }
