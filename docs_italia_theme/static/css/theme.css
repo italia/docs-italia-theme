@@ -39,7 +39,9 @@
 [class^="it-icon-"],
 [class*=" it-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
+  /* stylelint-disable */
   font-family: 'docs-italia' !important;
+  /* stylelint-enable */
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -51,6 +53,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* stylelint-disable */
+/* stylelint-enable */
 .it-icon-more::before {
   content: "\e900";
 }
@@ -339,12 +343,6 @@ img {
   padding: 0.2rem;
 }
 
-/* Note */
-.footnote-reference {
-  color: #193e5e;
-  border: 1px #193e5e solid;
-}
-
 /* Footer btn */
 .footer-buttons--next {
   clear: both;
@@ -378,6 +376,7 @@ img {
 /* General width */
 #doc-content {
   width: 100%;
+  position: relative;
 }
 @media (min-width: 992px) {
   #doc-content {
@@ -524,9 +523,6 @@ img {
     position: relative;
     /* line-height is defined in px instead rem for background element crossbrowser */
   }
-  #doc-content .title-wrap h1 {
-    line-height: 71px;
-  }
   #doc-content .title-wrap h2 {
     line-height: 60px;
   }
@@ -553,6 +549,9 @@ img {
   #doc-content .title-wrap h3 .title__chapter {
     position: relative;
     color: #0073e6;
+  }
+  #doc-content .title-wrap h1 {
+    line-height: 71px;
   }
   #doc-content .title-wrap h1 .title__chapter {
     position: relative;
@@ -799,6 +798,10 @@ img {
   color: #fff;
 }
 
+.t_translate-wrap {
+  display: none;
+}
+
 .doc-tooltip {
   background-color: #fff;
   font-family: "Lora", serif;
@@ -816,6 +819,9 @@ img {
   bottom: -25px;
   left: 0;
   z-index: -1;
+}
+.doc-tooltip.doc-tooltip--note::after {
+  content: none;
 }
 
 .tooltip__wrap {
@@ -946,14 +952,27 @@ img {
   background: none;
   border: none;
   color: #0073e6;
-  text-transform: capitalize;
   padding: 0;
   display: inline-block;
   font-size: 0.9em;
   cursor: pointer;
+  text-transform: capitalize;
+  vertical-align: middle;
 }
 .chapter-link:hover {
   text-decoration: underline;
+}
+
+.chapter-link__title {
+  text-transform: capitalize;
+  float: left;
+}
+
+.chapter-link__counter {
+  margin-right: 4.8px;
+  margin-right: 0.3rem;
+  display: inline-block;
+  float: left;
 }
 
 .Icon {
@@ -1042,6 +1061,65 @@ img {
 #doc-content table:not(.footnote) tr td:nth-of-type(1) {
   font-weight: 800;
   color: #002b4d;
+}
+
+#doc-content .footnote-reference {
+  color: #193e5e;
+  border: 1px #193e5e solid;
+  border-radius: 3px;
+  padding-right: 12.8px;
+  padding-right: 0.8rem;
+}
+#doc-content .note-action {
+  margin-top: 8px;
+  margin-top: 0.5rem;
+}
+#doc-content .note-close-btn,
+#doc-content .note-back-btn {
+  background: none;
+  border: 0;
+  display: inline-block;
+  color: #0073e6;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+#doc-content .note-back-btn {
+  position: relative;
+}
+#doc-content .note-back-btn::before {
+  content: '';
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  position: absolute;
+  background-color: #0073e6;
+  left: 0;
+}
+#doc-content .note-back-btn:hover {
+  text-decoration: underline;
+}
+#doc-content .docutils.footnote {
+  color: #000;
+  font-size: 12.8px;
+  font-size: 0.8rem;
+  display: none;
+  margin-bottom: 32px;
+  margin-bottom: 2rem;
+}
+#doc-content .docutils.footnote td {
+  width: 100%;
+  float: left;
+}
+#doc-content .docutils.footnote .fn-backref {
+  color: #193e5e;
+  border: 1px #193e5e solid;
+  border-radius: 3px;
+  padding: 3.2px;
+  padding: 0.2rem;
+  line-height: 1;
+  display: inline-block;
+  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 /*# sourceMappingURL=theme.css.map */

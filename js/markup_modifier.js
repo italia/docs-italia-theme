@@ -117,7 +117,7 @@ module.exports = ThemeMarkupModifier = (function ($) {
             newStr = str.replace(/[\[\]]/g,'');
             stringToAppend = "<div class='note-action'>" +
                              "<button type='button' class='note-close-btn'>X</button>" +
-                             "<button type='button' class='note-back-btn'>torna al testo</button>" +
+                             "<button type='button' class='note-back-btn'>" + themeTranslate.backToText() + "</button>" +
                              "</div>";
 
         $(this).text('Note ' + newStr);

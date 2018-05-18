@@ -3,8 +3,9 @@ var ThemeMarkupModifier = require('./markup_modifier.js');
 var ThemeToolTip = require('./tooltip.js');
 var ThemeChapterNav = require('./section_navigation.js');
 var ThemeNote = require('./note.js');
+var themeTranslate = require('./theme_translate.js');
 
-// Init all 
+// Init all
 $(document).ready(function() {
   ThemeMarkupModifier.init();
   ThemeToolTip.init();
@@ -12,7 +13,7 @@ $(document).ready(function() {
   ThemeNote.init();
 });
 
-},{"./markup_modifier.js":2,"./note.js":3,"./section_navigation.js":4,"./tooltip.js":5}],2:[function(require,module,exports){
+},{"./markup_modifier.js":2,"./note.js":3,"./section_navigation.js":4,"./theme_translate.js":5,"./tooltip.js":6}],2:[function(require,module,exports){
 // Modify DOM via JS.
 module.exports = ThemeMarkupModifier = (function ($) {
   var that;
@@ -132,7 +133,7 @@ module.exports = ThemeMarkupModifier = (function ($) {
             newStr = str.replace(/[\[\]]/g,'');
             stringToAppend = "<div class='note-action'>" +
                              "<button type='button' class='note-close-btn'>X</button>" +
-                             "<button type='button' class='note-back-btn'>torna al testo</button>" +
+                             "<button type='button' class='note-back-btn'>" + themeTranslate.backToText() + "</button>" +
                              "</div>";
 
         $(this).text('Note ' + newStr);
@@ -231,24 +232,25 @@ module.exports = ThemeChapterNav = (function ($) {
           "<ul class='chapter-nav__list chapter-nav__list--visible'>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-comment'></span>" +
-          "<button type='button' class='chapter-link'><span>4</span> commenti</button></li>" +
+          "<button type='button' class='chapter-link'><span class='chapter-link__counter'>4</span>" +
+          "<span class='chapter-link__title'>" + themeTranslate.getComment() + "</span></button type='button'></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-more'></span>" +
-          "<button type='button' class='chapter-link chapter-link--expand'>Vedi Azioni</button></li>" +
+          "<button type='button' class='chapter-link chapter-link--expand'>" + themeTranslate.getSeeAction() + "</button></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-more'></span>" +
-          "<button type='button' class='chapter-link chapter-link--expand'>Altre Azioni</button></li></ul>" +
+          "<button type='button' class='chapter-link chapter-link--expand'>" + themeTranslate.getOtherActions() + "</button></li></ul>" +
           "<div class='chapter-nav__list--hidden'>" +
           "<ul class='chapter-nav__list'>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-link'></span>" +
-          "<button type='button' class='chapter-link'>Copia link</button></li>" +
+          "<button type='button' class='chapter-link'>" + themeTranslate.getCopyLink() + "</button></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-compare'></span>" +
-          "<button type='button' class='chapter-link'>Confronta versioni</button></li>" +
+          "<button type='button' class='chapter-link'>" + themeTranslate.getCompareVersions() + "</button></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-share'></span>" +
-          "<button type='button' class='chapter-link'>Condividi</button>" +
+          "<button type='button' class='chapter-link'>" + themeTranslate.getShareMsg() + "</button>" +
           "</li></ul></div></div></div>";
       container = element.closest('.chapter-header');
       container.append(nav);
@@ -331,6 +333,42 @@ module.exports = ThemeChapterNav = (function ($) {
 })(jQuery);
 
 },{}],5:[function(require,module,exports){
+module.exports = themeTranslate = (function ($) {
+
+  return {
+
+    getShareMsg: function() {
+      return $('.t_translate--share_msg').attr('data-translation');
+    },
+
+    getCompareVersions: function() {
+      return $('.t_translate--compare_versions').attr('data-translation');
+    },
+
+    getCopyLink: function() {
+      return $('.t_translate--copy_link').attr('data-translation');
+    },
+
+    getSeeAction: function() {
+      return $('.t_translate--see_actions').attr('data-translation');
+    },
+
+    getOtherActions: function() {
+      return $('.t_translate--other_actions').attr('data-translation');
+    },
+
+    getComment: function() {
+      return $('.t_translate--comments').attr('data-translation');
+    },
+
+    backToText: function() {
+      return $('.t_translate--back_to_text').attr('data-translation');
+    }
+  }
+
+})(jQuery);
+
+},{}],6:[function(require,module,exports){
 // Tooltips
 module.exports = ThemeToolTip = (function ($) {
   var that;
@@ -354,25 +392,25 @@ module.exports = ThemeToolTip = (function ($) {
 
     init: function() {
       that = this.$;
-      // Tolltip keywords
+      // Tooltip keywords
       that.$btnKeywords = that.btn.filter(function(){
         return ($(this).closest('.pull-quote').length)
       });
-      // Tolltip glossary
+      // Tooltip glossary
       that.$btnGlossay = that.btn.filter(function(){
         return ($(this).closest('.pull-quote').length == 0)
       });
-      // Tolltip inside Table
+      // Tooltip inside Table
       that.$tableNoteBtn = that.$noteBtn.filter(function(){
         return ( $(this).closest('table').length  )
       });
 
       ThemeToolTip.addAttribute();
 
-      // ThemeNote.setTollTip();
+      // ThemeNote.setToolTip();
     },
 
-    // Add atribute to keywords btn for enable tooltip
+    // Add attribute to keywords btn for enable tooltip
     addAttribute: function() {
       that.$btnKeywords.each(function(index) {
         var title = $(this).find('span').html();
@@ -422,7 +460,7 @@ module.exports = ThemeToolTip = (function ($) {
       this.ref = index
     },
 
-    // Enable toottip custom
+    // Enable tooltip custom
     addhandler: function() {
       for (var index = 0; index < that.toolTipArray.length; ++index) {
         var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
@@ -475,4 +513,4 @@ module.exports = ThemeToolTip = (function ($) {
   }
 })(jQuery);
 
-},{}]},{},[1,2,3,4,5]);
+},{}]},{},[1,2,3,4,5,6]);

@@ -26,24 +26,25 @@ module.exports = ThemeChapterNav = (function ($) {
           "<ul class='chapter-nav__list chapter-nav__list--visible'>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-comment'></span>" +
-          "<button type='button' class='chapter-link'><span>4</span> commenti</button></li>" +
+          "<button type='button' class='chapter-link'><span class='chapter-link__counter'>4</span>" +
+          "<span class='chapter-link__title'>" + themeTranslate.getComment() + "</span></button type='button'></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-more'></span>" +
-          "<button type='button' class='chapter-link chapter-link--expand'>Vedi Azioni</button></li>" +
+          "<button type='button' class='chapter-link chapter-link--expand'>" + themeTranslate.getSeeAction() + "</button></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-more'></span>" +
-          "<button type='button' class='chapter-link chapter-link--expand'>Altre Azioni</button></li></ul>" +
+          "<button type='button' class='chapter-link chapter-link--expand'>" + themeTranslate.getOtherActions() + "</button></li></ul>" +
           "<div class='chapter-nav__list--hidden'>" +
           "<ul class='chapter-nav__list'>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-link'></span>" +
-          "<button type='button' class='chapter-link'>Copia link</button></li>" +
+          "<button type='button' class='chapter-link'>" + themeTranslate.getCopyLink() + "</button></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-compare'></span>" +
-          "<button type='button' class='chapter-link'>Confronta versioni</button></li>" +
+          "<button type='button' class='chapter-link'>" + themeTranslate.getCompareVersions() + "</button></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-share'></span>" +
-          "<button type='button' class='chapter-link'>Condividi</button>" +
+          "<button type='button' class='chapter-link'>" + themeTranslate.getShareMsg() + "</button>" +
           "</li></ul></div></div></div>";
       container = element.closest('.chapter-header');
       container.append(nav);

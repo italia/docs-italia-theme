@@ -34,7 +34,13 @@ it:
     skiplink_goto_navigation: vai alla navigazione del sito
     toggle_menu_label: accedi al menu
     version: versione
-    
+    compare_versions: confronta versioni
+    copy_link: copia Link
+    see_actions: vedi azioni
+    other_actions: altre azioni
+    comments: commenti
+    back_to_text: torna al testo
+
     edit_on_github: Modifica su GitHub
     edit_on_bitbucket: Modifica su Bitbucket
     edit_on_gitlab: Modifica su GitLab
@@ -88,7 +94,13 @@ en:
     skiplinks_goto_navigation: go to site navigation
     toggle_menu_label: go to navigation
     version: version
-    
+    compare_versions: compare versions
+    copy_link: copy link
+    see_actions: see actions
+    other_actions: other actions
+    comments: comments
+    back_to_text: back to the text
+
     edit_on_github: Edit on GitHub
     edit_on_bitbucket: Edit on Bitbucket
     edit_on_gitlab: Edit on GitLab
