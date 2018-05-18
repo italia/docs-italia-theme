@@ -7,6 +7,7 @@ var themeTranslate = require('./theme_translate.js');
 
 // Init all
 $(document).ready(function() {
+  themeTranslate.init();
   ThemeMarkupModifier.init();
   ThemeToolTip.init();
   ThemeChapterNav.init();
@@ -133,7 +134,7 @@ module.exports = ThemeMarkupModifier = (function ($) {
             newStr = str.replace(/[\[\]]/g,'');
             stringToAppend = "<div class='note-action'>" +
                              "<button type='button' class='note-close-btn'>X</button>" +
-                             "<button type='button' class='note-back-btn'>" + themeTranslate.backToText() + "</button>" +
+                             "<button type='button' class='note-back-btn'>" + themeTranslate.getTranslation().backToText + "</button>" +
                              "</div>";
 
         $(this).text('Note ' + newStr);
@@ -221,7 +222,7 @@ module.exports = ThemeChapterNav = (function ($) {
       that = this.$;
       that.$title = $('.chapter-header.has-nav h1,.chapter-header.has-nav h2,.chapter-header.has-nav h3'),
       that.$title.each(function(index) {
-        $element = $(this);
+        var $element = $(this);
         ThemeChapterNav.addNav($element);
       });
       ThemeChapterNav.addHandler();
@@ -233,24 +234,24 @@ module.exports = ThemeChapterNav = (function ($) {
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-comment'></span>" +
           "<button type='button' class='chapter-link'><span class='chapter-link__counter'>4</span>" +
-          "<span class='chapter-link__title'>" + themeTranslate.getComment() + "</span></button type='button'></li>" +
+          "<span class='chapter-link__title'>" + themeTranslate.getTranslation().comments + "</span></button type='button'></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-more'></span>" +
-          "<button type='button' class='chapter-link chapter-link--expand'>" + themeTranslate.getSeeAction() + "</button></li>" +
+          "<button type='button' class='chapter-link chapter-link--expand'>" + themeTranslate.getTranslation().seeActions + "</button></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-more'></span>" +
-          "<button type='button' class='chapter-link chapter-link--expand'>" + themeTranslate.getOtherActions() + "</button></li></ul>" +
+          "<button type='button' class='chapter-link chapter-link--expand'>" + themeTranslate.getTranslation().otherActions + "</button></li></ul>" +
           "<div class='chapter-nav__list--hidden'>" +
           "<ul class='chapter-nav__list'>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-link'></span>" +
-          "<button type='button' class='chapter-link'>" + themeTranslate.getCopyLink() + "</button></li>" +
+          "<button type='button' class='chapter-link'>" + themeTranslate.getTranslation().copyLink + "</button></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-compare'></span>" +
-          "<button type='button' class='chapter-link'>" + themeTranslate.getCompareVersions() + "</button></li>" +
+          "<button type='button' class='chapter-link'>" + themeTranslate.getTranslation().compareVersions + "</button></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-share'></span>" +
-          "<button type='button' class='chapter-link'>" + themeTranslate.getShareMsg() + "</button>" +
+          "<button type='button' class='chapter-link'>" + themeTranslate.getTranslation().shareMsg + "</button>" +
           "</li></ul></div></div></div>";
       container = element.closest('.chapter-header');
       container.append(nav);
@@ -334,35 +335,26 @@ module.exports = ThemeChapterNav = (function ($) {
 
 },{}],5:[function(require,module,exports){
 module.exports = themeTranslate = (function ($) {
+  var that;
 
   return {
 
-    getShareMsg: function() {
-      return $('.t_translate--share_msg').attr('data-translation');
+    $: {
+      $element: $('.t_translate'),
+      obj: {}
     },
 
-    getCompareVersions: function() {
-      return $('.t_translate--compare_versions').attr('data-translation');
+    init: function() {
+      that = this.$;
+      that.$element.each(function(index) {
+        var $element = $(this),
+            name = $element.attr('data-name');
+        that.obj[name] = $element.attr('data-translation');
+      });
     },
 
-    getCopyLink: function() {
-      return $('.t_translate--copy_link').attr('data-translation');
-    },
-
-    getSeeAction: function() {
-      return $('.t_translate--see_actions').attr('data-translation');
-    },
-
-    getOtherActions: function() {
-      return $('.t_translate--other_actions').attr('data-translation');
-    },
-
-    getComment: function() {
-      return $('.t_translate--comments').attr('data-translation');
-    },
-
-    backToText: function() {
-      return $('.t_translate--back_to_text').attr('data-translation');
+    getTranslation: function() {
+      return that.obj;
     }
   }
 

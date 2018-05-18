@@ -6,6 +6,7 @@ var themeTranslate = require('./theme_translate.js');
 
 // Init all
 $(document).ready(function() {
+  themeTranslate.init();
   ThemeMarkupModifier.init();
   ThemeToolTip.init();
   ThemeChapterNav.init();
