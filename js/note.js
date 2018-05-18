@@ -56,3 +56,7 @@ module.exports = ThemeNote = (function ($) {
 
   }
 })(jQuery);
+
+$(document).ready(function() {
+  ThemeNote.init();
+});
