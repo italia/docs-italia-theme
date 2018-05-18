@@ -15,7 +15,6 @@ var ThemeNote = (function ($) {
 
     init: function() {
       that = this.$;
-      //ThemeNote.calcPosition();
 
       that.$noteStandardBtn = that.$noteBtn.filter(function() {
         return ($(this).closest('table').length == 0)
@@ -26,29 +25,8 @@ var ThemeNote = (function ($) {
       $('.note-back-btn').on('click', ThemeNote.backToBtn);
     },
 
-    // calcPosition: function() {
-    //   that.$noteBtn.each(function(index) {
-    //     var idDest = $(this).attr('href').replace('#',''),
-    //         $targetNote = $('#' + idDest);
-    // 
-    //     that.$note.css('display', 'none');
-    //     $targetNote.css('display', 'block');
-    //     that.dataObj[idDest] = {
-    //       ypos: parseInt($targetNote.offset().top),
-    //       height: parseInt($targetNote.outerHeight()),
-    //       btnYpos: parseInt($(this).offset().top)
-    //     }
-    // 
-    //     if(!$targetNote.hasClass('active')) {
-    //       $targetNote.slideUp(0);
-    //     }
-    //   });
-    // },
-
     shownoteStandardBtn: function(event) {
       event.preventDefault();
-
-      // ThemeNote.calcPosition();
 
       var $btn = $(event.target),
           noteid = $btn.attr('href').replace('#', ''),
@@ -80,7 +58,5 @@ var ThemeNote = (function ($) {
 })(jQuery);
 
 $(document).ready(function() {
-  setTimeout(function(){
-    ThemeNote.init();
-  }, 1000);
+  ThemeNote.init();
 });
