@@ -51,6 +51,17 @@
   }
 }
 
+// Figure
+.figure-fixed-wrap {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.figure-fixed {
+  max-width: none;
+}
+
 /* Title nav */
 .title__background {
   width: 100%;
@@ -215,7 +226,8 @@
     .section,
     .chapter-header,
     .caption-wrap,
-    .table-responsive {
+    .table-responsive,
+    .figure {
       @media (min-width: 992px) {
         width: 100%;
         float: none;

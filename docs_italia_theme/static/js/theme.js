@@ -28,6 +28,7 @@ module.exports = ThemeMarkupModifier = (function ($) {
       $noteBtn: $('.footnote-reference'),
       $note: $('.docutils.footnote'),
       $noteBackref: $('.fn-backref'),
+      $imgFixed: $('.figure-fixed'),
       titleReady: false
     },
 
@@ -39,6 +40,12 @@ module.exports = ThemeMarkupModifier = (function ($) {
       ThemeMarkupModifier.procedureModifier();
       ThemeMarkupModifier.addIcon();
       ThemeMarkupModifier.noteModifier();
+      ThemeMarkupModifier.imgModifier();
+    },
+
+    imgModifier: function() {
+      var $imgContainer = that.$imgFixed.closest('.figure');
+      $imgContainer.addClass('figure-fixed-wrap');
     },
 
     titleModifier: function() {
