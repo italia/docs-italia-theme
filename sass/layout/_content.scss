@@ -85,12 +85,6 @@
   padding: 0.2rem;
 }
 
-/* Note */
-.footnote-reference {
-  color: $dark-blue-border;
-  border: 1px $dark-blue-border solid;
-}
-
 /* Footer btn */
 .footer-buttons--next {
   clear: both;
@@ -122,6 +116,7 @@
 /* General width */
 #doc-content {
   width: 100%;
+  position: relative;
 
   @media (min-width: 992px) {
     width: calc(100% - #{$sidebar-width});
@@ -272,11 +267,6 @@
       clear: left;
       position: relative;
 
-      /* line-height is defined in px instead rem for background element crossbrowser */
-      h1 {
-        line-height: 71px;
-      }
-
       h2 {
         line-height: 60px;
       }
@@ -306,7 +296,10 @@
         }
       }
 
+      /* line-height is defined in px instead rem for background element crossbrowser */
       h1 {
+        line-height: 71px;
+
         .title__chapter {
           position: relative;
           background-color: $blue;
