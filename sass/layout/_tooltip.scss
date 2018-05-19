@@ -1,19 +1,48 @@
 .doc-tooltip {
   background-color: $white;
   font-family: $stack-font;
-  box-shadow: (-1px) 0 112px -14px rgba($black, 0.15);
+  box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.15);
 
-  &::after {
+  &.bs-popover-top::before,
+  &.bs-popover-bottom::before {
     content: "";
     width: 0;
     height: 0;
-    border-top: 30px solid transparent;
-    border-bottom: 25px solid transparent;
-    border-left: 30px solid $white;
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+    border-left: 40px solid $white;
     position: absolute;
-    bottom: -25px;
     left: 0;
     z-index: -1;
+  }
+
+  &.bs-popover-top::before {
+    bottom: -40px;
+  }
+
+  &.bs-popover-bottom::before {
+    top: -40px;
+  }
+
+  &.bs-popover-top::after,
+  &.bs-popover-bottom::after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+    position: absolute;
+    left: 5px;
+    z-index: -2;
+  }
+
+  &.bs-popover-top::after {
+    box-shadow: 5px 5px 70px 8px rgba(0, 0, 0, 0.15);
+    bottom: -20px;
+  }
+
+  &.bs-popover-bottom::after {
+    box-shadow: -5px -5px 70px 8px rgba(0, 0, 0, 0.15);
+    top: -20px;
   }
 
   &.doc-tooltip--note {

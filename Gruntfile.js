@@ -99,7 +99,10 @@ module.exports = function(grunt) {
       },
       build: {
         options: {
-          external: ['jquery']
+          external: ['jquery'],
+          transform: [
+                'uglifyify'
+            ],
         },
         src: ['js/*.js'],
         dest: 'docs_italia_theme/static/js/theme.js'
@@ -117,6 +120,13 @@ module.exports = function(grunt) {
     },
 
     watch: {
+      /* Stylelint scss files */
+      stylelint: {
+        files: [
+          'sass/**/*.scss'
+        ],
+        tasks: ['stylelint:dev']
+      },
       /* Compile sass changes into theme directory */
       sass: {
         files: [
