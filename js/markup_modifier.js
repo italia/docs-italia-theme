@@ -117,18 +117,31 @@ module.exports = ThemeMarkupModifier = (function ($) {
         var str =  $(this).text(),
             newStr = str.replace(/[\[\]]/g,'');
         $(this).text(newStr);
+
+        // Check if the button is inside a table and add a specific class to note element 'footnote-from-table'
+        if($(this).closest('.table-responsive').length) {
+          var id = $(this).attr('href').replace('#',''),
+              $noteBackref = $('#' + id);
+
+          $noteBackref.addClass('footnote-from-table');
+        }
       });
 
       that.$noteBackref.each(function(index) {
-        var str =  $(this).text(),
+        var $element = $(this),
+            str =  $element.text(),
             newStr = str.replace(/[\[\]]/g,'');
             stringToAppend = "<div class='note-action'>" +
                              "<button type='button' class='note-close-btn'>X</button>" +
                              "<button type='button' class='note-back-btn'>" + themeTranslate.getTranslation().backToText + "</button>" +
                              "</div>";
 
-        $(this).text('Note ' + newStr);
-        $(this).closest('td').next().append(stringToAppend);
+        $element.text('Note ' + newStr);
+
+        // Add btn ( x | back) if popover isn't showed inside table checking the 'footnote-from-table' class
+        if( $element.closest('.footnote-from-table').length == 0 ) {
+          $element.closest('td').next().append(stringToAppend);
+        }
       });
     }
   }

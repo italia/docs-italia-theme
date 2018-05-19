@@ -14,6 +14,7 @@ $(document).ready(function() {
   ThemeChapterNav.init();
   ThemeNote.init();
 
+  // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {
     ThemeToolTip.init();
   }

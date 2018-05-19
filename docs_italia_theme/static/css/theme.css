@@ -859,7 +859,7 @@ img {
           box-shadow: -5px -5px 70px 8px rgba(0, 0, 0, 0.15);
   top: -20px;
 }
-.doc-tooltip.doc-tooltip--note::after {
+.doc-tooltip.doc-tooltip--note::after, .doc-tooltip.doc-tooltip--note::before {
   content: none;
 }
 
@@ -927,6 +927,8 @@ img {
   letter-spacing: 0;
   position: relative;
   display: inline-block;
+  margin-top: 16px;
+  margin-top: 1rem;
 }
 .tooltip__link::after {
   content: '';
