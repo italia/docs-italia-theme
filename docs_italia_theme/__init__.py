@@ -3,6 +3,8 @@
 import os
 import re
 import yaml
+import json
+from sphinx.addnodes import glossary
 
 # This part would be better placed as an extension:
 # It loads yaml data files to set them as variables
@@ -23,7 +25,7 @@ def deep_merge(source, destination):
     return destination
 
 
-def load_site_data():
+def load_theme_data():
     """Load data from YAML config file"""
     source_path = os.path.abspath(
         os.path.join(os.path.dirname(__file__), 'data')
@@ -90,7 +92,33 @@ def html_page_context_listener(app, pagename, templatename, context, doctree):
         language = app.site_data['default_language']
     context['t'] = app.site_data['data']['l10n'][language]['t']
 
+def generate_glossary_json(app, doctree, docname):
+    current_builder = app.builder.name
+    if current_builder == 'html' or current_builder == 'readthedocs':
+        glossary_data = {}
+        data_dir = app.outdir + '/_static/data'
+        if not os.path.exists(data_dir):
+            os.makedirs(data_dir)
+        if os.path.exists(data_dir + '/glossary.json'):
+            with open(data_dir + '/glossary.json', 'r') as existing_glossary:
+                glossary_data = json.loads(existing_glossary.read())
+        for node in doctree.traverse(glossary):
+            for definition_list in node.children:
+                for definition_list_item in definition_list.children:
+                    term = definition_list_item.children[0].rawsource
+                    definition = ''
+                    for paragraphs in definition_list_item.children[1].children:
+                        definition += paragraphs.rawsource + '\n'
+                    definition = definition[:-2]
+                    glossary_data[term] = definition
+        glossary_json = json.dumps(glossary_data)    
+        glossary_json_file = open(data_dir + '/glossary.json', 'w')
+        glossary_json_file.write(glossary_json)
+        glossary_json_file.close()
+                
+
 def setup(app):
-    app.site_data = load_site_data()
+    app.site_data = load_theme_data()
     app.connect('html-page-context', html_page_context_listener)
+    app.connect('doctree-resolved', generate_glossary_json)
     app.add_html_theme('docs_italia_theme', os.path.abspath(os.path.dirname(__file__)))
