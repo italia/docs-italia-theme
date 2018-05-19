@@ -1,5 +1,5 @@
 // Notes
-module.exports = ThemeNote = (function ($) {
+module.exports = themeNote = (function ($) {
   var that;
 
   return {
@@ -20,9 +20,9 @@ module.exports = ThemeNote = (function ($) {
         return ($(this).closest('table').length == 0)
       });
       that.$note.css('display', 'block').slideUp(0);
-      that.$noteStandardBtn.on('click', ThemeNote.shownoteStandardBtn);
-      $('.note-close-btn').on('click', ThemeNote.closeNote);
-      $('.note-back-btn').on('click', ThemeNote.backToBtn);
+      that.$noteStandardBtn.on('click', themeNote.shownoteStandardBtn);
+      $('.note-close-btn').on('click', themeNote.closeNote);
+      $('.note-back-btn').on('click', themeNote.backToBtn);
     },
 
     shownoteStandardBtn: function(event) {

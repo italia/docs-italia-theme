@@ -1,5 +1,5 @@
 // Modify DOM via JS.
-module.exports = ThemeMarkupModifier = (function ($) {
+module.exports = themeMarkupModifier = (function ($) {
   var that;
 
   return {
@@ -17,13 +17,13 @@ module.exports = ThemeMarkupModifier = (function ($) {
 
     init: function() {
       that = this.$;
-      ThemeMarkupModifier.titleModifier();
-      ThemeMarkupModifier.tableModifier();
-      ThemeMarkupModifier.captionModifier();
-      ThemeMarkupModifier.procedureModifier();
-      ThemeMarkupModifier.addIcon();
-      ThemeMarkupModifier.noteModifier();
-      ThemeMarkupModifier.imgModifier();
+      themeMarkupModifier.titleModifier();
+      themeMarkupModifier.tableModifier();
+      themeMarkupModifier.captionModifier();
+      themeMarkupModifier.procedureModifier();
+      themeMarkupModifier.addIcon();
+      themeMarkupModifier.noteModifier();
+      themeMarkupModifier.imgModifier();
     },
 
     imgModifier: function() {
@@ -36,10 +36,10 @@ module.exports = ThemeMarkupModifier = (function ($) {
 
         var $element = $(this),
             title = $element.html(),
-            number = ThemeMarkupModifier.startingNumber(title);
+            number = themeMarkupModifier.startingNumber(title);
 
         $element.wrap('<div class="chapter-header clearfix"><div class="title-wrap">');
-        if( !ThemeMarkupModifier.dotNumberValidator(number) ) {
+        if( !themeMarkupModifier.dotNumberValidator(number) ) {
           $element.html(title.replace(number , '<span class="title__chapter">' + number + '</span>'));
           $element.addClass('title-has-nav');
           $element.closest('.title-wrap').append('<span class="title__background">');

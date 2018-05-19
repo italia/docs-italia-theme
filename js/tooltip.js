@@ -1,5 +1,5 @@
 // Tooltips
-module.exports = ThemeToolTip = (function ($) {
+module.exports = themeToolTip = (function ($) {
   var that;
 
   return {
@@ -34,9 +34,9 @@ module.exports = ThemeToolTip = (function ($) {
         return ( $(this).closest('table').length  )
       });
 
-      ThemeToolTip.addAttribute();
+      themeToolTip.addAttribute();
 
-      // ThemeNote.setToolTip();
+      // themeNote.setToolTip();
     },
 
     // Add attribute to keywords btn for enable tooltip
@@ -44,22 +44,22 @@ module.exports = ThemeToolTip = (function ($) {
       that.$btnKeywords.each(function(index) {
         var title = $(this).find('span').html();
         $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
-        that.toolTipArray.push(new ThemeToolTip.setData($(this),index));
+        that.toolTipArray.push(new themeToolTip.setData($(this),index));
       });
 
       that.$btnGlossay.each(function(index) {
         var title = $(this).find('span').html();
         $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
-        that.toolTipArrayKeywords.push(new ThemeToolTip.setDataKeywords($(this),index,title));
+        that.toolTipArrayKeywords.push(new themeToolTip.setDataKeywords($(this),index,title));
       });
 
       that.$tableNoteBtn.each(function(index) {
         var title = $(this).text();
         $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
-        that.toolTipNote.push(new ThemeToolTip.setDataNote($(this),index));
+        that.toolTipNote.push(new themeToolTip.setDataNote($(this),index));
       });
 
-      ThemeToolTip.addhandler();
+      themeToolTip.addhandler();
     },
 
     // Set array whith keywords btn info

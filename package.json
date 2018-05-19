@@ -10,18 +10,21 @@
   "author": "Presidenza del Consiglio dei Ministri",
   "scripts": {
     "start": "grunt",
-    "build": "grunt build"
+    "build": "grunt build",
+    "release": "grunt release"
   },
   "dependencies": {
     "grunt-cli": "^1.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^8.5.0",
+    "bootstrap-italia": "^0.8.2",
     "browserify": "^14.5.0",
     "connect-livereload": "^0.6.0",
     "cssnano": "^3.10.0",
     "grunt": "^1.0.1",
     "grunt-browserify": "^5.2.0",
+    "grunt-cache-bust": "1.4.1",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",

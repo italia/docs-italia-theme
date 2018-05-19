@@ -37,24 +37,11 @@
   {% endif %}
   {% endif %}
 
-  {# RTD hosts this file, so just load on non RTD builds #}
-  <link rel="stylesheet" href="{{ pathto('_static/toolkit/bootstrap-italia.min.css', 1) }}" type="text/css" />
-
   {# Titillium Font #}
   <!-- <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,600,700,900" rel="stylesheet"> -->
   <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-
-  {% if not READTHEDOCS %}
-  <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
-  {% endif %}
-
-  {% for cssfile in css_files %}
-  <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
-  {% endfor %}
-
-  {% for cssfile in extra_css_files %}
-  <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
-  {% endfor %}
+  <link rel="stylesheet" href="{{ pathto('_static/css/vendor/bootstrap-italia.min.css', 1) }}" type="text/css" />
+  <link rel="stylesheet" href="{{ pathto('_static/css/theme.css', 1) }}" type="text/css" />
 
   {%- block linktags %}
   {%- if hasdoc('about') %}
@@ -83,12 +70,6 @@
   {%- endif %}
   {%- endblock %}
   {%- block extrahead %} {% endblock %}
-
-  {# Keep modernizr in head - http://modernizr.com/docs/#installing #}
-  <script src="{{ pathto('_static/js/modernizr.min.js', 1) }}"></script>
-
-  {# Fontawesome #}
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
 
   <link rel="apple-touch-icon" sizes="180x180" href="{{ pathto('_static/icons/apple-touch-icon.png', 1) }}">
   <link rel="icon" type="image/png" href="{{ pathto('_static/icons/favicon-32x32.png', 1) }}" sizes="32x32">

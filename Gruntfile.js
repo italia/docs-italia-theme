@@ -59,11 +59,8 @@ module.exports = function(grunt) {
           ]
         },
         files: [{
-          expand: true,
-          cwd: 'docs_italia_theme/static/css',
-          src: ['**/*.css'],
-          dest: 'docs_italia_theme/static/css',
-          ext: '.css'
+          src: 'docs_italia_theme/static/css/theme.css',
+          dest: 'docs_italia_theme/static/css/theme.css',
         }]
       },
       
@@ -80,32 +77,62 @@ module.exports = function(grunt) {
           ]
         },
         files: [{
-          expand: true,
-          cwd: 'docs_italia_theme/static/css',
-          src: ['**/*.css'],
-          dest: 'docs_italia_theme/static/css',
-          ext: '.css'
+          src: 'docs_italia_theme/static/css/theme.css',
+          dest: 'docs_italia_theme/static/css/theme.css',
         }]
       }
+    },
+    
+    copy: {
+      all: {
+        files: [
+          {
+            src: ['node_modules/bootstrap-italia/dist/css/bootstrap-italia.min.css'],
+            dest: 'docs_italia_theme/static/css/vendor/bootstrap-italia.min.css'
+          },
+        ],
+      },
     },
 
     browserify: {
       dev: {
         options: {
-          external: ['jquery']
+          alias: {
+            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js'
+          }
         },
         src: ['js/*.js'],
         dest: 'docs_italia_theme/static/js/theme.js'
       },
       build: {
         options: {
-          external: ['jquery'],
+          alias: {
+            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js'
+          },
           transform: [
                 'uglifyify'
             ],
         },
         src: ['js/*.js'],
         dest: 'docs_italia_theme/static/js/theme.js'
+      }
+    },
+    
+    cacheBust: {
+      all: {
+        options: {
+          baseDir: 'docs_italia_theme/',
+          assets: [
+            'static/css/*.css',
+            'static/js/*.js'
+          ],
+          deleteOriginals: true
+        },
+        files: [{
+          expand: true,
+          cwd: 'docs_italia_theme/layouts/',
+          src: ['head.html', 'scripts.html']
+        }]
       }
     },
 
@@ -166,6 +193,7 @@ module.exports = function(grunt) {
     'stylelint:dev',
     'sass',
     'postcss:dev',
+    'copy',
     'browserify:dev',
     'exec:build_sphinx',
     'connect',
@@ -178,7 +206,19 @@ module.exports = function(grunt) {
     'stylelint:build',
     'sass',
     'postcss:build',
+    'copy',
     'browserify:build',
+    'exec:build_sphinx'
+  ]);
+  
+  grunt.registerTask('release', [
+    'clean',
+    'stylelint:build',
+    'sass',
+    'postcss:build',
+    'copy',
+    'browserify:build',
+    'cacheBust',
     'exec:build_sphinx'
   ]);
 }

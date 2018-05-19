@@ -1,5 +1,5 @@
 // Section navigation
-module.exports = ThemeChapterNav = (function ($) {
+module.exports = themeSectionNav = (function ($) {
   var that;
 
   return {
@@ -16,9 +16,9 @@ module.exports = ThemeChapterNav = (function ($) {
       that.$title = $('.chapter-header.has-nav h1,.chapter-header.has-nav h2,.chapter-header.has-nav h3'),
       that.$title.each(function(index) {
         var $element = $(this);
-        ThemeChapterNav.addNav($element);
+        themeSectionNav.addNav($element);
       });
-      ThemeChapterNav.addHandler();
+      themeSectionNav.addHandler();
     },
 
     addNav: function(element) {
@@ -64,8 +64,8 @@ module.exports = ThemeChapterNav = (function ($) {
             $wrap.addClass('active');
             $wrap.find('.title__background').css('height',lineHeight);
 
-            // if (typeof ThemeNote != "undefined") {
-            //   ThemeNote.closeAllNote();
+            // if (typeof themeNote != "undefined") {
+            //   themeNote.closeAllNote();
             // }
           }
         });
@@ -106,8 +106,8 @@ module.exports = ThemeChapterNav = (function ($) {
               that.$body.addClass('no-scroll');
             }
 
-            if (typeof ThemeNote != "undefined") {
-              ThemeNote.closeAllNote();
+            if (typeof themeNote != "undefined") {
+              themeNote.closeAllNote();
             }
           }
         }
