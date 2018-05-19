@@ -1,20 +1,68 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+module.exports = themeGlossary = (function ($) {
+  var that;
+
+  return {
+
+    $: {
+      $url: '_static/data/glossary.json',
+      $glossay: {},
+      callback: {}
+    },
+
+    init: function(callback) {
+      that = this.$;
+      that.callback = callback;
+
+      $.ajax({
+        dataType: 'json',
+        url: that.$url,
+        success: themeGlossary.success,
+        error: themeGlossary.error,
+        cache: false
+      });
+    },
+
+    success: function(data) {
+      that.$glossay = data;
+      that.callback();
+    },
+
+    error: function(data) {
+      that.callback();
+    },
+
+    getGlossay: function() {
+      return that.$glossay
+    }
+  }
+
+})(jQuery);
+
+},{}],2:[function(require,module,exports){
 var ThemeMarkupModifier = require('./markup_modifier.js');
 var ThemeToolTip = require('./tooltip.js');
 var ThemeChapterNav = require('./section_navigation.js');
 var ThemeNote = require('./note.js');
 var themeTranslate = require('./theme_translate.js');
+var themeGlossary = require('./get_glossay.js');
 
 // Init all
 $(document).ready(function() {
+
+  themeGlossary.init(glossayReady.bind(this));
   themeTranslate.init();
   ThemeMarkupModifier.init();
-  ThemeToolTip.init();
   ThemeChapterNav.init();
   ThemeNote.init();
+
+  function glossayReady() {
+    ThemeToolTip.init();
+  }
+
 });
 
-},{"./markup_modifier.js":2,"./note.js":3,"./section_navigation.js":4,"./theme_translate.js":5,"./tooltip.js":6}],2:[function(require,module,exports){
+},{"./get_glossay.js":1,"./markup_modifier.js":3,"./note.js":4,"./section_navigation.js":5,"./theme_translate.js":6,"./tooltip.js":7}],3:[function(require,module,exports){
 // Modify DOM via JS.
 module.exports = ThemeMarkupModifier = (function ($) {
   var that;
@@ -151,7 +199,7 @@ module.exports = ThemeMarkupModifier = (function ($) {
   }
 })(jQuery);
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 // Notes
 module.exports = ThemeNote = (function ($) {
   var that;
@@ -211,7 +259,7 @@ module.exports = ThemeNote = (function ($) {
   }
 })(jQuery);
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 // Section navigation
 module.exports = ThemeChapterNav = (function ($) {
   var that;
@@ -340,7 +388,7 @@ module.exports = ThemeChapterNav = (function ($) {
   }
 })(jQuery);
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports = themeTranslate = (function ($) {
   var that;
 
@@ -367,7 +415,7 @@ module.exports = themeTranslate = (function ($) {
 
 })(jQuery);
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // Tooltips
 module.exports = ThemeToolTip = (function ($) {
   var that;
@@ -383,7 +431,6 @@ module.exports = ThemeToolTip = (function ($) {
       toolTipArray: [],
       toolTipArrayKeywords: [],
       toolTipNote: [],
-
       $noteBtn: $('.footnote-reference'),
       $note: $('.docutils.footnote'),
       $tableNoteBtn: {}
@@ -475,8 +522,9 @@ module.exports = ThemeToolTip = (function ($) {
         var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
             "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArrayKeywords[index].ref + "></button>" +
             "<h2 class='tooltip__title'>" + that.toolTipArrayKeywords[index].title + "</h2>" +
-            // "<p class='tooltip__content'>" + that.toolTipArrayKeywords[index].body + "</p>" +
-            "<h2 class='tooltip__link'>" + "vai al Glossario"+ "</h2>" +
+            "<p class='tooltip__content'>" + ThemeToolTip.validateGlossaryData(index) + "</p>" +
+            "<a class='tooltip__link' href=" + that.toolTipArrayKeywords[index].term + " + title=" + that.toolTipArrayKeywords[index].title + ">" +
+            "vai al Glossario"+ "</a>" +
             "</div></div>",
             btn = that.toolTipArrayKeywords[index].btn;
         btn.popover({template:toolTipTemplate,offset:'125px , 40px',container: btn});
@@ -504,12 +552,28 @@ module.exports = ThemeToolTip = (function ($) {
         event.preventDefault();
       });
 
-      $(document).on('click','.tooltip__close-btn', function(e){
-        $(e.target).blur();
+      $(document).on('click','.tooltip__link', function(event){
+        event.preventDefault();
+        var href = $(event.target).attr('href');
+        window.location.href = href;
       });
 
+      $(document).on('click','.tooltip__close-btn', function(event){
+        $(event.target).blur();
+      });
+    },
+
+    validateGlossaryData: function(index) {
+      var summary = themeGlossary.getGlossay()[that.toolTipArrayKeywords[index].title];
+      if ( summary != undefined ) {
+        var trimmedSummary = summary.substr(0 , 100);
+        return trimmedSummary
+      } else {
+        return themeTranslate.getTranslation().glossayEmpty
+      }
     }
+
   }
 })(jQuery);
 
-},{}]},{},[1,2,3,4,5,6]);
+},{}]},{},[1,2,3,4,5,6,7]);

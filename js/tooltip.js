@@ -13,7 +13,6 @@ module.exports = ThemeToolTip = (function ($) {
       toolTipArray: [],
       toolTipArrayKeywords: [],
       toolTipNote: [],
-
       $noteBtn: $('.footnote-reference'),
       $note: $('.docutils.footnote'),
       $tableNoteBtn: {}
@@ -105,8 +104,9 @@ module.exports = ThemeToolTip = (function ($) {
         var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
             "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArrayKeywords[index].ref + "></button>" +
             "<h2 class='tooltip__title'>" + that.toolTipArrayKeywords[index].title + "</h2>" +
-            // "<p class='tooltip__content'>" + that.toolTipArrayKeywords[index].body + "</p>" +
-            "<h2 class='tooltip__link'>" + "vai al Glossario"+ "</h2>" +
+            "<p class='tooltip__content'>" + ThemeToolTip.validateGlossaryData(index) + "</p>" +
+            "<a class='tooltip__link' href=" + that.toolTipArrayKeywords[index].term + " + title=" + that.toolTipArrayKeywords[index].title + ">" +
+            "vai al Glossario"+ "</a>" +
             "</div></div>",
             btn = that.toolTipArrayKeywords[index].btn;
         btn.popover({template:toolTipTemplate,offset:'125px , 40px',container: btn});
@@ -134,10 +134,26 @@ module.exports = ThemeToolTip = (function ($) {
         event.preventDefault();
       });
 
-      $(document).on('click','.tooltip__close-btn', function(e){
-        $(e.target).blur();
+      $(document).on('click','.tooltip__link', function(event){
+        event.preventDefault();
+        var href = $(event.target).attr('href');
+        window.location.href = href;
       });
 
+      $(document).on('click','.tooltip__close-btn', function(event){
+        $(event.target).blur();
+      });
+    },
+
+    validateGlossaryData: function(index) {
+      var summary = themeGlossary.getGlossay()[that.toolTipArrayKeywords[index].title];
+      if ( summary != undefined ) {
+        var trimmedSummary = summary.substr(0 , 100);
+        return trimmedSummary
+      } else {
+        return themeTranslate.getTranslation().glossayEmpty
+      }
     }
+
   }
 })(jQuery);
