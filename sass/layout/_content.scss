@@ -134,33 +134,6 @@
     float: left;
   }
 
-  ol {
-    padding-left: 1rem;
-
-    li {
-      position: relative;
-      margin-bottom: 1rem;
-      padding-left: 1rem;
-      counter-increment: list;
-      list-style-type: none;
-      font-family: $stack-font;
-
-      &::after {
-        position: absolute;
-        left: -1rem;
-        top: 0;
-        width: 1.1rem;
-        height: 1.5rem;
-        z-index: 1;
-        content: counter(list);
-        color: $white;
-        text-align: center;
-        font-family: $titillium-font;
-        font-weight: 600;
-      }
-    }
-  }
-
   .useful-docs {
     .mimetype {
       display: none;
@@ -179,6 +152,35 @@
 
       &::after {
         display: none;
+      }
+    }
+  }
+
+  .procedure {
+    ol {
+      padding-left: 1rem;
+
+      li {
+        position: relative;
+        margin-bottom: 1rem;
+        padding-left: 1rem;
+        counter-increment: list;
+        list-style-type: none;
+        font-family: $stack-font;
+
+        &::after {
+          position: absolute;
+          left: -1rem;
+          top: 0;
+          width: 1.1rem;
+          height: 1.5rem;
+          z-index: 1;
+          content: counter(list);
+          color: $white;
+          text-align: center;
+          font-family: $titillium-font;
+          font-weight: 600;
+        }
       }
     }
   }
@@ -227,10 +229,10 @@
     .chapter-header,
     .caption-wrap,
     .table-responsive,
-    .figure {
+    .figure,
+    .example-block-full {
       @media (min-width: 992px) {
         width: 100%;
-        float: none;
       }
     }
   }
@@ -427,7 +429,7 @@
       text-transform: uppercase;
       font-weight: 800;
 
-      span {
+      .Icon {
         font-size: 1.5rem;
       }
     }
@@ -448,10 +450,6 @@
       .admonition-title {
         color: $black;
         font-family: $titillium-font;
-
-        span {
-          color: inherit;
-        }
       }
     }
 
@@ -467,10 +465,6 @@
 
       .admonition-title {
         font-family: $titillium-font;
-
-        span {
-          color: inherit;
-        }
       }
     }
 
