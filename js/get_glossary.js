@@ -1,3 +1,4 @@
+// Get glossary terms
 module.exports = themeGlossary = (function ($) {
   var that;
 

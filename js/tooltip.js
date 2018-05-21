@@ -1,5 +1,5 @@
 // Tooltips
-module.exports = ThemeToolTip = (function ($) {
+module.exports = themeToolTip = (function ($) {
   var that;
 
   return {
@@ -33,7 +33,9 @@ module.exports = ThemeToolTip = (function ($) {
         return ( $(this).closest('table').length  )
       });
 
-      ThemeToolTip.addAttribute();
+      themeToolTip.addAttribute();
+
+      // themeNote.setToolTip();
     },
 
     // Add attribute to keywords btn for enable tooltip
@@ -41,22 +43,22 @@ module.exports = ThemeToolTip = (function ($) {
       that.$btnKeywords.each(function(index) {
         var title = $(this).find('span').html();
         $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
-        that.toolTipArrayKeywords.push(new ThemeToolTip.setDataKeywords($(this),index));
+        that.toolTipArrayKeywords.push(new themeToolTip.setDataKeywords($(this),index));
       });
 
       that.$btnGlossay.each(function(index) {
         var title = $(this).find('span').html();
         $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
-        that.toolTipArrayGlossary.push(new ThemeToolTip.setDataGlossary($(this),index,title));
+        that.toolTipArrayGlossary.push(new themeToolTip.setDataGlossary($(this),index,title));
       });
 
       that.$tableNoteBtn.each(function(index) {
         var title = $(this).text();
         $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
-        that.toolTipArrayNote.push(new ThemeToolTip.setDataNote($(this),index));
+        that.toolTipArrayNote.push(new themeToolTip.setDataNote($(this),index));
       });
 
-      ThemeToolTip.addhandler();
+      themeToolTip.addhandler();
     },
 
     // Set array whith keywords btn info
@@ -106,9 +108,10 @@ module.exports = ThemeToolTip = (function ($) {
             btnToGlossary = '';
 
         // Check if glossary term exist, if not replace default text and hide link.
-        if ( ThemeToolTip.validateGlossaryData(index) ) {
+        if ( themeToolTip.validateGlossaryData(index) ) {
           summary = themeGlossary.getGlossay()[that.toolTipArrayGlossary[index].title];
-          trimmedSummary = summary.substr(0 , 100);
+          trimmedSummary = summary.substr(0 , 90);
+          trimmedSummary = trimmedSummary.substr(0, Math.min(trimmedSummary.length, trimmedSummary.lastIndexOf(" "))) + ' ...'
           btnToGlossary = "<a class='tooltip__link' href=" + that.toolTipArrayGlossary[index].term + " + title=" + that.toolTipArrayGlossary[index].title + ">" +
           themeTranslate.getTranslation().goToGlossay + "</a>";
         } else {

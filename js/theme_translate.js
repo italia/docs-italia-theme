@@ -1,3 +1,4 @@
+// Theme l10n
 module.exports = themeTranslate = (function ($) {
   var that;
 
