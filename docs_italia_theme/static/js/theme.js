@@ -475,7 +475,7 @@ module.exports = themeToolTip = (function ($) {
       });
       // Tooltip glossary
       that.$btnGlossay = that.btn.filter(function(){
-        return ($(this).closest('.pull-quote').length == 0)
+        return ( $(this).closest('.pull-quote').length == 0 && $(this).find('.xref').length )
       });
       // Tooltip inside Table
       that.$tableNoteBtn = that.$noteBtn.filter(function(){
