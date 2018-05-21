@@ -595,4 +595,10 @@
   .glossary.docutils {
     display: none;
   }
+
+  #glossario {
+    .glossary.docutils {
+      display: block;
+    }
+  }
 }

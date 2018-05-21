@@ -10,10 +10,9 @@ module.exports = themeToolTip = (function ($) {
       $btnGlossay: {},
       docWindow: $( window ),
       $body: $('body'),
-      toolTipArray: [],
       toolTipArrayKeywords: [],
-      toolTipNote: [],
-
+      toolTipArrayGlossary: [],
+      toolTipArrayNote: [],
       $noteBtn: $('.footnote-reference'),
       $note: $('.docutils.footnote'),
       $tableNoteBtn: {}
@@ -44,26 +43,26 @@ module.exports = themeToolTip = (function ($) {
       that.$btnKeywords.each(function(index) {
         var title = $(this).find('span').html();
         $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
-        that.toolTipArray.push(new themeToolTip.setData($(this),index));
+        that.toolTipArrayKeywords.push(new themeToolTip.setDataKeywords($(this),index));
       });
 
       that.$btnGlossay.each(function(index) {
         var title = $(this).find('span').html();
         $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
-        that.toolTipArrayKeywords.push(new themeToolTip.setDataKeywords($(this),index,title));
+        that.toolTipArrayGlossary.push(new themeToolTip.setDataGlossary($(this),index,title));
       });
 
       that.$tableNoteBtn.each(function(index) {
         var title = $(this).text();
         $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
-        that.toolTipNote.push(new themeToolTip.setDataNote($(this),index));
+        that.toolTipArrayNote.push(new themeToolTip.setDataNote($(this),index));
       });
 
       themeToolTip.addhandler();
     },
 
     // Set array whith keywords btn info
-    setData: function(item , index) {
+    setDataKeywords: function(item , index) {
       this.btn = item;
       this.term = item.attr('href');
       this.title = $(this.term).html();
@@ -72,7 +71,7 @@ module.exports = themeToolTip = (function ($) {
     },
 
     // Set array whith keywords btn info
-    setDataKeywords: function(item , index , title) {
+    setDataGlossary: function(item , index , title) {
       this.btn = item;
       this.term = item.attr('href');
       this.title = title;
@@ -91,34 +90,51 @@ module.exports = themeToolTip = (function ($) {
 
     // Enable tooltip custom
     addhandler: function() {
-      for (var index = 0; index < that.toolTipArray.length; ++index) {
-        var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
-            "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArray[index].ref + "></button>" +
-            "<h2 class='tooltip__title'>" + that.toolTipArray[index].title + "</h2>" +
-            "<p class='tooltip__content'>" + that.toolTipArray[index].body + "</p>" +
-            "</div></div>",
-            btn = that.toolTipArray[index].btn;
-        btn.popover({template:toolTipTemplate,offset:'115px , 40px',container: btn});
-      };
-
       for (var index = 0; index < that.toolTipArrayKeywords.length; ++index) {
         var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
             "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArrayKeywords[index].ref + "></button>" +
             "<h2 class='tooltip__title'>" + that.toolTipArrayKeywords[index].title + "</h2>" +
-            // "<p class='tooltip__content'>" + that.toolTipArrayKeywords[index].body + "</p>" +
-            "<h2 class='tooltip__link'>" + "vai al Glossario"+ "</h2>" +
+            "<p class='tooltip__content'>" + that.toolTipArrayKeywords[index].body + "</p>" +
             "</div></div>",
             btn = that.toolTipArrayKeywords[index].btn;
+        btn.popover({template:toolTipTemplate,offset:'115px , 40px',container: btn});
+      };
+
+      // Glossary popover
+      for (var index = 0; index < that.toolTipArrayGlossary.length; ++index) {
+        var glossaryFounded = false,
+            summary = '',
+            trimmedSummary = '',
+            btnToGlossary = '';
+
+        // Check if glossary term exist, if not replace default text and hide link.
+        if ( themeToolTip.validateGlossaryData(index) ) {
+          summary = themeGlossary.getGlossay()[that.toolTipArrayGlossary[index].title];
+          trimmedSummary = summary.substr(0 , 90);
+          trimmedSummary = trimmedSummary.substr(0, Math.min(trimmedSummary.length, trimmedSummary.lastIndexOf(" "))) + ' ...'
+          btnToGlossary = "<a class='tooltip__link' href=" + that.toolTipArrayGlossary[index].term + " + title=" + that.toolTipArrayGlossary[index].title + ">" +
+          themeTranslate.getTranslation().goToGlossay + "</a>";
+        } else {
+          trimmedSummary = themeTranslate.getTranslation().glossayEmpty;
+        }
+
+        var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
+            "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArrayGlossary[index].ref + "></button>" +
+            "<h2 class='tooltip__title'>" + that.toolTipArrayGlossary[index].title + "</h2>" +
+            "<p class='tooltip__content'>" +  trimmedSummary + "</p>" + btnToGlossary +
+            "</div></div>",
+            btn = that.toolTipArrayGlossary[index].btn;
         btn.popover({template:toolTipTemplate,offset:'125px , 40px',container: btn});
       };
 
-      for (var index = 0; index < that.toolTipNote.length; ++index) {
+      // Note Popover.
+      for (var index = 0; index < that.toolTipArrayNote.length; ++index) {
         var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip doc-tooltip--note' role='tooltip'><div class='tooltip__wrap'>" +
-            "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipNote[index].ref + "></button>" +
-            "<h2 class='tooltip__title'>" + that.toolTipNote[index].title + "</h2>" +
-            "<p class='tooltip__content'>" + that.toolTipNote[index].body + "</p>" +
+            "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArrayNote[index].ref + "></button>" +
+            "<h2 class='tooltip__title'>" + that.toolTipArrayNote[index].title + "</h2>" +
+            "<p class='tooltip__content'>" + that.toolTipArrayNote[index].body + "</p>" +
             "</div></div>",
-            btn = that.toolTipNote[index].btn;
+            btn = that.toolTipArrayNote[index].btn;
         btn.popover({template:toolTipTemplate,container: btn});
       };
 
@@ -134,10 +150,24 @@ module.exports = themeToolTip = (function ($) {
         event.preventDefault();
       });
 
-      $(document).on('click','.tooltip__close-btn', function(e){
-        $(e.target).blur();
+      $(document).on('click','.tooltip__link', function(event){
+        event.preventDefault();
+        var href = $(event.target).attr('href');
+        window.location.href = href;
       });
 
+      $(document).on('click','.tooltip__close-btn', function(event){
+        $(event.target).blur();
+      });
+    },
+
+    validateGlossaryData: function(index) {
+      if ( themeGlossary.getGlossay()[that.toolTipArrayGlossary[index].title] != undefined ) {
+        return true
+      } else {
+        return false
+      }
     }
+
   }
 })(jQuery);

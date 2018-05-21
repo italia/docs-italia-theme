@@ -27,10 +27,10 @@ module.exports = function(grunt) {
         },
         src: ['sass/**/*.scss']
       },
-      
+
       build: ['sass/**/*.scss']
     },
-    
+
     sass: {
       all: {
         options: {
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
         }]
       }
     },
-    
+
     postcss: {
       dev: {
         options: {
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
           dest: 'docs_italia_theme/static/css/theme.css',
         }]
       },
-      
+
       build: {
         options: {
           map: {
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
         }]
       }
     },
-    
+
     copy: {
       all: {
         files: [
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
             'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js'
           }
         },
-        src: ['js/*.js'],
+        src: ['js/index.js'],
         dest: 'docs_italia_theme/static/js/theme.js'
       },
       build: {
@@ -113,11 +113,11 @@ module.exports = function(grunt) {
                 'uglifyify'
             ],
         },
-        src: ['js/*.js'],
+        src: ['js/index.js'],
         dest: 'docs_italia_theme/static/js/theme.js'
       }
     },
-    
+
     cacheBust: {
       all: {
         options: {
@@ -210,7 +210,7 @@ module.exports = function(grunt) {
     'browserify:build',
     'exec:build_sphinx'
   ]);
-  
+
   grunt.registerTask('release', [
     'clean',
     'stylelint:build',

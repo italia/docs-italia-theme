@@ -7,12 +7,21 @@ var themeToolTip = require('./tooltip.js');
 var themeChapterNav = require('./section_navigation.js');
 var themeNote = require('./note.js');
 var themeTranslate = require('./theme_translate.js');
+var themeGlossary = require('./get_glossary.js');
+
 
 // Init all
 $(document).ready(function() {
+
+  themeGlossary.init(glossayReady.bind(this));
   themeTranslate.init();
   themeMarkupModifier.init();
-  themeToolTip.init();
   themeChapterNav.init();
   themeNote.init();
+
+  // Load tooltips when the ajax request for glossary terms is completed.
+  function glossayReady() {
+    themeToolTip.init();
+  }
+
 });
