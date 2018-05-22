@@ -322,6 +322,7 @@ eleifend, vis an wisi fali dignissim. Vim ad augue vidisse, adhuc everti eos te.
 
 
 .. admonition:: example
+   :class: example-block
 
    .. role:: admonition-internal-title
       :class: admonition-internal-title
@@ -417,6 +418,7 @@ dolore magnam aliquam quaerat voluptatem [5]_.
    <modello strategico>`.
 
 .. admonition:: example
+  :class: example-block example-block--full
 
   `File publisher_settings.yml tratto dallo Starter
   kit`:admonition-internal-title:

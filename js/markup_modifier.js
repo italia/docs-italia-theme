@@ -12,6 +12,7 @@ module.exports = themeMarkupModifier = (function ($) {
       $note: $('.docutils.footnote'),
       $noteBackref: $('.fn-backref'),
       $imgFixed: $('.figure-fixed'),
+      $codeTitle: $('.example-block .admonition-title'),
       titleReady: false
     },
 
@@ -21,6 +22,7 @@ module.exports = themeMarkupModifier = (function ($) {
       themeMarkupModifier.tableModifier();
       themeMarkupModifier.captionModifier();
       themeMarkupModifier.procedureModifier();
+      themeMarkupModifier.codeBlockTitleModifier();
       themeMarkupModifier.addIcon();
       themeMarkupModifier.noteModifier();
       themeMarkupModifier.imgModifier();
@@ -101,7 +103,8 @@ module.exports = themeMarkupModifier = (function ($) {
           $attention = $('.admonition.attention .admonition-title'),
           $important = $('.admonition.important .admonition-title'),
           $usefulDocs = $('.useful-docs li'),
-          $numericList = $('#doc-content ol li');
+          $numericList = $('.procedure ol li'),
+          $codeTitle = $('.example-block .admonition-title');
 
       $note.prepend('<span class="Icon it-icon-note"></span>');
       $error.prepend('<span class="Icon it-icon-procedure"></span>');
@@ -110,6 +113,7 @@ module.exports = themeMarkupModifier = (function ($) {
       $important.prepend('<span class="Icon it-icon-hint"></span>');
       $usefulDocs.prepend('<span class="Icon it-icon-pdf"></span>');
       $numericList.prepend('<span class="Icon it-icon-step Icon--ol"></span>');
+      $codeTitle.prepend('<span class="Icon it-icon-example"></span>');
     },
 
     noteModifier: function() {
@@ -143,6 +147,10 @@ module.exports = themeMarkupModifier = (function ($) {
           $element.closest('td').next().append(stringToAppend);
         }
       });
+    },
+
+    codeBlockTitleModifier: function() {
+      that.$codeTitle.wrap('<div class="code-block__header">');
     }
   }
 })(jQuery);
