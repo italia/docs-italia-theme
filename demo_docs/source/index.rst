@@ -1,7 +1,7 @@
 H1 Titolo del documento, molto probabile su 2/3 righe
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. highlights:: 
+.. highlights::
 
    Sommario di due/tre righe: lorem ipsum dolor sit amet, consectetur adipisici
    elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
@@ -10,6 +10,7 @@ H1 Titolo del documento, molto probabile su 2/3 righe
 :Licenza: CC-BY 4.0
 
 .. admonition:: Consultazione
+   :class: admonition-consultazione
 
    Questo documento è in consultazione pubblica dal 3 aprile al 4 maggio 2018,
    come previsto dall'`art. 71 comma 1 del decreto legislativo 7 marzo 2005, n.
@@ -43,7 +44,7 @@ H1 Titolo del documento, molto probabile su 2/3 righe
      - :term:`Keyword 3`
 
    .. glossary::
-      
+
       Keyword 1
          Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
          consectetur, adipisci velit, sed quia non numquam eius modi tempora
