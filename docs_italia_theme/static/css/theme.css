@@ -29,6 +29,14 @@
   border-color: #193e5e !important;
 }
 
+.border-medium-blue {
+  border-color: #06c !important;
+}
+
+.border-width-2 {
+  border-width: 2px !important;
+}
+
 @font-face {
   font-family: 'docs-italia';
   src: url("../fonts/docs-italia.eot");
@@ -1260,6 +1268,108 @@ img {
 .example-block .highlighttable pre {
   font-size: 12.8px;
   font-size: 0.8rem;
+}
+
+.block-comments p {
+  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.block-comments__header {
+  border-bottom-color: #ccc !important;
+  border-top-color: #eeeff0 !important;
+}
+.block-comments__header h6 {
+  color: #06c;
+}
+
+.block-comments__img {
+  width: 55px;
+}
+
+.block-comments__input input {
+  border: 1px #eeeff0 solid;
+  line-height: 2.5em;
+  border-radius: 5px;
+}
+.block-comments__input input:focus {
+  border: 1px #596771 solid;
+}
+.block-comments__input input::-webkit-input-placeholder {
+  color: #ccc;
+}
+.block-comments__input input:-ms-input-placeholder {
+  color: #ccc;
+}
+.block-comments__input input::-ms-input-placeholder {
+  color: #ccc;
+}
+.block-comments__input input::placeholder {
+  color: #ccc;
+}
+
+.block-comments__toggle-btn {
+  background: none;
+  width: 32px;
+  width: 2rem;
+  height: 32px;
+  height: 2rem;
+}
+.block-comments__toggle-btn .it-icon-plus,
+.block-comments__toggle-btn .it-icon-minus {
+  color: #06c;
+}
+.block-comments__toggle-btn .it-icon-plus {
+  display: none;
+}
+.block-comments__toggle-btn.collapsed .it-icon-plus {
+  display: inline-block;
+}
+.block-comments__toggle-btn.collapsed .it-icon-minus {
+  display: none;
+}
+
+.block-comments__item-btn {
+  background: none;
+  width: 32px;
+  width: 2rem;
+  height: 24px;
+  height: 1.5rem;
+  border: 0;
+}
+.block-comments__item-btn .it-icon-collapse,
+.block-comments__item-btn .it-icon-expand {
+  color: #06c;
+}
+.block-comments__item-btn .it-icon-collapse {
+  display: none;
+}
+.block-comments__item-btn.collapsed .it-icon-collapse {
+  display: inline-block;
+}
+.block-comments__item-btn.collapsed .it-icon-expand {
+  display: none;
+}
+
+.block-comments__item h2 {
+  color: #06c;
+  font-weight: 400;
+  font-size: 16px;
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.block-comments__date,
+.block-comments__role {
+  font-size: 12.8px;
+  font-size: 0.8rem;
+}
+
+.block-comments__paragraph {
+  font-size: 14.4px;
+  font-size: 0.9rem;
+}
+.block-comments__paragraph a {
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=theme.css.map */
