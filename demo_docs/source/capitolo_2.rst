@@ -45,7 +45,7 @@ Ex cum stet omittam oportere, nerou set quas audire splendide. Nam no esse
 eleifend, vis an wisi fali dignissim. Vim ad augue vidisse, adhuc everti eos te.
 
 .. admonition:: deepening
-   :name: approfondimento
+   :class: admonition-deepening admonition-display-page name-deepening
 
    Nec albucius phaedrum deterruisset ut, paulo ignota ceteros at eum. Ut legere
    adipisci :ref:`corrumpit mel <qui inani vivendo>`, vis te omnes indoctum
@@ -322,7 +322,7 @@ eleifend, vis an wisi fali dignissim. Vim ad augue vidisse, adhuc everti eos te.
 
 
 .. admonition:: example
-   :class: example-block
+   :class: admonition-example admonition-display-page name-example
 
    .. role:: admonition-internal-title
       :class: admonition-internal-title
@@ -418,7 +418,7 @@ dolore magnam aliquam quaerat voluptatem [5]_.
    <modello strategico>`.
 
 .. admonition:: example
-  :class: example-block example-block--full
+  :class: admonition-example admonition-display-page full-width name-example
 
   `File publisher_settings.yml tratto dallo Starter
   kit`:admonition-internal-title:

@@ -12,7 +12,7 @@ module.exports = themeMarkupModifier = (function ($) {
       $note: $('.docutils.footnote'),
       $noteBackref: $('.fn-backref'),
       $imgFixed: $('.figure-fixed'),
-      $codeTitle: $('.example-block .admonition-title'),
+      $admonitionTitle: $('.admonition .admonition-title'),
       titleReady: false
     },
 
@@ -22,7 +22,7 @@ module.exports = themeMarkupModifier = (function ($) {
       themeMarkupModifier.tableModifier();
       themeMarkupModifier.captionModifier();
       themeMarkupModifier.procedureModifier();
-      themeMarkupModifier.codeBlockTitleModifier();
+      themeMarkupModifier.admonitionTitleModifier();
       themeMarkupModifier.addIcon();
       themeMarkupModifier.noteModifier();
       themeMarkupModifier.imgModifier();
@@ -104,7 +104,8 @@ module.exports = themeMarkupModifier = (function ($) {
           $important = $('.admonition.important .admonition-title'),
           $usefulDocs = $('.useful-docs li'),
           $numericList = $('.procedure ol li'),
-          $codeTitle = $('.example-block .admonition-title');
+          $codeTitle = $('.admonition-example .admonition-title');
+          $deepeningTitle = $('.admonition-deepening .admonition-title');
 
       $note.prepend('<span class="Icon it-icon-note"></span>');
       $error.prepend('<span class="Icon it-icon-procedure"></span>');
@@ -114,6 +115,7 @@ module.exports = themeMarkupModifier = (function ($) {
       $usefulDocs.prepend('<span class="Icon it-icon-pdf"></span>');
       $numericList.prepend('<span class="Icon it-icon-step Icon--ol"></span>');
       $codeTitle.prepend('<span class="Icon it-icon-example"></span>');
+      $deepeningTitle.prepend('<span class="Icon it-icon-attention"></span>');
     },
 
     noteModifier: function() {
@@ -149,8 +151,33 @@ module.exports = themeMarkupModifier = (function ($) {
       });
     },
 
-    codeBlockTitleModifier: function() {
-      that.$codeTitle.wrap('<div class="code-block__header">');
+    admonitionTitleModifier: function() {
+      that.$admonitionTitle.each(function(index) {
+        var $title = $(this);
+        $title.html(getTitleTranslation($title));
+      });
+      that.$admonitionTitle.wrap('<div class="admonition__header">');
+
+      // Print title translation in case the parent admonition contain class name-{titleValue}
+      function getTitleTranslation($el) {
+        var title = $el.html(),
+            str = $el.closest('.admonition').attr('class'),
+            // Find the value between name- and ' ' the last class is always 'admonition' insert by sphinx
+            regex = /name-(.*)(\s)/,
+            matches = str.match(regex),
+            idName = '';
+
+        if(matches != null) {
+          idName = matches[1];
+        }
+
+        if( idName != undefined && themeTranslate.getTranslation()[idName] != undefined ) {
+          return themeTranslate.getTranslation()[idName];
+        } else {
+          return title;
+        }
+      }
     }
+
   }
 })(jQuery);
