@@ -1,0 +1,159 @@
+#doc-content {
+
+  // Admonition.
+  .admonition {
+    margin-bottom: 2rem;
+
+    .admonition-title {
+      text-transform: uppercase;
+      font-weight: 800;
+
+      .Icon {
+        font-size: 1.5rem;
+      }
+    }
+
+    .admonition__hidden-paragraph {
+      display: none;
+    }
+
+    .admonition__toggle-wrap {
+      border-top: 1px $grey solid;
+      padding-top: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .admonition__toggle-btn {
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: $blue;
+      padding-left: 0;
+
+      .Icon {
+        font-size: 0.6rem;
+        margin-left: 0.5rem;
+        position: relative;
+
+        &::after {
+          content: '';
+          width: 1rem;
+          height: 1rem;
+          border: 2px $blue solid;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          position: absolute;
+          border-radius: 50%;
+        }
+      }
+
+      .admonition__toggle-show-more,
+      .admonition__toggle-show-less {
+        &::first-letter {
+          text-transform: uppercase;
+        }
+      }
+
+      .admonition__toggle-show-less {
+        display: none;
+      }
+
+      .admonition__toggle-show-more {
+        display: inline-block;
+      }
+
+      &.active {
+        .admonition__toggle-show-more {
+          display: none;
+        }
+
+        .admonition__toggle-show-less {
+          display: inline-block;
+        }
+      }
+    }
+
+    &.admonition-consultazione {
+      padding-bottom: 1rem;
+      border-bottom: 1px $grey solid;
+      position: relative;
+
+      a {
+        text-decoration: underline;
+      }
+
+      .last {
+        font-family: $stack-font;
+      }
+
+      .admonition-title {
+        color: $black;
+        font-family: $titillium-font;
+
+        .Icon {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    &.important,
+    &.error,
+    &.hint,
+    &.note,
+    &.attention {
+      margin-top: 2rem;
+      padding-left: 2rem;
+      border-left: 1px $grey solid;
+      color: $grey-mid;
+
+      .admonition-title {
+        font-family: $titillium-font;
+      }
+    }
+
+    &.error {
+      .admonition-title {
+        color: $red;
+      }
+    }
+
+    &.note {
+      .admonition-title {
+        color: $mid-dark-blue;
+      }
+    }
+
+    &.attention {
+      .admonition-title {
+        color: $orange;
+      }
+    }
+
+    &.important {
+      .last {
+        font-weight: 800;
+        font-size: 1.2rem;
+      }
+    }
+
+    &.hint {
+      .reference.internal {
+        font-size: 0.8rem;
+        position: relative;
+
+        &::after {
+          content: '';
+          width: 0.4rem;
+          height: 0.4rem;
+          border-top: 1px $blue solid;
+          border-right: 1px $blue solid;
+          left: 100%;
+          transform: rotate(45deg) translateY(-50%);
+          position: absolute;
+          top: 50%;
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,34 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+// Admonition toggle
+module.exports = themeAdmonitionToggle = (function ($) {
+
+  return {
+    init: function(callback) {
+      that = this.$;
+
+      $('.admonition__toggle-btn').on('click',function(){
+        var $btn = $(this),
+            $paragraph = $btn.closest('.admonition__toggle-wrap').siblings('.admonition__hidden-paragraph'),
+            $admonition = $btn.closest('.admonition-deepening');
+
+        if( $paragraph.hasClass('active')) {
+          $("html, body").animate({ scrollTop: $admonition.offset().top - 10 }, 300, function(){
+            $paragraph.removeClass('active').slideUp();
+            $btn.removeClass('active');
+          });
+        } else {
+          $paragraph.addClass('active').slideDown();
+          $btn.addClass('active');
+        }
+
+        $btn.blur();
+      });
+    }
+  }
+
+})(jQuery);
+
+},{}],2:[function(require,module,exports){
 // Get glossary terms
 module.exports = themeGlossary = (function ($) {
   var that;
@@ -40,7 +70,7 @@ module.exports = themeGlossary = (function ($) {
 
 })(jQuery);
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 (function (global){
 global.$ = global.jQuery = require('jquery');
 global.Popper = require('popper.js');
@@ -52,6 +82,7 @@ var themeChapterNav = require('./section_navigation.js');
 var themeNote = require('./note.js');
 var themeTranslate = require('./theme_translate.js');
 var themeGlossary = require('./get_glossary.js');
+var themeAdmonitionToggle = require('./admonition_toggle.js');
 
 
 // Init all
@@ -62,6 +93,7 @@ $(document).ready(function() {
   themeMarkupModifier.init();
   themeChapterNav.init();
   themeNote.init();
+  themeAdmonitionToggle.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {
@@ -71,7 +103,7 @@ $(document).ready(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./get_glossary.js":1,"./markup_modifier.js":3,"./note.js":4,"./section_navigation.js":5,"./theme_translate.js":6,"./tooltip.js":7,"bootstrap-italia":"bootstrap-italia","jquery":8,"popper.js":9}],3:[function(require,module,exports){
+},{"./admonition_toggle.js":1,"./get_glossary.js":2,"./markup_modifier.js":4,"./note.js":5,"./section_navigation.js":6,"./theme_translate.js":7,"./tooltip.js":8,"bootstrap-italia":"bootstrap-italia","jquery":9,"popper.js":10}],4:[function(require,module,exports){
 // Modify DOM via JS.
 module.exports = themeMarkupModifier = (function ($) {
   var that;
@@ -79,7 +111,7 @@ module.exports = themeMarkupModifier = (function ($) {
   return {
 
     $: {
-      title: $('#doc-content h1, #doc-content h2, #doc-content h3'),
+      $title: $('#doc-content h1, #doc-content h2, #doc-content h3'),
       $table: $('table:not(.footnote):not(.docutils.field-list)'),
       $captionReference: $('table, .figure'),
       $noteBtn: $('.footnote-reference'),
@@ -87,11 +119,14 @@ module.exports = themeMarkupModifier = (function ($) {
       $noteBackref: $('.fn-backref'),
       $imgFixed: $('.figure-fixed'),
       $admonitionTitle: $('.admonition .admonition-title'),
+      $admonitionDeepening: $('.admonition-deepening'),
+      $deepeningParagraph: $('.admonition-deepening > p:not(.admonition-title)'),
       titleReady: false
     },
 
     init: function() {
       that = this.$;
+      themeMarkupModifier.deepeninModifier();
       themeMarkupModifier.titleModifier();
       themeMarkupModifier.tableModifier();
       themeMarkupModifier.captionModifier();
@@ -108,7 +143,7 @@ module.exports = themeMarkupModifier = (function ($) {
     },
 
     titleModifier: function() {
-      that.title.each(function(index) {
+      that.$title.each(function(index) {
 
         var $element = $(this),
             title = $element.html(),
@@ -180,6 +215,7 @@ module.exports = themeMarkupModifier = (function ($) {
           $numericList = $('.procedure ol li'),
           $codeTitle = $('.admonition-example .admonition-title');
           $deepeningTitle = $('.admonition-deepening .admonition-title');
+          $consultationTitle = $('.admonition-consultazione .admonition-title');
 
       $note.prepend('<span class="Icon it-icon-note"></span>');
       $error.prepend('<span class="Icon it-icon-procedure"></span>');
@@ -190,6 +226,7 @@ module.exports = themeMarkupModifier = (function ($) {
       $numericList.prepend('<span class="Icon it-icon-step Icon--ol"></span>');
       $codeTitle.prepend('<span class="Icon it-icon-example"></span>');
       $deepeningTitle.prepend('<span class="Icon it-icon-attention"></span>');
+      $consultationTitle.prepend('<span class="Icon it-icon-edit"></span>');
     },
 
     noteModifier: function() {
@@ -251,12 +288,23 @@ module.exports = themeMarkupModifier = (function ($) {
           return title;
         }
       }
+    },
+
+    deepeninModifier: function() {
+      var $hiddenBlock = that.$deepeningParagraph.slice(4,that.$deepeningParagraph.length),
+          btn = "<div class='admonition__toggle-wrap'><button type='button' class='admonition__toggle-btn'>" +
+          "<span class='admonition__toggle-show-more'>" + themeTranslate.getTranslation().showMore + "<span class='Icon it-icon-plus'></span></span>" +
+          "<span class='admonition__toggle-show-less'>" + themeTranslate.getTranslation().showLess + "<span class='Icon it-icon-minus'></span></span>" +
+          "</button></div>";
+
+      $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');
+      that.$admonitionDeepening.append(btn);
     }
 
   }
 })(jQuery);
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 // Notes
 module.exports = themeNote = (function ($) {
   var that;
@@ -316,7 +364,7 @@ module.exports = themeNote = (function ($) {
   }
 })(jQuery);
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 // Section navigation
 module.exports = themeSectionNav = (function ($) {
   var that;
@@ -445,7 +493,7 @@ module.exports = themeSectionNav = (function ($) {
   }
 })(jQuery);
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // Theme l10n
 module.exports = themeTranslate = (function ($) {
   var that;
@@ -473,7 +521,7 @@ module.exports = themeTranslate = (function ($) {
 
 })(jQuery);
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 // Tooltips
 module.exports = themeToolTip = (function ($) {
   var that;
@@ -648,7 +696,7 @@ module.exports = themeToolTip = (function ($) {
   }
 })(jQuery);
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -11014,7 +11062,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -13571,4 +13619,4 @@ var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function
 
 
 
-},{}]},{},[2]);
+},{}]},{},[3]);
