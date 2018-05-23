@@ -42,6 +42,9 @@ it:
     back_to_text: torna al testo
     glossay_empty: informazione non trovata
     go_to_glossary: vai al glossario
+    deepening: approfondimento
+    example: esempio
+    consultation: consultazione
 
     edit_on_github: Modifica su GitHub
     edit_on_bitbucket: Modifica su Bitbucket
@@ -104,6 +107,9 @@ en:
     back_to_text: back to the text
     glossay_empty: information not found
     go_to_glossary: vai al glossario
+    deepening: deepening
+    example: example
+    consultation: consultation
 
     edit_on_github: Edit on GitHub
     edit_on_bitbucket: Edit on Bitbucket

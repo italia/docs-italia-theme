@@ -86,7 +86,7 @@ module.exports = themeMarkupModifier = (function ($) {
       $note: $('.docutils.footnote'),
       $noteBackref: $('.fn-backref'),
       $imgFixed: $('.figure-fixed'),
-      $codeTitle: $('.admonition-display-page .admonition-title'),
+      $admonitionTitle: $('.admonition .admonition-title'),
       titleReady: false
     },
 
@@ -96,7 +96,7 @@ module.exports = themeMarkupModifier = (function ($) {
       themeMarkupModifier.tableModifier();
       themeMarkupModifier.captionModifier();
       themeMarkupModifier.procedureModifier();
-      themeMarkupModifier.codeBlockTitleModifier();
+      themeMarkupModifier.admonitionTitleModifier();
       themeMarkupModifier.addIcon();
       themeMarkupModifier.noteModifier();
       themeMarkupModifier.imgModifier();
@@ -225,9 +225,34 @@ module.exports = themeMarkupModifier = (function ($) {
       });
     },
 
-    codeBlockTitleModifier: function() {
-      that.$codeTitle.wrap('<div class="code-block__header">');
+    admonitionTitleModifier: function() {
+      that.$admonitionTitle.each(function(index) {
+        var $title = $(this);
+        $title.html(getTitleTranslation($title));
+      });
+      that.$admonitionTitle.wrap('<div class="admonition__header">');
+
+      // Print title translation in case the parent admonition contain class name-{titleValue}
+      function getTitleTranslation($el) {
+        var title = $el.html(),
+            str = $el.closest('.admonition').attr('class'),
+            // Find the value between name- and ' ' the last class is always 'admonition' insert by sphinx
+            regex = /name-(.*)(\s)/,
+            matches = str.match(regex),
+            idName = '';
+
+        if(matches != null) {
+          idName = matches[1];
+        }
+
+        if( idName != undefined && themeTranslate.getTranslation()[idName] != undefined ) {
+          return themeTranslate.getTranslation()[idName];
+        } else {
+          return title;
+        }
+      }
     }
+
   }
 })(jQuery);
 
