@@ -29,6 +29,85 @@ module.exports = themeAdmonitionToggle = (function ($) {
 })(jQuery);
 
 },{}],2:[function(require,module,exports){
+// Copy to clipboard
+module.exports = themeCopyToClipboard = (function ($) {
+  var that;
+
+  return {
+
+    $: {
+      $captionLink: {},
+      $navLink: {}
+    },
+
+    init: function() {
+      that = this.$;
+      var $iconLink = $('.it-icon-link');
+
+      // Caption
+      that.$captionLink = $iconLink.closest('.reference.internal');
+      that.$captionLink.on('click', themeCopyToClipboard.copyCaption)
+
+      that.$navLink = $iconLink.closest('.chapter-nav');
+      that.$navLink.on('click', themeCopyToClipboard.copyNav)
+    },
+
+    copyCaption: function(event) {
+      event.preventDefault();
+
+      var $btn =  $(event.target).closest('a'),
+          location = themeCopyToClipboard.getWindowLocation();
+
+      // Add current hashtag
+      location += $btn.attr('href');
+      themeCopyToClipboard.copyToClipboard(location);
+    },
+
+    copyNav: function() {
+      event.preventDefault();
+
+      var $section =  $(event.target).closest('.section'),
+          location = themeCopyToClipboard.getWindowLocation();
+
+      // Add current hashtag
+      location += '#' + $section.attr('id');
+      themeCopyToClipboard.copyToClipboard(location);
+    },
+
+    getWindowLocation: function() {
+      var location = window.location.href,
+          hashtagIndex = location.indexOf("#");
+
+      // Clear previous hashtag
+      if( hashtagIndex != -1) location = location.substring(0,hashtagIndex);
+      return location;
+    },
+
+    copyToClipboard: function(text) {
+      if (window.clipboardData && window.clipboardData.setData) {
+             return clipboardData.setData("Text", text);
+
+      } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+         var textarea = document.createElement("textarea");
+         textarea.textContent = text;
+         textarea.style.position = "fixed";
+         document.body.appendChild(textarea);
+         textarea.select();
+         try {
+             return document.execCommand("copy");
+         } catch (ex) {
+            //  console.warn("Copy to clipboard failed.", ex);
+             return false;
+         } finally {
+             document.body.removeChild(textarea);
+         }
+      }
+    }
+  }
+
+})(jQuery);
+
+},{}],3:[function(require,module,exports){
 // Get glossary terms
 module.exports = themeGlossary = (function ($) {
   var that;
@@ -70,7 +149,7 @@ module.exports = themeGlossary = (function ($) {
 
 })(jQuery);
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 (function (global){
 global.$ = global.jQuery = require('jquery');
 global.Popper = require('popper.js');
@@ -83,6 +162,7 @@ var themeNote = require('./note.js');
 var themeTranslate = require('./theme_translate.js');
 var themeGlossary = require('./get_glossary.js');
 var themeAdmonitionToggle = require('./admonition_toggle.js');
+var themeCopyToClipboard = require('./copy_to_clipboard.js');
 
 
 // Init all
@@ -94,6 +174,7 @@ $(document).ready(function() {
   themeChapterNav.init();
   themeNote.init();
   themeAdmonitionToggle.init();
+  themeCopyToClipboard.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {
@@ -103,7 +184,7 @@ $(document).ready(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./admonition_toggle.js":1,"./get_glossary.js":2,"./markup_modifier.js":4,"./note.js":5,"./section_navigation.js":6,"./theme_translate.js":7,"./tooltip.js":8,"bootstrap-italia":"bootstrap-italia","jquery":9,"popper.js":10}],4:[function(require,module,exports){
+},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":2,"./get_glossary.js":3,"./markup_modifier.js":5,"./note.js":6,"./section_navigation.js":7,"./theme_translate.js":8,"./tooltip.js":9,"bootstrap-italia":"bootstrap-italia","jquery":10,"popper.js":11}],5:[function(require,module,exports){
 // Modify DOM via JS.
 module.exports = themeMarkupModifier = (function ($) {
   var that;
@@ -304,7 +385,7 @@ module.exports = themeMarkupModifier = (function ($) {
   }
 })(jQuery);
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 // Notes
 module.exports = themeNote = (function ($) {
   var that;
@@ -364,7 +445,7 @@ module.exports = themeNote = (function ($) {
   }
 })(jQuery);
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // Section navigation
 module.exports = themeSectionNav = (function ($) {
   var that;
@@ -493,7 +574,7 @@ module.exports = themeSectionNav = (function ($) {
   }
 })(jQuery);
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 // Theme l10n
 module.exports = themeTranslate = (function ($) {
   var that;
@@ -521,7 +602,7 @@ module.exports = themeTranslate = (function ($) {
 
 })(jQuery);
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 // Tooltips
 module.exports = themeToolTip = (function ($) {
   var that;
@@ -696,7 +777,7 @@ module.exports = themeToolTip = (function ($) {
   }
 })(jQuery);
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -11062,7 +11143,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -13619,4 +13700,4 @@ var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function
 
 
 
-},{}]},{},[3]);
+},{}]},{},[4]);
