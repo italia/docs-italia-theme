@@ -666,78 +666,6 @@ img {
   font-size: 16px;
   font-size: 1rem;
 }
-#doc-content .admonition {
-  margin-bottom: 32px;
-  margin-bottom: 2rem;
-}
-#doc-content .admonition .admonition-title {
-  text-transform: uppercase;
-  font-weight: 800;
-}
-#doc-content .admonition .admonition-title .Icon {
-  font-size: 24px;
-  font-size: 1.5rem;
-}
-#doc-content .admonition.admonition-consultazione {
-  padding-bottom: 16px;
-  padding-bottom: 1rem;
-  border-bottom: 1px #ccc solid;
-  position: relative;
-}
-#doc-content .admonition.admonition-consultazione a {
-  text-decoration: underline;
-}
-#doc-content .admonition.admonition-consultazione .last {
-  font-family: "Lora", serif;
-}
-#doc-content .admonition.admonition-consultazione .admonition-title {
-  color: #000;
-  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-#doc-content .admonition.important, #doc-content .admonition.error, #doc-content .admonition.hint, #doc-content .admonition.note, #doc-content .admonition.attention {
-  margin-top: 32px;
-  margin-top: 2rem;
-  padding-left: 32px;
-  padding-left: 2rem;
-  border-left: 1px #ccc solid;
-  color: #596771;
-}
-#doc-content .admonition.important .admonition-title, #doc-content .admonition.error .admonition-title, #doc-content .admonition.hint .admonition-title, #doc-content .admonition.note .admonition-title, #doc-content .admonition.attention .admonition-title {
-  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-#doc-content .admonition.error .admonition-title {
-  color: #d83750;
-}
-#doc-content .admonition.note .admonition-title {
-  color: #004e95;
-}
-#doc-content .admonition.attention .admonition-title {
-  color: #df7d26;
-}
-#doc-content .admonition.important .last {
-  font-weight: 800;
-  font-size: 19.2px;
-  font-size: 1.2rem;
-}
-#doc-content .admonition.hint .reference.internal {
-  font-size: 12.8px;
-  font-size: 0.8rem;
-  position: relative;
-}
-#doc-content .admonition.hint .reference.internal::after {
-  content: '';
-  width: 6.4px;
-  width: 0.4rem;
-  height: 6.4px;
-  height: 0.4rem;
-  border-top: 1px #0073e6 solid;
-  border-right: 1px #0073e6 solid;
-  left: 100%;
-  -webkit-transform: rotate(45deg) translateY(-50%);
-          transform: rotate(45deg) translateY(-50%);
-  position: absolute;
-  top: 50%;
-}
 #doc-content .question-and-answers blockquote {
   margin-top: 8px;
   margin-top: 0.5rem;
@@ -808,6 +736,137 @@ img {
 }
 #doc-content #glossario .glossary.docutils {
   display: block;
+}
+
+#doc-content .admonition {
+  margin-bottom: 32px;
+  margin-bottom: 2rem;
+}
+#doc-content .admonition .admonition-title {
+  text-transform: uppercase;
+  font-weight: 800;
+}
+#doc-content .admonition .admonition-title .Icon {
+  font-size: 24px;
+  font-size: 1.5rem;
+}
+#doc-content .admonition .admonition__hidden-paragraph {
+  display: none;
+}
+#doc-content .admonition .admonition__toggle-wrap {
+  border-top: 1px #ccc solid;
+  padding-top: 16px;
+  padding-top: 1rem;
+  margin-top: 24px;
+  margin-top: 1.5rem;
+}
+#doc-content .admonition .admonition__toggle-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #0073e6;
+  padding-left: 0;
+}
+#doc-content .admonition .admonition__toggle-btn .Icon {
+  font-size: 9.6px;
+  font-size: 0.6rem;
+  margin-left: 8px;
+  margin-left: 0.5rem;
+  position: relative;
+}
+#doc-content .admonition .admonition__toggle-btn .Icon::after {
+  content: '';
+  width: 16px;
+  width: 1rem;
+  height: 16px;
+  height: 1rem;
+  border: 2px #0073e6 solid;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 50%;
+}
+#doc-content .admonition .admonition__toggle-btn .admonition__toggle-show-more::first-letter,
+#doc-content .admonition .admonition__toggle-btn .admonition__toggle-show-less::first-letter {
+  text-transform: uppercase;
+}
+#doc-content .admonition .admonition__toggle-btn .admonition__toggle-show-less {
+  display: none;
+}
+#doc-content .admonition .admonition__toggle-btn .admonition__toggle-show-more {
+  display: inline-block;
+}
+#doc-content .admonition .admonition__toggle-btn.active .admonition__toggle-show-more {
+  display: none;
+}
+#doc-content .admonition .admonition__toggle-btn.active .admonition__toggle-show-less {
+  display: inline-block;
+}
+#doc-content .admonition.admonition-consultazione {
+  padding-bottom: 16px;
+  padding-bottom: 1rem;
+  border-bottom: 1px #ccc solid;
+  position: relative;
+}
+#doc-content .admonition.admonition-consultazione a {
+  text-decoration: underline;
+}
+#doc-content .admonition.admonition-consultazione .last {
+  font-family: "Lora", serif;
+}
+#doc-content .admonition.admonition-consultazione .admonition-title {
+  color: #000;
+  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#doc-content .admonition.admonition-consultazione .admonition-title .Icon {
+  font-size: 19.2px;
+  font-size: 1.2rem;
+}
+#doc-content .admonition.important, #doc-content .admonition.error, #doc-content .admonition.hint, #doc-content .admonition.note, #doc-content .admonition.attention {
+  margin-top: 32px;
+  margin-top: 2rem;
+  padding-left: 32px;
+  padding-left: 2rem;
+  border-left: 1px #ccc solid;
+  color: #596771;
+}
+#doc-content .admonition.important .admonition-title, #doc-content .admonition.error .admonition-title, #doc-content .admonition.hint .admonition-title, #doc-content .admonition.note .admonition-title, #doc-content .admonition.attention .admonition-title {
+  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#doc-content .admonition.error .admonition-title {
+  color: #d83750;
+}
+#doc-content .admonition.note .admonition-title {
+  color: #004e95;
+}
+#doc-content .admonition.attention .admonition-title {
+  color: #df7d26;
+}
+#doc-content .admonition.important .last {
+  font-weight: 800;
+  font-size: 19.2px;
+  font-size: 1.2rem;
+}
+#doc-content .admonition.hint .reference.internal {
+  font-size: 12.8px;
+  font-size: 0.8rem;
+  position: relative;
+}
+#doc-content .admonition.hint .reference.internal::after {
+  content: '';
+  width: 6.4px;
+  width: 0.4rem;
+  height: 6.4px;
+  height: 0.4rem;
+  border-top: 1px #0073e6 solid;
+  border-right: 1px #0073e6 solid;
+  left: 100%;
+  -webkit-transform: rotate(45deg) translateY(-50%);
+          transform: rotate(45deg) translateY(-50%);
+  position: absolute;
+  top: 50%;
 }
 
 .footer-menu__link:hover {
@@ -1192,6 +1251,7 @@ img {
           transform: translateY(-50%);
 }
 .admonition-display-page > p,
+.admonition-display-page .admonition__hidden-paragraph p,
 .admonition-display-page li {
   font-size: 12.8px;
   font-size: 0.8rem;

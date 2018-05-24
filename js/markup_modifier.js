@@ -5,7 +5,7 @@ module.exports = themeMarkupModifier = (function ($) {
   return {
 
     $: {
-      title: $('#doc-content h1, #doc-content h2, #doc-content h3'),
+      $title: $('#doc-content h1, #doc-content h2, #doc-content h3'),
       $table: $('table:not(.footnote):not(.docutils.field-list)'),
       $captionReference: $('table, .figure'),
       $noteBtn: $('.footnote-reference'),
@@ -13,11 +13,14 @@ module.exports = themeMarkupModifier = (function ($) {
       $noteBackref: $('.fn-backref'),
       $imgFixed: $('.figure-fixed'),
       $admonitionTitle: $('.admonition .admonition-title'),
+      $admonitionDeepening: $('.admonition-deepening'),
+      $deepeningParagraph: $('.admonition-deepening > p:not(.admonition-title)'),
       titleReady: false
     },
 
     init: function() {
       that = this.$;
+      themeMarkupModifier.deepeninModifier();
       themeMarkupModifier.titleModifier();
       themeMarkupModifier.tableModifier();
       themeMarkupModifier.captionModifier();
@@ -34,7 +37,7 @@ module.exports = themeMarkupModifier = (function ($) {
     },
 
     titleModifier: function() {
-      that.title.each(function(index) {
+      that.$title.each(function(index) {
 
         var $element = $(this),
             title = $element.html(),
@@ -106,6 +109,7 @@ module.exports = themeMarkupModifier = (function ($) {
           $numericList = $('.procedure ol li'),
           $codeTitle = $('.admonition-example .admonition-title');
           $deepeningTitle = $('.admonition-deepening .admonition-title');
+          $consultationTitle = $('.admonition-consultazione .admonition-title');
 
       $note.prepend('<span class="Icon it-icon-note"></span>');
       $error.prepend('<span class="Icon it-icon-procedure"></span>');
@@ -116,6 +120,7 @@ module.exports = themeMarkupModifier = (function ($) {
       $numericList.prepend('<span class="Icon it-icon-step Icon--ol"></span>');
       $codeTitle.prepend('<span class="Icon it-icon-example"></span>');
       $deepeningTitle.prepend('<span class="Icon it-icon-attention"></span>');
+      $consultationTitle.prepend('<span class="Icon it-icon-edit"></span>');
     },
 
     noteModifier: function() {
@@ -177,6 +182,17 @@ module.exports = themeMarkupModifier = (function ($) {
           return title;
         }
       }
+    },
+
+    deepeninModifier: function() {
+      var $hiddenBlock = that.$deepeningParagraph.slice(4,that.$deepeningParagraph.length),
+          btn = "<div class='admonition__toggle-wrap'><button type='button' class='admonition__toggle-btn'>" +
+          "<span class='admonition__toggle-show-more'>" + themeTranslate.getTranslation().showMore + "<span class='Icon it-icon-plus'></span></span>" +
+          "<span class='admonition__toggle-show-less'>" + themeTranslate.getTranslation().showLess + "<span class='Icon it-icon-minus'></span></span>" +
+          "</button></div>";
+
+      $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');
+      that.$admonitionDeepening.append(btn);
     }
 
   }
