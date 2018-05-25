@@ -639,31 +639,54 @@ module.exports = themeToolTip = (function ($) {
       });
 
       themeToolTip.addAttribute();
+      themeToolTip.setPopOver();
+      themeToolTip.addHandler();
+    },
 
-      // themeNote.setToolTip();
+    getDesktop: function() {
+      if ( $( window ).width() > 1200 ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
+    getTablet: function() {
+      if ( $( window ).width() < 1199 && $( window ).width() > 576) {
+        return true;
+      } else {
+        return false;
+      }
     },
 
     // Add attribute to keywords btn for enable tooltip
     addAttribute: function() {
       that.$btnKeywords.each(function(index) {
         var title = $(this).find('span').html();
-        $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
+        $(this).attr('data-toggle','popover').attr('tabindex',index).attr('role','button').attr('data-trigger','manual').attr('data-html','true').attr('title',title).attr('data-ref',index);
+        if (themeToolTip.getDesktop() ) {
+          $(this).attr('data-placement','top');
+        }
         that.toolTipArrayKeywords.push(new themeToolTip.setDataKeywords($(this),index));
       });
 
       that.$btnGlossay.each(function(index) {
         var title = $(this).find('span').html();
-        $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
+        $(this).attr('data-toggle','popover').attr('tabindex',index).attr('role','button').attr('data-trigger','manual').attr('data-html','true').attr('title',title).attr('data-ref',index);
+        if (themeToolTip.getDesktop() ) {
+          $(this).attr('data-placement','top');
+        }
         that.toolTipArrayGlossary.push(new themeToolTip.setDataGlossary($(this),index,title));
       });
 
       that.$tableNoteBtn.each(function(index) {
         var title = $(this).text();
-        $(this).attr('data-toggle','popover').attr('tabindex',index).attr('data-placement','top').attr('role','button').attr('data-trigger','focus').attr('data-html','true').attr('title',title).attr('data-ref',index);
+        $(this).attr('data-toggle','popover').attr('tabindex',index).attr('role','button').attr('data-trigger','manual').attr('data-html','true').attr('title',title).attr('data-ref',index);
+        if (themeToolTip.getDesktop() ) {
+          $(this).attr('data-placement','top')
+        }
         that.toolTipArrayNote.push(new themeToolTip.setDataNote($(this),index));
       });
-
-      themeToolTip.addhandler();
     },
 
     // Set array whith keywords btn info
@@ -694,7 +717,8 @@ module.exports = themeToolTip = (function ($) {
     },
 
     // Enable tooltip custom
-    addhandler: function() {
+    setPopOver: function() {
+      // Keywords popover
       for (var index = 0; index < that.toolTipArrayKeywords.length; ++index) {
         var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
             "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArrayKeywords[index].ref + "></button>" +
@@ -702,7 +726,14 @@ module.exports = themeToolTip = (function ($) {
             "<p class='tooltip__content'>" + that.toolTipArrayKeywords[index].body + "</p>" +
             "</div></div>",
             btn = that.toolTipArrayKeywords[index].btn;
-        btn.popover({template:toolTipTemplate,offset:'115px , 40px',container: btn});
+
+        if (themeToolTip.getDesktop() ) {
+          btn.popover({template:toolTipTemplate,offset:'115px , 40px',container: btn});
+        } else if( themeToolTip.getTablet() ) {
+          btn.popover({template:toolTipTemplate,container: btn});
+        } else {
+          btn.popover({template:toolTipTemplate,offset:'-160px , 0',container: btn});
+        }
       };
 
       // Glossary popover
@@ -729,7 +760,14 @@ module.exports = themeToolTip = (function ($) {
             "<p class='tooltip__content'>" +  trimmedSummary + "</p>" + btnToGlossary +
             "</div></div>",
             btn = that.toolTipArrayGlossary[index].btn;
-        btn.popover({template:toolTipTemplate,offset:'125px , 40px',container: btn});
+
+        if (themeToolTip.getDesktop() ) {
+          btn.popover({template:toolTipTemplate,offset:'125px , 40px',container: btn});
+        } else if( themeToolTip.getTablet() ) {
+          btn.popover({template:toolTipTemplate,container: btn});
+        } else {
+          btn.popover({template:toolTipTemplate,offset:'-160px , 0',container: btn});
+        }
       };
 
       // Note Popover.
@@ -742,27 +780,30 @@ module.exports = themeToolTip = (function ($) {
             btn = that.toolTipArrayNote[index].btn;
         btn.popover({template:toolTipTemplate,container: btn});
       };
+    },
 
-      that.$tableNoteBtn.on('click' , function(event){
+    addHandler: function() {
+      $('[data-trigger="manual"]').click(function() {
         event.preventDefault();
+        if($('.tooltip').has(event.target).length) return;
+
+        if($(this).find('.tooltip').length > 0) {
+          $(this).popover('hide');
+        } else {
+          $(this).popover('show');
+        }
+      }).blur(function() {
+        $(this).popover('hide');
       });
 
-      that.$btnKeywords.on('click' , function(event){
-        event.preventDefault();
-      });
-
-      that.$btnGlossay.on('click' , function(event){
-        event.preventDefault();
+      $(document).on('click','.tooltip__close-btn', function(event){
+        $('[data-trigger="manual"]').popover('hide');
       });
 
       $(document).on('click','.tooltip__link', function(event){
         event.preventDefault();
         var href = $(event.target).attr('href');
         window.location.href = href;
-      });
-
-      $(document).on('click','.tooltip__close-btn', function(event){
-        $(event.target).blur();
       });
     },
 
