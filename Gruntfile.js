@@ -98,7 +98,8 @@ module.exports = function(grunt) {
       dev: {
         options: {
           alias: {
-            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js'
+            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js',
+            'modernizr': './js/modernizr.min.js'
           }
         },
         src: ['js/index.js'],
@@ -107,7 +108,8 @@ module.exports = function(grunt) {
       build: {
         options: {
           alias: {
-            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js'
+            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js',
+            'modernizr': './js/modernizr.min.js'
           },
           transform: [
                 'uglifyify'

@@ -1,27 +1,7 @@
 .chapter-nav__list--hidden {
-  @media (max-width: 991px) {
-    display: none;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba($black, 0.6);
-    z-index: 5;
-
-    .chapter-nav__list-wrap {
-      background-color: $white;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 0.5rem;
-      width: 100%;
-      max-width: 250px;
-    }
-
-    &.active {
-      display: block;
+  &:not(.show) {
+    @media (max-width: 991px) {
+      display: none;
     }
   }
 
@@ -34,6 +14,15 @@
       visibility: visible;
       opacity: 1;
     }
+  }
+}
+
+.chapter-nav__list-wrap {
+  @media (max-width: 991px) {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 4px;
   }
 }
 

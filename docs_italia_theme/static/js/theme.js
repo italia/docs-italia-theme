@@ -154,6 +154,7 @@ module.exports = themeGlossary = (function ($) {
 global.$ = global.jQuery = require('jquery');
 global.Popper = require('popper.js');
 require('bootstrap-italia');
+require('modernizr');
 
 var themeMarkupModifier = require('./markup_modifier.js');
 var themeToolTip = require('./tooltip.js');
@@ -184,7 +185,7 @@ $(document).ready(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":2,"./get_glossary.js":3,"./markup_modifier.js":5,"./note.js":6,"./section_navigation.js":7,"./theme_translate.js":8,"./tooltip.js":9,"bootstrap-italia":"bootstrap-italia","jquery":10,"popper.js":11}],5:[function(require,module,exports){
+},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":2,"./get_glossary.js":3,"./markup_modifier.js":5,"./note.js":6,"./section_navigation.js":7,"./theme_translate.js":8,"./tooltip.js":9,"bootstrap-italia":"bootstrap-italia","jquery":10,"modernizr":"modernizr","popper.js":11}],5:[function(require,module,exports){
 // Modify DOM via JS.
 module.exports = themeMarkupModifier = (function ($) {
   var that;
@@ -461,17 +462,23 @@ module.exports = themeSectionNav = (function ($) {
 
     init: function() {
       that = this.$;
+      $('.chapter-nav').remove();
+
       that.$title = $('.chapter-header.has-nav h1,.chapter-header.has-nav h2,.chapter-header.has-nav h3'),
       that.$title.each(function(index) {
         var $element = $(this),
-            title = $element.html().replace('¶', '');
+            title = $element.html();
         themeSectionNav.addNav($element,title);
       });
       themeSectionNav.addHandler();
     },
 
+    // Add navigation markdown, in case of mobile ( window width <=  991) the class for bootsrapp modale will be applied.
     addNav: function(element,title) {
-      var nav = "<div class='chapter-nav'><div class='chapter-nav__wrap'>" +
+      var modalClass = detectCModal(),
+          modalContentClass = detectCModalContent(),
+          modalContainerClass = detectCModalContainer(),
+          nav = "<div class='chapter-nav'><div class='chapter-nav__wrap'>" +
           "<ul class='chapter-nav__list chapter-nav__list--visible'>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-comment'></span>" +
@@ -479,12 +486,13 @@ module.exports = themeSectionNav = (function ($) {
           "<span class='chapter-link__title'>" + themeTranslate.getTranslation().comments + "</span></button type='button'></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-more'></span>" +
-          "<button type='button' class='chapter-link chapter-link--expand'>" + themeTranslate.getTranslation().seeActions + "</button></li>" +
+          "<button type='button' data-toggle='modal' class='chapter-link chapter-link--expand'>" + themeTranslate.getTranslation().seeActions + "</button></li>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-more'></span>" +
-          "<button type='button' class='chapter-link chapter-link--expand'>" + themeTranslate.getTranslation().otherActions + "</button></li></ul>" +
-          "<div class='chapter-nav__list--hidden'>" +
-          "<div class='chapter-nav__list-wrap'>" +
+          "<button type='button' data-toggle='modal' class='chapter-link chapter-link--expand'>" + themeTranslate.getTranslation().otherActions + "</button></li></ul>" +
+          "<div class='" + modalClass + "chapter-nav__list--hidden' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>" +
+          "<div class='" + modalContainerClass + "'>" +
+          "<div class='" + modalContentClass + " chapter-nav__list-wrap'>" +
           "<div class='chapter-nav__title'>" + title + "</div>" +
           "<ul class='chapter-nav__list'>" +
           "<li class='chapter-nav__item'>" +
@@ -496,83 +504,96 @@ module.exports = themeSectionNav = (function ($) {
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-share'></span>" +
           "<button type='button' class='chapter-link'>" + themeTranslate.getTranslation().shareMsg + "</button>" +
-          "</li></ul></div></div></div></div>";
+          "</li></ul></div>" +
+          "</div>" +
+          "</div></div></div>";
       container = element.closest('.chapter-header');
       container.append(nav);
+
+      function detectCModal(){
+        if( that.$window.outerWidth() <=  991 ) {
+          return 'modal fade ';
+        } else {
+          return '';
+        }
+      }
+
+      function detectCModalContent(){
+        if( that.$window.outerWidth() <=  991 ) {
+          return 'modal-content ';
+        } else {
+          return '';
+        }
+      }
+
+      function detectCModalContainer(){
+        if( that.$window.outerWidth() <=  991 ) {
+          return 'modal-dialog modal-dialog-centered modal-sm ';
+        } else {
+          return '';
+        }
+      }
     },
 
     addHandler: function(element) {
-      var $expanded = $('.chapter-link--expand');
+      // Display nav on mouseover ( desktop width no tochevents )
+      $('.chapter-header.has-nav').on('mouseover' , function(){
+        if (!Modernizr.touchevents && that.$window.outerWidth() > 992) {
+          var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
+          $wrap = $(this).find('.title-wrap');
+          lineHeight = parseInt($(this).find('.title-has-nav').css('line-height'))+2;
 
-      if (!that.$html.hasClass('touch')) {
-        $('.chapter-header.has-nav').on('mouseover' , function(){
-          if( that.$window.outerWidth() > 992 ) {
-            var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
-            $wrap = $(this).find('.title-wrap');
-            lineHeight = parseInt($(this).find('.title-has-nav').css('line-height'))+2;
+          $nav.addClass('active');
+          $wrap.addClass('active');
+          $wrap.find('.title__background').css('height',lineHeight);
+        }
+      });
 
-            $nav.addClass('active');
-            $wrap.addClass('active');
-            $wrap.find('.title__background').css('height',lineHeight);
-
-            // if (typeof themeNote != "undefined") {
-            //   themeNote.closeAllNote();
-            // }
-          }
-        });
-        $('.chapter-header.has-nav').on('mouseout' , function(){
-          if( that.$window.outerWidth() > 992 ) {
-            var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
-                $wrap = $(this).find('.title-wrap');
-            $nav.removeClass('active');
-            $wrap.removeClass('active');
-          }
-        });
-      }
-
-      // Close lightbox on click ( toch monitor)
-      $('.chapter-nav__list--hidden').on('click' , function(event){
-        if( $(event.target).is( $('.chapter-nav__list--hidden'))){
-          var $wrap = $(this).closest('.chapter-header').find('.title-wrap');
-          $(this).removeClass('active');
-          that.$body.removeClass('no-scroll');
+      // Close nav on mouseout ( desktop width no tochevents )
+      $('.chapter-header.has-nav').on('mouseout' , function(){
+        if (!Modernizr.touchevents && that.$window.outerWidth() > 992) {
+          var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
+              $wrap = $(this).find('.title-wrap');
+          $nav.removeClass('active');
           $wrap.removeClass('active');
         }
       });
 
-      // Open nav ( toch monitor)
-      $expanded.on('click' , function(){
+      // Display nav on click, dropdown on desktop and modal on mobile/tablet
+      $('.chapter-link--expand').on('click' , function(){
         var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
             $wrap = $(this).closest('.chapter-header').find('.title-wrap'),
             lineHeight = parseInt($(this).closest('.chapter-header').find('.title-has-nav').css('line-height'))+4;
-        if( $nav.hasClass('active') ) {
-          $nav.removeClass('active');
-          $wrap.removeClass('active');
-        } else {
-          $nav.addClass('active');
-          if( that.$window.outerWidth() > 992 ) {
+
+        if( that.$window.outerWidth() > 992 ) {
+          if( $nav.hasClass('active') ) {
+            $nav.removeClass('active');
+            $wrap.removeClass('active');
+          }
+          else {
+            $nav.addClass('active');
             $wrap.addClass('active');
             $wrap.find('.title__background').css('height',lineHeight);
             if(that.$window.outerWidth() <= 576) {
               that.$body.addClass('no-scroll');
             }
+          }
+        } else if ( that.$window.outerWidth() <= 991 ) {
+          var $modal = $(this).closest('.chapter-nav__wrap').find('.chapter-nav__list--hidden');
+          $modal.modal('show')
+        }
+      });
 
-            if (typeof themeNote != "undefined") {
-              themeNote.closeAllNote();
-            }
+      // Close when body is clikked ( Desktop with touchevents ).
+      that.$body.on('click' , function(event){
+        if ( Modernizr.touchevents && that.$window.outerWidth() > 992 ) {
+          var $nav = that.$title.closest('.chapter-header').find('.chapter-nav__list--hidden');
+          if( !$('.chapter-header').has(event.target).length > 0 ) {
+            $('.chapter-nav__list--hidden').removeClass('active');
+            $('.title-wrap').removeClass('active');
           }
         }
       });
-
-      // Close when bosy is clikked.
-      that.$body.on('click' , function(event){
-        var $nav = that.$title.closest('.chapter-header').find('.chapter-nav__list--hidden');
-        if( !$('.chapter-header').has(event.target).length > 0 ) {
-          $('.chapter-nav__list--hidden').removeClass('active');
-          $('.title-wrap').removeClass('active');
-        }
-      });
-
     }
   }
 })(jQuery);
@@ -13744,4 +13765,8 @@ var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function
 
 
 
+},{}],"modernizr":[function(require,module,exports){
+/*! modernizr 3.6.0 (Custom Build) | MIT *
+ * https://modernizr.com/download/?-touchevents-setclasses !*/
+!function(e,n,t){function o(e,n){return typeof e===n}function s(){var e,n,t,s,a,i,r;for(var l in f)if(f.hasOwnProperty(l)){if(e=[],n=f[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(s=o(n.fn,"function")?n.fn():n.fn,a=0;a<e.length;a++)i=e[a],r=i.split("."),1===r.length?Modernizr[r[0]]=s:(!Modernizr[r[0]]||Modernizr[r[0]]instanceof Boolean||(Modernizr[r[0]]=new Boolean(Modernizr[r[0]])),Modernizr[r[0]][r[1]]=s),d.push((s?"":"no-")+r.join("-"))}}function a(e){var n=u.className,t=Modernizr._config.classPrefix||"";if(p&&(n=n.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(o,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),p?u.className.baseVal=n:u.className=n)}function i(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):p?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function r(){var e=n.body;return e||(e=i(p?"svg":"body"),e.fake=!0),e}function l(e,t,o,s){var a,l,f,c,d="modernizr",p=i("div"),h=r();if(parseInt(o,10))for(;o--;)f=i("div"),f.id=s?s[o]:d+(o+1),p.appendChild(f);return a=i("style"),a.type="text/css",a.id="s"+d,(h.fake?h:p).appendChild(a),h.appendChild(p),a.styleSheet?a.styleSheet.cssText=e:a.appendChild(n.createTextNode(e)),p.id=d,h.fake&&(h.style.background="",h.style.overflow="hidden",c=u.style.overflow,u.style.overflow="hidden",u.appendChild(h)),l=t(p,e),h.fake?(h.parentNode.removeChild(h),u.style.overflow=c,u.offsetHeight):p.parentNode.removeChild(p),!!l}var f=[],c={_version:"3.6.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){f.push({name:e,fn:n,options:t})},addAsyncTest:function(e){f.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=c,Modernizr=new Modernizr;var d=[],u=n.documentElement,p="svg"===u.nodeName.toLowerCase(),h=c._config.usePrefixes?" -webkit- -moz- -o- -ms- ".split(" "):["",""];c._prefixes=h;var m=c.testStyles=l;Modernizr.addTest("touchevents",function(){var t;if("ontouchstart"in e||e.DocumentTouch&&n instanceof DocumentTouch)t=!0;else{var o=["@media (",h.join("touch-enabled),("),"heartz",")","{#modernizr{top:9px;position:absolute}}"].join("");m(o,function(e){t=9===e.offsetTop})}return t}),s(),a(d),delete c.addTest,delete c.addAsyncTest;for(var v=0;v<Modernizr._q.length;v++)Modernizr._q[v]();e.Modernizr=Modernizr}(window,document);
 },{}]},{},[4]);

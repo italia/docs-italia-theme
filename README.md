@@ -6,7 +6,7 @@
 This is the official theme for any piece of documentation hosted on the
 upcoming Docs Italia.
 
-## How to use Sphinx Italia on your documentation 
+## How to use Sphinx Italia on your documentation
 
 * Add the following line to your documentation `requirements.txt` file:
 
@@ -19,13 +19,13 @@ upcoming Docs Italia.
     ```
     # Add this line at the top of the file within the "import" section
     import docs_italia_theme
-    
+
     # Add the Sphinx extension 'docs_italia_theme' in the extensions list
     extensions = [
       ...,
       'docs_italia_theme'
     ]
-    
+
     # Edit these lines
     html_theme = "docs_italia_theme"
     html_theme_path = [docs_italia_theme.get_html_theme_path()]
@@ -34,13 +34,13 @@ upcoming Docs Italia.
 ## Contributing or modifying the theme
 
 * Clone the repository:
-    
+
     ```
     git clone git+https://github.com/italia/docs-italia-theme.git
     ```
 
 * If needed, install [Sphinx](http://www.sphinx-doc.org/en/stable/) into a virtual environment:
-    
+
     ```
     pip install sphinx
     ```
@@ -70,6 +70,14 @@ upcoming Docs Italia.
     npm start
     ```
 
-This will compile static assets and watch files required for the theme to reload at runtime.
+    This will compile static assets and watch files required for the theme to reload at runtime.
+
+6. Update modernizr.js
+
+  ```
+  ./node_modules/.bin/modernizr -uc ./modernizr.json -d ./js/modernizr.min.js
+  ```
+  
+  This will compile modernizr.js starting form the configuration present in ./modernizr.json
 
 **TODO:** building a release, handling versioning system to enable automatic update on Docs Italia platform

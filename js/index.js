@@ -1,6 +1,7 @@
 global.$ = global.jQuery = require('jquery');
 global.Popper = require('popper.js');
 require('bootstrap-italia');
+require('modernizr');
 
 var themeMarkupModifier = require('./markup_modifier.js');
 var themeToolTip = require('./tooltip.js');
