@@ -1012,15 +1012,15 @@ img {
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.6);
+    z-index: 5;
   }
-  .chapter-nav__list--hidden .chapter-nav__list {
+  .chapter-nav__list--hidden .chapter-nav__list-wrap {
     background-color: #fff;
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
-    padding: 2rem;
     border-radius: 0.5rem;
     width: 100%;
     max-width: 250px;
@@ -1086,8 +1086,32 @@ img {
 
 .chapter-nav__list {
   list-style-type: none;
-  padding-left: 0;
   margin-bottom: 0;
+  padding: 16px;
+  padding: 1rem;
+}
+@media (min-width: 992px) {
+  .chapter-nav__list {
+    padding: 0;
+  }
+}
+
+.chapter-nav__title {
+  padding: 16px;
+  padding: 1rem;
+  color: #000;
+  font-size: 12.8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  border-bottom: 1px #ccc solid;
+}
+.chapter-nav__title .title__chapter {
+  color: #8998a5;
+}
+@media (min-width: 992px) {
+  .chapter-nav__title {
+    display: none;
+  }
 }
 
 .chapter-nav__item:not(:last-child) {

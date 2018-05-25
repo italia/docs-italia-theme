@@ -7,14 +7,14 @@
     left: 0;
     right: 0;
     background-color: rgba($black, 0.6);
+    z-index: 5;
 
-    .chapter-nav__list {
+    .chapter-nav__list-wrap {
       background-color: $white;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      padding: 2rem;
       border-radius: 0.5rem;
       width: 100%;
       max-width: 250px;
@@ -80,8 +80,28 @@
 
 .chapter-nav__list {
   list-style-type: none;
-  padding-left: 0;
   margin-bottom: 0;
+  padding: 1rem;
+
+  @media (min-width: 992px) {
+    padding: 0;
+  }
+}
+
+.chapter-nav__title {
+  padding: 1rem;
+  color: $black;
+  font-size: 0.8rem;
+  font-weight: 800;
+  border-bottom: 1px $grey solid;
+
+  .title__chapter {
+    color: $grey-mid-01;
+  }
+
+  @media (min-width: 992px) {
+    display: none;
+  }
 }
 
 .chapter-nav__item:not(:last-child) {

@@ -463,13 +463,14 @@ module.exports = themeSectionNav = (function ($) {
       that = this.$;
       that.$title = $('.chapter-header.has-nav h1,.chapter-header.has-nav h2,.chapter-header.has-nav h3'),
       that.$title.each(function(index) {
-        var $element = $(this);
-        themeSectionNav.addNav($element);
+        var $element = $(this),
+            title = $element.html().replace('¶', '');
+        themeSectionNav.addNav($element,title);
       });
       themeSectionNav.addHandler();
     },
 
-    addNav: function(element) {
+    addNav: function(element,title) {
       var nav = "<div class='chapter-nav'><div class='chapter-nav__wrap'>" +
           "<ul class='chapter-nav__list chapter-nav__list--visible'>" +
           "<li class='chapter-nav__item'>" +
@@ -483,6 +484,8 @@ module.exports = themeSectionNav = (function ($) {
           "<span class='Icon it-icon-more'></span>" +
           "<button type='button' class='chapter-link chapter-link--expand'>" + themeTranslate.getTranslation().otherActions + "</button></li></ul>" +
           "<div class='chapter-nav__list--hidden'>" +
+          "<div class='chapter-nav__list-wrap'>" +
+          "<div class='chapter-nav__title'>" + title + "</div>" +
           "<ul class='chapter-nav__list'>" +
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-link'></span>" +
@@ -493,7 +496,7 @@ module.exports = themeSectionNav = (function ($) {
           "<li class='chapter-nav__item'>" +
           "<span class='Icon it-icon-share'></span>" +
           "<button type='button' class='chapter-link'>" + themeTranslate.getTranslation().shareMsg + "</button>" +
-          "</li></ul></div></div></div>";
+          "</li></ul></div></div></div></div>";
       container = element.closest('.chapter-header');
       container.append(nav);
     },
