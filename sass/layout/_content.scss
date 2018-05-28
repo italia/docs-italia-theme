@@ -1,3 +1,36 @@
+.main-container {
+  overflow: hidden;
+  position: relative;
+  background-color: $white;
+}
+
+.doc-content__consultation {
+  position: absolute;
+  display: none;
+  right: 0;
+  transform: rotate(45deg) translate(50px, -120px);
+  background-color: $green;
+  width: 320px;
+  transform-origin: left;
+  text-align: center;
+  padding: 0.5rem 0;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: $black;
+  z-index: 1;
+
+  @media (min-width: 576px) {
+    display: block;
+  }
+}
+
+.col-content {
+  padding: 2rem;
+
+  @media (min-width: 992px) {
+    padding-left: 5rem;
+  }
+}
 
 /* Caption */
 .caption-wrap {
@@ -23,7 +56,7 @@
     margin-top: 1.5rem;
     margin-bottom: 2rem;
 
-    @media (min-width: 992px) {
+    @media (min-width: 768px) {
       width: $chapter-nav-width;
       float: right;
       padding-left: 2rem;
@@ -108,6 +141,7 @@
     border-radius: 0.2rem;
     font-weight: 800;
     text-transform: capitalize;
+    display: inline-block;
   }
 }
 
@@ -129,7 +163,7 @@
   width: 100%;
   position: relative;
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     width: calc(100% - #{$sidebar-width});
     float: left;
   }

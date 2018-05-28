@@ -5,11 +5,23 @@
       {% include 'layouts/header.html' %}
       <!-- {% include 'layouts/network.html' %} -->
 
-      <div class="container-fluid">
-        <div class="row p-4 px-md-5">
-          <div class="col--nav">
-            {% include 'layouts/offcanvas.html' %}
-          </div>
+      <div class="container-fluid container-fluid--desktop main-container">
+        <div class="doc-content__consultation">
+          <span class="Icon it-icon-edit"></span>in consultazione
+        </div>
+        <div class="row">
+
+          <nav class="col--nav">
+            <div class="navbar-toggler--wrap p-3">
+              <button class="navbar-toggler p-0 border-0 ml-auto" type="button" data-toggle="offcanvas">
+                <span class="it-icon-note"></span>
+              </button>
+            </div>
+            <div class="navbar-collapse offcanvas-collapse" id="sidebar-nav">
+              {% include 'layouts/offcanvas.html' %}
+            </div>
+          </nav>
+
           <div id="doc-content" class="col-content">
             {% include 'layouts/breadcrumbs.html' %}
             {% if prev %}
@@ -23,8 +35,8 @@
                   <a href="{{ next.link|e }}" class="" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ next.title }}</a>
               </div>
             {% endif %}
-
           </div>
+
         </div>
       </div>
   </div>

@@ -1,6 +1,5 @@
-
   <section id="menu" class="">
-    <h2 class="">{{ _(t.navigation_menu_label) }}</h2>
+    <!-- <h2 class="">{{ _(t.navigation_menu_label) }}</h2> -->
     <div class="">
       <div class="">
         <a class=""
@@ -9,15 +8,63 @@
         </a>
       </div>
     </div>
-  </section>
-  <div class="">
-    {% if 'singlehtml' not in builder %}
+      {% if 'singlehtml' not in builder %}
       {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation|tobool, includehidden=theme_includehidden|tobool) %}
-    {% endif %}
-    {% if global_toc %}
-      {{ global_toc }}
-    {% else %}
+      {% endif %}
+      {% if global_toc %}
+
+      <!-- Mobile accordion -->
+      <div class="row sidebar-btn--wrap-mobile">
+        <button data-toggle="collapse" data-target="#indice-dei-contenuti" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile" type="button" aria-controls="indice-dei-contenuti">
+          contenuti
+          <span class="it-icon-collapse float-right"></span>
+          <span class="it-icon-expand float-right"></span>
+        </button>
+        <button data-toggle="collapse" data-target="#indice-delle-figure" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile" type="button" aria-controls="indice-delle-figure">
+          figure
+          <span class="it-icon-collapse float-right"></span>
+          <span class="it-icon-expand float-right"></span>
+        </button>
+        <button data-toggle="collapse" data-target="#indice-delle-tabelle" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile" type="button" aria-controls="indice-delle-tabelle">
+          tabelle
+          <span class="it-icon-collapse float-right"></span>
+          <span class="it-icon-expand float-right"></span>
+        </button>
+        <button data-toggle="collapse" data-target="#glossario" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile" type="button" aria-controls="glossario">
+          Glossario
+          <span class="it-icon-collapse float-right"></span>
+          <span class="it-icon-expand float-right"></span>
+        </button>
+      </div>
+
+      <button data-toggle="collapse" data-target="#indice-dei-contenuti" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="indice-dei-contenuti">
+        Indice dei contenuti
+        <span class="it-icon-collapse float-right"></span>
+        <span class="it-icon-expand float-right"></span>
+      </button>
+      <div class="sidebar-list--wrapper collapse show" id="indice-dei-contenuti" data-parent="#menu">
+        {{ global_toc }}
+      </div>
+      {% else %}
       <!-- Local TOC -->
-      <div class="">{{ toc }}</div>
-    {% endif %}
-  </div>
+        {{ toc }}
+      {% endif %}
+    <button data-toggle="collapse" data-target="#indice-delle-figure" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="indice-delle-figure">
+      Indice delle figure
+      <span class="it-icon-collapse float-right"></span>
+      <span class="it-icon-expand float-right"></span>
+    </button>
+      <div id="indice-delle-figure" class="collapse" data-parent="#menu">Lorem Ipsum</div>
+    <button data-toggle="collapse" data-target="#indice-delle-tabelle" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="indice-delle-tabelle">
+      Indice delle tabelle
+      <span class="it-icon-collapse float-right"></span>
+      <span class="it-icon-expand float-right"></span>
+    </button>
+      <div id="indice-delle-tabelle" class="collapse" data-parent="#menu">Lorem Ipsum</div>
+    <button data-toggle="collapse" data-target="#glossario" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="glossario">
+      Glossario
+      <span class="it-icon-collapse float-right"></span>
+      <span class="it-icon-expand float-right"></span>
+    </button>
+      <div id="glossario" class="collapse" data-parent="#menu">Lorem Ipsum</div>
+  </section>

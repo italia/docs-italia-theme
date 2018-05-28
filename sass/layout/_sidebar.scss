@@ -1,9 +1,114 @@
 .col--nav {
   width: 100%;
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     width: #{$sidebar-width};
     float: left;
-    padding-right: 3rem;
+    border-right: 1px $grey-light-01 solid;
+    padding-left: 4rem;
+  }
+}
+
+.offcanvas-collapse {
+  @media (max-width: 767.98px) {
+    z-index: 10;
+    background-color: $white;
+    top: 0;
+  }
+}
+
+.navbar-toggler--wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: $white;
+  box-shadow: -1px -2px 62px -13px rgba($black, 0.25);
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.navbar-toggler {
+  color: $blue;
+}
+
+.sidebar-btn--wrap-mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $white;
+}
+
+.sidebar-btn {
+  text-transform: uppercase;
+  color: $blue;
+  font-weight: 800;
+  cursor: pointer;
+  border: 0;
+  border-bottom: 2px $blue solid;
+  background: none;
+
+  &.sidebar-btn--desktop {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: block;
+    }
+  }
+
+  &.sidebar-btn--mobile {
+    display: inline-block;
+    font-size: 0.8rem;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &.focus--mouse {
+    border-color: $blue !important;
+  }
+
+  .it-icon-expand {
+    display: inline-block;
+  }
+
+  .it-icon-collapse {
+    display: none;
+  }
+
+  &.collapsed {
+    .it-icon-expand {
+      display: none;
+    }
+
+    .it-icon-collapse {
+      display: inline-block;
+    }
+  }
+
+  @media (min-width: 768px) {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
+  @media (max-width: 767.98px) {
+    .it-icon-expand,
+    .it-icon-collapse {
+      display: none;
+    }
+
+    &.collapsed {
+      .it-icon-expand,
+      .it-icon-collapse {
+        display: none;
+      }
+    }
   }
 }
