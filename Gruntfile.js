@@ -94,8 +94,23 @@ module.exports = function(grunt) {
       },
     },
 
+    modernizr: {
+      all: {
+        "crawl": false,
+        "customTests": [],
+        "dest": "js/modernizr.min.js",
+        "tests": [
+          "touchevents"
+        ],
+        "options": [
+          "setClasses"
+        ],
+        "uglify" : true
+      }
+    },
+
     browserify: {
-      dev: {
+      all: {
         options: {
           alias: {
             'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js',
@@ -104,19 +119,17 @@ module.exports = function(grunt) {
         },
         src: ['js/index.js'],
         dest: 'docs_italia_theme/static/js/theme.js'
+      }
+    },
+
+    uglify: {
+      options: {
+        mangle: false
       },
-      build: {
-        options: {
-          alias: {
-            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js',
-            'modernizr': './js/modernizr.min.js'
-          },
-          transform: [
-                'uglifyify'
-            ],
-        },
-        src: ['js/index.js'],
-        dest: 'docs_italia_theme/static/js/theme.js'
+      all: {
+        files: {
+          'docs_italia_theme/static/js/theme.js': ['docs_italia_theme/static/js/theme.js']
+        }
       }
     },
 
@@ -196,7 +209,8 @@ module.exports = function(grunt) {
     'sass',
     'postcss:dev',
     'copy',
-    'browserify:dev',
+    'modernizr',
+    'browserify',
     'exec:build_sphinx',
     'connect',
     'open',
@@ -209,7 +223,9 @@ module.exports = function(grunt) {
     'sass',
     'postcss:build',
     'copy',
-    'browserify:build',
+    'modernizr',
+    'browserify',
+    'uglify',
     'exec:build_sphinx'
   ]);
 
@@ -219,7 +235,9 @@ module.exports = function(grunt) {
     'sass',
     'postcss:build',
     'copy',
-    'browserify:build',
+    'modernizr',
+    'browserify',
+    'uglify',
     'cacheBust',
     'exec:build_sphinx'
   ]);
