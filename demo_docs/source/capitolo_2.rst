@@ -46,6 +46,7 @@ eleifend, vis an wisi fali dignissim. Vim ad augue vidisse, adhuc everti eos te.
 
 .. admonition:: deepening
    :class: admonition-deepening admonition-display-page name-deepening
+   :name: approfondimento
 
    Nec albucius phaedrum deterruisset ut, paulo ignota ceteros at eum. Ut legere
    adipisci :ref:`corrumpit mel <qui inani vivendo>`, vis te omnes indoctum
