@@ -36,6 +36,7 @@ it:
     version: versione
     compare_versions: confronta versioni
     copy_link: copia link
+    copied_link: link copiato
     see_actions: vedi azioni
     other_actions: altre azioni
     comments: commenti
@@ -112,6 +113,7 @@ en:
     version: version
     compare_versions: compare versions
     copy_link: copy link
+    copied_link: copied link
     see_actions: see actions
     other_actions: other actions
     comments: comments

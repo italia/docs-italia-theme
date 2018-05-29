@@ -56,22 +56,24 @@ module.exports = themeCopyToClipboard = (function ($) {
       event.preventDefault();
 
       var $btn =  $(event.target).closest('a'),
-          location = themeCopyToClipboard.getWindowLocation();
+          location = themeCopyToClipboard.getWindowLocation(),
+          $span = $btn.find('span');
 
       // Add current hashtag
       location += $btn.attr('href');
-      themeCopyToClipboard.copyToClipboard(location);
+      themeCopyToClipboard.copyToClipboard(location, $span);
     },
 
     copyNav: function() {
       event.preventDefault();
 
-      var $section =  $(event.target).closest('.section'),
+      var $el = $(event.target),
+          $section = $el.closest('.section'),
           location = themeCopyToClipboard.getWindowLocation();
 
       // Add current hashtag
       location += '#' + $section.attr('id');
-      themeCopyToClipboard.copyToClipboard(location);
+      themeCopyToClipboard.copyToClipboard(location, $el);
     },
 
     getWindowLocation: function() {
@@ -83,7 +85,7 @@ module.exports = themeCopyToClipboard = (function ($) {
       return location;
     },
 
-    copyToClipboard: function(text) {
+    copyToClipboard: function(text,$button) {
       if (window.clipboardData && window.clipboardData.setData) {
              return clipboardData.setData("Text", text);
 
@@ -96,10 +98,14 @@ module.exports = themeCopyToClipboard = (function ($) {
          try {
              return document.execCommand("copy");
          } catch (ex) {
-            //  console.warn("Copy to clipboard failed.", ex);
              return false;
          } finally {
-             document.body.removeChild(textarea);
+            document.body.removeChild(textarea)
+
+            $button.html(themeTranslate.getTranslation().copiedLink);
+            setTimeout(function(){
+              $button.html(themeTranslate.getTranslation().copyLink);
+            }, 3000);
          }
       }
     }
