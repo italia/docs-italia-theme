@@ -614,6 +614,11 @@ img {
 #doc-content .useful-docs li::after {
   display: none;
 }
+#doc-content .useful-docs .Icon {
+  font-size: 30.4px;
+  font-size: 1.9rem;
+  color: #0073e6;
+}
 #doc-content .procedure ol {
   padding-left: 16px;
   padding-left: 1rem;
@@ -651,6 +656,8 @@ img {
   position: relative;
   margin-bottom: 8px;
   margin-bottom: 0.5rem;
+  font-size: 14.4px;
+  font-size: 0.9rem;
 }
 #doc-content ul.simple li::after {
   content: '';

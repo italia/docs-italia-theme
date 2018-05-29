@@ -188,6 +188,11 @@
         display: none;
       }
     }
+
+    .Icon {
+      font-size: 1.9rem;
+      color: $blue;
+    }
   }
 
   .procedure {
@@ -225,6 +230,7 @@
     li {
       position: relative;
       margin-bottom: 0.5rem;
+      font-size: 0.9rem;
 
       &::after {
         content: '';
