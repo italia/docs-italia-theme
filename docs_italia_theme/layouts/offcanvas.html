@@ -1,23 +1,85 @@
+<!-- Toggle -->
+<div class="navbar-toggler--wrap navbar-toggler--wrap--bottom p-3">
+  <button class="navbar-toggler navbar-toggler--open p-0 border-0 ml-auto" type="button">
+    <span class="it-icon-note align-middle"></span>
+    <span class="navbar-toggler-bottom__chapter align-middle ml-2">{{ title|truncate(30, True) }}</span>
+  </button>
+</div>
 
-  <section id="menu" class="">
-    <h2 class="">{{ _(t.navigation_menu_label) }}</h2>
-    <div class="">
-      <div class="">
-        <a class=""
-          aria-controls="menu" aria-label="{{ _(t.navigation_menu_esc) }}" title="{{ t.navigation_menu_esc }}" href="#">
-          <span class="" aria-hidden="true"></span>
-        </a>
-      </div>
+<div class="sidebar-tabs">
+
+  <!-- Back button. -->
+  <div class="row">
+    <div class="col">
+      <button class="navbar-toggler navbar-toggler--back border-0 ml-auto" type="button" data-toggle="offcanvas">
+        <span class="it-icon-note align-middle"></span>
+        <span class="navbar-toggler__chapter align-middle ml-2">
+          {{ _(t.indices_and_glossary) }}
+        </span>
+      </button>
     </div>
-  </section>
-  <div class="">
-    {% if 'singlehtml' not in builder %}
-      {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation|tobool, includehidden=theme_includehidden|tobool) %}
-    {% endif %}
-    {% if global_toc %}
-      {{ global_toc }}
-    {% else %}
-      <!-- Local TOC -->
-      <div class="">{{ toc }}</div>
-    {% endif %}
   </div>
+
+  <!-- Tab -->
+  <ul class="row ml-3 mr-3 nav nav-tabs" role="tablist">
+    <li class="col text-center active">
+      <a id="content-index-mobile-tab" data-toggle="tab" href="#content-index-mobile" aria-controls="content-index-mobile" role="tab" aria-selected="true" class="sidebar-btn p-2 sidebar-btn--mobile active show" aria-controls="indice-dei-contenuti">
+        {{ _(t.contents) }}
+      </a>
+    </li>
+    <li class="col text-center">
+      <a id="figures-index-mobile-tab" data-toggle="tab" href="#figures-index-mobile" aria-controls="figures-index-mobile" role="tab" aria-selected="false" class="col sidebar-btn p-2 sidebar-btn--mobile" aria-controls="indice-delle-figure">
+        {{ _(t.figures) }}
+      </a>
+    </li>
+    <li class="col text-center">
+      <a id="table-index-mobile-tab" data-toggle="tab" href="#table-index-mobile" aria-controls="table-index-mobile" role="tab" aria-selected="false" class="col sidebar-btn p-2 sidebar-btn--mobile" aria-controls="indice-delle-tabelle">
+        {{ _(t.tables) }}
+      </a>
+    </li>
+    <li class="col text-center">
+      <a id="glossary-mobile-tab" data-toggle="tab" href="#glossary-mobile" aria-controls="glossary-mobile" role="tab" aria-selected="false" class="col sidebar-btn p-2 sidebar-btn--mobile" aria-controls="glossario">
+        {{ _(t.glossary) }}
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<!-- Off canvas -->
+<section class="docs-italia-offcanvas-menu" id="sidebar-nav">
+  <div class="tab-content sidebar-nav">
+
+      {% if 'singlehtml' not in builder %}
+      {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation|tobool, includehidden=theme_includehidden|tobool) %}
+      {% endif %}
+      {% if global_toc %}
+
+      <div id="content-index-mobile" class="tab-pane sidebar-list--wrapper fade show active" role="tabpanel" aria-labelledby="content-index-mobile-tab">
+        {{ global_toc }}
+      </div>
+      {% else %}
+      <!-- Local TOC -->
+        {{ toc }}
+      {% endif %}
+
+      <div id="figures-index-mobile" class="tab-pane sidebar-list--wrapper fade" role="tabpanel" aria-labelledby="figures-index-mobile-tab">
+        <ul>
+          <li>Lorem Ipsum</li>
+        </ul>
+      </div>
+
+      <div id="table-index-mobile" class="tab-pane fade sidebar-list--wrapper" role="tabpanel" aria-labelledby="table-index-mobile-tab">
+        <ul>
+          <li>Lorem Ipsum</li>
+        </ul>
+      </div>
+
+      <div id="glossary-mobile" class="tab-pane  sidebar-list--wrapper fade" role="tabpanel" aria-labelledby="glossary-mobile-tab">
+        <ul>
+          <li>Lorem Ipsum</li>
+        </ul>
+      </div>
+
+  </div>
+</section>

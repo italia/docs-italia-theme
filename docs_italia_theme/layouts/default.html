@@ -3,13 +3,19 @@
 <div class="">
   <div id="main">
       {% include 'layouts/header.html' %}
-      <!-- {% include 'layouts/network.html' %} -->
 
-      <div class="container-fluid">
-        <div class="row p-4 px-md-5">
-          <div class="col--nav">
+      <div class="container-fluid container-fluid--desktop main-container">
+        <div class="doc-content__consultation">
+          <span class="Icon it-icon-edit"></span>
+          {{ _(t.in_consultation) }}
+        </div>
+        <div class="row">
+
+          <nav class="col--nav">
+            {% include 'layouts/sidebar.html' %}
             {% include 'layouts/offcanvas.html' %}
-          </div>
+          </nav>
+
           <div id="doc-content" class="col-content">
             {% include 'layouts/breadcrumbs.html' %}
             {% if prev %}
@@ -23,8 +29,8 @@
                   <a href="{{ next.link|e }}" class="" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ next.title }}</a>
               </div>
             {% endif %}
-
           </div>
+
         </div>
       </div>
   </div>
