@@ -1,8 +1,6 @@
 #menu {
-  padding-bottom: 5rem;
-
   @media (max-width: 765.98px) {
-    padding-top: 5rem;
+    padding-top: 6.5rem;
   }
 
   > .sidebar-list--wrapper {
@@ -11,11 +9,14 @@
         text-decoration: none;
         color: $grey-mid;
         font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+        display: block;
+        line-height: 1.6;
       }
 
       > li {
         margin-bottom: 1rem;
-        padding: 1rem;
+        padding: 2rem 1rem;
 
         > a {
           font-weight: 800;
@@ -29,7 +30,7 @@
 
       &.current {
         > li.current {
-          background-color: $light-blue;
+          background-color: $grey-light;
         }
       }
 

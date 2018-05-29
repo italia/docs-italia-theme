@@ -13,32 +13,8 @@
       {% endif %}
       {% if global_toc %}
 
-      <!-- Mobile accordion -->
-      <div class="row sidebar-btn--wrap-mobile">
-        <button data-toggle="collapse" data-target="#indice-dei-contenuti" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile" type="button" aria-controls="indice-dei-contenuti">
-          contenuti
-          <span class="it-icon-collapse float-right"></span>
-          <span class="it-icon-expand float-right"></span>
-        </button>
-        <button data-toggle="collapse" data-target="#indice-delle-figure" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile" type="button" aria-controls="indice-delle-figure">
-          figure
-          <span class="it-icon-collapse float-right"></span>
-          <span class="it-icon-expand float-right"></span>
-        </button>
-        <button data-toggle="collapse" data-target="#indice-delle-tabelle" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile" type="button" aria-controls="indice-delle-tabelle">
-          tabelle
-          <span class="it-icon-collapse float-right"></span>
-          <span class="it-icon-expand float-right"></span>
-        </button>
-        <button data-toggle="collapse" data-target="#glossario" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile" type="button" aria-controls="glossario">
-          Glossario
-          <span class="it-icon-collapse float-right"></span>
-          <span class="it-icon-expand float-right"></span>
-        </button>
-      </div>
-
       <button data-toggle="collapse" data-target="#indice-dei-contenuti" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="indice-dei-contenuti">
-        Indice dei contenuti
+        {{ _(t.content_index) }}
         <span class="it-icon-collapse float-right"></span>
         <span class="it-icon-expand float-right"></span>
       </button>
@@ -49,22 +25,36 @@
       <!-- Local TOC -->
         {{ toc }}
       {% endif %}
-    <button data-toggle="collapse" data-target="#indice-delle-figure" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="indice-delle-figure">
-      Indice delle figure
-      <span class="it-icon-collapse float-right"></span>
-      <span class="it-icon-expand float-right"></span>
-    </button>
-      <div id="indice-delle-figure" class="collapse" data-parent="#menu">Lorem Ipsum</div>
-    <button data-toggle="collapse" data-target="#indice-delle-tabelle" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="indice-delle-tabelle">
-      Indice delle tabelle
-      <span class="it-icon-collapse float-right"></span>
-      <span class="it-icon-expand float-right"></span>
-    </button>
-      <div id="indice-delle-tabelle" class="collapse" data-parent="#menu">Lorem Ipsum</div>
-    <button data-toggle="collapse" data-target="#glossario" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="glossario">
-      Glossario
-      <span class="it-icon-collapse float-right"></span>
-      <span class="it-icon-expand float-right"></span>
-    </button>
-      <div id="glossario" class="collapse" data-parent="#menu">Lorem Ipsum</div>
+
+      <!-- Other menu with button-->
+      <button data-toggle="collapse" data-target="#indice-delle-figure" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="indice-delle-figure">
+        {{ _(t.figures_index) }}
+        <span class="it-icon-collapse float-right"></span>
+        <span class="it-icon-expand float-right"></span>
+      </button>
+        <div id="indice-delle-figure" class="sidebar-list--wrapper collapse" data-parent="#menu">
+          <ul>
+            <li>Lorem Ipsum</li>
+          </ul>
+        </div>
+      <button data-toggle="collapse" data-target="#indice-delle-tabelle" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="indice-delle-tabelle">
+        {{ _(t.table_index) }}
+        <span class="it-icon-collapse float-right"></span>
+        <span class="it-icon-expand float-right"></span>
+      </button>
+        <div id="indice-delle-tabelle" class="collapse sidebar-list--wrapper" data-parent="#menu">
+          <ul>
+            <li>Lorem Ipsum</li>
+          </ul>
+        </div>
+      <button data-toggle="collapse" data-target="#glossario" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="glossario">
+        {{ _(t.glossary) }}
+        <span class="it-icon-collapse float-right"></span>
+        <span class="it-icon-expand float-right"></span>
+      </button>
+      <div id="glossario" class="sidebar-list--wrapper collapse" data-parent="#menu">
+        <ul>
+          <li>Lorem Ipsum</li>
+        </ul>
+      </div>
   </section>

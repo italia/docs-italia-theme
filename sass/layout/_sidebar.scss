@@ -22,7 +22,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 9;
   background-color: $white;
   box-shadow: -1px -2px 62px -13px rgba($black, 0.25);
 
@@ -32,7 +32,13 @@
 }
 
 .navbar-toggler {
-  color: $blue;
+  color: $medium-blue;
+  padding: 1rem 1rem 1rem 2rem;
+}
+
+.navbar-toggler__chapter {
+  color: $black;
+  font-size: 0.8rem;
 }
 
 .sidebar-btn--wrap-mobile {
@@ -41,6 +47,19 @@
   left: 0;
   right: 0;
   background-color: $white;
+  transform: translateX(100%);
+  transition: transform 0.3s;
+  transition-timing-function: ease-in-out;
+  z-index: 11;
+  box-shadow: -1px -2px 62px -13px rgba($black, 0.25);
+
+  &.active {
+    transform: translateX(0);
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 }
 
 .sidebar-btn {
@@ -49,7 +68,7 @@
   font-weight: 800;
   cursor: pointer;
   border: 0;
-  border-bottom: 2px $blue solid;
+  border-bottom: 2px $medium-blue solid;
   background: none;
 
   &.sidebar-btn--desktop {
@@ -62,16 +81,16 @@
 
   &.sidebar-btn--mobile {
     display: inline-block;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     text-align: center;
 
-    @media (min-width: 768px) {
-      display: none;
+    &.collapsed {
+      border: 0;
     }
   }
 
   &.focus--mouse {
-    border-color: $blue !important;
+    border-color: $medium-blue !important;
   }
 
   .it-icon-expand {
