@@ -3,60 +3,17 @@
 <div class="">
   <div id="main">
       {% include 'layouts/header.html' %}
-      <!-- {% include 'layouts/network.html' %} -->
 
       <div class="container-fluid container-fluid--desktop main-container">
         <div class="doc-content__consultation">
-          <span class="Icon it-icon-edit"></span>in consultazione
+          <span class="Icon it-icon-edit"></span>
+          {{ _(t.in_consultation) }}
         </div>
         <div class="row">
 
           <nav class="col--nav">
-            <!-- Toggle -->
-            <div class="navbar-toggler--wrap navbar-toggler--wrap--bottom p-3">
-              <button class="navbar-toggler p-0 border-0 ml-auto" type="button" data-toggle="offcanvas">
-                <span class="it-icon-note align-middle"></span>
-                <span class="navbar-toggler-bottom__chapter align-middle ml-2">{{ title|truncate(35, True) }}</span>
-              </button>
-            </div>
-
-            <!-- Mobile accordion -->
-            <div class="sidebar-btn--wrap-mobile">
-              <div class="row navbar-toggler--row-mobile">
-                <div class="col">
-                  <button class="navbar-toggler border-0 ml-auto" type="button" data-toggle="offcanvas">
-                    <span class="it-icon-note align-middle"></span>
-                    <span class="navbar-toggler__chapter align-middle ml-2">Indici e glossario</span>
-                  </button>
-                </div>
-              </div>
-              <div class="row ml-3 mr-3">
-                <button data-toggle="collapse" data-target="#indice-dei-contenuti" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile" type="button" aria-controls="indice-dei-contenuti">
-                  {{ _(t.contents) }}
-                  <span class="it-icon-collapse float-right"></span>
-                  <span class="it-icon-expand float-right"></span>
-                </button>
-                <button data-toggle="collapse" data-target="#indice-delle-figure" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile collapsed" type="button" aria-controls="indice-delle-figure">
-                  {{ _(t.figures) }}
-                  <span class="it-icon-collapse float-right"></span>
-                  <span class="it-icon-expand float-right"></span>
-                </button>
-                <button data-toggle="collapse" data-target="#indice-delle-tabelle" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile collapsed" type="button" aria-controls="indice-delle-tabelle">
-                  {{ _(t.tables) }}
-                  <span class="it-icon-collapse float-right"></span>
-                  <span class="it-icon-expand float-right"></span>
-                </button>
-                <button data-toggle="collapse" data-target="#glossario" aria-expanded="true" class="col sidebar-btn p-3 sidebar-btn--mobile collapsed" type="button" aria-controls="glossario">
-                  {{ _(t.glossary) }}
-                  <span class="it-icon-collapse float-right"></span>
-                  <span class="it-icon-expand float-right"></span>
-                </button>
-              </div>
-            </div>
-
-            <div class="navbar-collapse offcanvas-collapse" id="sidebar-nav">
-              {% include 'layouts/offcanvas.html' %}
-            </div>
+            {% include 'layouts/sidebar.html' %}
+            {% include 'layouts/offcanvas.html' %}
           </nav>
 
           <div id="doc-content" class="col-content">
