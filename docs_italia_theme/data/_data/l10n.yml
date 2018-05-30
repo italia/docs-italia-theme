@@ -36,6 +36,7 @@ it:
     version: versione
     compare_versions: confronta versioni
     copy_link: copia link
+    copied_link: link copiato
     see_actions: vedi azioni
     other_actions: altre azioni
     comments: commenti
@@ -56,6 +57,7 @@ it:
     contents: contenuti
     in_consultation: in consultazione
     indices_and_glossary: indici e glossario
+    note: nota
 
     edit_on_github: Modifica su GitHub
     edit_on_bitbucket: Modifica su Bitbucket
@@ -112,6 +114,7 @@ en:
     version: version
     compare_versions: compare versions
     copy_link: copy link
+    copied_link: copied link
     see_actions: see actions
     other_actions: other actions
     comments: comments
@@ -132,6 +135,7 @@ en:
     contents: contents
     in_consultation: in_consultation
     indices_and_glossary: indices and glossary
+    note: note
 
     edit_on_github: Edit on GitHub
     edit_on_bitbucket: Edit on Bitbucket

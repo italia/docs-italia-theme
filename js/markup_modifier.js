@@ -106,6 +106,12 @@ module.exports = themeMarkupModifier = (function ($) {
           $attention = $('.admonition.attention .admonition-title'),
           $important = $('.admonition.important .admonition-title'),
           $usefulDocs = $('.useful-docs li'),
+          $usefulDocsPdf = $usefulDocs.filter(function(){
+            return $(this).find('.mimetype').html() == 'application/pdf';
+          });
+          $usefulDocsHtml = $usefulDocs.filter(function(){
+            return $(this).find('.mimetype').html() == 'text/html';
+          });
           $numericList = $('.procedure ol li'),
           $codeTitle = $('.admonition-example .admonition-title');
           $deepeningTitle = $('.admonition-deepening .admonition-title');
@@ -116,7 +122,8 @@ module.exports = themeMarkupModifier = (function ($) {
       $consiglio.prepend('<span class="Icon it-icon-hint"></span>');
       $attention.prepend('<span class="Icon it-icon-attention"></span>');
       $important.prepend('<span class="Icon it-icon-hint"></span>');
-      $usefulDocs.prepend('<span class="Icon it-icon-pdf"></span>');
+      $usefulDocsPdf.prepend('<span class="Icon it-icon-pdf"></span>');
+      $usefulDocsHtml.prepend('<span class="Icon it-icon-html"></span>');
       $numericList.prepend('<span class="Icon it-icon-step Icon--ol"></span>');
       $codeTitle.prepend('<span class="Icon it-icon-example"></span>');
       $deepeningTitle.prepend('<span class="Icon it-icon-attention"></span>');
@@ -147,7 +154,7 @@ module.exports = themeMarkupModifier = (function ($) {
                              "<button type='button' class='note-back-btn'>" + themeTranslate.getTranslation().backToText + "</button>" +
                              "</div>";
 
-        $element.text('Note ' + newStr);
+        $element.text(themeTranslate.getTranslation().note +  ' ' + newStr);
 
         // Add btn ( x | back) if popover isn't showed inside table checking the 'footnote-from-table' class
         if( $element.closest('.footnote-from-table').length == 0 ) {

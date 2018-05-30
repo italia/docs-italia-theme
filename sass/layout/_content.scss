@@ -105,7 +105,7 @@
   left: -0.5rem;
   display: none;
   right: 0;
-  z-index: -1;
+  z-index: 0;
 
   &::after {
     content: "";
@@ -140,7 +140,6 @@
     padding: 0.5rem 1rem;
     border-radius: 0.2rem;
     font-weight: 800;
-    text-transform: capitalize;
     display: inline-block;
   }
 }
@@ -188,6 +187,11 @@
         display: none;
       }
     }
+
+    .Icon {
+      font-size: 1.9rem;
+      color: $blue;
+    }
   }
 
   .procedure {
@@ -225,6 +229,7 @@
     li {
       position: relative;
       margin-bottom: 0.5rem;
+      font-size: 0.9rem;
 
       &::after {
         content: '';
@@ -337,6 +342,7 @@
         -o-box-decoration-break: clone;
         box-decoration-break: clone;
         left: -0.5rem;
+        z-index: 1;
 
         .title__chapter {
           position: relative;
