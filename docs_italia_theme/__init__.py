@@ -175,10 +175,10 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             table_list_item.parent = tables_toc
             tables_toc.children.append(table_list_item)
 
-    context['content_toc'] = app.builder.render_partial(content_toc)['fragment']
-    context['glossary_toc'] = app.builder.render_partial(glossary_toc)['fragment']
-    context['figures_toc'] = app.builder.render_partial(figures_toc)['fragment']
-    context['tables_toc'] = app.builder.render_partial(tables_toc)['fragment']
+    context['content_toc'] = app.builder.render_partial(content_toc)['fragment'] if hasattr(content_toc, 'children') else context['t']['no_content'].capitalize()
+    context['glossary_toc'] = app.builder.render_partial(glossary_toc)['fragment'] if hasattr(glossary_toc, 'children') else context['t']['no_glossary'].capitalize()
+    context['figures_toc'] = app.builder.render_partial(figures_toc)['fragment'] if hasattr(figures_toc, 'children') else context['t']['no_figures'].capitalize()
+    context['tables_toc'] = app.builder.render_partial(tables_toc)['fragment'] if hasattr(tables_toc, 'children') else context['t']['no_tables'].capitalize()
 
 def generate_glossary_json(app, doctree, docname):
     """Generate glossary JSON file"""
@@ -200,11 +200,11 @@ def generate_glossary_json(app, doctree, docname):
                         definition += paragraphs.rawsource + '\n'
                     definition = definition[:-2]
                     glossary_data[term] = definition
-        glossary_json = json.dumps(glossary_data)    
+        glossary_json = json.dumps(glossary_data)
         glossary_json_file = open(data_dir + '/glossary.json', 'w')
         glossary_json_file.write(glossary_json)
         glossary_json_file.close()
-                
+
 
 def setup(app):
     app.site_data = load_theme_data()

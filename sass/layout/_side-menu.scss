@@ -4,6 +4,8 @@
   }
 
   > .sidebar-list--wrapper {
+    padding: 1rem 1rem 0;
+
     > ul {
       a {
         text-decoration: none;
@@ -15,9 +17,6 @@
       }
 
       > li {
-        margin-bottom: 1rem;
-        padding: 2rem 1rem;
-
         > a {
           font-weight: 800;
         }
@@ -27,6 +26,7 @@
     ul {
       list-style-type: none;
       padding-left: 0;
+      margin-bottom: 0;
 
       &.current {
         > li.current {
@@ -36,6 +36,24 @@
 
       ul {
         padding-left: 1rem;
+      }
+    }
+
+    &.content-index--menu {
+      > ul {
+        > li {
+          padding-bottom: 1rem;
+        }
+      }
+    }
+
+    &.figures-index--menu,
+    &.table-index--menu,
+    &.glossary-mobile--menu {
+      > ul {
+        > li {
+          padding-bottom: 0;
+        }
       }
     }
   }

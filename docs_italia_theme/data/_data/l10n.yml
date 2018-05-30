@@ -59,6 +59,10 @@ it:
     indices_and_glossary: indici e glossario
     note: nota
     no_description: nessuna descrizione
+    no_content: nessuna sezione
+    no_glossary: nessun glossario
+    no_figures: nessuna figura
+    no_tables: nessuna tabella
 
     edit_on_github: Modifica su GitHub
     edit_on_bitbucket: Modifica su Bitbucket
@@ -138,6 +142,10 @@ en:
     indices_and_glossary: indices and glossary
     note: note
     no_description: no description
+    no_content: no sections
+    no_glossary: no glossary
+    no_figures: no figures
+    no_tables: no tables
 
     edit_on_github: Edit on GitHub
     edit_on_bitbucket: Edit on Bitbucket
