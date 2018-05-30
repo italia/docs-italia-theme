@@ -1,3 +1,9 @@
+header {
+  box-shadow: -5px 3px 175px -11px rgba($black, 0.14);
+  position: relative;
+  z-index: 1;
+}
+
 .h1--header {
   font-size: 1.333rem;
   line-height: 1.2;
