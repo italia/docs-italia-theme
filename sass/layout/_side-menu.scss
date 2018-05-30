@@ -1,22 +1,31 @@
 .sidebar-nav {
   @media (max-width: 765.98px) {
-    padding-top: 6.5rem;
+    padding-top: 5.5rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: $grey-mid;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    display: block;
+    line-height: 1.6;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
   }
 
   > .sidebar-list--wrapper {
-    padding: 1rem 1rem 0;
-
     > ul {
-      a {
-        text-decoration: none;
-        color: $grey-mid;
-        font-size: 0.9rem;
-        margin-bottom: 0.8rem;
-        display: block;
-        line-height: 1.6;
-      }
-
       > li {
+        padding: 1.5rem;
+
+        @media (min-width: 766px) {
+          padding: 1rem 3rem 1rem 1rem;
+        }
+
         > a {
           font-weight: 800;
         }
@@ -30,7 +39,11 @@
 
       &.current {
         > li.current {
-          background-color: $grey-light;
+          background-color: $lighteen-blue;
+
+          a {
+            color: $mid-dark-blue;
+          }
         }
       }
 
@@ -50,9 +63,12 @@
     &.figures-index--menu,
     &.table-index--menu,
     &.glossary-mobile--menu {
+      padding-top: 1rem;
+
       > ul {
         > li {
           padding-bottom: 0;
+          padding-top: 0.5rem;
         }
       }
     }

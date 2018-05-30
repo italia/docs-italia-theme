@@ -113,7 +113,7 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
     doctree_index = app.env.get_doctree(index)
 
     for toctreenode in doctree_index.traverse(toctree):
-        toctree_element = TocTree(app.env).resolve(index, app.builder, toctreenode, includehidden=True)
+        toctree_element = TocTree(app.env).resolve(pagename, app.builder, toctreenode, includehidden=True)
         if 'glossary_toc' in toctreenode.parent.attributes['names']:
             glossary_tocs.append(toctree_element)
         else:
