@@ -1234,7 +1234,7 @@ img {
   .chapter-nav__wrap {
     position: absolute;
     left: 2rem;
-    top: 0;
+    top: 1rem;
   }
 }
 
