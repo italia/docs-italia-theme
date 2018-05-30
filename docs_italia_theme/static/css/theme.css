@@ -1692,9 +1692,6 @@ header {
   display: block;
   line-height: 1.6;
 }
-.sidebar-nav a::first-letter {
-  text-transform: uppercase;
-}
 .sidebar-nav a:hover, .sidebar-nav a:focus {
   text-decoration: underline;
 }

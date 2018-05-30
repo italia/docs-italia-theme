@@ -13,7 +13,7 @@
       <div id="content-index" class="content-index--menu sidebar-list--wrapper collapse show" data-parent="#desktop-menu">
         <ul class="{% if pagename == master_doc %}current{% endif %}">
           <li class="toctree-l1 {% if pagename == master_doc %}current{% endif %}">
-            <a href='{{ pathto(master_doc) }}'>{{ _(t.introduction) }}</a>
+            <a href='{{ pathto(master_doc) }}'>{{ _(t.introduction|capitalize) }}</a>
           </li>
         </ul>
         {{ content_toc }}

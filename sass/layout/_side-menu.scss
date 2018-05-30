@@ -11,10 +11,6 @@
     display: block;
     line-height: 1.6;
 
-    &::first-letter {
-      text-transform: uppercase;
-    }
-
     &:hover,
     &:focus {
       text-decoration: underline;
