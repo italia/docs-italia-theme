@@ -1,9 +1,11 @@
 .sidebar-nav {
   @media (max-width: 765.98px) {
-    padding-top: 5.5rem;
+    padding-top: 6.5rem;
   }
 
   > .sidebar-list--wrapper {
+    padding: 1rem 1rem 0;
+
     > ul {
       a {
         text-decoration: none;
@@ -15,12 +17,6 @@
       }
 
       > li {
-        padding: 0 1rem 1rem;
-
-        &:nth-of-type(1) {
-          padding-top: 2rem;
-        }
-
         > a {
           font-weight: 800;
         }
