@@ -1417,6 +1417,7 @@ img {
   display: none;
   margin-bottom: 32px;
   margin-bottom: 2rem;
+  text-transform: capitalize;
 }
 #doc-content .docutils.footnote td {
   width: 100%;

@@ -57,6 +57,7 @@ it:
     contents: contenuti
     in_consultation: in consultazione
     indices_and_glossary: indici e glossario
+    note: nota
 
     edit_on_github: Modifica su GitHub
     edit_on_bitbucket: Modifica su Bitbucket
@@ -134,6 +135,7 @@ en:
     contents: contents
     in_consultation: in_consultation
     indices_and_glossary: indices and glossary
+    note: note
 
     edit_on_github: Edit on GitHub
     edit_on_bitbucket: Edit on Bitbucket

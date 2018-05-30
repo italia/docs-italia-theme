@@ -350,7 +350,7 @@ module.exports = themeMarkupModifier = (function ($) {
                              "<button type='button' class='note-back-btn'>" + themeTranslate.getTranslation().backToText + "</button>" +
                              "</div>";
 
-        $element.text('Note ' + newStr);
+        $element.text(themeTranslate.getTranslation().note +  ' ' + newStr);
 
         // Add btn ( x | back) if popover isn't showed inside table checking the 'footnote-from-table' class
         if( $element.closest('.footnote-from-table').length == 0 ) {
