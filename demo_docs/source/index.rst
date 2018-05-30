@@ -74,6 +74,7 @@ H1 Titolo del documento, molto probabile su 2/3 righe
    capitolo_2.rst
 
 .. toctree::
+   :name: glossary_toc
    :hidden:
 
    glossario.rst

@@ -5,22 +5,14 @@
         <span class="" aria-hidden="true"></span>
       </a>
 
-      {% if 'singlehtml' not in builder %}
-      {% set global_toc = toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation|tobool, includehidden=theme_includehidden|tobool) %}
-      {% endif %}
-      {% if global_toc %}
       <button data-toggle="collapse" data-target="#content-index" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="content-index">
         {{ _(t.content_index) }}
         <span class="it-icon-collapse float-right"></span>
         <span class="it-icon-expand float-right"></span>
       </button>
       <div class="sidebar-list--wrapper collapse show" id="content-index" data-parent="#desktop-menu">
-        {{ global_toc }}
+        {{ content_toc }}
       </div>
-      {% else %}
-      <!-- Local TOC -->
-        {{ toc }}
-      {% endif %}
 
       <!-- Other menu with button-->
       <button data-toggle="collapse" data-target="#figures-index" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop collapsed" type="button" aria-controls="figures-index">
@@ -29,9 +21,7 @@
         <span class="it-icon-expand float-right"></span>
       </button>
       <div id="figures-index" class="sidebar-list--wrapper collapse" data-parent="#desktop-menu">
-        <ul>
-          <li>Lorem Ipsum</li>
-        </ul>
+        {{ figures_toc }}
       </div>
 
       <button data-toggle="collapse" data-target="#table-index" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop collapsed" type="button" aria-controls="table-index">
@@ -40,9 +30,7 @@
         <span class="it-icon-expand float-right"></span>
       </button>
       <div id="table-index" class="collapse sidebar-list--wrapper" data-parent="#desktop-menu">
-        <ul>
-          <li>Lorem Ipsum</li>
-        </ul>
+        {{ tables_toc }}
       </div>
 
       <button data-toggle="collapse" data-target="#glossary-mobile" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop collapsed" type="button" aria-controls="glossary-mobile">
@@ -51,9 +39,7 @@
         <span class="it-icon-expand float-right"></span>
       </button>
       <div id="glossary-mobile" class="sidebar-list--wrapper collapse" data-parent="#desktop-menu">
-        <ul>
-          <li>Lorem Ipsum</li>
-        </ul>
+        {{ glossary_toc }}
       </div>
 
   </div>

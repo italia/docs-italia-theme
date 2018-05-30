@@ -126,6 +126,7 @@ sea, quod aeterno utroque est in. Sit comprehen sam, timeam cum ne.
 
 .. figure:: images/piano-triennale.svg
    :name: piano triennale
+   :alt: Piano Triennale per l'informatica nella PA
 
    Didascalia testo do eiusmod tempor incididunt ut labore et dolore magna
    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -238,6 +239,7 @@ sed ante convallis varius.
 .. figure:: images/modello-strategico.svg
    :class: figure-fixed
    :name: modello strategico
+   :alt: Modello strategico
 
    Didascalia testo do eiusmod tempor incididunt ut labore et dolore magna
    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris

@@ -58,6 +58,7 @@ it:
     in_consultation: in consultazione
     indices_and_glossary: indici e glossario
     note: nota
+    no_description: nessuna descrizione
 
     edit_on_github: Modifica su GitHub
     edit_on_bitbucket: Modifica su Bitbucket
@@ -133,9 +134,10 @@ en:
     figures: figures
     tables: tables
     contents: contents
-    in_consultation: in_consultation
+    in_consultation: in consultation
     indices_and_glossary: indices and glossary
     note: note
+    no_description: no description
 
     edit_on_github: Edit on GitHub
     edit_on_bitbucket: Edit on Bitbucket
