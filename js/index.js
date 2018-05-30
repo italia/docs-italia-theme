@@ -11,7 +11,7 @@ var themeTranslate = require('./theme_translate.js');
 var themeGlossary = require('./get_glossary.js');
 var themeAdmonitionToggle = require('./admonition_toggle.js');
 var themeCopyToClipboard = require('./copy_to_clipboard.js');
-
+var discourseAuth = require('./auth.js');
 
 // Init all
 $(document).ready(function() {
@@ -23,6 +23,7 @@ $(document).ready(function() {
   themeNote.init();
   themeAdmonitionToggle.init();
   themeCopyToClipboard.init();
+  discourseAuth.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {

@@ -14,7 +14,8 @@
     "release": "grunt release"
   },
   "dependencies": {
-    "grunt-cli": "^1.2.0"
+    "grunt-cli": "^1.2.0",
+    "request": "^2.87.0"
   },
   "devDependencies": {
     "autoprefixer": "^8.5.0",
