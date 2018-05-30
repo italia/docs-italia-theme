@@ -1677,7 +1677,7 @@ header {
   text-decoration: underline;
 }
 
-@media (max-width: 765.98px) {
+@media (max-width: 767.98px) {
   .sidebar-nav {
     padding-top: 5.5rem;
   }
@@ -1692,6 +1692,9 @@ header {
   display: block;
   line-height: 1.6;
 }
+.sidebar-nav a.current_item {
+  background-color: #0073e6;
+}
 .sidebar-nav a:hover, .sidebar-nav a:focus {
   text-decoration: underline;
 }
@@ -1699,7 +1702,7 @@ header {
   padding: 24px;
   padding: 1.5rem;
 }
-@media (min-width: 766px) {
+@media (min-width: 768px) {
   .sidebar-nav > .sidebar-list--wrapper > ul > li {
     padding: 1rem 3rem 1rem 1rem;
   }
