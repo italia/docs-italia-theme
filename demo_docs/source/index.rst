@@ -70,8 +70,8 @@ H1 Titolo del documento, molto probabile su 2/3 righe
    :numbered:
    :hidden:
 
-   capitolo_1.rst
-   capitolo_2.rst
+   capitolo-1.rst
+   capitolo-2.rst
 
 .. toctree::
    :name: glossary_toc
