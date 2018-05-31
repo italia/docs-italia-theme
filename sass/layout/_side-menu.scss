@@ -1,5 +1,5 @@
 .sidebar-nav {
-  @media (max-width: 765.98px) {
+  @media (max-width: 767.98px) {
     padding-top: 5.5rem;
   }
 
@@ -10,6 +10,25 @@
     margin-bottom: 0.3rem;
     display: block;
     line-height: 1.6;
+
+    &.current_item {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+      transition: margin-bottom 0.3s, margin-top 0.3s;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -0.5rem;
+        bottom: -0.5rem;
+        left: -0.5rem;
+        right: -0.5rem;
+        background-color: $sky-blue;
+        z-index: -1;
+      }
+    }
 
     &:hover,
     &:focus {
@@ -22,7 +41,7 @@
       > li {
         padding: 1.5rem;
 
-        @media (min-width: 766px) {
+        @media (min-width: 768px) {
           padding: 1rem 3rem 1rem 1rem;
         }
 

@@ -1677,7 +1677,7 @@ header {
   text-decoration: underline;
 }
 
-@media (max-width: 765.98px) {
+@media (max-width: 767.98px) {
   .sidebar-nav {
     padding-top: 5.5rem;
   }
@@ -1692,6 +1692,30 @@ header {
   display: block;
   line-height: 1.6;
 }
+.sidebar-nav a.current_item {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+  margin-top: 16px;
+  margin-top: 1rem;
+  -webkit-transition: margin-bottom 0.3s, margin-top 0.3s;
+  transition: margin-bottom 0.3s, margin-top 0.3s;
+}
+.sidebar-nav a.current_item::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  top: -0.5rem;
+  bottom: -8px;
+  bottom: -0.5rem;
+  left: -8px;
+  left: -0.5rem;
+  right: -8px;
+  right: -0.5rem;
+  background-color: #bffffd;
+  z-index: -1;
+}
 .sidebar-nav a:hover, .sidebar-nav a:focus {
   text-decoration: underline;
 }
@@ -1699,7 +1723,7 @@ header {
   padding: 24px;
   padding: 1.5rem;
 }
-@media (min-width: 766px) {
+@media (min-width: 768px) {
   .sidebar-nav > .sidebar-list--wrapper > ul > li {
     padding: 1rem 3rem 1rem 1rem;
   }
