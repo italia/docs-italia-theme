@@ -118,7 +118,7 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             glossary_tocs.append(toctree_element)
         else:
             content_tocs.append(toctree_element)
-    # content_tocs = []
+
     if content_tocs:
         content_toc = content_tocs[0]
         for content_element in content_tocs[1:]:
@@ -205,10 +205,24 @@ def generate_glossary_json(app, doctree, docname):
         glossary_json_file.write(glossary_json)
         glossary_json_file.close()
 
+def glossary_page_id(app, doctree, docname):
+    glossary_pages = []
+    index = app.env.config.master_doc
+    doctree_index = app.env.get_doctree(index)
+
+    for toctreenode in doctree_index.traverse(toctree):
+        toctree_element = TocTree(app.env).resolve(index, app.builder, toctreenode, includehidden=True)
+        if 'glossary_toc' in toctreenode.parent.attributes['names']:
+            glossary_pages = toctreenode['includefiles']
+
+    if docname in glossary_pages:
+        for glossary_section in doctree.children:
+            glossary_section.attributes['ids'] = ['glossary-page']
 
 def setup(app):
     app.site_data = load_theme_data()
     app.connect('html-page-context', add_yaml_data)
     app.connect('html-page-context', generate_additonal_tocs)
     app.connect('doctree-resolved', generate_glossary_json)
+    app.connect('doctree-resolved', glossary_page_id)
     app.add_html_theme('docs_italia_theme', os.path.abspath(os.path.dirname(__file__)))

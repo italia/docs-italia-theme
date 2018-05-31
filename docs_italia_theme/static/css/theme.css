@@ -33,6 +33,10 @@
   border-color: #06c !important;
 }
 
+.border-grey-light {
+  border-color: #eaebed !important;
+}
+
 .border-width-2 {
   border-width: 2px !important;
 }
@@ -965,7 +969,7 @@ header {
 #doc-content .glossary.docutils {
   display: none;
 }
-#doc-content #glossario .glossary.docutils {
+#doc-content #glossary-page .glossary.docutils {
   display: block;
 }
 
@@ -1760,10 +1764,10 @@ header {
   padding-top: 0.5rem;
 }
 
-#glossario > .chapter-header {
+#glossary-page > .chapter-header {
   display: none;
 }
-#glossario .chapter-header {
+#glossary-page .chapter-header {
   padding-top: 32px;
   padding-top: 2rem;
   padding-bottom: 32px;
@@ -1772,10 +1776,68 @@ header {
   padding-left: 0.5rem;
   overflow: hidden;
 }
-#glossario .chapter-header h2 {
+#glossary-page .chapter-header h2 {
   font-size: 176px;
   font-size: 11rem;
   font-weight: 100;
+  line-height: 1;
+}
+#glossary-page .glossary-page__btn {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: #0073e6;
+  display: block;
+  width: 100%;
+  text-align: left;
+  text-transform: uppercase;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+#glossary-page .glossary-page__btn .it-icon-minus,
+#glossary-page .glossary-page__btn .it-icon-plus {
+  color: #0073e6;
+}
+#glossary-page .glossary-page__btn .it-icon-minus {
+  display: inline-block;
+}
+#glossary-page .glossary-page__btn .it-icon-plus {
+  display: none;
+}
+#glossary-page .glossary-page__btn.collapsed {
+  color: #596771;
+}
+#glossary-page .glossary-page__btn.collapsed .it-icon-minus {
+  display: none;
+}
+#glossary-page .glossary-page__btn.collapsed .it-icon-plus {
+  display: inline-block;
+}
+#glossary-page .term-content {
+  padding-left: 36.8px;
+  padding-left: 2.3rem;
+  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#glossary-page .term-content p {
+  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#glossary-page .term-content:last-of-type.show {
+  border-bottom: 2px #eaebed solid;
+}
+#glossary-page dt:last-of-type .glossary-page__btn.collapsed {
+  border-bottom: 2px #eaebed solid;
+}
+
+.glossary-page__copy-link-wrap {
+  color: #0073e6;
+}
+
+.glossary-page__copy-link {
+  background: none;
+  border: none;
+  color: #0073e6;
+  cursor: pointer;
+  text-transform: capitalize;
 }
 
 /*# sourceMappingURL=theme.css.map */

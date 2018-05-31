@@ -47,6 +47,16 @@ module.exports = themeSidebarNav = (function ($) {
       });
     },
 
+    // Force select menu item, used in js/glossary_page.js.
+    selectCustomItem: function(id) {
+      var $item = that.$navItem.filter(function(){
+        return $(this).attr('href') == '#' + id
+      })
+
+      that.$navItem.not($(this)).removeClass('current_item');
+      $item.addClass('current_item');
+    },
+
     // Select the right current item on page load.
     selectNavItemOnLoad: function() {
       var location = window.location.href,
@@ -87,6 +97,15 @@ module.exports = themeSidebarNav = (function ($) {
         $activeList.collapse('show');
       } else {
         $listBtnMobile.tab('show');
+      }
+    },
+
+    // Force opening glossary accordion, used in js/glossary_page.js.
+    openGlossaryAccordion: function() {
+      if ( $( window ).width() > 768 ) {
+        $('#glossary-index').collapse('show');
+      } else {
+        $('#glossary-index-mobile-tab').tab('show');
       }
     }
   }

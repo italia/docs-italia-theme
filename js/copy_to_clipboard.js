@@ -6,7 +6,8 @@ module.exports = themeCopyToClipboard = (function ($) {
 
     $: {
       $captionLink: {},
-      $navLink: {}
+      $navLink: {},
+      $glossaryLink: {}
     },
 
     init: function() {
@@ -19,6 +20,9 @@ module.exports = themeCopyToClipboard = (function ($) {
 
       that.$navLink = $iconLink.closest('.chapter-nav');
       that.$navLink.on('click', themeCopyToClipboard.copyNav)
+
+      that.$glossaryLink = $('.glossary-page__copy-link');
+      that.$glossaryLink.on('click', themeCopyToClipboard.copyGlossaryLink)
     },
 
     copyCaption: function(event) {
@@ -42,6 +46,18 @@ module.exports = themeCopyToClipboard = (function ($) {
 
       // Add current hashtag
       location += '#' + $section.attr('id');
+      themeCopyToClipboard.copyToClipboard(location, $el);
+    },
+
+    copyGlossaryLink: function() {
+      event.preventDefault();
+
+      var $el = $(event.target),
+          $dt = $el.closest('dd').prev('dt'),
+          location = themeCopyToClipboard.getWindowLocation();
+
+      // Add current hashtag
+      location += '#' + $dt.attr('id');
       themeCopyToClipboard.copyToClipboard(location, $el);
     },
 
