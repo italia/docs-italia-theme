@@ -191,7 +191,7 @@ module.exports = function(grunt) {
       /* JavaScript */
       browserify: {
         files: ['js/*.js'],
-        tasks: ['browserify:dev']
+        tasks: ['browserify']
       },
       /* live-reload the demo_docs if sphinx re-builds */
       livereload: {

@@ -13,6 +13,8 @@ var themeAdmonitionToggle = require('./admonition_toggle.js');
 var themeCopyToClipboard = require('./copy_to_clipboard.js');
 var discourseAuth = require('./discourseAuth.js');
 var discourseComments = require('./discourseComments.js');
+var themeSidebarNav = require('./sidebar_nav.js');
+var themeGlossaryPage = require('./glossary_page.js');
 
 // Init all
 $(document).ready(function() {
@@ -26,6 +28,8 @@ $(document).ready(function() {
   themeCopyToClipboard.init();
   discourseAuth.init();
   discourseComments.init();
+  themeSidebarNav.init();
+  themeGlossaryPage.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {

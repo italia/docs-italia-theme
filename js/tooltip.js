@@ -66,7 +66,10 @@ module.exports = themeToolTip = (function ($) {
       });
 
       that.$btnGlossay.each(function(index) {
-        var title = $(this).find('span').html();
+        var title = $(this).attr('href'),
+            hashIndex = title.indexOf("#"),
+            title = title.substring(hashIndex +1, title.length).replace('term-','');
+
         $(this).attr('data-toggle','popover').attr('tabindex',index).attr('role','button').attr('data-trigger','manual').attr('data-html','true').attr('title',title).attr('data-ref',index);
         if (themeToolTip.getDesktop() ) {
           $(this).attr('data-placement','top');

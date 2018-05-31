@@ -1,5 +1,6 @@
 body {
   color: $grey-mid;
+  background-color: $dark-blue;
 
   &.no-scroll {
     overflow-y: hidden;
@@ -22,4 +23,8 @@ h5 {
 img {
   max-width: 100%;
   height: auto;
+}
+
+.container-fluid--desktop {
+  max-width: 1450px;
 }

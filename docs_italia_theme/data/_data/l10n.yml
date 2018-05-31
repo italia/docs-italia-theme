@@ -36,17 +36,34 @@ it:
     version: versione
     compare_versions: confronta versioni
     copy_link: copia link
+    copied_link: link copiato
     see_actions: vedi azioni
     other_actions: altre azioni
     comments: commenti
     back_to_text: torna al testo
     glossay_empty: informazione non trovata
+    glossary: glossario
     go_to_glossary: vai al glossario
     deepening: approfondimento
     example: esempio
     consultation: consultazione
     show_more: mostra tutto
     show_less: mostra meno
+    content_index: indice dei contenuti
+    table_index: indice delle tabelle
+    figures_index: indice delle figure
+    figures: figure
+    tables: tabelle
+    contents: contenuti
+    in_consultation: in consultazione
+    indices_and_glossary: indici e glossario
+    note: nota
+    no_description: nessuna descrizione
+    no_content: nessuna sezione
+    no_glossary: nessun glossario
+    no_figures: nessuna figura
+    no_tables: nessuna tabella
+    introduction: introduzione
 
     edit_on_github: Modifica su GitHub
     edit_on_bitbucket: Modifica su Bitbucket
@@ -103,17 +120,34 @@ en:
     version: version
     compare_versions: compare versions
     copy_link: copy link
+    copied_link: copied link
     see_actions: see actions
     other_actions: other actions
     comments: comments
     back_to_text: back to the text
     glossay_empty: information not found
+    glossary: glossary
     go_to_glossary: vai al glossario
     deepening: deepening
     example: example
     consultation: consultation
     show_more: show more
     show_less: show less
+    content_index: content index
+    table_index: table index
+    figures_index: index of figures
+    figures: figures
+    tables: tables
+    contents: contents
+    in_consultation: in consultation
+    indices_and_glossary: indices and glossary
+    note: note
+    no_description: no description
+    no_content: no sections
+    no_glossary: no glossary
+    no_figures: no figures
+    no_tables: no tables
+    introduction: introduction
 
     edit_on_github: Edit on GitHub
     edit_on_bitbucket: Edit on Bitbucket

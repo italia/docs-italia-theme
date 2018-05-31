@@ -1,0 +1,17 @@
+#glossario {
+  > .chapter-header {
+    display: none;
+  }
+
+  .chapter-header {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 0.5rem;
+    overflow: hidden;
+
+    h2 {
+      font-size: 11rem;
+      font-weight: 100;
+    }
+  }
+}
