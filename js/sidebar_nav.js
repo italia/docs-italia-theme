@@ -74,10 +74,6 @@ module.exports = themeSidebarNav = (function ($) {
     selectAccordion: function() {
           // Detect desktop accordion.
       var $activeList = that.$currentItem.closest('.sidebar-accordion-content'),
-          id = $activeList.attr('id'),
-          $listBtn = $('.sidebar-btn').filter(function(){
-            return $(this).attr('data-target') == '#' + id
-          }),
 
           // Detect mobile tab.
           $activeListMobile = that.$currentItem.closest('.tab-pane'),
@@ -86,11 +82,11 @@ module.exports = themeSidebarNav = (function ($) {
             return $(this).attr('href') == '#' + idMobile
           });
 
-      // Trigger click on accordion or tab.
+
       if ( $( window ).width() > 768 ) {
-        if( $listBtn.hasClass('collapsed') ) $listBtn.trigger('click');
+        $activeList.collapse('show');
       } else {
-        $listBtnMobile.trigger('click');
+        $listBtnMobile.tab('show');
       }
     }
   }
