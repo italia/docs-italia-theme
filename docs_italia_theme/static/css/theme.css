@@ -1693,7 +1693,28 @@ header {
   line-height: 1.6;
 }
 .sidebar-nav a.current_item {
-  background-color: #0073e6;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+  margin-top: 16px;
+  margin-top: 1rem;
+  -webkit-transition: margin-bottom 0.3s, margin-top 0.3s;
+  transition: margin-bottom 0.3s, margin-top 0.3s;
+}
+.sidebar-nav a.current_item::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  top: -0.5rem;
+  bottom: -8px;
+  bottom: -0.5rem;
+  left: -8px;
+  left: -0.5rem;
+  right: -8px;
+  right: -0.5rem;
+  background-color: #bffffd;
+  z-index: -1;
 }
 .sidebar-nav a:hover, .sidebar-nav a:focus {
   text-decoration: underline;
