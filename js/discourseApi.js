@@ -5,7 +5,7 @@ require('./jsencrypt.min.js')
 /**
  * Api Class to handle/generate Discourse User-Api-Key
  */
-function Api() {
+module.exports = function () {
   var obj = this
   // Private key cookie's name
   this.pk_cookie_name = 'docs-italia_pk';
@@ -30,13 +30,13 @@ function Api() {
   this.popup = null;
 
   // Create cookie
-  this._cookie_create = function (key, value, days, overwrite = false) {
+  this._cookie_create = function (key, value, days, overwrite) {
     if (this._cookie_read(key) == null || overwrite) {
       var expires = new Date();
       // Set expires in {days} days
       expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
       // Write the cookie
-      document.cookie = `${key}=${value};expires=${expires.toUTCString()}`;
+      document.cookie = key + '=' + value + ';' + 'expires=' + expires.toUTCString() + ';';
     }
   };
   // Read cookie
@@ -47,12 +47,12 @@ function Api() {
   // Delete cookie
   this._cookie_delete = function (key)  {
     if (this._cookie_read(key) !== null)
-      document.cookie = `${key}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+      document.cookie = key + '=;' + 'Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   };
   // Serialize parameters
   this._serializeParams = function (obj) {
     return Object.keys(obj)
-                 .map(k => `${encodeURIComponent(k)}=${encodeURIComponent([obj[k]])}`)
+                 .map(k => encodeURIComponent(k) + '=' + encodeURIComponent([obj[k]]))
                  .join('&');
   };
   // Generate N random bytes
@@ -96,7 +96,7 @@ function Api() {
     // Generate public/private RSA keys
     this.genRSAKey();
 
-    let data = {
+    var data = {
       application_name: 'docs-italia',
       public_key: obj.rsaKey.public,
       nonce: obj.randomBytes(16),
@@ -105,20 +105,20 @@ function Api() {
       scopes: 'write'
     };
 
-    return `${this.base_url}/user-api-key/new?${this._serializeParams(data)}`;
-  }
+    return this.base_url + '/user-api-key/new?' + this._serializeParams(data);
+  };
 
   this.getApiKey = function () {
-    let key = this._cookie_read(this.uak_cookie_name);
+    var key = this._cookie_read(this.uak_cookie_name);
     if (key !== null) {
       return JSON.parse(key).key;
     }
     return false;
-  }
+  };
 
   this.getCSRF = function () {
-    request({
-      url: `${this.base_url}/session/csrf.json`,
+    return request({
+      url: this.base_url + '/session/csrf.json',
     }, function (error, response, body ) {
       if (error === null) {
         obj.session.csrf = JSON.parse(body).csrf;
@@ -129,9 +129,9 @@ function Api() {
   };
 
   this.createPost = function () {
-    request({
+    return request({
       method: 'POST',
-      url: `${obj.base_url}/posts`,
+      url: obj.base_url + '/posts',
       body: {
         title: "Test Title",
         topic_id: 2,
@@ -141,35 +141,15 @@ function Api() {
       headers: {
         'User-Api-Key': this.getApiKey(),
       }
-    }, function (e, r, b) {
-      if (e === null) {
-        return b;
-      } else {
-        return e;
-      }
     });
-  }
-}
+  };
 
-var Discourse = new Api()
-
-module.exports = discourseAuth = {
-  init: function () {
-    let payload = Discourse.searchParameters('payload');
-    let pay_cookie = Discourse.getApiKey();
-
-    if (pay_cookie) {
-      console.log(`Already exists payload cookie: ${pay_cookie}`);
-      // Discourse.createPost()
-    } else {
-      if (payload !== false) {
-        Discourse.decryptPayload(payload);
-        console.log(Discourse.payload);
-      } else {
-        // Then generate api key
-        $('#redirect-login').html(`<a href="${Discourse.userAuthKeyUrl()}">Login</a>`);
-        window.location.href=Discourse.userAuthKeyUrl();
-      }
-    }
-  }
+  // Get all topic's posts
+  this.getTopicPosts = function(tid) {
+    return request({
+      method: 'GET',
+      url: obj.base_url + '/t/' + tid + '/posts.json',
+      json: true
+    });
+  };
 }

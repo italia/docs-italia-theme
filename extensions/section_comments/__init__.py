@@ -11,13 +11,6 @@ from docutils import nodes
 from docutils.parsers.rst import Directive
 from docutils.parsers.rst import directives
 
-############################
-# Import comment directive #
-############################
-sys.path.append("..")
-from comment import CommentBoxNode, CommentBoxDirective
-
-
 class SectionCommentsNode(nodes.Structural, nodes.Element):
     @staticmethod
     def visit(self, node):
@@ -30,6 +23,9 @@ class SectionCommentsDirective(Directive):
     # Directive's parameters
     required_arguments = 0
     optional_arguments = 0
+    option_spec = {
+        'topic_id': directives.unchanged
+    }
     final_argument_whitespace = True
 
     def run(self):
@@ -43,18 +39,12 @@ class SectionCommentsDirective(Directive):
         options = self.options
 
         node = SectionCommentsNode()
-        comment = CommentBoxNode()
+        node += nodes.raw('', text="<div class='section' id='docs-comments-box-"+options['topic_id']+"' data-topic='"+options['topic_id']+"'></div>", format='html')
+        node['data-topic-id'] = options['topic_id']
+
         return [ node ]
-
-def doctree_resolved_handler(app, doctree, docname):
-    for doc_node in doctree.traverse(nodes.section):
-        b_markup = nodes.raw('<b>Hello World</b>')
-        doc_node += b_markup
-        doc_node.replace_self(doc_node)
-
 
 def setup(app):
     app.add_node(SectionCommentsNode, html=(SectionCommentsNode.visit, SectionCommentsNode.depart))
     app.add_directive('section_comments', SectionCommentsDirective)
     # Add to nodes custom code / node / markups
-    app.connect('doctree-resolved', doctree_resolved_handler)
