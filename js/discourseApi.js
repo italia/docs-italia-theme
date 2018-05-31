@@ -1,4 +1,4 @@
-var request = require('request')
+var request = require('request-promise-native')
 var keypair = require('./keypair.js')
 require('./jsencrypt.min.js')
 
@@ -52,12 +52,12 @@ module.exports = function () {
   // Serialize parameters
   this._serializeParams = function (obj) {
     return Object.keys(obj)
-                 .map(k => encodeURIComponent(k) + '=' + encodeURIComponent([obj[k]]))
+                 .map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent([obj[k]]) })
                  .join('&');
   };
   // Generate N random bytes
   this.randomBytes = function (length) {
-	  return Array(length+1).join('x').replace(/x/g, c => {
+	  return Array(length+1).join('x').replace(/x/g, function(c) {
 	    return Math.floor(Math.random()*16).toString(16);
   	});
   };
