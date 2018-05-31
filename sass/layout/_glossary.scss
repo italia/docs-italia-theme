@@ -10,8 +10,8 @@
     overflow: hidden;
 
     h2 {
-      font-size: 11rem;
-      font-weight: 100;
+      font-size: 8rem;
+      font-family: $stack-font;
       line-height: 1;
     }
   }
@@ -88,5 +88,4 @@
   border: none;
   color: $blue;
   cursor: pointer;
-  text-transform: capitalize;
 }
