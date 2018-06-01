@@ -1,4 +1,4 @@
-#glossario {
+#glossary-page {
   > .chapter-header {
     display: none;
   }
@@ -10,8 +10,82 @@
     overflow: hidden;
 
     h2 {
-      font-size: 11rem;
-      font-weight: 100;
+      font-size: 8rem;
+      font-family: $stack-font;
+      line-height: 1;
     }
   }
+
+  .glossary-page__btn {
+    border: 0;
+    background: none;
+    cursor: pointer;
+    color: $blue;
+    display: block;
+    width: 100%;
+    text-align: left;
+    text-transform: uppercase;
+    transition: color 0.3s;
+
+    .it-icon-minus,
+    .it-icon-plus {
+      color: $blue;
+    }
+
+    .it-icon-minus {
+      display: inline-block;
+    }
+
+    .it-icon-plus {
+      display: none;
+    }
+
+    &.collapsed {
+      color: $grey-mid;
+
+      .it-icon-minus {
+        display: none;
+      }
+
+      .it-icon-plus {
+        display: inline-block;
+      }
+    }
+  }
+
+  .term-content {
+    padding-left: 2.3rem;
+    font-family: $titillium-font;
+
+    p {
+      font-family: $titillium-font;
+    }
+
+    &:last-of-type {
+      &.show {
+        border-bottom: 2px $grey-light-02 solid;
+      }
+    }
+  }
+
+  dt {
+    &:last-of-type {
+      .glossary-page__btn {
+        &.collapsed {
+          border-bottom: 2px $grey-light-02 solid;
+        }
+      }
+    }
+  }
+}
+
+.glossary-page__copy-link-wrap {
+  color: $blue;
+}
+
+.glossary-page__copy-link {
+  background: none;
+  border: none;
+  color: $blue;
+  cursor: pointer;
 }

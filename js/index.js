@@ -30,6 +30,7 @@ $(document).ready(function() {
   discourseComments.init();
   themeSidebarNav.init();
   themeGlossaryPage.init();
+  themeCopyToClipboard.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {
