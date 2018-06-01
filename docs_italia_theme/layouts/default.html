@@ -21,7 +21,7 @@
         <div id="doc-content" class="col-content">
           {% if prev %}
             <div class="footer-buttons footer-buttons--prev" role="navigation" aria-label="footer navigation">
-                <a href="{{ prev.link|e }}" class="" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"> {{ prev.title }}</a>
+                <a href="{{ prev.link|e }}" class="" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"> {{ _(t.go_to) }} {{ prev.title }}</a>
             </div>
           {% endif %}
           {% block body %}{% endblock %}

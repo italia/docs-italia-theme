@@ -19,7 +19,7 @@
   color: $black;
   z-index: 1;
 
-  @media (min-width: 576px) {
+  @media (min-width: 1200px) {
     display: block;
   }
 }
@@ -165,6 +165,7 @@
   @media (min-width: 768px) {
     width: calc(100% - #{$sidebar-width});
     float: left;
+    margin-top: 2rem;
   }
 
   .useful-docs {
