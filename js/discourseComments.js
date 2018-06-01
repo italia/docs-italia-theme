@@ -52,7 +52,6 @@ module.exports = discourseComments = (function ($) {
     init: function (newPostId) {
       // Obtains all comments boxes
       var $commentBox = $('div[id^="docs-comments-box-"]');
-
       // Check if user is logged in
       if (!Discourse.userIsLoggedIn())
       // Before flush set fixed height, to avoid blink
@@ -84,9 +83,9 @@ module.exports = discourseComments = (function ($) {
               // Create link to reply's target
               $('#reply-link-' + e.id).append($(
                 "<div>" +
-                "<a class='reply-to-post' href='#reply-to-" + e.reply_to_post_number + "'>" +
-                "In risposta a " + replyDest.username + "<small>(#"+ e.reply_to_post_number +")</small>" +
-                "</a>" +
+                  "<a class='reply-to-post' href='#reply-to-" + e.reply_to_post_number + "'>" +
+                    "In risposta a " + replyDest.username + "<small>(#"+ e.reply_to_post_number +")</small>" +
+                  "</a>" +
                 "</div>"
               ));
             }
@@ -132,7 +131,7 @@ module.exports = discourseComments = (function ($) {
 
       });
       // Handles min. characters nedeed to post
-      $('textarea.new-comment__body').bind('input', function (evt) {
+      $('textarea.new-comment__body').bind('input', function () {
         $req = $(this).parent().find('.required-chars');
         var currentLength = -20 + $(this).val().replace(/ /g,'').length;
         if (currentLength < 0) {
@@ -143,6 +142,24 @@ module.exports = discourseComments = (function ($) {
           $(this).parent().find('input[type="submit"]').attr('disabled', false);
         }
       });
+      // Show form elements on focus and hide on blur
+      $('textarea.new-comment__body')
+        .bind('focus', function () {
+          $parent = $(this).parents('form');
+
+          $parent.find('.new-comment__buttons').removeClass('d-none');
+          $parent.find('.new-comment__legend').removeClass('d-none');
+          $parent.find('.new-comment__required').removeClass('d-none');
+        })
+        .bind('blur', function () {
+          if ($(this).val() === '') {
+            $parent = $(this).parents('form');
+
+            $parent.find('.new-comment__buttons').addClass('d-none');
+            $parent.find('.new-comment__legend').addClass('d-none');
+            $parent.find('.new-comment__required').addClass('d-none');
+          }
+        })
     }
   }
 })(jQuery);
