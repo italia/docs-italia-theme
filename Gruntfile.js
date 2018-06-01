@@ -4,18 +4,14 @@ module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   grunt.initConfig({
-    open: {
-      dev: {
-        path: 'http://localhost:1919'
-      }
-    },
 
     connect: {
       server: {
         options: {
           port: 1919,
           base: 'demo_docs/build',
-          livereload: true
+          livereload: true,
+          open: true
         }
       }
     },
@@ -213,7 +209,6 @@ module.exports = function(grunt) {
     'browserify',
     'exec:build_sphinx',
     'connect',
-    'open',
     'watch'
   ]);
 
