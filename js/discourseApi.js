@@ -1,5 +1,5 @@
-var request = require('request-promise-native')
-var keypair = require('./keypair.js')
+var axios = require('axios')
+var keypair = require('keypair')
 require('./jsencrypt.min.js')
 
 /**
@@ -117,7 +117,7 @@ module.exports = function () {
   };
 
   this.getCSRF = function () {
-    return request({
+    return axios({
       url: this.base_url + '/session/csrf.json',
     }, function (error, response, body ) {
       if (error === null) {
@@ -128,28 +128,31 @@ module.exports = function () {
     });
   };
 
-  this.createPost = function () {
-    return request({
+  this.userIsLoggedIn = function () {
+    return this.getApiKey() != false;
+  };
+
+  this.createPost = function (tid, body) {
+    return axios({
       method: 'POST',
       url: obj.base_url + '/posts',
-      body: {
-        title: "Test Title",
-        topic_id: 2,
-        raw: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      data: {
+        title: "Post created from docs-italia",
+        topic_id: tid,
+        raw: body,
       },
-      json: true,
       headers: {
-        'User-Api-Key': this.getApiKey(),
+        'User-Api-Key': obj.getApiKey(),
       }
     });
   };
 
   // Get all topic's posts
   this.getTopicPosts = function(tid) {
-    return request({
-      method: 'GET',
+    return axios({
+      method: 'get',
       url: obj.base_url + '/t/' + tid + '/posts.json',
-      json: true
+      responseType: 'json'
     });
   };
 }

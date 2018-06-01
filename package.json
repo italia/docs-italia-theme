@@ -14,8 +14,9 @@
     "release": "grunt release"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "grunt-cli": "^1.2.0",
-    "request": "^2.87.0",
+    "keypair": "^1.0.1",
     "request-promise-native": "^1.0.5"
   },
   "devDependencies": {

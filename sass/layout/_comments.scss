@@ -105,3 +105,26 @@
     text-decoration: underline;
   }
 }
+
+form[id^="new-comment-"] {
+  position: relative;
+
+  &.sending::after {
+    content: '';
+    position: absolute;
+    background: white;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  &.sending::before {
+    content: 'Invio del commento...';
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
