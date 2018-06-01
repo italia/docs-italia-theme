@@ -631,12 +631,9 @@ $(document).ready(function() {
   themeChapterNav.init();
   themeNote.init();
   themeAdmonitionToggle.init();
-<<<<<<< HEAD
   themeCopyToClipboard.init();
   discourseAuth.init();
   discourseComments.init();
-=======
->>>>>>> bootstrap-italia
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();

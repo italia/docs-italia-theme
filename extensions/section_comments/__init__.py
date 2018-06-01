@@ -41,13 +41,6 @@ class SectionCommentsDirective(Directive):
         node = SectionCommentsNode()
         node += nodes.raw(text="<div class='section' id='docs-comments-box-"+options['topic_id']+"' data-topic='"+options['topic_id']+"'></div>", format='html')
         # Create form for write new comment
-        form_errors = nodes.raw(text='<div class="new-comment__errors-box"></div>')
-        form_body = nodes.raw(text="<textarea class='form-control new-comment__body' placeholder='Commenta...' rows='5'></textarea>", format='html')
-        form_submit = nodes.raw(text="<input type='submit' class='btn btn-sm new-comment__submit' value='invia' disabled='true' />", format='html')
-        form_delete = nodes.raw(text="<input type='reset' class='btn btn-sm new-comment__delete' value='annulla' />", format='html')
-        form_ccount = nodes.raw(text="<span>Caratteri richiesti: <span class='required-chars'></span></span>")
-        form_legend = nodes.raw(text="<div><small class='new-comment__legend'>_text_ => <b>text</b><br>*text* => <i>text</i><br></div>")
-
         form_template = """
             <form id='new-comment-""" + options['topic_id'] + """' data-topic='""" + options['topic_id'] + """'>
                 <div class="form group">
@@ -60,7 +53,7 @@ class SectionCommentsDirective(Directive):
                     </div>
 
                     <div class='new-comment__legend'>
-                        Consentito l'uso dei codici Markdown per la formattazione del testo:
+                        Markdown per la formattazione del testo:
                         <ul>
                             <li> Grassetto: __text__ (o **text**) </li>
                             <li> Corsivo: _text_ </li>
@@ -71,15 +64,7 @@ class SectionCommentsDirective(Directive):
                 </div>
             </from>
         """
-
-        #form = nodes.raw(text="<form id='new-comment-"+ options['topic_id'] +"' data-topic='"+options['topic_id']+"'></from>", format='html')
-        #form += form_errors
-        #form += form_body
-        #form += form_delete
-        #form += form_submit
-        #form += form_ccount
-        #form += form_legend
-
+        
         form = nodes.raw(text=form_template, format='html')
 
         node += form
