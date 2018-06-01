@@ -15,17 +15,17 @@ def test_basic():
 
         if isinstance(app.builder, DirectoryHTMLBuilder):
             search = (
-                '<body role="document" class="docs-italia">'
+                '<div id="main" role="document">'
             )
             assert search in content
         elif isinstance(app.builder, SingleFileHTMLBuilder):
             search = (
-                '<body role="document" class="docs-italia">'
+                '<div id="main" role="document">'
             )
             assert search in content
         else:
             search = (
-                '<body role="document" class="docs-italia">'
+                '<div id="main" role="document">'
             )
             assert search in content, ('Missing search with builder {0}'
                                        .format(app.builder.name))
