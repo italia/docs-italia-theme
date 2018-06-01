@@ -29,97 +29,6 @@ module.exports = themeAdmonitionToggle = (function ($) {
 })(jQuery);
 
 },{}],2:[function(require,module,exports){
-// temporary comments
-module.exports = themeComments = (function ($) {
-  var that;
-
-  return {
-
-    $: {
-      $container: $('#doc-content > .section')
-    },
-
-    init: function(callback) {
-      that = this.$;
-
-      var commentMarkup =
-      '<div class="block-comments container-fluid" id="accordion-comments">' +
-
-        '<div class="block-comments__header border-top border-bottom border-width-2 pt-3 pb-3 row align-items-center justify-content-between">' +
-          '<h6 class="col-auto text-uppercase mb-0">comments</h6><button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-collapsed" aria-expanded="false"><span class="it-icon-plus"></span><span class="it-icon-minus"></span></button>' +
-        '</div>' +
-        '<div class="block-comments__body collapse show pt-4" data-parent="#accordion-comments" id="comments-collapsed">' +
-
-          '<div class="row align-items-center mt-4 mb-4 block-comments__input">' +
-            '<figure class="col-auto mb-0"><img class="block-comments__img rounded-circle" src="http://via.placeholder.com/80x80"></figure>' +
-            '<input class="col ml-2 pl-3 pr-3" id="comments-input" placeholder="scrivi un commento">' +
-          '</div>' +
-          '<div class="row">' +
-
-            '<div class="block-comments__list col">' +
-              '<div class="row mt-4 mb-4">' +
-                '<ul class="block-comments__list col" id="accordion-comment-item">' +
-
-                  '<li class="row mb-5 block-comments__item">' +
-                    '<figure class="col-auto mb-0"><img class="block-comments__img rounded-circle" src="http://via.placeholder.com/80x80"></figure>' +
-                    '<div class="col">' +
-                      '<div class="row align-items-center justify-content-between" id="comment-heading-1">' +
-                        '<div class="col-auto">' +
-                          '<span class="block-comments__name text-capitalize mb-0">paola turcini</span></div>' +
-                        '<div class="col-auto">' +
-                          '<p class="d-inline-block mr-2 block-comments__date mb-0">16 apr 2018, 16:24</p><button class="block-comments__item-btn collapsed" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1"><span class="it-icon-collapse"></span><span class="it-icon-expand"></span></button></div>' +
-                      '</div>' +
-                      '<p class="text-uppercase block-comments__role">giornalista</p>' +
-                      '<p id="collapse-1" class="block-comments__paragraph pl-3 border-left collapse show" aria-labelledby="comment-heading-1">Lorem Ipsum è un testo segnaposto <a href="#">utilizzato nel settore</a> della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta' +
-                        'di caratteri e li assemblò per preparare un testo campi-1. È sopravvissuto non solo a più di cinque secoli, ma anche al</p>' +
-                    '</div>' +
-                  '</li>' +
-
-                  '<li class="row mb-5 block-comments__item">' +
-                    '<figure class="col-auto mb-0"><img class="block-comments__img rounded-circle" src="http://via.placeholder.com/80x80"></figure>' +
-                    '<div class="col">' +
-                      '<div class="row align-items-center justify-content-between" id="comment-heading-2">' +
-                        '<div class="col-auto">' +
-                          '<span class="block-comments__name text-capitalize mb-0">paola turcini</span></div>' +
-                        '<div class="col-auto">' +
-                          '<p class="d-inline-block mr-2 block-comments__date mb-0">16 apr 2018, 16:24</p><button class="block-comments__item-btn" data-toggle="collapse" data-target="#collapse-2" aria-expanded="true" aria-controls="collapse-2"><span class="it-icon-collapse"></span><span class="it-icon-expand"></span></button></div>' +
-                      '</div>' +
-                      '<p class="text-uppercase block-comments__role">giornalista</p>' +
-                      '<p id="collapse-2" class="block-comments__paragraph pl-3 border-left collapse" aria-labelledby="comment-heading-2">Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li' +
-                        'assemblò per preparare un testo campi-1. È sopravvissuto non solo a più di cinque secoli, ma anche al</p>' +
-                    '</div>' +
-                  '</li>' +
-
-                  '<li class="row mb-5 block-comments__item">' +
-                    '<figure class="col-auto mb-0"><img class="block-comments__img rounded-circle" src="http://via.placeholder.com/80x80"></figure>' +
-                    '<div class="col">' +
-                      '<div class="row align-items-center justify-content-between" id="comment-heading-3">' +
-                        '<div class="col-auto">' +
-                          '<span class="block-comments__name text-capitalize mb-0">paola turcini</span></div>' +
-                        '<div class="col-auto">' +
-                          '<p class="d-inline-block mr-2 block-comments__date mb-0">16 apr 2018, 16:24</p><button class="block-comments__item-btn collapsed" data-toggle="collapse" data-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3"><span class="it-icon-collapse"></span><span class="it-icon-expand"></span></button></div>' +
-                      '</div>' +
-                      '<p class="text-uppercase block-comments__role">giornalista</p>' +
-                      '<p id="collapse-3" class="block-comments__paragraph pl-3 border-left collapse" aria-labelledby="comment-heading-3">Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li' +
-                        'assemblò per preparare un testo campi-1. È sopravvissuto non solo a più di cinque secoli, ma anche al</p>' +
-                    '</div>' +
-                  '</li>' +
-                '</ul>' +
-              '</div>' +
-            '</div>' +
-
-          '</div>' +
-        '</div>' +
-      '</div>';
-
-      that.$container.append(commentMarkup)
-
-    }
-  }
-
-})(jQuery);
-
-},{}],3:[function(require,module,exports){
 // Copy to clipboard
 module.exports = themeCopyToClipboard = (function ($) {
   var that;
@@ -220,7 +129,7 @@ module.exports = themeCopyToClipboard = (function ($) {
 
 })(jQuery);
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 // Get glossary terms
 module.exports = themeGlossary = (function ($) {
   var that;
@@ -262,7 +171,7 @@ module.exports = themeGlossary = (function ($) {
 
 })(jQuery);
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 // Get glossary terms
 module.exports = themeGlossaryPage = (function ($) {
   var that;
@@ -360,7 +269,7 @@ module.exports = themeGlossaryPage = (function ($) {
 
 })(jQuery);
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 (function (global){
 global.$ = global.jQuery = require('jquery');
 global.Popper = require('popper.js');
@@ -377,7 +286,6 @@ var themeAdmonitionToggle = require('./admonition_toggle.js');
 var themeCopyToClipboard = require('./copy_to_clipboard.js');
 var themeSidebarNav = require('./sidebar_nav.js');
 var themeGlossaryPage = require('./glossary_page.js');
-var themeComments = require('./comments.js');
 
 // Init all
 $(document).ready(function() {
@@ -391,7 +299,6 @@ $(document).ready(function() {
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();
-  themeComments.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {
@@ -401,7 +308,7 @@ $(document).ready(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./admonition_toggle.js":1,"./comments.js":2,"./copy_to_clipboard.js":3,"./get_glossary.js":4,"./glossary_page.js":5,"./markup_modifier.js":7,"./note.js":8,"./section_navigation.js":9,"./sidebar_nav.js":10,"./theme_translate.js":11,"./tooltip.js":12,"bootstrap-italia":"bootstrap-italia","jquery":13,"modernizr":"modernizr","popper.js":14}],7:[function(require,module,exports){
+},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":2,"./get_glossary.js":3,"./glossary_page.js":4,"./markup_modifier.js":6,"./note.js":7,"./section_navigation.js":8,"./sidebar_nav.js":9,"./theme_translate.js":10,"./tooltip.js":11,"bootstrap-italia":"bootstrap-italia","jquery":12,"modernizr":"modernizr","popper.js":13}],6:[function(require,module,exports){
 // Modify DOM via JS.
 module.exports = themeMarkupModifier = (function ($) {
   var that;
@@ -609,7 +516,7 @@ module.exports = themeMarkupModifier = (function ($) {
   }
 })(jQuery);
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // Notes
 module.exports = themeNote = (function ($) {
   var that;
@@ -669,7 +576,7 @@ module.exports = themeNote = (function ($) {
   }
 })(jQuery);
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 // Section navigation
 module.exports = themeSectionNav = (function ($) {
   var that;
@@ -821,7 +728,7 @@ module.exports = themeSectionNav = (function ($) {
   }
 })(jQuery);
 
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 // Sidebar nav
 module.exports = themeSidebarNav = (function ($) {
   var that;
@@ -936,7 +843,7 @@ module.exports = themeSidebarNav = (function ($) {
 
 })(jQuery);
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 // Theme l10n
 module.exports = themeTranslate = (function ($) {
   var that;
@@ -964,7 +871,7 @@ module.exports = themeTranslate = (function ($) {
 
 })(jQuery);
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 // Tooltips
 module.exports = themeToolTip = (function ($) {
   var that;
@@ -1183,7 +1090,7 @@ module.exports = themeToolTip = (function ($) {
   }
 })(jQuery);
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -11549,7 +11456,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -14110,4 +14017,4 @@ var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function
 /*! modernizr 3.6.0 (Custom Build) | MIT *
  * https://modernizr.com/download/?-touchevents-setclasses !*/
 !function(e,n,t){function o(e,n){return typeof e===n}function s(){var e,n,t,s,a,i,r;for(var l in f)if(f.hasOwnProperty(l)){if(e=[],n=f[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(s=o(n.fn,"function")?n.fn():n.fn,a=0;a<e.length;a++)i=e[a],r=i.split("."),1===r.length?Modernizr[r[0]]=s:(!Modernizr[r[0]]||Modernizr[r[0]]instanceof Boolean||(Modernizr[r[0]]=new Boolean(Modernizr[r[0]])),Modernizr[r[0]][r[1]]=s),d.push((s?"":"no-")+r.join("-"))}}function a(e){var n=u.className,t=Modernizr._config.classPrefix||"";if(p&&(n=n.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(o,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),p?u.className.baseVal=n:u.className=n)}function i(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):p?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function r(){var e=n.body;return e||(e=i(p?"svg":"body"),e.fake=!0),e}function l(e,t,o,s){var a,l,f,c,d="modernizr",p=i("div"),h=r();if(parseInt(o,10))for(;o--;)f=i("div"),f.id=s?s[o]:d+(o+1),p.appendChild(f);return a=i("style"),a.type="text/css",a.id="s"+d,(h.fake?h:p).appendChild(a),h.appendChild(p),a.styleSheet?a.styleSheet.cssText=e:a.appendChild(n.createTextNode(e)),p.id=d,h.fake&&(h.style.background="",h.style.overflow="hidden",c=u.style.overflow,u.style.overflow="hidden",u.appendChild(h)),l=t(p,e),h.fake?(h.parentNode.removeChild(h),u.style.overflow=c,u.offsetHeight):p.parentNode.removeChild(p),!!l}var f=[],c={_version:"3.6.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){f.push({name:e,fn:n,options:t})},addAsyncTest:function(e){f.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=c,Modernizr=new Modernizr;var d=[],u=n.documentElement,p="svg"===u.nodeName.toLowerCase(),h=c._config.usePrefixes?" -webkit- -moz- -o- -ms- ".split(" "):["",""];c._prefixes=h;var m=c.testStyles=l;Modernizr.addTest("touchevents",function(){var t;if("ontouchstart"in e||e.DocumentTouch&&n instanceof DocumentTouch)t=!0;else{var o=["@media (",h.join("touch-enabled),("),"heartz",")","{#modernizr{top:9px;position:absolute}}"].join("");m(o,function(e){t=9===e.offsetTop})}return t}),s(),a(d),delete c.addTest,delete c.addAsyncTest;for(var v=0;v<Modernizr._q.length;v++)Modernizr._q[v]();e.Modernizr=Modernizr}(window,document);
-},{}]},{},[6]);
+},{}]},{},[5]);

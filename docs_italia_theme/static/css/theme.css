@@ -1589,6 +1589,12 @@ header {
   font-size: 0.8rem;
 }
 
+.block-comments {
+  margin-top: 32px;
+  margin-top: 2rem;
+  margin-bottom: 32px;
+  margin-bottom: 2rem;
+}
 .block-comments p {
   font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
