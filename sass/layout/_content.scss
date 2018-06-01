@@ -6,29 +6,37 @@
 
 .doc-content__consultation {
   position: absolute;
-  display: none;
   right: 0;
-  transform: rotate(45deg) translate(50px, -120px);
+  left: 0;
+  top: 0;
   background-color: $green;
-  width: 320px;
-  transform-origin: left;
-  text-align: center;
+  text-align: left;
   padding: 0.5rem 0;
   text-transform: uppercase;
   font-weight: 800;
   color: $black;
-  z-index: 1;
+  padding-left: 2rem;
+
+  @media (min-width: 992px) {
+    padding-left: 4rem;
+  }
 
   @media (min-width: 1200px) {
-    display: block;
+    transform: rotate(45deg) translate(45px, -125px);
+    width: 320px;
+    transform-origin: left;
+    z-index: 1;
+    left: auto;
+    text-align: center;
+    padding-left: 0;
   }
 }
 
 .col-content {
-  padding: 2rem;
+  padding: 4rem 2rem;
 
   @media (min-width: 992px) {
-    padding-left: 5rem;
+    padding: 4rem 4rem 5rem 4rem;
   }
 }
 
@@ -165,7 +173,6 @@
   @media (min-width: 768px) {
     width: calc(100% - #{$sidebar-width});
     float: left;
-    margin-top: 2rem;
   }
 
   .useful-docs {
