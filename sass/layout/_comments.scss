@@ -1,4 +1,7 @@
 .block-comments {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
   p {
     font-family: $titillium-font;
   }
@@ -41,6 +44,10 @@
   .it-icon-plus,
   .it-icon-minus {
     color: $medium-blue;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .it-icon-plus {
@@ -49,7 +56,7 @@
 
   &.collapsed {
     .it-icon-plus {
-      display: inline-block;
+      display: block;
     }
 
     .it-icon-minus {
@@ -84,13 +91,11 @@
   }
 }
 
-.block-comments__item {
-  h2 {
-    color: $medium-blue;
-    font-weight: 400;
-    font-size: 1rem;
-    letter-spacing: 0;
-  }
+.block-comments__name {
+  color: $medium-blue;
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 0;
 }
 
 .block-comments__date,
