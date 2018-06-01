@@ -1636,12 +1636,17 @@ header {
 .block-comments__toggle-btn .it-icon-plus,
 .block-comments__toggle-btn .it-icon-minus {
   color: #06c;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 .block-comments__toggle-btn .it-icon-plus {
   display: none;
 }
 .block-comments__toggle-btn.collapsed .it-icon-plus {
-  display: inline-block;
+  display: block;
 }
 .block-comments__toggle-btn.collapsed .it-icon-minus {
   display: none;
@@ -1669,7 +1674,7 @@ header {
   display: none;
 }
 
-.block-comments__item h2 {
+.block-comments__name {
   color: #06c;
   font-weight: 400;
   font-size: 16px;
