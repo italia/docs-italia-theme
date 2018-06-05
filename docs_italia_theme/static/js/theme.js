@@ -49,7 +49,7 @@ module.exports = themeCopyToClipboard = (function ($) {
       that.$captionLink = $iconLink.closest('.reference.internal');
       that.$captionLink.on('click', themeCopyToClipboard.copyCaption)
 
-      that.$navLink = $iconLink.closest('.chapter-nav');
+      that.$navLink = $iconLink.closest('.chapter-nav__item');
       that.$navLink.on('click', themeCopyToClipboard.copyNav)
 
       that.$glossaryLink = $('.glossary-page__copy-link');
@@ -71,7 +71,7 @@ module.exports = themeCopyToClipboard = (function ($) {
     copyNav: function() {
       event.preventDefault();
 
-      var $el = $(event.target),
+      var $el = $(this).find('.chapter-link'),
           $section = $el.closest('.section'),
           location = themeCopyToClipboard.getWindowLocation();
 
