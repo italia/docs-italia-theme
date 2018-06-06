@@ -1,69 +1,67 @@
-<div class="bg-primary--darken">
-  <footer class="footer container">
+<footer class="footer container-fluid container-fluid--desktop">
+  <div class="p-4 pl-md-5 pr-md-5">
     <div class="row d-none d-md-block">
       <div class="col-md-4 offset-md-4 col-lg-3 offset-lg-3 di-collab-pre">
-        <p>In collaborazione con</p>
+        <p>{{ t.in_collaboration_with | capitalize }}</p>
       </div>
     </div>
 
     <div class="row align-items-center">
       <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="d-flex">
+        <div class="d-flex">
           <div class="px-2 team-logo--icon">
-            <a href="http://teamdigitale.governo.it/" target="_blank" rel="noopener">
-            <img src="_static/icons/dt-logo_276x276.svg" alt="Team per la Trasformazione Digitale">
-            </a>
+            <a href="https://teamdigitale.governo.it/" target="_blank" rel="noopener">
+              <img src="_static/icons/dt-logo_276x276.svg" alt="{{ site.team_full }}">
+              </a>
           </div>
-          <div class="px-2 border-white border-left team-logo--text text-white">Team per la Trasformazione Digitale</div>
+          <div class="px-2 border-white border-left team-logo--text text-white">{{ site.team_full }}</div>
         </div>
       </div>
       <div class="col-sm-6 col-md-4 col-lg-3">
-        <p class="agid-collab d-sm-none">In collaborazione con</p>
-        <a href="http://www.agid.gov.it/" target="_blank" rel="noopener">
-          <img class="agid-logo img-responsive" src="_static/icons/logo-agid.svg" alt="Agenzia per l'Italia Digitale">
-        </a>
+        <p class="agid-collab d-sm-none">{{ t.in_collaboration_with | capitalize }}</p>
+        <a href="https://www.agid.gov.it/" target="_blank" rel="noopener">
+            <img class="agid-logo img-responsive" src="_static/icons/logo-agid.svg" alt="{{ site.agid_full }}">
+          </a>
       </div>
       <div class="col-sm-12 col-md-4 col-lg-6">
         <div class="text-right social">
-          <span>Seguici su:</span>
+          <span>{{ t.follow_us | capitalize }}:</span>
           <a href="https://github.com/italia/" class="small-prints px-1"><i class="icon it-icon it-icon-github {"></i>GitHub</a>
           <a href="https://twitter.com/teamdigitaleIT" class="small-prints px-1"><i class="icon it-icon it-icon-twitter"></i>Twitter</a>
           <a href="https://www.linkedin.com/company/teamdigitale/" class="small-prints px-1"><i class="icon it-icon it-icon-linkedin"></i>LinkedIn</a>
         </div>
       </div>
-    </div><!--/row-->
+    </div>
+    <!--/row-->
     <div class="row py-4 colophon">
       <ul class="col list-inline small">
         {% for link in site.data.footer_links %}
-          {% set link_name = link.title %}
         <li class="list-inline-item">
-          <strong><a class="footer-menu__link text-light-blue small-prints" href="{{ link.url }}">{% if t[link_name] %}{{ _(t[link_name]) }}{% else %}{{ _(link_name) }}{% endif %}</a></strong>
+          <strong><a class="footer-menu__link text-light-blue small-prints" href="{{ link.url }}">{{ t[link.title] }}</a></strong>
         </li>
         {% endfor %}
       </ul>
-      <p class="small">I servizi presentati nei mockup sono esempi per far capire le future funzionalità dell’applicazione.</p>
     </div>
 
-  <!-- </div> -->
+    <!-- </div> -->
 
-      <div class="t_translate-wrap">
-        <span class="t_translate" data-name="shareMsg" data-translation="{{ _(t.share_msg) }}"/>
-        <span class="t_translate" data-name="compareVersions" data-translation="{{ _(t.compare_versions) }}"/>
-        <span class="t_translate" data-name="copyLink" data-translation="{{ _(t.copy_link) }}"/>
-        <span class="t_translate" data-name="copiedLink" data-translation="{{ _(t.copied_link) }}"/>
-        <span class="t_translate" data-name="seeActions" data-translation="{{ _(t.see_actions) }}"/>
-        <span class="t_translate" data-name="otherActions" data-translation="{{ _(t.other_actions) }}"/>
-        <span class="t_translate" data-name="comments" data-translation="{{ _(t.comments) }}"/>
-        <span class="t_translate" data-name="backToText" data-translation="{{ _(t.back_to_text) }}"/>
-        <span class="t_translate" data-name="glossayEmpty" data-translation="{{ _(t.glossay_empty) }}"/>
-        <span class="t_translate" data-name="goToGlossay" data-translation="{{ _(t.go_to_glossary) }}"/>
-        <span class="t_translate" data-name="deepening" data-translation="{{ _(t.deepening) }}"/>
-        <span class="t_translate" data-name="example" data-translation="{{ _(t.example) }}"/>
-        <span class="t_translate" data-name="consultation" data-translation="{{ _(t.consultation) }}"/>
-        <span class="t_translate" data-name="showMore" data-translation="{{ _(t.show_more) }}"/>
-        <span class="t_translate" data-name="showLess" data-translation="{{ _(t.show_less) }}"/>
-        <span class="t_translate" data-name="note" data-translation="{{ _(t.note) }}"/>
-      </div>
-
-    </footer>
-</div>
+    <div class="t_translate-wrap">
+      <span class="t_translate" data-name="shareMsg" data-translation="{{ t.share_msg }}" />
+      <span class="t_translate" data-name="compareVersions" data-translation="{{ t.compare_versions }}" />
+      <span class="t_translate" data-name="copyLink" data-translation="{{ t.copy_link }}" />
+      <span class="t_translate" data-name="copiedLink" data-translation="{{ t.copied_link }}" />
+      <span class="t_translate" data-name="seeActions" data-translation="{{ t.see_actions }}" />
+      <span class="t_translate" data-name="otherActions" data-translation="{{ t.other_actions }}" />
+      <span class="t_translate" data-name="comments" data-translation="{{ t.comments }}" />
+      <span class="t_translate" data-name="backToText" data-translation="{{ t.back_to_text }}" />
+      <span class="t_translate" data-name="glossayEmpty" data-translation="{{ t.glossay_empty }}" />
+      <span class="t_translate" data-name="goToGlossay" data-translation="{{ t.go_to_glossary }}" />
+      <span class="t_translate" data-name="deepening" data-translation="{{ t.deepening }}" />
+      <span class="t_translate" data-name="example" data-translation="{{ t.example }}" />
+      <span class="t_translate" data-name="consultation" data-translation="{{ t.consultation }}" />
+      <span class="t_translate" data-name="showMore" data-translation="{{ t.show_more }}" />
+      <span class="t_translate" data-name="showLess" data-translation="{{ t.show_less }}" />
+      <span class="t_translate" data-name="note" data-translation="{{ t.note }}" />
+    </div>
+  </div>
+</footer>
