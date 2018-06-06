@@ -283,6 +283,7 @@ var themeNote = require('./note.js');
 var themeTranslate = require('./theme_translate.js');
 var themeGlossary = require('./get_glossary.js');
 var themeAdmonitionToggle = require('./admonition_toggle.js');
+var themeVersionDropdown = require('./version_dropdown.js');
 var themeCopyToClipboard = require('./copy_to_clipboard.js');
 var themeSidebarNav = require('./sidebar_nav.js');
 var themeGlossaryPage = require('./glossary_page.js');
@@ -299,6 +300,7 @@ $(document).ready(function() {
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();
+  themeVersionDropdown.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {
@@ -308,7 +310,7 @@ $(document).ready(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":2,"./get_glossary.js":3,"./glossary_page.js":4,"./markup_modifier.js":6,"./note.js":7,"./section_navigation.js":8,"./sidebar_nav.js":9,"./theme_translate.js":10,"./tooltip.js":11,"bootstrap-italia":"bootstrap-italia","jquery":12,"modernizr":"modernizr","popper.js":13}],6:[function(require,module,exports){
+},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":2,"./get_glossary.js":3,"./glossary_page.js":4,"./markup_modifier.js":6,"./note.js":7,"./section_navigation.js":8,"./sidebar_nav.js":9,"./theme_translate.js":10,"./tooltip.js":11,"./version_dropdown.js":12,"bootstrap-italia":"bootstrap-italia","jquery":13,"modernizr":"modernizr","popper.js":14}],6:[function(require,module,exports){
 // Modify DOM via JS.
 module.exports = themeMarkupModifier = (function ($) {
   var that;
@@ -1091,6 +1093,29 @@ module.exports = themeToolTip = (function ($) {
 })(jQuery);
 
 },{}],12:[function(require,module,exports){
+// Admonition toggle
+module.exports = themeVersionDropdown = (function ($) {
+
+  return {
+    init: function(callback) {
+      that = this.$;
+
+      $('#version-list .dropdown-item').on('click', function () {
+        console.log('header dropdown clicked');
+        var $btn = $(this),
+            $url = $btn.attr('di-value');
+            // $target = $(something);
+            // $admonition = $btn.closest('.admonition-deepening');
+
+      });
+
+      $('#version-list.dropdown').dropdown();
+    }
+  }
+
+})(jQuery);
+
+},{}],13:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -11456,7 +11481,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.

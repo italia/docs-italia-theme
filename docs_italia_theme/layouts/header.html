@@ -71,15 +71,15 @@
 
       <div class="docs-italia__header-col docs-italia__header-col--info p-2">
         <!-- INFO -->
-        <span class="it-icon-info"></span>
+        <a href="#" role="button" class="btn"><span class="it-icon it-icon-info"></span></a>
       </div>
       <div class="docs-italia__header-col docs-italia__header-col--eye p-2">
         <!-- EYE -->
-        <span class="it-icon-compare"></span>
+        <a href="#" role="button" class="btn"><span class="it-icon it-icon-compare"></span></a>
       </div>
       <div class="docs-italia__header-col docs-italia__header-col--downloads p-2">
         <!-- DOWNLOAD -->
-        <span class="it-icon-download"></span>
+        <span class="it-icon it-icon-download"></span>
         {# when theme_custom_versions_badge is True the custom versions bar is shown in place of the standard RTD panel #}
         {% if theme_custom_versions_badge == 'True' %}
           <style>
@@ -89,7 +89,8 @@
             }
           </style>
           <div class="" style="bottom: 0; width: inherit;">
-            {% include 'layouts/versions.html' %}
+            <!-- TODO: Modella questo elemento -->
+            <!-- {% include 'layouts/versions.html' %} -->
           </div>
         {% else %}
           {% if not READTHEDOCS %}
@@ -100,7 +101,7 @@
       </div>
       <div class="docs-italia__header-col docs-italia__header-col--github p-2">
         <!-- GITHUB -->
-        <span class="it-icon-github"></span>
+        <a href="#" role="button" class="btn"><span class="it-icon it-icon-github"></span></a>
       </div>
 
     </div>

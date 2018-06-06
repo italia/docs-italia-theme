@@ -51,6 +51,14 @@ header {
 
 .docs-italia__header-col {
   flex: 0 0 auto;
+
+  .btn {
+    padding: 0;
+
+    .it-icon {
+      font-size: 1.3rem;
+    }
+  }
 }
 
 .info--header {

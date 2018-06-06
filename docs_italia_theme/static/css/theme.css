@@ -231,6 +231,14 @@ header {
   font-weight: 400;
 }
 
+.docs-italia__document-title-icon {
+  font-size: 32px;
+  font-size: 2rem;
+  float: left;
+  margin-right: 10px;
+  margin-right: 0.625rem;
+}
+
 .docs-italia #cerca {
   border: 1px #ccc solid;
   font-size: 12.8px;
@@ -254,6 +262,13 @@ header {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
+}
+.docs-italia__header-col .btn {
+  padding: 0;
+}
+.docs-italia__header-col .btn .it-icon {
+  font-size: 20.8px;
+  font-size: 1.3rem;
 }
 
 .info--header {
