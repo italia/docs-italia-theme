@@ -10,6 +10,7 @@ var themeNote = require('./note.js');
 var themeTranslate = require('./theme_translate.js');
 var themeGlossary = require('./get_glossary.js');
 var themeAdmonitionToggle = require('./admonition_toggle.js');
+var themeVersionDropdown = require('./version_dropdown.js');
 var themeCopyToClipboard = require('./copy_to_clipboard.js');
 var themeSidebarNav = require('./sidebar_nav.js');
 var themeGlossaryPage = require('./glossary_page.js');
@@ -26,6 +27,7 @@ $(document).ready(function() {
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();
+  themeVersionDropdown.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {
