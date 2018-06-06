@@ -163,6 +163,10 @@
   content: "\e917";
 }
 
+.small {
+  font-size: 14px;
+}
+
 /* Theme layout */
 body {
   color: #596771;
@@ -1127,6 +1131,56 @@ header {
           transform: rotate(45deg) translateY(-50%);
   position: absolute;
   top: 50%;
+}
+
+.footer {
+  padding: 3em 0;
+}
+.footer * {
+  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.footer .di-collab-pre {
+  font: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.footer .team-logo--icon {
+  width: 72px;
+}
+.footer .team-logo--text {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 18px;
+  max-width: 160px;
+  text-transform: uppercase;
+}
+.footer .agid-logo {
+  height: 56px !important;
+  max-width: 100%;
+}
+.footer .small-prints {
+  color: #00fff8;
+  font-weight: 600;
+}
+.footer .social {
+  font-size: 1em;
+  color: #fff;
+}
+.footer .social > span {
+  margin-right: 1em;
+}
+.footer .social .icon {
+  color: #00264d;
+  background-color: #fff;
+  padding: 0.3em 0.4em;
+  border-radius: 100%;
+  font-size: 22px;
+  margin-right: 0.4em;
+}
+.footer .social .small-prints {
+  font-size: 0;
+}
+.footer .colophon {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 2em;
 }
 
 .footer-menu__link:hover {

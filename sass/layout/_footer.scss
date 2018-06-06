@@ -1,3 +1,65 @@
+.footer {
+  padding: 3em 0;
+
+  * {
+    font-family: $titillium-font;
+  }
+
+  .di-collab-pre {
+    font: $titillium-font;
+  }
+
+  .team-logo--icon {
+    width: 72px;
+  }
+
+  .team-logo--text {
+    font-size: 1rem;
+    line-height: 18px;
+    max-width: 160px;
+    text-transform: uppercase;
+  }
+
+  .agid-logo {
+    height: 56px !important;
+    max-width: 100%;
+  }
+
+  .small-prints {
+    color: #00fff8;
+    font-weight: 600;
+  }
+
+  .social {
+    font-size: 1em;
+    color: #fff;
+
+    > span {
+      margin-right: 1em;
+    }
+
+    .icon {
+      color: #00264d;
+      background-color: #fff;
+      // padding: 0.2em 0.4em;
+      padding: 0.3em 0.4em;
+      border-radius: 100%;
+      // font-size: initial;
+      font-size: 22px;
+      margin-right: 0.4em;
+    }
+
+    .small-prints {
+      font-size: 0;
+    }
+  }
+
+  .colophon {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 2em;
+  }
+}
+
 .footer-menu__link {
   &:hover {
     color: $white;
