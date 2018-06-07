@@ -14,6 +14,7 @@ var themeVersionDropdown = require('./version_dropdown.js');
 var themeCopyToClipboard = require('./copy_to_clipboard.js');
 var themeSidebarNav = require('./sidebar_nav.js');
 var themeGlossaryPage = require('./glossary_page.js');
+var themeScrollProgressBar = require('./scroll_progressbar.js');
 
 // Init all
 $(document).ready(function() {
@@ -28,6 +29,7 @@ $(document).ready(function() {
   themeGlossaryPage.init();
   themeCopyToClipboard.init();
   themeVersionDropdown.init();
+  themeScrollProgressBar.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {
