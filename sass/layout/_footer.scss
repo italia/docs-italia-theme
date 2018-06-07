@@ -1,6 +1,4 @@
 .footer {
-  padding: 3em 0;
-
   * {
     font-family: $titillium-font;
   }
@@ -34,8 +32,14 @@
     font-size: 1em;
     color: #fff;
 
-    > span {
+    > .socials-pre {
       margin-right: 1em;
+      display: none;
+
+      // display large up
+      @media (min-width: 992px) {
+        display: initial;
+      }
     }
 
     .icon {

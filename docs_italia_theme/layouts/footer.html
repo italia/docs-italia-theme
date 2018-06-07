@@ -1,39 +1,83 @@
 <footer class="footer container-fluid container-fluid--desktop">
-  <div class="p-4 pl-md-5 pr-md-5">
+  <div class="pt-3 pt-md-5 pb-3 pb-md-5">
     <div class="row d-none d-md-block">
       <div class="col-md-4 offset-md-4 col-lg-3 offset-lg-3 di-collab-pre">
         <p>{{ t.in_collaboration_with | capitalize }}</p>
       </div>
     </div>
 
-    <div class="row align-items-center">
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="d-flex">
-          <div class="px-2 team-logo--icon">
-            <a href="https://teamdigitale.governo.it/" target="_blank" rel="noopener">
-              <img src="_static/icons/dt-logo_276x276.svg" alt="{{ site.team_full }}">
+    <!-- <div class="row align-items-center d-sm-none d-md-block"> -->
+    <div class="row align-items-center d-none d-md-flex">
+      <!-- <div class="col-sm-6 col-md-4 col-lg-3"> -->
+      <div class="col-sm-12 col-md-4 col-lg-3">
+          <div class="d-flex">
+            <div class="px-2 team-logo--icon">
+              <a href="http://teamdigitale.governo.it/" target="_blank" rel="noopener">
+                <img src="_static/icons/dt-logo_276x276.svg" alt="{{ site.team_full }}">
               </a>
+            </div>
+          <div class="px-2 border-white border-left team-logo--text text-white">
+            {{ site.team_full }}
           </div>
-          <div class="px-2 border-white border-left team-logo--text text-white">{{ site.team_full }}</div>
         </div>
       </div>
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <p class="agid-collab d-sm-none">{{ t.in_collaboration_with | capitalize }}</p>
-        <a href="https://www.agid.gov.it/" target="_blank" rel="noopener">
-            <img class="agid-logo img-responsive" src="_static/icons/logo-agid.svg" alt="{{ site.agid_full }}">
-          </a>
+      <!-- <div class="col-sm-6 col-md-4 col-lg-3"> -->
+      <div class="col-sm-12 col-md-4 col-lg-3">
+        <!-- <p class="agid-collab d-sm-none ">{{ t.in_collaboration_with | capitalize }}</p> -->
+        <a href="http://www.agid.gov.it/" target="_blank" rel="noopener">
+          <img class="agid-logo img-responsive" src="_static/icons/logo-agid.svg" alt="{{ site.agid_full }}">
+        </a>
       </div>
       <div class="col-sm-12 col-md-4 col-lg-6">
-        <div class="text-right social">
-          <span>{{ t.follow_us | capitalize }}:</span>
-          <a href="https://github.com/italia/" class="small-prints px-1"><i class="icon it-icon it-icon-github {"></i>GitHub</a>
+        <div class="text-center text-md-right social">
+          <span class="socials-pre">{{ t.follow_us | capitalize }}:</span>
+          <a href="https://github.com/italia/" class="small-prints px-1"><i class="icon it-icon it-icon-github"></i>GitHub</a>
+          <a href="https://twitter.com/teamdigitaleIT" class="small-prints px-1"><i class="icon it-icon it-icon-twitter"></i>Twitter</a>
+          <a href="https://www.linkedin.com/company/teamdigitale/" class="small-prints px-1"><i class="icon it-icon it-icon-linkedin"></i>LinkedIn</a>
+        </div>
+      </div>
+    </div><!--/row-->
+
+    <div class="row align-items-center d-md-none">
+      <!-- Mobile only -->
+      <!-- <div class="col-sm-6 col-md-4 col-lg-3 pb-2"> -->
+      <div class="col-sm-12 col-md-4 col-lg-3 pb-2">
+          <div class="d-flex">
+            <div class="d-flex" style="margin:0 auto;">
+              <div class="px-2 team-logo--icon">
+                <a href="http://teamdigitale.governo.it/" target="_blank" rel="noopener">
+                  <img src="_static/icons/dt-logo_276x276.svg" alt="{{ site.team_full }}">
+                </a>
+              </div>
+              <div class="px-2 border-white border-left team-logo--text text-white">
+                {{ site.team_full }}
+              </div>
+            </div>
+        </div>
+      </div>
+      <!-- <div class="col-sm-6 col-md-4 col-lg-3 pt-2 pb-2"> -->
+      <div class="col-sm-12 col-md-4 col-lg-3 pt-2 pb-2">
+        <div class="d-flex">
+          <div class="d-flex" style="margin:0 auto;">
+            <p class="agid-collab d-none">In collaborazione con</p>
+            <a href="http://www.agid.gov.it/" target="_blank" rel="noopener">
+              <img class="agid-logo img-responsive" src="_static/icons/logo-agid.svg" alt="Agenzia per l'Italia Digitale">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-6 pt-4 pb-2 colophon mt-3">
+        <div class="text-center text-md-right social">
+          <span class="socials-pre">Seguici su:</span>
+          <a href="https://github.com/italia/" class="small-prints px-1"><i class="icon it-icon it-icon-github"></i>GitHub</a>
           <a href="https://twitter.com/teamdigitaleIT" class="small-prints px-1"><i class="icon it-icon it-icon-twitter"></i>Twitter</a>
           <a href="https://www.linkedin.com/company/teamdigitale/" class="small-prints px-1"><i class="icon it-icon it-icon-linkedin"></i>LinkedIn</a>
         </div>
       </div>
     </div>
     <!--/row-->
-    <div class="row py-4 colophon">
+
+    <div class="row py-4 colophon mt-md-5 mt-sm-2 pt-3 pt-sm-2">
       <ul class="col list-inline small">
         {% for link in site.data.footer_links %}
         <li class="list-inline-item">
