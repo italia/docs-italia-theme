@@ -187,7 +187,6 @@ h4,
 h5 {
   color: #000;
   margin-bottom: 32px;
-  margin-bottom: 32px;
   margin-bottom: 2rem;
 }
 
@@ -221,13 +220,11 @@ header .progress-bar {
 
 .h1--header {
   font-size: 21.328px;
-  font-size: 21.328px;
   font-size: 1.333rem;
   line-height: 1.2;
   letter-spacing: unset;
 }
 .h1--header span {
-  font-size: 11.2px;
   font-size: 11.2px;
   font-size: 0.7rem;
   font-weight: 400;
@@ -246,24 +243,20 @@ header .progress-bar {
 
 .docs-italia__document-title {
   font-size: 14.4px;
-  font-size: 14.4px;
   font-size: 0.9rem;
   font-weight: 400;
 }
 
 .docs-italia__document-title-icon {
   font-size: 32px;
-  font-size: 32px;
   font-size: 2rem;
   float: left;
-  margin-right: 10px;
   margin-right: 10px;
   margin-right: 0.625rem;
 }
 
 .docs-italia #cerca {
   border: 1px #ccc solid;
-  font-size: 12.8px;
   font-size: 12.8px;
   font-size: 0.8rem;
   font-weight: 100;
@@ -290,7 +283,6 @@ header .progress-bar {
   padding: 0;
 }
 .docs-italia__header-col .btn .it-icon {
-  font-size: 20.8px;
   font-size: 20.8px;
   font-size: 1.3rem;
 }
@@ -370,13 +362,11 @@ header .progress-bar {
 .navbar-toggler {
   color: #06c;
   padding: 16px 16px 16px 32px;
-  padding: 16px 16px 16px 32px;
   padding: 1rem 1rem 1rem 2rem;
 }
 
 .navbar-toggler__chapter {
   color: #000;
-  font-size: 12.8px;
   font-size: 12.8px;
   font-size: 0.8rem;
 }
@@ -426,7 +416,6 @@ header .progress-bar {
 .sidebar-btn.sidebar-btn--mobile {
   display: inline-block;
   font-size: 11.2px;
-  font-size: 11.2px;
   font-size: 0.7rem;
   text-align: center;
   border: 0;
@@ -450,7 +439,6 @@ header .progress-bar {
 }
 .sidebar-btn .it-icon-expand,
 .sidebar-btn .it-icon-collapse {
-  font-size: 9.6px;
   font-size: 9.6px;
   font-size: 0.6rem;
   line-height: 2.5;
@@ -499,12 +487,10 @@ header .progress-bar {
   background-color: #4bd4d6;
   text-align: left;
   padding: 8px 0;
-  padding: 8px 0;
   padding: 0.5rem 0;
   text-transform: uppercase;
   font-weight: 800;
   color: #000;
-  padding-left: 32px;
   padding-left: 32px;
   padding-left: 2rem;
 }
@@ -529,7 +515,6 @@ header .progress-bar {
 
 .col-content {
   padding: 64px 32px;
-  padding: 64px 32px;
   padding: 4rem 2rem;
 }
 @media (min-width: 992px) {
@@ -544,15 +529,12 @@ header .progress-bar {
 }
 .caption-wrap .caption--table {
   margin-top: 32px;
-  margin-top: 32px;
   margin-top: 2rem;
-  margin-bottom: 32px;
   margin-bottom: 32px;
   margin-bottom: 2rem;
   display: block;
   font-family: "Lora", serif;
   font-style: italic;
-  font-size: 12px;
   font-size: 12px;
   font-size: 0.75rem;
   padding: 0;
@@ -566,9 +548,7 @@ header .progress-bar {
 .caption-wrap .reference--wrap {
   font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 24px;
-  margin-top: 24px;
   margin-top: 1.5rem;
-  margin-bottom: 32px;
   margin-bottom: 32px;
   margin-bottom: 2rem;
 }
@@ -588,9 +568,7 @@ header .progress-bar {
 /* Title H1/H2 */
 .chapter-header {
   margin-bottom: 16px;
-  margin-bottom: 16px;
   margin-bottom: 1rem;
-  margin-left: 8px;
   margin-left: 8px;
   margin-left: 0.5rem;
 }
@@ -623,7 +601,6 @@ header .progress-bar {
   top: -1px;
   height: auto;
   left: -8px;
-  left: -8px;
   left: -0.5rem;
   display: none;
   right: 0;
@@ -649,7 +626,6 @@ header .progress-bar {
   background-color: #bffffd;
   color: #000;
   padding: 3.2px;
-  padding: 3.2px;
   padding: 0.2rem;
 }
 
@@ -657,13 +633,11 @@ header .progress-bar {
 .footer-buttons--next {
   clear: both;
   margin-top: 64px;
-  margin-top: 64px;
   margin-top: 4rem;
 }
 .footer-buttons--next a {
   background-color: #0073e6;
   color: #fff;
-  padding: 8px 16px;
   padding: 8px 16px;
   padding: 0.5rem 1rem;
   border-radius: 0.2rem;
@@ -672,7 +646,6 @@ header .progress-bar {
 }
 
 .footer-buttons--prev {
-  margin-bottom: 40px;
   margin-bottom: 40px;
   margin-bottom: 2.5rem;
 }
@@ -707,9 +680,7 @@ header .progress-bar {
 #doc-content .useful-docs li {
   border-top: 1px #ccc solid;
   padding-top: 16px;
-  padding-top: 16px;
   padding-top: 1rem;
-  padding-bottom: 16px;
   padding-bottom: 16px;
   padding-bottom: 1rem;
   vertical-align: middle;
@@ -719,21 +690,17 @@ header .progress-bar {
 }
 #doc-content .useful-docs .Icon {
   font-size: 30.4px;
-  font-size: 30.4px;
   font-size: 1.9rem;
   color: #0073e6;
 }
 #doc-content .procedure ol {
-  padding-left: 16px;
   padding-left: 16px;
   padding-left: 1rem;
 }
 #doc-content .procedure ol li {
   position: relative;
   margin-bottom: 16px;
-  margin-bottom: 16px;
   margin-bottom: 1rem;
-  padding-left: 16px;
   padding-left: 16px;
   padding-left: 1rem;
   counter-increment: list;
@@ -743,13 +710,10 @@ header .progress-bar {
 #doc-content .procedure ol li::after {
   position: absolute;
   left: -16px;
-  left: -16px;
   left: -1rem;
   top: 0;
   width: 17.6px;
-  width: 17.6px;
   width: 1.1rem;
-  height: 24px;
   height: 24px;
   height: 1.5rem;
   z-index: 1;
@@ -765,9 +729,7 @@ header .progress-bar {
 #doc-content ul.simple li {
   position: relative;
   margin-bottom: 8px;
-  margin-bottom: 8px;
   margin-bottom: 0.5rem;
-  font-size: 14.4px;
   font-size: 14.4px;
   font-size: 0.9rem;
 }
@@ -780,9 +742,7 @@ header .progress-bar {
   border-left: 5px solid #596771;
   position: absolute;
   left: -16px;
-  left: -16px;
   left: -1rem;
-  top: 6.4px;
   top: 6.4px;
   top: 0.4rem;
 }
@@ -813,7 +773,6 @@ header .progress-bar {
 }
 #doc-content .procedure.topic {
   margin-bottom: 48px;
-  margin-bottom: 48px;
   margin-bottom: 3rem;
 }
 #doc-content .procedure.topic em {
@@ -821,15 +780,11 @@ header .progress-bar {
 }
 #doc-content .procedure__img {
   padding-left: 24px;
-  padding-left: 24px;
   padding-left: 1.5rem;
-  margin-bottom: 32px;
   margin-bottom: 32px;
   margin-bottom: 2rem;
   margin-left: 8px;
-  margin-left: 8px;
   margin-left: 0.5rem;
-  margin-top: 32px;
   margin-top: 32px;
   margin-top: 2rem;
   border-left: 1px #799ebc solid;
@@ -843,7 +798,6 @@ header .progress-bar {
   color: #000;
   font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12.8px;
-  font-size: 12.8px;
   font-size: 0.8rem;
   font-weight: 800;
 }
@@ -851,9 +805,7 @@ header .progress-bar {
   color: #004e95;
   position: absolute;
   left: -24px;
-  left: -24px;
   left: -1.5rem;
-  font-size: 32px;
   font-size: 32px;
   font-size: 2rem;
 }
@@ -938,13 +890,11 @@ header .progress-bar {
   color: #000;
   font-weight: 800;
   font-size: 22.4px;
-  font-size: 22.4px;
   font-size: 1.4rem;
   font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #doc-content .docutils.field-list {
   width: 100%;
-  margin-bottom: 32px;
   margin-bottom: 32px;
   margin-bottom: 2rem;
   border-bottom: 1px #ccc solid;
@@ -952,7 +902,6 @@ header .progress-bar {
 }
 #doc-content .docutils.field-list tr {
   display: block;
-  margin-bottom: 32px;
   margin-bottom: 32px;
   margin-bottom: 2rem;
 }
@@ -973,34 +922,27 @@ header .progress-bar {
 }
 #doc-content .highlights {
   font-size: 24px;
-  font-size: 24px;
   font-size: 1.5rem;
   font-family: "Lora", serif;
 }
 #doc-content blockquote.epigraph {
   margin-top: 32px;
-  margin-top: 32px;
   margin-top: 2rem;
-  padding-left: 32px;
   padding-left: 32px;
   padding-left: 2rem;
   border-left: 4px #00c4c8 solid;
   color: #596771;
   font-size: 19.2px;
-  font-size: 19.2px;
   font-size: 1.2rem;
-  margin-bottom: 32px;
   margin-bottom: 32px;
   margin-bottom: 2rem;
 }
 #doc-content blockquote.epigraph .attribution {
   margin-bottom: 0;
   font-size: 16px;
-  font-size: 16px;
   font-size: 1rem;
 }
 #doc-content .question-and-answers blockquote {
-  margin-top: 8px;
   margin-top: 8px;
   margin-top: 0.5rem;
   margin-bottom: 0;
@@ -1012,18 +954,15 @@ header .progress-bar {
 #doc-content .question-and-answers .pull-quote {
   max-width: 490px;
   margin-bottom: 32px;
-  margin-bottom: 32px;
   margin-bottom: 2rem;
 }
 #doc-content .question-and-answers .pull-quote ul {
   list-style-type: none;
   padding-left: 24px;
-  padding-left: 24px;
   padding-left: 1.5rem;
 }
 #doc-content .question-and-answers .pull-quote ul li {
   display: inline-block;
-  margin-top: 16px;
   margin-top: 16px;
   margin-top: 1rem;
 }
@@ -1032,9 +971,7 @@ header .progress-bar {
 }
 #doc-content .question-and-answers .pull-quote ul li a {
   padding: 3.2px 8px;
-  padding: 3.2px 8px;
   padding: 0.2rem 0.5rem;
-  margin-right: 3.2px;
   margin-right: 3.2px;
   margin-right: 0.2rem;
   background-color: #bffffd;
@@ -1056,7 +993,6 @@ header .progress-bar {
 #doc-content .question-and-answers .pull-quote:nth-of-type(odd) blockquote > div,
 #doc-content .question-and-answers .pull-quote:nth-of-type(odd) ul {
   padding-left: 24px;
-  padding-left: 24px;
   padding-left: 1.5rem;
   border-left: 5px #00c4c8 solid;
 }
@@ -1067,7 +1003,6 @@ header .progress-bar {
 }
 #doc-content .question-and-answers .pull-quote:nth-of-type(even) blockquote > div,
 #doc-content .question-and-answers .pull-quote:nth-of-type(even) ul {
-  padding-right: 24px;
   padding-right: 24px;
   padding-right: 1.5rem;
   border-right: 5px #00c4c8 solid;
@@ -1081,7 +1016,6 @@ header .progress-bar {
 
 #doc-content .admonition {
   margin-bottom: 32px;
-  margin-bottom: 32px;
   margin-bottom: 2rem;
 }
 #doc-content .admonition .admonition-title {
@@ -1089,7 +1023,6 @@ header .progress-bar {
   font-weight: 800;
 }
 #doc-content .admonition .admonition-title .Icon {
-  font-size: 24px;
   font-size: 24px;
   font-size: 1.5rem;
 }
@@ -1099,9 +1032,7 @@ header .progress-bar {
 #doc-content .admonition .admonition__toggle-wrap {
   border-top: 1px #ccc solid;
   padding-top: 16px;
-  padding-top: 16px;
   padding-top: 1rem;
-  margin-top: 24px;
   margin-top: 24px;
   margin-top: 1.5rem;
 }
@@ -1114,9 +1045,7 @@ header .progress-bar {
 }
 #doc-content .admonition .admonition__toggle-btn .Icon {
   font-size: 9.6px;
-  font-size: 9.6px;
   font-size: 0.6rem;
-  margin-left: 8px;
   margin-left: 8px;
   margin-left: 0.5rem;
   position: relative;
@@ -1124,9 +1053,7 @@ header .progress-bar {
 #doc-content .admonition .admonition__toggle-btn .Icon::after {
   content: '';
   width: 16px;
-  width: 16px;
   width: 1rem;
-  height: 16px;
   height: 16px;
   height: 1rem;
   border: 2px #0073e6 solid;
@@ -1155,7 +1082,6 @@ header .progress-bar {
 }
 #doc-content .admonition.admonition-consultazione {
   padding-bottom: 16px;
-  padding-bottom: 16px;
   padding-bottom: 1rem;
   border-bottom: 1px #ccc solid;
   position: relative;
@@ -1172,14 +1098,11 @@ header .progress-bar {
 }
 #doc-content .admonition.admonition-consultazione .admonition-title .Icon {
   font-size: 19.2px;
-  font-size: 19.2px;
   font-size: 1.2rem;
 }
 #doc-content .admonition.important, #doc-content .admonition.error, #doc-content .admonition.hint, #doc-content .admonition.note, #doc-content .admonition.attention {
   margin-top: 32px;
-  margin-top: 32px;
   margin-top: 2rem;
-  padding-left: 32px;
   padding-left: 32px;
   padding-left: 2rem;
   border-left: 1px #ccc solid;
@@ -1200,11 +1123,9 @@ header .progress-bar {
 #doc-content .admonition.important .last {
   font-weight: 800;
   font-size: 19.2px;
-  font-size: 19.2px;
   font-size: 1.2rem;
 }
 #doc-content .admonition.hint .reference.internal {
-  font-size: 12.8px;
   font-size: 12.8px;
   font-size: 0.8rem;
   position: relative;
@@ -1212,9 +1133,7 @@ header .progress-bar {
 #doc-content .admonition.hint .reference.internal::after {
   content: '';
   width: 6.4px;
-  width: 6.4px;
   width: 0.4rem;
-  height: 6.4px;
   height: 6.4px;
   height: 0.4rem;
   border-top: 1px #0073e6 solid;
@@ -1237,7 +1156,6 @@ header .progress-bar {
 }
 .footer .team-logo--text {
   font-size: 16px;
-  font-size: 16px;
   font-size: 1rem;
   line-height: 18px;
   max-width: 160px;
@@ -1257,17 +1175,20 @@ header .progress-bar {
 }
 .footer .social > .socials-pre {
   margin-right: 1em;
-  display: none;
+  display: block;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 @media (min-width: 992px) {
   .footer .social > .socials-pre {
     display: initial;
+    margin-bottom: 0;
   }
 }
 .footer .social .icon {
   color: #00264d;
   background-color: #fff;
-  padding: 0.3em 0.4em;
+  padding: 0.3em 0.35em;
   border-radius: 100%;
   font-size: 22px;
   margin-right: 0.4em;
@@ -1277,7 +1198,12 @@ header .progress-bar {
 }
 .footer .colophon {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 2em;
+  margin-top: 1.5em;
+}
+@media (min-width: 992px) {
+  .footer .colophon {
+    margin-top: 2em;
+  }
 }
 
 .footer-menu__link:hover {
@@ -1339,7 +1265,6 @@ header .progress-bar {
   overflow: hidden;
   width: 330px;
   padding: 32px;
-  padding: 32px;
   padding: 2rem;
   font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -1348,14 +1273,12 @@ header .progress-bar {
   overflow: hidden;
   font-style: italic;
   margin-bottom: 8px;
-  margin-bottom: 8px;
   margin-bottom: 0.5rem;
   font-size: 1em;
   letter-spacing: 0;
 }
 
 .tooltip__content {
-  font-size: 14.4px;
   font-size: 14.4px;
   font-size: 0.9rem;
   font-style: italic;
@@ -1365,9 +1288,7 @@ header .progress-bar {
 .tooltip__close-btn {
   position: absolute;
   top: 16px;
-  top: 16px;
   top: 1rem;
-  right: 16px;
   right: 16px;
   right: 1rem;
   width: 20px;
@@ -1398,14 +1319,12 @@ header .progress-bar {
 .tooltip__link {
   color: #0073e6;
   font-size: 12.8px;
-  font-size: 12.8px;
   font-size: 0.8rem;
   font-weight: 100;
   text-transform: uppercase;
   letter-spacing: 0;
   position: relative;
   display: inline-block;
-  margin-top: 16px;
   margin-top: 16px;
   margin-top: 1rem;
 }
@@ -1478,14 +1397,12 @@ header .progress-bar {
 
 .chapter-link__counter {
   margin-right: 4.8px;
-  margin-right: 4.8px;
   margin-right: 0.3rem;
   display: inline-block;
   float: left;
 }
 
 .Icon {
-  margin-right: 8px;
   margin-right: 8px;
   margin-right: 0.5rem;
   vertical-align: middle;
@@ -1495,7 +1412,6 @@ header .progress-bar {
 .chapter-nav__list {
   list-style-type: none;
   margin-bottom: 0;
-  padding: 16px;
   padding: 16px;
   padding: 1rem;
 }
@@ -1507,10 +1423,8 @@ header .progress-bar {
 
 .chapter-nav__title {
   padding: 16px;
-  padding: 16px;
   padding: 1rem;
   color: #000;
-  font-size: 12.8px;
   font-size: 12.8px;
   font-size: 0.8rem;
   font-weight: 800;
@@ -1527,7 +1441,6 @@ header .progress-bar {
 
 .chapter-nav__item:not(:last-child) {
   margin-bottom: 16px;
-  margin-bottom: 16px;
   margin-bottom: 1rem;
 }
 @media (min-width: 992px) {
@@ -1537,7 +1450,6 @@ header .progress-bar {
 }
 
 .chapter-nav__list--visible {
-  margin-top: 16px;
   margin-top: 16px;
   margin-top: 1rem;
 }
@@ -1588,12 +1500,10 @@ header .progress-bar {
   text-transform: uppercase;
   color: #000;
   font-size: 12px;
-  font-size: 12px;
   font-size: 0.75rem;
   vertical-align: top;
 }
 #doc-content table:not(.footnote) tr {
-  font-size: 12px;
   font-size: 12px;
   font-size: 0.75rem;
 }
@@ -1607,12 +1517,10 @@ header .progress-bar {
   border: 1px #193e5e solid;
   border-radius: 3px;
   padding: 0 6.4px;
-  padding: 0 6.4px;
   padding: 0 0.4rem;
   line-height: 1.4;
 }
 #doc-content .note-action {
-  margin-top: 8px;
   margin-top: 8px;
   margin-top: 0.5rem;
 }
@@ -1643,10 +1551,8 @@ header .progress-bar {
 #doc-content .docutils.footnote {
   color: #000;
   font-size: 12.8px;
-  font-size: 12.8px;
   font-size: 0.8rem;
   display: none;
-  margin-bottom: 32px;
   margin-bottom: 32px;
   margin-bottom: 2rem;
   text-transform: capitalize;
@@ -1660,11 +1566,9 @@ header .progress-bar {
   border: 1px #193e5e solid;
   border-radius: 3px;
   padding: 3.2px;
-  padding: 3.2px;
   padding: 0.2rem;
   line-height: 1;
   display: inline-block;
-  margin-bottom: 8px;
   margin-bottom: 8px;
   margin-bottom: 0.5rem;
 }
@@ -1672,10 +1576,8 @@ header .progress-bar {
 .admonition-display-page {
   background-color: #f9fafb;
   padding: 32px;
-  padding: 32px;
   padding: 2rem;
   position: relative;
-  margin-top: 32px;
   margin-top: 32px;
   margin-top: 2rem;
 }
@@ -1703,7 +1605,6 @@ header .progress-bar {
 .admonition-display-page .admonition__hidden-paragraph p,
 .admonition-display-page li {
   font-size: 12.8px;
-  font-size: 12.8px;
   font-size: 0.8rem;
   color: #002b4d;
 }
@@ -1712,7 +1613,6 @@ header .progress-bar {
 }
 .admonition-display-page ol li {
   margin-bottom: 16px;
-  margin-bottom: 16px;
   margin-bottom: 1rem;
   position: relative;
   list-style-type: none;
@@ -1720,19 +1620,15 @@ header .progress-bar {
   color: #002b4d;
   font-family: "Lora", serif;
   text-indent: 16px;
-  text-indent: 16px;
   text-indent: 1rem;
 }
 .admonition-display-page ol li::after {
   position: absolute;
   left: -16px;
-  left: -16px;
   left: -1rem;
   top: 0;
   width: 17.6px;
-  width: 17.6px;
   width: 1.1rem;
-  height: 24px;
   height: 24px;
   height: 1.5rem;
   z-index: 1;
@@ -1743,7 +1639,6 @@ header .progress-bar {
 .admonition-display-page ol li::before {
   position: absolute;
   left: -32px;
-  left: -32px;
   left: -2rem;
   top: 0.65em;
   height: 1px;
@@ -1751,7 +1646,6 @@ header .progress-bar {
   content: "";
   font-weight: 800;
   background-color: #002b4d;
-  width: 16px;
   width: 16px;
   width: 1rem;
 }
@@ -1762,19 +1656,16 @@ header .progress-bar {
 }
 .admonition-display-page .admonition-title {
   padding-bottom: 3.2px;
-  padding-bottom: 3.2px;
   padding-bottom: 0.2rem;
   display: inline-block;
   background: -webkit-gradient(linear, left top, left bottom, from(#004e95), to(#004e95)) no-repeat right bottom/calc(100% - 2rem) 2px;
   background: linear-gradient(#004e95, #004e95) no-repeat right bottom/calc(100% - 2rem) 2px;
-  margin-bottom: 16px;
   margin-bottom: 16px;
   margin-bottom: 1rem;
   overflow: hidden;
 }
 .admonition-display-page .admonition-internal-title {
   text-transform: uppercase;
-  font-size: 12.8px;
   font-size: 12.8px;
   font-size: 0.8rem;
   font-weight: 800;
@@ -1787,15 +1678,12 @@ header .progress-bar {
 }
 .admonition-display-page .highlighttable pre {
   font-size: 12.8px;
-  font-size: 12.8px;
   font-size: 0.8rem;
 }
 
 .block-comments {
   margin-top: 32px;
-  margin-top: 32px;
   margin-top: 2rem;
-  margin-bottom: 32px;
   margin-bottom: 32px;
   margin-bottom: 2rem;
 }
@@ -1839,9 +1727,7 @@ header .progress-bar {
 .block-comments__toggle-btn {
   background: none;
   width: 32px;
-  width: 32px;
   width: 2rem;
-  height: 32px;
   height: 32px;
   height: 2rem;
 }
@@ -1867,9 +1753,7 @@ header .progress-bar {
 .block-comments__item-btn {
   background: none;
   width: 32px;
-  width: 32px;
   width: 2rem;
-  height: 24px;
   height: 24px;
   height: 1.5rem;
   border: 0;
@@ -1892,7 +1776,6 @@ header .progress-bar {
   color: #06c;
   font-weight: 400;
   font-size: 16px;
-  font-size: 16px;
   font-size: 1rem;
   letter-spacing: 0;
 }
@@ -1900,12 +1783,10 @@ header .progress-bar {
 .block-comments__date,
 .block-comments__role {
   font-size: 12.8px;
-  font-size: 12.8px;
   font-size: 0.8rem;
 }
 
 .block-comments__paragraph {
-  font-size: 14.4px;
   font-size: 14.4px;
   font-size: 0.9rem;
 }
@@ -1922,9 +1803,7 @@ header .progress-bar {
   text-decoration: none;
   color: #596771;
   font-size: 14.4px;
-  font-size: 14.4px;
   font-size: 0.9rem;
-  margin-bottom: 4.8px;
   margin-bottom: 4.8px;
   margin-bottom: 0.3rem;
   display: block;
@@ -1934,9 +1813,7 @@ header .progress-bar {
   position: relative;
   z-index: 1;
   margin-bottom: 16px;
-  margin-bottom: 16px;
   margin-bottom: 1rem;
-  margin-top: 16px;
   margin-top: 16px;
   margin-top: 1rem;
   -webkit-transition: margin-bottom 0.3s, margin-top 0.3s;
@@ -1946,15 +1823,11 @@ header .progress-bar {
   content: '';
   position: absolute;
   top: -8px;
-  top: -8px;
   top: -0.5rem;
-  bottom: -8px;
   bottom: -8px;
   bottom: -0.5rem;
   left: -8px;
-  left: -8px;
   left: -0.5rem;
-  right: -8px;
   right: -8px;
   right: -0.5rem;
   background-color: #bffffd;
@@ -1964,7 +1837,6 @@ header .progress-bar {
   text-decoration: underline;
 }
 .sidebar-nav > .sidebar-list--wrapper > ul > li {
-  padding: 24px;
   padding: 24px;
   padding: 1.5rem;
 }
@@ -1989,22 +1861,18 @@ header .progress-bar {
 }
 .sidebar-nav > .sidebar-list--wrapper ul ul {
   padding-left: 16px;
-  padding-left: 16px;
   padding-left: 1rem;
 }
 .sidebar-nav > .sidebar-list--wrapper.content-index--menu > ul > li {
-  padding-bottom: 16px;
   padding-bottom: 16px;
   padding-bottom: 1rem;
 }
 .sidebar-nav > .sidebar-list--wrapper.figures-index--menu, .sidebar-nav > .sidebar-list--wrapper.table-index--menu, .sidebar-nav > .sidebar-list--wrapper.glossary-mobile--menu {
   padding-top: 16px;
-  padding-top: 16px;
   padding-top: 1rem;
 }
 .sidebar-nav > .sidebar-list--wrapper.figures-index--menu > ul > li, .sidebar-nav > .sidebar-list--wrapper.table-index--menu > ul > li, .sidebar-nav > .sidebar-list--wrapper.glossary-mobile--menu > ul > li {
   padding-bottom: 0;
-  padding-top: 8px;
   padding-top: 8px;
   padding-top: 0.5rem;
 }
@@ -2014,18 +1882,14 @@ header .progress-bar {
 }
 #glossary-page .chapter-header {
   padding-top: 32px;
-  padding-top: 32px;
   padding-top: 2rem;
   padding-bottom: 32px;
-  padding-bottom: 32px;
   padding-bottom: 2rem;
-  padding-left: 8px;
   padding-left: 8px;
   padding-left: 0.5rem;
   overflow: hidden;
 }
 #glossary-page .chapter-header h2 {
-  font-size: 128px;
   font-size: 128px;
   font-size: 8rem;
   font-family: "Lora", serif;
@@ -2064,7 +1928,6 @@ header .progress-bar {
 }
 #glossary-page .term-content {
   padding-left: 36.8px;
-  padding-left: 36.8px;
   padding-left: 2.3rem;
   font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -2088,4 +1951,5 @@ header .progress-bar {
   color: #0073e6;
   cursor: pointer;
 }
+
 /*# sourceMappingURL=theme.css.map */

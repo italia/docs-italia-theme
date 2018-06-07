@@ -34,11 +34,13 @@
 
     > .socials-pre {
       margin-right: 1em;
-      display: none;
+      display: block;
+      margin-bottom: 1rem;
 
       // display large up
       @media (min-width: 992px) {
         display: initial;
+        margin-bottom: 0;
       }
     }
 
@@ -46,7 +48,7 @@
       color: #00264d;
       background-color: #fff;
       // padding: 0.2em 0.4em;
-      padding: 0.3em 0.4em;
+      padding: 0.3em 0.35em;
       border-radius: 100%;
       // font-size: initial;
       font-size: 22px;
@@ -60,7 +62,11 @@
 
   .colophon {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 2em;
+    margin-top: 1.5em;
+
+    @media (min-width: 992px) {
+      margin-top: 2em;
+    }
   }
 }
 

@@ -287,6 +287,7 @@ var themeVersionDropdown = require('./version_dropdown.js');
 var themeCopyToClipboard = require('./copy_to_clipboard.js');
 var themeSidebarNav = require('./sidebar_nav.js');
 var themeGlossaryPage = require('./glossary_page.js');
+var themeScrollProgressBar = require('./scroll_progressbar.js');
 
 // Init all
 $(document).ready(function() {
@@ -301,6 +302,7 @@ $(document).ready(function() {
   themeGlossaryPage.init();
   themeCopyToClipboard.init();
   themeVersionDropdown.init();
+  themeScrollProgressBar.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {
@@ -310,7 +312,7 @@ $(document).ready(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":2,"./get_glossary.js":3,"./glossary_page.js":4,"./markup_modifier.js":6,"./note.js":7,"./section_navigation.js":8,"./sidebar_nav.js":9,"./theme_translate.js":10,"./tooltip.js":11,"./version_dropdown.js":12,"bootstrap-italia":"bootstrap-italia","jquery":13,"modernizr":"modernizr","popper.js":14}],6:[function(require,module,exports){
+},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":2,"./get_glossary.js":3,"./glossary_page.js":4,"./markup_modifier.js":6,"./note.js":7,"./scroll_progressbar.js":8,"./section_navigation.js":9,"./sidebar_nav.js":10,"./theme_translate.js":11,"./tooltip.js":12,"./version_dropdown.js":13,"bootstrap-italia":"bootstrap-italia","jquery":14,"modernizr":"modernizr","popper.js":15}],6:[function(require,module,exports){
 // Modify DOM via JS.
 module.exports = themeMarkupModifier = (function ($) {
   var that;
@@ -579,6 +581,27 @@ module.exports = themeNote = (function ($) {
 })(jQuery);
 
 },{}],8:[function(require,module,exports){
+// Admonition toggle
+module.exports = themeScrollProgressBar = (function ($) {
+
+  return {
+    init: function(callback) {
+      that = this.$;
+
+      // When the user scrolls the page, execute myFunction
+      $(window).scroll(function() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("scrollprogressBar").style.width = scrolled + "%";
+        console.log('scrolling');
+      });
+    }
+  };
+
+})(jQuery);
+
+},{}],9:[function(require,module,exports){
 // Section navigation
 module.exports = themeSectionNav = (function ($) {
   var that;
@@ -730,7 +753,7 @@ module.exports = themeSectionNav = (function ($) {
   }
 })(jQuery);
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 // Sidebar nav
 module.exports = themeSidebarNav = (function ($) {
   var that;
@@ -845,7 +868,7 @@ module.exports = themeSidebarNav = (function ($) {
 
 })(jQuery);
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 // Theme l10n
 module.exports = themeTranslate = (function ($) {
   var that;
@@ -873,7 +896,7 @@ module.exports = themeTranslate = (function ($) {
 
 })(jQuery);
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 // Tooltips
 module.exports = themeToolTip = (function ($) {
   var that;
@@ -1092,7 +1115,7 @@ module.exports = themeToolTip = (function ($) {
   }
 })(jQuery);
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // Admonition toggle
 module.exports = themeVersionDropdown = (function ($) {
 
@@ -1115,7 +1138,7 @@ module.exports = themeVersionDropdown = (function ($) {
 
 })(jQuery);
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -11481,7 +11504,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
