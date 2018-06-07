@@ -11,7 +11,7 @@
         <div class="d-flex">
           <div class="px-2 team-logo--icon">
             <a href="http://teamdigitale.governo.it/" target="_blank" rel="noopener">
-              <img src="_static/icons/dt-logo_276x276.svg" alt="{{ site.team_full }}">
+              <img src="{{ pathto('_static/icons/dt-logo_276x276.svg', 1) }}" alt="{{ site.team_full }}">
             </a>
           </div>
           <div class="px-2 border-white border-left team-logo--text text-white">
@@ -22,7 +22,7 @@
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pb-2">
         <p class="agid-collab d-block d-sm-none">{{ t.in_collaboration_with | capitalize }}</p>
         <a href="http://www.agid.gov.it/" target="_blank" rel="noopener">
-          <img class="agid-logo img-responsive" src="_static/icons/logo-agid.svg" alt="{{ site.agid_full }}">
+          <img class="agid-logo img-responsive" src="{{ pathto('_static/icons/logo-agid.svg', 1) }}" alt="{{ site.agid_full }}">
         </a>
       </div>
       <div class="col-xs-12 col-md-4 col-lg-6">
