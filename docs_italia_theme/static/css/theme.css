@@ -482,8 +482,10 @@ header .progress-bar {
 .doc-content__consultation {
   position: absolute;
   right: 0;
+  left: 0;
   top: 0;
   background-color: #4bd4d6;
+  text-align: left;
   padding: 8px 0;
   padding: 0.5rem 0;
   text-transform: uppercase;
@@ -491,19 +493,10 @@ header .progress-bar {
   color: #000;
   padding-left: 32px;
   padding-left: 2rem;
-  -webkit-transform: rotate(45deg) translate(45px, -125px);
-          transform: rotate(45deg) translate(45px, -125px);
-  width: 320px;
-  -webkit-transform-origin: left;
-          transform-origin: left;
-  z-index: 1;
-  left: auto;
-  text-align: center;
 }
 @media (min-width: 992px) {
   .doc-content__consultation {
     padding-left: 4rem;
-    text-align: left;
   }
 }
 @media (min-width: 1200px) {

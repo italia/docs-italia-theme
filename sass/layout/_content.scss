@@ -7,26 +7,18 @@
 .doc-content__consultation {
   position: absolute;
   right: 0;
-  // left: 0;
+  left: 0;
   top: 0;
   background-color: $green;
-  // text-align: left;
+  text-align: left;
   padding: 0.5rem 0;
   text-transform: uppercase;
   font-weight: 800;
   color: $black;
   padding-left: 2rem;
-  transform: rotate(45deg) translate(45px, -125px);
-  width: 320px;
-  transform-origin: left;
-  z-index: 1;
-  left: auto;
-  text-align: center;
-  // padding-left: 0;
 
   @media (min-width: 992px) {
     padding-left: 4rem;
-    text-align: left;
   }
 
   @media (min-width: 1200px) {
