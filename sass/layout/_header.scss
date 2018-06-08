@@ -2,6 +2,21 @@ header {
   box-shadow: 0 0 120px 0 rgba($black, 0.1);
   position: relative;
   z-index: 1;
+
+  // Feature progress-bar
+
+  .progress-container {
+    width: 100%;
+    height: 0.25rem;
+    // background: $light-blue;
+    background: #bbd8f1;
+  }
+
+  .progress-bar {
+    height: 0.25rem;
+    background: $medium-blue;
+    width: 0%;
+  }
 }
 
 .h1--header {
@@ -31,6 +46,12 @@ header {
   font-weight: 400;
 }
 
+.docs-italia__document-title-icon {
+  font-size: 2rem;
+  float: left;
+  margin-right: 0.625rem;
+}
+
 .docs-italia {
   #cerca {
     border: 1px $grey solid;
@@ -45,6 +66,14 @@ header {
 
 .docs-italia__header-col {
   flex: 0 0 auto;
+
+  .btn {
+    padding: 0;
+
+    .it-icon {
+      font-size: 1.3rem;
+    }
+  }
 }
 
 .info--header {

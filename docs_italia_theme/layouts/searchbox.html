@@ -1,15 +1,19 @@
 {%- if builder != 'singlehtml' %}
   <div role="search">
     <form class="" id="rtd-search-form" action="{{ pathto('search') }}" method="get">
-      <div class="" role="search">
+
+      <div class="input-group" role="search">
         <input type="hidden" name="check_keywords" value="yes" />
         <input type="hidden" name="area" value="default" />
-        <input style="" class="p-2 text-grey" required="" id="cerca" type="text" name="q" placeholder="{{ t.search_form_label }}...">
-        <i class=""></i>
-      </div>
+        <input type="text" class="p-2 text-grey form-control" style="" required="" id="cerca" name="q" placeholder="{{ t.search_form_label }}...">
+				<span class="input-group-append">
+					<button type="submit" class="btn btn-default" role="search">
+            <span class="it-icon-search">
+							<span class="sr-only">{{ t.search_form_label }}</span>
+						</span>
+					</button>
+				</span>
+			</div>
     </form>
-  </div>
-  <div class="">
-    icona search
   </div>
 {%- endif %}

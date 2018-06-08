@@ -4,10 +4,8 @@
 {% include 'layouts/head.html' %}
 
 <body class="{{ site.css_theme }}">
+  {% include 'layouts/header.html' %}
   <div id="main" role="document">
-
-    {% include 'layouts/header.html' %}
-
     <div class="container-fluid container-fluid--desktop main-container">
       <div class="row">
         <nav class="col--nav">
@@ -35,11 +33,11 @@
         </div>
       </div>
   </div>
+  {% include 'layouts/footer.html' %}
 
-{% include 'layouts/footer.html' %}
-{% include 'layouts/scrolltop.html' %}
-{% include 'layouts/scripts.html' %}
-{% include 'layouts/web-analytics.html' %}
+  {% include 'layouts/scrolltop.html' %}
+  {% include 'layouts/scripts.html' %}
+  {% include 'layouts/web-analytics.html' %}
 
 </body>
 </html>

@@ -1,62 +1,72 @@
-<div class="bg-primary--darken">
-    <footer class="container-fluid">
-
-      <div class="row pt-5 pb-5 pl-4 pl-md-5 pr-4 pr-md-5">
-
-        <div class="col-12 border-bottom border-dark-blue pb-2">
-          <img class="" src="{{ site.owner_logo }}"
-            alt="{{ site.owner_full }}" style="height: 80px; max-width: 100%">
-          <p class="">
-          </p>
-        </div>
-
-        <!-- <div class="">
-          <p class="">{{ _(t.in_collaboration_with) }}</p>
-          <div class="">
-            <div class="">
-              <img class="" src="{{ site.gov_logo | d('//placehold.it/75x80?text=placeholder') }}" alt=""
-                style="height: 4em; max-width: 100%">
-              <img class="" src="{{ site.partner_logo | d('//placehold.it/75x80?text=placeholder') }}" alt=""
-                style="height: 4em; max-width: 100%">
+<footer class="footer container-fluid container-fluid--desktop">
+  <div class="px-3 pt-md-3 pb-md-2 mx-md-5">
+    <div class="row align-items-center d-flex">
+      <div class="col-xs-12 col-sm-6 col-lg-4 pt-4 pt-sm-5">
+        <a href="http://teamdigitale.governo.it/" target="_blank" class="d-inline-block" rel="noopener">
+          <div class="d-flex align-items-center">
+            <div class="px-2">
+              <img class="team-logo--icon" src="{{ pathto('_static/images/team-digitale-logo.svg', 1) }}" alt="{{ site.team_full }}">
             </div>
-            <div class=""></div>
-            <p class="">
-              {{ site.partner_full | upper }}
-            </p>
+            <div class="px-2 border-white border-left team-logo--text text-white">
+              {{ site.team_full }}
+            </div>
           </div>
-        </div> -->
-
-        <div class="col-12 pt-3">
-          <ul class="footer-menu list-inline pl-0">
-            {% for link in site.data.footer_links %}
-              {% set link_name = link.title %}
-              <li class="list-inline-item">
-                <strong><a class="footer-menu__link text-light-blue" href="{{ link.url }}">{% if t[link_name] %}{{ _(t[link_name]) }}{% else %}{{ _(link_name) }}{% endif %}</a></strong>
-              </li>
-            {% endfor %}
-
-          </ul>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-lg-4">
+        <span class="d-block m-2 in-collaboration">{{ t.in_collaboration_with }}</span>
+        <a href="https://www.agid.gov.it/" target="_blank" class="d-inline-block" rel="noopener">
+          <div class="d-flex align-items-center">
+            <div class="px-2">
+              <img class="agid-logo--icon" src="{{ pathto('_static/images/agid-logo.svg', 1) }}" alt="{{ site.agid_full }}">
+            </div>
+            <span class="agid-logo--separator border-white border-left"></span>
+            <div class="px-2 agid-logo--text text-white">
+              {{ site.agid_full }}
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-lg-4 pt-4 pt-sm-5">
+        <div class="text-center text-lg-right social d-flex align-items-center justify-content-center justify-content-lg-end flex-column flex-lg-row">
+          <div class="mr-lg-1 mb-2 mb-lg-0">{{ t.follow_us | capitalize }}</div>
+          <div>
+            <a href="https://github.com/italia/" class="d-inline-flex small-prints mx-1"><i class="d-inline-block icon it-icon it-icon-github"></i>GitHub</a>
+            <a href="https://twitter.com/teamdigitaleIT" class="d-finline-lex small-prints mx-1"><i class="d-inline-block icon it-icon it-icon-twitter it-icon-github"></i>Twitter</a>
+            <a href="https://www.linkedin.com/company/teamdigitale/" class="d-inline-flex small-prints mx-1"><i class="d-inline-block icon it-icon it-icon-linkedin it-icon-github"></i>LinkedIn</a>
+          </div>
         </div>
       </div>
+    </div>
+    <!--/row-->
 
-      <div class="t_translate-wrap">
-        <span class="t_translate" data-name="shareMsg" data-translation="{{ _(t.share_msg) }}"/>
-        <span class="t_translate" data-name="compareVersions" data-translation="{{ _(t.compare_versions) }}"/>
-        <span class="t_translate" data-name="copyLink" data-translation="{{ _(t.copy_link) }}"/>
-        <span class="t_translate" data-name="copiedLink" data-translation="{{ _(t.copied_link) }}"/>
-        <span class="t_translate" data-name="seeActions" data-translation="{{ _(t.see_actions) }}"/>
-        <span class="t_translate" data-name="otherActions" data-translation="{{ _(t.other_actions) }}"/>
-        <span class="t_translate" data-name="comments" data-translation="{{ _(t.comments) }}"/>
-        <span class="t_translate" data-name="backToText" data-translation="{{ _(t.back_to_text) }}"/>
-        <span class="t_translate" data-name="glossayEmpty" data-translation="{{ _(t.glossay_empty) }}"/>
-        <span class="t_translate" data-name="goToGlossay" data-translation="{{ _(t.go_to_glossary) }}"/>
-        <span class="t_translate" data-name="deepening" data-translation="{{ _(t.deepening) }}"/>
-        <span class="t_translate" data-name="example" data-translation="{{ _(t.example) }}"/>
-        <span class="t_translate" data-name="consultation" data-translation="{{ _(t.consultation) }}"/>
-        <span class="t_translate" data-name="showMore" data-translation="{{ _(t.show_more) }}"/>
-        <span class="t_translate" data-name="showLess" data-translation="{{ _(t.show_less) }}"/>
-        <span class="t_translate" data-name="note" data-translation="{{ _(t.note) }}"/>
-      </div>
+    <div class="row pb-4 colophon mt-md-5 mt-sm-3 pt-3 pt-sm-2">
+      <ul class="col list-inline small">
+        {% for link in site.data.footer_links %}
+        <li class="list-inline-item">
+          <strong><a class="footer-menu__link text-light-blue small-prints" href="{{ link.url }}">{{ t[link.title] }}</a></strong>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
 
-    </footer>
-</div>
+    <div class="t_translate-wrap">
+      <span class="t_translate" data-name="shareMsg" data-translation="{{ t.share_msg }}" />
+      <span class="t_translate" data-name="compareVersions" data-translation="{{ t.compare_versions }}" />
+      <span class="t_translate" data-name="copyLink" data-translation="{{ t.copy_link }}" />
+      <span class="t_translate" data-name="copiedLink" data-translation="{{ t.copied_link }}" />
+      <span class="t_translate" data-name="seeActions" data-translation="{{ t.see_actions }}" />
+      <span class="t_translate" data-name="otherActions" data-translation="{{ t.other_actions }}" />
+      <span class="t_translate" data-name="comments" data-translation="{{ t.comments }}" />
+      <span class="t_translate" data-name="backToText" data-translation="{{ t.back_to_text }}" />
+      <span class="t_translate" data-name="glossayEmpty" data-translation="{{ t.glossay_empty }}" />
+      <span class="t_translate" data-name="goToGlossay" data-translation="{{ t.go_to_glossary }}" />
+      <span class="t_translate" data-name="deepening" data-translation="{{ t.deepening }}" />
+      <span class="t_translate" data-name="example" data-translation="{{ t.example }}" />
+      <span class="t_translate" data-name="consultation" data-translation="{{ t.consultation }}" />
+      <span class="t_translate" data-name="showMore" data-translation="{{ t.show_more }}" />
+      <span class="t_translate" data-name="showLess" data-translation="{{ t.show_less }}" />
+      <span class="t_translate" data-name="note" data-translation="{{ t.note }}" />
+    </div>
+  </div>
+</footer>
