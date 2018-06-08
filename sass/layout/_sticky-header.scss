@@ -1,0 +1,13 @@
+.di-sticky {
+  position: fixed;
+  top: -96px;
+  // top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.di-sticky + #main {
+  // padding-top: 85px;
+  // padding-top: 96px;
+  padding-top: 180px;
+}

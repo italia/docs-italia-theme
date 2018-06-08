@@ -11,7 +11,6 @@ module.exports = themeScrollProgressBar = (function ($) {
         var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         var scrolled = (winScroll / height) * 100;
         document.getElementById("scrollprogressBar").style.width = scrolled + "%";
-        console.log('scrolling');
       });
     }
   };
