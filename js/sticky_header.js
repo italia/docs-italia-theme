@@ -1,28 +1,26 @@
-// Admonition toggle
+// Sticky header
 module.exports = themeStickyHeader = (function ($) {
 
   return {
     init: function(callback) {
-      that = this.$;
-
       // Get the header
       var header = $('header'),
-      sticky_content = $('#top-commands');
+          doc_header = $('#doc-header');
 
       // Get the offset position of the navbar
-      var offset = sticky_content.offset().top;
+      var offset = doc_header.offset().top;
 
+      // Do we need to debounce here?
       $(window).scroll(function () {
 
         // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
         if (window.pageYOffset >= offset) {
-          header.addClass("di-sticky");
+          header.addClass("sticky");
         } else {
-          header.removeClass("di-sticky");
+          header.removeClass("sticky");
         }
 
       });
-
     }
   }
 
