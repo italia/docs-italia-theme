@@ -14,7 +14,9 @@
     "release": "grunt release"
   },
   "dependencies": {
-    "grunt-cli": "^1.2.0"
+    "grunt-cli": "^1.2.0",
+    "resize-sensor": "0.0.6",
+    "sticky-sidebar": "^3.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^8.5.0",
@@ -22,7 +24,7 @@
     "browserify": "^14.5.0",
     "connect-livereload": "^0.6.0",
     "cssnano": "^3.10.0",
-    "grunt": "^1.0.1",
+    "grunt": "^1.0.3",
     "grunt-browserify": "^5.2.0",
     "grunt-cache-bust": "1.4.1",
     "grunt-contrib-clean": "^1.1.0",
