@@ -3,12 +3,12 @@
     font-family: $titillium-font;
   }
 
-  .di-collab-pre {
-    font: $titillium-font;
+  .in-collaboration {
+    font-size: 0.8em;
   }
 
   .team-logo--icon {
-    width: 72px;
+    width: 54px;
   }
 
   .team-logo--text {
@@ -18,9 +18,34 @@
     text-transform: uppercase;
   }
 
-  .agid-logo {
-    height: 56px !important;
-    max-width: 100%;
+  .agid-logo--icon {
+    width: 8em;
+
+    @media (min-width: 768px) {
+      width: 10em;
+    }
+  }
+
+  .agid-logo--separator {
+    border-left-width: 2px !important;
+    height: 30px;
+
+    @media (min-width: 768px) {
+      height: 40px;
+    }
+  }
+
+  .agid-logo--text {
+    width: 7rem;
+    line-height: 1.2;
+    font-size: 1em;
+    display: inline-block;
+    vertical-align: middle;
+
+    @media (min-width: 768px) {
+      font-size: 1.1em;
+      width: 8rem;
+    }
   }
 
   .small-prints {
@@ -32,27 +57,14 @@
     font-size: 1em;
     color: #fff;
 
-    > .socials-pre {
-      margin-right: 1em;
-      display: block;
-      margin-bottom: 1rem;
-
-      // display large up
-      @media (min-width: 992px) {
-        display: initial;
-        margin-bottom: 0;
-      }
-    }
-
     .icon {
       color: #00264d;
       background-color: #fff;
       // padding: 0.2em 0.4em;
-      padding: 0.3em 0.35em;
+      padding: 0.3em 0.3em;
       border-radius: 100%;
       // font-size: initial;
       font-size: 22px;
-      margin-right: 0.4em;
     }
 
     .small-prints {
