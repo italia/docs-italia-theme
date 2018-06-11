@@ -14,9 +14,7 @@
     "release": "grunt release"
   },
   "dependencies": {
-    "grunt-cli": "^1.2.0",
-    "resize-sensor": "0.0.6",
-    "sticky-sidebar": "^3.3.1"
+    "grunt-cli": "^1.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^8.5.0",
@@ -41,6 +39,8 @@
     "matchdep": "^2.0.0",
     "modernizr": "^3.6.0",
     "pixrem": "^4.0.1",
+    "resize-sensor": "0.0.6",
+    "sticky-sidebar": "^3.3.1",
     "stylelint": "^9.2.1",
     "stylelint-config-standard": "^18.2.0"
   },
