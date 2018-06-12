@@ -17,8 +17,7 @@
     "axios": "^0.18.0",
     "grunt-cli": "^1.2.0",
     "keypair": "^1.0.1",
-    "request-promise-native": "^1.0.5"
-    "grunt-cli": "^1.2.0",
+    "request-promise-native": "^1.0.5",
     "resize-sensor": "0.0.6",
     "sticky-sidebar": "^3.3.1"
   },

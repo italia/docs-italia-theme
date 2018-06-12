@@ -1,3 +1,6 @@
+# coding=utf-8
+# encoding=utf8
+
 import sys
 
 ##############################
@@ -54,7 +57,7 @@ class SectionCommentsDirective(Directive):
                         <figure class="col-auto mb-0">
                             <img class="block-comments__img new-comment__figure rounded-circle" src="">
                         </figure>
-                        <input class='form-control new-comment__body col ml-2 pl-3 pr-3' id="comments-input" placeholder='Commenta...' />
+                        <input class='form-control new-comment__body col ml-2 pl-3 pr-3' id="comments-input" placeholder='Scrivi un commento...'>
                     </div>
                     <!-- Buttons -->
                     <div class='new-comment__buttons d-none'>
@@ -81,7 +84,7 @@ class SectionCommentsDirective(Directive):
             <div class="block-comments container-fluid" id="accordion-comments">
                 <!-- Top header -->
                 <div class="block-comments__header border-top border-bottom border-width-2 pt-3 pb-3 row align-items-center justify-content-between">
-                    <h6 class="col-auto text-uppercase mb-0">{{ _(t.comments) }}</h6>
+                    <h6 class="col-auto text-uppercase mb-0">Commenti</h6>
                     <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-collapsed0" aria-expanded="true"><span class="it-icon-plus"></span><span class="it-icon-minus"></span></button>
                 </div>
             </div>
@@ -91,6 +94,13 @@ class SectionCommentsDirective(Directive):
                 <div class="row align-items-center mt-4 mb-4 block-comments__input">
                     """ + form_template + """
                     <div class='section' id='docs-comments-box-"""+ options['topic_id'] +"""' data-topic='"""+ options['topic_id'] +"""'></div>
+                </div>
+                <div class="row">
+                    <div class="block-comments__list col">
+                        <div class="row mt-4 mb-4">
+                            <ul class="block-comments__list col items" id="accordion-comment-item" data-topic='"""+ options['topic_id'] +"""'></ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         """

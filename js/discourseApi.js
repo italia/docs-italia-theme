@@ -27,7 +27,7 @@ module.exports = function () {
 
   // Create cookie
   this._cookie_create = function (key, value, days, overwrite) {
-    if (this._cookie_read(key) == null || overwrite) {
+    if ((this._cookie_read(key) == null || this._cookie_read(key) === 'false') || overwrite) {
       var expires = new Date();
       // Set expires in {days} days
       expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -106,7 +106,7 @@ module.exports = function () {
 
   this.getApiKey = function () {
     var key = this._cookie_read(this.uak_cookie_name);
-    if (key !== null) {
+    if (key !== null && key !== 'false') {
       return JSON.parse(key).key;
     }
     return false;

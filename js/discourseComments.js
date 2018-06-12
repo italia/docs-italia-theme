@@ -18,6 +18,14 @@ function _createAvatarUrl (template, size) {
   return Discourse.base_url + '/' + template.replace('{size}', size);
 }
 
+function _parseUserRefsReplacer (match) {
+  return Discourse.base_url + match;
+}
+// Parse user refers into cooked comment's body
+function _parseUserRefs (text) {
+  return text.replace(/(\/u\/\w+)/gm, _parseUserRefsReplacer);
+}
+
 // Create the comment markup with given topic id and post
 function _createMedia (tid, post, nPId) {
   // Id attribute for comment div
@@ -33,25 +41,38 @@ function _createMedia (tid, post, nPId) {
   if (typeof nPId !== "undefined") {
     isNew = post.id == nPId;
   }
+
+  // Change user link to points correctly to discourse site user's profile
+  post.cooked = _parseUserRefs(post.cooked);
+
   // Return markup
   return "" +
-  "<div class='media topic-comment comment-" + post.id + (isNew ? ' is-new' : '') + "' id='"+commentHTMLId+"' data-topic='"+tid+"' data-comment="+post.id+">" +
+    "<li id='"+ commentHTMLId + "' class='row mb-5 block-comments__item comment-"+ post.id + (isNew ? ' is-new' : '') + "' data-topic='"+ tid +"' data-comment="+post.id+">" +
     "<div id='reply-to-"+post.post_number+"'></div>" +
-    "<img class='mr-3' src='"+avatarUrl+"'/>" +
-    "<div class='media-body media-body-comment-"+post.id+"'>" +
-      "<div id='reply-link-"+post.id+"'></div>" +
-      "<h5 class='mt-0 topic-comment--title'> "+post.username+" </h5>" + "<small>(#"+ post.post_number +")</small>" +
-      "<div class='topic-comment--date'>"+ date +" </div>" +
-      "<div class='topic-comment--body'> "+post.cooked+" </div>" +
-    "</div>" +
-  "</div>";
+      "<figure class='col-auto mb-0'><img class='block-comments__img rounded-circle' src='"+ avatarUrl +"'></figure>" +
+      "<div class='col'>" +
+        "<div class='row align-items-center justify-content-between' id='comment-heading-1'>" +
+          "<div class='col-auto'>" +
+            "<span class='block-comments__name text-capitalize mb-0'>" + post.username + "</span>" +
+            "<div id='reply-link-"+post.id+"'></div>" +
+          "</div>" +
+          "<div class='col-auto'>" +
+            "<p class='d-inline-block mr-2 block-comments__date mb-0'>" + date + "</p>" +
+            "<button class='block-comments__item-btn collapsed' data-toggle='collapse' data-target='#collapse-"+ post.id +"'><span class='it-icon-collapse'></span><span class='it-icon-expand'></span></button>" +
+          "</div>" +
+        "</div>" +
+        "<p class='text-uppercase block-comments__role'>giornalista</p>" +
+        "<div id='collapse-"+ post.id +"' class='block-comments__paragraph pl-3 border-left collapse show' aria-labelledby='comment-heading-1'>" + post.cooked + "</div>" +
+      "</div>" +
+    "</li>";
 }
 
 module.exports = discourseComments = (function ($) {
   return {
     init: function (newPostId) {
       // Obtains all comments boxes
-      var $commentBox = $('div[id^="docs-comments-box-"]');
+      var $commentBoxOriginal = $('div[id^="docs-comments-box-"]');
+      var $commentBox = $('ul.block-comments__list.items');
       // Check if user is logged in
       if (!Discourse.userIsLoggedIn())
       // Before flush set fixed height, to avoid blink
