@@ -1,4 +1,5 @@
-#desktop-menu { //.sidebar__inner{
+#desktop-menu {
+  // See https://abouolia.github.io/sticky-sidebar/#configure-your-css
   transform: translate(0, 0); /* For browsers don't support translate3d. */
   transform: translate3d(0, 0, 0);
   will-change: position, transform;
@@ -21,11 +22,8 @@
 }
 
 .docs-italia-menu {
-  // begin sticky sidebar style as indicated in:
-  // https://abouolia.github.io/sticky-sidebar/#configure-your-css
-  //.sidebar {
+  // See https://abouolia.github.io/sticky-sidebar/#configure-your-css
   will-change: min-height;
-  // end sticky sidebar style
   display: none;
 
   @media (min-width: 768px) {
