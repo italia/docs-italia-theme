@@ -6,7 +6,7 @@ require('./jsencrypt.min.js')
  * Api Class to handle/generate Discourse User-Api-Key
  */
 module.exports = function () {
-  var obj = this
+  var obj = this;
   // Private key cookie's name
   this.pk_cookie_name = 'docs-italia_pk';
   // User API Key cookie's name
@@ -15,11 +15,7 @@ module.exports = function () {
   this.expires_cookie = 10;
 
   this.base_url = 'http://ec2-52-212-9-50.eu-west-1.compute.amazonaws.com';
-  this.user = {
-    id: -1,
-    key: null,
-    username: '',
-  };
+  this.user = null;
   this.session = {
     csrf: null,
   };
@@ -144,6 +140,17 @@ module.exports = function () {
       headers: {
         'User-Api-Key': obj.getApiKey(),
       }
+    });
+  };
+
+  this.getCurrentUser = function () {
+    // Set user object
+    return axios({
+      url: obj.base_url + '/session/current.json',
+      headers: { 'User-Api-Key': obj.getApiKey(), }
+    }).then(function (results) {
+      obj.user = results.data.current_user;
+      console.log(obj);
     });
   };
 

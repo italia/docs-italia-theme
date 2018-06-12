@@ -49,7 +49,14 @@ class SectionCommentsDirective(Directive):
             <form id='new-comment-""" + options['topic_id'] + """' data-topic='""" + options['topic_id'] + """'>
                 <div class="form group">
                     <div class="new-comment__errors-box"></div>
-                    <textarea class='form-control new-comment__body' placeholder='Commenta...' rows='5'></textarea>
+                    <!-- Write -->
+                    <div class="row align-items-center mt-4 mb-4 block-comments__input new-comment__write">
+                        <figure class="col-auto mb-0">
+                            <img class="block-comments__img new-comment__figure rounded-circle" src="">
+                        </figure>
+                        <input class='form-control new-comment__body col ml-2 pl-3 pr-3' id="comments-input" placeholder='Commenta...' />
+                    </div>
+                    <!-- Buttons -->
                     <div class='new-comment__buttons d-none'>
                         <input type='submit' class='btn btn-sm new-comment__submit' value='invia' disabled='true' />
                         <input type='reset' class='btn btn-sm new-comment__delete' value='annulla' />
@@ -71,17 +78,19 @@ class SectionCommentsDirective(Directive):
             </from>
         """
         cbox_template = """
-            <div class="collapse-header" id="cbox-header">
-                <button data-toggle="collapse" data-target="#cbox-collapse" aria-expanded="true" aria-controls="cbox-collapse">
-                    Commenti
-                </button>
+            <div class="block-comments container-fluid" id="accordion-comments">
+                <!-- Top header -->
+                <div class="block-comments__header border-top border-bottom border-width-2 pt-3 pb-3 row align-items-center justify-content-between">
+                    <h6 class="col-auto text-uppercase mb-0">{{ _(t.comments) }}</h6>
+                    <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-collapsed0" aria-expanded="true"><span class="it-icon-plus"></span><span class="it-icon-minus"></span></button>
+                </div>
             </div>
-            <div id="cbox-collapse" class="collapse show" role="tabpanel" aria-labelledby="cbox-header">
-                <div class="collapse-body">
-                    """ + form_template + """
 
-                    <div class='section' id='docs-comments-box-"""+ options['topic_id'] +"""' data-topic='"""+ options['topic_id'] +"""'>
-                    </div>
+            <div class="block-comments__body pt-4 collapse show" data-parent="#accordion-comments" id="comments-collapsed0" style="">
+                <!-- Input row -->
+                <div class="row align-items-center mt-4 mb-4 block-comments__input">
+                    """ + form_template + """
+                    <div class='section' id='docs-comments-box-"""+ options['topic_id'] +"""' data-topic='"""+ options['topic_id'] +"""'></div>
                 </div>
             </div>
         """

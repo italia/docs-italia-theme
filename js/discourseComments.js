@@ -61,6 +61,11 @@ module.exports = discourseComments = (function ($) {
       // Set required characters
       $('form[id^="new-comment-"] .required-chars').text('-20');
 
+      // Set comment-write-box user picture
+      Discourse.getCurrentUser().then(function () {
+        $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.avatar_template, 45));
+      });
+      
       // Foreach get comments from discourse
       $commentBox.each(function (idx, cB) {
         var topicId = $(cB).data('topic');
@@ -131,19 +136,20 @@ module.exports = discourseComments = (function ($) {
 
       });
       // Handles min. characters nedeed to post
-      $('textarea.new-comment__body').bind('input', function () {
-        $req = $(this).parent().find('.required-chars');
+      $('input.new-comment__body').bind('input', function () {
+        $parent = $(this).parents('form');
+        $req = $parent.find('.required-chars');
         var currentLength = -20 + $(this).val().replace(/ /g,'').length;
         if (currentLength < 0) {
           $req.text(currentLength);
-          $(this).parent().find('input[type="submit"]').attr('disabled', true);
+          $parent.find('input[type="submit"]').attr('disabled', true);
         } else {
           $req.text('0');
-          $(this).parent().find('input[type="submit"]').attr('disabled', false);
+          $parent.find('input[type="submit"]').attr('disabled', false);
         }
       });
       // Show form elements on focus and hide on blur
-      $('textarea.new-comment__body')
+      $('input.new-comment__body')
         .bind('focus', function () {
           $parent = $(this).parents('form');
 
