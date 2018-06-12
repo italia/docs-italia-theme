@@ -1,28 +1,29 @@
 <!-- <h2 class="u-padding-all-s">
   <a href="{{ pathto(master_doc) }}" class="u-color-white">{{ project }}</a>
 </h2> -->
-
-<dl class="badge badge-pill bg-primary" role="note" aria-label="versions">
-    <!-- <dt class="">{{ t.version }}:</dt> -->
-    {%- set nav_version = version %}
-    {% if READTHEDOCS and current_version %}
-      {%- if current_version == 'stable' and last_stable_version %}
-        {%- set current_version = last_stable_version %}
-      {%- endif %}
-      {%- set nav_version = current_version %}
-    {% endif %}
-    {% if nav_version %}
-      <dd class="">
-        <span class="">
-          <select class="" id="version-list">
-            <option value=''>{{ t.version }} {{ nav_version }}</option>
-            {% for slug, url in versions %}
-              {% if slug != nav_version %}
-                <option value="{{ url }}">{{ slug }}</option>
-              {% endif %}
-            {% endfor %}
-          </select>
-        </span>
-      </dd>
-    {% endif %}
-</dl>
+<div class="dropdown" id="version-list">
+  {%- set nav_version = version %}
+  {% if READTHEDOCS and current_version %}
+    {%- if current_version == 'stable' and last_stable_version %}
+      {%- set current_version = last_stable_version %}
+    {%- endif %}
+    {%- set nav_version = current_version %}
+  {% endif %}
+  {% if nav_version %}
+    <button class="btn btn-primary dropdown-toggle badge badge-pill bg-primary" type="button" id="dropdownVersionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ t.version }} {{ nav_version }}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownVersionButton">
+      {% for slug, url in versions %}
+        {% if slug != nav_version %}
+          <a class="dropdown-item" href="#" di-value="{{ url }}">
+            {{ slug }}
+          </a>
+        {% endif %}
+      {% endfor %}
+       <a class="dropdown-item" href="#">{{ t.version }} 2</a>
+       <a class="dropdown-item" href="#">{{ t.version }} 3</a>
+       <a class="dropdown-item" href="#">{{ t.version }} 4</a>
+    </div>
+  {% endif %}
+</div>

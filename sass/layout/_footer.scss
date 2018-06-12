@@ -1,3 +1,87 @@
+.footer {
+  * {
+    font-family: $titillium-font;
+  }
+
+  .in-collaboration {
+    font-size: 0.8em;
+  }
+
+  .team-logo--icon {
+    width: 54px;
+  }
+
+  .team-logo--text {
+    font-size: 1rem;
+    line-height: 18px;
+    max-width: 160px;
+    text-transform: uppercase;
+  }
+
+  .agid-logo--icon {
+    width: 8em;
+
+    @media (min-width: 768px) {
+      width: 10em;
+    }
+  }
+
+  .agid-logo--separator {
+    border-left-width: 2px !important;
+    height: 30px;
+
+    @media (min-width: 768px) {
+      height: 40px;
+    }
+  }
+
+  .agid-logo--text {
+    width: 7rem;
+    line-height: 1.2;
+    font-size: 1em;
+    display: inline-block;
+    vertical-align: middle;
+
+    @media (min-width: 768px) {
+      font-size: 1.1em;
+      width: 8rem;
+    }
+  }
+
+  .small-prints {
+    color: #00fff8;
+    font-weight: 600;
+  }
+
+  .social {
+    font-size: 1em;
+    color: #fff;
+
+    .icon {
+      color: #00264d;
+      background-color: #fff;
+      // padding: 0.2em 0.4em;
+      padding: 0.3em 0.3em;
+      border-radius: 100%;
+      // font-size: initial;
+      font-size: 22px;
+    }
+
+    .small-prints {
+      font-size: 0;
+    }
+  }
+
+  .colophon {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 1.5em;
+
+    @media (min-width: 992px) {
+      margin-top: 2em;
+    }
+  }
+}
+
 .footer-menu__link {
   &:hover {
     color: $white;

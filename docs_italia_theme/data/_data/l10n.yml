@@ -73,7 +73,8 @@ it:
     previous: precedente
     next: successivo
 
-    in_collaboration_with: In collaborazione con
+    in_collaboration_with: in collaborazione con
+    follow_us: seguici su
 
     header_link_trasformazione: Piano Triennale
     header_link_developers: Developers
@@ -157,7 +158,8 @@ en:
     previous: previous
     next: next
 
-    in_collaboration_with: In collaboration with
+    in_collaboration_with: in collaboration with
+    follow_us: follow us on
 
     header_link_trasformazione: Piano Triennale
     header_link_developers: Developers

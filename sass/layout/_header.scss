@@ -1,7 +1,40 @@
 header {
   box-shadow: 0 0 120px 0 rgba($black, 0.1);
   position: relative;
-  z-index: 1;
+  z-index: 10;
+
+  // Feature progress-bar
+
+  .progress-container {
+    width: 100%;
+    height: 0.25rem;
+    // background: $light-blue;
+    background: #bbd8f1;
+  }
+
+  .progress-bar {
+    height: 0.25rem;
+    background: $medium-blue;
+    width: 0%;
+  }
+
+  .doc-header-room {
+    height: 4rem;
+  }
+
+  &.sticky {
+    #doc-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      max-width: 1450px;
+      z-index: 10;
+    }
+
+    .doc-header-room {
+      display: block !important;
+    }
+  }
 }
 
 .h1--header {
@@ -29,6 +62,13 @@ header {
 .docs-italia__document-title {
   font-size: 0.9rem;
   font-weight: 400;
+  margin: 0;
+}
+
+.docs-italia__document-title-icon {
+  font-size: 2rem;
+  float: left;
+  margin-right: 0.625rem;
 }
 
 .docs-italia {
@@ -45,6 +85,14 @@ header {
 
 .docs-italia__header-col {
   flex: 0 0 auto;
+
+  .btn {
+    padding: 0;
+
+    .it-icon {
+      font-size: 1.3rem;
+    }
+  }
 }
 
 .info--header {
