@@ -2,6 +2,11 @@
   transform: translate(0, 0); /* For browsers don't support translate3d. */
   transform: translate3d(0, 0, 0);
   will-change: position, transform;
+  padding-bottom: 5rem;
+
+  & > button:first-of-type {
+    margin-top: 1.5rem;
+  }
 }
 
 .col--nav {
@@ -25,8 +30,6 @@
 
   @media (min-width: 768px) {
     display: block;
-    padding-top: 1.5rem;
-    bottom: 2rem;
   }
 }
 

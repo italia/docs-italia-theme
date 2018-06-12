@@ -1,6 +1,7 @@
 global.$ = global.jQuery = require('jquery');
 global.Popper = require('popper.js');
 global.ResizeSensor = require('resize-sensor'); // needed by themeStickySidebar.
+require('sticky-sidebar')
 require('bootstrap-italia');
 require('modernizr');
 
