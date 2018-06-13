@@ -57,7 +57,7 @@ class SectionCommentsDirective(Directive):
                         <figure class="col-auto mb-0">
                             <img class="block-comments__img new-comment__figure rounded-circle" src="">
                         </figure>
-                        <input class='form-control new-comment__body col ml-2 pl-3 pr-3' id="comments-input" placeholder='Scrivi un commento...'>
+                        <textarea class='form-control new-comment__body col ml-2 pl-3 pr-3' id="comments-input" placeholder='Scrivi un commento...' rows="4"></textarea>
                     </div>
                     <!-- Buttons -->
                     <div class='new-comment__buttons d-none'>
@@ -89,7 +89,7 @@ class SectionCommentsDirective(Directive):
                 </div>
             </div>
 
-            <div class="block-comments__body pt-4 collapse show" data-parent="#accordion-comments" id="comments-collapsed0" style="">
+            <div class="block-comments__body collapse show" data-parent="#accordion-comments" id="comments-collapsed0" style="">
                 <!-- Input row -->
                 <div class="row align-items-center mt-4 mb-4 block-comments__input">
                     """ + form_template + """

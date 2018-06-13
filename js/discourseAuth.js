@@ -15,7 +15,7 @@ module.exports = discourseAuth = {
       } else {
         // Then generate api key
         $('#redirect-login').html('<a href="' + Discourse.userAuthKeyUrl() + '">Login</a>');
-        window.location.href=Discourse.userAuthKeyUrl();
+        // window.location.href=Discourse.userAuthKeyUrl();
       }
     }
   }

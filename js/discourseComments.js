@@ -18,16 +18,18 @@ function _createAvatarUrl (template, size) {
   return Discourse.base_url + '/' + template.replace('{size}', size);
 }
 
+// Presets Discourse'base url to matched value.
 function _parseUserRefsReplacer (match) {
   return Discourse.base_url + match;
 }
+
 // Parse user refers into cooked comment's body
 function _parseUserRefs (text) {
   return text.replace(/(\/u\/\w+)/gm, _parseUserRefsReplacer);
 }
 
 // Create the comment markup with given topic id and post
-function _createMedia (tid, post, nPId) {
+function _createMarkup (tid, post, nPId) {
   // Id attribute for comment div
   var commentHTMLId = 'docs-comment-' + tid + '-' + post.id;
   // Replace the avatar's size from template url
@@ -45,34 +47,38 @@ function _createMedia (tid, post, nPId) {
   // Change user link to points correctly to discourse site user's profile
   post.cooked = _parseUserRefs(post.cooked);
 
-  // Return markup
-  return "" +
-    "<li id='"+ commentHTMLId + "' class='row mb-5 block-comments__item comment-"+ post.id + (isNew ? ' is-new' : '') + "' data-topic='"+ tid +"' data-comment="+post.id+">" +
-    "<div id='reply-to-"+post.post_number+"'></div>" +
-      "<figure class='col-auto mb-0'><img class='block-comments__img rounded-circle' src='"+ avatarUrl +"'></figure>" +
-      "<div class='col'>" +
-        "<div class='row align-items-center justify-content-between' id='comment-heading-1'>" +
-          "<div class='col-auto'>" +
-            "<span class='block-comments__name text-capitalize mb-0'>" + post.username + "</span>" +
-            "<div id='reply-link-"+post.id+"'></div>" +
+  // Get user role and then return html for comment
+  return Discourse.getUserCustomFieldValue(post.username).then(function(customField) {
+    // Return markup
+    return "" +
+      "<li id='"+ commentHTMLId + "' class='row mb-5 block-comments__item comment-"+ post.id + (isNew ? ' is-new' : '') + "' data-topic='"+ tid +"' data-comment="+post.id+">" +
+        "<div id='reply-to-"+post.post_number+"'></div>" +
+        "<figure class='col-auto mb-0'><img class='block-comments__img rounded-circle' src='"+ avatarUrl +"'></figure>" +
+        "<div class='col'>" +
+          "<div class='row align-items-center justify-content-between' id='comment-heading-1'>" +
+            "<div class='col-auto'>" +
+              "<span class='block-comments__name text-capitalize mb-0'>" + post.username + "</span>" +
+              "<div id='reply-link-"+post.id+"'></div>" +
+            "</div>" +
+            "<div class='col-auto'>" +
+              "<p class='d-inline-block mr-2 block-comments__date mb-0'>" + date + "</p>" +
+              "<button class='block-comments__item-btn collapsed' data-toggle='collapse' data-target='#collapse-"+ post.id +"'><span class='it-icon-collapse'></span><span class='it-icon-expand'></span></button>" +
+            "</div>" +
           "</div>" +
-          "<div class='col-auto'>" +
-            "<p class='d-inline-block mr-2 block-comments__date mb-0'>" + date + "</p>" +
-            "<button class='block-comments__item-btn collapsed' data-toggle='collapse' data-target='#collapse-"+ post.id +"'><span class='it-icon-collapse'></span><span class='it-icon-expand'></span></button>" +
-          "</div>" +
+          "<p class='text-uppercase block-comments__role'>" + (customField !== null ? customField : 'utente')+ "</p>" +
+          "<div id='collapse-"+ post.id +"' class='block-comments__paragraph pl-3 border-left collapse show' aria-labelledby='comment-heading-1'>" + post.cooked + "</div>" +
         "</div>" +
-        "<p class='text-uppercase block-comments__role'>giornalista</p>" +
-        "<div id='collapse-"+ post.id +"' class='block-comments__paragraph pl-3 border-left collapse show' aria-labelledby='comment-heading-1'>" + post.cooked + "</div>" +
-      "</div>" +
-    "</li>";
+      "</li>";
+  });
 }
 
 module.exports = discourseComments = (function ($) {
   return {
-    init: function (newPostId) {
+    init: function (newPostId, postObject) {
       // Obtains all comments boxes
-      var $commentBoxOriginal = $('div[id^="docs-comments-box-"]');
       var $commentBox = $('ul.block-comments__list.items');
+      var topicId = $commentBox.data('topic');
+
       // Check if user is logged in
       if (!Discourse.userIsLoggedIn())
       // Before flush set fixed height, to avoid blink
@@ -83,9 +89,11 @@ module.exports = discourseComments = (function ($) {
       $('form[id^="new-comment-"] .required-chars').text('-20');
 
       // Set comment-write-box user picture
-      Discourse.getCurrentUser().then(function () {
-        $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.avatar_template, 45));
-      });
+      if (Discourse.userIsLoggedIn()) {
+        Discourse.getCurrentUser().then(function () {
+          $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.avatar_template, 45));
+        });
+      }
       
       // Foreach get comments from discourse
       $commentBox.each(function (idx, cB) {
@@ -100,8 +108,11 @@ module.exports = discourseComments = (function ($) {
           topicPosts = _remapPosts(results.post_stream.posts);
           // Loop through posts
           topicPosts.forEach(function (e, idx) {
+            //if (typeof Discourse.usersFields[e.username] !== "undefined")
             // Append markup with comment to the comments box
-            $commentBox.append($(_createMedia(topicId, e, newPostId)));
+            _createMarkup(topicId, e, newPostId).then(function (html) {
+              $commentBox.append(html);
+            });
             // Check if current comment is a reply to another
             if (e.reply_to_post_number !== null) {
               // Get the reply's target
@@ -121,6 +132,13 @@ module.exports = discourseComments = (function ($) {
 
       // Reset min-height to auto
       $commentBox.css('min-height', 'auto');
+
+      // If user isn't logged don't show new-comment form
+      if (!Discourse.userIsLoggedIn()) {
+        var message = 'Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta' +
+                      '<div> <a href="' + Discourse.userAuthKeyUrl() + '" class="btn btn-success">Login</a>';
+        $('form[id^="new-comment-"]').html('<div class="new-comment__login">' + message + '</div>');
+      }
 
       // Manage new comment posting
       $('form[id^="new-comment-"]').bind('submit', function (evt) {
@@ -142,22 +160,20 @@ module.exports = discourseComments = (function ($) {
                 $form.removeClass('sending');
                 $body.val('');
                 // Re-init current modules, to update comments list
-                module.exports.init(results.id);
+                module.exports.init(results.data.id, results);
               }, 1500)
               // Error
               .catch(function (error) {
-                console.log(error.response.data.errors);
                 var errorsString = error.response.data.errors.join('<br>');
                 $form.removeClass('sending');
                 $errorsBox.append(errorsString);
-                console.log(reason, 'error');
               });
           })
         }
 
       });
       // Handles min. characters nedeed to post
-      $('input.new-comment__body').bind('input', function () {
+      $('textarea.new-comment__body').bind('input', function () {
         $parent = $(this).parents('form');
         $req = $parent.find('.required-chars');
         var currentLength = -20 + $(this).val().replace(/ /g,'').length;
@@ -170,7 +186,7 @@ module.exports = discourseComments = (function ($) {
         }
       });
       // Show form elements on focus and hide on blur
-      $('input.new-comment__body')
+      $('textarea.new-comment__body')
         .bind('focus', function () {
           $parent = $(this).parents('form');
 

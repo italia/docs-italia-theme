@@ -1,6 +1,6 @@
 .block-comments {
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.25rem;
 
   p {
     font-family: $titillium-font;
@@ -113,6 +113,20 @@
 
 form[id^="new-comment-"] {
   position: relative;
+  width: 100%;
+
+  textarea {
+    border: 1px $grey-light-01 solid;
+    border-radius: 5px;
+
+    &:focus {
+      border: 1px $grey-mid solid;
+    }
+
+    &::placeholder {
+      color: $grey;
+    }
+  }
 
   &.sending::after {
     content: '';
@@ -131,5 +145,11 @@ form[id^="new-comment-"] {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+li[id^="docs-comment-"] {
+  &.is-new {
+    background: lightyellow;
   }
 }

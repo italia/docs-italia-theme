@@ -1,6 +1,22 @@
-var axios = require('axios')
-var keypair = require('keypair')
-require('./jsencrypt.min.js')
+var axios = require('axios');
+// Import axios cache adapter
+var aca = require('axios-cache-adapter');
+var keypair = require('keypair');
+require('./jsencrypt.min.js');
+
+// Setup cache
+var cache = aca.setupCache({
+  maxAge: 15 * 60 * 1000,
+  exclude: {
+    filter: function (req) {
+      console.log(req.method === "post", req);
+      return req.method === "post";
+    }
+  }
+});
+
+var axinstance = axios.create({ //  adapter: cache.adapter,
+});
 
 /**
  * Api Class to handle/generate Discourse User-Api-Key
@@ -24,6 +40,9 @@ module.exports = function () {
   this.jsenc = new JSEncrypt();
   this.payload = null;
   this.popup = null;
+  // Static variable that will contains username => custom_field pairs to avoid multiples requests
+  // and avoid "429 Too Many Requests" discourse's error
+  this.usersFields = {};
 
   // Create cookie
   this._cookie_create = function (key, value, days, overwrite) {
@@ -113,7 +132,7 @@ module.exports = function () {
   };
 
   this.getCSRF = function () {
-    return axios({
+    return axinstance({
       url: this.base_url + '/session/csrf.json',
     }, function (error, response, body ) {
       if (error === null) {
@@ -129,7 +148,7 @@ module.exports = function () {
   };
 
   this.createPost = function (tid, body) {
-    return axios({
+    return axinstance({
       method: 'POST',
       url: obj.base_url + '/posts',
       data: {
@@ -145,18 +164,27 @@ module.exports = function () {
 
   this.getCurrentUser = function () {
     // Set user object
-    return axios({
+    return axinstance({
       url: obj.base_url + '/session/current.json',
       headers: { 'User-Api-Key': obj.getApiKey(), }
     }).then(function (results) {
       obj.user = results.data.current_user;
-      console.log(obj);
+      return results;
+    });
+  };
+
+  this.getUserCustomFieldValue = function (username) {
+    console.log('getUserCustomFieldValue');
+    return axinstance({
+      url: obj.base_url + '/u/' + username + '.json',
+    }).then(function (data) {
+      return data.data.user.user_fields[1];
     });
   };
 
   // Get all topic's posts
   this.getTopicPosts = function(tid) {
-    return axios({
+    return axinstance({
       method: 'get',
       url: obj.base_url + '/t/' + tid + '/posts.json',
       responseType: 'json'
