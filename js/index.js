@@ -1,9 +1,11 @@
 global.$ = global.jQuery = require('jquery');
 global.Popper = require('popper.js');
+global.stickybits = require('stickybits');
 global.ResizeSensor = require('resize-sensor'); // needed by themeStickySidebar.
 require('sticky-sidebar')
 require('bootstrap-italia');
 require('modernizr');
+
 
 var themeMarkupModifier = require('./markup_modifier.js');
 var themeToolTip = require('./tooltip.js');
@@ -41,5 +43,4 @@ $(document).ready(function() {
   function glossayReady() {
     themeToolTip.init();
   }
-
 });
