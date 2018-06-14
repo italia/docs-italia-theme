@@ -1,22 +1,6 @@
 var axios = require('axios');
-// Import axios cache adapter
-var aca = require('axios-cache-adapter');
 var keypair = require('keypair');
-require('./jsencrypt.min.js');
-
-// Setup cache
-var cache = aca.setupCache({
-  maxAge: 15 * 60 * 1000,
-  exclude: {
-    filter: function (req) {
-      console.log(req.method === "post", req);
-      return req.method === "post";
-    }
-  }
-});
-
-var axinstance = axios.create({ //  adapter: cache.adapter,
-});
+require('jsencrypt');
 
 /**
  * Api Class to handle/generate Discourse User-Api-Key
@@ -132,7 +116,7 @@ module.exports = function () {
   };
 
   this.getCSRF = function () {
-    return axinstance({
+    return axios({
       url: this.base_url + '/session/csrf.json',
     }, function (error, response, body ) {
       if (error === null) {
@@ -148,7 +132,7 @@ module.exports = function () {
   };
 
   this.createPost = function (tid, body) {
-    return axinstance({
+    return axios({
       method: 'POST',
       url: obj.base_url + '/posts',
       data: {
@@ -163,9 +147,11 @@ module.exports = function () {
   };
 
   this.getCurrentUser = function () {
+    var endpoint = obj.base_url + '/session/current.json';
+
     // Set user object
-    return axinstance({
-      url: obj.base_url + '/session/current.json',
+    return axios({
+      url: endpoint,
       headers: { 'User-Api-Key': obj.getApiKey(), }
     }).then(function (results) {
       obj.user = results.data.current_user;
@@ -174,9 +160,10 @@ module.exports = function () {
   };
 
   this.getUserCustomFieldValue = function (username) {
-    console.log('getUserCustomFieldValue');
-    return axinstance({
-      url: obj.base_url + '/u/' + username + '.json',
+    var endpoint = obj.base_url + '/u/' + username + '.json';
+
+    return axios({
+      url: endpoint,
     }).then(function (data) {
       return data.data.user.user_fields[1];
     });
@@ -184,10 +171,12 @@ module.exports = function () {
 
   // Get all topic's posts
   this.getTopicPosts = function(tid) {
-    return axinstance({
+    return axios({
       method: 'get',
       url: obj.base_url + '/t/' + tid + '/posts.json',
       responseType: 'json'
     });
   };
-}
+
+};
+
