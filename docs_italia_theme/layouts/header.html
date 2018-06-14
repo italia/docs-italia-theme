@@ -5,7 +5,6 @@
         <svg class="svg--header align-bottom" xmlns="http://www.w3.org/2000/svg" height="78.187" width="97.387" viewBox="0 0 91.300002 73.300002"><g fill="#fff"><path d="M31.799 71.9V15.7h15.1V72h-15.1zM91.099 28.5h-13.8v23.1c0 2.3.1 3.8.2 4.8.1.9.5 1.7 1.2 2.4s1.8 1 3.3 1l8.6-.2.7 12c-5 1.1-8.9 1.7-11.5 1.7-6.8 0-11.4-1.5-13.8-4.6-2.5-3-3.7-8.6-3.7-16.8V0h15.1v15.6h13.8v12.9zM9.099 32.8c-2.6 0-4.8-.9-6.5-2.7s-2.6-4-2.6-6.6.9-4.8 2.5-6.6c1.7-1.8 3.9-2.6 6.5-2.6s4.8.9 6.5 2.7 2.5 4 2.5 6.7-.8 4.8-2.5 6.6c-1.6 1.6-3.7 2.5-6.4 2.5z"/></g></svg>
       </a>
     </div>
-
     <div class="col pl-4">
       <h1 class="h1--header mb-1">
         <a href="https://docs.developers.italia.it" class="text-white">
@@ -18,70 +17,67 @@
       <h2 class="text-white mb-0 h2--header">{{ _(t.site_subtitle | default(site.subtitle) | escape) }}</h2>
     </div>
   </div>
+</header>
+<div class="doc-header container-fluid container-fluid--desktop bg-white">
+  <div class="row py-2 px-4 px-lg-5 justify-content-between justify-content-lg-start">
+    <div class="col col-sm-4 col-md-3 col-xl d-none d-md-flex align-items-center">
+      <!-- TITOLO -->
+      <span class="it-icon-document docs-italia__document-title-icon"></span>
+      <span class="docs-italia__document-title">Titolo del documento</span>
+    </div>
 
-  <div class="row bg-white" id="doc-header">
-    <div class="container-fluid">
-      <div class="row py-2 px-4 px-lg-5 justify-content-between justify-content-lg-start">
-        <div class="col col-sm-4 col-md-3 col-xl d-none d-md-flex align-items-center">
-          <!-- TITOLO -->
-          <span class="it-icon-document docs-italia__document-title-icon"></span>
-          <span class="docs-italia__document-title">Titolo del documento</span>
-        </div>
-
-        <!-- <div class="col col-md-6"> -->
-        <div class="col">
-          <div class="row">
-            <div class="col-">
-              <a class="btn btn-default d-block d-sm-none" role="button" id="di-show-searchbox">
-                <span class="it-icon-search">
-                  <span class="sr-only">{{ t.search_form_label }}</span>
-                </span>
-              </a>
-            </div>
-            <div class="col-8 d-none d-sm-block">
-              <!-- SEARCH -->
-              {% include 'layouts/searchbox.html' %}
-            </div>
-            <!-- VERSIONS -->
-            <div class="col-">
-              <div id="rst-menu">
-                {% include 'layouts/docmenu.html' %}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="docs-italia__header-col-container col-md-3"> -->
-        <!-- <div class="docs-italia__header-col docs-italia__header-col--info p-2 d-inline-block"> -->
-        <div class="docs-italia__header-col docs-italia__header-col--info p-2 order-first order-lg-3">
-          <!-- INFO -->
-          <a href="#" role="button" class="btn"><span class="it-icon it-icon-info"></span></a>
-        </div>
-        <div class="docs-italia__header-col docs-italia__header-col--eye p-2 di-nav_menu-item d-none d-lg-block">
-          <!-- EYE -->
-          <a href="#" role="button" class="btn"><span class="it-icon it-icon-compare"></span></a>
-        </div>
-        <div class="docs-italia__header-col docs-italia__header-col--downloads p-2 di-nav_menu-item d-none d-lg-block">
-          <!-- DOWNLOAD -->
-          <span class="it-icon it-icon-download"></span>
-        </div>
-        <div class="docs-italia__header-col docs-italia__header-col--github p-2 di-nav_menu-item d-none d-lg-block">
-          <!-- GITHUB -->
-          <a href="#" role="button" class="btn"><span class="it-icon it-icon-github"></span></a>
-        </div>
-
-        <div class="docs-italia__header-col docs-italia__header-col--github p-2 di-nav_menu-button d-lg-none">
-          <!-- menu mobile -->
-          <a href="#" role="button" class="btn"><span class="it-icon it-icon-more"></span></a>
-        </div>
-        <!-- </div> <!~~ /.col .docs-italia__header-col(s) ~~> -->
-      </div>
+    <!-- <div class="col col-md-6"> -->
+    <div class="col">
       <div class="row">
-        <div class="progress-container">
-          <div class="progress-bar" id="scrollprogressBar"></div>
+        <div class="col-">
+          <a class="btn btn-default d-block d-sm-none" role="button" id="di-show-searchbox">
+            <span class="it-icon-search">
+              <span class="sr-only">{{ t.search_form_label }}</span>
+            </span>
+          </a>
+        </div>
+        <div class="col-8 d-none d-sm-block">
+          <!-- SEARCH -->
+          {% include 'layouts/searchbox.html' %}
+        </div>
+        <!-- VERSIONS -->
+        <div class="col-">
+          <div id="rst-menu">
+            {% include 'layouts/docmenu.html' %}
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- <div class="docs-italia__header-col-container col-md-3"> -->
+    <!-- <div class="docs-italia__header-col docs-italia__header-col--info p-2 d-inline-block"> -->
+    <div class="docs-italia__header-col docs-italia__header-col--info p-2 order-first order-lg-3">
+      <!-- INFO -->
+      <a href="#" role="button" class="btn"><span class="it-icon it-icon-info"></span></a>
+    </div>
+    <div class="docs-italia__header-col docs-italia__header-col--eye p-2 di-nav_menu-item d-none d-lg-block">
+      <!-- EYE -->
+      <a href="#" role="button" class="btn"><span class="it-icon it-icon-compare"></span></a>
+    </div>
+    <div class="docs-italia__header-col docs-italia__header-col--downloads p-2 di-nav_menu-item d-none d-lg-block">
+      <!-- DOWNLOAD -->
+      <span class="it-icon it-icon-download"></span>
+    </div>
+    <div class="docs-italia__header-col docs-italia__header-col--github p-2 di-nav_menu-item d-none d-lg-block">
+      <!-- GITHUB -->
+      <a href="#" role="button" class="btn"><span class="it-icon it-icon-github"></span></a>
+    </div>
+
+    <div class="docs-italia__header-col docs-italia__header-col--github p-2 di-nav_menu-button d-lg-none">
+      <!-- menu mobile -->
+      <a href="#" role="button" class="btn"><span class="it-icon it-icon-more"></span></a>
+    </div>
+    <!-- </div> <!~~ /.col .docs-italia__header-col(s) ~~> -->
   </div>
-  <div class="doc-header-room d-none"></div>
-</header>
+  <div class="row">
+    <div class="progress-container">
+      <div class="progress-bar" id="scrollprogressBar"></div>
+    </div>
+  </div>
+</div>
+  
