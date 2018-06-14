@@ -551,4 +551,15 @@
       display: block;
     }
   }
+
+  .highlighted {
+    background: $sky-blue;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.6rem;
+  }
+}
+
+.code .highlight {
+  background: none;
 }
