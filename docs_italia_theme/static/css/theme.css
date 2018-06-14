@@ -17605,4 +17605,10 @@ header.sticky .doc-header-room {
   cursor: pointer;
 }
 
+i.return-to-top__icon {
+  top: 9.6px;
+  top: 0.6rem;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=theme.css.map */
