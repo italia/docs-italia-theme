@@ -19,7 +19,6 @@ it:
     most_viewed_this_month: Più visti questo mese
     navigation_menu_label: Menu di navigazione
     navigation_menu_esc: esci dalla navigazione
-    scrolltop_label: torna all'inizio dei contenuti
     search: Cerca
     search_form_label: Cerca nel documento
     search_form_off: disattiva il form di ricerca
@@ -104,7 +103,6 @@ en:
     most_viewed_this_month: Most viewed this month
     navigation_menu_label: Navigation menu
     navigation_menu_esc: exit navigation
-    scrolltop_label: back to contents
     search: Search
     search_form_label: Search in Document
     search_form_off: exit search form
