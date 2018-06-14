@@ -1,11 +1,11 @@
 .chapter-nav__list--hidden {
   &:not(.show) {
-    @media (max-width: 991px) {
+    @include media-breakpoint-up(lg) {
       display: none;
     }
   }
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0.35s, opacity 0.35s;
@@ -18,7 +18,7 @@
 }
 
 .chapter-nav__list-wrap {
-  @media (max-width: 991px) {
+  @include media-breakpoint-up(lg) {
     max-width: 300px;
     margin-left: auto;
     margin-right: auto;
@@ -27,7 +27,7 @@
 }
 
 .chapter-nav__wrap {
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     position: absolute;
     left: 2rem;
     top: 1rem;
@@ -72,7 +72,7 @@
   margin-bottom: 0;
   padding: 1rem;
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     padding: 0;
   }
 }
@@ -88,7 +88,7 @@
     color: $grey-mid-01;
   }
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     display: none;
   }
 }
@@ -96,7 +96,7 @@
 .chapter-nav__item:not(:last-child) {
   margin-bottom: 1rem;
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     margin-bottom: 0;
   }
 }
@@ -104,14 +104,14 @@
 .chapter-nav__list--visible {
   margin-top: 1rem;
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     margin-top: -0.5rem;
   }
 
   .chapter-nav__item {
     display: inline-block;
 
-    @media (min-width: 992px) {
+    @include media-breakpoint-up(lg) {
       display: block;
     }
   }
