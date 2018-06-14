@@ -30,7 +30,8 @@ module.exports = function(grunt) {
     sass: {
       all: {
         options: {
-          style: 'expanded'
+          style: 'expanded',
+          loadPath: ['node_modules', '.']
         },
         files: [{
           expand: true,
