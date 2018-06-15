@@ -12,10 +12,6 @@ module.exports = discourseAuth = {
         Discourse.decryptPayload(payload);
         // Remove ?payload get parameter from url
         window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
-      } else {
-        // Then generate api key
-        $('#redirect-login').html('<a href="' + Discourse.userAuthKeyUrl() + '">Login</a>');
-        // window.location.href=Discourse.userAuthKeyUrl();
       }
     }
   }
