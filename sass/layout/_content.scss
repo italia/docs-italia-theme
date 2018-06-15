@@ -282,6 +282,20 @@
         width: 100%;
       }
     }
+
+    .figure,
+    table,
+    .section,
+    .admonition,
+    p {
+
+      // workaround per mostrare correttamente l'ancora con sidebar sticky
+      &:not([id=""]) {
+        margin-top: -4rem;
+        padding-top: 4rem;
+        display: inline-block;
+      }
+    }
   }
 
   // Procedure
