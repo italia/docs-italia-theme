@@ -6,8 +6,10 @@ H1 Titolo del documento, molto probabile su 2/3 righe
    Sommario di due/tre righe: lorem ipsum dolor sit amet, consectetur adipisici
    elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
 
-:Publisher: Team per la Trasformazione Digitale
-:Licenza: CC-BY 4.0
+.. container:: document-info
+
+   :Publisher: Team per la Trasformazione Digitale
+   :Licenza: CC-BY 4.0
 
 .. admonition:: Consultazione
    :class: admonition-consultazione name-consultation

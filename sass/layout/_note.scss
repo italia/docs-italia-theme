@@ -44,7 +44,10 @@
     font-size: 0.8rem;
     display: none;
     margin-bottom: 2rem;
-    text-transform: capitalize;
+
+    .label {
+      text-transform: capitalize;
+    }
 
     td {
       width: 100%;

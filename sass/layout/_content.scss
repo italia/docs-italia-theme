@@ -284,15 +284,18 @@
     }
 
     .figure,
-    table,
     .section {
-
-      // workaround per mostrare correttamente l'ancora con sidebar sticky
       &:not([id=""]) {
         margin-top: -4rem;
         padding-top: 4rem;
         display: inline-block;
       }
+    }
+
+    .table:not([id=""]) {
+      margin-top: -4rem;
+      padding-top: 4rem;
+      display: inline-table;
     }
   }
 
@@ -431,32 +434,37 @@
   }
 
   // Publisher / Licenza.
-  .docutils.field-list {
-    width: 100%;
-    margin-bottom: 2rem;
-    border-bottom: 1px $grey solid;
-    font-family: $titillium-font;
+  .document-info {
+    padding: 0;
 
-    tr {
-      display: block;
+    .docutils.field-list {
+      width: 100%;
+      margin-bottom: 2rem;
+      border-bottom: 1px $grey solid;
+      font-family: $titillium-font;
+      display: grid;
 
-      @include media-breakpoint-up(sm) {
-        width: 50%;
-        float: left;
+      tr {
+        display: block;
+
+        @include media-breakpoint-up(sm) {
+          width: 50%;
+          float: left;
+        }
+
+        margin-bottom: 2rem;
       }
 
-      margin-bottom: 2rem;
-    }
+      .field-name,
+      .field-body {
+        display: block;
+        font-weight: 400;
+      }
 
-    .field-name,
-    .field-body {
-      display: block;
-      font-weight: 400;
-    }
-
-    .field-body {
-      color: $medium-blue;
-      text-decoration: underline;
+      .field-body {
+        color: $medium-blue;
+        text-decoration: underline;
+      }
     }
   }
 
