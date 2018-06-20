@@ -271,7 +271,7 @@
       }
     }
 
-    // Exeption
+    // Exception
     .section,
     .chapter-header,
     .caption-wrap,
@@ -285,9 +285,7 @@
 
     .figure,
     table,
-    .section,
-    .admonition,
-    p {
+    .section {
 
       // workaround per mostrare correttamente l'ancora con sidebar sticky
       &:not([id=""]) {
