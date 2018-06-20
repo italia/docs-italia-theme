@@ -271,7 +271,7 @@
       }
     }
 
-    // Exeption
+    // Exception
     .section,
     .chapter-header,
     .caption-wrap,
@@ -280,6 +280,18 @@
     .full-width {
       @include media-breakpoint-up(lg) {
         width: 100%;
+      }
+    }
+
+    .figure,
+    table,
+    .section {
+
+      // workaround per mostrare correttamente l'ancora con sidebar sticky
+      &:not([id=""]) {
+        margin-top: -4rem;
+        padding-top: 4rem;
+        display: inline-block;
       }
     }
   }
