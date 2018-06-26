@@ -1,0 +1,70 @@
+.Offcanvas-menu {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  .Offcanvas-menu__inner {
+    width: 80%;
+    background-color: #fff;
+    height: 100vh;
+
+    .Offcanvas-menu__header {
+      padding: 1.5rem 2rem 1rem 2rem;
+
+      .Offcanvas-menu__title {
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+    }
+
+    .Offcanvas-menu__nav {
+      padding: 0.5rem 0 0 0;
+      margin: 0;
+
+      .Offcanvas-menu__nav__item {
+        list-style: none;
+        // margin: 0 0 0 0.2rem;
+        margin: 0;
+        padding: 0.5rem 1rem;
+
+        // &:hover {
+        //   border-left: 0.2rem solid #000;
+        //   margin-left: 0;
+        // }
+
+        // Horiontal separators
+        &:nth-child(1),
+        &:nth-child(4) {
+          position: relative;
+
+          &::before {
+            content: '';
+            width: 64px;
+            height: 1px;
+            left: 2rem;
+            border-top: 1px solid rgba(0, 102, 204, 0.2);
+            position: absolute;
+            top: 0;
+          }
+        }
+
+        .Offcanvas-menu__nav__link {
+          padding: 0.5rem 1rem;
+          font-size: 1rem;
+          display: block;
+        }
+      }
+    }
+  }
+
+  .Offcanvas-menu__extra {
+    width: 20%;
+    height: 100vh;
+  }
+}
