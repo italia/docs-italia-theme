@@ -117,4 +117,3 @@ class DiscourseCommentsDirective(Directive):
 def setup(app):
     app.add_node(DiscourseCommentsNode, html=(DiscourseCommentsNode.visit, DiscourseCommentsNode.depart))
     app.add_directive('discourse_comments', DiscourseCommentsDirective)
-    # Add to nodes custom code / node / markups
