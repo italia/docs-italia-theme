@@ -17,7 +17,6 @@ from os.path import abspath, join, dirname
 sys.path.insert(0, os.path.abspath(join(dirname(__file__))))
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../..'))
-sys.path.insert(0, os.path.abspath('../../extensions'))
 
 # -- PROJECT Variables ------------------------------------------------
 settings_project_name = 'Docs Italia Demo'
@@ -42,7 +41,6 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'docs_italia_theme',
-    'section_comments',
 ]
 
 # Math

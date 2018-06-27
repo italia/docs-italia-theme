@@ -336,8 +336,5 @@ tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis choro
 reprehendunt cour deiro sant.
 
 
-.. section_comments::
-  :topic_id: 2
-
-.. section_comments::
+.. discourse_comments::
   :topic_id: 13

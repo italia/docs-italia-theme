@@ -14,7 +14,7 @@ from docutils import nodes
 from docutils.parsers.rst import Directive
 from docutils.parsers.rst import directives
 
-class SectionCommentsNode(nodes.Structural, nodes.Element):
+class DiscourseCommentsNode(nodes.Structural, nodes.Element):
     @staticmethod
     def visit(self, node):
         pass
@@ -22,7 +22,7 @@ class SectionCommentsNode(nodes.Structural, nodes.Element):
     def depart(self, node):
         pass
 
-class SectionCommentsDirective(Directive):
+class DiscourseCommentsDirective(Directive):
     # Directive's parameters
     required_arguments = 0
     optional_arguments = 0
@@ -41,7 +41,7 @@ class SectionCommentsDirective(Directive):
         # Directive's options
         options = self.options
 
-        node = SectionCommentsNode()
+        node = DiscourseCommentsNode()
 
         #############
         # Templates #
@@ -115,6 +115,6 @@ class SectionCommentsDirective(Directive):
         return [ node ]
 
 def setup(app):
-    app.add_node(SectionCommentsNode, html=(SectionCommentsNode.visit, SectionCommentsNode.depart))
-    app.add_directive('section_comments', SectionCommentsDirective)
+    app.add_node(DiscourseCommentsNode, html=(DiscourseCommentsNode.visit, DiscourseCommentsNode.depart))
+    app.add_directive('discourse_comments', DiscourseCommentsDirective)
     # Add to nodes custom code / node / markups
