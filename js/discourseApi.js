@@ -100,7 +100,7 @@ module.exports = function () {
       public_key: obj.rsaKey.public,
       nonce: obj.randomBytes(16),
       client_id: obj.randomBytes(32),
-      auth_redirect: 'http://localhost:1919',
+      auth_redirect: location.protocol + '//' + location.hostname + location.pathname,
       scopes: 'write'
     };
 
