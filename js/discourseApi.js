@@ -2,6 +2,7 @@ var axios = require('axios');
 var keypair = require('keypair');
 require('jsencrypt');
 
+
 /**
  * Api Class to handle/generate Discourse User-Api-Key
  */
@@ -100,7 +101,7 @@ module.exports = function () {
       public_key: obj.rsaKey.public,
       nonce: obj.randomBytes(16),
       client_id: obj.randomBytes(32),
-      auth_redirect: location.protocol + '//' + location.hostname + location.pathname ,
+      auth_redirect: 'http://localhost',
       scopes: 'write'
     };
 
@@ -179,4 +180,3 @@ module.exports = function () {
   };
 
 };
-

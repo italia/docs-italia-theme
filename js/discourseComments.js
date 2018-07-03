@@ -94,7 +94,7 @@ module.exports = discourseComments = (function ($) {
           $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.avatar_template, 45));
         });
       }
-      
+
       // Foreach get comments from discourse
       $commentBox.each(function (idx, cB) {
         var topicId = $(cB).data('topic');
