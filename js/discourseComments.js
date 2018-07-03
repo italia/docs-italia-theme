@@ -135,6 +135,13 @@ module.exports = discourseComments = (function ($) {
 
       // If user isn't logged don't show new-comment form
       if (!Discourse.userIsLoggedIn()) {
+        var surl_cookie_name = 'docs-italia_surl';
+        var authRedirect = location.protocol + '//' + location.hostname + (typeof location.port !== 'undefined' ? ':' + location.port : '' );
+        var sourceUrl = authRedirect + location.pathname;
+
+        // Create a cookie for stores sourceUrl
+        Discourse._cookie_create(surl_cookie_name, sourceUrl, 10, true);
+
         var message = 'Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta' +
                       '<div> <a href="' + Discourse.userAuthKeyUrl() + '" class="btn btn-success">Login</a>';
         $('form[id^="new-comment-"]').html('<div class="new-comment__login">' + message + '</div>');

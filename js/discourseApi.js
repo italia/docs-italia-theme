@@ -96,12 +96,14 @@ module.exports = function () {
     // Generate public/private RSA keys
     this.genRSAKey();
 
+    var authRedirect = location.protocol + '//' + location.hostname + (typeof location.port !== 'undefined' ? ':' + location.port : '' );
+
     var data = {
       application_name: 'docs-italia',
       public_key: obj.rsaKey.public,
       nonce: obj.randomBytes(16),
       client_id: obj.randomBytes(32),
-      auth_redirect: 'http://localhost:8080',
+      auth_redirect: authRedirect,
       scopes: 'write'
     };
 

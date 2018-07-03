@@ -10,8 +10,17 @@ module.exports = discourseAuth = {
     } else {
       if (payload !== false) {
         Discourse.decryptPayload(payload);
-        // Remove ?payload get parameter from url
-        window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
+        // Get sourceUrl from cookie
+        var surl_cookie_name = 'docs-italia_surl';
+        var sourceUrl = Discourse._cookie_read(surl_cookie_name);
+        Discourse._cookie_delete(surl_cookie_name);
+
+        if (typeof sourceUrl !== 'undefined') {
+          window.location.href = sourceUrl;
+        } else {
+          // Remove ?payload get parameter from url
+          window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
+        }
       }
     }
   }
