@@ -136,7 +136,8 @@ module.exports = discourseComments = (function ($) {
       // If user isn't logged don't show new-comment form
       if (!Discourse.userIsLoggedIn()) {
         var surl_cookie_name = 'docs-italia_surl';
-        var authRedirect = location.protocol + '//' + location.hostname + (location.port.length > 0 ? ':' + location.port : '' );
+        var portLength = location.port.length;
+        var authRedirect = location.protocol + '//' + location.hostname + (portLength > 0 ? ':' + location.port : '' );
         var sourceUrl = authRedirect + location.pathname;
 
         // Create a cookie for stores sourceUrl
