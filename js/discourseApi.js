@@ -95,8 +95,8 @@ module.exports = function () {
   this.userAuthKeyUrl = function () {
     // Generate public/private RSA keys
     this.genRSAKey();
-
-    var authRedirect = location.protocol + '//' + location.hostname + (typeof location.port !== 'undefined' ? ':' + location.port : '' );
+    var portLength = location.port.length;
+    var authRedirect = location.protocol + '//' + location.hostname + (portLength > 0 ? ':' + location.port : '' );
 
     var data = {
       application_name: 'docs-italia',
