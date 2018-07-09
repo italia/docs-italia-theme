@@ -16,8 +16,8 @@
     <div class="dropdown-menu" aria-labelledby="dropdownVersionButton">
       {% for slug, url in versions %}
         {% if slug != nav_version %}
-          <a class="dropdown-item" href="#" di-value="{{ url }}">
-            {{ slug }}
+          <a class="dropdown-item" href="{{ url }}" di-value="{{ url }}">
+            {{ t.version }} {{ slug }}
           </a>
         {% endif %}
       {% endfor %}
