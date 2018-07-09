@@ -6,12 +6,9 @@ module.exports = themeVersionDropdown = (function ($) {
       that = this.$;
 
       $('#version-list .dropdown-item').on('click', function () {
-        console.log('header dropdown clicked');
         var $btn = $(this),
             $url = $btn.attr('di-value');
-            // $target = $(something);
-            // $admonition = $btn.closest('.admonition-deepening');
-
+            location.pathname = $url;
       });
 
       $('#version-list.dropdown').dropdown();
