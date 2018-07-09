@@ -294,6 +294,14 @@
         display: inline-block;
       }
     }
+
+    // bugfix per far mostrare correttamente anche l'ancora delle tabelle con
+    // sidebar sticky
+    .table-responsive {
+      margin-top: -4rem;
+      padding-top: 4rem;
+      display: inline-block;
+    }
   }
 
   // Procedure
