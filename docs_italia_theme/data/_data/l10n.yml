@@ -76,11 +76,22 @@ it:
     follow_us: seguici su
 
     header_link_trasformazione: Piano Triennale
+    header_link_piattaforme: Piattaforme
+    header_link_software: Software
+    header_link_api: API
+    header_link_community: Le community
     header_link_developers: Developers
     header_link_design: Designers
+    header_link_tools: Gli strumenti
     header_link_forum: Forum
     header_link_docs: Docs
     header_link_github: GitHub
+
+    header_link_secondary_who_we_are: Chi siamo
+    header_link_secondary_usage: Come lo uso
+    header_link_secondary_participate: Come partecipo
+    header_link_secondary_news: News
+    header_link_secondary_contacts: Contatti
 
 en:
   code: eng
@@ -160,8 +171,19 @@ en:
     follow_us: follow us on
 
     header_link_trasformazione: Piano Triennale
+    header_link_piattaforme: Platforms
+    header_link_software: Software
+    header_link_api: API
+    header_link_community: Communities
     header_link_developers: Developers
     header_link_design: Designers
+    header_link_tools: Tools
     header_link_forum: Forum
     header_link_docs: Docs
     header_link_github: GitHub
+
+    header_link_secondary_who_we_are: Who we are
+    header_link_secondary_usage: How I use it
+    header_link_secondary_participate: How I participate
+    header_link_secondary_news: News
+    header_link_secondary_contacts: Contacts
