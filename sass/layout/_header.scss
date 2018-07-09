@@ -77,7 +77,7 @@
   font-weight: 500;
 
   &.secondary-nav--offcanvas {
-    @include media-breakpoint-down(lg) {
+    @include media-breakpoint-down(md) {
       transform: translateX(-100%);
       z-index: 10;
       background-color: $white;
@@ -100,7 +100,7 @@
 
 .lang-selector .dropdown {
   // Modal behaviour
-  @include media-breakpoint-down(lg) {
+  @include media-breakpoint-down(md) {
     &.show::before {
       content: '';
       width: 100vw;
@@ -140,7 +140,7 @@
     box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.35);
     z-index: 100;
 
-    @include media-breakpoint-down(lg) {
+    @include media-breakpoint-down(md) {
       position: fixed !important;
       z-index: 1001 !important;
       top: calc(50% - 80px) !important;

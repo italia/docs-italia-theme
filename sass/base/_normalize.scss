@@ -30,7 +30,7 @@
 }
 
 .dropdown-menu-right {
-  @include media-breakpoint-down(lg) {
+  @include media-breakpoint-down(md) {
     right: auto;
     left: auto;
   }
