@@ -292,10 +292,12 @@
       }
     }
 
-    .table:not([id=""]) {
+    // bugfix per far mostrare correttamente anche l'ancora delle tabelle con
+    // header sticky
+    .table-responsive {
       margin-top: -4rem;
       padding-top: 4rem;
-      display: inline-table;
+      display: inline-block;
     }
   }
 
