@@ -21,7 +21,7 @@
   .agid-logo--icon {
     width: 8em;
 
-    @media (min-width: 768px) {
+    @include media-breakpoint-up(md) {
       width: 10em;
     }
   }
@@ -30,7 +30,7 @@
     border-left-width: 2px !important;
     height: 30px;
 
-    @media (min-width: 768px) {
+    @include media-breakpoint-up(md) {
       height: 40px;
     }
   }
@@ -42,7 +42,7 @@
     display: inline-block;
     vertical-align: middle;
 
-    @media (min-width: 768px) {
+    @include media-breakpoint-up(md) {
       font-size: 1.1em;
       width: 8rem;
     }
@@ -76,7 +76,7 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin-top: 1.5em;
 
-    @media (min-width: 992px) {
+    @include media-breakpoint-up(lg) {
       margin-top: 2em;
     }
   }

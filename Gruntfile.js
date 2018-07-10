@@ -30,7 +30,8 @@ module.exports = function(grunt) {
     sass: {
       all: {
         options: {
-          style: 'expanded'
+          style: 'expanded',
+          loadPath: ['node_modules', '.']
         },
         files: [{
           expand: true,
@@ -77,17 +78,6 @@ module.exports = function(grunt) {
           dest: 'docs_italia_theme/static/css/theme.css',
         }]
       }
-    },
-
-    copy: {
-      all: {
-        files: [
-          {
-            src: ['node_modules/bootstrap-italia/dist/css/bootstrap-italia.min.css'],
-            dest: 'docs_italia_theme/static/css/vendor/bootstrap-italia.min.css'
-          },
-        ],
-      },
     },
 
     modernizr: {
@@ -204,7 +194,6 @@ module.exports = function(grunt) {
     'stylelint:dev',
     'sass',
     'postcss:dev',
-    'copy',
     'modernizr',
     'browserify',
     'exec:build_sphinx',
@@ -217,7 +206,6 @@ module.exports = function(grunt) {
     'stylelint:build',
     'sass',
     'postcss:build',
-    'copy',
     'modernizr',
     'browserify',
     'uglify',
@@ -229,7 +217,6 @@ module.exports = function(grunt) {
     'stylelint:build',
     'sass',
     'postcss:build',
-    'copy',
     'modernizr',
     'browserify',
     'uglify',

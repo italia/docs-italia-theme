@@ -7,6 +7,7 @@ module.exports = themeNote = (function ($) {
     $: {
       $noteBtn: $('.footnote-reference'),
       $note: $('.docutils.footnote'),
+      $noteBackRef: $('.docutils.footnote').find('.fn-backref'),
       $noteStandardBtn: {},
       $body: $('body'),
       $window: $(window),
@@ -21,6 +22,7 @@ module.exports = themeNote = (function ($) {
       });
       that.$note.css('display', 'block').slideUp(0);
       that.$noteStandardBtn.on('click', themeNote.shownoteStandardBtn);
+      that.$noteBackRef.on('click', themeNote.backToBtn);
       $('.note-close-btn').on('click', themeNote.closeNote);
       $('.note-back-btn').on('click', themeNote.backToBtn);
     },
@@ -33,10 +35,10 @@ module.exports = themeNote = (function ($) {
           $note = $('#' +  noteid);
 
       if($note.hasClass('active')) {
-        $("html, body").animate({ scrollTop: $note.offset().top - 10 }, 300);
+        $("html, body").animate({ scrollTop: $note.offset().top - 150 }, 300);
       } else {
         $note.addClass('active').slideDown();
-        $("html, body").animate({ scrollTop: $note.offset().top - 10 }, 300);
+        $("html, body").animate({ scrollTop: $note.offset().top - 150 }, 300);
       }
     },
 
@@ -51,7 +53,7 @@ module.exports = themeNote = (function ($) {
       var $target = $(event.target),
           id = $target.closest('.footnote.active').attr('id');
 
-      $("html, body").animate({ scrollTop: $('a[href="#' + id + '"]').offset().top }, 200);
+      $("html, body").animate({ scrollTop: $('a[href="#' + id + '"]').offset().top - 150 }, 200);
     }
 
   }

@@ -17,11 +17,11 @@
   color: $black;
   padding-left: 2rem;
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     padding-left: 4rem;
   }
 
-  @media (min-width: 1200px) {
+  @include media-breakpoint-up(xl) {
     transform: rotate(45deg) translate(45px, -125px);
     width: 320px;
     transform-origin: left;
@@ -35,7 +35,7 @@
 .col-content {
   padding: 4rem 2rem;
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     padding: 4rem 4rem 5rem 4rem;
   }
 }
@@ -53,7 +53,7 @@
     font-size: 0.75rem;
     padding: 0;
 
-    @media (min-width: 992px) {
+    @include media-breakpoint-up(lg) {
       width: calc(100% - #{$chapter-nav-width});
       float: left;
     }
@@ -64,7 +64,7 @@
     margin-top: 1.5rem;
     margin-bottom: 2rem;
 
-    @media (min-width: 768px) {
+    @include media-breakpoint-up(md) {
       width: $chapter-nav-width;
       float: right;
       padding-left: 2rem;
@@ -86,7 +86,7 @@
 .chapter-nav {
   position: relative;
 
-  @media (min-width: 992px) {
+  @include media-breakpoint-up(lg) {
     width: $chapter-nav-width;
     float: left;
   }
@@ -170,7 +170,7 @@
   width: 100%;
   position: relative;
 
-  @media (min-width: 768px) {
+  @include media-breakpoint-up(md) {
     width: calc(100% - #{$sidebar-width});
     float: left;
   }
@@ -264,23 +264,38 @@
 
     // Content width
     > * {
-      @media (min-width: 992px) {
+      @include media-breakpoint-up(lg) {
         width: calc(100% - #{$chapter-nav-width});
         float: left;
         clear: left;
       }
     }
 
-    // Exeption
+    // Exception
     .section,
     .chapter-header,
     .caption-wrap,
     .table-responsive,
     .figure,
     .full-width {
-      @media (min-width: 992px) {
+      @include media-breakpoint-up(lg) {
         width: 100%;
       }
+    }
+
+    .figure,
+    .section {
+      &:not([id=""]) {
+        margin-top: -4rem;
+        padding-top: 4rem;
+        display: inline-block;
+      }
+    }
+
+    .table:not([id=""]) {
+      margin-top: -4rem;
+      padding-top: 4rem;
+      display: inline-table;
     }
   }
 
@@ -322,7 +337,7 @@
 
   // Title
   .title-wrap {
-    @media (min-width: 992px) {
+    @include media-breakpoint-up(lg) {
       width: calc(100% - #{$chapter-nav-width});
       float: left;
       clear: left;
@@ -419,32 +434,37 @@
   }
 
   // Publisher / Licenza.
-  .docutils.field-list {
-    width: 100%;
-    margin-bottom: 2rem;
-    border-bottom: 1px $grey solid;
-    font-family: $titillium-font;
+  .document-info {
+    padding: 0;
 
-    tr {
-      display: block;
+    .docutils.field-list {
+      width: 100%;
+      margin-bottom: 2rem;
+      border-bottom: 1px $grey solid;
+      font-family: $titillium-font;
+      display: grid;
 
-      @media (min-width: 576px) {
-        width: 50%;
-        float: left;
+      tr {
+        display: block;
+
+        @include media-breakpoint-up(sm) {
+          width: 50%;
+          float: left;
+        }
+
+        margin-bottom: 2rem;
       }
 
-      margin-bottom: 2rem;
-    }
+      .field-name,
+      .field-body {
+        display: block;
+        font-weight: 400;
+      }
 
-    .field-name,
-    .field-body {
-      display: block;
-      font-weight: 400;
-    }
-
-    .field-body {
-      color: $medium-blue;
-      text-decoration: underline;
+      .field-body {
+        color: $medium-blue;
+        text-decoration: underline;
+      }
     }
   }
 
@@ -551,4 +571,15 @@
       display: block;
     }
   }
+
+  .highlighted {
+    background: $sky-blue;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.6rem;
+  }
+}
+
+.code .highlight {
+  background: none;
 }

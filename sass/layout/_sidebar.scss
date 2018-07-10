@@ -1,13 +1,19 @@
-#desktop-menu { //.sidebar__inner{
+#desktop-menu {
+  // See https://abouolia.github.io/sticky-sidebar/#configure-your-css
   transform: translate(0, 0); /* For browsers don't support translate3d. */
   transform: translate3d(0, 0, 0);
   will-change: position, transform;
+  padding-bottom: 5rem;
+
+  & > button:first-of-type {
+    margin-top: 1.5rem;
+  }
 }
 
 .col--nav {
   width: 100%;
 
-  @media (min-width: 768px) {
+  @include media-breakpoint-up(md) {
     width: #{$sidebar-width};
     float: left;
     border-right: 1px $grey-light-01 solid;
@@ -16,22 +22,17 @@
 }
 
 .docs-italia-menu {
-  // begin sticky sidebar style as indicated in:
-  // https://abouolia.github.io/sticky-sidebar/#configure-your-css
-  //.sidebar {
+  // See https://abouolia.github.io/sticky-sidebar/#configure-your-css
   will-change: min-height;
-  // end sticky sidebar style
   display: none;
 
-  @media (min-width: 768px) {
+  @include media-breakpoint-up(md) {
     display: block;
-    padding-top: 1.5rem;
-    bottom: 2rem;
   }
 }
 
 .docs-italia-offcanvas-menu {
-  @media (max-width: 767.98px) {
+  @include media-breakpoint-down(md) {
     transform: translateX(100%);
     z-index: 10;
     background-color: $white;
@@ -49,7 +50,7 @@
     }
   }
 
-  @media (min-width: 768px) {
+  @include media-breakpoint-up(md) {
     display: none;
   }
 }
@@ -63,7 +64,7 @@
   background-color: $white;
   box-shadow: -1px -2px 62px -13px rgba($black, 0.25);
 
-  @media (min-width: 768px) {
+  @include media-breakpoint-up(md) {
     display: none;
   }
 }
@@ -94,7 +95,7 @@
     transform: translateX(0);
   }
 
-  @media (min-width: 768px) {
+  @include media-breakpoint-up(md) {
     display: none;
   }
 }
@@ -108,7 +109,7 @@
   border-bottom: 3px $blue solid;
   background: none;
 
-  @media (min-width: 768px) {
+  @include media-breakpoint-up(md) {
     border-bottom: 2px $medium-blue-02 solid;
   }
 
@@ -122,7 +123,7 @@
       border-bottom: 3px $blue solid;
       text-decoration: none;
 
-      @media (min-width: 768px) {
+      @include media-breakpoint-up(md) {
         border-bottom: 2px $medium-blue-02 solid;
       }
     }
@@ -131,7 +132,7 @@
   &.focus--mouse {
     border-color: $blue !important;
 
-    @media (min-width: 768px) {
+    @include media-breakpoint-up(md) {
       border-color: $medium-blue-02 !important;
     }
   }
@@ -160,13 +161,13 @@
     }
   }
 
-  @media (min-width: 768px) {
+  @include media-breakpoint-up(md) {
     display: block;
     width: 100%;
     text-align: left;
   }
 
-  @media (max-width: 767.98px) {
+  @include media-breakpoint-down(md) {
     .it-icon-expand,
     .it-icon-collapse {
       display: none;

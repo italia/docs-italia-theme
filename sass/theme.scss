@@ -1,4 +1,5 @@
 /* Theme variables */
+@import "bootstrap-italia/src/scss/bootstrap-italia.scss ";
 @import "abstract/variables";
 
 /* Base */
@@ -22,3 +23,4 @@
 @import "layout/comments";
 @import "layout/side-menu";
 @import "layout/glossary";
+@import "layout/back-to-top";
