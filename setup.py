@@ -30,6 +30,7 @@ setup(
         'static/*.svg',
         'static/font/*.*',
         'data/*.*',
+        'discourse_comments/*.py'
     ]},
     include_package_data = True,
     # See http://www.sphinx-doc.org/en/stable/theming.html#distribute-your-theme-as-a-python-package

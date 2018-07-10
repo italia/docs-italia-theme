@@ -1,6 +1,6 @@
 .block-comments {
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.25rem;
 
   p {
     font-family: $titillium-font;
@@ -108,5 +108,48 @@
 
   a {
     text-decoration: underline;
+  }
+}
+
+form[id^="new-comment-"] {
+  position: relative;
+  width: 100%;
+
+  textarea {
+    border: 1px $grey-light-01 solid;
+    border-radius: 5px;
+
+    &:focus {
+      border: 1px $grey-mid solid;
+    }
+
+    &::placeholder {
+      color: $grey;
+    }
+  }
+
+  &.sending::after {
+    content: '';
+    position: absolute;
+    background: white;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  &.sending::before {
+    content: 'Invio del commento...';
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+li[id^="docs-comment-"] {
+  &.is-new {
+    background: lightyellow;
   }
 }

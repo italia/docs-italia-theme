@@ -4,6 +4,7 @@ import os
 import re
 import yaml
 import json
+from discourse_comments import *
 from docutils.nodes import figure
 from docutils.nodes import table
 from docutils.nodes import bullet_list
@@ -225,4 +226,7 @@ def setup(app):
     app.connect('html-page-context', generate_additonal_tocs)
     app.connect('doctree-resolved', generate_glossary_json)
     app.connect('doctree-resolved', glossary_page_id)
+    # Setup for discourse_comments custom directive
+    app.add_node(DiscourseCommentsNode, html=(DiscourseCommentsNode.visit, DiscourseCommentsNode.depart))
+    app.add_directive('discourse_comments', DiscourseCommentsDirective)
     app.add_html_theme('docs_italia_theme', os.path.abspath(os.path.dirname(__file__)))

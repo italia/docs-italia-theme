@@ -16,6 +16,8 @@ var themeGlossary = require('./get_glossary.js');
 var themeAdmonitionToggle = require('./admonition_toggle.js');
 var themeVersionDropdown = require('./version_dropdown.js');
 var themeCopyToClipboard = require('./copy_to_clipboard.js');
+var discourseAuth = require('./discourseAuth.js');
+var discourseComments = require('./discourseComments.js');
 var themeSidebarNav = require('./sidebar_nav.js');
 var themeGlossaryPage = require('./glossary_page.js');
 var themeScrollProgressBar = require('./scroll_progressbar.js');
@@ -31,6 +33,9 @@ $(document).ready(function() {
   themeChapterNav.init();
   themeNote.init();
   themeAdmonitionToggle.init();
+  themeCopyToClipboard.init();
+  discourseAuth.init();
+  discourseComments.init();
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();
