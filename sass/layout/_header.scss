@@ -283,3 +283,50 @@
     text-decoration: none;
   }
 }
+
+.article-intro-more .dropdown {
+  // Modal behaviour
+  @include media-breakpoint-down(md) {
+    &.show::before {
+      content: '';
+      width: 100vw;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+  }
+
+  .dropdown-toggle::after {
+    display: none;
+  }
+
+  .dropdown-menu {
+    background-color: #fff;
+    padding: 0.5rem;
+    margin: 0;
+    border-radius: 0.2rem;
+    -webkit-box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.35);
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.35);
+    z-index: 100;
+
+    @include media-breakpoint-down(md) {
+      position: fixed !important;
+      z-index: 1001 !important;
+      top: calc(50% - 140px) !important;
+      left: calc(50% - 140px) !important;
+      transform: none !important;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    .dropdown-item {
+      color: #0073e6;
+    }
+  }
+}

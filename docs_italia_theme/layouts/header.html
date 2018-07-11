@@ -172,9 +172,42 @@
       <a href="#" role="button" class="btn"><span class="it-icon it-icon-github"></span></a>
     </div>
 
-    <div class="docs-italia__header-col docs-italia__header-col--github p-2 di-nav_menu-button d-lg-none">
+    <div class="docs-italia__header-col docs-italia__header-col--article-intro-more article-intro-more p-2 di-nav_menu-button d-lg-none">
       <!-- menu mobile -->
-      <a href="#" role="button" class="btn"><span class="it-icon it-icon-more"></span></a>
+      <div class="dropdown">
+        <a href="#" role="button" class="btn dropdown-toggle" id="article-intro-moreDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="dropdown__icon it-icon it-icon-more"></span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="article-intro-moreDropdown">
+            <!-- DOWNLOAD -->
+            <a href="#" role="button" class="dropdown-item pl-2">
+              <span class="dropdown-item__icon d-inline-bock py-2 pr-2">
+                <span class="it-icon it-icon-download"></span>
+              </span>
+              <span class="dropdown-item__label d-inline-bock">
+                Download
+              </span>
+            </a>
+            <!-- EYE -->
+            <a href="#" role="button" class="dropdown-item pl-2">
+              <span class="dropdown-item__icon d-inline-bock py-2 pr-2">
+                <span class="it-icon it-icon-compare"></span>
+              </span>
+              <span class="dropdown-item__label d-inline-bock">
+                Confronta versioni su GitHub
+              </span>
+            </a>
+            <!-- GITHUB -->
+            <a href="#" role="button" class="dropdown-item pl-2">
+              <span class="dropdown-item__icon d-inline-bock py-2 pr-2">
+                <span class="it-icon it-icon-github"></span>
+              </span>
+              <span class="dropdown-item__label d-inline-bock">
+                Modifica su GitHub
+              </span>
+            </a>
+          </div>
+        </div>
     </div>
     <!-- </div> <!~~ /.col .docs-italia__header-col(s) ~~> -->
   </div>
