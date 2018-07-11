@@ -330,3 +330,19 @@
     }
   }
 }
+
+#rtd-search-form {
+  border: 1px solid #ccc;
+
+  input[type="text"] {
+    border: none;
+  }
+
+  .input-group-append button {
+    background-color: $white;
+
+    .it-icon-search {
+      font-size: 1.2rem;
+    }
+  }
+}
