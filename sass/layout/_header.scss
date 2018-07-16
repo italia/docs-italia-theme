@@ -262,6 +262,7 @@
 
     .it-icon {
       font-size: 1.3rem;
+      display: block;
     }
   }
 }
@@ -336,6 +337,7 @@
 
   input[type="text"] {
     border: none;
+    height: 100%;
   }
 
   .input-group-append button {
