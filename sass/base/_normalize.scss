@@ -15,6 +15,10 @@
   background-color: $white;
 }
 
+.navbar.primary-bg-a7 {
+  background-color: #0059b3;
+}
+
 .dropdown-menu.dropdown-menu-right::before {
   @include media-breakpoint-up(lg) {
     right: 24px;
