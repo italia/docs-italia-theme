@@ -9,10 +9,18 @@
   right: 0;
   bottom: 0;
 
+  &.deactive .Offcanvas-menu__inner {
+    margin-left: -80%;
+    overflow: hidden;
+  }
+
   .Offcanvas-menu__inner {
     width: 80%;
     background-color: #fff;
     height: 100vh;
+    margin-left: 0;
+    transition: margin-left 0.5s ease-out;
+    -webkit-transition: margin-left 0.5s ease-out;
 
     .Offcanvas-menu__header {
       padding: 1.5rem 2rem 1rem 2rem;
