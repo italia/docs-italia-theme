@@ -1,7 +1,7 @@
 .header {
   font-size: 1rem;
 
-  & a {
+  & a:not(.site-title):not(.social__link) {
     font-size: 0.889rem;
   }
 
@@ -195,8 +195,13 @@
 
 .h1--header {
   font-size: 1.333rem;
+  font-weight: 600;
   line-height: 1.2;
   letter-spacing: unset;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 2rem;
+  }
 
   span {
     font-size: 0.7rem;
