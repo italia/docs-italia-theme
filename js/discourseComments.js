@@ -135,15 +135,55 @@ module.exports = discourseComments = (function ($) {
 
       // If user isn't logged don't show new-comment form
       if (!Discourse.userIsLoggedIn()) {
-        var surl_cookie_name = 'docs-italia_surl';
+        var sUrlCookieName = 'docs-italia_surl';
         var authRedirect = location.protocol + '//' + location.hostname;
         var sourceUrl = authRedirect + location.pathname;
 
         // Create a cookie for stores sourceUrl
-        Discourse._cookie_create(surl_cookie_name, sourceUrl, 10, true);
+        Discourse._cookie_create(sUrlCookieName, sourceUrl, 10, true);
+
+        // Create popup window
+        window.ppWin = function () {
+          var params = 'width=400,height=400';
+          var win = window.open(Discourse.userAuthKeyUrl(), 'Discourse Authentication', params);
+          $(win).on('load', function () {
+            // Set target
+            var t = win.document;
+            var form = $(t).find('form');
+            $(form).on('submit', function (evt) {
+              // Avoid submit
+              evt.preventDefault();
+              // Get page csrf-token, used during ajax form submit
+              var csrfToken = $(win.document.head).find('meta[name="csrf-token"]').attr('content');
+              // Execute an ajax request directily from opened window
+              var xhr = new win.XMLHttpRequest();
+              xhr.open('POST', win.location.protocol + '//' + win.location.hostname + $(form).attr('action'));
+              // Set request's header
+              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              xhr.setRequestHeader('X-CSRF-Token', csrfToken);
+
+              xhr.onload = function () {
+                if (xhr.status === 200) {
+                  // Close popup
+                  win.close();
+                  console.log('win closed: ', win.closed);
+                  // Execute redirect
+                  var responseURL = xhr.responseURL;
+                  window.location.href = responseURL;
+                } else {
+                  console.log(xhr.status);
+                  console.log(xhr.statusText);
+                }
+              };
+              xhr.send($(form).serialize());
+            });
+          });
+          return win;
+        };
 
         var message = 'Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta' +
-                      '<div> <a href="' + Discourse.userAuthKeyUrl() + '" class="btn btn-success">Login</a>';
+                      // '<div> <a href="' + Discourse.userAuthKeyUrl() + '" class="btn btn-success">Login</a>';
+                      '<a href="#" onclick="ppWin()">Login</a>';
         $('form[id^="new-comment-"]').html('<div class="new-comment__login">' + message + '</div>');
       }
 

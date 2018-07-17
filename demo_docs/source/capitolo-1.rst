@@ -338,3 +338,5 @@ reprehendunt cour deiro sant.
 
 .. discourse_comments::
   :topic_id: 13
+
+.. index:: BNF, grammar, syntax, notation
