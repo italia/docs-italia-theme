@@ -183,7 +183,7 @@ module.exports = discourseComments = (function ($) {
 
         var message = 'Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta' +
                       // '<div> <a href="' + Discourse.userAuthKeyUrl() + '" class="btn btn-success">Login</a>';
-                      '<a href="#" onclick="ppWin()">Login</a>';
+                      '<a href="#" onclick="ppWin()" class="btn btn-success">Login</a>';
         $('form[id^="new-comment-"]').html('<div class="new-comment__login">' + message + '</div>');
       }
 
