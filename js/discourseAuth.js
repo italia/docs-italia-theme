@@ -6,7 +6,7 @@ module.exports = discourseAuth = {
     var payload = Discourse.searchParameters('payload');
     var pay_cookie = Discourse.getApiKey();
     if (pay_cookie) {
-      console.log('Already exists payload cookie: ' + pay_cookie);
+      // console.log('Already exists payload cookie: ' + pay_cookie);
     } else {
       if (payload !== false) {
         Discourse.decryptPayload(payload);
