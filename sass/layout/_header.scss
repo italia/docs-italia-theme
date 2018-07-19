@@ -201,7 +201,7 @@
   letter-spacing: unset;
 
   @include media-breakpoint-up(sm) {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   span {
@@ -213,12 +213,21 @@
 .svg--header {
   width: 50px;
   height: 40px;
+
+  @include media-breakpoint-up(sm) {
+    width: 65px;
+    height: 60px;
+  }
 }
 
 .h2--header {
   font-size: 14px;
   font-weight: 300;
   letter-spacing: unset;
+
+  @include media-breakpoint-up(sm) {
+    line-height: 1.5rem;
+  }
 }
 
 .docs-italia__document-title {
