@@ -1,6 +1,5 @@
 .Offcanvas-menu {
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   width: 100vw;
   height: 100vh;
@@ -9,12 +8,24 @@
   right: 0;
   bottom: 0;
 
+  &.animate--left {
+    transform: translate3d(-100%, 0, 0);
+    transition: transform 0.4s;
+    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  }
+
+  &.js-active {
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.8s;
+    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  }
+
   .Offcanvas-menu__inner {
     width: 80%;
     background-color: #fff;
     height: 100vh;
-    margin-left: 0;
-    transition: margin-left 0.5s ease-out;
+    transform: translateX(0);
+    transition: all 0.5s ease-out;
 
     .Offcanvas-menu__header {
       padding: 1.5rem 2rem 1rem 2rem;
@@ -73,5 +84,30 @@
   .Offcanvas-menu__extra {
     width: 20%;
     height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
   }
+}
+
+body::before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  content: '';
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+  transition: opacity 0.4s, transform 0s 0.4s;
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+body.show-menu::before {
+  opacity: 1;
+  transition: opacity 0.8s;
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  transform: translate3d(0, 0, 0);
 }

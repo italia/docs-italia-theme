@@ -7,8 +7,8 @@ module.exports = themeOffcanvasFeature = (function ($) {
         e.preventDefault();
         var genid = $(this).data('activeid');
         var $targetelement = $('*[data-activatedby="'+genid+'"]');
-        $targetelement.toggleClass('deactive');
-        $('body').toggleClass('stopScrolling--vertical');
+        $targetelement.toggleClass('js-active');
+        $('body').toggleClass('show-menu').toggleClass('stopScrolling--vertical');
       });
     }
   };
