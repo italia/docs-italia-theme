@@ -4,7 +4,7 @@ import os
 import re
 import yaml
 import json
-from discourse_comments import *
+from discourse_comments.discourse_comments import *
 from docutils.nodes import figure
 from docutils.nodes import table
 from docutils.nodes import bullet_list
