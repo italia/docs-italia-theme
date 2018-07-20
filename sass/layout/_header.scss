@@ -231,15 +231,21 @@
 }
 
 .docs-italia__document-title {
-  font-size: 0.9rem;
-  font-weight: 400;
-  margin: 0;
-}
+  .docs-italia__document-title__label {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 1.2rem;
+  }
 
-.docs-italia__document-title-icon {
-  font-size: 2rem;
-  float: left;
-  margin-right: 0.625rem;
+  .docs-italia__document-title__icon {
+    font-size: 2rem;
+    float: left;
+    margin-right: 0.625rem;
+  }
 }
 
 .docs-italia {
