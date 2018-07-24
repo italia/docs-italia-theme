@@ -133,7 +133,14 @@
     <div class="col d-flex align-items-center">
       <div class="row w-100">
         <div class="col-">
-          <a class="btn btn-default d-block d-sm-none pr-1 pl-3" role="button" id="di-show-searchbox">
+          <a class="btn btn-default d-block d-sm-none pr-1 pl-3"
+             role="button"
+             id="di-show-searchbox"
+             data-toggle="collapse"
+             data-target="#searchboxSupportedContent"
+             aria-controls="searchboxSupportedContent"
+             aria-expanded="false"
+             aria-label="Toggle searchbox">
             <span class="it-icon-search">
               <span class="sr-only">{{ t.search_form_label }}</span>
             </span>

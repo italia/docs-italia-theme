@@ -22,6 +22,7 @@ var themeScrollProgressBar = require('./scroll_progressbar.js');
 var themeStickyHeader = require('./sticky_header.js');
 var themeStickySidebar = require('./sticky_sidebar.js');
 var themeOffcanvasFeature = require('./offcanvas_feature.js');
+var themeSearchboxCollapse = require('./searchbox_collapse.js');
 
 // Init all
 $(document).ready(function() {
@@ -40,7 +41,8 @@ $(document).ready(function() {
   themeStickyHeader.init();
   themeStickySidebar.init();
   themeOffcanvasFeature.init();
-  
+  themeSearchboxCollapse.init();
+
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {
     themeToolTip.init();
