@@ -6,16 +6,19 @@ module.exports = themeSearchboxCollapse = (function ($) {
       var $searchbox = $('#rtd-search-form'),
         $searchboxDesktopContainer = $searchbox.parent(),
         $searchboxMobileContainer = $('.doc-header'),
-        wrapper = $('<div class="row row py-2 px-4 px-lg-5"><div class="col">');
+        wrapper = '<div class="row p-2 pr-3"><div class="col"></div></div>';
 
       $('#di-show-searchbox').on('click', function(event) {
         $(this).toggleClass('active');
         if($(this).hasClass('active')) {
           $searchbox.detach();
-          $('.doc-header').append($searchbox.wrap(wrapper));
+          $searchboxMobileContainer.append($searchbox);
+          $searchbox.wrap(wrapper).fadeIn();
         }
         else {
-          $searchboxContainer.append($searchbox);
+          $searchbox.unwrap().unwrap().fadeOut();
+          $searchbox.detach();
+          $searchboxDesktopContainer.append($searchbox);
         }
       });
     }
