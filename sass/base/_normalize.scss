@@ -57,3 +57,7 @@
   right: auto;
   bottom: auto;
 }
+
+.dropdown-menu::before {
+  z-index: -1;
+}
