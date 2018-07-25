@@ -37,3 +37,11 @@
 .border-width-2 {
   border-width: 2px !important;
 }
+
+.stopScrolling--vertical {
+  overflow-y: hidden;
+}
+
+.deactive {
+  display: none !important;
+}

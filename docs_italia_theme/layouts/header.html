@@ -1,13 +1,86 @@
-<header class="container-fluid container-fluid--desktop">
-  <div class="row pt-4 pb-4 pl-4 pl-md-5 pr-4 pr-lg-5 bg-primary--dark align-items-end">
-    <div class="logo--header pb-1">
-      <a href="https://docs.italia.it" tabindex="-1" aria-hidden="true" class="">
+<header class="container-fluid container-fluid--desktop px-0 header">
+  <nav class="navbar navbar-expand-lg primary-bg-a7 navbar-dark justify-content-between slim-header p-0 pl-lg-4 pr-lg-5">
+    <a class="navbar-brand d-none d-lg-block active order-lg-1 ml-4" href="#">AGID + Team Digitale</a>
+    <button class="navbar-toggler collapsed order-1 text-white py-2"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+    <small class="d-inline-block">AGID + Team Digitale</small>&nbsp;<span class="navbar__icon it-icon-expand my-auto ml-1"></span></button>
+
+    <ul class="navbar-nav lang-selector col-lg-offset-12 order-2 order-lg-3 pl-2 pr-4 pr-lg-0 m-0 list-unstyled">
+      <li class="nav-item dropdown nav-item--no-underline">
+        <a class="nav-link dropdown-toggle pr-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          ITA&nbsp;<span class="dropdown__icon it-icon-collapse my-auto ml-1"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown" x-placement="bottom-start">
+          <a class="dropdown-item active pl-2" href="/it" val="ITA">
+            <span lang="it">Italiano</span>
+            <span class="it-icon-check float-right"></span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item pl-2" href="/en" val="ENG">
+            <span lang="en">English</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+    <div class="collapse navbar-collapse order-2" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li> -->
+        <li role="separator" class="nav-item divider divider--w-100 ml-0 "></li>
+        <li class="nav-item px-lg-2 pl-3">
+          <a class="nav-link" href="#">{{ _(t.header_link_trasformazione)}}</a>
+        </li>
+        <li role="separator" class="nav-item divider ml-lg-0 ml-3"></li>
+        <li class="nav-item nav-text px-lg-2 pl-3 d-lg-none ">
+          <span class="nav-text text-uppercase text-white">{{ _(t.header_link_community) }}</span>
+        </li>
+        <li class="nav-item px-lg-2 pl-3">
+          <a class="nav-link" href="#">{{ _(t.header_link_developers) }}</a>
+        </li>
+        <li class="nav-item px-lg-2 pl-3">
+          <a class="nav-link" href="#">{{ _(t.header_link_design) }}</a>
+        </li>
+        <li role="separator" class="nav-item divider ml-lg-0 ml-3"></li>
+        <li class="nav-item nav-text px-lg-2 pl-3 d-lg-none ">
+          <span class="nav-text text-uppercase text-white">{{ _(t.header_link_tools) }}</span>
+        </li>
+        <li class="nav-item px-lg-2 pl-3">
+          <a class="nav-link" href="#">{{ _(t.header_link_forum) }}</a>
+        </li>
+        <li class="nav-item px-lg-2 pl-3 active">
+          <a class="nav-link" href="#">{{ _(t.header_link_docs) }}</a>
+        </li>
+        <li class="nav-item px-lg-2 pl-3">
+          <a class="nav-link" href="#">{{ _(t.header_link_github) }}</a>
+        </li>
+        <li role="separator" class="nav-item divider ml-lg-0 ml-3 d-none d-lg-block"></li>
+      </ul>
+    </div>
+    <!-- <ul class="navbar-nav mr-auto"> -->
+  </nav>
+
+  <div class="row p-4 px-lg-5 m-0 bg-primary--dark align-items-center">
+    <nav class="navbar navbar-expand-lg navbar-dark px-0">
+      <div class="Header-hamb mx-2 d-block d-lg-none">
+        <a href="#" data-activate-element data-activeid="offcanvasMenu" class="">
+          <span class="navbar-toggler-icon"></span>
+        </a>
+      </div>
+    </nav>
+    <div class="logo--header">
+      <a href="https://docs.italia.it" tabindex="-1" aria-hidden="true" class="d-block">
         <svg class="svg--header align-bottom" xmlns="http://www.w3.org/2000/svg" height="78.187" width="97.387" viewBox="0 0 91.300002 73.300002"><g fill="#fff"><path d="M31.799 71.9V15.7h15.1V72h-15.1zM91.099 28.5h-13.8v23.1c0 2.3.1 3.8.2 4.8.1.9.5 1.7 1.2 2.4s1.8 1 3.3 1l8.6-.2.7 12c-5 1.1-8.9 1.7-11.5 1.7-6.8 0-11.4-1.5-13.8-4.6-2.5-3-3.7-8.6-3.7-16.8V0h15.1v15.6h13.8v12.9zM9.099 32.8c-2.6 0-4.8-.9-6.5-2.7s-2.6-4-2.6-6.6.9-4.8 2.5-6.6c1.7-1.8 3.9-2.6 6.5-2.6s4.8.9 6.5 2.7 2.5 4 2.5 6.7-.8 4.8-2.5 6.6c-1.6 1.6-3.7 2.5-6.4 2.5z"/></g></svg>
       </a>
     </div>
     <div class="col pl-4">
       <h1 class="h1--header mb-1">
-        <a href="https://docs.developers.italia.it" class="text-white">
+        <a href="https://docs.developers.italia.it" class="site-title text-white">
           {{ _(t.site_title | default(site.title) | escape) }}
           {% if site.pill %}
             <span class="badge badge-pill bg-primary--mid-dark align-middle">{{ _(site.pill) }}</span>
@@ -16,22 +89,59 @@
       </h1>
       <h2 class="text-white mb-0 h2--header">{{ _(t.site_subtitle | default(site.subtitle) | escape) }}</h2>
     </div>
+    <div class="col mx-l-auto d-none d-lg-block">
+      <div class="text-center text-lg-right social d-flex align-items-center justify-content-center justify-content-lg-end flex-column flex-lg-row">
+        <div class="mr-lg-1 mb-2 mb-lg-0 social__label">{{ t.follow_us | capitalize }}</div>
+        <div>
+          <a href="https://facebook.com/italia/" class="d-inline-flex small-prints mx-1 social__link"><i class="d-inline-block icon it-icon it-icon-linkedin it-icon-github"></i><!--Facebook--></a>
+          <a href="https://github.com/italia/" class="d-inline-flex small-prints mx-1 social__link"><i class="d-inline-block icon it-icon it-icon-github"></i><!--GitHub--></a>
+          <a href="https://twitter.com/teamdigitaleIT" class="d-finline-lex small-prints mx-1 social__link"><i class="d-inline-block icon it-icon it-icon-twitter it-icon-github"></i><!--Twitter--></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row pt-4 pb-4 pl-4 pl-md-5 pr-4 pr-lg-5 m-0 d-none d-lg-block bg-primary--dark secondary-nav">
+    <nav class="navbar navbar-expand-lg navbar-dark justify-content-between mx-r-auto">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">{{ t.header_link_secondary_who_we_are }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">{{ t.header_link_secondary_usage }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">{{ t.header_link_secondary_participate }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">{{ t.header_link_secondary_news }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">{{ t.header_link_secondary_contacts }}</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </header>
 <div class="doc-header container-fluid container-fluid--desktop bg-white">
   <div class="row py-2 px-4 px-lg-5 justify-content-between justify-content-lg-start">
-    <div class="col col-sm-4 col-md-3 col-xl d-none d-md-flex align-items-center">
+    <div class="col col-sm-4 col-md-3 col-xl-5 d-none d-md-flex align-items-center docs-italia__document-title">
       <!-- TITOLO -->
-      <span class="it-icon-document docs-italia__document-title-icon"></span>
-      <span class="docs-italia__document-title">Titolo del documento</span>
+      <span class="it-icon-document docs-italia__document-title__icon"></span>
+      <span class="docs-italia__document-title__label">Titolo del documento</span>
     </div>
 
-    <!-- <div class="col col-md-6"> -->
-    <div class="col">
-      <div class="row">
-        <div class="col-">
-          <a class="btn btn-default d-block d-sm-none" role="button" id="di-show-searchbox">
-            <span class="it-icon-search">
+    <div class="col d-flex align-items-center">
+      <div class="row w-100">
+        <div class="col- d-flex align-items-center">
+          <a class="btn btn-default d-block d-sm-none p-2"
+             role="button"
+             id="di-show-searchbox"
+             data-toggle="collapse"
+             data-target="#searchboxSupportedContent"
+             aria-controls="searchboxSupportedContent"
+             aria-expanded="false"
+             aria-label="Toggle searchbox">
+            <span class="d-block it-icon-search">
               <span class="sr-only">{{ t.search_form_label }}</span>
             </span>
           </a>
@@ -41,7 +151,7 @@
           {% include 'layouts/searchbox.html' %}
         </div>
         <!-- VERSIONS -->
-        <div class="col-">
+        <div class="col- mx-auto d-flex align-items-center">
           <div id="rst-menu">
             {% include 'layouts/docmenu.html' %}
           </div>
@@ -49,28 +159,59 @@
       </div>
     </div>
 
-    <!-- <div class="docs-italia__header-col-container col-md-3"> -->
-    <!-- <div class="docs-italia__header-col docs-italia__header-col--info p-2 d-inline-block"> -->
-    <div class="docs-italia__header-col docs-italia__header-col--info p-2 order-first order-lg-3">
+    <div class="docs-italia__header-col docs-italia__header-col--info p-2 order-first order-lg-1 d-flex align-items-center">
       <!-- INFO -->
       <a href="#" role="button" class="btn"><span class="it-icon it-icon-info"></span></a>
     </div>
-    <div class="docs-italia__header-col docs-italia__header-col--eye p-2 di-nav_menu-item d-none d-lg-block">
+    <div class="docs-italia__header-col docs-italia__header-col--eye p-2 di-nav_menu-item d-none d-lg-flex align-items-center order-lg-2">
       <!-- EYE -->
       <a href="#" role="button" class="btn"><span class="it-icon it-icon-compare"></span></a>
     </div>
-    <div class="docs-italia__header-col docs-italia__header-col--downloads p-2 di-nav_menu-item d-none d-lg-block">
+    <div class="docs-italia__header-col docs-italia__header-col--downloads p-2 di-nav_menu-item d-none d-lg-flex align-items-center order-lg-3">
       <!-- DOWNLOAD -->
-      <span class="it-icon it-icon-download"></span>
+      <a href="#" role="button" class="btn"><span class="it-icon it-icon-download"></span></a>
     </div>
-    <div class="docs-italia__header-col docs-italia__header-col--github p-2 di-nav_menu-item d-none d-lg-block">
+    <div class="docs-italia__header-col docs-italia__header-col--github p-2 di-nav_menu-item d-none d-lg-flex align-items-center order-lg-4">
       <!-- GITHUB -->
       <a href="#" role="button" class="btn"><span class="it-icon it-icon-github"></span></a>
     </div>
 
-    <div class="docs-italia__header-col docs-italia__header-col--github p-2 di-nav_menu-button d-lg-none">
+    <div class="docs-italia__header-col docs-italia__header-col--article-intro-more article-intro-more p-2 di-nav_menu-button d-lg-none d-flex align-items-center">
       <!-- menu mobile -->
-      <a href="#" role="button" class="btn"><span class="it-icon it-icon-more"></span></a>
+      <div class="dropdown">
+        <a href="#" role="button" class="btn dropdown-toggle" id="article-intro-moreDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="dropdown__icon it-icon it-icon-more"></span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="article-intro-moreDropdown">
+            <!-- DOWNLOAD -->
+            <a href="#" role="button" class="dropdown-item pl-2">
+              <span class="dropdown-item__icon d-inline-bock py-2 pr-2">
+                <span class="it-icon it-icon-download"></span>
+              </span>
+              <span class="dropdown-item__label d-inline-bock">
+                Download
+              </span>
+            </a>
+            <!-- EYE -->
+            <a href="#" role="button" class="dropdown-item pl-2">
+              <span class="dropdown-item__icon d-inline-bock py-2 pr-2">
+                <span class="it-icon it-icon-compare"></span>
+              </span>
+              <span class="dropdown-item__label d-inline-bock">
+                Confronta versioni su GitHub
+              </span>
+            </a>
+            <!-- GITHUB -->
+            <a href="#" role="button" class="dropdown-item pl-2">
+              <span class="dropdown-item__icon d-inline-bock py-2 pr-2">
+                <span class="it-icon it-icon-github"></span>
+              </span>
+              <span class="dropdown-item__label d-inline-bock">
+                Modifica su GitHub
+              </span>
+            </a>
+          </div>
+        </div>
     </div>
     <!-- </div> <!~~ /.col .docs-italia__header-col(s) ~~> -->
   </div>
@@ -80,4 +221,3 @@
     </div>
   </div>
 </div>
-  

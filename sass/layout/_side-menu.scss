@@ -9,23 +9,28 @@
     font-size: 0.9rem;
     display: block;
     line-height: 1.6;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -0.5rem;
+      bottom: -0.5rem;
+      left: -0.5rem;
+      right: -0.5rem;
+      z-index: -1;
+    }
 
     &.current_item {
       position: relative;
       z-index: 1;
-      margin-bottom: 1rem;
-      margin-top: 1rem;
-      transition: margin-bottom 0.3s, margin-top 0.3s;
+      // margin-bottom: 1rem;
+      // margin-top: 1rem;
+      // transition: margin-bottom 0.3s, margin-top 0.3s;
 
       &::before {
-        content: '';
-        position: absolute;
-        top: -0.5rem;
-        bottom: -0.5rem;
-        left: -0.5rem;
-        right: -0.5rem;
         background-color: $sky-blue;
-        z-index: -1;
       }
     }
 

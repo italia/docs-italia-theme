@@ -1,5 +1,5 @@
 // Sticky header
-module.exports = themeStickyHeader = (function ($) {
+module.exports = themeStickyHeader = (function ($, stickybits) {
 
   return {
     init: function() {
@@ -7,4 +7,4 @@ module.exports = themeStickyHeader = (function ($) {
     }
   }
 
-})(jQuery);
+})(jQuery, stickybits);
