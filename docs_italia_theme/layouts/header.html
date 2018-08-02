@@ -10,7 +10,7 @@
       aria-label="Toggle navigation">
     <small class="d-inline-block">AGID + Team Digitale</small>&nbsp;<span class="navbar__icon it-icon-expand my-auto ml-1"></span></button>
 
-    <ul class="navbar-nav lang-selector col-lg-offset-12 order-2 order-lg-3 pl-2 pr-4 pr-lg-0 m-0 list-unstyled">
+    <!--<ul class="navbar-nav lang-selector col-lg-offset-12 order-2 order-lg-3 pl-2 pr-4 pr-lg-0 m-0 list-unstyled">
       <li class="nav-item dropdown nav-item--no-underline">
         <a class="nav-link dropdown-toggle pr-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           ITA&nbsp;<span class="dropdown__icon it-icon-collapse my-auto ml-1"></span>
@@ -26,7 +26,7 @@
           </a>
         </div>
       </li>
-    </ul>
+    </ul>-->
     <div class="collapse navbar-collapse order-2" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <!-- <li class="nav-item active">
@@ -59,7 +59,7 @@
         <li class="nav-item px-lg-2 pl-3">
           <a class="nav-link" href="#">{{ _(t.header_link_github) }}</a>
         </li>
-        <li role="separator" class="nav-item divider ml-lg-0 ml-3 d-none d-lg-block"></li>
+        <!--<li role="separator" class="nav-item divider ml-lg-0 ml-3 d-none d-lg-block"></li>-->
       </ul>
     </div>
     <!-- <ul class="navbar-nav mr-auto"> -->
@@ -89,34 +89,31 @@
       </h1>
       <h2 class="text-white mb-0 h2--header">{{ _(t.site_subtitle | default(site.subtitle) | escape) }}</h2>
     </div>
-    <div class="col mx-l-auto d-none d-lg-block">
+    <!--<div class="col mx-l-auto d-none d-lg-block">
       <div class="text-center text-lg-right social d-flex align-items-center justify-content-center justify-content-lg-end flex-column flex-lg-row">
         <div class="mr-lg-1 mb-2 mb-lg-0 social__label">{{ t.follow_us | capitalize }}</div>
         <div>
-          <a href="https://facebook.com/italia/" class="d-inline-flex small-prints mx-1 social__link"><i class="d-inline-block icon it-icon it-icon-linkedin it-icon-github"></i><!--Facebook--></a>
-          <a href="https://github.com/italia/" class="d-inline-flex small-prints mx-1 social__link"><i class="d-inline-block icon it-icon it-icon-github"></i><!--GitHub--></a>
-          <a href="https://twitter.com/teamdigitaleIT" class="d-finline-lex small-prints mx-1 social__link"><i class="d-inline-block icon it-icon it-icon-twitter it-icon-github"></i><!--Twitter--></a>
+          <a href="https://facebook.com/italia/" class="d-inline-flex small-prints mx-1 social__link"><i class="d-inline-block icon it-icon it-icon-linkedin it-icon-github"></i></a>
+          <a href="https://github.com/italia/" class="d-inline-flex small-prints mx-1 social__link"><i class="d-inline-block icon it-icon it-icon-github"></i></a>
+          <a href="https://twitter.com/teamdigitaleIT" class="d-finline-lex small-prints mx-1 social__link"><i class="d-inline-block icon it-icon it-icon-twitter it-icon-github"></i></a>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
   <div class="row pt-4 pb-4 pl-4 pl-md-5 pr-4 pr-lg-5 m-0 d-none d-lg-block bg-primary--dark secondary-nav">
     <nav class="navbar navbar-expand-lg navbar-dark justify-content-between mx-r-auto">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">{{ t.header_link_secondary_who_we_are }}</a>
+          <a class="nav-link" href="#">Progetti</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">{{ t.header_link_secondary_usage }}</a>
+          <a class="nav-link" href="#">Documenti</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">{{ t.header_link_secondary_participate }}</a>
+          <a class="nav-link" href="#">Amministrazioni</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">{{ t.header_link_secondary_news }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">{{ t.header_link_secondary_contacts }}</a>
+          <a class="nav-link" href="/che-cos-e-docs-italia/">Che cos'è</a>
         </li>
       </ul>
     </nav>
@@ -127,7 +124,7 @@
     <div class="col col-sm-4 col-md-3 col-xl-5 d-none d-md-flex align-items-center docs-italia__document-title">
       <!-- TITOLO -->
       <span class="it-icon-document docs-italia__document-title__icon"></span>
-      <span class="docs-italia__document-title__label">Titolo del documento</span>
+      <span class="docs-italia__document-title__label">{{ docstitle }}</span>
     </div>
 
     <div class="col d-flex align-items-center">

@@ -175,10 +175,10 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             table_list_item.parent = tables_toc
             tables_toc.children.append(table_list_item)
 
-    context['content_toc'] = app.builder.render_partial(content_toc)['fragment'] if hasattr(content_toc, 'children') else context['t']['no_content'].capitalize()
-    context['glossary_toc'] = app.builder.render_partial(glossary_toc)['fragment'] if hasattr(glossary_toc, 'children') else context['t']['no_glossary'].capitalize()
-    context['figures_toc'] = app.builder.render_partial(figures_toc)['fragment'] if hasattr(figures_toc, 'children') else context['t']['no_figures'].capitalize()
-    context['tables_toc'] = app.builder.render_partial(tables_toc)['fragment'] if hasattr(tables_toc, 'children') else context['t']['no_tables'].capitalize()
+    context['content_toc'] = app.builder.render_partial(content_toc)['fragment'] if hasattr(content_toc, 'children') else None
+    context['glossary_toc'] = app.builder.render_partial(glossary_toc)['fragment'] if hasattr(glossary_toc, 'children') else None
+    context['figures_toc'] = app.builder.render_partial(figures_toc)['fragment'] if hasattr(figures_toc, 'children') else None
+    context['tables_toc'] = app.builder.render_partial(tables_toc)['fragment'] if hasattr(tables_toc, 'children') else None
 
 def generate_glossary_json(app, doctree, docname):
     """Generate glossary JSON file"""

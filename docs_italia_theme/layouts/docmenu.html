@@ -11,19 +11,14 @@
   {% endif %}
   {% if nav_version %}
     <button class="btn btn-primary dropdown-toggle badge badge-pill bg-primary" type="button" id="dropdownVersionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      {{ t.version }} {{ nav_version }}
+      {{ nav_version }}
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownVersionButton">
       {% for slug, url in versions %}
-        {% if slug != nav_version %}
-          <a class="dropdown-item" href="#" di-value="{{ url }}">
-            {{ slug }}
-          </a>
-        {% endif %}
+      <a class="dropdown-item" href="#">
+        {{ slug }}
+      </a>
       {% endfor %}
-       <a class="dropdown-item" href="#">{{ t.version }} 2</a>
-       <a class="dropdown-item" href="#">{{ t.version }} 3</a>
-       <a class="dropdown-item" href="#">{{ t.version }} 4</a>
     </div>
   {% endif %}
 </div>

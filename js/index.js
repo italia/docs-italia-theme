@@ -37,10 +37,10 @@ $(document).ready(function() {
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();
-  themeVersionDropdown.init();
+  // themeVersionDropdown.init();
   themeScrollProgressBar.init();
   themeStickyHeader.init();
-  themeStickySidebar.init();
+  // themeStickySidebar.init();
   themeOffcanvasFeature.init();
   themeSearchboxCollapse.init();
   themeScrollspy.init();
