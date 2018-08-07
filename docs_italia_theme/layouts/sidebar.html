@@ -16,7 +16,9 @@
           <a href='{{ pathto(master_doc) }}'>{{ _(t.introduction|capitalize) }}</a>
         </li>
       </ul>
+      {% if content_toc %}
       {{ content_toc }}
+      {% endif %}
     </div>
 
     {% if figures_toc %}
