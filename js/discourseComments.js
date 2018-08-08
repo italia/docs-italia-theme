@@ -136,7 +136,7 @@ module.exports = discourseComments = (function ($) {
       // If user isn't logged don't show new-comment form
       if (!Discourse.userIsLoggedIn()) {
         var sUrlCookieName = 'docs-italia_surl';
-        var authRedirect = location.protocol + '//' + location.hostname + (location.port !== "" ? ':' + location.port : '');
+        var authRedirect = location.protocol + '//' + location.hostname;
         var sourceUrl = authRedirect + location.pathname;
 
         // Create a cookie for stores sourceUrl
@@ -144,7 +144,7 @@ module.exports = discourseComments = (function ($) {
 
         // Create popup window
         window.ppWin = function () {
-          var params = 'width=400,height=400';
+          var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
           var win = window.open(Discourse.userAuthKeyUrl(), 'Discourse Authentication', params);
           $(win).on('load', function () {
             // Set target
@@ -166,7 +166,7 @@ module.exports = discourseComments = (function ($) {
                 if (xhr.status === 200) {
                   // Close popup
                   win.close();
-                  console.log('win closed: ', win.closed);
+                  alert('win closed: ', win.closed);
                   // Execute redirect
                   var responseURL = xhr.responseURL;
                   window.location.href = responseURL;
@@ -183,9 +183,14 @@ module.exports = discourseComments = (function ($) {
 
         var message = 'Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta' +
                       // '<div> <a href="' + Discourse.userAuthKeyUrl() + '" class="btn btn-success">Login</a>';
-                      '<div><a href="#" onclick="ppWin()" class="btn btn-success">Login</a></div>';
+                      '<div><a href="#" class="btn btn-success login-button">Login</a></div>';
         $('form[id^="new-comment-"]').html('<div class="new-comment__login">' + message + '</div>');
       }
+
+      // Handle login-button click
+      $('.btn.login-button').bind('click', function () {
+        ppWin();
+      })
 
       // Manage new comment posting
       $('form[id^="new-comment-"]').bind('submit', function (evt) {
