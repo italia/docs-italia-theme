@@ -9,7 +9,9 @@ var DOCUMENTATION_OPTIONS = {
     SOURCELINK_SUFFIX: '{{ sourcelink_suffix }}'
 };
 </script>
-{%- for scriptfile in script_files %}
-<script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
-{%- endfor %}
 <script src="{{ pathto('_static/js/theme.js', 1) }}"></script>
+{%- for scriptfile in script_files %}
+{%- if not 'jquery' in scriptfile %}
+<script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
+{%- endif %}
+{%- endfor %}
