@@ -19,7 +19,7 @@ setup(
     description = __doc__,
     long_description = codecs.open('README.md', 'r', 'utf-8').read(),
     zip_safe = False,
-    packages = ['docs_italia_theme'],
+    packages = ['docs_italia_theme', 'docs-italia-theme'],
     package_data = {'docs_italia_theme': [
         'theme.conf',
         '*.html',
