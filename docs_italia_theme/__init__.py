@@ -134,7 +134,10 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
 
         for figurenode in doctree_page.traverse(figure):
             figure_id = figurenode.attributes['ids'][0]
-            figure_number = app.env.toc_fignumbers[page]['figure'][figure_id]
+            toc_fig_tables = app.env.toc_fignumbers[page].get('figure', {})
+            figure_number = toc_fig_tables.get(figure_id)
+            if figure_number is None:
+                continue
             figure_title = figurenode.children[0]['alt'] if 'alt' in figurenode.children[0] else context['t']['no_description']
             figure_text_string = 'Fig. ' + str(figure_number[0]) + '.' + str(figure_number[1]) + ' - ' + figure_title.capitalize()
             figure_text = Text(figure_text_string)
@@ -161,7 +164,6 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             table_number = toc_fig_tables.get(table_id)
             if table_number is None:
                 continue
-            table_number = app.env.toc_fignumbers[page]['table'][table_id]
             table_title = tablenode.children[0].rawsource if tablenode.children[0].rawsource else context['t']['no_description']
             table_title = (table_title[:60] + '...') if len(table_title) > 60 else table_title
             table_text_string = 'Tab. ' + '.'.join([str(n) for n in table_number]) + ' - ' + table_title.capitalize()
