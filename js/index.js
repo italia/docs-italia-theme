@@ -43,7 +43,7 @@ $(document).ready(function() {
   // themeStickySidebar.init();
   themeOffcanvasFeature.init();
   themeSearchboxCollapse.init();
-  themeScrollspy.init();
+  // themeScrollspy.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossayReady() {
