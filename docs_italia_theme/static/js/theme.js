@@ -227,7 +227,7 @@ module.exports = function () {
   this.userAuthKeyUrl = function () {
     // Generate public/private RSA keys
     this.genRSAKey();
-    var authRedirect = location.protocol + '//' + location.hostname;
+    var authRedirect = location.protocol + '//' + location.hostname + (location.port !== "" ? ':' + location.port : '');
 
     var data = {
       application_name: 'docs-italia',
@@ -482,7 +482,7 @@ module.exports = discourseComments = (function ($) {
       // If user isn't logged don't show new-comment form
       if (!Discourse.userIsLoggedIn()) {
         var sUrlCookieName = 'docs-italia_surl';
-        var authRedirect = location.protocol + '//' + location.hostname;
+        var authRedirect = location.protocol + '//' + location.hostname + (location.port !== "" ? ':' + location.port : '');
         var sourceUrl = authRedirect + location.pathname;
 
         // Create a cookie for stores sourceUrl
@@ -492,7 +492,9 @@ module.exports = discourseComments = (function ($) {
         window.ppWin = function () {
           var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
           var win = window.open(Discourse.userAuthKeyUrl(), 'Discourse Authentication', params);
+
           $(win).on('load', function () {
+            console.log('win loaded');
             // Set target
             var t = win.document;
             var form = $(t).find('form');
