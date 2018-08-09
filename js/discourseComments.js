@@ -146,40 +146,7 @@ module.exports = discourseComments = (function ($) {
         window.ppWin = function () {
           var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
           var win = window.open(Discourse.userAuthKeyUrl(), 'Discourse Authentication', params);
-
-          $(win).on('load', function () {
-            console.log('win loaded');
-            // Set target
-            var t = win.document;
-            var form = $(t).find('form');
-            $(form).on('submit', function (evt) {
-              // Avoid submit
-              evt.preventDefault();
-              // Get page csrf-token, used during ajax form submit
-              var csrfToken = $(win.document.head).find('meta[name="csrf-token"]').attr('content');
-              // Execute an ajax request directily from opened window
-              var xhr = new win.XMLHttpRequest();
-              xhr.open('POST', win.location.protocol + '//' + win.location.hostname + $(form).attr('action'));
-              // Set request's header
-              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-              xhr.setRequestHeader('X-CSRF-Token', csrfToken);
-
-              xhr.onload = function () {
-                if (xhr.status === 200) {
-                  // Close popup
-                  win.close();
-                  alert('win closed: ', win.closed);
-                  // Execute redirect
-                  var responseURL = xhr.responseURL;
-                  window.location.href = responseURL;
-                } else {
-                  console.log(xhr.status);
-                  console.log(xhr.statusText);
-                }
-              };
-              xhr.send($(form).serialize());
-            });
-          });
+          
           return win;
         };
 

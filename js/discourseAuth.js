@@ -16,7 +16,8 @@ module.exports = discourseAuth = {
         Discourse._cookie_delete(surl_cookie_name);
 
         if (typeof sourceUrl !== 'undefined') {
-          window.location.href = sourceUrl;
+          window.opener.document.location.href = sourceUrl;
+          window.close();
         } else {
           // Remove ?payload get parameter from url
           window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
