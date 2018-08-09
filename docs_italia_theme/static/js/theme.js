@@ -204,12 +204,14 @@ module.exports = function () {
   };
   // Get search parameters
   this.searchParameters = function (search) {
-    if (this.searchParams === null)
-      this.searchParams = new URLSearchParams(window.location.search);
-    if (this.searchParams.has(search))
-      return this.searchParams.get(search);
-    else
-      return false;
+    this.searchParams = window.location.search.substr(1).split('&').reduce(function (q, query) {
+      var chunks = query.split('=');
+      var key = chunks[0];
+      var value = chunks[1];
+      return (q[key] = value, q);
+    }, {});
+
+    return typeof this.searchParams[search] !== "undefined";
   };
   // Decrypts payload
   this.decryptPayload = function (payload) {
