@@ -133,6 +133,8 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
         doctree_page = app.env.get_doctree(page)
 
         for figurenode in doctree_page.traverse(figure):
+            if not figurenode.attributes['ids']:
+                continue
             figure_id = figurenode.attributes['ids'][0]
             toc_fig_tables = app.env.toc_fignumbers[page].get('figure', {})
             figure_number = toc_fig_tables.get(figure_id)
