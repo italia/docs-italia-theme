@@ -138,8 +138,12 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             figure_number = toc_fig_tables.get(figure_id)
             if figure_number is None:
                 continue
-            figure_title = figurenode.children[0]['alt'] if 'alt' in figurenode.children[0] else context['t']['no_description']
-            figure_text_string = 'Fig. ' + str(figure_number[0]) + '.' + str(figure_number[1]) + ' - ' + figure_title.capitalize()
+            figure_title = figurenode.children[0].get('alt') or context['t']['no_description']
+            try:
+                figure_text_string = 'Fig. {}.{} - {}'.format(
+                    figure_number[0], figure_number[1], figure_title.capitalize())
+            except IndexError:
+                continue
             figure_text = Text(figure_text_string)
             figure_text.rawsource = figure_text_string
             figure_reference = reference()
