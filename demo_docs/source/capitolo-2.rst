@@ -166,7 +166,7 @@ Nunc viverra, sapien ut sagittis bibendum, ante elit eleifend nisl, vitae semper
 purus odio sed erat. Maecenas a orci nulla. Mauris consectetur ligula justo, eu
 sagittis nisl accumsan ac. Phasellus lacus velit, convallis vel venenatis ac,
 posuere quis erat. Phasellus commodo lectus sit amet `risus elementum porttitor
-<https://www.example.com>`.
+<https://www.example.com>`_.
 
 In pharetra est ut eros sagittis feugiat. Cras nec suscipit odio. Duis in orci
 sed ante convallis varius.
