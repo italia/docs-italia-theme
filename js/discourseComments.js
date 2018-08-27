@@ -146,7 +146,6 @@ module.exports = discourseComments = (function ($) {
         window.ppWin = function () {
           var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
           var win = window.open(Discourse.userAuthKeyUrl(), 'Discourse Authentication', params);
-          
           return win;
         };
 

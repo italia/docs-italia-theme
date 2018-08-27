@@ -72,14 +72,12 @@ module.exports = function () {
   };
   // Get search parameters
   this.searchParameters = function (search) {
-    this.searchParams = window.location.search.substr(1).split('&').reduce(function (q, query) {
-      var chunks = query.split('=');
-      var key = chunks[0];
-      var value = chunks[1];
-      return (q[key] = value, q);
-    }, {});
-
-    return typeof this.searchParams[search] !== "undefined";
+    if (this.searchParams === null)
+      this.searchParams = new URLSearchParams(window.location.search);
+    if (this.searchParams.has(search))
+      return this.searchParams.get(search);
+    else
+      return false;
   };
   // Decrypts payload
   this.decryptPayload = function (payload) {
@@ -138,7 +136,7 @@ module.exports = function () {
   this.createPost = function (tid, body) {
     return axios({
       method: 'POST',
-      url: obj.base_url + '/posts',
+      url: obj.base_url + '/posts.json',
       data: {
         title: "Post created from docs-italia",
         topic_id: tid,
