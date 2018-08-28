@@ -80,6 +80,3 @@ H1 Titolo del documento, molto probabile su 2/3 righe
    :hidden:
 
    glossario.rst
-
-.. section_comments::
-  :topic_id: 29
