@@ -91,7 +91,7 @@
     </div>
     <!-- GITHUB -->
     {% if github_user %}
-      {% set github_url = "https://github.com/" + github_user + "/" + github_repo + "/blob/" + github_version + conf_py_path + pagename + suffix %}
+      {% set github_url = "https://github.com/" + github_user + "/" + github_repo + "/blob/" + github_version + conf_py_path + pagename + source_suffix %}
     {% endif %}
     <div class="docs-italia__header-col docs-italia__header-col--github p-2 di-nav_menu-item d-none d-lg-flex align-items-center order-lg-4">
       <a href="{{ github_url | default('#') }}" role="button" class="btn" title="{{ t.view_on_github }}"><span class="docs-icon-github"></span></a>
