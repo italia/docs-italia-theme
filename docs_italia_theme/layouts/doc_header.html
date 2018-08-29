@@ -30,27 +30,16 @@
         <div class="col- mx-auto d-flex align-items-center">
           <div id="rst-menu">
             <div class="dropdown" id="version-list">
-              {% set nav_version = version %}
-              {% if READTHEDOCS and current_version %}
-                {% if current_version == 'stable' and last_stable_version %}
-                  {% set current_version = last_stable_version %}
-                {% endif %}
-                {% set nav_version = current_version %}
-              {% endif %}
-              {% if nav_version %}
                 <button class="btn btn-primary dropdown-toggle badge badge-pill bg-primary" type="button" id="dropdownVersionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{ nav_version }}
+                  {{ version }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownVersionButton">
                   {% for slug, url in versions %}
-                    {% if slug != nav_version %}
-                      <a class="dropdown-item" href="#" di-value="{{ url }}">
-                        {{ slug }}
-                      </a>
-                    {% endif %}
+                  <a class="dropdown-item" href="{{ url }}">
+                    {{ slug }}
+                  </a>
                   {% endfor %}
                 </div>
-              {% endif %}
             </div>
           </div>
         </div>
