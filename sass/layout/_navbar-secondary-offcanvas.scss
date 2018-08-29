@@ -1,4 +1,4 @@
-.Offcanvas-menu {
+.offcanvas-menu {
   position: fixed;
   z-index: 1000;
   width: 100vw;
@@ -20,36 +20,30 @@
     transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
   }
 
-  .Offcanvas-menu__inner {
+  .offcanvas-menu__inner {
     width: 80%;
     background-color: #fff;
     height: 100vh;
     transform: translateX(0);
     transition: all 0.5s ease-out;
 
-    .Offcanvas-menu__header {
-      padding: 1.5rem 2rem 1rem 2rem;
+    .offcanvas-menu__header {
+      padding: 1.5rem 1.8rem 1rem;
 
-      .Offcanvas-menu__title {
+      .offcanvas-menu__title {
         font-weight: 600;
         font-size: 1.2rem;
       }
     }
 
-    .Offcanvas-menu__nav {
+    .offcanvas-menu__nav {
       padding: 0.5rem 0 0 0;
       margin: 0;
 
-      .Offcanvas-menu__nav__item {
+      .offcanvas-menu__nav__item {
         list-style: none;
-        // margin: 0 0 0 0.2rem;
         margin: 0;
         padding: 0.5rem 1rem;
-
-        // &:hover {
-        //   border-left: 0.2rem solid #000;
-        //   margin-left: 0;
-        // }
 
         // Horiontal separators
         &:nth-child(1),
@@ -67,7 +61,7 @@
           }
         }
 
-        .Offcanvas-menu__nav__link {
+        .offcanvas-menu__nav__link {
           padding: 0.5rem 1rem;
           font-size: 1rem;
           display: block;
@@ -76,12 +70,12 @@
     }
   }
 
-  &.deactive .Offcanvas-menu__inner {
+  &.deactive .offcanvas-menu__inner {
     margin-left: -80%;
     overflow: hidden;
   }
 
-  .Offcanvas-menu__extra {
+  .offcanvas-menu__extra {
     width: 20%;
     height: 100vh;
     position: fixed;

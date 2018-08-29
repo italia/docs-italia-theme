@@ -3,8 +3,7 @@
     bottom: 4rem;
   }
 
-  i.return-to-top__icon {
-    top: 0.6rem;
-    cursor: pointer;
+  i::before {
+    margin: 0;
   }
 }

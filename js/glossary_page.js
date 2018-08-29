@@ -30,14 +30,14 @@ module.exports = themeGlossaryPage = (function ($) {
             id = $btn.attr('id'),
             $target = $btn.next('dd'),
             $customBtn = "<button class='glossary-page__btn collapsed border-top border-grey-light border-width-2 pt-3 pb-3' data-toggle='collapse' data-target='#glossary-" + id + "' aria-expanded='true' aria-controls='glossary-" + id + "'>" +
-                         "<span class='it-icon-plus mr-3'> </span>" +
-                         "<span class='it-icon-minus mr-3'> </span>" +
+                         "<span class='docs-icon-plus mr-3'> </span>" +
+                         "<span class='docs-icon-minus mr-3'> </span>" +
                           $btn.text() +
                          "</button>";
 
         $btn.html($customBtn);
         $target.attr('id', 'glossary-' + id).attr('aria-labelledby' , id).addClass(themeGlossaryPage.showClass(index));
-        $target.append("<div class='glossary-page__copy-link-wrap mt-3'><span class='Icon it-icon-link'></span><button type='button' class='glossary-page__copy-link'>" + themeTranslate.getTranslation().copyLink + "</button></div>");
+        $target.append("<div class='glossary-page__copy-link-wrap mt-3'><span class='Icon docs-icon-link'></span><button type='button' class='glossary-page__copy-link'>" + themeTranslate.getTranslation().copyLink + "</button></div>");
       });
     },
 

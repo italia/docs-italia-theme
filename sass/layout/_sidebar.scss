@@ -103,7 +103,7 @@
 .sidebar-btn {
   text-transform: uppercase;
   color: $medium-blue;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   border: 0;
   border-bottom: 3px $blue solid;
@@ -137,26 +137,26 @@
     }
   }
 
-  .it-icon-expand,
-  .it-icon-collapse {
+  .it-expand,
+  .it-collapse {
     font-size: 0.6rem;
     line-height: 2.5;
   }
 
-  .it-icon-expand {
+  .it-expand {
     display: inline-block;
   }
 
-  .it-icon-collapse {
+  .it-collapse {
     display: none;
   }
 
   &.collapsed {
-    .it-icon-expand {
+    .it-expand {
       display: none;
     }
 
-    .it-icon-collapse {
+    .it-collapse {
       display: inline-block;
     }
   }
@@ -168,14 +168,14 @@
   }
 
   @include media-breakpoint-down(sm) {
-    .it-icon-expand,
-    .it-icon-collapse {
+    .it-expand,
+    .it-collapse {
       display: none;
     }
 
     &.collapsed {
-      .it-icon-expand,
-      .it-icon-collapse {
+      .it-expand,
+      .it-collapse {
         display: none;
       }
     }

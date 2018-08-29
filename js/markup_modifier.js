@@ -84,7 +84,7 @@ module.exports = themeMarkupModifier = (function ($) {
           $caption.addClass('caption--table');
           // check if there is a copy link after cation
           if($reference.length) {
-            $reference.prepend('<div class="reference-icon Icon it-icon-link"></div>')
+            $reference.prepend('<div class="reference-icon Icon docs-icon-link"></div>')
             $p.addClass('reference--wrap')
             $caption.wrap('<div class="caption-wrap">');
             $caption.closest('.caption-wrap').append($p);
@@ -117,17 +117,17 @@ module.exports = themeMarkupModifier = (function ($) {
           $deepeningTitle = $('.admonition-deepening .admonition-title');
           $consultationTitle = $('.admonition-consultazione .admonition-title');
 
-      $note.prepend('<span class="Icon it-icon-note"></span>');
-      $error.prepend('<span class="Icon it-icon-procedure"></span>');
-      $consiglio.prepend('<span class="Icon it-icon-hint"></span>');
-      $attention.prepend('<span class="Icon it-icon-attention"></span>');
-      $important.prepend('<span class="Icon it-icon-hint"></span>');
-      $usefulDocsPdf.prepend('<span class="Icon it-icon-pdf"></span>');
-      $usefulDocsHtml.prepend('<span class="Icon it-icon-html"></span>');
-      $numericList.prepend('<span class="Icon it-icon-step Icon--ol"></span>');
-      $codeTitle.prepend('<span class="Icon it-icon-example"></span>');
-      $deepeningTitle.prepend('<span class="Icon it-icon-attention"></span>');
-      $consultationTitle.prepend('<span class="Icon it-icon-edit"></span>');
+      $note.prepend('<span class="Icon docs-icon-note"></span>');
+      $error.prepend('<span class="Icon docs-icon-procedure"></span>');
+      $consiglio.prepend('<span class="Icon docs-icon-hint"></span>');
+      $attention.prepend('<span class="Icon docs-icon-attention"></span>');
+      $important.prepend('<span class="Icon docs-icon-hint"></span>');
+      $usefulDocsPdf.prepend('<span class="Icon docs-icon-pdf"></span>');
+      $usefulDocsHtml.prepend('<span class="Icon docs-icon-html"></span>');
+      $numericList.prepend('<span class="Icon docs-icon-step Icon--ol"></span>');
+      $codeTitle.prepend('<span class="Icon docs-icon-example"></span>');
+      $deepeningTitle.prepend('<span class="Icon docs-icon-attention"></span>');
+      $consultationTitle.prepend('<span class="Icon docs-icon-edit"></span>');
     },
 
     noteModifier: function() {
@@ -194,8 +194,8 @@ module.exports = themeMarkupModifier = (function ($) {
     deepeninModifier: function() {
       var $hiddenBlock = that.$deepeningParagraph.slice(4,that.$deepeningParagraph.length),
           btn = "<div class='admonition__toggle-wrap'><button type='button' class='admonition__toggle-btn'>" +
-          "<span class='admonition__toggle-show-more'>" + themeTranslate.getTranslation().showMore + "<span class='Icon it-icon-plus'></span></span>" +
-          "<span class='admonition__toggle-show-less'>" + themeTranslate.getTranslation().showLess + "<span class='Icon it-icon-minus'></span></span>" +
+          "<span class='admonition__toggle-show-more'>" + themeTranslate.getTranslation().showMore + "<span class='Icon docs-icon-plus'></span></span>" +
+          "<span class='admonition__toggle-show-less'>" + themeTranslate.getTranslation().showLess + "<span class='Icon docs-icon-minus'></span></span>" +
           "</button></div>";
 
       $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');

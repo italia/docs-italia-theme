@@ -36,7 +36,7 @@ module.exports = themeSectionNav = (function ($) {
           // "<button type='button' class='chapter-link'><span class='chapter-link__counter'>4</span>" +
           // "<span class='chapter-link__title'>" + themeTranslate.getTranslation().comments + "</span></button type='button'></li>" +
           "<li class='chapter-nav__item'>" +
-          "<span class='Icon it-icon-more'></span>" +
+          "<span class='Icon docs-icon-more'></span>" +
           "<button type='button' data-toggle='modal' class='chapter-link chapter-link--expand'>" + themeTranslate.getTranslation().seeActions + "</button></li>" +
           // "<li class='chapter-nav__item'>" +
           // "<span class='Icon it-icon-more'></span>" +
@@ -47,7 +47,7 @@ module.exports = themeSectionNav = (function ($) {
           "<div class='chapter-nav__title'>" + title + "</div>" +
           "<ul class='chapter-nav__list'>" +
           "<li class='chapter-nav__item'>" +
-          "<span class='Icon it-icon-link'></span>" +
+          "<span class='Icon docs-icon-link'></span>" +
           "<button type='button' class='chapter-link'>" + themeTranslate.getTranslation().copyLink + "</button></li>" +
           // "<li class='chapter-nav__item'>" +
           // "<span class='Icon it-icon-compare'></span>" +

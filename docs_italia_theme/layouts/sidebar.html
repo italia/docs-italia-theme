@@ -7,8 +7,8 @@
 
     <button data-toggle="collapse" data-target="#content-index" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="content-index">
       {{ _(t.content_index) }}
-      <span class="it-icon-collapse float-right"></span>
-      <span class="it-icon-expand float-right"></span>
+      <span class="it-collapse float-right"></span>
+      <span class="it-expand float-right"></span>
     </button>
     <div id="content-index" class="content-index--menu sidebar-list--wrapper sidebar-accordion-content collapse show" data-parent="#desktop-menu">
       <ul class="{% if pagename == master_doc %}current{% endif %}">
@@ -24,8 +24,8 @@
     {% if figures_toc %}
     <button data-toggle="collapse" data-target="#figures-index" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop collapsed" type="button" aria-controls="figures-index">
       {{ _(t.figures_index) }}
-      <span class="it-icon-collapse float-right"></span>
-      <span class="it-icon-expand float-right"></span>
+      <span class="it-collapse float-right"></span>
+      <span class="it-expand float-right"></span>
     </button>
     <div id="figures-index" class="figures-index--menu sidebar-list--wrapper sidebar-accordion-content collapse" data-parent="#desktop-menu">
       {{ figures_toc }}
@@ -35,8 +35,8 @@
     {% if tables_toc %}
     <button data-toggle="collapse" data-target="#table-index" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop collapsed" type="button" aria-controls="table-index">
       {{ _(t.table_index) }}
-      <span class="it-icon-collapse float-right"></span>
-      <span class="it-icon-expand float-right"></span>
+      <span class="it-collapse float-right"></span>
+      <span class="it-expand float-right"></span>
     </button>
     <div id="table-index" class="table-index--menu collapse sidebar-list--wrapper sidebar-accordion-content collapse" data-parent="#desktop-menu">
       {{ tables_toc }}
@@ -46,8 +46,8 @@
     {% if glossary_toc %}
     <button data-toggle="collapse" data-target="#glossary-index" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop collapsed" type="button" aria-controls="glossary-index">
       {{ _(t.glossary) }}
-      <span class="it-icon-collapse float-right"></span>
-      <span class="it-icon-expand float-right"></span>
+      <span class="it-collapse float-right"></span>
+      <span class="it-expand float-right"></span>
     </button>
     <div id="glossary-index" class="glossary-mobile--menu sidebar-list--wrapper sidebar-accordion-content collapse" data-parent="#desktop-menu">
       {{ glossary_toc }}

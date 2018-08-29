@@ -13,7 +13,7 @@
   text-align: left;
   padding: 0.5rem 0;
   text-transform: uppercase;
-  font-weight: 800;
+  font-weight: 700;
   color: $black;
   padding-left: 2rem;
 
@@ -73,7 +73,7 @@
 }
 
 .caption-number {
-  font-weight: 800;
+  font-weight: 700;
   color: $black;
 }
 
@@ -147,7 +147,7 @@
     color: $white;
     padding: 0.5rem 1rem;
     border-radius: 0.2rem;
-    font-weight: 800;
+    font-weight: 700;
     display: inline-block;
   }
 }
@@ -306,7 +306,7 @@
     margin-bottom: 3rem;
 
     em {
-      font-weight: 800;
+      font-weight: 700;
     }
   }
 
@@ -327,7 +327,7 @@
     color: $black;
     font-family: $titillium-font;
     font-size: 0.8rem;
-    font-weight: 800;
+    font-weight: 700;
   }
 
   .Icon--ol {
@@ -430,7 +430,7 @@
 
   .topic-title {
     color: $black;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 1.4rem;
     font-family: $titillium-font;
   }
@@ -498,7 +498,7 @@
       margin-bottom: 0;
 
       > div {
-        font-weight: 800;
+        font-weight: 700;
         font-family: $stack-font;
       }
     }

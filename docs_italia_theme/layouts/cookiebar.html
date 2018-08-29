@@ -1,9 +1,13 @@
 <div class="cookiebar bg-dark p-4 hide" aria-hidden="true">
-    <p class="text-white">
-      {{ t.cookiebar_msg }}
-    </p>
-    <p>
-        <button data-accept="cookiebar" class="btn btn-info mr-2">{{ t.cookiebar_accept }}</button>
-        <a href="{{ site.privacy_link }}" class="btn btn-outline-info">{{ t.cookiebar_privacy_policy }}</a>
-    </p>
+  <div class="container">
+    <div class="row d-flex align-items-center">
+      <div class="col-12 col-md-7">
+        <span class="text-white">{{ t.cookiebar_msg }}</span>
+      </div>
+      <div class="col-12 col-md-5 mt-2 mt-md-0 text-right">
+        <a class="btn btn-link" href="{{ site.cookies_policy_link }}">{{ t.cookiebar_privacy_policy }}</a>
+        <button class="btn btn-sm btn-primary mr-2" data-accept="cookiebar">{{ t.cookiebar_accept }}</button>
+      </div>
+    </div>
+  </div>
 </div>

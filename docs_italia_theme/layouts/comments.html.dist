@@ -3,7 +3,7 @@
    <!-- Top header -->
    <div class="block-comments__header border-top border-bottom border-width-2 pt-3 pb-3 row align-items-center justify-content-between">
       <h6 class="col-auto text-uppercase mb-0">{{ _(t.comments) }}</h6>
-      <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-collapsed0" aria-expanded="true"><span class="it-icon-plus"></span><span class="it-icon-minus"></span></button>
+      <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-collapsed0" aria-expanded="true"><span class="docs-icon-plus"></span><span class="docs-icon-minus"></span></button>
    </div>
    <div class="block-comments__body pt-4 collapse show" data-parent="#accordion-comments" id="comments-collapsed0" style="">
       <!-- Input row -->
@@ -24,7 +24,7 @@
                            <div class="col-auto"><span class="block-comments__name text-capitalize mb-0">paola turcini</span></div>
                            <div class="col-auto">
                               <p class="d-inline-block mr-2 block-comments__date mb-0">16 apr 2018, 16:24</p>
-                              <button class="block-comments__item-btn collapsed" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1"><span class="it-icon-collapse"></span><span class="it-icon-expand"></span></button>
+                              <button class="block-comments__item-btn collapsed" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1"><span class="docs-icon-collapse"></span><span class="docs-icon-expand"></span></button>
                            </div>
                         </div>
                         <p class="text-uppercase block-comments__role">giornalista</p>
@@ -39,7 +39,7 @@
                            <div class="col-auto"><span class="block-comments__name text-capitalize mb-0">paola turcini</span></div>
                            <div class="col-auto">
                               <p class="d-inline-block mr-2 block-comments__date mb-0">16 apr 2018, 16:24</p>
-                              <button class="block-comments__item-btn" data-toggle="collapse" data-target="#collapse-2" aria-expanded="true" aria-controls="collapse-2"><span class="it-icon-collapse"></span><span class="it-icon-expand"></span></button>
+                              <button class="block-comments__item-btn" data-toggle="collapse" data-target="#collapse-2" aria-expanded="true" aria-controls="collapse-2"><span class="docs-icon-collapse"></span><span class="docs-icon-expand"></span></button>
                            </div>
                         </div>
                         <p class="text-uppercase block-comments__role">giornalista</p>
@@ -54,7 +54,7 @@
                            <div class="col-auto"><span class="block-comments__name text-capitalize mb-0">paola turcini</span></div>
                            <div class="col-auto">
                               <p class="d-inline-block mr-2 block-comments__date mb-0">16 apr 2018, 16:24</p>
-                              <button class="block-comments__item-btn collapsed" data-toggle="collapse" data-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3"><span class="it-icon-collapse"></span><span class="it-icon-expand"></span></button>
+                              <button class="block-comments__item-btn collapsed" data-toggle="collapse" data-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3"><span class="docs-icon-collapse"></span><span class="docs-icon-expand"></span></button>
                            </div>
                         </div>
                         <p class="text-uppercase block-comments__role">giornalista</p>
