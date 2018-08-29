@@ -150,7 +150,7 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             figure_text.rawsource = figure_text_string
             figure_reference = reference()
             figure_reference.attributes['internal'] = True
-            figure_reference.attributes['refuri'] = page + app.builder.out_suffix + '#' + figure_id
+            figure_reference.attributes['refuri'] = app.builder.get_relative_uri(pagename, page) + '#' + figure_id
             figure_compact_paragraph = compact_paragraph()
             figure_list_item = list_item()
             figure_text.parent = figure_reference
@@ -177,7 +177,7 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             table_text.rawsource = table_text_string
             table_reference = reference()
             table_reference.attributes['internal'] = True
-            table_reference.attributes['refuri'] = page + app.builder.out_suffix + '#' + table_id
+            table_reference.attributes['refuri'] = app.builder.get_relative_uri(pagename, page) + '#' + table_id
             table_compact_paragraph = compact_paragraph()
             table_list_item = list_item()
             table_text.parent = table_reference
