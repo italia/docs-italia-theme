@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 settings_project_name = 'Docs Italia Demo'
 settings_copyright_copyleft = 'CC-BY 3.0 - Agenzia per l\'Italia Digitale'
 settings_editor_name = "AgID - Agenzia per l'Italia Digitale"
-settings_doc_version = '1'
+settings_doc_version = 'bozza'
 settings_doc_release = '1.0'
 settings_doc_language = 'it'
 settings_file_name = 'docs-italia-demo'
