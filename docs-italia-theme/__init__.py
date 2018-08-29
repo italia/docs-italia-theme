@@ -5,3 +5,6 @@
 
 def get_html_theme_path():
     return None
+
+def setup(app):
+    pass
