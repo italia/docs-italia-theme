@@ -9,6 +9,7 @@ from docutils.nodes import table
 from docutils.nodes import bullet_list
 from docutils.nodes import list_item
 from docutils.nodes import reference
+from docutils.nodes import caption
 from docutils.nodes import Text
 from sphinx.addnodes import compact_paragraph
 from sphinx.addnodes import glossary
@@ -114,6 +115,11 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
 
     for toctreenode in doctree_index.traverse(toctree):
         toctree_element = TocTree(app.env).resolve(pagename, app.builder, toctreenode, includehidden=True)
+        try:
+            toc_caption = next(child for child in toctree_element.children if isinstance(child, caption))
+            toctree_element.children.remove(toc_caption)
+        except StopIteration:
+            pass
         if 'glossary_toc' in toctreenode.parent.attributes['names']:
             glossary_tocs.append(toctree_element)
         else:
