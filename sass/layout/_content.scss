@@ -284,20 +284,17 @@
     }
 
     .figure,
+    .table,
     .section {
       &:not([id=""]) {
-        margin-top: -4rem;
         padding-top: 4rem;
         display: inline-block;
       }
     }
 
-    // bugfix per far mostrare correttamente anche l'ancora delle tabelle con
-    // header sticky
-    .table-responsive {
-      margin-top: -4rem;
-      padding-top: 4rem;
-      display: inline-block;
+    .glossary dt:not([id=""]) {
+      margin-top: -4em;
+      padding-top: 4em;
     }
   }
 
