@@ -150,8 +150,8 @@ module.exports = themeMarkupModifier = (function ($) {
             str =  $element.text(),
             newStr = str.replace(/[\[\]]/g,'');
             stringToAppend = "<div class='note-action'>" +
-                             "<button type='button' class='note-close-btn'>X</button>" +
-                             "<button type='button' class='note-back-btn'>" + themeTranslate.getTranslation().backToText + "</button>" +
+                             "<button type='button' class='note-close-btn'>×</button>" +
+                             "<button type='button' class='note-back-btn'><i class='it-arrow-up'></i>" + themeTranslate.getTranslation().backToText + "</button>" +
                              "</div>";
 
         $element.text(themeTranslate.getTranslation().note +  ' ' + newStr);
