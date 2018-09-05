@@ -380,7 +380,7 @@ sed ante convallis varius.
 
    3. Clicca sul pulsante *Copy to clipboard* accanto all’URL del repo;
 
-   .. image:: images/github_example.png
+      .. image:: images/github_example.png
 
    .. role:: procedure-internal-title
       :class: procedure-internal-title
