@@ -172,32 +172,6 @@
     float: left;
   }
 
-  ul {
-    list-style-type: none;
-
-    li {
-      position: relative;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-
-      &::after {
-        content: '';
-        width: 0;
-        height: 0;
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        border-left: 5px solid $grey-mid;
-        position: absolute;
-        left: -1rem;
-        top: 0.4rem;
-      }
-
-      ul li {
-        margin-top: 0.5rem;
-      }
-    }
-  }
-
   .useful-docs {
     .mimetype {
       display: none;
@@ -250,6 +224,33 @@
           font-family: $titillium-font;
           font-weight: 600;
         }
+      }
+    }
+  }
+
+  ul.simple,
+  ul.simple ul {
+    list-style-type: none;
+
+    li {
+      position: relative;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+
+      &::after {
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 5px solid $grey-mid;
+        position: absolute;
+        left: -1rem;
+        top: 0.4rem;
+      }
+
+      ul li {
+        margin-top: 0.5rem;
       }
     }
   }
