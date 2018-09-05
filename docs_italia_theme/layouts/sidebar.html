@@ -10,7 +10,7 @@
       <span class="it-collapse float-right"></span>
       <span class="it-expand float-right"></span>
     </button>
-    <div id="content-index" class="content-index--menu sidebar-list--wrapper sidebar-accordion-content collapse show" data-parent="#desktop-menu">
+    <div id="content-index" class="content-index--menu sidebar-list--wrapper sidebar-accordion-content collapse show">
       <ul class="{% if pagename == master_doc %}current{% endif %}">
         <li class="toctree-l1 {% if pagename == master_doc %}current{% endif %}">
           <a href='{{ pathto(master_doc) }}'>{{ _(t.introduction|capitalize) }}</a>
@@ -27,7 +27,7 @@
       <span class="it-collapse float-right"></span>
       <span class="it-expand float-right"></span>
     </button>
-    <div id="figures-index" class="figures-index--menu sidebar-list--wrapper sidebar-accordion-content collapse" data-parent="#desktop-menu">
+    <div id="figures-index" class="figures-index--menu sidebar-list--wrapper sidebar-accordion-content collapse">
       {{ figures_toc }}
     </div>
     {% endif %}
@@ -38,7 +38,7 @@
       <span class="it-collapse float-right"></span>
       <span class="it-expand float-right"></span>
     </button>
-    <div id="table-index" class="table-index--menu collapse sidebar-list--wrapper sidebar-accordion-content collapse" data-parent="#desktop-menu">
+    <div id="table-index" class="table-index--menu collapse sidebar-list--wrapper sidebar-accordion-content collapse">
       {{ tables_toc }}
     </div>
     {% endif %}
@@ -49,7 +49,7 @@
       <span class="it-collapse float-right"></span>
       <span class="it-expand float-right"></span>
     </button>
-    <div id="glossary-index" class="glossary-mobile--menu sidebar-list--wrapper sidebar-accordion-content collapse" data-parent="#desktop-menu">
+    <div id="glossary-index" class="glossary-mobile--menu sidebar-list--wrapper sidebar-accordion-content collapse">
       {{ glossary_toc }}
     </div>
     {% endif %}
