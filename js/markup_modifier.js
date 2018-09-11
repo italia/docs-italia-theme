@@ -77,12 +77,13 @@ module.exports = themeMarkupModifier = (function ($) {
         $caption.each(function(index) {
           var $caption = $(this),
               $table = $caption.closest('.table-responsive, .figure'),
+              $table_id = $table.hasClass('figure') ? $table.attr('id') : $table.find('table').attr('id');
               $reference = $('<p></p>').addClass('reference--wrap').append(
                 $('<a></a>').addClass('reference internal').append(
                   $('<i></i>').addClass('it-link mr-2 align-middle')
                 ).append(
                   $('<span></span>').text('copia link')
-                ).attr('href', '#' + $table.attr('id'))
+                ).attr('href', '#' + $table_id)
               );
               
           $caption.addClass('caption--table');
