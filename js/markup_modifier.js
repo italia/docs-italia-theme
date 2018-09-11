@@ -73,22 +73,22 @@ module.exports = themeMarkupModifier = (function ($) {
     captionModifier: function() {
       // Move caption after table.
       var $caption = that.$captionReference.find('caption, .caption');
-      if ( $caption.length ) {
+      if ($caption.length) {
         $caption.each(function(index) {
           var $caption = $(this),
-              $table = $caption.closest('.table-responsive, .figure');
-              $p = $table.next(),
-              $reference = $p.find('.reference.internal');
-
-          $table.after($caption);
+              $table = $caption.closest('.table-responsive, .figure'),
+              $reference = $('<p></p>').addClass('reference--wrap').append(
+                $('<a></a>').addClass('reference internal').append(
+                  $('<i></i>').addClass('it-link mr-2 align-middle')
+                ).append(
+                  $('<span></span>').text('copia link')
+                ).attr('href', '#' + $table.attr('id'))
+              );
+              
           $caption.addClass('caption--table');
-          // check if there is a copy link after cation
-          if($reference.length) {
-            $reference.prepend('<div class="reference-icon Icon docs-icon-link"></div>')
-            $p.addClass('reference--wrap')
-            $caption.wrap('<div class="caption-wrap">');
-            $caption.closest('.caption-wrap').append($p);
-          }
+          $table.after($caption);
+          $caption.wrap('<div class="caption-wrap">');
+          $caption.closest('.caption-wrap').append($reference);
         });
       }
     },

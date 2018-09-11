@@ -132,8 +132,6 @@ sea, quod aeterno utroque est in. Sit comprehen sam, timeam cum ne.
    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
    nisie.
 
-:ref:`copia link <piano triennale>`
-
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
 fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
 culpa qui officia deserunt mollit anim id est laborum.
@@ -202,8 +200,6 @@ sed ante convallis varius.
    | comune          | parametri, ecc.    |                     |             |
    +-----------------+--------------------+---------------------+-------------+
 
-:ref:`copia link <attività>`
-
 .. [*] I fornitori che non ancora possiedono le credenziali di accesso alla
    dashboard, dovranno richiederle tramite e-mail alla casella
    segnalazioni-anpr@teamdigitale.governo.it.
@@ -244,8 +240,6 @@ sed ante convallis varius.
    Didascalia testo do eiusmod tempor incididunt ut labore et dolore magna
    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
    nisie.
-
-:ref:`copia link <modello strategico>`
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. **Ut enim ad minim veniam, quis
@@ -305,8 +299,6 @@ dolore magnam aliquam quaerat voluptatem [4]_.
    | sodales   | sodales   |           |           | id,       | sodales   | id,       | sodales   |
    |           |           |           |           | imperdiet |           | imperdiet |           |
    +-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+
-
-:ref:`copia link <senza intestazione>`
 
 Sottoparagrafo con box esempio
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
