@@ -289,8 +289,7 @@
     .table,
     .section {
       &:not([id=""]) {
-        padding-top: 4rem;
-        display: inline-block;
+        border-top: 4rem solid transparent;
       }
     }
 
