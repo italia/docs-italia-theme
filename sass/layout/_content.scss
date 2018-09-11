@@ -288,7 +288,7 @@
     .figure,
     .table,
     .section {
-      &:not([id=""]) {
+      &[id] {
         border-top: 4rem solid transparent;
       }
     }
