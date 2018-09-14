@@ -48,7 +48,11 @@
 
     <div class="docs-italia__header-col docs-italia__header-col--info p-2 order-first order-lg-1 d-flex align-items-center">
       <!-- INFO -->
-      <a href="#" role="button" class="btn"><span class="docs-icon-info"></span></a>
+      {% if docsitalia_datas %}
+      <a href="#" role="button" class="btn" data-toggle="modal" data-target="#documentInfo">
+        <span class="docs-icon-info"></span>
+      </a>
+      {% endif %}
     </div>
     <div class="docs-italia__header-col docs-italia__header-col--eye p-2 di-nav_menu-item d-none d-lg-flex align-items-center order-lg-2">
       <!-- EYE -->
