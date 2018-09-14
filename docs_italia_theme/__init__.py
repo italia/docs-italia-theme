@@ -116,7 +116,7 @@ def add_yaml_data(app, pagename, templatename, context, doctree):
         context['publisher'] = u'Organizzazione demo'
         context['publisher_slug'] = 'organizzazione-demo'
     
-    if (context['docsitalia_data']):
+    if 'docsitalia_data' in context:
         context['docstitle'] = context['docsitalia_data']['document']['name']
 
 def generate_additonal_tocs(app, pagename, templatename, context, doctree):
