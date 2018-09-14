@@ -101,6 +101,23 @@ def add_yaml_data(app, pagename, templatename, context, doctree):
     else:
         language = app.site_data['default_language']
     context['t'] = app.site_data['data']['l10n'][language]['t']
+    
+    # Run only for local development
+    if os.environ.get('READTHEDOCS', None) != 'True':
+        try:
+            with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
+                data = document_settings.read()
+                data = yaml.safe_load(data)
+        except:
+            data = {}
+        context['docsitalia_data'] = data
+        context['publisher_project'] = u'Progetto demo'
+        context['publisher_project_slug'] = 'progetto-demo'
+        context['publisher'] = u'Organizzazione demo'
+        context['publisher_slug'] = 'organizzazione-demo'
+    
+    if (context['docsitalia_data']):
+        context['docstitle'] = context['docsitalia_data']['document']['name']
 
 def generate_additonal_tocs(app, pagename, templatename, context, doctree):
     """Generate and add additional tocs to Sphinx context"""

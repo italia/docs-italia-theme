@@ -1,0 +1,9 @@
+--- 
+document: 
+  description: >
+    Sommario di due/tre righe: lorem ipsum dolor sit amet, consectetur adipisici
+    elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+  name: "Documento demo Docs Italia"
+  tags: 
+    - demo
+    - "docs italia"
