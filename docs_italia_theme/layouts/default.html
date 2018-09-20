@@ -42,6 +42,8 @@
   {% endblock %}
   {% include 'layouts/web-analytics.html' %}
   {% include 'layouts/cookiebar.html' %}
+  {% if docsitalia_data %}
   {% include 'layouts/document_info.html' %}
+  {% endif %}
 </body>
 </html>
