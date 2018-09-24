@@ -117,6 +117,10 @@ def add_yaml_data(app, pagename, templatename, context, doctree):
         context['publisher_project_slug'] = 'progetto-demo'
         context['publisher'] = u'Organizzazione demo'
         context['publisher_slug'] = 'organizzazione-demo'
+        context['tags'] = [
+            ('demo', '#'),
+            ('docs italia', '#')
+        ]
     
     if 'docsitalia_data' in context:
         context['docstitle'] = context['docsitalia_data']['document']['name']

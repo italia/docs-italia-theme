@@ -14,8 +14,8 @@
           Progetto: <a href="{{ publisher_project_slug }}">{{ publisher_project }}</a>
         </p>
         <p>Tag:
-            {% for tag in docsitalia_data.document.tags %}
-            <span class="border border-primary rounded ml-1 py-1 px-2 tag"><a href="#">{{ tag }}</a></span>
+            {% for tag, url in tags %}
+            <span class="border border-primary rounded ml-1 py-1 px-2 tag"><a href="{{ url }}">{{ tag }}</a></span>
             {% endfor %}
         </p>
       </div>
