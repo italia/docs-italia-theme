@@ -104,6 +104,8 @@ def add_yaml_data(app, pagename, templatename, context, doctree):
     
     # Run only for local development
     if os.environ.get('READTHEDOCS', None) != 'True':
+        context['LOCAL'] = True
+        
         try:
             with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
                 data = document_settings.read()
