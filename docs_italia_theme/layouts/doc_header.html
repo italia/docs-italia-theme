@@ -45,21 +45,22 @@
         </div>
       </div>
     </div>
-
+    <!-- INFO -->
     <div class="docs-italia__header-col docs-italia__header-col--info p-2 order-first order-lg-1 d-flex align-items-center">
-      <!-- INFO -->
       {% if docsitalia_data %}
       <a href="#" role="button" class="btn" data-toggle="modal" data-target="#documentInfo">
         <span class="docs-icon-info"></span>
       </a>
       {% endif %}
     </div>
+    <!-- EYE -->
+    {#
     <div class="docs-italia__header-col docs-italia__header-col--eye p-2 di-nav_menu-item d-none d-lg-flex align-items-center order-lg-2">
-      <!-- EYE -->
       <a href="#" role="button" class="btn"><span class="docs-icon-compare"></span></a>
     </div>
+    #}
+    <!-- DOWNLOAD -->
     <div class="docs-italia__header-col docs-italia__header-col--downloads dropdown p-2 di-nav_menu-item d-none d-lg-flex align-items-center order-lg-3">
-      <!-- DOWNLOAD -->
       <a class="btn" href="#" id="downloadsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="docs-icon-download"></span>
       </a>
@@ -105,6 +106,7 @@
               </span>
             </a>
             <!-- EYE -->
+            {#
             <a href="#" role="button" class="dropdown-item pl-2">
               <span class="dropdown-item__icon d-inline-bock py-2 pr-2">
                 <span class=" docs-icon-compare"></span>
@@ -113,6 +115,7 @@
                 Confronta versioni su GitHub
               </span>
             </a>
+            #}
             <!-- GITHUB -->
             <a href="{{ github_url | default('#') }}" role="button" class="dropdown-item pl-2">
               <span class="dropdown-item__icon d-inline-bock py-2 pr-2">
