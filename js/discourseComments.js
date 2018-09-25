@@ -53,7 +53,9 @@ function _createMarkup (tid, post, nPId) {
     return "" +
       "<li id='"+ commentHTMLId + "' class='row mb-5 block-comments__item comment-"+ post.id + (isNew ? ' is-new' : '') + "' data-topic='"+ tid +"' data-comment="+post.id+">" +
         "<div id='reply-to-"+post.post_number+"'></div>" +
-        "<figure class='col-auto mb-0'><img class='block-comments__img rounded-circle' src='"+ avatarUrl +"'></figure>" +
+        "<figure class='col-auto mb-0'>" +
+          "<img class='block-comments__img rounded-circle' src='"+ avatarUrl +"'>" +
+        "</figure>" +
         "<div class='col'>" +
           "<div class='row align-items-center justify-content-between' id='comment-heading-1'>" +
             "<div class='col-auto'>" +
@@ -223,6 +225,20 @@ module.exports = discourseComments = (function ($) {
             $parent.find('.new-comment__required').addClass('d-none');
           }
         })
+
+      // Logout icon click
+      $('.block-comments__logout-link').bind('click', function (evt) {
+        evt.preventDefault();
+
+        var iWantLogout = window.confirm('Dopo il logout non sarà possibile scrivere nuovi commenti. Sei sicuro di voler procedere?');
+
+        if (iWantLogout === true) {
+          // Discourse.logout();
+          Discourse._cookie_delete('docs-italia_pk');
+          Discourse._cookie_delete('docs-italia_uak');
+          location.href = location.href;
+        }
+      });
     }
   }
 })(jQuery);

@@ -320,6 +320,10 @@ class DiscourseCommentsDirective(Directive):
                     <div class="row align-items-center mt-4 mb-4 block-comments__input new-comment__write">
                         <figure class="col-auto mb-0">
                             <img class="block-comments__img new-comment__figure rounded-circle" src="">
+                            <figcaption>
+                                <!-- <a href='#logout' class="block-comments__logout-link block-comments__logout-link--icon" alt="Logout">&#10060;</a> -->
+                                <a href='#logout' class="block-comments__logout-link block-comments__logout-link--visible" title="Logout" alt="Logout">Logout</a>
+                            </figcaption>
                         </figure>
                         <textarea class='form-control new-comment__body col ml-2 pl-3 pr-3' id="comments-input" placeholder='Scrivi un commento...' rows="4"></textarea>
                     </div>

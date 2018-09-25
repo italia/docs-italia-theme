@@ -129,6 +129,31 @@ module.exports = function () {
     });
   };
 
+  // Logout user
+  this.logout = function () {
+    /*
+    var request = {
+      url: this.base_url + '/session/' + this.user.username,
+      method: 'POST',
+      data: {
+        '_method': 'delete'
+      },
+      headers: {
+        'X-CSRF-Token': obj.session.csrf
+      }
+    };
+
+    if (obj.session.csrf !== null) {
+      return axios(request);
+    } else {
+      this.getCSRF().then(function (data) {
+        request.headers['X-CSRF-Token'] = data.data.csrf;
+        return axios(request);
+      })
+    }
+    */
+  };
+
   this.userIsLoggedIn = function () {
     return this.getApiKey() != false;
   };
@@ -179,5 +204,4 @@ module.exports = function () {
       responseType: 'json'
     });
   };
-
 };
