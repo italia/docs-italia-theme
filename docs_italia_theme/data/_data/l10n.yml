@@ -7,7 +7,7 @@ it:
     active_lang: lingua attiva
     cookiebar_accept: Accetto
     cookiebar_msg: Questo sito utilizza cookie tecnici, analytics e di terze parti. Proseguendo nella navigazione accetti l’utilizzo dei cookie.
-    cookiebar_privacy_policy: Privacy policy
+    cookiebar_privacy_policy: Cookie policy
     copyright: Copyright
     documents: Documentazione
     downloads: Downloads
@@ -64,10 +64,10 @@ it:
     no_tables: nessuna tabella
     introduction: introduzione
 
-    edit_on_github: Modifica su GitHub
-    edit_on_bitbucket: Modifica su Bitbucket
-    edit_on_gitlab: Modifica su GitLab
-    view_page_source: Sorgente della pagina
+    view_on_github: Visualizza sorgente su GitHub
+    view_on_bitbucket: Visualizza sorgente su Bitbucket
+    view_on_gitlab: Visualizza sorgente su GitLab
+    view_page_source: Visualizza sorgente della pagina
 
     previous: precedente
     next: successivo
@@ -76,11 +76,21 @@ it:
     follow_us: seguici su
 
     header_link_trasformazione: Piano Triennale
+    header_link_piattaforme: Piattaforme
+    header_link_software: Software
+    header_link_api: API
+    header_link_community: Le community
     header_link_developers: Developers
     header_link_design: Designers
+    header_link_tools: Gli strumenti
     header_link_forum: Forum
     header_link_docs: Docs
     header_link_github: GitHub
+    header_link_secondary_who_we_are: Chi siamo
+    header_link_projects: Progetti
+    header_link_documents: Documenti
+    header_link_administrations: Amministrazioni
+    header_link_whatis: Che cos'è
 
 en:
   code: eng
@@ -91,7 +101,7 @@ en:
     active_lang: current language
     cookiebar_accept: Accept
     cookiebar_msg: We are using cookies to provide statistics that help us give you the best experience of our site. By continuing to use the site you are agreeing to our use of cookies.
-    cookiebar_privacy_policy: Privacy policy
+    cookiebar_privacy_policy: Cookie policy
     copyright: Copyright
     documents: Documents
     downloads: Downloads
@@ -148,10 +158,10 @@ en:
     no_tables: no tables
     introduction: introduction
 
-    edit_on_github: Edit on GitHub
-    edit_on_bitbucket: Edit on Bitbucket
-    edit_on_gitlab: Edit on GitLab
-    view_page_source: View page source
+    view_on_github: View source on GitHub
+    view_on_bitbucket: View source on Bitbucket
+    view_on_gitlab: View source on GitLab
+    view_page_source: View source page source
 
     previous: previous
     next: next
@@ -160,8 +170,17 @@ en:
     follow_us: follow us on
 
     header_link_trasformazione: Piano Triennale
+    header_link_piattaforme: Platforms
+    header_link_software: Software
+    header_link_api: API
+    header_link_community: Communities
     header_link_developers: Developers
     header_link_design: Designers
+    header_link_tools: Tools
     header_link_forum: Forum
     header_link_docs: Docs
     header_link_github: GitHub
+    header_link_projects: Projects
+    header_link_documents: Documents
+    header_link_administrations: Administrations
+    header_link_whatis: What is

@@ -182,8 +182,8 @@ module.exports = themeToolTip = (function ($) {
 
     addHandler: function() {
       $('[data-trigger="manual"]').click(function() {
-        event.preventDefault();
         if($('.tooltip').has(event.target).length) return;
+        event.preventDefault();
 
         if($(this).find('.tooltip').length > 0) {
           $(this).popover('hide');

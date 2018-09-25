@@ -1,17 +1,17 @@
 @font-face {
   font-family: 'docs-italia';
-  src: url('#{$icomoon-font-path}/docs-italia.eot');
+  src: url('#{$icon-font-path}/docs-italia.eot');
   src:
-    url('#{$icomoon-font-path}/docs-italia.eot#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/docs-italia.ttf') format('truetype'),
-    url('#{$icomoon-font-path}/docs-italia.woff') format('woff'),
-    url('#{$icomoon-font-path}/docs-italia.svg#docs-italia') format('svg');
+    url('#{$icon-font-path}/docs-italia.eot#iefix') format('embedded-opentype'),
+    url('#{$icon-font-path}/docs-italia.ttf') format('truetype'),
+    url('#{$icon-font-path}/docs-italia.woff') format('woff'),
+    url('#{$icon-font-path}/docs-italia.svg#docs-italia') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-[class^="it-icon-"],
-[class*=" it-icon-"] {
+[class^="docs-icon-"],
+[class*=" docs-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   /* stylelint-disable */
   font-family: 'docs-italia' !important;
@@ -34,146 +34,146 @@
 }
 /* stylelint-enable */
 
-.it-icon-more {
+.docs-icon-more {
   &::before {
-    content: unicode($it-icon-more);
+    content: unicode($docs-icon-more);
   }
 }
 
-.it-icon-expand {
+.docs-icon-expand {
   &::before {
-    content: unicode($it-icon-expand);
+    content: unicode($docs-icon-expand);
   }
 }
 
-.it-icon-collapse {
+.docs-icon-collapse {
   &::before {
-    content: unicode($it-icon-collapse);
+    content: unicode($docs-icon-collapse);
   }
 }
 
-.it-icon-plus {
+.docs-icon-plus {
   &::before {
-    content: unicode($it-icon-plus);
+    content: unicode($docs-icon-plus);
   }
 }
 
-.it-icon-minus {
+.docs-icon-minus {
   &::before {
-    content: unicode($it-icon-minus);
+    content: unicode($docs-icon-minus);
   }
 }
 
-.it-icon-document {
+.docs-icon-document {
   &::before {
-    content: unicode($it-icon-document);
+    content: unicode($docs-icon-document);
   }
 }
 
-.it-icon-edit {
+.docs-icon-edit {
   &::before {
-    content: unicode($it-icon-edit);
+    content: unicode($docs-icon-edit);
   }
 }
 
-.it-icon-download {
+.docs-icon-download {
   &::before {
-    content: unicode($it-icon-download);
+    content: unicode($docs-icon-download);
   }
 }
 
-.it-icon-info {
+.docs-icon-info {
   &::before {
-    content: unicode($it-icon-info);
+    content: unicode($docs-icon-info);
   }
 }
 
-.it-icon-compare {
+.docs-icon-compare {
   &::before {
-    content: unicode($it-icon-compare);
+    content: unicode($docs-icon-compare);
   }
 }
 
-.it-icon-github {
+.docs-icon-github {
   &::before {
-    content: unicode($it-icon-github);
+    content: unicode($docs-icon-github);
   }
 }
 
-.it-icon-share {
+.docs-icon-share {
   &::before {
-    content: unicode($it-icon-share);
+    content: unicode($docs-icon-share);
   }
 }
 
-.it-icon-search {
+.docs-icon-search {
   &::before {
-    content: unicode($it-icon-search);
+    content: unicode($docs-icon-search);
   }
 }
 
-.it-icon-link {
+.docs-icon-link {
   &::before {
-    content: unicode($it-icon-link);
+    content: unicode($docs-icon-link);
   }
 }
 
-.it-icon-external-link {
+.docs-icon-external-link {
   &::before {
-    content: unicode($it-icon-external-link);
+    content: unicode($docs-icon-external-link);
   }
 }
 
-.it-icon-comment {
+.docs-icon-comment {
   &::before {
-    content: unicode($it-icon-comment);
+    content: unicode($docs-icon-comment);
   }
 }
 
-.it-icon-attention {
+.docs-icon-attention {
   &::before {
-    content: unicode($it-icon-attention);
+    content: unicode($docs-icon-attention);
   }
 }
 
-.it-icon-example {
+.docs-icon-example {
   &::before {
-    content: unicode($it-icon-example);
+    content: unicode($docs-icon-example);
   }
 }
 
-.it-icon-procedure {
+.docs-icon-procedure {
   &::before {
-    content: unicode($it-icon-procedure);
+    content: unicode($docs-icon-procedure);
   }
 }
 
-.it-icon-hint {
+.docs-icon-hint {
   &::before {
-    content: unicode($it-icon-hint);
+    content: unicode($docs-icon-hint);
   }
 }
 
-.it-icon-note {
+.docs-icon-note {
   &::before {
-    content: unicode($it-icon-note);
+    content: unicode($docs-icon-note);
   }
 }
 
-.it-icon-step {
+.docs-icon-step {
   &::before {
-    content: unicode($it-icon-step);
+    content: unicode($docs-icon-step);
   }
 }
 
-.it-icon-pdf {
+.docs-icon-pdf {
   &::before {
-    content: unicode($it-icon-pdf);
+    content: unicode($docs-icon-pdf);
   }
 }
 
-.it-icon-html {
+.docs-icon-html {
   &::before {
-    content: unicode($it-icon-html);
+    content: unicode($docs-icon-html);
   }
 }

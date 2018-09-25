@@ -1,5 +1,9 @@
-// .return-to-top i {
-i.return-to-top__icon {
-  top: 0.6rem;
-  cursor: pointer;
+.return-to-top {
+  @include media-breakpoint-down(sm) {
+    bottom: 4rem;
+  }
+
+  i::before {
+    margin: 0;
+  }
 }

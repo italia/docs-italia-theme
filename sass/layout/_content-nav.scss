@@ -1,6 +1,6 @@
 .chapter-nav__list--hidden {
   &:not(.show) {
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-down(md) {
       display: none;
     }
   }
@@ -18,7 +18,7 @@
 }
 
 .chapter-nav__list-wrap {
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-down(md) {
     max-width: 300px;
     margin-left: auto;
     margin-right: auto;
@@ -42,7 +42,6 @@
   display: inline-block;
   font-size: 0.9em;
   cursor: pointer;
-  text-transform: capitalize;
   vertical-align: middle;
 
   &:hover {
@@ -51,7 +50,6 @@
 }
 
 .chapter-link__title {
-  text-transform: capitalize;
   float: left;
 }
 
@@ -81,7 +79,7 @@
   padding: 1rem;
   color: $black;
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 700;
   border-bottom: 1px $grey solid;
 
   .title__chapter {

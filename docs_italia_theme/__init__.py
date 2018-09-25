@@ -11,6 +11,7 @@ from docutils.nodes import table
 from docutils.nodes import bullet_list
 from docutils.nodes import list_item
 from docutils.nodes import reference
+from docutils.nodes import caption
 from docutils.nodes import Text
 from sphinx.addnodes import compact_paragraph
 from sphinx.addnodes import glossary
@@ -102,9 +103,33 @@ def add_yaml_data(app, pagename, templatename, context, doctree):
     else:
         language = app.site_data['default_language']
     context['t'] = app.site_data['data']['l10n'][language]['t']
+    
+    # Run only for local development
+    if os.environ.get('READTHEDOCS', None) != 'True':
+        context['LOCAL'] = True
+        
+        try:
+            with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
+                data = document_settings.read()
+                data = yaml.safe_load(data)
+        except:
+            data = {}
+        context['docsitalia_data'] = data
+        context['publisher_project'] = u'Progetto demo'
+        context['publisher_project_slug'] = 'progetto-demo'
+        context['publisher'] = u'Organizzazione demo'
+        context['publisher_slug'] = 'organizzazione-demo'
+        context['tags'] = [
+            ('demo', '#'),
+            ('docs italia', '#')
+        ]
+    
+    if 'docsitalia_data' in context:
+        context['docstitle'] = context['docsitalia_data']['document']['name']
 
 def generate_additonal_tocs(app, pagename, templatename, context, doctree):
     """Generate and add additional tocs to Sphinx context"""
+    pages_list = []
     content_tocs = []
     glossary_tocs = []
     content_toc = ''
@@ -116,10 +141,16 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
 
     for toctreenode in doctree_index.traverse(toctree):
         toctree_element = TocTree(app.env).resolve(pagename, app.builder, toctreenode, includehidden=True)
+        try:
+            toc_caption = next(child for child in toctree_element.children if isinstance(child, caption))
+            toctree_element.children.remove(toc_caption)
+        except StopIteration:
+            pass
         if 'glossary_toc' in toctreenode.parent.attributes['names']:
             glossary_tocs.append(toctree_element)
         else:
             content_tocs.append(toctree_element)
+            pages_list = toctreenode['includefiles']
 
     if content_tocs:
         content_toc = content_tocs[0]
@@ -131,19 +162,29 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             glossary_toc.extend(glossary_element.children)
         glossary_toc = glossary_toc.children[0].children[0].children[1]
 
-    for page in app.env.toc_fignumbers:
+    pages_with_fignumbers = (x for x in pages_list if x in app.env.toc_fignumbers)
+    for page in pages_with_fignumbers:
         doctree_page = app.env.get_doctree(page)
 
         for figurenode in doctree_page.traverse(figure):
+            if not figurenode.attributes['ids']:
+                continue
             figure_id = figurenode.attributes['ids'][0]
-            figure_number = app.env.toc_fignumbers[page]['figure'][figure_id]
-            figure_title = figurenode.children[0]['alt'] if 'alt' in figurenode.children[0] else context['t']['no_description']
-            figure_text_string = 'Fig. ' + str(figure_number[0]) + '.' + str(figure_number[1]) + ' - ' + figure_title.capitalize()
+            toc_fig_tables = app.env.toc_fignumbers[page].get('figure', {})
+            figure_number = toc_fig_tables.get(figure_id)
+            if figure_number is None:
+                continue
+            figure_title = figurenode.children[0].get('alt') or context['t']['no_description']
+            try:
+                figure_text_string = 'Fig. {}.{} - {}'.format(
+                    figure_number[0], figure_number[1], figure_title.capitalize())
+            except IndexError:
+                continue
             figure_text = Text(figure_text_string)
             figure_text.rawsource = figure_text_string
             figure_reference = reference()
             figure_reference.attributes['internal'] = True
-            figure_reference.attributes['refuri'] = page + app.builder.out_suffix + '#' + figure_id
+            figure_reference.attributes['refuri'] = app.builder.get_relative_uri(pagename, page) + '#' + figure_id
             figure_compact_paragraph = compact_paragraph()
             figure_list_item = list_item()
             figure_text.parent = figure_reference
@@ -156,16 +197,21 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             figures_toc.children.append(figure_list_item)
 
         for tablenode in doctree_page.traverse(table):
+            if not tablenode.attributes['ids']:
+                continue
             table_id = tablenode.attributes['ids'][0]
-            table_number = app.env.toc_fignumbers[page]['table'][table_id]
+            toc_fig_tables = app.env.toc_fignumbers[page].get('table', {})
+            table_number = toc_fig_tables.get(table_id)
+            if table_number is None:
+                continue
             table_title = tablenode.children[0].rawsource if tablenode.children[0].rawsource else context['t']['no_description']
             table_title = (table_title[:60] + '...') if len(table_title) > 60 else table_title
-            table_text_string = 'Tab. ' + str(table_number[0]) + '.' + str(table_number[1]) + ' - ' + table_title.capitalize()
+            table_text_string = 'Tab. ' + '.'.join([str(n) for n in table_number]) + ' - ' + table_title.capitalize()
             table_text = Text(table_text_string)
             table_text.rawsource = table_text_string
             table_reference = reference()
             table_reference.attributes['internal'] = True
-            table_reference.attributes['refuri'] = page + app.builder.out_suffix + '#' + table_id
+            table_reference.attributes['refuri'] = app.builder.get_relative_uri(pagename, page) + '#' + table_id
             table_compact_paragraph = compact_paragraph()
             table_list_item = list_item()
             table_text.parent = table_reference
@@ -177,10 +223,10 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             table_list_item.parent = tables_toc
             tables_toc.children.append(table_list_item)
 
-    context['content_toc'] = app.builder.render_partial(content_toc)['fragment'] if hasattr(content_toc, 'children') else context['t']['no_content'].capitalize()
-    context['glossary_toc'] = app.builder.render_partial(glossary_toc)['fragment'] if hasattr(glossary_toc, 'children') else context['t']['no_glossary'].capitalize()
-    context['figures_toc'] = app.builder.render_partial(figures_toc)['fragment'] if hasattr(figures_toc, 'children') else context['t']['no_figures'].capitalize()
-    context['tables_toc'] = app.builder.render_partial(tables_toc)['fragment'] if hasattr(tables_toc, 'children') else context['t']['no_tables'].capitalize()
+    context['content_toc'] = app.builder.render_partial(content_toc)['fragment'] if hasattr(content_toc, 'children') and content_toc.children else None
+    context['glossary_toc'] = app.builder.render_partial(glossary_toc)['fragment'] if hasattr(glossary_toc, 'children') and glossary_toc.children else None
+    context['figures_toc'] = app.builder.render_partial(figures_toc)['fragment'] if hasattr(figures_toc, 'children') and figures_toc.children else None
+    context['tables_toc'] = app.builder.render_partial(tables_toc)['fragment'] if hasattr(tables_toc, 'children') and tables_toc.children else None
 
 def generate_glossary_json(app, doctree, docname):
     """Generate glossary JSON file"""

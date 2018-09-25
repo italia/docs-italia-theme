@@ -10,16 +10,17 @@
       <div class="row">
         <nav class="col--nav">
           {% include 'layouts/sidebar.html' %}
-          {% include 'layouts/offcanvas.html' %}
+          {% include 'layouts/sidebar_offcanvas.html' %}
+          {% include 'layouts/navbar-secondary_offcanvas.html' %}
         </nav>
         <div id="doc-content" class="col-content">
-          <div class="doc-content__consultation">
+          <!--<div class="doc-content__consultation">
             <span class="Icon it-icon-edit"></span>
             {{ _(t.in_consultation) }}
-          </div>
+          </div>-->
           {% if prev %}
             <div class="footer-buttons footer-buttons--prev" role="navigation" aria-label="footer navigation">
-                <a href="{{ prev.link|e }}" class="" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"> {{ _(t.go_to) }} {{ prev.title }}</a>
+                <a href="{{ prev.link|e }}" class="" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"> Torna a {{ prev.title }}</a>
             </div>
           {% endif %}
           {% block body %}{% endblock %}
@@ -40,6 +41,9 @@
   {% include 'layouts/scripts.html' %}
   {% endblock %}
   {% include 'layouts/web-analytics.html' %}
-
+  {% include 'layouts/cookiebar.html' %}
+  {% if docsitalia_data %}
+  {% include 'layouts/document_info.html' %}
+  {% endif %}
 </body>
 </html>

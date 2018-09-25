@@ -27,27 +27,27 @@
     text-transform: uppercase;
     transition: color 0.3s;
 
-    .it-icon-minus,
-    .it-icon-plus {
+    .docs-icon-minus,
+    .docs-icon-plus {
       color: $blue;
     }
 
-    .it-icon-minus {
+    .docs-icon-minus {
       display: inline-block;
     }
 
-    .it-icon-plus {
+    .docs-icon-plus {
       display: none;
     }
 
     &.collapsed {
       color: $grey-mid;
 
-      .it-icon-minus {
+      .docs-icon-minus {
         display: none;
       }
 
-      .it-icon-plus {
+      .docs-icon-plus {
         display: inline-block;
       }
     }

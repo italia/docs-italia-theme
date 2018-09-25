@@ -1,5 +1,5 @@
 /* Theme variables */
-@import "bootstrap-italia/src/scss/bootstrap-italia.scss ";
+@import "bootstrap-italia/src/scss/bootstrap-italia";
 @import "abstract/variables";
 
 /* Base */
@@ -9,17 +9,18 @@
 
 /* Theme layout */
 @import "layout/general";
+@import "layout/dropdown";
 @import "layout/header";
+@import "layout/navbar-secondary-offcanvas";
 @import "layout/sidebar";
 @import "layout/content";
-@import "layout/admonition";
+@import "layout/admonitions";
 @import "layout/footer";
 @import "layout/tooltip";
 @import "layout/content-nav";
 @import "layout/scrollbar";
 @import "layout/table";
 @import "layout/note";
-@import "layout/example-block";
 @import "layout/comments";
 @import "layout/side-menu";
 @import "layout/glossary";

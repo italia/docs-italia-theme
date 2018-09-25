@@ -1,18 +1,23 @@
 {% if READTHEDOCS and translations %}
-<li>
-<a href="#languages" data-menu-trigger="languages" class="Header-language u-border-none u-zindex-max u-inlineBlock">
-    <span class="u-hiddenVisually">{{ t.active_lang }}:</span>
-    <span class="">{{ site['data']['l10n'][language].code | upper }}</span>
-    <span class="Icon Icon-expand u-padding-left-xs"></span>
-  </a>
-</li>
-
-  <div id="languages" data-menu class="Dropdown-menu Header-language-other u-jsVisibilityHidden u-nojsDisplayNone">
-    <span class="Icon-drop-down Dropdown-arrow u-color-white"></span>
-    <ul class="Linklist">
+<ul class="navbar-nav lang-selector col-lg-offset-12 order-2 order-lg-3 pr-4 pr-lg-0 m-0 list-unstyled">
+  <li role="separator" class="nav-item divider ml-lg-0 ml-3 d-none d-lg-block"></li>
+  <li class="nav-item dropdown nav-item--no-underline pl-2">
+    <a class="nav-link dropdown-toggle pr-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ site['data']['l10n'][language].code | upper }}
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" data-placement="bottom-start">
       {% for lang, lang_code in translations.items() %}
-      <li><a href="/{{ lang }}/{{ current_version }}" class="u-padding-r-all"><span lang="{{ lang }}">{{ lang_code }}</span></a></li>
+      <a class="dropdown-item pl-2 right-icon" href="/{{ lang }}/{{ current_version }}">
+        <span lang="{{ lang }}">{{ lang_code }}</span>
+        {% if language == lang %}
+        <span class="it-check float-right"></span>
+        {% endif %}
+      </a>
+      {% if not loop.last %}
+      <div class="dropdown-divider"></div>
+      {% endif %}
       {% endfor %}
-    </ul>
-  </div>
+    </div>
+  </li>
+</ul>
 {% endif %}

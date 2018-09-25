@@ -3,6 +3,10 @@
     font-family: $titillium-font;
   }
 
+  a:hover {
+    text-decoration: none;
+  }
+
   .in-collaboration {
     font-size: 0.8em;
   }
@@ -65,10 +69,6 @@
       border-radius: 100%;
       // font-size: initial;
       font-size: 22px;
-    }
-
-    .small-prints {
-      font-size: 0;
     }
   }
 

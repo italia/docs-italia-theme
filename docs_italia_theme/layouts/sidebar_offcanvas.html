@@ -1,9 +1,10 @@
 <!-- Toggle -->
 <div class="navbar-toggler--wrap navbar-toggler--wrap--bottom p-3">
-  <button class="navbar-toggler navbar-toggler--open p-0 border-0 ml-auto" type="button">
-    <span class="it-icon-note align-middle"></span>
-    <span class="navbar-toggler-bottom__chapter align-middle ml-2">{{ title|truncate(30, True) }}</span>
-  </button>
+  <div class="navbar-toggler navbar-toggler--open p-0 border-0 ml-auto">
+    <div class="navbar-toggler-bottom__chapter align-middle text-truncate">
+      <span class="it-list mr-2"></span>{{ title }}
+    </div>
+  </div>
 </div>
 
 <div class="sidebar-tabs">
@@ -12,7 +13,7 @@
   <div class="row">
     <div class="col">
       <button class="navbar-toggler navbar-toggler--back border-0 ml-auto" type="button" data-toggle="offcanvas">
-        <span class="it-icon-note align-middle"></span>
+        <span class="it-arrow-left align-middle"></span>
         <span class="navbar-toggler__chapter align-middle ml-2">
           {{ _(t.indices_and_glossary) }}
         </span>

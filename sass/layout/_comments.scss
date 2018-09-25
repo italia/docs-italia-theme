@@ -41,8 +41,8 @@
   width: 2rem;
   height: 2rem;
 
-  .it-icon-plus,
-  .it-icon-minus {
+  .docs-icon-plus,
+  .docs-icon-minus {
     color: $medium-blue;
     position: absolute;
     top: 50%;
@@ -50,16 +50,16 @@
     transform: translate(-50%, -50%);
   }
 
-  .it-icon-plus {
+  .docs-icon-plus {
     display: none;
   }
 
   &.collapsed {
-    .it-icon-plus {
+    .docs-icon-plus {
       display: block;
     }
 
-    .it-icon-minus {
+    .docs-icon-minus {
       display: none;
     }
   }
@@ -71,21 +71,21 @@
   height: 1.5rem;
   border: 0;
 
-  .it-icon-collapse,
-  .it-icon-expand {
+  .it-collapse,
+  .it-expand {
     color: $medium-blue;
   }
 
-  .it-icon-collapse {
+  .it-collapse {
     display: none;
   }
 
   &.collapsed {
-    .it-icon-collapse {
+    .it-collapse {
       display: inline-block;
     }
 
-    .it-icon-expand {
+    .it-expand {
       display: none;
     }
   }

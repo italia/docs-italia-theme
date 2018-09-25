@@ -12,7 +12,7 @@ module.exports = themeCopyToClipboard = (function ($) {
 
     init: function() {
       that = this.$;
-      var $iconLink = $('.it-icon-link');
+      var $iconLink = $('.it-link');
 
       // Caption
       that.$captionLink = $iconLink.closest('.reference.internal');

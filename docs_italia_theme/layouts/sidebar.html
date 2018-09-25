@@ -7,44 +7,51 @@
 
     <button data-toggle="collapse" data-target="#content-index" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop" type="button" aria-controls="content-index">
       {{ _(t.content_index) }}
-      <span class="it-icon-collapse float-right"></span>
-      <span class="it-icon-expand float-right"></span>
+      <span class="it-collapse float-right"></span>
+      <span class="it-expand float-right"></span>
     </button>
-    <div id="content-index" class="content-index--menu sidebar-list--wrapper sidebar-accordion-content collapse show" data-parent="#desktop-menu">
+    <div id="content-index" class="content-index--menu sidebar-list--wrapper sidebar-accordion-content collapse show">
       <ul class="{% if pagename == master_doc %}current{% endif %}">
         <li class="toctree-l1 {% if pagename == master_doc %}current{% endif %}">
           <a href='{{ pathto(master_doc) }}'>{{ _(t.introduction|capitalize) }}</a>
         </li>
       </ul>
+      {% if content_toc %}
       {{ content_toc }}
+      {% endif %}
     </div>
 
-    <!-- Other menu with button-->
+    {% if figures_toc %}
     <button data-toggle="collapse" data-target="#figures-index" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop collapsed" type="button" aria-controls="figures-index">
       {{ _(t.figures_index) }}
-      <span class="it-icon-collapse float-right"></span>
-      <span class="it-icon-expand float-right"></span>
+      <span class="it-collapse float-right"></span>
+      <span class="it-expand float-right"></span>
     </button>
-    <div id="figures-index" class="figures-index--menu sidebar-list--wrapper sidebar-accordion-content collapse" data-parent="#desktop-menu">
+    <div id="figures-index" class="figures-index--menu sidebar-list--wrapper sidebar-accordion-content collapse">
       {{ figures_toc }}
     </div>
+    {% endif %}
 
+    {% if tables_toc %}
     <button data-toggle="collapse" data-target="#table-index" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop collapsed" type="button" aria-controls="table-index">
       {{ _(t.table_index) }}
-      <span class="it-icon-collapse float-right"></span>
-      <span class="it-icon-expand float-right"></span>
+      <span class="it-collapse float-right"></span>
+      <span class="it-expand float-right"></span>
     </button>
-    <div id="table-index" class="table-index--menu collapse sidebar-list--wrapper sidebar-accordion-content collapse" data-parent="#desktop-menu">
+    <div id="table-index" class="table-index--menu collapse sidebar-list--wrapper sidebar-accordion-content collapse">
       {{ tables_toc }}
     </div>
+    {% endif %}
 
+    {% if glossary_toc %}
     <button data-toggle="collapse" data-target="#glossary-index" aria-expanded="true" class="sidebar-btn p-3 sidebar-btn--desktop collapsed" type="button" aria-controls="glossary-index">
       {{ _(t.glossary) }}
-      <span class="it-icon-collapse float-right"></span>
-      <span class="it-icon-expand float-right"></span>
+      <span class="it-collapse float-right"></span>
+      <span class="it-expand float-right"></span>
     </button>
-    <div id="glossary-index" class="glossary-mobile--menu sidebar-list--wrapper sidebar-accordion-content collapse" data-parent="#desktop-menu">
+    <div id="glossary-index" class="glossary-mobile--menu sidebar-list--wrapper sidebar-accordion-content collapse">
       {{ glossary_toc }}
     </div>
+    {% endif %}
   </div>
 </section>

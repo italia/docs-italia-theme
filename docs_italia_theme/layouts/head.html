@@ -4,12 +4,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
 
-  <!-- styles -->
+  <!-- Styles -->
   <link rel="stylesheet" href="{{ pathto('_static/css/theme.css', 1) }}" type="text/css">
   <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css">
-  <!-- end styles -->
 
-  <!-- relations -->
+  <!-- Relations -->
   <link rel="index" title="{{ t.index }}" href="{{ pathto(master_doc) }}">
   <link rel="top" title="{{ docstitle|e }}" href="{{ pathto(master_doc) }}">
   {%- if parents %}
@@ -21,17 +20,38 @@
   {%- if prev %}
   <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}">
   {%- endif %}
-  <!-- end relations -->
 
-  <!-- icons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ pathto('_static/icons/apple-touch-icon.png', 1) }}">
-  <link rel="icon" type="image/png" href="{{ pathto('_static/icons/favicon-32x32.png', 1) }}" sizes="32x32">
-  <link rel="icon" type="image/png" href="{{ pathto('_static/icons/favicon-16x16.png', 1) }}" sizes="16x16">
-  <link rel="manifest" href="{{ pathto('_static/icons/manifest.json', 1) }}">
-  <link rel="mask-icon" href="{{ pathto('_static/icons/safari-pinned-tab.svg', 1) }}">
-  <link rel="shortcut icon" href="{{ pathto('_static/icons/favicon.ico', 1) }}">
-  <meta name="apple-mobile-web-app-title" content="{{ title|striptags|e }}{{ titlesuffix }}">
-  <meta name="application-name" content="{{ title|striptags|e }}{{ titlesuffix }}">
-  <meta name="msapplication-config" content="{{ pathto('_static/icons/browserconfig.xml', 1) }}">
-  <!-- end icons -->
+  {% if docsitalia_data and not LOCAL %}
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@teamdigitaleIT">
+  <meta name="twitter:title" content="Docs Italia">
+  <meta name="twitter:description" content="Docs Italia è un servizio a disposizione delle Pubbliche Amministrazioni per pubblicare documenti tecnici e amministrativi, e offre ai cittadini la possibilità di leggere e commentare documenti pubblici ed essere informati sull’andamento dei progetti.">
+  <meta name="twitter:image" content="{{ MEDIA_URL }}docsitalia/images/social-card.png">
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:url" content="https://docs.italia.it/">
+  <meta property="og:title" content="Docs Italia">
+  <meta property="og:description" content="Docs Italia è un servizio a disposizione delle Pubbliche Amministrazioni per pubblicare documenti tecnici e amministrativi, e offre ai cittadini la possibilità di leggere e commentare documenti pubblici ed essere informati sull’andamento dei progetti.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{{ MEDIA_URL }}docsitalia/images/social-card.png">
+  <meta property="og:image:secure_url" content="{{ MEDIA_URL }}docsitalia/images/social-card.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="{{ MEDIA_URL }}docsitalia/icons/apple-touch-icon.png">
+  <link rel="icon" href="{{ MEDIA_URL }}docsitalia/icons/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="{{ MEDIA_URL }}docsitalia/icons/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="manifest" href="{{ MEDIA_URL }}docsitalia/icons/manifest.webmanifest">
+  <link rel="mask-icon" href="{{ MEDIA_URL }}docsitalia/icons/safari-pinned-tab.svg" color="#0066CC">
+  <link rel="icon" href="{{ MEDIA_URL }}docsitalia/icons/favicon.ico">
+  <meta name="msapplication-config" content="{{ site.baseurl }}/docs/assets/img/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#0066CC">
+  {% endif %}
+  
+  <!-- No Index - remove after migration from readthedocs -->
+  <meta name="robots" content="noindex, nofollow">
 </head>

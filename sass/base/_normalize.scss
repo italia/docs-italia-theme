@@ -1,3 +1,67 @@
 .small {
   font-size: 14px;
 }
+
+.navbar-dark--text-white {
+  color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .lang-selector .nav-link {
+  color: white !important;
+}
+
+.navbar.bg-white {
+  background-color: $white;
+}
+
+.navbar.primary-bg-a7 {
+  background-color: #0059b3;
+}
+
+.dropdown-menu.dropdown-menu-right::before {
+  @include media-breakpoint-up(lg) {
+    right: 24px;
+    left: auto;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .navbar .dropdown-menu.dropdown-menu-right {
+    left: auto;
+    right: 0;
+  }
+}
+
+.dropdown-menu-right {
+  @include media-breakpoint-down(md) {
+    right: auto;
+    left: auto;
+  }
+}
+
+.dropdown.show .dropdown-menu[x-placement='bottom-start'],
+.btn-group.show .dropdown-menu[x-placement='bottom-start'] {
+  animation: dropdownFadeIn forwards 0.3s;
+}
+
+.dropdown.show .dropdown-menu[x-placement='top-start'],
+.btn-group.show .dropdown-menu[x-placement='top-start'] {
+  animation: dropdownFadeInTop forwards 0.3s;
+}
+
+.dropdown-menu[x-placement^="top"],
+.dropdown-menu[x-placement^="right"],
+.dropdown-menu[x-placement^="bottom"],
+.dropdown-menu[x-placement^="left"] {
+  right: auto;
+  bottom: auto;
+}
+
+.dropdown-menu::before {
+  z-index: -1;
+}
+
+.injected {
+  display: none;
+}

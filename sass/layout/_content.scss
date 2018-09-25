@@ -13,7 +13,7 @@
   text-align: left;
   padding: 0.5rem 0;
   text-transform: uppercase;
-  font-weight: 800;
+  font-weight: 700;
   color: $black;
   padding-left: 2rem;
 
@@ -45,8 +45,8 @@
   clear: both;
 
   .caption--table {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     display: block;
     font-family: $stack-font;
     font-style: italic;
@@ -61,8 +61,9 @@
 
   .reference--wrap {
     font-family: $titillium-font;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     margin-bottom: 2rem;
+    font-size: 0.9em;
 
     @include media-breakpoint-up(md) {
       width: $chapter-nav-width;
@@ -73,7 +74,7 @@
 }
 
 .caption-number {
-  font-weight: 800;
+  font-weight: 700;
   color: $black;
 }
 
@@ -147,7 +148,7 @@
     color: $white;
     padding: 0.5rem 1rem;
     border-radius: 0.2rem;
-    font-weight: 800;
+    font-weight: 700;
     display: inline-block;
   }
 }
@@ -156,12 +157,8 @@
   margin-bottom: 2.5rem;
 }
 
-/* Reference icon */
-.reference.internal {
-  vertical-align: middle;
-}
-
 .reference-icon {
+  vertical-align: middle;
   display: inline-block;
 }
 
@@ -231,7 +228,8 @@
     }
   }
 
-  ul.simple {
+  ul.simple,
+  ul.simple ul {
     list-style-type: none;
 
     li {
@@ -249,6 +247,10 @@
         position: absolute;
         left: -1rem;
         top: 0.4rem;
+      }
+
+      ul li {
+        margin-top: 0.5rem;
       }
     }
   }
@@ -284,18 +286,16 @@
     }
 
     .figure,
+    .table,
     .section {
-      &:not([id=""]) {
-        margin-top: -4rem;
-        padding-top: 4rem;
-        display: inline-block;
+      &[id] {
+        border-top: 4rem solid transparent;
       }
     }
 
-    .table:not([id=""]) {
-      margin-top: -4rem;
-      padding-top: 4rem;
-      display: inline-table;
+    .glossary dt:not([id=""]) {
+      margin-top: -4em;
+      padding-top: 4em;
     }
   }
 
@@ -304,7 +304,7 @@
     margin-bottom: 3rem;
 
     em {
-      font-weight: 800;
+      font-weight: 700;
     }
   }
 
@@ -325,7 +325,7 @@
     color: $black;
     font-family: $titillium-font;
     font-size: 0.8rem;
-    font-weight: 800;
+    font-weight: 700;
   }
 
   .Icon--ol {
@@ -428,7 +428,7 @@
 
   .topic-title {
     color: $black;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 1.4rem;
     font-family: $titillium-font;
   }
@@ -496,7 +496,7 @@
       margin-bottom: 0;
 
       > div {
-        font-weight: 800;
+        font-weight: 700;
         font-family: $stack-font;
       }
     }
@@ -582,4 +582,8 @@
 
 .code .highlight {
   background: none;
+}
+
+.highlight-rst pre {
+  padding: 1rem;
 }

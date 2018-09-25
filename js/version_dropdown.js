@@ -11,7 +11,7 @@ module.exports = themeVersionDropdown = (function ($) {
             location.pathname = $url;
       });
 
-      $('#version-list.dropdown').dropdown();
+      // $('#version-list.dropdown').dropdown();
     }
   }
 

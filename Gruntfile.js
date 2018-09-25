@@ -27,6 +27,23 @@ module.exports = function(grunt) {
       build: ['sass/**/*.scss']
     },
 
+    copy: {
+      all: {
+        files: [{
+          expand: true,
+          cwd: 'node_modules/bootstrap-italia/src/icons/font',
+          src: ['**'], 
+          dest: 'docs_italia_theme/static/font'
+        },
+        {
+          expand: true,
+          cwd: 'node_modules/bootstrap-italia/src/icons/css',
+          src: 'italia-icon-font.css', 
+          dest: 'docs_italia_theme/static/css'
+        }],
+      },
+    },
+
     sass: {
       all: {
         options: {
@@ -43,6 +60,13 @@ module.exports = function(grunt) {
       }
     },
 
+    concat: {
+      all: {
+        src: ['docs_italia_theme/static/css/theme.css', 'docs_italia_theme/static/css/italia-icon-font.css'],
+        dest: 'docs_italia_theme/static/css/theme.css'
+      },
+    },
+
     postcss: {
       dev: {
         options: {
@@ -57,7 +81,7 @@ module.exports = function(grunt) {
         },
         files: [{
           src: 'docs_italia_theme/static/css/theme.css',
-          dest: 'docs_italia_theme/static/css/theme.css',
+          dest: 'docs_italia_theme/static/css/theme.css'
         }]
       },
 
@@ -75,23 +99,23 @@ module.exports = function(grunt) {
         },
         files: [{
           src: 'docs_italia_theme/static/css/theme.css',
-          dest: 'docs_italia_theme/static/css/theme.css',
+          dest: 'docs_italia_theme/static/css/theme.css'
         }]
       }
     },
 
     modernizr: {
       all: {
-        "crawl": false,
-        "customTests": [],
-        "dest": "js/modernizr.min.js",
-        "tests": [
-          "touchevents"
+        'crawl': false,
+        'customTests': [],
+        'dest': 'js/modernizr.min.js',
+        'tests': [
+          'touchevents'
         ],
-        "options": [
-          "setClasses"
+        'options': [
+          'setClasses'
         ],
-        "uglify" : true
+        'uglify' : true
       }
     },
 
@@ -144,30 +168,17 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      build: ["demo_docs/build"]
+      build: ['demo_docs/build'],
+      css: ['docs_italia_theme/static/css/italia-icon-font.css', 'docs_italia_theme/static/css/*.map']
     },
 
     watch: {
-      /* Stylelint scss files */
-      stylelint: {
+      /* Watch scss files */
+      scss: {
         files: [
           'sass/**/*.scss'
         ],
-        tasks: ['stylelint:dev']
-      },
-      /* Compile sass changes into theme directory */
-      sass: {
-        files: [
-          'sass/**/*.scss'
-        ],
-        tasks: ['sass']
-      },
-      /* Process css into theme directory */
-      postcss: {
-        files: [
-          'docs_italia_theme/static/css/**/*.css'
-        ],
-        tasks: ['postcss:dev']
+        tasks: ['stylelint:dev', 'copy', 'sass', 'concat', 'clean:css', 'postcss:dev']
       },
       /* Changes in theme dir rebuild sphinx */
       sphinx: {
@@ -190,9 +201,12 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default', [
-    'clean',
+    'clean:build',
     'stylelint:dev',
+    'copy',
     'sass',
+    'concat',
+    'clean:css',
     'postcss:dev',
     'modernizr',
     'browserify',
@@ -202,9 +216,12 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'clean',
+    'clean:build',
     'stylelint:build',
+    'copy',
     'sass',
+    'concat',
+    'clean:css',
     'postcss:build',
     'modernizr',
     'browserify',
@@ -213,9 +230,12 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('release', [
-    'clean',
+    'clean:build',
     'stylelint:build',
+    'copy',
     'sass',
+    'concat',
+    'clean:css',
     'postcss:build',
     'modernizr',
     'browserify',

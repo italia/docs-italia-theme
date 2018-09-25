@@ -1,4 +1,113 @@
 #doc-content {
+  .admonition-display-page {
+    background-color: $grey-light;
+    padding: 2rem;
+    position: relative;
+    margin-top: 2rem;
+
+    &::before,
+    &::after {
+      content: "";
+      width: 0;
+      height: 0;
+      right: 0;
+      top: 0;
+      position: absolute;
+      z-index: 1;
+    }
+
+    &::before {
+      border-bottom: 50px solid transparent;
+      border-right: 50px solid $white;
+    }
+
+    &::after {
+      border-top: 50px solid transparent;
+      border-bottom: 50px solid $grey;
+      border-right: 50px solid transparent;
+      transform: translateY(-50%);
+    }
+
+    > p,
+    .admonition__hidden-paragraph p,
+    li {
+      font-size: 0.8rem;
+      color: $dark-blue;
+    }
+
+    ol {
+      counter-reset: list;
+
+      li {
+        margin-bottom: 1rem;
+        position: relative;
+        list-style-type: none;
+        counter-increment: list;
+        color: $dark-blue;
+        font-family: $stack-font;
+        text-indent: 1rem;
+
+        &::after {
+          position: absolute;
+          left: -1rem;
+          top: 0;
+          width: 1.1rem;
+          height: 1.5rem;
+          z-index: 1;
+          content: counter(list) ".";
+          text-align: center;
+          font-weight: 700;
+        }
+
+        &::before {
+          position: absolute;
+          left: -2rem;
+          top: 0.65em;
+          height: 1px;
+          z-index: 1;
+          content: "";
+          font-weight: 700;
+          background-color: $dark-blue;
+          width: 1rem;
+        }
+      }
+    }
+
+    .code-block__header,
+    .admonition-title {
+      color: $mid-dark-blue;
+      font-family: $titillium-font;
+    }
+
+    .admonition-title {
+      padding-bottom: 0.2rem;
+      display: inline-block;
+      background: linear-gradient($mid-dark-blue, $mid-dark-blue) no-repeat right bottom / calc(100% - 2rem) 2px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .admonition-internal-title {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: $dark-blue;
+      font-family: $titillium-font;
+    }
+
+    .linenodiv {
+      pre {
+        color: $grey-mid-01;
+        font-weight: 400;
+      }
+    }
+
+    .highlighttable {
+      pre {
+        font-size: 0.8rem;
+      }
+    }
+  }
 
   // Admonition.
   .admonition {
@@ -6,7 +115,7 @@
 
     .admonition-title {
       text-transform: uppercase;
-      font-weight: 800;
+      font-weight: 700;
 
       .Icon {
         font-size: 1.5rem;
@@ -132,7 +241,7 @@
 
     &.important {
       .last {
-        font-weight: 800;
+        font-weight: 700;
         font-size: 1.2rem;
       }
     }

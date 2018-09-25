@@ -9,6 +9,8 @@
     font-size: 0.9rem;
     display: block;
     line-height: 1.6;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 
     &.current_item {
       position: relative;
@@ -45,7 +47,7 @@
         }
 
         > a {
-          font-weight: 800;
+          font-weight: 700;
         }
       }
     }
