@@ -91,7 +91,7 @@ def load_theme_data():
 
     return context
 
-def add_yaml_data(app, pagename, templatename, context, doctree):
+def add_context_data(app, pagename, templatename, context, doctree):
     """Add yaml data to Sphinx context"""
     context['site'] = app.site_data
     # The translation context is pinned to the Italian sources, as Sphinx has
@@ -105,6 +105,10 @@ def add_yaml_data(app, pagename, templatename, context, doctree):
     # Run only for local development
     if os.environ.get('READTHEDOCS', None) != 'True':
         context['LOCAL'] = True
+        context['PRODUCTION_DOMAIN'] = 'localhost'
+        context['slug'] = 'demo-document'
+        context['current_version'] = 'bozza'
+        context['rtd_language'] = 'it'
         
         try:
             with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
@@ -267,7 +271,7 @@ def glossary_page_id(app, doctree, docname):
 
 def setup(app):
     app.site_data = load_theme_data()
-    app.connect('html-page-context', add_yaml_data)
+    app.connect('html-page-context', add_context_data)
     app.connect('html-page-context', generate_additonal_tocs)
     app.connect('doctree-resolved', generate_glossary_json)
     app.connect('doctree-resolved', glossary_page_id)
