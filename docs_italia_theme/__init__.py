@@ -322,7 +322,7 @@ class DiscourseCommentsDirective(Directive):
                             <img class="block-comments__img new-comment__figure rounded-circle" src="">
                             <figcaption>
                                 <!-- <a href='#logout' class="block-comments__logout-link block-comments__logout-link--icon" alt="Logout">&#10060;</a> -->
-                                <a href='#logout' class="block-comments__logout-link block-comments__logout-link--visible" title="Logout" alt="Logout">Logout</a>
+                                <a href='#logout' class="block-comments__logout-link block-comments__logout-link--visible" data-toggle="modal" data-target="#logout-modal" title="Logout" alt="Logout">Logout</a>
                             </figcaption>
                         </figure>
                         <textarea class='form-control new-comment__body col ml-2 pl-3 pr-3' id="comments-input" placeholder='Scrivi un commento...' rows="4"></textarea>
@@ -372,8 +372,32 @@ class DiscourseCommentsDirective(Directive):
                 </div>
             </div>
         """
+
+        # Create logout modal
+        logout_modal = """
+            <div class="modal logout-modal" id="logout-modal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Esegui il logout</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p> Dopo il logout non sar&agrave; possibile scrivere nuovi commenti. Sei sicuro di voler procedere? </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="logout-modal__submit">Conferma</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="logout-modal__cancel">Annulla</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        """
         #node += nodes.raw(text="<div class='section' id='docs-comments-box-"+options['topic_id']+"' data-topic='"+options['topic_id']+"'></div>", format='html')
         node += nodes.raw(text=cbox_template, format='html')
+        node += nodes.raw(text=logout_modal, format='html')
 
         #form = nodes.raw(text=form_template, format='html')
         #node += form

@@ -263,17 +263,16 @@ module.exports = function () {
 
   // Logout user
   this.logout = function () {
-    /*
     var request = {
-      url: this.base_url + '/session/' + this.user.username,
+      url: this.base_url + '/admin/users/' + this.user.id + '/log_out',
       method: 'POST',
-      data: {
-        '_method': 'delete'
-      },
       headers: {
-        'X-CSRF-Token': obj.session.csrf
+        'X-CSRF-Token': obj.session.csrf,
+        'User-Api-Key': obj.getApiKey(),
       }
     };
+
+    console.log(obj.session.csrf);
 
     if (obj.session.csrf !== null) {
       return axios(request);
@@ -283,7 +282,6 @@ module.exports = function () {
         return axios(request);
       })
     }
-    */
   };
 
   this.userIsLoggedIn = function () {
@@ -598,17 +596,13 @@ module.exports = discourseComments = (function ($) {
         })
 
       // Logout icon click
-      $('.block-comments__logout-link').bind('click', function (evt) {
+      $('#logout-modal__submit').bind('click', function (evt) {
         evt.preventDefault();
 
-        var iWantLogout = window.confirm('Dopo il logout non sarà possibile scrivere nuovi commenti. Sei sicuro di voler procedere?');
-
-        if (iWantLogout === true) {
-          // Discourse.logout();
-          Discourse._cookie_delete('docs-italia_pk');
-          Discourse._cookie_delete('docs-italia_uak');
-          location.href = location.href;
-        }
+        Discourse.logout();
+        Discourse._cookie_delete('docs-italia_pk');
+        Discourse._cookie_delete('docs-italia_uak');
+        location.href = location.href;
       });
     }
   }
