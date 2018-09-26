@@ -8,10 +8,19 @@ var Discourse = new Api();
 function _remapPosts(posts) {
   var remappedObject = [];
   posts.forEach(function (e) {
-    remappedObject[e.post_number] = e;
+    remappedObject[e.created_at] = e;
   });
-  return remappedObject;
+  return remappedObject.sort();
 };
+
+// Orders created_at posts' values
+function _orderDates(posts) {
+  var orderedArray = [];
+  posts.forEach(function (e) {
+    orderedArray.push(e.created_at);
+  });
+  return orderedArray.sort();
+}
 
 // Create the correct avatarUrl
 function _createAvatarUrl (template, size) {
@@ -105,27 +114,30 @@ module.exports = discourseComments = (function ($) {
           // Get data from axios' response.
           results = results.data;
 
+          var orderedDates = _orderDates(results.post_stream.posts);
           topicPosts = _remapPosts(results.post_stream.posts);
+          console.log(topicPosts);
           // Loop through posts
-          topicPosts.forEach(function (e, idx) {
+          orderedDates.forEach(function (e, idx) {
+            e = topicPosts[e];
             //if (typeof Discourse.usersFields[e.username] !== "undefined")
             // Append markup with comment to the comments box
             _createMarkup(topicId, e, newPostId).then(function (html) {
               $commentBox.append(html);
-            });
-            // Check if current comment is a reply to another
-            if (e.reply_to_post_number !== null) {
-              // Get the reply's target
-              var replyDest = topicPosts[e.reply_to_post_number];
-              // Create link to reply's target
-              $('#reply-link-' + e.id).append($(
-                "<div>" +
-                  "<a class='reply-to-post' href='#reply-to-" + e.reply_to_post_number + "'>" +
+              // Check if current comment is a reply to another
+              if (e.reply_to_post_number !== null) {
+                // Get the reply's target
+                var replyDest = topicPosts[e.reply_to_post_number];
+                // Create link to reply's target
+                $('#reply-link-' + e.id).append($(
+                    "<div>" +
+                    "<a class='reply-to-post' href='#reply-to-" + e.reply_to_post_number + "'>" +
                     "In risposta a " + replyDest.username + "<small>(#"+ e.reply_to_post_number +")</small>" +
-                  "</a>" +
-                "</div>"
-              ));
-            }
+                    "</a>" +
+                    "</div>"
+                ));
+              }
+            });
           })
         });
       });
@@ -158,7 +170,7 @@ module.exports = discourseComments = (function ($) {
       // Handle login-button click
       $('.btn.login-button').bind('click', function () {
         ppWin();
-      })
+      });
 
       // Manage new comment posting
       $('form[id^="new-comment-"]').bind('submit', function (evt) {

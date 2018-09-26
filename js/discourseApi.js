@@ -175,7 +175,7 @@ module.exports = function () {
   this.getTopicPosts = function(tid) {
     return axios({
       method: 'get',
-      url: obj.base_url + '/t/' + tid + '/posts.json',
+      url: obj.base_url + '/t/' + tid + '/posts.json?order=created',
       responseType: 'json'
     });
   };
