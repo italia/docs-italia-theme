@@ -33,13 +33,7 @@
                 <button class="btn btn-primary dropdown-toggle badge badge-pill bg-primary" type="button" id="dropdownVersionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ current_version }}
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownVersionButton">
-                  {% for slug, url in versions %}
-                  <a class="dropdown-item" href="{{ url }}">
-                    {{ slug }}
-                  </a>
-                  {% endfor %}
-                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownVersionButton"></div>
             </div>
           </div>
         </div>
