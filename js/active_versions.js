@@ -35,7 +35,7 @@ module.exports = activeVersions = (function ($) {
     success: function(data) {
       that.$activeVersions = data.versions.reduce(function(activeVersions, version) {
         (version.active == true && version.built == true)
-          || activeVersions.push({
+          && activeVersions.push({
             name: version.verbose_name,
             url: that.$projectBaseUrl + version.slug
           });
