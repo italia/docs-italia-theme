@@ -580,10 +580,14 @@
   }
 }
 
-.code .highlight {
-  background: none;
-}
-
-.highlight-rst pre {
+.highlight {
   padding: 1rem;
+
+  .highlighttable & {
+    padding: 0;
+  }
+
+  .code & {
+    background: none;
+  }
 }
