@@ -240,6 +240,10 @@
     }
 
     &.important {
+      .admonition-title {
+        color: $green;
+      }
+
       .last {
         font-weight: 700;
         font-size: 1.2rem;
@@ -247,6 +251,10 @@
     }
 
     &.hint {
+      .admonition-title {
+        color: $green;
+      }
+
       .reference.internal {
         font-size: 0.8rem;
         position: relative;
