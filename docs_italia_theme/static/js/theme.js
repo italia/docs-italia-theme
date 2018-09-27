@@ -29,6 +29,71 @@ module.exports = themeAdmonitionToggle = (function ($) {
 })(jQuery);
 
 },{}],2:[function(require,module,exports){
+var axios = require('axios');
+
+module.exports = (function () {
+  var instance;
+
+  function createInstance() {
+    var cache = function () {
+      // This instance
+      var i = this;
+
+      this.cacheTables = {};
+      this.set = function (k, v) {
+        i.cacheTables[k] = v;
+        return i;
+      };
+      this.get = function (k) {
+        return new Promise(function (resolve, reject) {
+          resolve(i.cacheTables[k]);
+        });
+      };
+      this.hasKey = function (k) {
+        return typeof i.cacheTables[k] !== "undefined";
+      };
+      this.isProcessing = function (k) {
+        return i.cacheTables[k] === null;
+      };
+      this.setProcessing = function (k) {
+        i.cacheTables[k] = null;
+      };
+      // Interface for axios' cached requests
+      this.axiosInterface = function (request, callback = null) {
+        // Check if method is set. If not, default is GET
+        var m = typeof request.method !== "undefined" ? request.method.toUpperCase() : 'GET';
+        // Create key
+        var k = m + '|' + request.url;
+
+        if (i.hasKey(k) || i.isProcessing(k)) {
+          return i.get(k);
+        } else {
+          i.setProcessing(k);
+          return axios(request).then(function (data) {
+            i.set(k, data);
+            // Check if callback is setted
+            if (callback !== null) {
+              callback(data);
+            }
+            return data;
+          });
+        }
+      }
+    };
+    return new cache();
+  }
+
+  return {
+    getInstance: function () {
+      if (!instance) {
+        instance = createInstance();
+      }
+      return instance;
+    }
+  }
+})();
+
+},{"axios":22}],3:[function(require,module,exports){
 // Copy to clipboard
 module.exports = themeCopyToClipboard = (function ($) {
   var that;
@@ -129,17 +194,21 @@ module.exports = themeCopyToClipboard = (function ($) {
 
 })(jQuery);
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var axios = require('axios');
 var keypair = require('keypair');
+var cache = require('./cache');
 require('jsencrypt');
 
 
 /**
  * Api Class to handle/generate Discourse User-Api-Key
  */
-module.exports = function () {
+var Api = function () {
   var obj = this;
+  var cacheManager = cache.getInstance();
+  var axiosCached = cacheManager.axiosInterface;
+
   // Private key cookie's name
   this.pk_cookie_name = 'docs-italia_pk';
   // User API Key cookie's name
@@ -157,9 +226,11 @@ module.exports = function () {
   this.jsenc = new JSEncrypt();
   this.payload = null;
   this.popup = null;
-  // Static variable that will contains username => custom_field pairs to avoid multiples requests
-  // and avoid "429 Too Many Requests" discourse's error
-  this.usersFields = {};
+  // It will contains all fetched data
+  this.request = {
+    posts: [],
+    usersFields: []
+  };
 
   // Create cookie
   this._cookie_create = function (key, value, days, overwrite) {
@@ -250,15 +321,21 @@ module.exports = function () {
   };
 
   this.getCSRF = function () {
-    return axios({
-      url: this.base_url + '/session/csrf.json',
-    }, function (error, response, body ) {
-      if (error === null) {
-        obj.session.csrf = JSON.parse(body).csrf;
-      } else {
-        obj.session.csrf = false;
-      }
-    });
+    if (typeof obj.request.csrf !== "undefined") {
+      return new Promise(function (resolve, reject) {
+        resolve(obj.request.csrf);
+      });
+    } else {
+      return axios({
+        url: this.base_url + '/session/csrf.json',
+      }, function (error, response, body ) {
+        if (error === null) {
+          obj.request.csrf = JSON.parse(body).csrf;
+        } else {
+          obj.request.csrf = false;
+        }
+      });
+    }
   };
 
   this.userIsLoggedIn = function () {
@@ -284,11 +361,13 @@ module.exports = function () {
     var endpoint = obj.base_url + '/session/current.json';
 
     // Set user object
-    return axios({
+    return axiosCached({
       url: endpoint,
       headers: { 'User-Api-Key': obj.getApiKey(), }
     }).then(function (results) {
-      obj.user = results.data.current_user;
+      if (results !== null) {
+        obj.request.currentUser = results.data.current_user;
+      }
       return results;
     });
   };
@@ -296,57 +375,133 @@ module.exports = function () {
   this.getUserCustomFieldValue = function (username) {
     var endpoint = obj.base_url + '/u/' + username + '.json';
 
-    return axios({
-      url: endpoint,
-    }).then(function (data) {
-      return data.data.user.user_fields[1];
+    return axiosCached({ url: endpoint }).then(function (data) {
+      if (data !== null) {
+        obj.request.usersFields[username] = data.data.user.user_fields[1];
+        return data.data.user.user_fields[1];
+      } else {
+        return data;
+      }
     });
   };
 
   // Get all topic's posts
-  this.getTopicPosts = function(tid) {
-    return axios({
-      method: 'get',
-      url: obj.base_url + '/t/' + tid + '/posts.json?order=created',
-      responseType: 'json'
-    });
+  this.getTopicPosts = function(tid, cached = true) {
+    if (cached) {
+      return axiosCached({
+        method: 'get',
+        url: obj.base_url + '/t/' + tid + '/posts.json',
+        responseType: 'json'
+      });
+    } else {
+      return axios({
+        method: 'get',
+        url: obj.base_url + '/t/' + tid + '/posts.json',
+        responseType: 'json'
+      });
+    }
   };
 
+  this.fetchData = function (tid) {
+    /**
+     * Current User's data
+     */
+    return this.getCurrentUser().then(function (dataUser) {
+        var user = obj.request.currentUser = dataUser.data.current_user;
+        /**
+         * Get current user's custom field
+         */
+        return obj.getUserCustomFieldValue(user.username).then(function (dataField) {
+            /**
+             * Get Topic's Posts
+             */
+            return obj.getTopicPosts(tid).then(function (dataPosts) {
+                var userFieldRequests = [];
+                var userField = [];
+                var posts = dataPosts.data.post_stream.posts;
+
+                posts.forEach(function (post) {
+                  if (typeof userField[post.username] === "undefined") {
+                    userField[post.username] = true;
+                    userFieldRequests.push(axiosCached({ url: obj.base_url + '/u/' + post.username + '.json' }));
+                  }
+                });
+                return axios.all(userFieldRequests).then(function(data) {
+                  data.forEach(function (d) {
+                    obj.request.usersFields[d.data.user.username] = d.data.user.user_fields[1];
+                  });
+                  posts.forEach(function (post) {
+                    // Save post in request object
+                    obj.request.posts.push(post);
+                  })
+                });
+              });
+          })
+      })
+  };
 };
 
-},{"axios":21,"jsencrypt":48,"keypair":49}],4:[function(require,module,exports){
+/**
+ * Implements singleton design pattern
+ * @type {{getInstance}}
+ */
+module.exports = (function () {
+  var instance;
+
+  function createInstance() {
+    return new Api();
+  }
+
+  return {
+    getInstance: function() {
+      if (!instance) {
+        instance = createInstance();
+      }
+      return instance;
+    }
+  }
+})();
+
+},{"./cache":2,"axios":22,"jsencrypt":49,"keypair":50}],5:[function(require,module,exports){
 var Api = require('./discourseApi.js');
 
 module.exports = discourseAuth = {
   init: function () {
-    var Discourse = new Api();
-    var payload = Discourse.searchParameters('payload');
-    var pay_cookie = Discourse.getApiKey();
-    if (pay_cookie) {
-      // console.log('Already exists payload cookie: ' + pay_cookie);
-    } else {
-      if (payload !== false) {
-        Discourse.decryptPayload(payload);
-        // Get sourceUrl from cookie
-        var surl_cookie_name = 'docs-italia_surl';
-        var sourceUrl = Discourse._cookie_read(surl_cookie_name);
-        Discourse._cookie_delete(surl_cookie_name);
+    var Discourse = new Api.getInstance();
+    var $commentBox = $('ul.block-comments__list.items');
+    var topicId = $commentBox.first().data('topic');
+    // Starts to fetch data
 
-        if (typeof sourceUrl !== 'undefined') {
-          window.opener.document.location.href = sourceUrl;
-          window.close();
-        } else {
-          // Remove ?payload get parameter from url
-          window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
+    return Discourse.fetchData(topicId).then(function () {
+      var payload = Discourse.searchParameters('payload');
+      var pay_cookie = Discourse.getApiKey();
+      if (pay_cookie) {
+        // console.log('Already exists payload cookie: ' + pay_cookie);
+      } else {
+        if (payload !== false) {
+          Discourse.decryptPayload(payload);
+          // Get sourceUrl from cookie
+          var surl_cookie_name = 'docs-italia_surl';
+          var sourceUrl = Discourse._cookie_read(surl_cookie_name);
+          Discourse._cookie_delete(surl_cookie_name);
+
+          if (typeof sourceUrl !== 'undefined') {
+            window.opener.document.location.href = sourceUrl;
+            window.close();
+          } else {
+            // Remove ?payload get parameter from url
+            window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
+          }
         }
       }
-    }
+    });
+
   }
 }
 
-},{"./discourseApi.js":3}],5:[function(require,module,exports){
+},{"./discourseApi.js":4}],6:[function(require,module,exports){
 var Api = require('./discourseApi.js');
-var Discourse = new Api();
+var Discourse = new Api.getInstance();
 
 // Execute init
 // _commentReinit()
@@ -354,10 +509,12 @@ var Discourse = new Api();
 // Remaps topic's posts object
 function _remapPosts(posts) {
   var remappedObject = [];
+
   posts.forEach(function (e) {
-    remappedObject[e.created_at] = e;
+    remappedObject[e.post_number] = e;
   });
-  return remappedObject.sort();
+
+  return remappedObject;
 };
 
 // Orders created_at posts' values
@@ -404,39 +561,43 @@ function _createMarkup (tid, post, nPId) {
   post.cooked = _parseUserRefs(post.cooked);
 
   // Get user role and then return html for comment
-  return Discourse.getUserCustomFieldValue(post.username).then(function(customField) {
-    // Return markup
-    return "" +
-      "<li id='"+ commentHTMLId + "' class='row mb-5 block-comments__item comment-"+ post.id + (isNew ? ' is-new' : '') + "' data-topic='"+ tid +"' data-comment="+post.id+">" +
-        "<div id='reply-to-"+post.post_number+"'></div>" +
-        "<figure class='col-auto mb-0'><img class='block-comments__img rounded-circle' src='"+ avatarUrl +"'></figure>" +
-        "<div class='col'>" +
-          "<div class='row align-items-center justify-content-between' id='comment-heading-1'>" +
-            "<div class='col-auto'>" +
-              "<span class='block-comments__name text-capitalize mb-0'>" + post.username + "</span>" +
-              "<div id='reply-link-"+post.id+"'></div>" +
-            "</div>" +
-            "<div class='col-auto'>" +
-              "<p class='d-inline-block mr-2 block-comments__date mb-0'>" + date + "</p>" +
-              "<button class='block-comments__item-btn collapsed' data-toggle='collapse' data-target='#collapse-"+ post.id +"'><span class='it-icon-collapse'></span><span class='it-icon-expand'></span></button>" +
-            "</div>" +
+//  var customField = Discourse.request.usersFields[post.username];
+
+  // Return markup
+  return new Promise(function (resolve) {
+    resolve("" +
+    "<li id='"+ commentHTMLId + "' class='row mb-5 block-comments__item comment-"+ post.id + (isNew ? ' is-new' : '') + "' data-topic='"+ tid +"' data-comment="+post.id+">" +
+      "<div id='reply-to-"+post.post_number+"'></div>" +
+      "<figure class='col-auto mb-0'><img class='block-comments__img rounded-circle' src='"+ avatarUrl +"'></figure>" +
+      "<div class='col'>" +
+        "<div class='row align-items-center justify-content-between' id='comment-heading-1'>" +
+          "<div class='col-auto'>" +
+            "<span class='block-comments__name text-capitalize mb-0'>" + post.username + "</span>" +
+            "<div id='reply-link-"+post.id+"'></div>" +
           "</div>" +
-          "<p class='text-uppercase block-comments__role'>" + (customField !== null ? customField : 'utente')+ "</p>" +
-          "<div id='collapse-"+ post.id +"' class='block-comments__paragraph pl-3 border-left collapse show' aria-labelledby='comment-heading-1'>" + post.cooked + "</div>" +
+          "<div class='col-auto'>" +
+            "<p class='d-inline-block mr-2 block-comments__date mb-0'>" + date + "</p>" +
+            "<button class='block-comments__item-btn collapsed' data-toggle='collapse' data-target='#collapse-"+ post.id +"'><span class='it-icon-collapse'></span><span class='it-icon-expand'></span></button>" +
+          "</div>" +
         "</div>" +
-      "</li>";
+        "<p class='text-uppercase block-comments__role'>" + (Discourse.request.usersFields[post.username] !== null ? Discourse.request.usersFields[post.username] : 'utente')+ "</p>" +
+        "<div id='collapse-"+ post.id +"' class='block-comments__paragraph pl-3 border-left collapse show' aria-labelledby='comment-heading-1'>" + post.cooked + "</div>" +
+      "</div>" +
+    "</li>");
   });
+
+  return markup;
 }
 
 module.exports = discourseComments = (function ($) {
   return {
-    init: function (newPostId, postObject) {
+    init: function (newPostId, postObject = null) {
       // Obtains all comments boxes
       var $commentBox = $('ul.block-comments__list.items');
       var topicId = $commentBox.data('topic');
 
       // Check if user is logged in
-      if (!Discourse.userIsLoggedIn())
+      // if (!Discourse.userIsLoggedIn())
       // Before flush set fixed height, to avoid blink
       $commentBox.css('min-height', $commentBox.height() + 'px');
       // Flush commentBox
@@ -446,47 +607,40 @@ module.exports = discourseComments = (function ($) {
 
       // Set comment-write-box user picture
       if (Discourse.userIsLoggedIn()) {
-        Discourse.getCurrentUser().then(function () {
-          $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.avatar_template, 45));
-        });
+        if (typeof Discourse.request.currentUser !== "undefined") {
+          $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.request.currentUser.avatar_template, 45));
+        } else {
+          Discourse.getCurrentUser().then(function (currentUser) {
+            $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 45));
+          });
+        }
       }
 
       // Foreach get comments from discourse
       $commentBox.each(function (idx, cB) {
         var topicId = $(cB).data('topic');
-        var topicPosts = {};
+        var topicPosts = _remapPosts(Discourse.request.posts);
 
         // Get all posts for given topic id
-        Discourse.getTopicPosts(topicId).then(function (results) {
-          // Get data from axios' response.
-          results = results.data;
-
-          var orderedDates = _orderDates(results.post_stream.posts);
-          topicPosts = _remapPosts(results.post_stream.posts);
-          console.log(topicPosts);
-          // Loop through posts
-          orderedDates.forEach(function (e, idx) {
-            e = topicPosts[e];
-            //if (typeof Discourse.usersFields[e.username] !== "undefined")
-            // Append markup with comment to the comments box
-            _createMarkup(topicId, e, newPostId).then(function (html) {
-              $commentBox.append(html);
-              // Check if current comment is a reply to another
-              if (e.reply_to_post_number !== null) {
-                // Get the reply's target
-                var replyDest = topicPosts[e.reply_to_post_number];
-                // Create link to reply's target
-                $('#reply-link-' + e.id).append($(
-                    "<div>" +
-                    "<a class='reply-to-post' href='#reply-to-" + e.reply_to_post_number + "'>" +
-                    "In risposta a " + replyDest.username + "<small>(#"+ e.reply_to_post_number +")</small>" +
-                    "</a>" +
-                    "</div>"
-                ));
-              }
-            });
-          })
-        });
+        topicPosts.forEach(function (e, idx) {
+          // Append markup with comment to the comments box
+          _createMarkup(topicId, e, newPostId).then(function (html) {
+            $commentBox.append(html);
+            // Check if current comment is a reply to another
+            if (e.reply_to_post_number !== null) {
+              // Get the reply's target
+              var replyDest = topicPosts[e.reply_to_post_number];
+              // Create link to reply's target
+              $('#reply-link-' + e.id).append($(
+                  "<div>" +
+                  "<a class='reply-to-post' href='#reply-to-" + e.reply_to_post_number + "'>" +
+                  "In risposta a " + replyDest.username + "<small>(#"+ e.reply_to_post_number +")</small>" +
+                  "</a>" +
+                  "</div>"
+              ));
+            }
+          });
+        })
       });
 
       // Reset min-height to auto
@@ -538,18 +692,20 @@ module.exports = discourseComments = (function ($) {
               .then(function (results) {
                 $form.removeClass('sending');
                 $body.val('');
-                // Re-init current modules, to update comments list
-                module.exports.init(results.data.id, results);
-              }, 1500)
+                Discourse.getTopicPosts(topic_id, false).then(function (data) {
+                  Discourse.request.posts = data.data.post_stream.posts;
+                  // Re-init current modules, to update comments list
+                  module.exports.init(results.data.id, results);
+                });
+              })
               // Error
               .catch(function (error) {
                 var errorsString = error.response.data.errors.join('<br>');
                 $form.removeClass('sending');
                 $errorsBox.append(errorsString);
               });
-          })
+          }, 1500);
         }
-
       });
       // Handles min. characters nedeed to post
       $('textarea.new-comment__body').bind('input', function () {
@@ -582,11 +738,19 @@ module.exports = discourseComments = (function ($) {
             $parent.find('.new-comment__required').addClass('d-none');
           }
         })
+      // After new post
+      if (postObject !== null) {
+        var beforeLast = Discourse.request.posts[Discourse.request.posts.length-2];
+        var idTarget = '#reply-to-' + beforeLast.post_number;
+        setTimeout(function () {
+          location.hash = idTarget;
+        }, 500);
+      }
     }
   }
 })(jQuery);
 
-},{"./discourseApi.js":3}],6:[function(require,module,exports){
+},{"./discourseApi.js":4}],7:[function(require,module,exports){
 // Get glossary terms
 module.exports = themeGlossary = (function ($) {
   var that;
@@ -628,7 +792,7 @@ module.exports = themeGlossary = (function ($) {
 
 })(jQuery);
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 // Get glossary terms
 module.exports = themeGlossaryPage = (function ($) {
   var that;
@@ -726,7 +890,7 @@ module.exports = themeGlossaryPage = (function ($) {
 
 })(jQuery);
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (global){
 global.$ = global.jQuery = require('jquery');
 global.Popper = require('popper.js');
@@ -767,8 +931,9 @@ $(document).ready(function() {
   themeNote.init();
   themeAdmonitionToggle.init();
   themeCopyToClipboard.init();
-  discourseAuth.init();
-  discourseComments.init();
+  discourseAuth.init().then(function() {
+    discourseComments.init();
+  });
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();
@@ -787,7 +952,7 @@ $(document).ready(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":2,"./discourseAuth.js":4,"./discourseComments.js":5,"./get_glossary.js":6,"./glossary_page.js":7,"./markup_modifier.js":9,"./note.js":10,"./offcanvas_feature.js":11,"./scroll_progressbar.js":12,"./scrollspy.js":13,"./searchbox_collapse.js":14,"./section_navigation.js":15,"./sidebar_nav.js":16,"./sticky_header.js":17,"./sticky_sidebar.js":18,"./theme_translate.js":19,"./tooltip.js":20,"bootstrap-italia":"bootstrap-italia","jquery":47,"modernizr":"modernizr","popper.js":50,"stickybits":52}],9:[function(require,module,exports){
+},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":3,"./discourseAuth.js":5,"./discourseComments.js":6,"./get_glossary.js":7,"./glossary_page.js":8,"./markup_modifier.js":10,"./note.js":11,"./offcanvas_feature.js":12,"./scroll_progressbar.js":13,"./scrollspy.js":14,"./searchbox_collapse.js":15,"./section_navigation.js":16,"./sidebar_nav.js":17,"./sticky_header.js":18,"./sticky_sidebar.js":19,"./theme_translate.js":20,"./tooltip.js":21,"bootstrap-italia":"bootstrap-italia","jquery":48,"modernizr":"modernizr","popper.js":51,"stickybits":53}],10:[function(require,module,exports){
 // Modify DOM via JS.
 module.exports = themeMarkupModifier = (function ($) {
   var that;
@@ -996,7 +1161,7 @@ module.exports = themeMarkupModifier = (function ($) {
   }
 })(jQuery);
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 // Notes
 module.exports = themeNote = (function ($) {
   var that;
@@ -1058,7 +1223,7 @@ module.exports = themeNote = (function ($) {
   }
 })(jQuery);
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 // Offcanvas feature
 module.exports = themeOffcanvasFeature = (function ($) {
 
@@ -1076,7 +1241,7 @@ module.exports = themeOffcanvasFeature = (function ($) {
 
 })(jQuery);
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // Admonition toggle
 module.exports = themeScrollProgressBar = (function ($) {
 
@@ -1096,7 +1261,7 @@ module.exports = themeScrollProgressBar = (function ($) {
 
 })(jQuery);
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 // Sidebar nav
 module.exports = themeScrollspy = (function ($) {
   var that;
@@ -1155,7 +1320,7 @@ module.exports = themeScrollspy = (function ($) {
 
 })(jQuery);
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 // Sticky sidebar
 module.exports = themeSearchboxCollapse = (function ($) {
 
@@ -1183,7 +1348,7 @@ module.exports = themeSearchboxCollapse = (function ($) {
   }
 })(jQuery);
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 // Section navigation
 module.exports = themeSectionNav = (function ($) {
   var that;
@@ -1335,7 +1500,7 @@ module.exports = themeSectionNav = (function ($) {
   }
 })(jQuery);
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 // Sidebar nav
 module.exports = themeSidebarNav = (function ($) {
   var that;
@@ -1450,7 +1615,7 @@ module.exports = themeSidebarNav = (function ($) {
 
 })(jQuery);
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 // Sticky header
 module.exports = themeStickyHeader = (function ($, stickybits) {
 
@@ -1462,7 +1627,7 @@ module.exports = themeStickyHeader = (function ($, stickybits) {
 
 })(jQuery, stickybits);
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 // Sticky sidebar
 module.exports = themeStickySidebar = (function ($) {
 
@@ -1486,7 +1651,7 @@ module.exports = themeStickySidebar = (function ($) {
   }
 })(jQuery);
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 // Theme l10n
 module.exports = themeTranslate = (function ($) {
   var that;
@@ -1514,7 +1679,7 @@ module.exports = themeTranslate = (function ($) {
 
 })(jQuery);
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 // Tooltips
 module.exports = themeToolTip = (function ($) {
   var that;
@@ -1733,9 +1898,9 @@ module.exports = themeToolTip = (function ($) {
   }
 })(jQuery);
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":23}],22:[function(require,module,exports){
+},{"./lib/axios":24}],23:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1919,7 +2084,7 @@ module.exports = function xhrAdapter(config) {
 };
 
 }).call(this,require('_process'))
-},{"../core/createError":29,"./../core/settle":32,"./../helpers/btoa":36,"./../helpers/buildURL":37,"./../helpers/cookies":39,"./../helpers/isURLSameOrigin":41,"./../helpers/parseHeaders":43,"./../utils":45,"_process":51}],23:[function(require,module,exports){
+},{"../core/createError":30,"./../core/settle":33,"./../helpers/btoa":37,"./../helpers/buildURL":38,"./../helpers/cookies":40,"./../helpers/isURLSameOrigin":42,"./../helpers/parseHeaders":44,"./../utils":46,"_process":52}],24:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -1973,7 +2138,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":24,"./cancel/CancelToken":25,"./cancel/isCancel":26,"./core/Axios":27,"./defaults":34,"./helpers/bind":35,"./helpers/spread":44,"./utils":45}],24:[function(require,module,exports){
+},{"./cancel/Cancel":25,"./cancel/CancelToken":26,"./cancel/isCancel":27,"./core/Axios":28,"./defaults":35,"./helpers/bind":36,"./helpers/spread":45,"./utils":46}],25:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1994,7 +2159,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -2053,14 +2218,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":24}],26:[function(require,module,exports){
+},{"./Cancel":25}],27:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 var defaults = require('./../defaults');
@@ -2141,7 +2306,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"./../defaults":34,"./../utils":45,"./InterceptorManager":28,"./dispatchRequest":30}],28:[function(require,module,exports){
+},{"./../defaults":35,"./../utils":46,"./InterceptorManager":29,"./dispatchRequest":31}],29:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2195,7 +2360,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":45}],29:[function(require,module,exports){
+},{"./../utils":46}],30:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -2215,7 +2380,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":31}],30:[function(require,module,exports){
+},{"./enhanceError":32}],31:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2303,7 +2468,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/isCancel":26,"../defaults":34,"./../helpers/combineURLs":38,"./../helpers/isAbsoluteURL":40,"./../utils":45,"./transformData":33}],31:[function(require,module,exports){
+},{"../cancel/isCancel":27,"../defaults":35,"./../helpers/combineURLs":39,"./../helpers/isAbsoluteURL":41,"./../utils":46,"./transformData":34}],32:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2326,7 +2491,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -2354,7 +2519,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":29}],33:[function(require,module,exports){
+},{"./createError":30}],34:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2376,7 +2541,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../utils":45}],34:[function(require,module,exports){
+},{"./../utils":46}],35:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2476,7 +2641,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this,require('_process'))
-},{"./adapters/http":22,"./adapters/xhr":22,"./helpers/normalizeHeaderName":42,"./utils":45,"_process":51}],35:[function(require,module,exports){
+},{"./adapters/http":23,"./adapters/xhr":23,"./helpers/normalizeHeaderName":43,"./utils":46,"_process":52}],36:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -2489,7 +2654,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 'use strict';
 
 // btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
@@ -2527,7 +2692,7 @@ function btoa(input) {
 
 module.exports = btoa;
 
-},{}],37:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2595,7 +2760,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":45}],38:[function(require,module,exports){
+},{"./../utils":46}],39:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2611,7 +2776,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],39:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2666,7 +2831,7 @@ module.exports = (
   })()
 );
 
-},{"./../utils":45}],40:[function(require,module,exports){
+},{"./../utils":46}],41:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2682,7 +2847,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2752,7 +2917,7 @@ module.exports = (
   })()
 );
 
-},{"./../utils":45}],42:[function(require,module,exports){
+},{"./../utils":46}],43:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -2766,7 +2931,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":45}],43:[function(require,module,exports){
+},{"../utils":46}],44:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2821,7 +2986,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":45}],44:[function(require,module,exports){
+},{"./../utils":46}],45:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2850,7 +3015,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],45:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -3155,7 +3320,7 @@ module.exports = {
   trim: trim
 };
 
-},{"./helpers/bind":35,"is-buffer":46}],46:[function(require,module,exports){
+},{"./helpers/bind":36,"is-buffer":47}],47:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -3178,7 +3343,7 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -13544,7 +13709,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -18916,7 +19081,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 (function (process,setImmediate){
 var forge = {};
 var aes = forge.aes = {};
@@ -23374,7 +23539,7 @@ pki.privateKeyToPem = function(key, maxline) {
 };
 
 }).call(this,require('_process'),require("timers").setImmediate)
-},{"_process":51,"timers":53}],50:[function(require,module,exports){
+},{"_process":52,"timers":54}],51:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -25918,7 +26083,7 @@ return Popper;
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -26104,7 +26269,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 /**
   stickybits - Stickybits is a lightweight alternative to `position: sticky` polyfills
   @version v3.5.3
@@ -26559,7 +26724,7 @@ process.umask = function() { return 0; };
 
 })));
 
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -26638,7 +26803,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":51,"timers":53}],"bootstrap-italia":[function(require,module,exports){
+},{"process/browser.js":52,"timers":54}],"bootstrap-italia":[function(require,module,exports){
 /*!
  * Bootstrap Italia v0.10.3
  * Copyright 2018
@@ -26667,4 +26832,4 @@ var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function
 /*! modernizr 3.6.0 (Custom Build) | MIT *
  * https://modernizr.com/download/?-touchevents-setclasses !*/
 !function(e,n,t){function o(e,n){return typeof e===n}function s(){var e,n,t,s,a,i,r;for(var l in f)if(f.hasOwnProperty(l)){if(e=[],n=f[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(s=o(n.fn,"function")?n.fn():n.fn,a=0;a<e.length;a++)i=e[a],r=i.split("."),1===r.length?Modernizr[r[0]]=s:(!Modernizr[r[0]]||Modernizr[r[0]]instanceof Boolean||(Modernizr[r[0]]=new Boolean(Modernizr[r[0]])),Modernizr[r[0]][r[1]]=s),d.push((s?"":"no-")+r.join("-"))}}function a(e){var n=u.className,t=Modernizr._config.classPrefix||"";if(p&&(n=n.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(o,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),p?u.className.baseVal=n:u.className=n)}function i(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):p?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function r(){var e=n.body;return e||(e=i(p?"svg":"body"),e.fake=!0),e}function l(e,t,o,s){var a,l,f,c,d="modernizr",p=i("div"),h=r();if(parseInt(o,10))for(;o--;)f=i("div"),f.id=s?s[o]:d+(o+1),p.appendChild(f);return a=i("style"),a.type="text/css",a.id="s"+d,(h.fake?h:p).appendChild(a),h.appendChild(p),a.styleSheet?a.styleSheet.cssText=e:a.appendChild(n.createTextNode(e)),p.id=d,h.fake&&(h.style.background="",h.style.overflow="hidden",c=u.style.overflow,u.style.overflow="hidden",u.appendChild(h)),l=t(p,e),h.fake?(h.parentNode.removeChild(h),u.style.overflow=c,u.offsetHeight):p.parentNode.removeChild(p),!!l}var f=[],c={_version:"3.6.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){f.push({name:e,fn:n,options:t})},addAsyncTest:function(e){f.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=c,Modernizr=new Modernizr;var d=[],u=n.documentElement,p="svg"===u.nodeName.toLowerCase(),h=c._config.usePrefixes?" -webkit- -moz- -o- -ms- ".split(" "):["",""];c._prefixes=h;var m=c.testStyles=l;Modernizr.addTest("touchevents",function(){var t;if("ontouchstart"in e||e.DocumentTouch&&n instanceof DocumentTouch)t=!0;else{var o=["@media (",h.join("touch-enabled),("),"heartz",")","{#modernizr{top:9px;position:absolute}}"].join("");m(o,function(e){t=9===e.offsetTop})}return t}),s(),a(d),delete c.addTest,delete c.addAsyncTest;for(var v=0;v<Modernizr._q.length;v++)Modernizr._q[v]();e.Modernizr=Modernizr}(window,document);
-},{}]},{},[8]);
+},{}]},{},[9]);

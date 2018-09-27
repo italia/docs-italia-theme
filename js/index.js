@@ -37,8 +37,9 @@ $(document).ready(function() {
   themeNote.init();
   themeAdmonitionToggle.init();
   themeCopyToClipboard.init();
-  discourseAuth.init();
-  discourseComments.init();
+  discourseAuth.init().then(function() {
+    discourseComments.init();
+  });
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();

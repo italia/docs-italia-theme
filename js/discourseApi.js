@@ -1,13 +1,17 @@
 var axios = require('axios');
 var keypair = require('keypair');
+var cache = require('./cache');
 require('jsencrypt');
 
 
 /**
  * Api Class to handle/generate Discourse User-Api-Key
  */
-module.exports = function () {
+var Api = function () {
   var obj = this;
+  var cacheManager = cache.getInstance();
+  var axiosCached = cacheManager.axiosInterface;
+
   // Private key cookie's name
   this.pk_cookie_name = 'docs-italia_pk';
   // User API Key cookie's name
@@ -25,9 +29,11 @@ module.exports = function () {
   this.jsenc = new JSEncrypt();
   this.payload = null;
   this.popup = null;
-  // Static variable that will contains username => custom_field pairs to avoid multiples requests
-  // and avoid "429 Too Many Requests" discourse's error
-  this.usersFields = {};
+  // It will contains all fetched data
+  this.request = {
+    posts: [],
+    usersFields: []
+  };
 
   // Create cookie
   this._cookie_create = function (key, value, days, overwrite) {
@@ -118,15 +124,21 @@ module.exports = function () {
   };
 
   this.getCSRF = function () {
-    return axios({
-      url: this.base_url + '/session/csrf.json',
-    }, function (error, response, body ) {
-      if (error === null) {
-        obj.session.csrf = JSON.parse(body).csrf;
-      } else {
-        obj.session.csrf = false;
-      }
-    });
+    if (typeof obj.request.csrf !== "undefined") {
+      return new Promise(function (resolve, reject) {
+        resolve(obj.request.csrf);
+      });
+    } else {
+      return axios({
+        url: this.base_url + '/session/csrf.json',
+      }, function (error, response, body ) {
+        if (error === null) {
+          obj.request.csrf = JSON.parse(body).csrf;
+        } else {
+          obj.request.csrf = false;
+        }
+      });
+    }
   };
 
   this.userIsLoggedIn = function () {
@@ -152,11 +164,13 @@ module.exports = function () {
     var endpoint = obj.base_url + '/session/current.json';
 
     // Set user object
-    return axios({
+    return axiosCached({
       url: endpoint,
       headers: { 'User-Api-Key': obj.getApiKey(), }
     }).then(function (results) {
-      obj.user = results.data.current_user;
+      if (results !== null) {
+        obj.request.currentUser = results.data.current_user;
+      }
       return results;
     });
   };
@@ -164,20 +178,89 @@ module.exports = function () {
   this.getUserCustomFieldValue = function (username) {
     var endpoint = obj.base_url + '/u/' + username + '.json';
 
-    return axios({
-      url: endpoint,
-    }).then(function (data) {
-      return data.data.user.user_fields[1];
+    return axiosCached({ url: endpoint }).then(function (data) {
+      if (data !== null) {
+        obj.request.usersFields[username] = data.data.user.user_fields[1];
+        return data.data.user.user_fields[1];
+      } else {
+        return data;
+      }
     });
   };
 
   // Get all topic's posts
-  this.getTopicPosts = function(tid) {
-    return axios({
-      method: 'get',
-      url: obj.base_url + '/t/' + tid + '/posts.json?order=created',
-      responseType: 'json'
-    });
+  this.getTopicPosts = function(tid, cached = true) {
+    if (cached) {
+      return axiosCached({
+        method: 'get',
+        url: obj.base_url + '/t/' + tid + '/posts.json',
+        responseType: 'json'
+      });
+    } else {
+      return axios({
+        method: 'get',
+        url: obj.base_url + '/t/' + tid + '/posts.json',
+        responseType: 'json'
+      });
+    }
   };
 
+  this.fetchData = function (tid) {
+    /**
+     * Current User's data
+     */
+    return this.getCurrentUser().then(function (dataUser) {
+        var user = obj.request.currentUser = dataUser.data.current_user;
+        /**
+         * Get current user's custom field
+         */
+        return obj.getUserCustomFieldValue(user.username).then(function (dataField) {
+            /**
+             * Get Topic's Posts
+             */
+            return obj.getTopicPosts(tid).then(function (dataPosts) {
+                var userFieldRequests = [];
+                var userField = [];
+                var posts = dataPosts.data.post_stream.posts;
+
+                posts.forEach(function (post) {
+                  if (typeof userField[post.username] === "undefined") {
+                    userField[post.username] = true;
+                    userFieldRequests.push(axiosCached({ url: obj.base_url + '/u/' + post.username + '.json' }));
+                  }
+                });
+                return axios.all(userFieldRequests).then(function(data) {
+                  data.forEach(function (d) {
+                    obj.request.usersFields[d.data.user.username] = d.data.user.user_fields[1];
+                  });
+                  posts.forEach(function (post) {
+                    // Save post in request object
+                    obj.request.posts.push(post);
+                  })
+                });
+              });
+          })
+      })
+  };
 };
+
+/**
+ * Implements singleton design pattern
+ * @type {{getInstance}}
+ */
+module.exports = (function () {
+  var instance;
+
+  function createInstance() {
+    return new Api();
+  }
+
+  return {
+    getInstance: function() {
+      if (!instance) {
+        instance = createInstance();
+      }
+      return instance;
+    }
+  }
+})();
