@@ -37,8 +37,15 @@ $(document).ready(function() {
   themeNote.init();
   themeAdmonitionToggle.init();
   themeCopyToClipboard.init();
-  discourseAuth.init();
-  discourseComments.init();
+  discourseAuth.init()
+    .then(function() {
+      discourseComments.init();
+    })
+    .catch(function () {
+      console.log('here')
+      discourseAuth.init(true);
+      discourseComments.init();
+    });
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();
