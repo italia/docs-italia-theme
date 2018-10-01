@@ -28,7 +28,7 @@ module.exports = (function () {
         i.cacheTables[k] = null;
       };
       // Interface for axios' cached requests
-      this.axiosInterface = function (request, callback = null) {
+      this.axiosInterface = function (request, callback) {
         // Check if method is set. If not, default is GET
         var m = typeof request.method !== "undefined" ? request.method.toUpperCase() : 'GET';
         // Create key
@@ -41,7 +41,7 @@ module.exports = (function () {
           return axios(request).then(function (data) {
             i.set(k, data);
             // Check if callback is setted
-            if (callback !== null) {
+            if (callback !== null && typeof callback !== "undefined" && callback !== false) {
               callback(data);
             }
             return data;

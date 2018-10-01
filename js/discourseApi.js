@@ -200,8 +200,8 @@ var Api = function () {
   };
 
   // Get all topic's posts
-  this.getTopicPosts = function(tid, cached = true) {
-    if (cached) {
+  this.getTopicPosts = function(tid, cached) {
+    if (cached === true) {
       return axiosCached({
         method: 'get',
         url: obj.base_url + '/t/' + tid + '/posts.json',
@@ -216,7 +216,7 @@ var Api = function () {
     }
   };
 
-  this.fetchData = function (tid, notLogged = false) {
+  this.fetchData = function (tid, notLogged) {
     /**
      * Current User's data
      */

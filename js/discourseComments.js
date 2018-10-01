@@ -89,7 +89,7 @@ function _createMarkup (tid, post, nPId) {
 
 module.exports = discourseComments = (function ($) {
   return {
-    init: function (newPostId, postObject = null) {
+    init: function (newPostId, postObject) {
       // Obtains all comments boxes
       var $commentBox = $('ul.block-comments__list.items');
       var topicId = $commentBox.data('topic');
@@ -238,7 +238,7 @@ module.exports = discourseComments = (function ($) {
           }
         })
       // After new post
-      if (postObject !== null) {
+      if (postObject !== null && typeof postObject !== "undefined") {
         var beforeLast = Discourse.request.posts[Discourse.request.posts.length-2];
         var idTarget = '#reply-to-' + beforeLast.post_number;
         setTimeout(function () {
