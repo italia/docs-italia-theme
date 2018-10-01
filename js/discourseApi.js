@@ -140,8 +140,6 @@ module.exports = function () {
       }
     };
 
-    console.log(obj.session.csrf);
-
     if (obj.session.csrf !== null) {
       return axios(request);
     } else {
