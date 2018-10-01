@@ -308,6 +308,7 @@ var Api = function () {
       auth_redirect: authRedirect,
       scopes: 'write'
     };
+    console.log(data);
 
     return this.base_url + '/user-api-key/new?' + this._serializeParams(data);
   };
@@ -339,7 +340,7 @@ var Api = function () {
   };
 
   this.userIsLoggedIn = function () {
-    return this.getApiKey() != false;
+    return obj.getApiKey() != false;
   };
 
   this.createPost = function (tid, body) {
@@ -358,6 +359,11 @@ var Api = function () {
   };
 
   this.getCurrentUser = function () {
+    if (!obj.userIsLoggedIn()) {
+      return new Promise(function (resolve) {
+        resolve(false);
+      })
+    }
     var endpoint = obj.base_url + '/session/current.json';
 
     // Set user object
@@ -373,6 +379,11 @@ var Api = function () {
   };
 
   this.getUserCustomFieldValue = function (username) {
+    if (!obj.userIsLoggedIn()) {
+      return new Promise(function (resolve) {
+        resolve(false);
+      })
+    }
     var endpoint = obj.base_url + '/u/' + username + '.json';
 
     return axiosCached({ url: endpoint }).then(function (data) {
@@ -402,41 +413,46 @@ var Api = function () {
     }
   };
 
-  this.fetchData = function (tid) {
+  this.fetchData = function (tid, notLogged = false) {
     /**
      * Current User's data
      */
     return this.getCurrentUser().then(function (dataUser) {
+      if (dataUser !== false) {
         var user = obj.request.currentUser = dataUser.data.current_user;
-        /**
-         * Get current user's custom field
-         */
-        return obj.getUserCustomFieldValue(user.username).then(function (dataField) {
-            /**
-             * Get Topic's Posts
-             */
-            return obj.getTopicPosts(tid).then(function (dataPosts) {
-                var userFieldRequests = [];
-                var userField = [];
-                var posts = dataPosts.data.post_stream.posts;
+      } else {
+        var user = { username: null };
+      }
+      /**
+       * Get current user's custom field
+       */
+      return obj.getUserCustomFieldValue(user.username)
+        .then(function (dataField) {
+          /**
+           * Get Topic's Posts
+           */
+          return obj.getTopicPosts(tid).then(function (dataPosts) {
+            var userFieldRequests = [];
+            var userField = [];
+            var posts = dataPosts.data.post_stream.posts;
 
-                posts.forEach(function (post) {
-                  if (typeof userField[post.username] === "undefined") {
-                    userField[post.username] = true;
-                    userFieldRequests.push(axiosCached({ url: obj.base_url + '/u/' + post.username + '.json' }));
-                  }
-                });
-                return axios.all(userFieldRequests).then(function(data) {
-                  data.forEach(function (d) {
-                    obj.request.usersFields[d.data.user.username] = d.data.user.user_fields[1];
-                  });
-                  posts.forEach(function (post) {
-                    // Save post in request object
-                    obj.request.posts.push(post);
-                  })
-                });
+            posts.forEach(function (post) {
+              if (typeof userField[post.username] === "undefined") {
+                userField[post.username] = true;
+                userFieldRequests.push(axiosCached({ url: obj.base_url + '/u/' + post.username + '.json' }));
+              }
+            });
+            return axios.all(userFieldRequests).then(function(data) {
+              data.forEach(function (d) {
+                obj.request.usersFields[d.data.user.username] = d.data.user.user_fields[1];
               });
-          })
+              posts.forEach(function (post) {
+                // Save post in request object
+                obj.request.posts.push(post);
+              })
+            });
+          });
+        })
       })
   };
 };
@@ -466,13 +482,13 @@ module.exports = (function () {
 var Api = require('./discourseApi.js');
 
 module.exports = discourseAuth = {
-  init: function () {
+  init: function (notLogged = false) {
     var Discourse = new Api.getInstance();
     var $commentBox = $('ul.block-comments__list.items');
     var topicId = $commentBox.first().data('topic');
     // Starts to fetch data
 
-    return Discourse.fetchData(topicId).then(function () {
+    return Discourse.fetchData(topicId, notLogged).then(function () {
       var payload = Discourse.searchParameters('payload');
       var pay_cookie = Discourse.getApiKey();
       if (pay_cookie) {
@@ -480,6 +496,7 @@ module.exports = discourseAuth = {
       } else {
         if (payload !== false) {
           Discourse.decryptPayload(payload);
+          console.log('payolaod');
           // Get sourceUrl from cookie
           var surl_cookie_name = 'docs-italia_surl';
           var sourceUrl = Discourse._cookie_read(surl_cookie_name);
@@ -656,7 +673,8 @@ module.exports = discourseComments = (function ($) {
         Discourse._cookie_create(sUrlCookieName, sourceUrl, 10, true);
 
         // Create popup window
-        window.ppWin = function () {
+          window.ppWin = function () {
+          console.log('ppwin')
           var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
           var win = window.open(Discourse.userAuthKeyUrl(), 'Discourse Authentication', params);
           return win;
@@ -931,9 +949,15 @@ $(document).ready(function() {
   themeNote.init();
   themeAdmonitionToggle.init();
   themeCopyToClipboard.init();
-  discourseAuth.init().then(function() {
-    discourseComments.init();
-  });
+  discourseAuth.init()
+    .then(function() {
+      discourseComments.init();
+    })
+    .catch(function () {
+      console.log('here')
+      discourseAuth.init(true);
+      discourseComments.init();
+    });
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();

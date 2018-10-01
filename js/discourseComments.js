@@ -154,7 +154,8 @@ module.exports = discourseComments = (function ($) {
         Discourse._cookie_create(sUrlCookieName, sourceUrl, 10, true);
 
         // Create popup window
-        window.ppWin = function () {
+          window.ppWin = function () {
+          console.log('ppwin')
           var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
           var win = window.open(Discourse.userAuthKeyUrl(), 'Discourse Authentication', params);
           return win;

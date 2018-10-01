@@ -111,6 +111,7 @@ var Api = function () {
       auth_redirect: authRedirect,
       scopes: 'write'
     };
+    console.log(data);
 
     return this.base_url + '/user-api-key/new?' + this._serializeParams(data);
   };
@@ -142,7 +143,7 @@ var Api = function () {
   };
 
   this.userIsLoggedIn = function () {
-    return this.getApiKey() != false;
+    return obj.getApiKey() != false;
   };
 
   this.createPost = function (tid, body) {
@@ -161,6 +162,11 @@ var Api = function () {
   };
 
   this.getCurrentUser = function () {
+    if (!obj.userIsLoggedIn()) {
+      return new Promise(function (resolve) {
+        resolve(false);
+      })
+    }
     var endpoint = obj.base_url + '/session/current.json';
 
     // Set user object
@@ -176,6 +182,11 @@ var Api = function () {
   };
 
   this.getUserCustomFieldValue = function (username) {
+    if (!obj.userIsLoggedIn()) {
+      return new Promise(function (resolve) {
+        resolve(false);
+      })
+    }
     var endpoint = obj.base_url + '/u/' + username + '.json';
 
     return axiosCached({ url: endpoint }).then(function (data) {
@@ -205,41 +216,46 @@ var Api = function () {
     }
   };
 
-  this.fetchData = function (tid) {
+  this.fetchData = function (tid, notLogged = false) {
     /**
      * Current User's data
      */
     return this.getCurrentUser().then(function (dataUser) {
+      if (dataUser !== false) {
         var user = obj.request.currentUser = dataUser.data.current_user;
-        /**
-         * Get current user's custom field
-         */
-        return obj.getUserCustomFieldValue(user.username).then(function (dataField) {
-            /**
-             * Get Topic's Posts
-             */
-            return obj.getTopicPosts(tid).then(function (dataPosts) {
-                var userFieldRequests = [];
-                var userField = [];
-                var posts = dataPosts.data.post_stream.posts;
+      } else {
+        var user = { username: null };
+      }
+      /**
+       * Get current user's custom field
+       */
+      return obj.getUserCustomFieldValue(user.username)
+        .then(function (dataField) {
+          /**
+           * Get Topic's Posts
+           */
+          return obj.getTopicPosts(tid).then(function (dataPosts) {
+            var userFieldRequests = [];
+            var userField = [];
+            var posts = dataPosts.data.post_stream.posts;
 
-                posts.forEach(function (post) {
-                  if (typeof userField[post.username] === "undefined") {
-                    userField[post.username] = true;
-                    userFieldRequests.push(axiosCached({ url: obj.base_url + '/u/' + post.username + '.json' }));
-                  }
-                });
-                return axios.all(userFieldRequests).then(function(data) {
-                  data.forEach(function (d) {
-                    obj.request.usersFields[d.data.user.username] = d.data.user.user_fields[1];
-                  });
-                  posts.forEach(function (post) {
-                    // Save post in request object
-                    obj.request.posts.push(post);
-                  })
-                });
+            posts.forEach(function (post) {
+              if (typeof userField[post.username] === "undefined") {
+                userField[post.username] = true;
+                userFieldRequests.push(axiosCached({ url: obj.base_url + '/u/' + post.username + '.json' }));
+              }
+            });
+            return axios.all(userFieldRequests).then(function(data) {
+              data.forEach(function (d) {
+                obj.request.usersFields[d.data.user.username] = d.data.user.user_fields[1];
               });
-          })
+              posts.forEach(function (post) {
+                // Save post in request object
+                obj.request.posts.push(post);
+              })
+            });
+          });
+        })
       })
   };
 };
