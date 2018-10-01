@@ -42,7 +42,6 @@ $(document).ready(function() {
       discourseComments.init();
     })
     .catch(function () {
-      console.log('here')
       discourseAuth.init(true);
       discourseComments.init();
     });

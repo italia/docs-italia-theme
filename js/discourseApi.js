@@ -100,7 +100,7 @@ var Api = function () {
 
   this.userAuthKeyUrl = function () {
     // Generate public/private RSA keys
-    this.genRSAKey();
+    // this.genRSAKey();
     var authRedirect = location.protocol + '//' + location.hostname + (location.port !== "" ? ':' + location.port : '');
 
     var data = {
@@ -111,7 +111,6 @@ var Api = function () {
       auth_redirect: authRedirect,
       scopes: 'write'
     };
-    console.log(data);
 
     return this.base_url + '/user-api-key/new?' + this._serializeParams(data);
   };

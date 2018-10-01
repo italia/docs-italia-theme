@@ -3,11 +3,18 @@ var Api = require('./discourseApi.js');
 module.exports = discourseAuth = {
   init: function (notLogged) {
     var Discourse = new Api.getInstance();
+
     var $commentBox = $('ul.block-comments__list.items');
     var topicId = $commentBox.first().data('topic');
 
     // Get payload parameter
     var payload = Discourse.searchParameters('payload');
+
+    // Generate public/private RSA keys
+    if (!payload && !Discourse.userIsLoggedIn()) {
+      Discourse.genRSAKey();
+    }
+
     var pay_cookie = Discourse.getApiKey();
 
     if (!pay_cookie && payload) {
