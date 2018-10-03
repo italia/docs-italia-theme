@@ -64,12 +64,17 @@ module.exports = function (pk_name, uak_name, expire_days) {
   };
   // Create private/public RSA keys
   this.genRSAKey = function () {
-    this.rsaKey = keypair();
-    // Set public and private keys
-    this.jsenc.setPublicKey(this.rsaKey.public);
-    this.jsenc.setPrivateKey(this.rsaKey.private);
-    // Seve private kay to a cookie
-    this._cookie_create(this.pk_cookie_name, encodeURI(this.rsaKey.private), 1, true);
+    var that = this;
+    return new Promise(function (resolve) {
+      resolve(keypair())
+    }).then(function (rsaKey) {
+      that.rsaKey = rsaKey;
+      // Set public and private keys
+      that.jsenc.setPublicKey(that.rsaKey.public);
+      that.jsenc.setPrivateKey(that.rsaKey.private);
+      // Seve private kay to a cookie
+      that._cookie_create(that.pk_cookie_name, encodeURI(that.rsaKey.private), 1, true);
+    })
   };
   // Get search parameters
   this.searchParameters = function (search) {

@@ -1,6 +1,6 @@
-var Utility = require('./src/Classes/Utility');
-var DConfig = require('./src/Classes/DConfig');
-var DCallsManager = require('./src/Classes/DCallsManager');
+var Utility = require('./src/modules/Utility');
+var DConfig = require('./src/modules/DConfig');
+var DCallsManager = require('./src/modules/DCallsManager');
 
 function DiscourseApi() {
   var that = this;
@@ -38,7 +38,6 @@ function DiscourseApi() {
     } else if (!that.user.logged()) {
       // Create key
       that.key.create();
-
       // Set user state as not logged
       that.user.state('logged', false);
     } else {
@@ -74,11 +73,11 @@ function DiscourseApi() {
       }
     },
     create: function () {
-      that.utility.genRSAKey();
-      setTimeout(function () {
-        that.utility.eventCreate('keyCreated', {});
-      }, 500);
-      return that;
+      return that.utility.genRSAKey().then(function () {
+        setTimeout(function () {
+          that.utility.eventCreate('keyCreated', {});
+        }, 1000);
+      });
     },
   };
 

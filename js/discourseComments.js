@@ -40,7 +40,7 @@ function _createMarkup (tid, post, nPId) {
   // Id attribute for comment div
   var commentHTMLId = 'docs-comment-' + tid + '-' + post.id;
   // Replace the avatar's size from template url
-  var avatarUrl = _createAvatarUrl(post.avatar_template, 45)
+  var avatarUrl = _createAvatarUrl(post.avatar_template, 110);
   // Create a javascript Date object starts from post.updated_at date value
   var date = new Date(post.updated_at);
   // And formats as dd/mm/YYYY hh:ii
@@ -215,8 +215,7 @@ module.exports = discourseComments = (function ($) {
       });
 
       // Show form elements on focus and hide on blur
-      $('textarea.new-comment__body')
-        .bind('focus', function () {
+      $('textarea.new-comment__body').bind('focus', function () {
           $parent = $(this).parents('form');
 
           $parent.find('.new-comment__buttons').removeClass('d-none');
