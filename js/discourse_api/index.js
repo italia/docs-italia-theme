@@ -12,7 +12,7 @@ function DiscourseApi() {
 
   // Discourse's Calls Manager
   this.cm = new DCallsManager(this);
-  this.utility = new Utility('docs-italia_pk', 'docs-italia_uak', 10);
+  this.utility = new Utility('docs-italia_pk', 'docs-italia_puk', 'docs-italia_uak', 10);
 
   /**
    * Api object
@@ -73,6 +73,13 @@ function DiscourseApi() {
       }
     },
     create: function () {
+      if (that.utility._cookie_read(that.utility.pk_cookie_name)) {
+        setTimeout(function () {
+          that.utility.eventCreate('keyCreated', {});
+        }, 1000);
+        return;
+      }
+
       return that.utility.genRSAKey().then(function () {
         setTimeout(function () {
           that.utility.eventCreate('keyCreated', {});

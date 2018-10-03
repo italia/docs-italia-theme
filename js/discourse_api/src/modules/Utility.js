@@ -5,10 +5,11 @@ require('jsencrypt');
 /**
  * Utility Class
  */
-module.exports = function (pk_name, uak_name, expire_days) {
+module.exports = function (pk_name, puk_name, uak_name, expire_days) {
   this.jsenc = new JSEncrypt();
   // Private key cookie's name
   this.pk_cookie_name = pk_name; // 'docs-italia_pk'
+  this.puk_cookie_name = puk_name;
   // User API Key cookie's name
   this.uak_cookie_name = uak_name; // 'docs-italia_uak';
   // Expires days (for now: 10 days)
@@ -74,6 +75,7 @@ module.exports = function (pk_name, uak_name, expire_days) {
       that.jsenc.setPrivateKey(that.rsaKey.private);
       // Seve private kay to a cookie
       that._cookie_create(that.pk_cookie_name, encodeURI(that.rsaKey.private), 1, true);
+      that._cookie_create(that.puk_cookie_name, encodeURI(that.rsaKey.public), 1, true);
     })
   };
   // Get search parameters
