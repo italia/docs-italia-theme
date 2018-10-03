@@ -102,10 +102,10 @@ module.exports = discourseComments = (function ($) {
       // Set comment-write-box user picture
       if (Discourse.user.logged()) {
         if (Object.keys(Discourse.user.object).length !== 0) {
-          $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.object.avatar_template, 45));
+          $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.object.avatar_template, 110));
         } else {
           Discourse.user.current().then(function (currentUser) {
-            $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 45));
+            $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 110));
           });
         }
       }
