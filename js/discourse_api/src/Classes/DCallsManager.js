@@ -1,4 +1,4 @@
-const DCall = require('./DCall');
+var DCall = require('./DCall');
 
 function DCallsManager(caller) {
   this.caller = caller;

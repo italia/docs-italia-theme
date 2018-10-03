@@ -21,7 +21,7 @@ module.exports = function (pk_name, uak_name, expire_days) {
    * @returns {CustomEvent<any>}
    */
   this.eventCreate = function (name, detail) {
-    const e = new CustomEvent(name, {
+    var e = new CustomEvent(name, {
       detail: detail,
       bubbles: true,
       cancelable: true
@@ -63,7 +63,7 @@ module.exports = function (pk_name, uak_name, expire_days) {
     });
   };
   // Create private/public RSA keys
-  this.genRSAKey = async function () {
+  this.genRSAKey = function () {
     this.rsaKey = keypair();
     // Set public and private keys
     this.jsenc.setPublicKey(this.rsaKey.public);
@@ -82,7 +82,6 @@ module.exports = function (pk_name, uak_name, expire_days) {
   };
   // Decrypts payload
   this.decryptPayload = function (payload) {
-    console.log(this, 'utility class');
     this.jsenc.setPrivateKey(decodeURI(this._cookie_read(this.pk_cookie_name)));
     this.payload = this.jsenc.decrypt(payload);
     // Check if decryption is correct

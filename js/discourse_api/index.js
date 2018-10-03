@@ -19,8 +19,8 @@ function DiscourseApi() {
    */
   this.init = function (appName) {
     that.name = appName;
-    const payload = that.utility.searchParameters('payload');
-    const pay_cookie = that.key.get();
+    var payload = that.utility.searchParameters('payload');
+    var pay_cookie = that.key.get();
 
     if (!pay_cookie && payload) {
       that.utility.decryptPayload(payload);
@@ -73,7 +73,7 @@ function DiscourseApi() {
         return false;
       }
     },
-    create: async function () {
+    create: function () {
       that.utility.genRSAKey();
       setTimeout(function () {
         that.utility.eventCreate('keyCreated', {});
@@ -127,7 +127,7 @@ function DiscourseApi() {
     logout: function () {
       var userId = that.user.object.id;
 
-      const headers = that.getHeaders(['X-CSRF-Token', 'User-Api-Key']);
+      var headers = that.getHeaders(['X-CSRF-Token', 'User-Api-Key']);
       that.cm.call('userLogout', '/admin/users/$/log_out', [userId], null, headers).get().then(function () {
         that.user.state('logged', false);
         that.utility._cookie_delete('docs-italia_uak');
