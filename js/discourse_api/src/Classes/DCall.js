@@ -1,14 +1,4 @@
 var axios = require('axios');
-// var axiosExt = require('axios-extensions');
-
-/*
-TODO: Implements...
-const http = axios.create({
-  baseURL: '/',
-  headers: { 'Cache-Control': 'no-cache' },
-  adapter: axiosExt.throttleAdapterEnhancer(axiosExt.cacheAdapterEnhancer(axios.defaults.adapter))
-});
-*/
 
 /**
  * DActions - embeds discourse action call
@@ -50,8 +40,6 @@ DCall.prototype.get = function () {
   return axios.get(this.endpoint, {
     data: this.body,
     headers: this.headers,
-    // useCache: this.cache,
-    // forceUpdate: !this.cache,
   }).then(function (response) {
     return response;
   });
