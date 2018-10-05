@@ -235,11 +235,7 @@ module.exports = discourseComments = (function ($) {
       // Logout icon click
       $('#logout-modal__submit').bind('click', function (evt) {
         evt.preventDefault();
-
-        Discourse.logout();
-        Discourse._cookie_delete('docs-italia_pk');
-        Discourse._cookie_delete('docs-italia_uak');
-        location.href = location.href;
+        Discourse.user.logout();
       });
 
       // Handle keyCreated event to enable login button.

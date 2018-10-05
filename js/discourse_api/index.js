@@ -134,7 +134,7 @@ function DiscourseApi() {
       var userId = that.user.object.id;
 
       var headers = that.getHeaders(['X-CSRF-Token', 'User-Api-Key']);
-      that.cm.call('userLogout', '/admin/users/$/log_out', [userId], null, headers).get().then(function () {
+      that.cm.call('userLogout', '/admin/users/$/log_out!', [userId], null, headers).post().then(function (response) {
         that.user.state('logged', false);
         that.utility._cookie_delete('docs-italia_uak');
         window.location.href = location.href;
