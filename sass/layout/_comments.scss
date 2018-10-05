@@ -23,6 +23,7 @@
 .block-comments__logout-link {
   display: none;
   padding-top: 0.25em;
+
   &--icon {
     position: absolute;
     top: 50%;
@@ -30,10 +31,12 @@
     transform: translate(-50%, -50%);
     color: $red;
     text-shadow: 0 0 20px black;
+
     &:hover {
       color: white;
     }
   }
+
   &:hover {
     text-decoration: none;
   }
