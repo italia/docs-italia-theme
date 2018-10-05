@@ -20,7 +20,40 @@
   width: 55px;
 }
 
+.block-comments__logout-link {
+  display: none;
+  padding-top: 0.25em;
+
+  &--icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $red;
+    text-shadow: 0 0 20px black;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &--visible {
+    display: block;
+    position: relative;
+  }
+}
+
 .block-comments__input {
+  &:hover {
+    .block-comments__logout-link {
+      display: block;
+    }
+  }
+
   input {
     border: 1px $grey-light-01 solid;
     line-height: 2.5em;

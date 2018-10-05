@@ -8,6 +8,7 @@ var axios = require('axios');
 function DCall(baseUrl, name, endpoint, token, body, headers, cache) {
   if (endpoint.indexOf('$') >= 0) {
     var count = 0;
+    var avoidJSONExt = false;
     var temp = endpoint.split('/').map(function (e, i) {
       if (e === '$') {
         var position = count;
@@ -17,9 +18,17 @@ function DCall(baseUrl, name, endpoint, token, body, headers, cache) {
         return e;
       }
     });
+    
     endpoint = temp.join('/');
   }
-  endpoint = baseUrl + endpoint + '.json';
+  
+  // Check for ! to avoid '.json' suffix
+  if (endpoint.indexOf('!') >= 0) {
+    avoidJSONExt = true;
+    endpoint = endpoint.replace('!', '');
+  }
+  
+  endpoint = baseUrl + endpoint + (!avoidJSONExt ? '.json' : '');
   this.set(name, endpoint, body, headers, cache);
   return this;
 }

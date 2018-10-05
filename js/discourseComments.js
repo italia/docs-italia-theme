@@ -150,7 +150,7 @@ module.exports = discourseComments = (function ($) {
         Discourse.utility._cookie_create(sUrlCookieName, sourceUrl, 10, true);
 
         // Create popup window
-          window.ppWin = function () {
+        window.ppWin = function () {
           var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
           var win = window.open(Discourse.authLink(), 'Discourse Authentication', params);
           return win;
@@ -231,6 +231,12 @@ module.exports = discourseComments = (function ($) {
             $parent.find('.new-comment__required').addClass('d-none');
           }
         });
+
+      // Logout icon click
+      $('#logout-modal__submit').bind('click', function (evt) {
+        evt.preventDefault();
+        Discourse.user.logout();
+      });
 
       // Handle keyCreated event to enable login button.
       $(window).bind('keyCreated', function () {
