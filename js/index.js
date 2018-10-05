@@ -37,15 +37,6 @@ $(document).ready(function() {
   themeNote.init();
   themeAdmonitionToggle.init();
   themeCopyToClipboard.init();
-  discourseAuth.init()
-    .then(function() {
-      discourseComments.init();
-    })
-    .catch(function () {
-      console.log('here')
-      discourseAuth.init(true);
-      discourseComments.init();
-    });
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();
@@ -62,3 +53,9 @@ $(document).ready(function() {
     themeToolTip.init();
   }
 });
+
+window.onload = function() {
+  discourseAuth.init().then(function() {
+    discourseComments.init();
+  });
+}

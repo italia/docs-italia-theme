@@ -1,8 +1,4 @@
-var Api = require('./discourseApi.js');
-var Discourse = new Api.getInstance();
-
-// Execute init
-// _commentReinit()
+var Discourse = require('./discourse_api');
 
 // Remaps topic's posts object
 function _remapPosts(posts) {
@@ -26,7 +22,7 @@ function _orderDates(posts) {
 
 // Create the correct avatarUrl
 function _createAvatarUrl (template, size) {
-  return Discourse.base_url + '/' + template.replace('{size}', size);
+  return Discourse.restUrl + '/' + template.replace('{size}', size);
 }
 
 // Presets Discourse'base url to matched value.
@@ -44,7 +40,7 @@ function _createMarkup (tid, post, nPId) {
   // Id attribute for comment div
   var commentHTMLId = 'docs-comment-' + tid + '-' + post.id;
   // Replace the avatar's size from template url
-  var avatarUrl = _createAvatarUrl(post.avatar_template, 45)
+  var avatarUrl = _createAvatarUrl(post.avatar_template, 110);
   // Create a javascript Date object starts from post.updated_at date value
   var date = new Date(post.updated_at);
   // And formats as dd/mm/YYYY hh:ii
@@ -59,7 +55,7 @@ function _createMarkup (tid, post, nPId) {
   post.cooked = _parseUserRefs(post.cooked);
 
   // Get user role and then return html for comment
-//  var customField = Discourse.request.usersFields[post.username];
+  var customField = typeof Discourse.user.fields[post.username] === "undefined" ? 'utente' : Discourse.user.fields[post.username];
 
   // Return markup
   return new Promise(function (resolve) {
@@ -78,7 +74,7 @@ function _createMarkup (tid, post, nPId) {
             "<button class='block-comments__item-btn collapsed' data-toggle='collapse' data-target='#collapse-"+ post.id +"'><span class='it-icon-collapse'></span><span class='it-icon-expand'></span></button>" +
           "</div>" +
         "</div>" +
-        "<p class='text-uppercase block-comments__role'>" + (Discourse.request.usersFields[post.username] !== null ? Discourse.request.usersFields[post.username] : 'utente')+ "</p>" +
+        "<p class='text-uppercase block-comments__role'>" + customField + "</p>" +
         "<div id='collapse-"+ post.id +"' class='block-comments__paragraph pl-3 border-left collapse show' aria-labelledby='comment-heading-1'>" + post.cooked + "</div>" +
       "</div>" +
     "</li>");
@@ -104,12 +100,12 @@ module.exports = discourseComments = (function ($) {
       $('form[id^="new-comment-"] .required-chars').text('-20');
 
       // Set comment-write-box user picture
-      if (Discourse.userIsLoggedIn()) {
-        if (typeof Discourse.request.currentUser !== "undefined") {
-          $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.request.currentUser.avatar_template, 45));
+      if (Discourse.user.logged()) {
+        if (Object.keys(Discourse.user.object).length !== 0) {
+          $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.object.avatar_template, 110));
         } else {
-          Discourse.getCurrentUser().then(function (currentUser) {
-            $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 45));
+          Discourse.user.current().then(function (currentUser) {
+            $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 110));
           });
         }
       }
@@ -117,10 +113,10 @@ module.exports = discourseComments = (function ($) {
       // Foreach get comments from discourse
       $commentBox.each(function (idx, cB) {
         var topicId = $(cB).data('topic');
-        var topicPosts = _remapPosts(Discourse.request.posts);
+        var topicPosts = _remapPosts(Discourse.posts.postStream);
 
         // Get all posts for given topic id
-        topicPosts.forEach(function (e, idx) {
+        topicPosts.forEach(function (e) {
           // Append markup with comment to the comments box
           _createMarkup(topicId, e, newPostId).then(function (html) {
             $commentBox.append(html);
@@ -145,25 +141,23 @@ module.exports = discourseComments = (function ($) {
       $commentBox.css('min-height', 'auto');
 
       // If user isn't logged don't show new-comment form
-      if (!Discourse.userIsLoggedIn()) {
-        var sUrlCookieName = 'docs-italia_surl';
+      if (!Discourse.user.logged()) {
+        var sUrlCookieName = Discourse.name + '_source_url';
         var authRedirect = location.protocol + '//' + location.hostname + (location.port !== "" ? ':' + location.port : '');
         var sourceUrl = authRedirect + location.pathname;
 
         // Create a cookie for stores sourceUrl
-        Discourse._cookie_create(sUrlCookieName, sourceUrl, 10, true);
+        Discourse.utility._cookie_create(sUrlCookieName, sourceUrl, 10, true);
 
         // Create popup window
           window.ppWin = function () {
-          console.log('ppwin')
           var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
-          var win = window.open(Discourse.userAuthKeyUrl(), 'Discourse Authentication', params);
+          var win = window.open(Discourse.authLink(), 'Discourse Authentication', params);
           return win;
         };
 
         var message = 'Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta' +
-                      // '<div> <a href="' + Discourse.userAuthKeyUrl() + '" class="btn btn-success">Login</a>';
-                      '<div><a href="#" class="btn btn-success login-button">Login</a></div>';
+                      '<div><a href="#" class="btn btn-success login-button disabled">Login</a></div>';
         $('form[id^="new-comment-"]').html('<div class="new-comment__login">' + message + '</div>');
       }
 
@@ -186,13 +180,12 @@ module.exports = discourseComments = (function ($) {
         } else {
           $form.addClass('sending');
           setTimeout(function () {
-            Discourse.createPost(topic_id, body_value)
+            Discourse.posts.post(body_value)
               // Success
               .then(function (results) {
                 $form.removeClass('sending');
                 $body.val('');
-                Discourse.getTopicPosts(topic_id, false).then(function (data) {
-                  Discourse.request.posts = data.data.post_stream.posts;
+                Discourse.posts.get(topic_id, false).then(function (data) {
                   // Re-init current modules, to update comments list
                   module.exports.init(results.data.id, results);
                 });
@@ -206,6 +199,7 @@ module.exports = discourseComments = (function ($) {
           }, 1500);
         }
       });
+
       // Handles min. characters nedeed to post
       $('textarea.new-comment__body').bind('input', function () {
         $parent = $(this).parents('form');
@@ -219,9 +213,9 @@ module.exports = discourseComments = (function ($) {
           $parent.find('input[type="submit"]').attr('disabled', false);
         }
       });
+
       // Show form elements on focus and hide on blur
-      $('textarea.new-comment__body')
-        .bind('focus', function () {
+      $('textarea.new-comment__body').bind('focus', function () {
           $parent = $(this).parents('form');
 
           $parent.find('.new-comment__buttons').removeClass('d-none');
@@ -236,10 +230,16 @@ module.exports = discourseComments = (function ($) {
             $parent.find('.new-comment__legend').addClass('d-none');
             $parent.find('.new-comment__required').addClass('d-none');
           }
-        })
+        });
+
+      // Handle keyCreated event to enable login button.
+      $(window).bind('keyCreated', function () {
+        $('.btn.login-button').removeClass('disabled');
+      });
+
       // After new post
       if (postObject !== null && typeof postObject !== "undefined") {
-        var beforeLast = Discourse.request.posts[Discourse.request.posts.length-2];
+        var beforeLast = Discourse.posts.postStream[Discourse.posts.postStream.length-(Discourse.posts.postStream.length > 2 ? 2 : 1)];
         var idTarget = '#reply-to-' + beforeLast.post_number;
         setTimeout(function () {
           location.hash = idTarget;
