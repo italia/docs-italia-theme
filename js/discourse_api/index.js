@@ -74,6 +74,13 @@ function DiscourseApi() {
     },
     create: function () {
       if (that.utility._cookie_read(that.utility.pk_cookie_name)) {
+        // Fix: if already exists pk_cookie_name it's needed to load public/private kays into jsenc objecet
+        // Set public and private keys
+        var pub_key = decodeURI(that.utility._cookie_read(that.utility.puk_cookie_name));
+        var prv_key = decodeURI(that.utility._cookie_read(that.utility.pk_cookie_name));
+        // Here is the fix
+        that.utility.rsaKey = { public : pub_key, private: prv_key };
+        
         setTimeout(function () {
           that.utility.eventCreate('keyCreated', {});
         }, 1000);
