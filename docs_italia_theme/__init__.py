@@ -179,7 +179,7 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             figure_title = figurenode.children[0].get('alt') or context['t']['no_description']
             try:
                 figure_text_string = 'Fig. {}.{} - {}'.format(
-                    figure_number[0], figure_number[1], figure_title.capitalize())
+                    figure_number[0], figure_number[1], figure_title)
             except IndexError:
                 continue
             figure_text = Text(figure_text_string)
@@ -208,7 +208,7 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
                 continue
             table_title = tablenode.children[0].rawsource if tablenode.children[0].rawsource else context['t']['no_description']
             table_title = (table_title[:60] + '...') if len(table_title) > 60 else table_title
-            table_text_string = 'Tab. ' + '.'.join([str(n) for n in table_number]) + ' - ' + table_title.capitalize()
+            table_text_string = 'Tab. ' + '.'.join([str(n) for n in table_number]) + ' - ' + table_title
             table_text = Text(table_text_string)
             table_text.rawsource = table_text_string
             table_reference = reference()
