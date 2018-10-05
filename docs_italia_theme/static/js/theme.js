@@ -130,36 +130,657 @@ module.exports = themeCopyToClipboard = (function ($) {
 })(jQuery);
 
 },{}],3:[function(require,module,exports){
-var axios = require('axios');
-var keypair = require('keypair');
-require('jsencrypt');
+var Discourse = require('./discourse_api');
 
+module.exports = discourseAuth = {
+  init: function () {
+    return new Promise(function (resolve) {
+      var $commentBox = $('ul.block-comments__list.items');
+      var topicId = $commentBox.first().data('topic');
+
+      Discourse.restUrl = 'http://ec2-52-212-9-50.eu-west-1.compute.amazonaws.com';
+      Discourse.init('docs');
+
+      resolve(Discourse.posts.get(topicId));
+    });
+  }
+};
+
+},{"./discourse_api":5}],4:[function(require,module,exports){
+var Discourse = require('./discourse_api');
+
+// Remaps topic's posts object
+function _remapPosts(posts) {
+  var remappedObject = [];
+
+  posts.forEach(function (e) {
+    remappedObject[e.post_number] = e;
+  });
+
+  return remappedObject;
+};
+
+// Orders created_at posts' values
+function _orderDates(posts) {
+  var orderedArray = [];
+  posts.forEach(function (e) {
+    orderedArray.push(e.created_at);
+  });
+  return orderedArray.sort();
+}
+
+// Create the correct avatarUrl
+function _createAvatarUrl (template, size) {
+  return Discourse.restUrl + '/' + template.replace('{size}', size);
+}
+
+// Presets Discourse'base url to matched value.
+function _parseUserRefsReplacer (match) {
+  return Discourse.base_url + match;
+}
+
+// Parse user refers into cooked comment's body
+function _parseUserRefs (text) {
+  return text.replace(/(\/u\/\w+)/gm, _parseUserRefsReplacer);
+}
+
+// Create the comment markup with given topic id and post
+function _createMarkup (tid, post, nPId) {
+  // Id attribute for comment div
+  var commentHTMLId = 'docs-comment-' + tid + '-' + post.id;
+  // Replace the avatar's size from template url
+  var avatarUrl = _createAvatarUrl(post.avatar_template, 110);
+  // Create a javascript Date object starts from post.updated_at date value
+  var date = new Date(post.updated_at);
+  // And formats as dd/mm/YYYY hh:ii
+  date = date.getDate()  + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+  // Check if current rendering comment is a new one
+  var isNew = false;
+  if (typeof nPId !== "undefined") {
+    isNew = post.id == nPId;
+  }
+
+  // Change user link to points correctly to discourse site user's profile
+  post.cooked = _parseUserRefs(post.cooked);
+
+  // Get user role and then return html for comment
+  var customField = typeof Discourse.user.fields[post.username] === "undefined" ? 'utente' : Discourse.user.fields[post.username];
+
+  // Return markup
+  return new Promise(function (resolve) {
+    resolve("" +
+    "<li id='"+ commentHTMLId + "' class='row mb-5 block-comments__item comment-"+ post.id + (isNew ? ' is-new' : '') + "' data-topic='"+ tid +"' data-comment="+post.id+">" +
+      "<div id='reply-to-"+post.post_number+"'></div>" +
+      "<figure class='col-auto mb-0'><img class='block-comments__img rounded-circle' src='"+ avatarUrl +"'></figure>" +
+      "<div class='col'>" +
+        "<div class='row align-items-center justify-content-between' id='comment-heading-1'>" +
+          "<div class='col-auto'>" +
+            "<span class='block-comments__name text-capitalize mb-0'>" + post.username + "</span>" +
+            "<div id='reply-link-"+post.id+"'></div>" +
+          "</div>" +
+          "<div class='col-auto'>" +
+            "<p class='d-inline-block mr-2 block-comments__date mb-0'>" + date + "</p>" +
+            "<button class='block-comments__item-btn collapsed' data-toggle='collapse' data-target='#collapse-"+ post.id +"'><span class='it-icon-collapse'></span><span class='it-icon-expand'></span></button>" +
+          "</div>" +
+        "</div>" +
+        "<p class='text-uppercase block-comments__role'>" + customField + "</p>" +
+        "<div id='collapse-"+ post.id +"' class='block-comments__paragraph pl-3 border-left collapse show' aria-labelledby='comment-heading-1'>" + post.cooked + "</div>" +
+      "</div>" +
+    "</li>");
+  });
+
+  return markup;
+}
+
+module.exports = discourseComments = (function ($) {
+  return {
+    init: function (newPostId, postObject) {
+      // Obtains all comments boxes
+      var $commentBox = $('ul.block-comments__list.items');
+      var topicId = $commentBox.data('topic');
+
+      // Check if user is logged in
+      // if (!Discourse.userIsLoggedIn())
+      // Before flush set fixed height, to avoid blink
+      $commentBox.css('min-height', $commentBox.height() + 'px');
+      // Flush commentBox
+      $commentBox.html('');
+      // Set required characters
+      $('form[id^="new-comment-"] .required-chars').text('-20');
+
+      // Set comment-write-box user picture
+      if (Discourse.user.logged()) {
+        if (Object.keys(Discourse.user.object).length !== 0) {
+          $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.object.avatar_template, 45));
+        } else {
+          Discourse.user.current().then(function (currentUser) {
+            $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 45));
+          });
+        }
+      }
+
+      // Foreach get comments from discourse
+      $commentBox.each(function (idx, cB) {
+        var topicId = $(cB).data('topic');
+        var topicPosts = _remapPosts(Discourse.posts.postStream);
+
+        // Get all posts for given topic id
+        topicPosts.forEach(function (e) {
+          // Append markup with comment to the comments box
+          _createMarkup(topicId, e, newPostId).then(function (html) {
+            $commentBox.append(html);
+            // Check if current comment is a reply to another
+            if (e.reply_to_post_number !== null) {
+              // Get the reply's target
+              var replyDest = topicPosts[e.reply_to_post_number];
+              // Create link to reply's target
+              $('#reply-link-' + e.id).append($(
+                  "<div>" +
+                  "<a class='reply-to-post' href='#reply-to-" + e.reply_to_post_number + "'>" +
+                  "In risposta a " + replyDest.username + "<small>(#"+ e.reply_to_post_number +")</small>" +
+                  "</a>" +
+                  "</div>"
+              ));
+            }
+          });
+        })
+      });
+
+      // Reset min-height to auto
+      $commentBox.css('min-height', 'auto');
+
+      // If user isn't logged don't show new-comment form
+      if (!Discourse.user.logged()) {
+        var sUrlCookieName = Discourse.name + '_source_url';
+        var authRedirect = location.protocol + '//' + location.hostname + (location.port !== "" ? ':' + location.port : '');
+        var sourceUrl = authRedirect + location.pathname;
+
+        // Create a cookie for stores sourceUrl
+        Discourse.utility._cookie_create(sUrlCookieName, sourceUrl, 10, true);
+
+        // Create popup window
+          window.ppWin = function () {
+          var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
+          var win = window.open(Discourse.authLink(), 'Discourse Authentication', params);
+          return win;
+        };
+
+        var message = 'Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta' +
+                      '<div><a href="#" class="btn btn-success login-button disabled">Login</a></div>';
+        $('form[id^="new-comment-"]').html('<div class="new-comment__login">' + message + '</div>');
+      }
+
+      // Handle login-button click
+      $('.btn.login-button').bind('click', function () {
+        ppWin();
+      });
+
+      // Manage new comment posting
+      $('form[id^="new-comment-"]').bind('submit', function (evt) {
+        evt.preventDefault();
+        var $form = $(this);
+        var $body = $form.find('.new-comment__body');
+        var $errorsBox = $form.find('.new-comment__errors-box');
+        var topic_id = $form.data('topic');
+        var body_value = $body.val();
+
+        if (typeof body_value === 'undefined') {
+          return false;
+        } else {
+          $form.addClass('sending');
+          setTimeout(function () {
+            Discourse.posts.post(body_value)
+              // Success
+              .then(function (results) {
+                $form.removeClass('sending');
+                $body.val('');
+                Discourse.posts.get(topic_id, false).then(function (data) {
+                  // Re-init current modules, to update comments list
+                  module.exports.init(results.data.id, results);
+                });
+              })
+              // Error
+              .catch(function (error) {
+                var errorsString = error.response.data.errors.join('<br>');
+                $form.removeClass('sending');
+                $errorsBox.append(errorsString);
+              });
+          }, 1500);
+        }
+      });
+
+      // Handles min. characters nedeed to post
+      $('textarea.new-comment__body').bind('input', function () {
+        $parent = $(this).parents('form');
+        $req = $parent.find('.required-chars');
+        var currentLength = -20 + $(this).val().replace(/ /g,'').length;
+        if (currentLength < 0) {
+          $req.text(currentLength);
+          $parent.find('input[type="submit"]').attr('disabled', true);
+        } else {
+          $req.text('0');
+          $parent.find('input[type="submit"]').attr('disabled', false);
+        }
+      });
+
+      // Show form elements on focus and hide on blur
+      $('textarea.new-comment__body').bind('focus', function () {
+          $parent = $(this).parents('form');
+
+          $parent.find('.new-comment__buttons').removeClass('d-none');
+          $parent.find('.new-comment__legend').removeClass('d-none');
+          $parent.find('.new-comment__required').removeClass('d-none');
+        })
+        .bind('blur', function () {
+          if ($(this).val() === '') {
+            $parent = $(this).parents('form');
+
+            $parent.find('.new-comment__buttons').addClass('d-none');
+            $parent.find('.new-comment__legend').addClass('d-none');
+            $parent.find('.new-comment__required').addClass('d-none');
+          }
+        });
+
+      // Handle keyCreated event to enable login button.
+      $(window).bind('keyCreated', function () {
+        $('.btn.login-button').removeClass('disabled');
+      });
+
+      // After new post
+      if (postObject !== null && typeof postObject !== "undefined") {
+        var beforeLast = Discourse.posts.postStream[Discourse.posts.postStream.length-(Discourse.posts.postStream.length > 2 ? 2 : 1)];
+        var idTarget = '#reply-to-' + beforeLast.post_number;
+        setTimeout(function () {
+          location.hash = idTarget;
+        }, 500);
+      }
+    }
+  }
+})(jQuery);
+
+},{"./discourse_api":5}],5:[function(require,module,exports){
+var Utility = require('./src/modules/Utility');
+var DConfig = require('./src/modules/DConfig');
+var DCallsManager = require('./src/modules/DCallsManager');
+
+function DiscourseApi() {
+  var that = this;
+
+  // Set config values
+  this.name = null;
+  this.headers = {};
+  this.restUrl = null;
+
+  // Discourse's Calls Manager
+  this.cm = new DCallsManager(this);
+  this.utility = new Utility('docs-italia_pk', 'docs-italia_uak', 10);
+
+  /**
+   * Api object
+   */
+  this.init = function (appName) {
+    that.name = appName;
+    var payload = that.utility.searchParameters('payload');
+    var pay_cookie = that.key.get();
+
+    if (!pay_cookie && payload) {
+      that.utility.decryptPayload(payload);
+      var sourceUrl = that.utility._cookie_read(that.name + '_source_url');
+      if (typeof sourceUrl !== 'undefined') {
+        // Get current user
+        that.user.current();
+        that.user.state('logged', true);
+        window.opener.document.location.href = sourceUrl;
+        window.close();
+      } else {
+        // Remove ?payload get parameter from url
+        window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
+      }
+    } else if (!that.user.logged()) {
+      // Create key
+      that.key.create()
+
+      // Set user state as not logged
+      that.user.state('logged', false);
+    } else {
+      // Get current user
+      that.user.current();
+      // Get csrf token
+      that.user.csrf();
+    }
+  };
+
+  this.authLink = function () {
+    var authRedirect = location.protocol + '//' + location.hostname + (location.port !== "" ? ':' + location.port : '');
+    var data = {
+      application_name: that.name,
+      public_key: that.utility.rsaKey.public,
+      nonce: that.utility.randomBytes(16),
+      client_id: that.utility.randomBytes(32),
+      auth_redirect: authRedirect,
+      scopes: 'write'
+    };
+    return  that.restUrl + '/user-api-key/new?' + that.utility._serializeParams(data);
+  };
+
+  this.key = {
+    get: function () {
+      var key = that.utility._cookie_read(that.utility.uak_cookie_name);
+      if (key !== null && key !== 'false') {
+        var parsedKey = JSON.parse(key).key;
+        that.setHeader('User-Api-Key', parsedKey);
+        return parsedKey;
+      } else {
+        return false;
+      }
+    },
+    create: function () {
+      return that.utility.genRSAKey().then(function () {
+        setTimeout(function () {
+          that.utility.eventCreate('keyCreated', {});
+        }, 1000);
+      });
+    },
+  };
+
+  /**
+   * User
+   * @type {{object: {}, states: {}, get: (function(*): *), current:
+   *     DiscourseApi.user.current, state: DiscourseApi.user.state, logged:
+   *     (function(): (*|*|boolean)), logout: DiscourseApi.user.logout}}
+   */
+  this.user = {
+    object: {},
+    states: {},
+    fields: {},
+    // Get user by username
+    get: function (username) {
+      var callName = 'userGet_' + username;
+      that.cm.call(callName, '/u/$', [username], null, null);
+      that.cm.queue('user', callName);
+    },
+
+    // Get current user's session
+    current: function () {
+      return that.cm.call('userCurrent', '/session/current', null, null, that.getHeaderObject('User-Api-Key')).get().then(function (response) {
+        that.user.object = response.data.current_user;
+        return that.user.object;
+      });
+    },
+
+    // Set/get user's state value
+    state: function (stateName, stateValue) {
+      if (typeof stateValue === "undefined") {
+        return that.user.states[stateName]
+      } else {
+        if (typeof value === "object") {
+          that.user.states[stateName] = stateValue;
+        }
+      }
+    },
+
+    // Return true if user is logged in
+    logged: function () {
+      return that.key.get();
+    },
+
+    // Log out current user
+    logout: function () {
+      var userId = that.user.object.id;
+
+      var headers = that.getHeaders(['X-CSRF-Token', 'User-Api-Key']);
+      that.cm.call('userLogout', '/admin/users/$/log_out', [userId], null, headers).get().then(function () {
+        that.user.state('logged', false);
+        that.utility._cookie_delete('docs-italia_uak');
+        window.location.href = location.href;
+      });
+    },
+
+    // Get CSRF Token
+    csrf: function () {
+      return that.cm.call('csrf', '/session/csrf', null, null, null).get().then (function (response) {
+        that.setHeader('X-CSRF-Token', response);
+        return response;
+      })
+    },
+  };
+
+  this.posts = {
+    postStream: null,
+    topicId: 0,
+    queue: [],
+
+    get: function (topicId, cache) {
+      if (typeof cache === "undefined") {
+        cache = true;
+      }
+
+      return that.cm.call('topicPosts', '/t/$/posts', [topicId], null, null, cache).get().then(function (response) {
+        that.posts.postStream = response.data.post_stream.posts;
+        that.posts.topicId = topicId;
+        // Fetch users' custom fields
+        that.posts.postStream.forEach(function (post) {
+          if (typeof that.user.fields[post.username] === "undefined") {
+            that.user.fields[post.username] = null;
+            that.user.get(post.username)
+          }
+        });
+
+        // Execute created users' fields queue
+        return that.cm.executeQueue('user').then(function (responseQueue) {
+          responseQueue.forEach(function (field) {
+            that.user.fields[field.data.user.username] = field.data.user.user_fields[1];
+          })
+        })
+      })
+    },
+    post: function (raw) {
+      var body = {
+        raw: raw,
+        topic_id: that.posts.topicId,
+        title: 'Post created from docs-italia'
+      };
+
+      return that.cm.call('createPost', '/posts', null, body, that.getHeaderObject('User-Api-Key')).post().then(function (response) {
+        return response;
+      })
+    }
+  };
+};
+
+DiscourseApi.prototype = new DConfig;
+
+module.exports = new DiscourseApi();
+
+
+},{"./src/modules/DCallsManager":7,"./src/modules/DConfig":8,"./src/modules/Utility":9}],6:[function(require,module,exports){
+var axios = require('axios');
 
 /**
- * Api Class to handle/generate Discourse User-Api-Key
+ * DActions - embeds discourse action call
+ * @param endpoint
+ * @constructor
  */
-module.exports = function () {
-  var obj = this;
-  // Private key cookie's name
-  this.pk_cookie_name = 'docs-italia_pk';
-  // User API Key cookie's name
-  this.uak_cookie_name = 'docs-italia_uak';
-  // Expires days (for now: 10 days)
-  this.expires_cookie = 10;
+function DCall(baseUrl, name, endpoint, token, body, headers, cache) {
+  if (endpoint.indexOf('$') >= 0) {
+    var count = 0;
+    var temp = endpoint.split('/').map(function (e, i) {
+      if (e === '$') {
+        var position = count;
+        count++;
+        return token[position];
+      } else {
+        return e;
+      }
+    });
+    endpoint = temp.join('/');
+  }
+  endpoint = baseUrl + endpoint + '.json';
+  this.set(name, endpoint, body, headers, cache);
+  return this;
+}
 
-  this.base_url = 'http://ec2-52-212-9-50.eu-west-1.compute.amazonaws.com';
-  this.user = null;
-  this.session = {
-    csrf: null,
-  };
-  this.rsaKey = null;
-  this.searchParams = null;
+DCall.prototype.set = function (name, endpoint, body, headers, cache) {
+  this.name = name;
+  this.body = body;
+  this.endpoint = endpoint;
+  this.headers = headers;
+  this.cache = cache;
+};
+
+// Execute axios get call
+DCall.prototype.get = function () {
+  if (typeof this.cache === "undefined")
+    this.cache = true;
+
+  return axios.get(this.endpoint, {
+    data: this.body,
+    headers: this.headers,
+  }).then(function (response) {
+    return response;
+  });
+};
+// Execute axios post call
+DCall.prototype.post = function () {
+  return axios({
+    method: 'POST',
+    url: this.endpoint,
+    data: this.body,
+    headers: this.headers
+  });
+};
+
+/**
+ * Static method executeQueue
+ * @param queue
+ * @returns {*}
+ */
+DCall.executeQueue = function (queue) {
+  return axios.all(queue);
+};
+
+DCall.prototype.getResponse = function () {
+  return this.response;
+};
+
+/**
+ * Exports
+ * @type {function(*=, *=, *, *=, *=): DCall}
+ */
+module.exports = DCall;
+},{"axios":25}],7:[function(require,module,exports){
+var DCall = require('./DCall');
+
+function DCallsManager(caller) {
+  this.caller = caller;
+  this.calls = [];
+  this.callsEndpointMap = [];
+  this.callsQueue = [];
+}
+
+DCallsManager.prototype.call = function (name, endpoint, token, body, headers, cache) {
+  this.calls[name] = new DCall(this.caller.restUrl, name, endpoint, token, body, headers, cache);
+  this.callsEndpointMap[endpoint] = name;
+  return this.calls[name];
+};
+
+DCallsManager.prototype.queue = function (group, name) {
+  if (typeof this.callsQueue[group] === "undefined")
+    this.callsQueue[group] = [];
+
+  this.callsQueue[group].push(this.calls[name].get());
+};
+
+DCallsManager.prototype.executeQueue = function (group) {
+  var queue = this.getQueue(group);
+  return DCall.executeQueue(queue);
+};
+
+DCallsManager.prototype.getQueue = function (group) {
+  return this.callsQueue[group];
+};
+
+DCallsManager.prototype.get = function (name) {
+  return this.calls[name];
+};
+
+DCallsManager.prototype.getByEndpoint = function (endpoint) {
+  return this.get(this.callsEndpointMap[endpoint]);
+};
+
+/**
+ * Exports
+ * @type {DCallsManager}
+ */
+module.exports = DCallsManager;
+},{"./DCall":6}],8:[function(require,module,exports){
+function DConfig (restUrl, headers) {
+  this.restUrl = restUrl;
+  this.headers = headers;
+  return this;
+}
+
+DConfig.prototype.setHeader = function (name, value) {
+  var headerValue = {};
+  headerValue[name] = value;
+
+  this.headers[name] = headerValue;
+  return this;
+};
+
+DConfig.prototype.getHeaderObject = function (name) {
+  return this.headers[name];
+};
+
+DConfig.prototype.getHeaderValue = function (name) {
+  return this.headers[name][name];
+};
+
+DConfig.prototype.getHeaders = function (names) {
+  var headers = {};
+  var that = this;
+  names.forEach(function (name) {
+    headers[name] = that.getHeaderValue(name);
+  });
+  return headers;
+};
+/**
+ * Exports
+ * @type {function(*, *): DConfig}
+ */
+module.exports = DConfig;
+},{}],9:[function(require,module,exports){
+var keypair = require('keypair');
+var $ = require('jquery');
+require('jsencrypt');
+
+/**
+ * Utility Class
+ */
+module.exports = function (pk_name, uak_name, expire_days) {
   this.jsenc = new JSEncrypt();
-  this.payload = null;
-  this.popup = null;
-  // Static variable that will contains username => custom_field pairs to avoid multiples requests
-  // and avoid "429 Too Many Requests" discourse's error
-  this.usersFields = {};
+  // Private key cookie's name
+  this.pk_cookie_name = pk_name; // 'docs-italia_pk'
+  // User API Key cookie's name
+  this.uak_cookie_name = uak_name; // 'docs-italia_uak';
+  // Expires days (for now: 10 days)
+  this.expires_cookie = expire_days; // 10;
+
+  /**
+   * Create an event
+   * @param name
+   * @param detail
+   * @returns {CustomEvent<any>}
+   */
+  this.eventCreate = function (name, detail) {
+    var e = new CustomEvent(name, {
+      detail: detail,
+      bubbles: true,
+      cancelable: true
+    });
+    window.dispatchEvent(e);
+    return e;
+  };
 
   // Create cookie
   this._cookie_create = function (key, value, days, overwrite) {
@@ -184,27 +805,32 @@ module.exports = function () {
   // Serialize parameters
   this._serializeParams = function (obj) {
     return Object.keys(obj)
-                 .map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent([obj[k]]) })
-                 .join('&');
+        .map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent([obj[k]]) })
+        .join('&');
   };
   // Generate N random bytes
   this.randomBytes = function (length) {
-	  return Array(length+1).join('x').replace(/x/g, function(c) {
-	    return Math.floor(Math.random()*16).toString(16);
-  	});
+    return Array(length+1).join('x').replace(/x/g, function(c) {
+      return Math.floor(Math.random()*16).toString(16);
+    });
   };
   // Create private/public RSA keys
   this.genRSAKey = function () {
-    this.rsaKey = keypair();
-    // Set public and private keys
-    this.jsenc.setPublicKey(this.rsaKey.public);
-    this.jsenc.setPrivateKey(this.rsaKey.private);
-    // Seve private kay to a cookie
-    this._cookie_create(this.pk_cookie_name, encodeURI(this.rsaKey.private), 1, true);
+    var that = this;
+    return new Promise(function (resolve) {
+      resolve(keypair())
+    }).then(function (rsaKey) {
+      that.rsaKey = rsaKey;
+      // Set public and private keys
+      that.jsenc.setPublicKey(that.rsaKey.public);
+      that.jsenc.setPrivateKey(that.rsaKey.private);
+      // Seve private kay to a cookie
+      that._cookie_create(that.pk_cookie_name, encodeURI(that.rsaKey.private), 1, true);
+    })
   };
   // Get search parameters
   this.searchParameters = function (search) {
-    if (this.searchParams === null)
+    if (this.searchParams === null || typeof this.searchParams === "undefined")
       this.searchParams = new URLSearchParams(window.location.search);
     if (this.searchParams.has(search))
       return this.searchParams.get(search);
@@ -223,392 +849,9 @@ module.exports = function () {
       this._cookie_create(this.uak_cookie_name, this.payload, this.expires_cookie);
     }
   };
-
-  this.userAuthKeyUrl = function () {
-    // Generate public/private RSA keys
-    this.genRSAKey();
-    var authRedirect = location.protocol + '//' + location.hostname + (location.port !== "" ? ':' + location.port : '');
-
-    var data = {
-      application_name: 'docs-italia',
-      public_key: obj.rsaKey.public,
-      nonce: obj.randomBytes(16),
-      client_id: obj.randomBytes(32),
-      auth_redirect: authRedirect,
-      scopes: 'write'
-    };
-
-    return this.base_url + '/user-api-key/new?' + this._serializeParams(data);
-  };
-
-  this.getApiKey = function () {
-    var key = this._cookie_read(this.uak_cookie_name);
-    if (key !== null && key !== 'false') {
-      return JSON.parse(key).key;
-    }
-    return false;
-  };
-
-  this.getCSRF = function () {
-    return axios({
-      url: this.base_url + '/session/csrf.json',
-    }, function (error, response, body ) {
-      if (error === null) {
-        obj.session.csrf = JSON.parse(body).csrf;
-      } else {
-        obj.session.csrf = false;
-      }
-    });
-  };
-
-  // Logout user
-  this.logout = function () {
-    var request = {
-      url: this.base_url + '/admin/users/' + this.user.id + '/log_out',
-      method: 'POST',
-      headers: {
-        'X-CSRF-Token': obj.session.csrf,
-        'User-Api-Key': obj.getApiKey(),
-      }
-    };
-
-    console.log(obj.session.csrf);
-
-    if (obj.session.csrf !== null) {
-      return axios(request);
-    } else {
-      this.getCSRF().then(function (data) {
-        request.headers['X-CSRF-Token'] = data.data.csrf;
-        return axios(request);
-      })
-    }
-  };
-
-  this.userIsLoggedIn = function () {
-    return this.getApiKey() != false;
-  };
-
-  this.createPost = function (tid, body) {
-    return axios({
-      method: 'POST',
-      url: obj.base_url + '/posts.json',
-      data: {
-        title: "Post created from docs-italia",
-        topic_id: tid,
-        raw: body,
-      },
-      headers: {
-        'User-Api-Key': obj.getApiKey(),
-      }
-    });
-  };
-
-  this.getCurrentUser = function () {
-    var endpoint = obj.base_url + '/session/current.json';
-
-    // Set user object
-    return axios({
-      url: endpoint,
-      headers: { 'User-Api-Key': obj.getApiKey(), }
-    }).then(function (results) {
-      obj.user = results.data.current_user;
-      return results;
-    });
-  };
-
-  this.getUserCustomFieldValue = function (username) {
-    var endpoint = obj.base_url + '/u/' + username + '.json';
-
-    return axios({
-      url: endpoint,
-    }).then(function (data) {
-      return data.data.user.user_fields[1];
-    });
-  };
-
-  // Get all topic's posts
-  this.getTopicPosts = function(tid) {
-    return axios({
-      method: 'get',
-      url: obj.base_url + '/t/' + tid + '/posts.json',
-      responseType: 'json'
-    });
-  };
 };
 
-},{"axios":21,"jsencrypt":48,"keypair":49}],4:[function(require,module,exports){
-var Api = require('./discourseApi.js');
-
-module.exports = discourseAuth = {
-  init: function () {
-    var Discourse = new Api();
-    var payload = Discourse.searchParameters('payload');
-    var pay_cookie = Discourse.getApiKey();
-    if (pay_cookie) {
-      // console.log('Already exists payload cookie: ' + pay_cookie);
-    } else {
-      if (payload !== false) {
-        Discourse.decryptPayload(payload);
-        // Get sourceUrl from cookie
-        var surl_cookie_name = 'docs-italia_surl';
-        var sourceUrl = Discourse._cookie_read(surl_cookie_name);
-        Discourse._cookie_delete(surl_cookie_name);
-
-        if (typeof sourceUrl !== 'undefined') {
-          window.opener.document.location.href = sourceUrl;
-          window.close();
-        } else {
-          // Remove ?payload get parameter from url
-          window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
-        }
-      }
-    }
-  }
-}
-
-},{"./discourseApi.js":3}],5:[function(require,module,exports){
-var Api = require('./discourseApi.js');
-var Discourse = new Api();
-
-// Execute init
-// _commentReinit()
-
-// Remaps topic's posts object
-function _remapPosts(posts) {
-  var remappedObject = [];
-  posts.forEach(function (e) {
-    remappedObject[e.post_number] = e;
-  });
-  return remappedObject;
-};
-
-// Create the correct avatarUrl
-function _createAvatarUrl (template, size) {
-  return Discourse.base_url + '/' + template.replace('{size}', size);
-}
-
-// Presets Discourse'base url to matched value.
-function _parseUserRefsReplacer (match) {
-  return Discourse.base_url + match;
-}
-
-// Parse user refers into cooked comment's body
-function _parseUserRefs (text) {
-  return text.replace(/(\/u\/\w+)/gm, _parseUserRefsReplacer);
-}
-
-// Create the comment markup with given topic id and post
-function _createMarkup (tid, post, nPId) {
-  // Id attribute for comment div
-  var commentHTMLId = 'docs-comment-' + tid + '-' + post.id;
-  // Replace the avatar's size from template url
-  var avatarUrl = _createAvatarUrl(post.avatar_template, 45)
-  // Create a javascript Date object starts from post.updated_at date value
-  var date = new Date(post.updated_at);
-  // And formats as dd/mm/YYYY hh:ii
-  date = date.getDate()  + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
-  // Check if current rendering comment is a new one
-  var isNew = false;
-  if (typeof nPId !== "undefined") {
-    isNew = post.id == nPId;
-  }
-
-  // Change user link to points correctly to discourse site user's profile
-  post.cooked = _parseUserRefs(post.cooked);
-
-  // Get user role and then return html for comment
-  return Discourse.getUserCustomFieldValue(post.username).then(function(customField) {
-    // Return markup
-    return "" +
-      "<li id='"+ commentHTMLId + "' class='row mb-5 block-comments__item comment-"+ post.id + (isNew ? ' is-new' : '') + "' data-topic='"+ tid +"' data-comment="+post.id+">" +
-        "<div id='reply-to-"+post.post_number+"'></div>" +
-        "<figure class='col-auto mb-0'>" +
-          "<img class='block-comments__img rounded-circle' src='"+ avatarUrl +"'>" +
-        "</figure>" +
-        "<div class='col'>" +
-          "<div class='row align-items-center justify-content-between' id='comment-heading-1'>" +
-            "<div class='col-auto'>" +
-              "<span class='block-comments__name text-capitalize mb-0'>" + post.username + "</span>" +
-              "<div id='reply-link-"+post.id+"'></div>" +
-            "</div>" +
-            "<div class='col-auto'>" +
-              "<p class='d-inline-block mr-2 block-comments__date mb-0'>" + date + "</p>" +
-              "<button class='block-comments__item-btn collapsed' data-toggle='collapse' data-target='#collapse-"+ post.id +"'><span class='it-icon-collapse'></span><span class='it-icon-expand'></span></button>" +
-            "</div>" +
-          "</div>" +
-          "<p class='text-uppercase block-comments__role'>" + (customField !== null ? customField : 'utente')+ "</p>" +
-          "<div id='collapse-"+ post.id +"' class='block-comments__paragraph pl-3 border-left collapse show' aria-labelledby='comment-heading-1'>" + post.cooked + "</div>" +
-        "</div>" +
-      "</li>";
-  });
-}
-
-module.exports = discourseComments = (function ($) {
-  return {
-    init: function (newPostId, postObject) {
-      // Obtains all comments boxes
-      var $commentBox = $('ul.block-comments__list.items');
-      var topicId = $commentBox.data('topic');
-
-      // Check if user is logged in
-      if (!Discourse.userIsLoggedIn())
-      // Before flush set fixed height, to avoid blink
-      $commentBox.css('min-height', $commentBox.height() + 'px');
-      // Flush commentBox
-      $commentBox.html('');
-      // Set required characters
-      $('form[id^="new-comment-"] .required-chars').text('-20');
-
-      // Set comment-write-box user picture
-      if (Discourse.userIsLoggedIn()) {
-        Discourse.getCurrentUser().then(function () {
-          $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.avatar_template, 45));
-        });
-      }
-
-      // Foreach get comments from discourse
-      $commentBox.each(function (idx, cB) {
-        var topicId = $(cB).data('topic');
-        var topicPosts = {};
-
-        // Get all posts for given topic id
-        Discourse.getTopicPosts(topicId).then(function (results) {
-          // Get data from axios' response.
-          results = results.data;
-
-          topicPosts = _remapPosts(results.post_stream.posts);
-          // Loop through posts
-          topicPosts.forEach(function (e, idx) {
-            //if (typeof Discourse.usersFields[e.username] !== "undefined")
-            // Append markup with comment to the comments box
-            _createMarkup(topicId, e, newPostId).then(function (html) {
-              $commentBox.append(html);
-            });
-            // Check if current comment is a reply to another
-            if (e.reply_to_post_number !== null) {
-              // Get the reply's target
-              var replyDest = topicPosts[e.reply_to_post_number];
-              // Create link to reply's target
-              $('#reply-link-' + e.id).append($(
-                "<div>" +
-                  "<a class='reply-to-post' href='#reply-to-" + e.reply_to_post_number + "'>" +
-                    "In risposta a " + replyDest.username + "<small>(#"+ e.reply_to_post_number +")</small>" +
-                  "</a>" +
-                "</div>"
-              ));
-            }
-          })
-        });
-      });
-
-      // Reset min-height to auto
-      $commentBox.css('min-height', 'auto');
-
-      // If user isn't logged don't show new-comment form
-      if (!Discourse.userIsLoggedIn()) {
-        var sUrlCookieName = 'docs-italia_surl';
-        var authRedirect = location.protocol + '//' + location.hostname + (location.port !== "" ? ':' + location.port : '');
-        var sourceUrl = authRedirect + location.pathname;
-
-        // Create a cookie for stores sourceUrl
-        Discourse._cookie_create(sUrlCookieName, sourceUrl, 10, true);
-
-        // Create popup window
-        window.ppWin = function () {
-          var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
-          var win = window.open(Discourse.userAuthKeyUrl(), 'Discourse Authentication', params);
-          return win;
-        };
-
-        var message = 'Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta' +
-                      // '<div> <a href="' + Discourse.userAuthKeyUrl() + '" class="btn btn-success">Login</a>';
-                      '<div><a href="#" class="btn btn-success login-button">Login</a></div>';
-        $('form[id^="new-comment-"]').html('<div class="new-comment__login">' + message + '</div>');
-      }
-
-      // Handle login-button click
-      $('.btn.login-button').bind('click', function () {
-        ppWin();
-      })
-
-      // Manage new comment posting
-      $('form[id^="new-comment-"]').bind('submit', function (evt) {
-        evt.preventDefault();
-        var $form = $(this);
-        var $body = $form.find('.new-comment__body');
-        var $errorsBox = $form.find('.new-comment__errors-box');
-        var topic_id = $form.data('topic');
-        var body_value = $body.val();
-
-        if (typeof body_value === 'undefined') {
-          return false;
-        } else {
-          $form.addClass('sending');
-          setTimeout(function () {
-            Discourse.createPost(topic_id, body_value)
-              // Success
-              .then(function (results) {
-                $form.removeClass('sending');
-                $body.val('');
-                // Re-init current modules, to update comments list
-                module.exports.init(results.data.id, results);
-              }, 1500)
-              // Error
-              .catch(function (error) {
-                var errorsString = error.response.data.errors.join('<br>');
-                $form.removeClass('sending');
-                $errorsBox.append(errorsString);
-              });
-          })
-        }
-
-      });
-      // Handles min. characters nedeed to post
-      $('textarea.new-comment__body').bind('input', function () {
-        $parent = $(this).parents('form');
-        $req = $parent.find('.required-chars');
-        var currentLength = -20 + $(this).val().replace(/ /g,'').length;
-        if (currentLength < 0) {
-          $req.text(currentLength);
-          $parent.find('input[type="submit"]').attr('disabled', true);
-        } else {
-          $req.text('0');
-          $parent.find('input[type="submit"]').attr('disabled', false);
-        }
-      });
-      // Show form elements on focus and hide on blur
-      $('textarea.new-comment__body')
-        .bind('focus', function () {
-          $parent = $(this).parents('form');
-
-          $parent.find('.new-comment__buttons').removeClass('d-none');
-          $parent.find('.new-comment__legend').removeClass('d-none');
-          $parent.find('.new-comment__required').removeClass('d-none');
-        })
-        .bind('blur', function () {
-          if ($(this).val() === '') {
-            $parent = $(this).parents('form');
-
-            $parent.find('.new-comment__buttons').addClass('d-none');
-            $parent.find('.new-comment__legend').addClass('d-none');
-            $parent.find('.new-comment__required').addClass('d-none');
-          }
-        })
-
-      // Logout icon click
-      $('#logout-modal__submit').bind('click', function (evt) {
-        evt.preventDefault();
-
-        Discourse.logout();
-        Discourse._cookie_delete('docs-italia_pk');
-        Discourse._cookie_delete('docs-italia_uak');
-        location.href = location.href;
-      });
-    }
-  }
-})(jQuery);
-
-},{"./discourseApi.js":3}],6:[function(require,module,exports){
+},{"jquery":51,"jsencrypt":52,"keypair":53}],10:[function(require,module,exports){
 // Get glossary terms
 module.exports = themeGlossary = (function ($) {
   var that;
@@ -650,7 +893,7 @@ module.exports = themeGlossary = (function ($) {
 
 })(jQuery);
 
-},{}],7:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 // Get glossary terms
 module.exports = themeGlossaryPage = (function ($) {
   var that;
@@ -748,7 +991,7 @@ module.exports = themeGlossaryPage = (function ($) {
 
 })(jQuery);
 
-},{}],8:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 (function (global){
 global.$ = global.jQuery = require('jquery');
 global.Popper = require('popper.js');
@@ -789,8 +1032,9 @@ $(document).ready(function() {
   themeNote.init();
   themeAdmonitionToggle.init();
   themeCopyToClipboard.init();
-  discourseAuth.init();
-  discourseComments.init();
+  discourseAuth.init().then(function () {
+    discourseComments.init();
+  })
   themeSidebarNav.init();
   themeGlossaryPage.init();
   themeCopyToClipboard.init();
@@ -809,7 +1053,7 @@ $(document).ready(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":2,"./discourseAuth.js":4,"./discourseComments.js":5,"./get_glossary.js":6,"./glossary_page.js":7,"./markup_modifier.js":9,"./note.js":10,"./offcanvas_feature.js":11,"./scroll_progressbar.js":12,"./scrollspy.js":13,"./searchbox_collapse.js":14,"./section_navigation.js":15,"./sidebar_nav.js":16,"./sticky_header.js":17,"./sticky_sidebar.js":18,"./theme_translate.js":19,"./tooltip.js":20,"bootstrap-italia":"bootstrap-italia","jquery":47,"modernizr":"modernizr","popper.js":50,"stickybits":52}],9:[function(require,module,exports){
+},{"./admonition_toggle.js":1,"./copy_to_clipboard.js":2,"./discourseAuth.js":3,"./discourseComments.js":4,"./get_glossary.js":10,"./glossary_page.js":11,"./markup_modifier.js":13,"./note.js":14,"./offcanvas_feature.js":15,"./scroll_progressbar.js":16,"./scrollspy.js":17,"./searchbox_collapse.js":18,"./section_navigation.js":19,"./sidebar_nav.js":20,"./sticky_header.js":21,"./sticky_sidebar.js":22,"./theme_translate.js":23,"./tooltip.js":24,"bootstrap-italia":"bootstrap-italia","jquery":51,"modernizr":"modernizr","popper.js":54,"stickybits":56}],13:[function(require,module,exports){
 // Modify DOM via JS.
 module.exports = themeMarkupModifier = (function ($) {
   var that;
@@ -1018,7 +1262,7 @@ module.exports = themeMarkupModifier = (function ($) {
   }
 })(jQuery);
 
-},{}],10:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 // Notes
 module.exports = themeNote = (function ($) {
   var that;
@@ -1080,7 +1324,7 @@ module.exports = themeNote = (function ($) {
   }
 })(jQuery);
 
-},{}],11:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 // Offcanvas feature
 module.exports = themeOffcanvasFeature = (function ($) {
 
@@ -1098,7 +1342,7 @@ module.exports = themeOffcanvasFeature = (function ($) {
 
 })(jQuery);
 
-},{}],12:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 // Admonition toggle
 module.exports = themeScrollProgressBar = (function ($) {
 
@@ -1118,7 +1362,7 @@ module.exports = themeScrollProgressBar = (function ($) {
 
 })(jQuery);
 
-},{}],13:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 // Sidebar nav
 module.exports = themeScrollspy = (function ($) {
   var that;
@@ -1177,7 +1421,7 @@ module.exports = themeScrollspy = (function ($) {
 
 })(jQuery);
 
-},{}],14:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 // Sticky sidebar
 module.exports = themeSearchboxCollapse = (function ($) {
 
@@ -1205,7 +1449,7 @@ module.exports = themeSearchboxCollapse = (function ($) {
   }
 })(jQuery);
 
-},{}],15:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 // Section navigation
 module.exports = themeSectionNav = (function ($) {
   var that;
@@ -1357,7 +1601,7 @@ module.exports = themeSectionNav = (function ($) {
   }
 })(jQuery);
 
-},{}],16:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 // Sidebar nav
 module.exports = themeSidebarNav = (function ($) {
   var that;
@@ -1472,7 +1716,7 @@ module.exports = themeSidebarNav = (function ($) {
 
 })(jQuery);
 
-},{}],17:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 // Sticky header
 module.exports = themeStickyHeader = (function ($, stickybits) {
 
@@ -1484,7 +1728,7 @@ module.exports = themeStickyHeader = (function ($, stickybits) {
 
 })(jQuery, stickybits);
 
-},{}],18:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 // Sticky sidebar
 module.exports = themeStickySidebar = (function ($) {
 
@@ -1508,7 +1752,7 @@ module.exports = themeStickySidebar = (function ($) {
   }
 })(jQuery);
 
-},{}],19:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 // Theme l10n
 module.exports = themeTranslate = (function ($) {
   var that;
@@ -1536,7 +1780,7 @@ module.exports = themeTranslate = (function ($) {
 
 })(jQuery);
 
-},{}],20:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 // Tooltips
 module.exports = themeToolTip = (function ($) {
   var that;
@@ -1755,9 +1999,9 @@ module.exports = themeToolTip = (function ($) {
   }
 })(jQuery);
 
-},{}],21:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":23}],22:[function(require,module,exports){
+},{"./lib/axios":27}],26:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1941,7 +2185,7 @@ module.exports = function xhrAdapter(config) {
 };
 
 }).call(this,require('_process'))
-},{"../core/createError":29,"./../core/settle":32,"./../helpers/btoa":36,"./../helpers/buildURL":37,"./../helpers/cookies":39,"./../helpers/isURLSameOrigin":41,"./../helpers/parseHeaders":43,"./../utils":45,"_process":51}],23:[function(require,module,exports){
+},{"../core/createError":33,"./../core/settle":36,"./../helpers/btoa":40,"./../helpers/buildURL":41,"./../helpers/cookies":43,"./../helpers/isURLSameOrigin":45,"./../helpers/parseHeaders":47,"./../utils":49,"_process":55}],27:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -1995,7 +2239,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":24,"./cancel/CancelToken":25,"./cancel/isCancel":26,"./core/Axios":27,"./defaults":34,"./helpers/bind":35,"./helpers/spread":44,"./utils":45}],24:[function(require,module,exports){
+},{"./cancel/Cancel":28,"./cancel/CancelToken":29,"./cancel/isCancel":30,"./core/Axios":31,"./defaults":38,"./helpers/bind":39,"./helpers/spread":48,"./utils":49}],28:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2016,7 +2260,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],25:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -2075,14 +2319,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":24}],26:[function(require,module,exports){
+},{"./Cancel":28}],30:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],27:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 var defaults = require('./../defaults');
@@ -2163,7 +2407,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"./../defaults":34,"./../utils":45,"./InterceptorManager":28,"./dispatchRequest":30}],28:[function(require,module,exports){
+},{"./../defaults":38,"./../utils":49,"./InterceptorManager":32,"./dispatchRequest":34}],32:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2217,7 +2461,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":45}],29:[function(require,module,exports){
+},{"./../utils":49}],33:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -2237,7 +2481,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":31}],30:[function(require,module,exports){
+},{"./enhanceError":35}],34:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2325,7 +2569,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/isCancel":26,"../defaults":34,"./../helpers/combineURLs":38,"./../helpers/isAbsoluteURL":40,"./../utils":45,"./transformData":33}],31:[function(require,module,exports){
+},{"../cancel/isCancel":30,"../defaults":38,"./../helpers/combineURLs":42,"./../helpers/isAbsoluteURL":44,"./../utils":49,"./transformData":37}],35:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2348,7 +2592,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],32:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -2376,7 +2620,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":29}],33:[function(require,module,exports){
+},{"./createError":33}],37:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2398,7 +2642,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../utils":45}],34:[function(require,module,exports){
+},{"./../utils":49}],38:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2498,7 +2742,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this,require('_process'))
-},{"./adapters/http":22,"./adapters/xhr":22,"./helpers/normalizeHeaderName":42,"./utils":45,"_process":51}],35:[function(require,module,exports){
+},{"./adapters/http":26,"./adapters/xhr":26,"./helpers/normalizeHeaderName":46,"./utils":49,"_process":55}],39:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -2511,7 +2755,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],36:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 'use strict';
 
 // btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
@@ -2549,7 +2793,7 @@ function btoa(input) {
 
 module.exports = btoa;
 
-},{}],37:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2617,7 +2861,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":45}],38:[function(require,module,exports){
+},{"./../utils":49}],42:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2633,7 +2877,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],39:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2688,7 +2932,7 @@ module.exports = (
   })()
 );
 
-},{"./../utils":45}],40:[function(require,module,exports){
+},{"./../utils":49}],44:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2704,7 +2948,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],41:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2774,7 +3018,7 @@ module.exports = (
   })()
 );
 
-},{"./../utils":45}],42:[function(require,module,exports){
+},{"./../utils":49}],46:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -2788,7 +3032,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":45}],43:[function(require,module,exports){
+},{"../utils":49}],47:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -2843,7 +3087,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":45}],44:[function(require,module,exports){
+},{"./../utils":49}],48:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2872,7 +3116,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],45:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -3177,7 +3421,7 @@ module.exports = {
   trim: trim
 };
 
-},{"./helpers/bind":35,"is-buffer":46}],46:[function(require,module,exports){
+},{"./helpers/bind":39,"is-buffer":50}],50:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -3200,7 +3444,7 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],47:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -13566,7 +13810,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],48:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -18938,7 +19182,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{}],49:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 (function (process,setImmediate){
 var forge = {};
 var aes = forge.aes = {};
@@ -23396,7 +23640,7 @@ pki.privateKeyToPem = function(key, maxline) {
 };
 
 }).call(this,require('_process'),require("timers").setImmediate)
-},{"_process":51,"timers":53}],50:[function(require,module,exports){
+},{"_process":55,"timers":57}],54:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -25940,7 +26184,7 @@ return Popper;
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],51:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -26126,7 +26370,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],52:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 /**
   stickybits - Stickybits is a lightweight alternative to `position: sticky` polyfills
   @version v3.5.3
@@ -26581,7 +26825,7 @@ process.umask = function() { return 0; };
 
 })));
 
-},{}],53:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -26660,7 +26904,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":51,"timers":53}],"bootstrap-italia":[function(require,module,exports){
+},{"process/browser.js":55,"timers":57}],"bootstrap-italia":[function(require,module,exports){
 /*!
  * Bootstrap Italia v0.10.3
  * Copyright 2018
@@ -26689,4 +26933,4 @@ var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function
 /*! modernizr 3.6.0 (Custom Build) | MIT *
  * https://modernizr.com/download/?-touchevents-setclasses !*/
 !function(e,n,t){function o(e,n){return typeof e===n}function s(){var e,n,t,s,a,i,r;for(var l in f)if(f.hasOwnProperty(l)){if(e=[],n=f[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(s=o(n.fn,"function")?n.fn():n.fn,a=0;a<e.length;a++)i=e[a],r=i.split("."),1===r.length?Modernizr[r[0]]=s:(!Modernizr[r[0]]||Modernizr[r[0]]instanceof Boolean||(Modernizr[r[0]]=new Boolean(Modernizr[r[0]])),Modernizr[r[0]][r[1]]=s),d.push((s?"":"no-")+r.join("-"))}}function a(e){var n=u.className,t=Modernizr._config.classPrefix||"";if(p&&(n=n.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(o,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),p?u.className.baseVal=n:u.className=n)}function i(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):p?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function r(){var e=n.body;return e||(e=i(p?"svg":"body"),e.fake=!0),e}function l(e,t,o,s){var a,l,f,c,d="modernizr",p=i("div"),h=r();if(parseInt(o,10))for(;o--;)f=i("div"),f.id=s?s[o]:d+(o+1),p.appendChild(f);return a=i("style"),a.type="text/css",a.id="s"+d,(h.fake?h:p).appendChild(a),h.appendChild(p),a.styleSheet?a.styleSheet.cssText=e:a.appendChild(n.createTextNode(e)),p.id=d,h.fake&&(h.style.background="",h.style.overflow="hidden",c=u.style.overflow,u.style.overflow="hidden",u.appendChild(h)),l=t(p,e),h.fake?(h.parentNode.removeChild(h),u.style.overflow=c,u.offsetHeight):p.parentNode.removeChild(p),!!l}var f=[],c={_version:"3.6.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){f.push({name:e,fn:n,options:t})},addAsyncTest:function(e){f.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=c,Modernizr=new Modernizr;var d=[],u=n.documentElement,p="svg"===u.nodeName.toLowerCase(),h=c._config.usePrefixes?" -webkit- -moz- -o- -ms- ".split(" "):["",""];c._prefixes=h;var m=c.testStyles=l;Modernizr.addTest("touchevents",function(){var t;if("ontouchstart"in e||e.DocumentTouch&&n instanceof DocumentTouch)t=!0;else{var o=["@media (",h.join("touch-enabled),("),"heartz",")","{#modernizr{top:9px;position:absolute}}"].join("");m(o,function(e){t=9===e.offsetTop})}return t}),s(),a(d),delete c.addTest,delete c.addAsyncTest;for(var v=0;v<Modernizr._q.length;v++)Modernizr._q[v]();e.Modernizr=Modernizr}(window,document);
-},{}]},{},[8]);
+},{}]},{},[12]);
