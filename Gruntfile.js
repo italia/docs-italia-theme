@@ -32,13 +32,19 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'node_modules/bootstrap-italia/src/icons/font',
-          src: ['**'], 
+          src: ['**'],
           dest: 'docs_italia_theme/static/font'
         },
         {
           expand: true,
+          cwd: 'js/templates',
+          src: ['**'],
+          dest: 'docs_italia_theme/static/templates'
+        },
+        {
+          expand: true,
           cwd: 'node_modules/bootstrap-italia/src/icons/css',
-          src: 'italia-icon-font.css', 
+          src: 'italia-icon-font.css',
           dest: 'docs_italia_theme/static/css'
         }],
       },
@@ -184,6 +190,11 @@ module.exports = function(grunt) {
       sphinx: {
         files: ['docs_italia_theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
         tasks: ['clean:build', 'exec:build_sphinx']
+      },
+      /* Mustache's template files */
+      mustache: {
+        files: ['js/templates/**/*'],
+        tasks: ['copy']
       },
       /* JavaScript */
       browserify: {

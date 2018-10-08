@@ -45,6 +45,7 @@
     "husky": "^1.0.0-rc.6",
     "matchdep": "^2.0.0",
     "modernizr": "^3.6.0",
+    "mustache": "^3.0.0",
     "pixrem": "^4.0.1",
     "resize-sensor": "0.0.6",
     "sticky-sidebar": "^3.3.1",
