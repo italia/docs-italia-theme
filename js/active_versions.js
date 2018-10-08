@@ -37,7 +37,7 @@ module.exports = activeVersions = (function ($) {
         (version.active == true && version.built == true)
           && activeVersions.push({
             name: version.verbose_name,
-            url: that.$projectBaseUrl + version.slug
+            url: that.$projectBaseUrl + version.slug + '/'
           });
           return activeVersions
       }, []);
