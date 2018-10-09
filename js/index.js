@@ -58,7 +58,7 @@ window.onload = function() {
   var $commentBox = $('ul.block-comments__list.items');
   var topicId = $commentBox.first().data('topic');
   if (typeof topicId !== "undefined") {
-    discourseAuth.init().then(function() {
+    discourseAuth.init(topicId).then(function() {
       discourseComments.init();
     });
   }
