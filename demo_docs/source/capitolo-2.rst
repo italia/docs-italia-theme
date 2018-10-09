@@ -401,9 +401,19 @@ incididunt ut labore et dolore magna aliqua. **Ut enim ad minim veniam, quis
 nostrud exercitation** :term:`ullamco` **laboris nisi ut aliquip ex ea commodo
 consequat**.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+.. highlight:: js
+
+Duis aute irure dolor in reprehenderit in ``voluptate`` velit esse cillum dolore eu
 fugiat nulla pariatur. Excepteur `sint occaecat cupidatat`_ non proident, sunt
-in culpa qui officia deserunt mollit anim id est laborum.
+in culpa qui officia deserunt mollit anim id est laborum::
+
+   function map(array, transform) {
+      let mapped = [];
+      for (let element of array) {
+         mapped.push(transform(element));
+      }
+      return mapped;
+   }
 
 Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, **consectetur,
 adipisci velit, sed quia non numquam eius modi tempora incidunt** ut labore et

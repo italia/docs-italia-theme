@@ -582,6 +582,11 @@
 
 .highlight {
   padding: 1rem;
+  margin-bottom: 1em;
+
+  pre {
+    margin: 0;
+  }
 
   .highlighttable & {
     padding: 0;
@@ -590,4 +595,9 @@
   .code & {
     background: none;
   }
+}
+
+code .pre {
+  background-color: #efc;
+  padding: 0.2rem;
 }
