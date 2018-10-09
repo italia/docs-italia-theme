@@ -31,9 +31,11 @@
           <div id="rst-menu">
             <div class="dropdown" id="version-list">
                 <button class="btn btn-primary dropdown-toggle badge badge-pill bg-primary" type="button" id="dropdownVersionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{ current_version }}
+                  <span class="current-version">{{ current_version }}</span>
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownVersionButton"></div>
+                <div class="dropdown-menu" aria-labelledby="dropdownVersionButton">
+                  <div class="version-list-wrapper"></div>
+                </div>
             </div>
           </div>
         </div>

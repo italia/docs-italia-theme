@@ -4,7 +4,7 @@ module.exports = activeVersions = (function ($) {
 
   return {
     $: {
-      $versionList: $('#version-list').find('.dropdown-menu'),
+      $versionList: $('#version-list').find('.version-list-wrapper'),
       $apiBaseUrl: '/docsitalia/api/document/',
       $activeVerionsEndpoint: READTHEDOCS_DATA.project + '/active_versions/',
       $activeVersions: [],
