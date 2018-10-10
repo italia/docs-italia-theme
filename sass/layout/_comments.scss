@@ -203,7 +203,21 @@ li[id^="docs-comment-"] {
 }
 
 .new-comment {
+  &__login {
+    border: 1px solid $lightgrey-a2;
+    border-radius: 5px;
+    padding: 1em;
+  }
+
   &__legend {
     font-size: $comment_font_size - 2;
+  }
+
+  &__user-image {
+    &--anonymous {
+      background-color: $lightgrey-a1;
+      height: 56px;
+      width: 56px;
+    }
   }
 }

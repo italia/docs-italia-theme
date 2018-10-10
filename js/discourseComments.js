@@ -160,13 +160,12 @@ module.exports = discourseComments = (function ($) {
           return win;
         };
 
-        var message = 'Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta' +
-                      '<div><a href="#" class="btn btn-success login-button disabled">Login</a></div>';
+        var message = '<div><a href="#" class="login-button disabled">Accedi al Forum</a> per commentare</div>';
         $('form[id^="new-comment-"]').html('<div class="new-comment__login">' + message + '</div>');
       }
 
       // Handle login-button click
-      $('.btn.login-button').bind('click', function () {
+      $('.login-button').bind('click', function () {
         ppWin();
       });
 
