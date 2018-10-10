@@ -47,7 +47,7 @@ module.exports = themeSectionNav = (function ($) {
           "<div class='chapter-nav__title'>" + title + "</div>" +
           "<ul class='chapter-nav__list'>" +
           "<li class='chapter-nav__item'>" +
-          "<span class='Icon docs-icon-link'></span>" +
+          "<i class='it-link mr-2 align-middle'></i>" +
           "<button type='button' class='chapter-link'>" + themeTranslate.getTranslation().copyLink + "</button></li>" +
           // "<li class='chapter-nav__item'>" +
           // "<span class='Icon it-icon-compare'></span>" +
