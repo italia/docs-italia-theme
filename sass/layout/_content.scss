@@ -576,7 +576,6 @@
     background: $sky-blue;
     display: inline-block;
     font-weight: bold;
-    padding: 0.6rem;
   }
 }
 
@@ -598,6 +597,6 @@
 }
 
 code .pre {
-  background-color: #efc;
+  background-color: $light-green;
   padding: 0.2rem;
 }
