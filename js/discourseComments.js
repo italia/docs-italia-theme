@@ -66,7 +66,7 @@ function _createMarkup (tid, post, nPId) {
       "<div class='col'>" +
         "<div class='row align-items-center justify-content-between' id='comment-heading-1'>" +
           "<div class='col-auto'>" +
-            "<span class='block-comments__name text-capitalize mb-0'>" + post.username + "</span>" +
+            "<span class='block-comments__name text-capitalize mb-0'>" + (post.name !== '' ? post.name: post.username) + "</span>" +
             "<div id='reply-link-"+post.id+"'></div>" +
           "</div>" +
           "<div class='col-auto'>" +

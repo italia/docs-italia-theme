@@ -1,3 +1,7 @@
+$comment_font_size: 14px;
+$comment_line_height: 21px;
+$letter_spacing: 0.88px;
+
 .block-comments {
   margin-top: 2rem;
   margin-bottom: 0.25rem;
@@ -17,7 +21,7 @@
 }
 
 .block-comments__img {
-  width: 55px;
+  width: 56px;
 }
 
 .block-comments__logout-link {
@@ -133,11 +137,16 @@
 
 .block-comments__date,
 .block-comments__role {
-  font-size: 0.8rem;
+  font-size: $comment_font_size;
+  line-height: $comment_line_height;
+}
+.block-comments__role {
+  letter-spacing: $letter_spacing;
 }
 
 .block-comments__paragraph {
-  font-size: 0.9rem;
+  font-size: $comment_font_size;
+  line-height: $comment_line_height;
 
   a {
     text-decoration: underline;
