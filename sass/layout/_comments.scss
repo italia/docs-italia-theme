@@ -52,6 +52,8 @@ $letter_spacing: 0.88px;
 }
 
 .block-comments__input {
+  margin-bottom: 1em !important;
+
   &:hover {
     .block-comments__logout-link {
       display: block;
@@ -140,6 +142,7 @@ $letter_spacing: 0.88px;
   font-size: $comment_font_size;
   line-height: $comment_line_height;
 }
+
 .block-comments__role {
   letter-spacing: $letter_spacing;
 }
@@ -175,7 +178,7 @@ form[id^="new-comment-"] {
     position: absolute;
     background: white;
     width: 100%;
-    height: 100%;
+    height: 102%;
     left: 0;
     top: 0;
   }
@@ -193,5 +196,14 @@ form[id^="new-comment-"] {
 li[id^="docs-comment-"] {
   &.is-new {
     background: lightyellow;
+    padding-top: 0.5em;
+    border-radius: 5px;
+    box-shadow: 0 0 10px lightblue;
+  }
+}
+
+.new-comment {
+  &__legend {
+    font-size: $comment_font_size - 2;
   }
 }

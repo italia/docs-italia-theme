@@ -103,11 +103,11 @@ def add_yaml_data(app, pagename, templatename, context, doctree):
     else:
         language = app.site_data['default_language']
     context['t'] = app.site_data['data']['l10n'][language]['t']
-    
+
     # Run only for local development
     if os.environ.get('READTHEDOCS', None) != 'True':
         context['LOCAL'] = True
-        
+
         try:
             with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
                 data = document_settings.read()
@@ -123,7 +123,7 @@ def add_yaml_data(app, pagename, templatename, context, doctree):
             ('demo', '#'),
             ('docs italia', '#')
         ]
-    
+
     if 'docsitalia_data' in context:
         context['docstitle'] = context['docsitalia_data']['document']['name']
 
@@ -356,12 +356,10 @@ class DiscourseCommentsDirective(Directive):
                     <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-collapsed0" aria-expanded="true"><span class="it-icon-plus"></span><span class="it-icon-minus"></span></button>
                 </div>
             </div>
-
             <div class="block-comments__body collapse show" data-parent="#accordion-comments" id="comments-collapsed0" style="">
                 <!-- Input row -->
                 <div class="row align-items-center mt-4 mb-4 block-comments__input">
                     """ + form_template + """
-                    <div class='section' id='docs-comments-box-"""+ options['topic_id'] +"""' data-topic='"""+ options['topic_id'] +"""'></div>
                 </div>
                 <div class="row">
                     <div class="block-comments__list col">

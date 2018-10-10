@@ -44,11 +44,17 @@ function _createMarkup (tid, post, nPId) {
   // Create a javascript Date object starts from post.updated_at date value
   var date = new Date(post.updated_at);
   // And formats as dd/mm/YYYY hh:ii
-  date = date.getDate()  + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+  date = date.getDate()  + ' ' + (date.toLocaleString("it-IT", { month: "short" })) + ' ' + date.getFullYear() + ", " + date.getHours() + ":" + date.getMinutes();
   // Check if current rendering comment is a new one
   var isNew = false;
   if (typeof nPId !== "undefined") {
     isNew = post.id == nPId;
+  }
+  if (isNew) {
+    // Remove is-new after 5s
+    setTimeout(function () {
+      $('#' + commentHTMLId).removeClass('is-new');
+    }, 5000);
   }
 
   // Change user link to points correctly to discourse site user's profile
@@ -79,8 +85,6 @@ function _createMarkup (tid, post, nPId) {
       "</div>" +
     "</li>");
   });
-
-  return markup;
 }
 
 module.exports = discourseComments = (function ($) {

@@ -47,6 +47,8 @@ img {
 }
 
 body.loading {
+  overflow: hidden;
+
   &::after {
     position: absolute;
     background: $blue;
