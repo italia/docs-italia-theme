@@ -1,4 +1,12 @@
 var axios = require('axios');
+var cache = require('axios-extensions');
+
+// enhance the original axios adapter with throttle and cache enhancer
+var http = axios.create({
+  baseURL: '/',
+  headers: { 'Cache-Control': 'no-cache' },
+  adapter: cache.throttleAdapterEnhancer(cache.cacheAdapterEnhancer(axios.defaults.adapter, { threshold: 5 * 1000 }))
+});
 
 /**
  * DActions - embeds discourse action call
@@ -46,9 +54,10 @@ DCall.prototype.get = function () {
   if (typeof this.cache === "undefined")
     this.cache = true;
 
-  return axios.get(this.endpoint, {
+  return http.get(this.endpoint, {
     data: this.body,
-    headers: this.headers,
+    cache: this.cache,
+    headers: this.headers
   }).then(function (response) {
     return response;
   });
@@ -70,7 +79,7 @@ DCall.prototype.post = function () {
  */
 DCall.executeQueue = function (queue) {
   return axios.all(queue);
-};
+  };
 
 DCall.prototype.getResponse = function () {
   return this.response;
