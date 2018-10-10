@@ -79,8 +79,6 @@ function _createMarkup (tid, post, nPId) {
       "</div>" +
     "</li>");
   });
-
-  return markup;
 }
 
 module.exports = discourseComments = (function ($) {
