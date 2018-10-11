@@ -66,9 +66,6 @@ module.exports = discourseComments = (function ($) {
       // Obtains all comments boxes
       var $commentBox = $('ul.block-comments__list.items');
       var topicId = $commentBox.data('topic');
-
-      // Check if user is logged in
-      // if (!Discourse.userIsLoggedIn())
       // Before flush set fixed height, to avoid blink
       $commentBox.css('min-height', $commentBox.height() + 'px');
       // Flush commentBox
@@ -101,9 +98,7 @@ module.exports = discourseComments = (function ($) {
             // Get the reply's target
             var replyDest = topicPosts[e.reply_to_post_number];
             // Create link to reply's target
-            var rendered = $tpl({
-              post: e, replyDest: replyDest
-            }, 'discourse__reply-link');
+            var rendered = $tpl({ post: e, replyDest: replyDest }, 'discourse__reply-link');
             // Append markup
             $('#reply-link-' + e.id).append(rendered);
           }

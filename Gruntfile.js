@@ -239,7 +239,7 @@ module.exports = function(grunt) {
     'uglify',
     'exec:build_sphinx'
   ]);
-
+  
   grunt.registerTask('release', [
     'clean:build',
     'stylelint:build',
