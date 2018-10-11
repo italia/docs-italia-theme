@@ -1,4 +1,4 @@
-var $tpl = require('./getTpl')
+var $tpl = require('./getTpl');
 
 // Get glossary terms
 module.exports = themeGlossaryPage = (function ($) {
