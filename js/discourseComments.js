@@ -1,5 +1,5 @@
 var Discourse = require('./discourse_api');
-var Mustache = require('mustache');
+var $tpl = require('./getTpl');
 
 // Remaps topic's posts object
 function _remapPosts(posts) {
@@ -40,25 +40,24 @@ function _parseUserRefs (text) {
 function _createMarkup (target, tid, post, nPId) {
   // Create a javascript Date object starts from post.updated_at date value
   var d = new Date(post.updated_at);
-  $.get('./_static/templates/discourse/comment-box.mst.html', function(template) {
-    // Change user link to points correctly to discourse site user's profile
-    post.cooked = _parseUserRefs(post.cooked);
-    var rendered = Mustache.render(template, {
-      post: post,
-      tid: tid,
-      // Get user role and then return html for comment
-      customField: typeof Discourse.user.fields[post.username] === "undefined" ? 'utente' : Discourse.user.fields[post.username],
-      // Id attribute for comment div
-      commentHTMLId: 'docs-comment-' + tid + '-' + post.id,
-      // Replace the avatar's size from template url
-      avatarUrl: _createAvatarUrl(post.avatar_template, 110),
-      // And formats as dd/mm/YYYY hh:ii
-      date: d.getDate()  + "/" + (d.getMonth()+1) + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes(),
-      // Check if current rendering comment is a new one
-      isNew: typeof nPId !== 'undefined' ? (post.id == nPId ? 'is-new' : '') : '',
-    });
-    target.append(rendered)
-  });
+  post.cooked = _parseUserRefs(post.cooked);
+  
+  var rendered = $tpl({
+    post: post,
+    tid: tid,
+    // Get user role and then return html for comment
+    customField: typeof Discourse.user.fields[post.username] === "undefined" ? 'utente' : Discourse.user.fields[post.username],
+    // Id attribute for comment div
+    commentHTMLId: 'docs-comment-' + tid + '-' + post.id,
+    // Replace the avatar's size from template url
+    avatarUrl: _createAvatarUrl(post.avatar_template, 110),
+    // And formats as dd/mm/YYYY hh:ii
+    date: d.getDate()  + "/" + (d.getMonth()+1) + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes(),
+    // Check if current rendering comment is a new one
+    isNew: typeof nPId !== 'undefined' ? (post.id == nPId ? 'is-new' : '') : '',
+  }, 'discourse__comment');
+  
+  target.append(rendered)
 }
 
 module.exports = discourseComments = (function ($) {
@@ -102,10 +101,11 @@ module.exports = discourseComments = (function ($) {
             // Get the reply's target
             var replyDest = topicPosts[e.reply_to_post_number];
             // Create link to reply's target
-            $.get('./_static/templates/discourse/comment-reply-link.mst.html').then(function (template) {
-              var rendered = Mustache.render(template, { post: e, replyDesst: replyDest });
-              $('#reply-link-' + e.id).append(rendered);
-            });
+            var rendered = $tpl({
+              post: e, replyDest: replyDest
+            }, 'discourse__reply-link');
+            // Append markup
+            $('#reply-link-' + e.id).append(rendered);
           }
         })
       });
@@ -129,9 +129,8 @@ module.exports = discourseComments = (function ($) {
           return win;
         };
 
-        var message = 'Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta' +
-                      '<div><a href="#" class="btn btn-success login-button disabled">Login</a></div>';
-        $('form[id^="new-comment-"]').html('<div class="new-comment__login">' + message + '</div>');
+        var loginMarkup = $tpl({}, 'discourse__login');
+        $('form[id^="new-comment-"]').html(loginMarkup);
       }
 
       // Handle login-button click
