@@ -204,6 +204,7 @@ li[id^="docs-comment-"] {
 
 .new-comment {
   &__login {
+    display: flex;
     border: 1px solid $lightgrey-a2;
     border-radius: 5px;
     padding: 1em;
@@ -214,10 +215,23 @@ li[id^="docs-comment-"] {
   }
 
   &__user-image {
-    &--anonymous {
+    border-radius: 50%;
+    position: relative;
+    height: 56px;
+    width: 56px;
+    float: left;
+
+    &--anon {
+      margin: 0.25em;
+      margin-right: 1em;
       background-color: $lightgrey-a1;
-      height: 56px;
-      width: 56px;
+    }
+
+    i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }

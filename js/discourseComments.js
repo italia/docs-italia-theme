@@ -161,7 +161,12 @@ module.exports = discourseComments = (function ($) {
         };
 
         var message = '<div><a href="#" class="login-button disabled">Accedi al Forum</a> per commentare</div>';
-        $('form[id^="new-comment-"]').html('<div class="new-comment__login">' + message + '</div>');
+        $('form[id^="new-comment-"]').html(
+          '<div class="new-comment__write-box">'+
+            '<div class="new-comment__user-image new-comment__user-image--anon"><i class="docs-icon-comment"></i> </div>' +
+            '<div class="new-comment__login">' + message + '</div>' +
+          '</div>'
+        );
       }
 
       // Handle login-button click
