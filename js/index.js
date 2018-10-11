@@ -55,7 +55,11 @@ $(document).ready(function() {
 });
 
 window.onload = function() {
-  discourseAuth.init().then(function() {
-    discourseComments.init();
-  });
+  var $commentBox = $('ul.block-comments__list.items');
+  var topicId = $commentBox.first().data('topic');
+  if (typeof topicId !== "undefined" || location.href.indexOf('payload') > 0) {
+    discourseAuth.init(topicId).then(function() {
+      discourseComments.init();
+    });
+  }
 }
