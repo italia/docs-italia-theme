@@ -35,7 +35,7 @@ module.exports = themeGlossaryPage = (function ($) {
 
         $btn.html($customBtn);
         $target.attr('id', 'glossary-' + id).attr('aria-labelledby' , id).addClass(themeGlossaryPage.showClass(index));
-        $target.append("<div class='glossary-page__copy-link-wrap mt-3'><span class='Icon docs-icon-link'></span><button type='button' class='glossary-page__copy-link'>" + themeTranslate.getTranslation().copyLink + "</button></div>");
+        $target.append($tpl({ copyLink: themeTranslate.getTranslation().copyLink }, 'glossary__copy-link'));
       });
     },
 
