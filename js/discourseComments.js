@@ -174,7 +174,6 @@ module.exports = discourseComments = (function ($) {
           }
           features.push('left=' + left);
           features.push('top=' + right);
-          features.push('scrollbars=1');
           features.push('menubar=no');
           features.push('location=no');
           
