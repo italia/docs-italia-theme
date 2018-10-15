@@ -37,12 +37,6 @@ module.exports = function(grunt) {
         },
         {
           expand: true,
-          cwd: 'js',
-          src: ['config.yml'],
-          dest: 'docs_italia_theme/static'
-        },
-        {
-          expand: true,
           cwd: 'node_modules/bootstrap-italia/src/icons/css',
           src: 'italia-icon-font.css',
           dest: 'docs_italia_theme/static/css'
@@ -190,11 +184,6 @@ module.exports = function(grunt) {
       sphinx: {
         files: ['docs_italia_theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
         tasks: ['clean:build', 'exec:build_sphinx']
-      },
-      /* Config file */
-      config: {
-        files: ['js/config.yml'],
-        tasks: ['copy'],
       },
       /* JavaScript */
       browserify: {
