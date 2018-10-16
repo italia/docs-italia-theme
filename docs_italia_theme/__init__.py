@@ -324,11 +324,11 @@ class DiscourseCommentsDirective(Directive):
                                 <a href='#logout' class="block-comments__logout-link block-comments__logout-link--visible" data-toggle="modal" data-target="#logout-modal" title="Logout" alt="Logout">Logout</a>
                             </figcaption>
                         </figure>
-                        <textarea class='form-control new-comment__body col ml-2 pl-3 pr-3' id="comments-input" placeholder='Scrivi un commento...' rows="4"></textarea>
+                        <textarea class='form-control new-comment__body col ml-2 pl-3 pr-3' id="comments-input" placeholder='Scrivi qui un commento. Per formattare il testo puoi usare Markdown, clicca sul bottone "suggerimenti" per vedere degli esempi.' rows="4"></textarea>
                     </div>
                     <!-- Buttons -->
                     <div class='new-comment__buttons'>
-                        <button type="button" class="btn btn-secondary new-comment__suggestions" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="lorem"> suggerimenti </button>
+                        <button type="button" class="btn btn-sm btn-secondary new-comment__suggestions" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="lorem"> suggerimenti </button>
                         <input type='submit' class='btn btn-primary btn-sm new-comment__submit' value='invia' disabled='true' />
                     </div>
                     <div class="new-comment__required">
