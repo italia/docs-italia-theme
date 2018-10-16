@@ -202,7 +202,7 @@ module.exports = discourseComments = (function ($) {
               .catch(function (error) {
                 var errorsString = error.response.data.errors.join('<br>');
                 $form.removeClass('sending');
-                $errorsBox.append(errorsString);
+                $errorsBox.text(errorsString);
               });
           }, 1500);
         }
