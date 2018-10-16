@@ -210,7 +210,8 @@
     &.error,
     &.hint,
     &.note,
-    &.attention {
+    &.attention,
+    &.warning {
       margin-top: 2rem;
       padding-left: 2rem;
       border-left: 1px $grey solid;
@@ -233,7 +234,8 @@
       }
     }
 
-    &.attention {
+    &.attention,
+    &.warning {
       .admonition-title {
         color: $orange;
       }
