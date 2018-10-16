@@ -157,6 +157,12 @@ $letter_spacing: 0.88px;
 }
 
 form[id^="new-comment-"] {
+  &.sending {
+    .loading {
+      display: inline-block !important;
+    }
+  }
+
   position: relative;
   width: 100%;
 
@@ -175,86 +181,91 @@ form[id^="new-comment-"] {
     }
   }
 
-  &.sending::after {
-    content: '';
-    position: absolute;
-    background: white;
-    width: 100%;
-    height: 102%;
-    left: 0;
-    top: 0;
-  }
-
-  &.sending::before {
-    content: 'Invio del commento...';
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-li[id^="docs-comment-"] {
-  &.is-new {
-    background: lightyellow;
-    padding-top: 0.5em;
-    border-radius: 5px;
-    box-shadow: 0 0 10px lightblue;
-  }
-}
-
-.new-comment {
-  &__login {
-    display: flex;
-    border: 1px solid $lightgrey-a2;
-    border-radius: 5px;
-    padding: 1em;
-  }
-
-  &__legend {
-    font-size: $comment_font_size - 2;
-  }
-
-  &__user-image {
-    border-radius: 50%;
-    position: relative;
-    height: 56px;
-    width: 56px;
-    float: left;
-
-    &--anon {
-      margin: 0.25em;
-      margin-right: 1em;
-      background-color: $lightgrey-a1;
-    }
-
-    i {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+  li[id^="docs-comment-"] {
+    &.is-new {
+      background: lightyellow;
+      padding-top: 0.5em;
+      border-radius: 5px;
+      box-shadow: 0 0 10px lightblue;
     }
   }
 
-  &__suggestions {
-    &__tooltip {
-      .tooltip__content {
-        padding-left: 1.75em;
-        font-size: 0.95em;
+  .new-comment {
+    &__login {
+      display: flex;
+      border: 1px solid $lightgrey-a2;
+      border-radius: 5px;
+      padding: 1em;
+    }
+
+    &__legend {
+      font-size: $comment_font_size - 2;
+    }
+
+    &__user-image {
+      border-radius: 50%;
+      position: relative;
+      height: 56px;
+      width: 56px;
+      float: left;
+
+      &--anon {
+        margin: 0.25em;
+        margin-right: 1em;
+        background-color: $lightgrey-a1;
+      }
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     }
-  }
 
-  &__buttons {
-    float: left;
-  }
+    &__suggestions {
+      &__tooltip {
+        .tooltip__content {
+          padding-left: 1.75em;
+          font-size: 0.95em;
+        }
+      }
+    }
 
-  &__required {
-    float: right;
+    &__buttons {
+      float: left;
+    }
 
-    & > span {
-      font-size: 0.8em;
+    &__required {
+      float: right;
+
+      & > span {
+        font-size: 0.8em;
+      }
+    }
+
+    &__submit {
+      position: relative;
+      overflow: hidden;
+
+      .loading.no-bg {
+        display: none;
+        width: 30px;
+        height: 0;
+        content: ' ';
+        overflow: visible;
+        margin-bottom: 5px;
+        margin-left: -15px;
+        margin-right: 5px;
+
+        &::before {
+          left: auto;
+        }
+      }
+
+      & > div:not(.loading) {
+        display: inline;
+      }
     }
   }
 }

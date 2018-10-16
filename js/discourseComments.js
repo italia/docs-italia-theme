@@ -206,6 +206,7 @@ module.exports = discourseComments = (function ($) {
         evt.preventDefault();
         var $form = $(this);
         var $body = $form.find('.new-comment__body');
+        var $submit = $form.find('.new-comment__submit');
         var $errorsBox = $form.find('.new-comment__errors-box');
         var topic_id = $form.data('topic');
         var body_value = $body.val();
@@ -214,12 +215,17 @@ module.exports = discourseComments = (function ($) {
           return false;
         } else {
           $form.addClass('sending');
+          // Disable textarea & submit button
+          $body.attr('disabled', true);
+          $submit.attr('disabled', true);
           setTimeout(function () {
             Discourse.posts.post(body_value)
               // Success
               .then(function (results) {
                 $form.removeClass('sending');
                 $body.val('');
+                $body.attr('disabled', false);
+                $submit.attr('disabled', false);
                 Discourse.posts.get(topic_id, false).then(function (data) {
                   // Re-init current modules, to update comments list
                   module.exports.init(results.data.id, results);
@@ -245,11 +251,11 @@ module.exports = discourseComments = (function ($) {
         if (currentLength > 0) {
           $span.show();
           $req.text(currentLength);
-          $parent.find('input[type="submit"]').attr('disabled', true);
+          $parent.find('button[type="submit"]').attr('disabled', true);
         } else {
           $req.text('0');
           $span.hide();
-          $parent.find('input[type="submit"]').attr('disabled', false);
+          $parent.find('button[type="submit"]').attr('disabled', false);
         }
       });
 

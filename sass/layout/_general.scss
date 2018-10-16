@@ -46,7 +46,7 @@ img {
   }
 }
 
-body.loading {
+.loading {
   overflow: hidden;
 
   &::after {
@@ -74,5 +74,12 @@ body.loading {
     width: 30px;
     animation: pulsate 1s ease-out;
     animation-iteration-count: infinite;
+  }
+
+  &.no-bg {
+    &::after {
+      background: none;
+      position: relative;
+    }
   }
 }
