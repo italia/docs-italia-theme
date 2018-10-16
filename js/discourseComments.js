@@ -225,7 +225,6 @@ module.exports = discourseComments = (function ($) {
                 $form.removeClass('sending');
                 $body.val('');
                 $body.attr('disabled', false);
-                $submit.attr('disabled', false);
                 Discourse.posts.get(topic_id, false).then(function (data) {
                   // Re-init current modules, to update comments list
                   module.exports.init(results.data.id, results);
