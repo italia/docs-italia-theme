@@ -149,9 +149,13 @@ module.exports = discourseComments = (function ($) {
 
         // Create popup window
         window.ppWin = function () {
-          var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
-          var win = window.open(Discourse.authLink(), 'Discourse Authentication', params);
-          return win;
+          if (/Mobi|Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent)) {
+            window.location.href = Discourse.authLink();
+          } else {
+            var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
+            var win = window.open(Discourse.authLink(), 'Discourse Authentication', params);
+            return win;
+          }
         };
 
         var message = 'Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta' +
