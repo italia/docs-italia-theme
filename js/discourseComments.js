@@ -224,22 +224,22 @@ module.exports = discourseComments = (function ($) {
 
       // Show form elements on focus and hide on blur
       $('textarea.new-comment__body').bind('focus', function () {
-          $parent = $(this).parents('form');
+        $parent = $(this).parents('form');
+      });
 
-          $parent.find('.new-comment__buttons').removeClass('d-none');
-          $parent.find('.new-comment__legend').removeClass('d-none');
-          $parent.find('.new-comment__required').removeClass('d-none');
-        })
-        .bind('blur', function () {
-          if ($(this).val() === '') {
-            $parent = $(this).parents('form');
-
-            $parent.find('.new-comment__buttons').addClass('d-none');
-            $parent.find('.new-comment__legend').addClass('d-none');
-            $parent.find('.new-comment__required').addClass('d-none');
-          }
-        });
-
+      // Suggestions button click
+      $('.new-comment__suggestions').popover({
+        template:
+          "<div class='tooltip tooltip--active doc-tooltip new-comment__suggestions__tooltip' role='tooltip'>" +
+            "<div class='tooltip__wrap'>" +
+              "Markdown per la formattazione del testo:" +
+              "<ul class='tooltip__content'><li> Grassetto: __text__ (o **text**) </li><li> Corsivo: _text_ </li><li> Link: [Testo](http://url-to-link.ex) </li><li> Citazione: &gt; Testo citazione </li></ul></div>" +
+            "</div>" +
+          "</div>",
+        container: 'body',
+        offset:'550px , 40px'
+      });
+      
       // Logout icon click
       $('#logout-modal__submit').bind('click', function (evt) {
         evt.preventDefault();

@@ -327,22 +327,12 @@ class DiscourseCommentsDirective(Directive):
                         <textarea class='form-control new-comment__body col ml-2 pl-3 pr-3' id="comments-input" placeholder='Scrivi un commento...' rows="4"></textarea>
                     </div>
                     <!-- Buttons -->
-                    <div class='new-comment__buttons d-none'>
-                        <input type='submit' class='btn btn-sm new-comment__submit' value='invia' disabled='true' />
-                        <input type='reset' class='btn btn-sm new-comment__delete' value='annulla' />
+                    <div class='new-comment__buttons'>
+                        <button type="button" class="btn btn-secondary new-comment__suggestions" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="lorem"> suggerimenti </button>
+                        <input type='submit' class='btn btn-primary btn-sm new-comment__submit' value='invia' disabled='true' />
                     </div>
-                    <div class="new-comment__required d-none">
+                    <div class="new-comment__required">
                         <span>Caratteri richiesti: <span class='required-chars'></span></span>
-                    </div>
-
-                    <div class='new-comment__legend d-none'>
-                        Markdown per la formattazione del testo:
-                        <ul>
-                            <li> Grassetto: __text__ (o **text**) </li>
-                            <li> Corsivo: _text_ </li>
-                            <li> Link: [Testo](http://url-to-link.ex) </li>
-                            <li> Citazione: > Testo citazione </li>
-                        </ul>
                     </div>
                 </div>
             </from>

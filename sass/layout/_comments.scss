@@ -3,11 +3,12 @@ $comment_line_height: 21px;
 $letter_spacing: 0.88px;
 
 .block-comments {
+  font-family: $font-family-sans-serif;
   margin-top: 2rem;
   margin-bottom: 0.25rem;
 
   p {
-    font-family: $titillium-font;
+    font-family: $font-family-sans-serif;
   }
 }
 
@@ -62,7 +63,7 @@ $letter_spacing: 0.88px;
 
   input {
     border: 1px $grey-light-01 solid;
-    line-height: 2.5em;
+    line-height: 2em;
     border-radius: 5px;
 
     &:focus {
@@ -161,6 +162,8 @@ form[id^="new-comment-"] {
   width: 100%;
 
   textarea {
+    min-height: 5em;
+    font-weight: normal;
     border: 1px $grey-light-01 solid;
     border-radius: 5px;
 
@@ -232,6 +235,15 @@ li[id^="docs-comment-"] {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+  }
+
+  &__suggestions {
+    &__tooltip {
+      .tooltip__content {
+        padding-left: 1.75em;
+        font-size: 0.95em;
+      }
     }
   }
 }
