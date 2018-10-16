@@ -149,8 +149,35 @@ module.exports = discourseComments = (function ($) {
 
         // Create popup window
         window.ppWin = function () {
-          var params = 'width=400,height=400,menubar=no,location=no,left=0,top=0';
-          var win = window.open(Discourse.authLink(), 'Discourse Authentication', params);
+          var userAgent = typeof navigator.userAgent !== 'undefined' ? navigator.userAgent : '',
+              mobile = function() {
+                return /\b(iPhone|iP[ao]d)/.test(userAgent) ||
+                  /\b(iP[ao]d)/.test(userAgent) ||
+                  /Android/i.test(userAgent) ||
+                  /Mobile/i.test(userAgent);
+              },
+              screenX = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
+              screenY = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
+              outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.documentElement.clientWidth,
+              outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : document.documentElement.clientHeight - 22,
+              targetWidth = mobile() ? null : 600,
+              targetHeight = mobile() ? null : 500,
+              V = screenX < 0 ? window.screen.width + screenX : screenX,
+              left = parseInt(V + (outerWidth - targetWidth) / 2, 10),
+              right = parseInt(screenY + (outerHeight - targetHeight) / 2.5, 10),
+              features = [];
+          if (targetWidth !== null) {
+            features.push('width=' + targetWidth);
+          }
+          if (targetHeight !== null) {
+            features.push('height=' + targetHeight);
+          }
+          features.push('left=' + left);
+          features.push('top=' + right);
+          features.push('menubar=no');
+          features.push('location=no');
+          
+          var win = window.open(Discourse.authLink(), 'Discourse Authentication', features);
           return win;
         };
 
