@@ -321,7 +321,6 @@ class DiscourseCommentsDirective(Directive):
                         <figure class="col-auto mb-0">
                             <img class="block-comments__img new-comment__figure rounded-circle" src="">
                             <figcaption>
-                                <!-- <a href='#logout' class="block-comments__logout-link block-comments__logout-link--icon" alt="Logout">&#10060;</a> -->
                                 <a href='#logout' class="block-comments__logout-link block-comments__logout-link--visible" data-toggle="modal" data-target="#logout-modal" title="Logout" alt="Logout">Logout</a>
                             </figcaption>
                         </figure>
@@ -353,7 +352,7 @@ class DiscourseCommentsDirective(Directive):
                 <!-- Top header -->
                 <div class="block-comments__header border-top border-bottom border-width-2 pt-3 pb-3 row align-items-center justify-content-between">
                     <h6 class="col-auto text-uppercase mb-0">Commenti</h6>
-                    <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-collapsed0" aria-expanded="true"><span class="it-icon-plus"></span><span class="it-icon-minus"></span></button>
+                    <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-collapsed0" aria-expanded="true"><span class="docs-icon-plus"></span><span class="docs-icon-minus"></span></button>
                 </div>
             </div>
             <div class="block-comments__body collapse show" data-parent="#accordion-comments" id="comments-collapsed0" style="">

@@ -77,7 +77,7 @@ function _createMarkup (tid, post, nPId) {
           "</div>" +
           "<div class='col-auto'>" +
             "<p class='d-inline-block mr-2 block-comments__date mb-0'>" + date + "</p>" +
-            "<button class='block-comments__item-btn collapsed' data-toggle='collapse' data-target='#collapse-"+ post.id +"'><span class='it-icon-collapse'></span><span class='it-icon-expand'></span></button>" +
+            "<button class='block-comments__item-btn' data-toggle='collapse' data-target='#collapse-"+ post.id +"'><span class='docs-icon-collapse'></span><span class='docs-icon-expand'></span></button>" +
           "</div>" +
         "</div>" +
         "<p class='text-uppercase block-comments__role'>" + customField + "</p>" +

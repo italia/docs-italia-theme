@@ -110,22 +110,22 @@ $letter_spacing: 0.88px;
   height: 1.5rem;
   border: 0;
 
-  .it-collapse,
-  .it-expand {
+  .docs-icon-collapse,
+  .docs-icon-expand {
     color: $medium-blue;
   }
 
-  .it-collapse {
+  .docs-icon-expand {
     display: none;
   }
 
   &.collapsed {
-    .it-collapse {
-      display: inline-block;
+    .docs-icon-collapse {
+      display: none;
     }
 
-    .it-expand {
-      display: none;
+    .docs-icon-expand {
+      display: inline-block;
     }
   }
 }
