@@ -101,7 +101,7 @@ module.exports = discourseComments = (function ($) {
       // Flush commentBox
       $commentBox.html('');
       // Set required characters
-      $('form[id^="new-comment-"] .required-chars').text('-20');
+      $('form[id^="new-comment-"] .required-chars').text('20');
 
       // Set comment-write-box user picture
       if (Discourse.user.logged()) {
@@ -212,12 +212,16 @@ module.exports = discourseComments = (function ($) {
       $('textarea.new-comment__body').bind('input', function () {
         $parent = $(this).parents('form');
         $req = $parent.find('.required-chars');
-        var currentLength = -20 + $(this).val().replace(/ /g,'').length;
-        if (currentLength < 0) {
+        var $span = $parent.find('span').first();
+        var currentLength = 20 - $(this).val().replace(/ /g,'').length;
+        $span.data('required-chars', currentLength);
+        if (currentLength > 0) {
+          $span.show();
           $req.text(currentLength);
           $parent.find('input[type="submit"]').attr('disabled', true);
         } else {
           $req.text('0');
+          $span.hide();
           $parent.find('input[type="submit"]').attr('disabled', false);
         }
       });

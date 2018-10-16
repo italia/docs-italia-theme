@@ -245,4 +245,16 @@ li[id^="docs-comment-"] {
       }
     }
   }
+
+  &__buttons {
+    float: left;
+  }
+
+  &__required {
+    float: right;
+
+    & > span {
+      font-size: 0.8em;
+    }
+  }
 }

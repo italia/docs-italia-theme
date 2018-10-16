@@ -332,7 +332,7 @@ class DiscourseCommentsDirective(Directive):
                         <input type='submit' class='btn btn-primary btn-sm new-comment__submit' value='invia' disabled='true' />
                     </div>
                     <div class="new-comment__required">
-                        <span>Caratteri richiesti: <span class='required-chars'></span></span>
+                        <span>Scrivi almeno altri <span class='required-chars'></span> caratteri</span>
                     </div>
                 </div>
             </from>
