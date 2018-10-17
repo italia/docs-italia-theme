@@ -35,7 +35,7 @@
       @include media-breakpoint-up(lg) {
         border-left: 0;
         margin-left: 0;
-        border-bottom: 0.1rem solid $white;
+        border-bottom: 2px solid $white;
         margin-bottom: 0;
       }
     }
