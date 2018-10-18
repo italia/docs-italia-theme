@@ -46,6 +46,13 @@ it:
     go_to_glossary: vai al glossario
     deepening: approfondimento
     example: esempio
+    must: si deve
+    must_not: non si deve
+    should: si dovrebbe
+    should_not: non si dovrebbe
+    may: si può
+    use: usa
+    use_not: non usare
     consultation: consultazione
     show_more: mostra tutto
     show_less: mostra meno
@@ -141,6 +148,13 @@ en:
     go_to_glossary: vai al glossario
     deepening: deepening
     example: example
+    must: must
+    must_not: must not
+    should: should
+    should_not: should not
+    may: may
+    use: use
+    use_not: don't use
     consultation: consultation
     show_more: show more
     show_less: show less
