@@ -10,8 +10,8 @@
       <div class="modal-body">
         <p>{{ docsitalia_data.document.description }}</p>
         <p>
-          Organizzazione: <a href="{{ publisher_slug }}">{{ publisher }}</a><br>
-          Progetto: <a href="{{ publisher_project_slug }}">{{ publisher_project }}</a>
+          Organizzazione: <a href="/{{ publisher_slug }}">{{ publisher }}</a><br>
+          Progetto: <a href="/{{ publisher_slug }}/{{ publisher_project_slug }}">{{ publisher_project }}</a>
         </p>
         <p>Tag:
             {% for tag, url in tags %}
