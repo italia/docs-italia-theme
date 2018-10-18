@@ -123,7 +123,7 @@ module.exports = themeMarkupModifier = (function ($) {
           $numericList = $('.procedure ol li'),
           $codeTitle = $('.admonition-example .admonition-title');
           $deepeningTitle = $('.admonition-deepening .admonition-title');
-          $consultationTitle = $('.admonition-consultazione .admonition-title');
+          $consultationTitle = $('.admonition-consultation .admonition-title');
 
       $note.prepend(this.iconMarkup('note'));
       $error.prepend(this.iconMarkup('procedure'));
@@ -182,7 +182,7 @@ module.exports = themeMarkupModifier = (function ($) {
         var title = $el.html(),
             str = $el.closest('.admonition').attr('class'),
             // Find the value between name- and ' ' the last class is always 'admonition' insert by sphinx
-            regex = /name-(.*)(\s)/,
+            regex = /admonition-(\S*)(\s)/,
             matches = str.match(regex),
             idName = '';
 
