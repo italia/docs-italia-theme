@@ -1,10 +1,24 @@
 <script type="text/javascript">
+var PRODUCTION_DOMAIN = '{{ PRODUCTION_DOMAIN }}';
+var DOCSITALIA_DATA = {
+  publisher_slug: '{{ publisher_slug }}',
+  publisher_project_slug: '{{ publisher_project_slug }}'
+}
+{% if not READTHEDOCS %}
+LOCAL = true;
+READTHEDOCS_DATA = {
+  project: '{{ slug }}',
+  version: '{{ current_version }}',
+  language: '{{ rtd_language }}',
+  api_host: '//' + PRODUCTION_DOMAIN
+}
+{% endif %}
 var DOCUMENTATION_OPTIONS = {
-    URL_ROOT:'{{ url_root }}',
-    VERSION:'{{ release|e }}',
-    LANGUAGE:'{{ language }}',
-    COLLAPSE_INDEX:false,
-    FILE_SUFFIX:'{{ '' if no_search_suffix else file_suffix }}',
+    URL_ROOT: '{{ url_root }}',
+    VERSION: '{{ release|e }}',
+    LANGUAGE: '{{ language }}',
+    COLLAPSE_INDEX: false,
+    FILE_SUFFIX: '{{ '' if no_search_suffix else file_suffix }}',
     HAS_SOURCE: {{ has_source|lower }},
     SOURCELINK_SUFFIX: '{{ sourcelink_suffix }}'
 };

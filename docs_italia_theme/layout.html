@@ -1,3 +1,7 @@
+{%- set url_root = pathto('', 1) %}
+{%- if url_root == '#' %}
+  {% set url_root = '' %}
+{% endif %}
 {%- extends 'layouts/default.html' %}
 {% block body %}
   {{ body }}

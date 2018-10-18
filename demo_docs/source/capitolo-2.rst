@@ -24,6 +24,16 @@ dolore magnam aliquam quaerat voluptatem.
 Titolo paragrafo lorem ipsum sit
 --------------------------------
 
+.. warning::
+
+   Ut legere adipisci corrumpit mel, vis te omnes indoctum intellegat. Nos trud
+   suscipit theophrastus no vel, an nam quaeque habemus deterruisset. In iuvaret
+   quat definiebas quo, ex eligendi inciderint per.
+
+   In est unum utamur appareat. Te sumo civibus invenire qui. Omnis atqui exerci
+   an his, ad quo omnes copiosae. **Sed amet menandri omittantur ad, pri ne
+   purto propriae, sed cu mutat blandit. Vix prima lorem interesset at.**
+
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
 fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
 culpa qui officia deserunt mollit anim id est laborum.
@@ -401,9 +411,19 @@ incididunt ut labore et dolore magna aliqua. **Ut enim ad minim veniam, quis
 nostrud exercitation** :term:`ullamco` **laboris nisi ut aliquip ex ea commodo
 consequat**.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+.. highlight:: js
+
+Duis aute irure dolor in reprehenderit in ``voluptate`` velit esse cillum dolore eu
 fugiat nulla pariatur. Excepteur `sint occaecat cupidatat`_ non proident, sunt
-in culpa qui officia deserunt mollit anim id est laborum.
+in culpa qui officia deserunt mollit anim id est laborum::
+
+   function map(array, transform) {
+      let mapped = [];
+      for (let element of array) {
+         mapped.push(transform(element));
+      }
+      return mapped;
+   }
 
 Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, **consectetur,
 adipisci velit, sed quia non numquam eius modi tempora incidunt** ut labore et

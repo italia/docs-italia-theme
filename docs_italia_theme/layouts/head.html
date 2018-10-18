@@ -2,7 +2,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
+  <title>{{ docstitle }} | {{ title|striptags|e }}</title>
 
   <!-- Styles -->
   <link rel="stylesheet" href="{{ pathto('_static/css/theme.css', 1) }}" type="text/css">
@@ -25,16 +25,17 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@teamdigitaleIT">
-  <meta name="twitter:title" content="Docs Italia">
-  <meta name="twitter:description" content="Docs Italia è un servizio a disposizione delle Pubbliche Amministrazioni per pubblicare documenti tecnici e amministrativi, e offre ai cittadini la possibilità di leggere e commentare documenti pubblici ed essere informati sull’andamento dei progetti.">
+  <meta name="twitter:title" content="{{ docstitle }} | {{ title|striptags|e }}">
+  <meta name="twitter:description" content="{{ docsitalia_data['document']['description'] }}">
   <meta name="twitter:image" content="{{ MEDIA_URL }}docsitalia/images/social-card.png">
 
   <!-- Open Graph -->
-  <meta property="og:locale" content="it_IT" />
-  <meta property="og:url" content="https://docs.italia.it/">
-  <meta property="og:title" content="Docs Italia">
-  <meta property="og:description" content="Docs Italia è un servizio a disposizione delle Pubbliche Amministrazioni per pubblicare documenti tecnici e amministrativi, e offre ai cittadini la possibilità di leggere e commentare documenti pubblici ed essere informati sull’andamento dei progetti.">
+  <meta property="og:locale" content="{{ t.locale }}" />
+  <meta property="og:url" content="{{ canonical_url }}{{ pagename }}.html">
+  <meta property="og:title" content="{{ docstitle }} | {{ title|striptags|e }}">
+  <meta property="og:description" content="{{ docsitalia_data['document']['description'] }}">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Docs Italia">
   <meta property="og:image" content="{{ MEDIA_URL }}docsitalia/images/social-card.png">
   <meta property="og:image:secure_url" content="{{ MEDIA_URL }}docsitalia/images/social-card.png">
   <meta property="og:image:type" content="image/png">
