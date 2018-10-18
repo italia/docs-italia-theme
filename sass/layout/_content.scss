@@ -193,7 +193,8 @@
       }
     }
 
-    .Icon {
+    [class^="docs-icon-"],
+    [class*=" docs-icon-"] {
       font-size: 1.9rem;
       color: $blue;
     }
@@ -215,7 +216,7 @@
           position: absolute;
           left: -1rem;
           top: 0;
-          width: 1.1rem;
+          width: 1rem;
           height: 1.5rem;
           z-index: 1;
           content: counter(list);
@@ -328,7 +329,7 @@
     font-weight: 700;
   }
 
-  .Icon--ol {
+  .procedure .docs-icon-step {
     color: $mid-dark-blue;
     position: absolute;
     left: -1.5rem;

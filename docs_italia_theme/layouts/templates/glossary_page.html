@@ -1,0 +1,16 @@
+{% raw %}
+<script id="glossary__btn" type="text/template">
+	<button class='glossary-page__btn collapsed border-top border-grey-light border-width-2 pt-3 pb-3' data-toggle='collapse' data-target='#glossary-{{ id }}' aria-expanded='true' aria-controls='glossary-{{ id }}'>
+		<span class='docs-icon-plus mr-3'> </span>
+		<span class='docs-icon-minus mr-3'> </span>
+		{{ text }}
+	</button>
+</script>
+
+<script id="glossary__copy-link" type="text/template">
+	<div class='glossary-page__copy-link-wrap mt-3'>
+		<i class='it-link mr-2 align-middle'></i>
+		<button type='button' class='glossary-page__copy-link'> {{ copyLink }} </button>
+	</div>
+</script>
+{% endraw %}

@@ -117,7 +117,8 @@
       text-transform: uppercase;
       font-weight: 700;
 
-      .Icon {
+      [class^="docs-icon-"],
+      [class*=" docs-icon-"] {
         font-size: 1.5rem;
       }
     }
@@ -139,7 +140,8 @@
       color: $blue;
       padding-left: 0;
 
-      .Icon {
+      [class^="docs-icon-"],
+      [class*=" docs-icon-"] {
         font-size: 0.6rem;
         margin-left: 0.5rem;
         position: relative;
@@ -200,7 +202,8 @@
         color: $black;
         font-family: $titillium-font;
 
-        .Icon {
+        [class^="docs-icon-"],
+        [class*=" docs-icon-"] {
           font-size: 1.2rem;
         }
       }

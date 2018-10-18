@@ -1,0 +1,31 @@
+{% raw %}
+<script id="tooltip__main" type="text/template">
+	<div class='tooltip tooltip--active doc-tooltip' role='tooltip'>
+		<div class='tooltip__wrap'>
+			<button type='button' role='button' class='tooltip__close-btn' data-ref="{{ item.ref }}"></button>
+			<h2 class='tooltip__title'>{{ item.title }}</h2>
+			<p class='tooltip__content'>{{ item.body }}</p>
+		</div>
+	</div>
+</script>
+
+<script id="tooltip__glossary" type="text/template">
+	<div class='tooltip tooltip--active doc-tooltip' role='tooltip'>
+		<div class='tooltip__wrap'>
+			<button type='button' role='button' class='tooltip__close-btn' data-ref="{{ item.ref }}"></button>
+			<h2 class='tooltip__title'>{{ item.title }}</h2>
+			<p class='tooltip__content'>{{ trimmedSummary }}</p> {{ btnToGlossary }}
+		</div>
+	</div>
+</script>
+
+<script id="tooltip__note" type="text/template">
+	<div class='tooltip tooltip--active doc-tooltip doc-tooltip--note' role='tooltip'>
+		<div class='tooltip__wrap'>
+			<button type='button' role='button' class='tooltip__close-btn' data-ref="{{ item.ref }}"></button>
+			<h2 class='tooltip__title'>{{ item.title }}</h2>
+			<p class='tooltip__content'> {{ item.body }}</p>
+		</div>
+	</div>
+</script>
+{% endraw %}
