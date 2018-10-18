@@ -117,7 +117,8 @@
       text-transform: uppercase;
       font-weight: 700;
 
-      .Icon {
+      [class^="docs-icon-"],
+      [class*=" docs-icon-"] {
         font-size: 1.5rem;
       }
     }
@@ -139,7 +140,8 @@
       color: $blue;
       padding-left: 0;
 
-      .Icon {
+      [class^="docs-icon-"],
+      [class*=" docs-icon-"] {
         font-size: 0.6rem;
         margin-left: 0.5rem;
         position: relative;
@@ -200,7 +202,8 @@
         color: $black;
         font-family: $titillium-font;
 
-        .Icon {
+        [class^="docs-icon-"],
+        [class*=" docs-icon-"] {
           font-size: 1.2rem;
         }
       }
@@ -210,7 +213,8 @@
     &.error,
     &.hint,
     &.note,
-    &.attention {
+    &.attention,
+    &.warning {
       margin-top: 2rem;
       padding-left: 2rem;
       border-left: 1px $grey solid;
@@ -233,13 +237,18 @@
       }
     }
 
-    &.attention {
+    &.attention,
+    &.warning {
       .admonition-title {
         color: $orange;
       }
     }
 
     &.important {
+      .admonition-title {
+        color: $green;
+      }
+
       .last {
         font-weight: 700;
         font-size: 1.2rem;
@@ -247,6 +256,10 @@
     }
 
     &.hint {
+      .admonition-title {
+        color: $green;
+      }
+
       .reference.internal {
         font-size: 0.8rem;
         position: relative;

@@ -29,3 +29,24 @@
     }
   }
 }
+
+#version-list {
+  .dropdown-toggle .current-version {
+    max-width: 8em;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    display: inline-block;
+  }
+
+  .version-list-wrapper {
+    max-height: 10.2em;
+    max-width: 18em;
+    overflow-y: scroll;
+  }
+
+  .dropdown-item {
+    text-overflow: ellipsis;
+    max-width: 16em;
+    overflow-x: hidden;
+  }
+}

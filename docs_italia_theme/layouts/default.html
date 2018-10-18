@@ -6,6 +6,9 @@
 <body class="{{ site.css_theme }}">
 	{% include 'layouts/loader_show_script.html' %}
   {% include 'layouts/header.html' %}
+
+	{% include 'layouts/templates.html' %}
+
   <div id="main" role="document">
     <div class="container-fluid container-fluid--desktop main-container">
       <div class="row">
@@ -16,7 +19,7 @@
         </nav>
         <div id="doc-content" class="col-content">
           <!--<div class="doc-content__consultation">
-            <span class="Icon it-icon-edit"></span>
+            <span class="it-icon-edit"></span>
             {{ _(t.in_consultation) }}
           </div>-->
           {% if prev %}
