@@ -52,7 +52,7 @@ function _createMarkup (target, tid, post, nPId) {
     // Replace the avatar's size from template url
     avatarUrl: _createAvatarUrl(post.avatar_template, 110),
     // And formats as dd/mm/YYYY hh:ii
-    date: d.getDate()  + "/" + (d.getMonth()+1) + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes(),
+    date: d.getDate()  + ' ' + (d.toLocaleString("it-IT", { month: "short" })) + ' ' + d.getFullYear() + ", " + d.getHours() + ":" + d.getMinutes(),
     // Check if current rendering comment is a new one
     isNew: typeof nPId !== 'undefined' ? (post.id == nPId ? 'is-new' : '') : '',
   }, 'discourse__comment');
@@ -203,7 +203,8 @@ module.exports = discourseComments = (function ($) {
       $('textarea.new-comment__body').bind('input', function () {
         $parent = $(this).parents('form');
         $req = $parent.find('.required-chars');
-        var $span = $parent.find('span').first();
+        var $span = $($parent.find('span')[1]);
+
         var currentLength = 20 - $(this).val().replace(/ /g,'').length;
         $span.data('required-chars', currentLength);
         if (currentLength > 0) {
@@ -224,13 +225,7 @@ module.exports = discourseComments = (function ($) {
 
       // Suggestions button click
       $('.new-comment__suggestions').popover({
-        template:
-          "<div class='tooltip tooltip--active doc-tooltip new-comment__suggestions__tooltip' role='tooltip'>" +
-            "<div class='tooltip__wrap'>" +
-              "Markdown per la formattazione del testo:" +
-              "<ul class='tooltip__content'><li> Grassetto: __text__ (o **text**) </li><li> Corsivo: _text_ </li><li> Link: [Testo](http://url-to-link.ex) </li><li> Citazione: &gt; Testo citazione </li></ul></div>" +
-            "</div>" +
-          "</div>",
+        template: $tpl({}, 'discourse__markup__tooltip'),
         container: 'body',
         offset:'550px , 40px'
       });

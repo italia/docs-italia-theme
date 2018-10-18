@@ -1,44 +1,61 @@
 {% raw %}
 <script id="discourse__comment" type="text/template">
-	<li id='{{ commentHTMLId }}' class='row mb-5 block-comments__item comment-{{ post.id }} {{ isNew }}' data-topic='{{ tid }}' data-comment='{{ post.id }}'>
-		<div id='reply-to-{{ post.post_number }}'></div>
-		<figure class='col-auto mb-0'>
-			<img class='block-comments__img rounded-circle' src='{{ avatarUrl }}'>
-		</figure>
-		<div class='col'>
-			<div class='row align-items-center justify-content-between' id='comment-heading-1'>
-				<div class='col-auto'>
-					<span class='block-comments__name text-capitalize mb-0'> {{ post.username }} </span>
-					<div id='reply-link-{{ post.id }}'></div>
-				</div>
-				<div class='col-auto'>
-					<p class='d-inline-block mr-2 block-comments__date mb-0'> {{ date }} </p>
-					<button class='block-comments__item-btn collapsed' data-toggle='collapse' data-target='#collapse-{{ post.id }}'>
-						<span class='it-icon-collapse'></span>
-						<span class='it-icon-expand'></span>
-					</button>
-				</div>
-			</div>
-			<p class='text-uppercase block-comments__role'> {{ customField }} </p>
-			<div id='collapse-{{ post.id }}' class='block-comments__paragraph pl-3 border-left collapse show' aria-labelledby='comment-heading-1'>
-				{{ post.cooked }}
-			</div>
-		</div>
-	</li>
+  <li id='{{ commentHTMLId }}' class='row mb-5 block-comments__item comment-{{ post.id }} {{ isNew }}'
+      data-topic='{{ tid }}' data-comment='{{ post.id }}'>
+    <div id='reply-to-{{ post.post_number }}'></div>
+    <figure class='col-auto mb-0'>
+      <img class='block-comments__img rounded-circle' src='{{ avatarUrl }}'>
+    </figure>
+    <div class='col'>
+      <div class='row align-items-center justify-content-between' id='comment-heading-1'>
+        <div class='col-auto'>
+          <span class='block-comments__name text-capitalize mb-0'> {{ post.username }} </span>
+          <div id='reply-link-{{ post.id }}'></div>
+        </div>
+        <div class='col-auto'>
+          <p class='d-inline-block mr-2 block-comments__date mb-0'> {{ date }} </p>
+          <button class='block-comments__item-btn' data-toggle='collapse'
+                  data-target='#collapse-{{ post.id }}'>
+            <span class='docs-icon-collapse'></span>
+            <span class='docs-icon-expand'></span>
+          </button>
+        </div>
+      </div>
+      <p class='text-uppercase block-comments__role'> {{ customField }} </p>
+      <div id='collapse-{{ post.id }}' class='block-comments__paragraph pl-3 border-left collapse show'
+           aria-labelledby='comment-heading-1'>
+        {{ post.cooked }}
+      </div>
+    </div>
+  </li>
 </script>
 
 <script id="discourse__reply-link" type="text/template">
-	<div>
-		<a class='reply-to-post' href='#reply-to-{{ post.reply_to_post_number }}'>
-			In risposta a {{ replyDest.username }} <small>(#{{ post.reply_to_post_number }})</small>
-		</a>
-	</div>
+  <div>
+    <a class='reply-to-post' href='#reply-to-{{ post.reply_to_post_number }}'>
+      In risposta a {{ replyDest.username }}
+      <small>(#{{ post.reply_to_post_number }})</small>
+    </a>
+  </div>
 </script>
 
 <script id="discourse__login" type="text/template">
-	<div class="new-comment__login">
-		Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta
-		<div><a href="#" class="btn btn-success login-button disabled">Login</a></div>
-	</div>
+  <div class="new-comment__login">
+    <div><a href="#" class="login-button disabled">Accedi al Forum</a> per commentare</div>
+  </div>
+</script>
+
+<script id="discourse__markup__tooltip" type="text/template">
+  <div class='tooltip tooltip--active doc-tooltip new-comment__suggestions__tooltip' role='tooltip'>
+    <div class='tooltip__wrap'>
+      Markdown per la formattazione del testo:
+      <ul class='tooltip__content'>
+        <li> Grassetto: __text__ (o **text**)</li>
+        <li> Corsivo: _text_</li>
+        <li> Link: [Testo](http://url-to-link.ex)</li>
+        <li> Citazione: &gt; Testo citazione</li>
+      </ul>
+    </div>
+  </div>
 </script>
 {% endraw %}

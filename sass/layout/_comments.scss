@@ -3,12 +3,12 @@ $comment_line_height: 21px;
 $letter_spacing: 0.88px;
 
 .block-comments {
-  font-family: $font-family-sans-serif;
+  font-family: sans-serif;
   margin-top: 2rem;
   margin-bottom: 0.25rem;
 
   p {
-    font-family: $font-family-sans-serif;
+    font-family: sans-serif;
   }
 }
 
@@ -160,6 +160,15 @@ form[id^="new-comment-"] {
   &.sending {
     .loading {
       display: inline-block !important;
+      position: relative;
+      overflow: visible;
+      width: 40px;
+      z-index: 1;
+
+      &::before {
+        border: 5px solid $blue !important;
+        top: 60%;
+      }
     }
   }
 
