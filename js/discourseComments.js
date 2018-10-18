@@ -227,7 +227,7 @@ module.exports = discourseComments = (function ($) {
       $('.new-comment__suggestions').popover({
         template: $tpl({}, 'discourse__markup__tooltip'),
         container: 'body',
-        offset:'550px , 40px'
+        offset:'175px , 40px'
       });
 
       // Logout icon click
