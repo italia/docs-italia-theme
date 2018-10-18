@@ -1,3 +1,5 @@
+var $tpl = require('./getTpl');
+
 // Sticky sidebar
 module.exports = themeSearchboxCollapse = (function ($) {
 
@@ -6,7 +8,7 @@ module.exports = themeSearchboxCollapse = (function ($) {
       var $searchbox = $('#rtd-search-form'),
         $searchboxDesktopContainer = $searchbox.parent(),
         $searchboxMobileContainer = $('.doc-header'),
-        wrapper = '<div class="row p-2 pr-3"><div class="col"></div></div>';
+        wrapper = $tpl({}, 'searchbox_collapse__row');
 
       $('#di-show-searchbox').on('click', function(event) {
         $(this).toggleClass('active');

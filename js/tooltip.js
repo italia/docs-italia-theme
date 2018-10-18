@@ -1,3 +1,5 @@
+var $tpl = require('./getTpl');
+
 // Tooltips
 module.exports = themeToolTip = (function ($) {
   var that;
@@ -118,11 +120,7 @@ module.exports = themeToolTip = (function ($) {
     setPopOver: function() {
       // Keywords popover
       for (var index = 0; index < that.toolTipArrayKeywords.length; ++index) {
-        var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
-            "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArrayKeywords[index].ref + "></button>" +
-            "<h2 class='tooltip__title'>" + that.toolTipArrayKeywords[index].title + "</h2>" +
-            "<p class='tooltip__content'>" + that.toolTipArrayKeywords[index].body + "</p>" +
-            "</div></div>",
+        var toolTipTemplate = $tpl({ item: that.toolTipArrayKeywords[index] }, 'tooltip__main'),
             btn = that.toolTipArrayKeywords[index].btn;
 
         if (themeToolTip.getDesktop() ) {
@@ -152,12 +150,11 @@ module.exports = themeToolTip = (function ($) {
           trimmedSummary = themeTranslate.getTranslation().glossayEmpty;
         }
 
-        var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip' role='tooltip'><div class='tooltip__wrap'>" +
-            "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArrayGlossary[index].ref + "></button>" +
-            "<h2 class='tooltip__title'>" + that.toolTipArrayGlossary[index].title + "</h2>" +
-            "<p class='tooltip__content'>" +  trimmedSummary + "</p>" + btnToGlossary +
-            "</div></div>",
-            btn = that.toolTipArrayGlossary[index].btn;
+        var toolTipTemplate = $tpl({
+          item: that.toolTipArrayGlossary[index],
+          trimmedSummary: trimmedSummary,
+          btnToGlossary: btnToGlossary
+        }, 'tooltip__glossary'), btn = that.toolTipArrayGlossary[index].btn;
 
         if (themeToolTip.getDesktop() ) {
           btn.popover({template:toolTipTemplate,offset:'125px , 40px',container: btn});
@@ -170,11 +167,7 @@ module.exports = themeToolTip = (function ($) {
 
       // Note Popover.
       for (var index = 0; index < that.toolTipArrayNote.length; ++index) {
-        var toolTipTemplate = "<div class='tooltip tooltip--active doc-tooltip doc-tooltip--note' role='tooltip'><div class='tooltip__wrap'>" +
-            "<button type='button' role='button' class='tooltip__close-btn' data-ref=" + that.toolTipArrayNote[index].ref + "></button>" +
-            "<h2 class='tooltip__title'>" + that.toolTipArrayNote[index].title + "</h2>" +
-            "<p class='tooltip__content'>" + that.toolTipArrayNote[index].body + "</p>" +
-            "</div></div>",
+        var toolTipTemplate = $tpl({ item: that.toolTipArrayNote[index] }, 'tooltip__note'),
             btn = that.toolTipArrayNote[index].btn;
         btn.popover({template:toolTipTemplate,container: btn});
       };
