@@ -145,9 +145,9 @@ module.exports = themeToolTip = (function ($) {
           trimmedSummary = summary.substr(0 , 90);
           trimmedSummary = trimmedSummary.substr(0, Math.min(trimmedSummary.length, trimmedSummary.lastIndexOf(" "))) + ' ...'
           btnToGlossary = "<a class='tooltip__link' href=" + that.toolTipArrayGlossary[index].term + " + title=" + that.toolTipArrayGlossary[index].title + ">" +
-          themeTranslate.getTranslation().goToGlossay + "</a>";
+          t.go_to_glossary + "</a>";
         } else {
-          trimmedSummary = themeTranslate.getTranslation().glossayEmpty;
+          trimmedSummary = t.glossary_empty;
         }
 
         var toolTipTemplate = $tpl({

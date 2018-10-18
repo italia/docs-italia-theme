@@ -158,10 +158,10 @@ module.exports = themeMarkupModifier = (function ($) {
         var $element = $(this),
             str =  $element.text(),
             newStr = str.replace(/[\[\]]/g,''),
-            backToText = themeTranslate.getTranslation().backToText,
+            backToText = t.back_to_text,
             stringToAppend = $tpl({ text: stringToAppend }, 'markup_modifier__note-action');
 
-        $element.text(themeTranslate.getTranslation().note +  ' ' + newStr);
+        $element.text(t.note +  ' ' + newStr);
 
         // Add btn ( x | back) if popover isn't showed inside table checking the 'footnote-from-table' class
         if( $element.closest('.footnote-from-table').length == 0 ) {
@@ -190,8 +190,8 @@ module.exports = themeMarkupModifier = (function ($) {
           idName = matches[1];
         }
 
-        if( idName != undefined && themeTranslate.getTranslation()[idName] != undefined ) {
-          return themeTranslate.getTranslation()[idName];
+        if(idName != undefined && t[idName] != undefined) {
+          return t[idName];
         } else {
           return title;
         }
@@ -200,8 +200,8 @@ module.exports = themeMarkupModifier = (function ($) {
 
     deepeninModifier: function() {
       var $hiddenBlock = that.$deepeningParagraph.slice(4,that.$deepeningParagraph.length),
-        more = themeTranslate.getTranslation().showMore,
-        less = themeTranslate.getTranslation().showLess,
+        more = t.show_more,
+        less = t.show_less,
         btn = $tpl({ more: more, less: less }, 'markup_modifier__admonition');
 
       $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');

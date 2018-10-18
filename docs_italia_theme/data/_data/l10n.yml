@@ -41,7 +41,7 @@ it:
     other_actions: altre azioni
     comments: commenti
     back_to_text: torna al testo
-    glossay_empty: informazione non trovata
+    glossary_empty: informazione non trovata
     glossary: glossario
     go_to_glossary: vai al glossario
     deepening: approfondimento
@@ -143,7 +143,7 @@ en:
     other_actions: other actions
     comments: comments
     back_to_text: back to the text
-    glossay_empty: information not found
+    glossary_empty: information not found
     glossary: glossary
     go_to_glossary: vai al glossario
     deepening: deepening

@@ -32,12 +32,12 @@ module.exports = themeSectionNav = (function ($) {
           modalContentClass = detectCModalContent(),
           modalContainerClass = detectCModalContainer(),
           nav = $tpl({
-            seeActions: themeTranslate.getTranslation().seeActions,
+            seeActions: t.see_actions,
             modalClass: modalClass,
             modalContainerClass: modalContainerClass,
             modalContentClass: modalContentClass,
             title: title,
-            copyLink: themeTranslate.getTranslation().copyLink
+            copyLink: t.copy_link
           }, 'section_navigation__nav');
       container = element.closest('.chapter-header');
       container.append(nav);
