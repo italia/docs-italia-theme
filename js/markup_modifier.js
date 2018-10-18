@@ -111,6 +111,7 @@ module.exports = themeMarkupModifier = (function ($) {
           $error = $('.admonition.error .admonition-title'),
           $consiglio = $('.admonition.hint .admonition-title'),
           $attention = $('.admonition.attention .admonition-title'),
+          $warning = $('.admonition.warning .admonition-title'),
           $important = $('.admonition.important .admonition-title'),
           $usefulDocs = $('.useful-docs li'),
           $usefulDocsPdf = $usefulDocs.filter(function(){
@@ -128,6 +129,7 @@ module.exports = themeMarkupModifier = (function ($) {
       $error.prepend(this.iconMarkup('procedure'));
       $consiglio.prepend(this.iconMarkup('hint'));
       $attention.prepend(this.iconMarkup('attention'));
+      $warning.prepend(this.iconMarkup('attention'));
       $important.prepend(this.iconMarkup('hint'));
       $usefulDocsPdf.prepend(this.iconMarkup('pdf'));
       $usefulDocsHtml.prepend(this.iconMarkup('html'));

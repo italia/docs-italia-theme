@@ -9,7 +9,7 @@
   right: 0;
   left: 0;
   top: 0;
-  background-color: $green;
+  background-color: $teal;
   text-align: left;
   padding: 0.5rem 0;
   text-transform: uppercase;
@@ -576,14 +576,27 @@
     background: $sky-blue;
     display: inline-block;
     font-weight: bold;
-    padding: 0.6rem;
   }
 }
 
-.code .highlight {
-  background: none;
+.highlight {
+  padding: 1rem;
+  margin-bottom: 1em;
+
+  pre {
+    margin: 0;
+  }
+
+  .highlighttable & {
+    padding: 0;
+  }
+
+  .code & {
+    background: none;
+  }
 }
 
-.highlight-rst pre {
-  padding: 1rem;
+code .pre {
+  background-color: $light-green;
+  padding: 0.2rem;
 }

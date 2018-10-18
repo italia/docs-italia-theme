@@ -3,6 +3,7 @@ it:
   name: italiano
   t:
     this: it
+    locale: it_IT
     about_these_documents: Informazioni su questi documenti
     active_lang: lingua attiva
     cookiebar_accept: Accetto
@@ -97,6 +98,7 @@ en:
   name: english
   t:
     this: en
+    locale: en_US
     about_these_documents: About these Documents
     active_lang: current language
     cookiebar_accept: Accept
