@@ -133,7 +133,7 @@ module.exports = themeMarkupModifier = (function ($) {
       $important.prepend(this.iconMarkup('hint'));
       $usefulDocsPdf.prepend(this.iconMarkup('pdf'));
       $usefulDocsHtml.prepend(this.iconMarkup('html'));
-      $numericList.prepend(this.iconMarkup('step Icon--ol'));
+      $numericList.prepend(this.iconMarkup('step'));
       $codeTitle.prepend(this.iconMarkup('example'));
       $deepeningTitle.prepend(this.iconMarkup('attention'));
       $consultationTitle.prepend(this.iconMarkup('edit'));

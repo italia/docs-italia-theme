@@ -45,6 +45,10 @@ function DiscourseApi() {
       that.user.current();
       // Get csrf token
       that.user.csrf();
+      // Scroll to comment-box
+      $('html, body').animate({
+        scrollTop: $('form[id^="new-comment-"]').offset().top
+      }, 0);
     }
   };
 
