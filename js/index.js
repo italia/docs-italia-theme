@@ -27,7 +27,7 @@ var themeScrollspy = require('./scrollspy.js');
 // Init all
 $(document).ready(function() {
 
-  themeGlossary.init(glossayReady.bind(this));
+  themeGlossary.init(glossaryReady.bind(this));
   themeMarkupModifier.init();
   themeChapterNav.init();
   themeNote.init();
@@ -44,7 +44,7 @@ $(document).ready(function() {
   // themeScrollspy.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
-  function glossayReady() {
+  function glossaryReady() {
     themeToolTip.init();
   }
 });
