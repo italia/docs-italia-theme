@@ -59,7 +59,8 @@
   float: left;
 }
 
-.Icon {
+[class^="docs-icon-"],
+[class*=" docs-icon-"] {
   margin-right: 0.5rem;
   vertical-align: middle;
   color: inherit;

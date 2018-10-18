@@ -1,3 +1,5 @@
+var $tpl = require('./getTpl');
+
 // Modify DOM via JS.
 module.exports = themeMarkupModifier = (function ($) {
   var that;
@@ -43,7 +45,7 @@ module.exports = themeMarkupModifier = (function ($) {
             title = $element.html(),
             number = themeMarkupModifier.startingNumber(title);
 
-        $element.wrap('<div class="chapter-header clearfix"><div class="title-wrap">');
+        $element.wrap($tpl({}, 'markup_modifier__chapter-header'));
         if( !themeMarkupModifier.dotNumberValidator(number) ) {
           $element.html(title.replace(number , '<span class="title__chapter">' + number + '</span>'));
           $element.addClass('title-has-nav');
@@ -99,12 +101,17 @@ module.exports = themeMarkupModifier = (function ($) {
       var $img = $('.procedure.topic').find('img');
       $img.wrap('<div class="procedure__img">');
     },
+  
+    iconMarkup: function (value) {
+      return $tpl({ i: value }, 'markup_modifier__icon');
+    },
 
     addIcon: function() {
       var $note = $('.admonition.note .admonition-title'),
           $error = $('.admonition.error .admonition-title'),
           $consiglio = $('.admonition.hint .admonition-title'),
           $attention = $('.admonition.attention .admonition-title'),
+          $warning = $('.admonition.warning .admonition-title'),
           $important = $('.admonition.important .admonition-title'),
           $usefulDocs = $('.useful-docs li'),
           $usefulDocsPdf = $usefulDocs.filter(function(){
@@ -118,17 +125,18 @@ module.exports = themeMarkupModifier = (function ($) {
           $deepeningTitle = $('.admonition-deepening .admonition-title');
           $consultationTitle = $('.admonition-consultazione .admonition-title');
 
-      $note.prepend('<span class="Icon docs-icon-note"></span>');
-      $error.prepend('<span class="Icon docs-icon-procedure"></span>');
-      $consiglio.prepend('<span class="Icon docs-icon-hint"></span>');
-      $attention.prepend('<span class="Icon docs-icon-attention"></span>');
-      $important.prepend('<span class="Icon docs-icon-hint"></span>');
-      $usefulDocsPdf.prepend('<span class="Icon docs-icon-pdf"></span>');
-      $usefulDocsHtml.prepend('<span class="Icon docs-icon-html"></span>');
-      $numericList.prepend('<span class="Icon docs-icon-step Icon--ol"></span>');
-      $codeTitle.prepend('<span class="Icon docs-icon-example"></span>');
-      $deepeningTitle.prepend('<span class="Icon docs-icon-attention"></span>');
-      $consultationTitle.prepend('<span class="Icon docs-icon-edit"></span>');
+      $note.prepend(this.iconMarkup('note'));
+      $error.prepend(this.iconMarkup('procedure'));
+      $consiglio.prepend(this.iconMarkup('hint'));
+      $attention.prepend(this.iconMarkup('attention'));
+      $warning.prepend(this.iconMarkup('attention'));
+      $important.prepend(this.iconMarkup('hint'));
+      $usefulDocsPdf.prepend(this.iconMarkup('pdf'));
+      $usefulDocsHtml.prepend(this.iconMarkup('html'));
+      $numericList.prepend(this.iconMarkup('step'));
+      $codeTitle.prepend(this.iconMarkup('example'));
+      $deepeningTitle.prepend(this.iconMarkup('attention'));
+      $consultationTitle.prepend(this.iconMarkup('edit'));
     },
 
     noteModifier: function() {
@@ -149,11 +157,9 @@ module.exports = themeMarkupModifier = (function ($) {
       that.$noteBackref.each(function(index) {
         var $element = $(this),
             str =  $element.text(),
-            newStr = str.replace(/[\[\]]/g,'');
-            stringToAppend = "<div class='note-action'>" +
-                             "<button type='button' class='note-close-btn'>×</button>" +
-                             "<button type='button' class='note-back-btn'><i class='it-arrow-up'></i>" + themeTranslate.getTranslation().backToText + "</button>" +
-                             "</div>";
+            newStr = str.replace(/[\[\]]/g,''),
+            backToText = themeTranslate.getTranslation().backToText,
+            stringToAppend = $tpl({ text: stringToAppend }, 'markup_modifier__note-action');
 
         $element.text(themeTranslate.getTranslation().note +  ' ' + newStr);
 
@@ -194,10 +200,9 @@ module.exports = themeMarkupModifier = (function ($) {
 
     deepeninModifier: function() {
       var $hiddenBlock = that.$deepeningParagraph.slice(4,that.$deepeningParagraph.length),
-          btn = "<div class='admonition__toggle-wrap'><button type='button' class='admonition__toggle-btn'>" +
-          "<span class='admonition__toggle-show-more'>" + themeTranslate.getTranslation().showMore + "<span class='Icon docs-icon-plus'></span></span>" +
-          "<span class='admonition__toggle-show-less'>" + themeTranslate.getTranslation().showLess + "<span class='Icon docs-icon-minus'></span></span>" +
-          "</button></div>";
+        more = themeTranslate.getTranslation().showMore,
+        less = themeTranslate.getTranslation().showLess,
+        btn = $tpl({ more: more, less: less }, 'markup_modifier__admonition');
 
       $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');
       that.$admonitionDeepening.append(btn);
