@@ -130,7 +130,8 @@
   }
 }
 
-.docs-icon-attention {
+.docs-icon-attention,
+.docs-icon-warning {
   &::before {
     content: unicode($docs-icon-attention);
   }

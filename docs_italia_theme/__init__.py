@@ -93,7 +93,7 @@ def load_theme_data():
 
     return context
 
-def add_yaml_data(app, pagename, templatename, context, doctree):
+def add_context_data(app, pagename, templatename, context, doctree):
     """Add yaml data to Sphinx context"""
     context['site'] = app.site_data
     # The translation context is pinned to the Italian sources, as Sphinx has
@@ -103,10 +103,14 @@ def add_yaml_data(app, pagename, templatename, context, doctree):
     else:
         language = app.site_data['default_language']
     context['t'] = app.site_data['data']['l10n'][language]['t']
-
+    
     # Run only for local development
     if os.environ.get('READTHEDOCS', None) != 'True':
         context['LOCAL'] = True
+        context['PRODUCTION_DOMAIN'] = 'localhost'
+        context['slug'] = 'demo-document'
+        context['current_version'] = 'bozza'
+        context['rtd_language'] = 'it'
 
         try:
             with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
@@ -123,7 +127,7 @@ def add_yaml_data(app, pagename, templatename, context, doctree):
             ('demo', '#'),
             ('docs italia', '#')
         ]
-
+    
     if 'docsitalia_data' in context:
         context['docstitle'] = context['docsitalia_data']['document']['name']
 
@@ -177,7 +181,7 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             figure_title = figurenode.children[0].get('alt') or context['t']['no_description']
             try:
                 figure_text_string = 'Fig. {}.{} - {}'.format(
-                    figure_number[0], figure_number[1], figure_title.capitalize())
+                    figure_number[0], figure_number[1], figure_title)
             except IndexError:
                 continue
             figure_text = Text(figure_text_string)
@@ -206,7 +210,7 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
                 continue
             table_title = tablenode.children[0].rawsource if tablenode.children[0].rawsource else context['t']['no_description']
             table_title = (table_title[:60] + '...') if len(table_title) > 60 else table_title
-            table_text_string = 'Tab. ' + '.'.join([str(n) for n in table_number]) + ' - ' + table_title.capitalize()
+            table_text_string = 'Tab. ' + '.'.join([str(n) for n in table_number]) + ' - ' + table_title
             table_text = Text(table_text_string)
             table_text.rawsource = table_text_string
             table_reference = reference()
@@ -321,6 +325,7 @@ class DiscourseCommentsDirective(Directive):
                         <figure class="col-auto mb-0">
                             <img class="block-comments__img new-comment__figure rounded-circle" src="">
                             <figcaption>
+                                <!-- <a href='#logout' class="block-comments__logout-link block-comments__logout-link--icon" alt="Logout">&#10060;</a> -->
                                 <a href='#logout' class="block-comments__logout-link block-comments__logout-link--visible" data-toggle="modal" data-target="#logout-modal" title="Logout" alt="Logout">Logout</a>
                             </figcaption>
                         </figure>
@@ -396,7 +401,7 @@ class DiscourseCommentsDirective(Directive):
 
 def setup(app):
     app.site_data = load_theme_data()
-    app.connect('html-page-context', add_yaml_data)
+    app.connect('html-page-context', add_context_data)
     app.connect('html-page-context', generate_additonal_tocs)
     app.connect('doctree-resolved', generate_glossary_json)
     app.connect('doctree-resolved', glossary_page_id)
