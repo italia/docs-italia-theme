@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'docs-italia';
+  font-family: $docs-italia-font-icon;
   src: url('#{$icon-font-path}/docs-italia.eot');
   src:
     url('#{$icon-font-path}/docs-italia.eot#iefix') format('embedded-opentype'),
@@ -14,7 +14,7 @@
 [class*=" docs-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   /* stylelint-disable */
-  font-family: 'docs-italia' !important;
+  font-family: $docs-italia-font-icon !important;
   /* stylelint-enable */
   speak: none;
   font-style: normal;
