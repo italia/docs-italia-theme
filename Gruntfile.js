@@ -32,13 +32,13 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'node_modules/bootstrap-italia/src/icons/font',
-          src: ['**'], 
+          src: ['**'],
           dest: 'docs_italia_theme/static/font'
         },
         {
           expand: true,
           cwd: 'node_modules/bootstrap-italia/src/icons/css',
-          src: 'italia-icon-font.css', 
+          src: 'italia-icon-font.css',
           dest: 'docs_italia_theme/static/css'
         }],
       },

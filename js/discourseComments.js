@@ -1,4 +1,5 @@
 var Discourse = require('./discourse_api');
+var $tpl = require('./getTpl');
 
 // Remaps topic's posts object
 function _remapPosts(posts) {
@@ -36,55 +37,27 @@ function _parseUserRefs (text) {
 }
 
 // Create the comment markup with given topic id and post
-function _createMarkup (tid, post, nPId) {
-  // Id attribute for comment div
-  var commentHTMLId = 'docs-comment-' + tid + '-' + post.id;
-  // Replace the avatar's size from template url
-  var avatarUrl = _createAvatarUrl(post.avatar_template, 110);
+function _createMarkup (target, tid, post, nPId) {
   // Create a javascript Date object starts from post.updated_at date value
-  var date = new Date(post.updated_at);
-  // And formats as dd/mm/YYYY hh:ii
-  date = date.getDate()  + ' ' + (date.toLocaleString("it-IT", { month: "short" })) + ' ' + date.getFullYear() + ", " + date.getHours() + ":" + date.getMinutes();
-  // Check if current rendering comment is a new one
-  var isNew = false;
-  if (typeof nPId !== "undefined") {
-    isNew = post.id == nPId;
-  }
-  if (isNew) {
-    // Remove is-new after 5s
-    setTimeout(function () {
-      $('#' + commentHTMLId).removeClass('is-new');
-    }, 5000);
-  }
-
-  // Change user link to points correctly to discourse site user's profile
+  var d = new Date(post.updated_at);
   post.cooked = _parseUserRefs(post.cooked);
 
-  // Get user role and then return html for comment
-  var customField = typeof Discourse.user.fields[post.username] === "undefined" ? 'utente' : Discourse.user.fields[post.username];
+  var rendered = $tpl({
+    post: post,
+    tid: tid,
+    // Get user role and then return html for comment
+    customField: typeof Discourse.user.fields[post.username] === "undefined" ? 'utente' : Discourse.user.fields[post.username],
+    // Id attribute for comment div
+    commentHTMLId: 'docs-comment-' + tid + '-' + post.id,
+    // Replace the avatar's size from template url
+    avatarUrl: _createAvatarUrl(post.avatar_template, 110),
+    // And formats as dd/mm/YYYY hh:ii
+    date: d.getDate()  + "/" + (d.getMonth()+1) + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes(),
+    // Check if current rendering comment is a new one
+    isNew: typeof nPId !== 'undefined' ? (post.id == nPId ? 'is-new' : '') : '',
+  }, 'discourse__comment');
 
-  // Return markup
-  return new Promise(function (resolve) {
-    resolve("" +
-    "<li id='"+ commentHTMLId + "' class='row mb-5 block-comments__item comment-"+ post.id + (isNew ? ' is-new' : '') + "' data-topic='"+ tid +"' data-comment="+post.id+">" +
-      "<div id='reply-to-"+post.post_number+"'></div>" +
-      "<figure class='col-auto mb-0'><img class='block-comments__img rounded-circle' src='"+ avatarUrl +"'></figure>" +
-      "<div class='col'>" +
-        "<div class='row align-items-center justify-content-between' id='comment-heading-1'>" +
-          "<div class='col-auto'>" +
-            "<span class='block-comments__name text-capitalize mb-0'>" + (post.name !== '' ? post.name: post.username) + "</span>" +
-            "<div id='reply-link-"+post.id+"'></div>" +
-          "</div>" +
-          "<div class='col-auto'>" +
-            "<p class='d-inline-block mr-2 block-comments__date mb-0'>" + date + "</p>" +
-            "<button class='block-comments__item-btn' data-toggle='collapse' data-target='#collapse-"+ post.id +"'><span class='docs-icon-collapse'></span><span class='docs-icon-expand'></span></button>" +
-          "</div>" +
-        "</div>" +
-        "<p class='text-uppercase block-comments__role'>" + customField + "</p>" +
-        "<div id='collapse-"+ post.id +"' class='block-comments__paragraph pl-3 border-left collapse show' aria-labelledby='comment-heading-1'>" + post.cooked + "</div>" +
-      "</div>" +
-    "</li>");
-  });
+  target.append(rendered)
 }
 
 module.exports = discourseComments = (function ($) {
@@ -93,9 +66,6 @@ module.exports = discourseComments = (function ($) {
       // Obtains all comments boxes
       var $commentBox = $('ul.block-comments__list.items');
       var topicId = $commentBox.data('topic');
-
-      // Check if user is logged in
-      // if (!Discourse.userIsLoggedIn())
       // Before flush set fixed height, to avoid blink
       $commentBox.css('min-height', $commentBox.height() + 'px');
       // Flush commentBox
@@ -122,22 +92,16 @@ module.exports = discourseComments = (function ($) {
         // Get all posts for given topic id
         topicPosts.forEach(function (e) {
           // Append markup with comment to the comments box
-          _createMarkup(topicId, e, newPostId).then(function (html) {
-            $commentBox.append(html);
-            // Check if current comment is a reply to another
-            if (e.reply_to_post_number !== null) {
-              // Get the reply's target
-              var replyDest = topicPosts[e.reply_to_post_number];
-              // Create link to reply's target
-              $('#reply-link-' + e.id).append($(
-                  "<div>" +
-                  "<a class='reply-to-post' href='#reply-to-" + e.reply_to_post_number + "'>" +
-                  "In risposta a " + replyDest.username + "<small>(#"+ e.reply_to_post_number +")</small>" +
-                  "</a>" +
-                  "</div>"
-              ));
-            }
-          });
+          _createMarkup($commentBox, topicId, e, newPostId);
+          // Check if current comment is a reply to another
+          if (e.reply_to_post_number !== null) {
+            // Get the reply's target
+            var replyDest = topicPosts[e.reply_to_post_number];
+            // Create link to reply's target
+            var rendered = $tpl({ post: e, replyDest: replyDest }, 'discourse__reply-link');
+            // Append markup
+            $('#reply-link-' + e.id).append(rendered);
+          }
         })
       });
 
@@ -187,13 +151,8 @@ module.exports = discourseComments = (function ($) {
           return win;
         };
 
-        var message = '<div><a href="#" class="login-button disabled">Accedi al Forum</a> per commentare</div>';
-        $('form[id^="new-comment-"]').html(
-          '<div class="new-comment__write-box">'+
-            '<div class="new-comment__user-image new-comment__user-image--anon"><i class="docs-icon-comment"></i> </div>' +
-            '<div class="new-comment__login">' + message + '</div>' +
-          '</div>'
-        );
+        var loginMarkup = $tpl({}, 'discourse__login');
+        $('form[id^="new-comment-"]').html(loginMarkup);
       }
 
       // Handle login-button click
@@ -275,7 +234,7 @@ module.exports = discourseComments = (function ($) {
         container: 'body',
         offset:'550px , 40px'
       });
-      
+
       // Logout icon click
       $('#logout-modal__submit').bind('click', function (evt) {
         evt.preventDefault();
