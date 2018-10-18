@@ -146,7 +146,7 @@ module.exports = discourseComments = (function ($) {
           features.push('top=' + right);
           features.push('menubar=no');
           features.push('location=no');
-          
+
           var win = window.open(Discourse.authLink(), 'Discourse Authentication', features);
           return win;
         };
