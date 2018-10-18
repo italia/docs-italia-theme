@@ -124,6 +124,7 @@ module.exports = themeMarkupModifier = (function ($) {
           $codeTitle = $('.admonition-example .admonition-title');
           $deepeningTitle = $('.admonition-deepening .admonition-title');
           $consultationTitle = $('.admonition-consultation .admonition-title');
+          $procedureTitle = $('.procedure .topic-title');
 
       $note.prepend(this.iconMarkup('note'));
       $error.prepend(this.iconMarkup('procedure'));
@@ -137,6 +138,7 @@ module.exports = themeMarkupModifier = (function ($) {
       $codeTitle.prepend(this.iconMarkup('example'));
       $deepeningTitle.prepend(this.iconMarkup('attention'));
       $consultationTitle.prepend(this.iconMarkup('edit'));
+      $procedureTitle.prepend(this.iconMarkup('procedure'));
     },
 
     noteModifier: function() {
