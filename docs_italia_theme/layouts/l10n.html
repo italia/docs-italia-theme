@@ -1,0 +1,7 @@
+<script type="text/javascript">
+var t = {
+  {%- for key, trans in t.items() %}
+  {{ key }} : "{{ trans }}",
+  {%- endfor %}
+}
+</script>

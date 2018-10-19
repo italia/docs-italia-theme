@@ -6,7 +6,7 @@ module.exports = themeGlossary = (function ($) {
 
     $: {
       $url: '_static/data/glossary.json',
-      $glossay: {},
+      $glossary: {},
       callback: {}
     },
 
@@ -24,7 +24,7 @@ module.exports = themeGlossary = (function ($) {
     },
 
     success: function(data) {
-      that.$glossay = data;
+      that.$glossary = data;
       that.callback();
     },
 
@@ -32,8 +32,8 @@ module.exports = themeGlossary = (function ($) {
       that.callback();
     },
 
-    getGlossay: function() {
-      return that.$glossay
+    getGlossary: function() {
+      return that.$glossary
     }
   }
 

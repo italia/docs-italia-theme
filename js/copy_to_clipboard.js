@@ -87,9 +87,9 @@ module.exports = themeCopyToClipboard = (function ($) {
          } finally {
             document.body.removeChild(textarea)
 
-            $button.html(themeTranslate.getTranslation().copiedLink);
+            $button.html(t.copied_link);
             setTimeout(function(){
-              $button.html(themeTranslate.getTranslation().copyLink);
+              $button.html(t.copy_link);
             }, 3000);
          }
       }

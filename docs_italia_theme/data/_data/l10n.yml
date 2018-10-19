@@ -41,11 +41,18 @@ it:
     other_actions: altre azioni
     comments: commenti
     back_to_text: torna al testo
-    glossay_empty: informazione non trovata
+    glossary_empty: informazione non trovata
     glossary: glossario
     go_to_glossary: vai al glossario
     deepening: approfondimento
     example: esempio
+    must: si deve
+    must_not: non si deve
+    should: si dovrebbe
+    should_not: non si dovrebbe
+    may: si può
+    use: usa
+    use_not: non usare
     consultation: consultazione
     show_more: mostra tutto
     show_less: mostra meno
@@ -136,11 +143,18 @@ en:
     other_actions: other actions
     comments: comments
     back_to_text: back to the text
-    glossay_empty: information not found
+    glossary_empty: information not found
     glossary: glossary
     go_to_glossary: vai al glossario
     deepening: deepening
     example: example
+    must: must
+    must_not: must not
+    should: should
+    should_not: should not
+    may: may
+    use: use
+    use_not: don't use
     consultation: consultation
     show_more: show more
     show_less: show less

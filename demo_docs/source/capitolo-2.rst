@@ -55,7 +55,7 @@ Ex cum stet omittam oportere, nerou set quas audire splendide. Nam no esse
 eleifend, vis an wisi fali dignissim. Vim ad augue vidisse, adhuc everti eos te.
 
 .. admonition:: deepening
-   :class: admonition-deepening admonition-display-page name-deepening
+   :class: admonition-deepening display-page
    :name: approfondimento
 
    Nec albucius phaedrum deterruisset ut, paulo ignota ceteros at eum. Ut legere
@@ -129,6 +129,13 @@ augue vidisse, adhuc everti eos te, sea blandit adversarium ne.
 Civibus facilisis vulputate ex mea, summo dicunt sed et. In diam purto mea.
 Iriure graecis ei vis. Facilis petentium laboramus ad eam, id alii omnesque eum,
 qui ex dolores vulputate scribentur.
+
+.. admonition:: avviso
+
+   Eum in natum modus, in viderer phaedrum splendide. Dicit everti tur
+   pertinacia cu eam, laudem option iracundia nam an, eu mei duis choro
+   reprehendunt cour deiro sant. Ius eu amet verear graecis, ne quot posse sea,
+   quod aeterno utroque est in. Sit comprehen sam, timeam reprimique cum ne.
 
 Dicit everti tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis
 choro reprehendunt cour deiro sant. Ius eu amet verear graecis, ne quot posse
@@ -327,7 +334,7 @@ eleifend, vis an wisi fali dignissim. Vim ad augue vidisse, adhuc everti eos te.
 
 
 .. admonition:: example
-   :class: admonition-example admonition-display-page name-example
+   :class: admonition-example display-page
 
    .. role:: admonition-internal-title
       :class: admonition-internal-title
@@ -433,7 +440,7 @@ dolore magnam aliquam quaerat voluptatem [5]_.
    <modello strategico>`.
 
 .. admonition:: example
-  :class: admonition-example admonition-display-page full-width name-example
+  :class: admonition-example display-page full-width
 
   `File publisher_settings.yml tratto dallo Starter
   kit`:admonition-internal-title:

@@ -9,7 +9,7 @@ module.exports = themeToolTip = (function ($) {
     $: {
       btn: $('#doc-content .reference.internal'),
       $btnKeywords : {},
-      $btnGlossay: {},
+      $btnGlossary: {},
       docWindow: $( window ),
       $body: $('body'),
       toolTipArrayKeywords: [],
@@ -27,8 +27,8 @@ module.exports = themeToolTip = (function ($) {
         return ($(this).closest('.pull-quote').length)
       });
       // Tooltip glossary
-      that.$btnGlossay = that.btn.filter(function(){
         return ( $(this).closest('.pull-quote').length == 0 && $(this).find('.xref').length )
+      that.$btnGlossary = that.btn.filter(function() {
       });
       // Tooltip inside Table
       that.$tableNoteBtn = that.$noteBtn.filter(function(){
@@ -67,7 +67,7 @@ module.exports = themeToolTip = (function ($) {
         that.toolTipArrayKeywords.push(new themeToolTip.setDataKeywords($(this),index));
       });
 
-      that.$btnGlossay.each(function(index) {
+      that.$btnGlossary.each(function(index) {
         var title = $(this).attr('href'),
             hashIndex = title.indexOf("#"),
             title = title.substring(hashIndex +1, title.length).replace('term-','');
@@ -141,13 +141,13 @@ module.exports = themeToolTip = (function ($) {
 
         // Check if glossary term exist, if not replace default text and hide link.
         if ( themeToolTip.validateGlossaryData(index) ) {
-          summary = themeGlossary.getGlossay()[that.toolTipArrayGlossary[index].title];
+          summary = themeGlossary.getGlossary()[that.toolTipArrayGlossary[index].title];
           trimmedSummary = summary.substr(0 , 90);
           trimmedSummary = trimmedSummary.substr(0, Math.min(trimmedSummary.length, trimmedSummary.lastIndexOf(" "))) + ' ...'
           btnToGlossary = "<a class='tooltip__link' href=" + that.toolTipArrayGlossary[index].term + " + title=" + that.toolTipArrayGlossary[index].title + ">" +
-          themeTranslate.getTranslation().goToGlossay + "</a>";
+          t.go_to_glossary + "</a>";
         } else {
-          trimmedSummary = themeTranslate.getTranslation().glossayEmpty;
+          trimmedSummary = t.glossary_empty;
         }
 
         var toolTipTemplate = $tpl({
@@ -199,7 +199,7 @@ module.exports = themeToolTip = (function ($) {
     },
 
     validateGlossaryData: function(index) {
-      if ( themeGlossary.getGlossay()[that.toolTipArrayGlossary[index].title] != undefined ) {
+      if ( themeGlossary.getGlossary()[that.toolTipArrayGlossary[index].title] != undefined ) {
         return true
       } else {
         return false
