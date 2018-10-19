@@ -190,6 +190,7 @@ module.exports = themeMarkupModifier = (function ($) {
 
         if(matches != null) {
           idName = matches[1];
+          idName = idName.replace('-', '_');
         }
 
         if(idName != undefined && t[idName] != undefined) {
