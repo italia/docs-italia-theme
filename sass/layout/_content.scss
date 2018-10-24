@@ -322,6 +322,11 @@
       padding-bottom: 0.2rem;
       background: linear-gradient($mid-dark-blue, $mid-dark-blue) no-repeat right bottom / calc(100% - 2rem) 2px;
       margin-bottom: 1rem;
+
+      [class^="docs-icon-"],
+      [class*=" docs-icon-"] {
+        margin-right: 0.5rem;
+      }
     }
 
     .procedure__img {
