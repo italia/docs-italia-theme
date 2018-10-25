@@ -3,12 +3,12 @@ $comment_line_height: 21px;
 $letter_spacing: 0.88px;
 
 .block-comments {
-  font-family: sans-serif;
+  font-family: $font-family-sans-serif;
   margin-top: 2rem;
   margin-bottom: 0.25rem;
 
   p {
-    font-family: sans-serif;
+    font-family: $font-family-sans-serif;
   }
 }
 
@@ -151,12 +151,18 @@ $letter_spacing: 0.88px;
   font-size: $comment_font_size;
   line-height: $comment_line_height;
 
+  p {
+    font-family: $font-family-sans-serif;
+  }
+
   a {
     text-decoration: underline;
   }
 }
 
 form[id^="new-comment-"] {
+  font-family: $font-family-sans-serif;
+
   &:not(.sending) {
     .loading {
       display: none;
