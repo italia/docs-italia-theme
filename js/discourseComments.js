@@ -12,15 +12,6 @@ function _remapPosts(posts) {
   return remappedObject.reverse();
 };
 
-// Orders created_at posts' values
-function _orderDates(posts) {
-  var orderedArray = [];
-  posts.forEach(function (e) {
-    orderedArray.push(e.created_at);
-  });
-  return orderedArray.sort();
-}
-
 // Create the correct avatarUrl
 function _createAvatarUrl (template, size) {
   return Discourse.restUrl + '/' + template.replace('{size}', size);
@@ -181,26 +172,24 @@ module.exports = discourseComments = (function ($) {
           // Disable textarea & submit button
           $body.attr('disabled', true);
           $submit.attr('disabled', true);
-          setTimeout(function () {
-            Discourse.posts.post(body_value)
-              // Success
-              .then(function (results) {
-                $form.removeClass('sending');
-                $body.val('');
-                $body.attr('disabled', false);
-                Discourse.posts.get(topic_id, false).then(function (data) {
-                  // Re-init current modules, to update comments list
-                  module.exports.init(results.data.id, results);
-                });
-              })
-              // Error
-              .catch(function (error) {
-                var errorsString = error.response.data.errors.join('<br>');
-                $form.removeClass('sending');
-                $body.attr('disabled', false);
-                $errorsBox.text(errorsString);
+          Discourse.posts.post(body_value)
+            // Success
+            .then(function (results) {
+              $form.removeClass('sending');
+              $body.val('');
+              $body.attr('disabled', false);
+              Discourse.posts.get(topic_id, false).then(function (data) {
+                // Re-init current modules, to update comments list
+                module.exports.init(results.data.id, results);
               });
-          }, 1500);
+            })
+            // Error
+            .catch(function (error) {
+              var errorsString = error.response.data.errors.join('<br>');
+              $form.removeClass('sending');
+              $body.attr('disabled', false);
+              $errorsBox.text(errorsString);
+            });
         }
       });
 
@@ -232,7 +221,8 @@ module.exports = discourseComments = (function ($) {
       $('.new-comment__suggestions').popover({
         template: $tpl({}, 'discourse__markup__tooltip'),
         container: 'body',
-        offset:'175px , 40px'
+        offset:'175px , 40px',
+        trigger: 'focus',
       });
 
       // Logout icon click
