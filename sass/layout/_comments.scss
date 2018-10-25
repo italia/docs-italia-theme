@@ -3,13 +3,12 @@ $comment_line_height: 21px;
 $letter_spacing: 0.88px;
 
 .block-comments {
-  font-family: $font-family-sans-serif;
   margin-top: 2rem;
   margin-bottom: 0.25rem;
+}
 
-  p {
-    font-family: $font-family-sans-serif;
-  }
+.block-comments__body p {
+  font-family: $font-family-sans-serif;
 }
 
 .block-comments__header {
@@ -54,25 +53,6 @@ $letter_spacing: 0.88px;
 
 .block-comments__input {
   margin-bottom: 1em !important;
-
-  &:hover {
-    .block-comments__logout-link {
-      display: block;
-    }
-  }
-
-  input {
-    border: 1px $grey-light-01 solid;
-    border-radius: 5px;
-
-    &:focus {
-      border: 1px $grey-mid solid;
-    }
-
-    &::placeholder {
-      color: $grey;
-    }
-  }
 }
 
 .block-comments__toggle-btn {
@@ -151,18 +131,12 @@ $letter_spacing: 0.88px;
   font-size: $comment_font_size;
   line-height: $comment_line_height;
 
-  p {
-    font-family: $font-family-sans-serif;
-  }
-
   a {
     text-decoration: underline;
   }
 }
 
 form[id^="new-comment-"] {
-  font-family: $font-family-sans-serif;
-
   &:not(.sending) {
     .loading {
       display: none;

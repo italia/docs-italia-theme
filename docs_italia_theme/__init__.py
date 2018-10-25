@@ -333,7 +333,7 @@ class DiscourseCommentsDirective(Directive):
                     </div>
                     <!-- Buttons -->
                     <div class='new-comment__buttons'>
-                        <button type='submit' class='btn btn-primary btn-sm new-comment__submit' disabled='true'><div>invia</div></button>
+                        <button type='submit' class='btn btn-primary btn-sm new-comment__submit mr-2' disabled='true'><div>invia</div></button>
                         <button type="button" class="btn btn-sm btn-secondary new-comment__suggestions" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="lorem"> suggerimenti </button><span class="loading no-bg">&nbsp;</span>
                     </div>
                     <div class="new-comment__required">
