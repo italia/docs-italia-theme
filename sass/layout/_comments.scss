@@ -157,6 +157,12 @@ $letter_spacing: 0.88px;
 }
 
 form[id^="new-comment-"] {
+  &:not(.sending) {
+    .loading {
+      display: none;
+    }
+  }
+
   &.sending {
     .loading {
       display: inline-block !important;

@@ -91,17 +91,21 @@ module.exports = discourseComments = (function ($) {
 
         // Get all posts for given topic id
         topicPosts.forEach(function (e) {
-          // Append markup with comment to the comments box
-          _createMarkup($commentBox, topicId, e, newPostId);
-          // Check if current comment is a reply to another
-          if (e.reply_to_post_number !== null) {
-            // Get the reply's target
-            var replyDest = topicPosts[e.reply_to_post_number];
-            // Create link to reply's target
-            var rendered = $tpl({ post: e, replyDest: replyDest }, 'discourse__reply-link');
-            // Append markup
-            $('#reply-link-' + e.id).append(rendered);
+          if (!e.hidden) {
+            _createMarkup($commentBox, topicId, e, newPostId);
+            if (e.reply_to_post_number !== null) {
+              // Get the reply's target
+              var replyDest = topicPosts[e.reply_to_post_number];
+              // Create link to reply's target
+              var rendered = $tpl({
+                post: e,
+                replyDest: replyDest
+              }, 'discourse__reply-link');
+              // Append markup
+              $('#reply-link-' + e.id).append(rendered);
+            }
           }
+          // Append markup with comment to the comments box
         })
       });
 
@@ -193,6 +197,7 @@ module.exports = discourseComments = (function ($) {
               .catch(function (error) {
                 var errorsString = error.response.data.errors.join('<br>');
                 $form.removeClass('sending');
+                $body.attr('disabled', false);
                 $errorsBox.text(errorsString);
               });
           }, 1500);
