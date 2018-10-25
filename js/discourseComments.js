@@ -9,7 +9,7 @@ function _remapPosts(posts) {
     remappedObject[e.post_number] = e;
   });
 
-  return remappedObject;
+  return remappedObject.reverse();
 };
 
 // Orders created_at posts' values
@@ -245,15 +245,6 @@ module.exports = discourseComments = (function ($) {
       $(window).bind('keyCreated', function () {
         $('.btn.login-button').removeClass('disabled');
       });
-
-      // After new post
-      if (postObject !== null && typeof postObject !== "undefined") {
-        var beforeLast = Discourse.posts.postStream[Discourse.posts.postStream.length-(Discourse.posts.postStream.length > 2 ? 2 : 1)];
-        var idTarget = '#reply-to-' + beforeLast.post_number;
-        setTimeout(function () {
-          location.hash = idTarget;
-        }, 500);
-      }
     }
   }
 })(jQuery);
