@@ -37,7 +37,7 @@ function _parseUserRefs (text) {
 }
 
 // Create the comment markup with given topic id and post
-function _createMarkup (target, tid, post, nPId) {
+function _createMarkup (target, tid, post, nPId, reported) {
   // Create a javascript Date object starts from post.updated_at date value
   var d = new Date(post.updated_at);
   post.cooked = _parseUserRefs(post.cooked);
@@ -45,6 +45,7 @@ function _createMarkup (target, tid, post, nPId) {
   var rendered = $tpl({
     post: post,
     tid: tid,
+    reported: reported ? 'reported' : '',
     // Get user role and then return html for comment
     customField: typeof Discourse.user.fields[post.username] === "undefined" ? 'utente' : Discourse.user.fields[post.username],
     // Id attribute for comment div
@@ -92,7 +93,7 @@ module.exports = discourseComments = (function ($) {
         // Get all posts for given topic id
         topicPosts.forEach(function (e) {
           // Append markup with comment to the comments box
-          _createMarkup($commentBox, topicId, e, newPostId);
+          _createMarkup($commentBox, topicId, e, newPostId, e.hidden && typeof e.hidden_reason_id !== "undefined");
           // Check if current comment is a reply to another
           if (e.reply_to_post_number !== null) {
             // Get the reply's target
@@ -186,7 +187,14 @@ module.exports = discourseComments = (function ($) {
               })
               // Error
               .catch(function (error) {
-                var errorsString = error.response.data.errors.join('<br>');
+                var errorsString = '';
+                
+                // If user is "muted" by a moderator...
+                if (!Discourse.user.object.can_create_topic) {
+                  errorsString = 'Il tuo profilo risulta essere stato <b>silenziato</b>. Contatta un moderatore per avere più informazioni.<br>';
+                } else {
+                  errorsString = error.response.data.errors.join('<br>');
+                }
                 $form.removeClass('sending');
                 $errorsBox.append(errorsString);
               });
