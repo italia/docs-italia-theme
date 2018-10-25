@@ -29,8 +29,12 @@ function DiscourseApi() {
         // Get current user
         that.user.current();
         that.user.state('logged', true);
-        window.opener.document.location.href = sourceUrl;
-        window.close();
+        if (/Mobi|Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent)) {
+          window.document.location.href = sourceUrl;
+        } else {
+          window.opener.document.location.href = sourceUrl;
+          window.close();
+        }
       } else {
         // Remove ?payload get parameter from url
         window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
