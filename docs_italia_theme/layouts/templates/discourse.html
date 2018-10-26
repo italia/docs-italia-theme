@@ -35,10 +35,18 @@
 	</div>
 </script>
 
-<script id="discourse__login" type="text/template">
+<script id="discourse__login" type="text/template"\>
 	<div class="new-comment__login">
 		Clicca sul bottone "login" per effettuare l\'accesso a forum-italia e commenta
 		<div><a href="#" class="btn btn-success login-button disabled">Login</a></div>
+	</div>
+</script>
+
+<script id="discourse__silenced" type="text/template">
+	<div class="error error__silenced">
+		Il tuo account è stato temporaneamente sospeso, scopri di più leggendo
+		<a href="{{ baseUrl }}/u/{{username}}/notifications" target="_blank">le tue notifiche su Forum Italia</a>
+		<br>
 	</div>
 </script>
 {% endraw %}

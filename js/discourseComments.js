@@ -89,7 +89,7 @@ module.exports = discourseComments = (function ($) {
       $commentBox.each(function (idx, cB) {
         var topicId = $(cB).data('topic');
         var topicPosts = _remapPosts(Discourse.posts.postStream);
-
+        
         // Get all posts for given topic id
         topicPosts.forEach(function (e) {
           // Append markup with comment to the comments box
@@ -191,7 +191,10 @@ module.exports = discourseComments = (function ($) {
                 
                 // If user is "muted" by a moderator...
                 if (!Discourse.user.object.can_create_topic) {
-                  errorsString = 'Il tuo profilo risulta essere stato <b>silenziato</b>. Contatta un moderatore per avere più informazioni.<br>';
+                  errorsString = $tpl({
+                    baseUrl: Discourse.restUrl,
+                    username: Discourse.user.object.username,
+                  }, 'discourse__silenced');
                 } else {
                   errorsString = error.response.data.errors.join('<br>');
                 }
