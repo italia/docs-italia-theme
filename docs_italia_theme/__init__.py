@@ -111,7 +111,7 @@ def add_context_data(app, pagename, templatename, context, doctree):
         context['slug'] = 'demo-document'
         context['current_version'] = 'bozza'
         context['rtd_language'] = 'it'
-        
+
         try:
             with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
                 data = document_settings.read()
@@ -329,25 +329,15 @@ class DiscourseCommentsDirective(Directive):
                                 <a href='#logout' class="block-comments__logout-link block-comments__logout-link--visible" data-toggle="modal" data-target="#logout-modal" title="Logout" alt="Logout">Logout</a>
                             </figcaption>
                         </figure>
-                        <textarea class='form-control new-comment__body col ml-2 pl-3 pr-3' id="comments-input" placeholder='Scrivi un commento...' rows="4"></textarea>
+                        <textarea class='form-control new-comment__body col ml-2 p-2' id="comments-input" placeholder='Scrivi qui un commento. Per formattare il testo puoi usare Markdown, clicca sul bottone "suggerimenti" per vedere degli esempi.' rows="4"></textarea>
                     </div>
                     <!-- Buttons -->
-                    <div class='new-comment__buttons d-none'>
-                        <input type='submit' class='btn btn-sm new-comment__submit' value='invia' disabled='true' />
-                        <input type='reset' class='btn btn-sm new-comment__delete' value='annulla' />
+                    <div class='new-comment__buttons'>
+                        <button type='submit' class='btn btn-primary btn-sm new-comment__submit mr-2' disabled='true'><div>invia</div></button>
+                        <button type="button" class="btn btn-sm btn-secondary new-comment__suggestions" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="lorem"> suggerimenti </button><span class="loading no-bg">&nbsp;</span>
                     </div>
-                    <div class="new-comment__required d-none">
-                        <span>Caratteri richiesti: <span class='required-chars'></span></span>
-                    </div>
-
-                    <div class='new-comment__legend d-none'>
-                        Markdown per la formattazione del testo:
-                        <ul>
-                            <li> Grassetto: __text__ (o **text**) </li>
-                            <li> Corsivo: _text_ </li>
-                            <li> Link: [Testo](http://url-to-link.ex) </li>
-                            <li> Citazione: > Testo citazione </li>
-                        </ul>
+                    <div class="new-comment__required">
+                        <span>Scrivi almeno altri <span class='required-chars'></span> caratteri</span>
                     </div>
                 </div>
             </from>
@@ -357,15 +347,13 @@ class DiscourseCommentsDirective(Directive):
                 <!-- Top header -->
                 <div class="block-comments__header border-top border-bottom border-width-2 pt-3 pb-3 row align-items-center justify-content-between">
                     <h6 class="col-auto text-uppercase mb-0">Commenti</h6>
-                    <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-collapsed0" aria-expanded="true"><span class="it-icon-plus"></span><span class="it-icon-minus"></span></button>
+                    <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-collapsed0" aria-expanded="true"><span class="docs-icon-plus"></span><span class="docs-icon-minus"></span></button>
                 </div>
             </div>
-
             <div class="block-comments__body collapse show" data-parent="#accordion-comments" id="comments-collapsed0" style="">
                 <!-- Input row -->
                 <div class="row align-items-center mt-4 mb-4 block-comments__input">
                     """ + form_template + """
-                    <div class='section' id='docs-comments-box-"""+ options['topic_id'] +"""' data-topic='"""+ options['topic_id'] +"""'></div>
                 </div>
                 <div class="row">
                     <div class="block-comments__list col">

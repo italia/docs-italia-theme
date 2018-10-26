@@ -1,10 +1,14 @@
+$comment_font_size: 14px;
+$comment_line_height: 21px;
+$letter_spacing: 0.88px;
+
 .block-comments {
   margin-top: 2rem;
   margin-bottom: 0.25rem;
+}
 
-  p {
-    font-family: $titillium-font;
-  }
+.block-comments__body p {
+  font-family: $font-family-sans-serif;
 }
 
 .block-comments__header {
@@ -17,7 +21,7 @@
 }
 
 .block-comments__img {
-  width: 55px;
+  width: 56px;
 }
 
 .block-comments__logout-link {
@@ -48,25 +52,7 @@
 }
 
 .block-comments__input {
-  &:hover {
-    .block-comments__logout-link {
-      display: block;
-    }
-  }
-
-  input {
-    border: 1px $grey-light-01 solid;
-    line-height: 2.5em;
-    border-radius: 5px;
-
-    &:focus {
-      border: 1px $grey-mid solid;
-    }
-
-    &::placeholder {
-      color: $grey;
-    }
-  }
+  margin-bottom: 1em !important;
 }
 
 .block-comments__toggle-btn {
@@ -104,22 +90,22 @@
   height: 1.5rem;
   border: 0;
 
-  .it-collapse,
-  .it-expand {
+  .docs-icon-collapse,
+  .docs-icon-expand {
     color: $medium-blue;
   }
 
-  .it-collapse {
+  .docs-icon-expand {
     display: none;
   }
 
   &.collapsed {
-    .it-collapse {
-      display: inline-block;
+    .docs-icon-collapse {
+      display: none;
     }
 
-    .it-expand {
-      display: none;
+    .docs-icon-expand {
+      display: inline-block;
     }
   }
 }
@@ -133,11 +119,17 @@
 
 .block-comments__date,
 .block-comments__role {
-  font-size: 0.8rem;
+  font-size: $comment_font_size;
+  line-height: $comment_line_height;
+}
+
+.block-comments__role {
+  letter-spacing: $letter_spacing;
 }
 
 .block-comments__paragraph {
-  font-size: 0.9rem;
+  font-size: $comment_font_size;
+  line-height: $comment_line_height;
 
   a {
     text-decoration: underline;
@@ -145,10 +137,33 @@
 }
 
 form[id^="new-comment-"] {
+  &:not(.sending) {
+    .loading {
+      display: none;
+    }
+  }
+
+  &.sending {
+    .loading {
+      display: inline-block !important;
+      position: relative;
+      overflow: visible;
+      width: 40px;
+      z-index: 1;
+
+      &::before {
+        border: 5px solid $blue !important;
+        top: 60%;
+      }
+    }
+  }
+
   position: relative;
   width: 100%;
 
   textarea {
+    min-height: 5em;
+    font-weight: normal;
     border: 1px $grey-light-01 solid;
     border-radius: 5px;
 
@@ -161,28 +176,91 @@ form[id^="new-comment-"] {
     }
   }
 
-  &.sending::after {
-    content: '';
-    position: absolute;
-    background: white;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
+  li[id^="docs-comment-"] {
+    &.is-new {
+      background: lightyellow;
+      padding-top: 0.5em;
+      border-radius: 5px;
+      box-shadow: 0 0 10px lightblue;
+    }
   }
 
-  &.sending::before {
-    content: 'Invio del commento...';
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
+  .new-comment {
+    &__login {
+      display: flex;
+      border: 1px solid $lightgrey-a2;
+      border-radius: 5px;
+      padding: 1em;
+    }
 
-li[id^="docs-comment-"] {
-  &.is-new {
-    background: lightyellow;
+    &__legend {
+      font-size: $comment_font_size - 2;
+    }
+
+    &__user-image {
+      border-radius: 50%;
+      position: relative;
+      height: 56px;
+      width: 56px;
+      float: left;
+
+      &--anon {
+        margin: 0.25em;
+        margin-right: 0.75em;
+        background-color: $lightgrey-a1;
+      }
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &__suggestions {
+      &__tooltip {
+        .tooltip__content {
+          padding-left: 1.75em;
+          font-size: 0.95em;
+        }
+      }
+    }
+
+    &__buttons {
+      float: left;
+    }
+
+    &__required {
+      float: right;
+
+      & > span {
+        font-size: 0.8em;
+      }
+    }
+
+    &__submit {
+      position: relative;
+      overflow: hidden;
+
+      .loading.no-bg {
+        display: none;
+        width: 30px;
+        height: 0;
+        content: ' ';
+        overflow: visible;
+        margin-bottom: 5px;
+        margin-left: -15px;
+        margin-right: 5px;
+
+        &::before {
+          left: auto;
+        }
+      }
+
+      & > div:not(.loading) {
+        display: inline;
+      }
+    }
   }
 }
