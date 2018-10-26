@@ -612,7 +612,12 @@
   }
 }
 
-code .pre {
+code:not(.download) .pre {
   background-color: $light-green;
   padding: 0.2rem;
+}
+
+code.download {
+  font-family: $titillium-font;
+  font-size: 100%;
 }
