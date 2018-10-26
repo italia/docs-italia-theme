@@ -198,7 +198,6 @@ function DiscourseApi() {
       var body = {
         raw: raw,
         topic_id: that.posts.topicId,
-        title: 'Post created from docs-italia'
       };
 
       return that.cm.call('createPost', '/posts', null, body, that.getHeaderObject('User-Api-Key')).post().then(function (response) {

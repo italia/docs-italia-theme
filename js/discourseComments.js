@@ -9,17 +9,8 @@ function _remapPosts(posts) {
     remappedObject[e.post_number] = e;
   });
 
-  return remappedObject;
+  return remappedObject.reverse();
 };
-
-// Orders created_at posts' values
-function _orderDates(posts) {
-  var orderedArray = [];
-  posts.forEach(function (e) {
-    orderedArray.push(e.created_at);
-  });
-  return orderedArray.sort();
-}
 
 // Create the correct avatarUrl
 function _createAvatarUrl (template, size) {
@@ -41,7 +32,7 @@ function _createMarkup (target, tid, post, nPId) {
   // Create a javascript Date object starts from post.updated_at date value
   var d = new Date(post.updated_at);
   post.cooked = _parseUserRefs(post.cooked);
-  
+
   var rendered = $tpl({
     post: post,
     tid: tid,
@@ -52,11 +43,11 @@ function _createMarkup (target, tid, post, nPId) {
     // Replace the avatar's size from template url
     avatarUrl: _createAvatarUrl(post.avatar_template, 110),
     // And formats as dd/mm/YYYY hh:ii
-    date: d.getDate()  + "/" + (d.getMonth()+1) + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes(),
+    date: d.getDate()  + ' ' + (d.toLocaleString("it-IT", { month: "short" })) + ' ' + d.getFullYear() + ", " + d.getHours() + ":" + d.getMinutes(),
     // Check if current rendering comment is a new one
     isNew: typeof nPId !== 'undefined' ? (post.id == nPId ? 'is-new' : '') : '',
   }, 'discourse__comment');
-  
+
   target.append(rendered)
 }
 
@@ -71,7 +62,7 @@ module.exports = discourseComments = (function ($) {
       // Flush commentBox
       $commentBox.html('');
       // Set required characters
-      $('form[id^="new-comment-"] .required-chars').text('-20');
+      $('form[id^="new-comment-"] .required-chars').text('20');
 
       // Set comment-write-box user picture
       if (Discourse.user.logged()) {
@@ -91,17 +82,21 @@ module.exports = discourseComments = (function ($) {
 
         // Get all posts for given topic id
         topicPosts.forEach(function (e) {
-          // Append markup with comment to the comments box
-          _createMarkup($commentBox, topicId, e, newPostId);
-          // Check if current comment is a reply to another
-          if (e.reply_to_post_number !== null) {
-            // Get the reply's target
-            var replyDest = topicPosts[e.reply_to_post_number];
-            // Create link to reply's target
-            var rendered = $tpl({ post: e, replyDest: replyDest }, 'discourse__reply-link');
-            // Append markup
-            $('#reply-link-' + e.id).append(rendered);
+          if (!e.hidden) {
+            _createMarkup($commentBox, topicId, e, newPostId);
+            if (e.reply_to_post_number !== null) {
+              // Get the reply's target
+              var replyDest = topicPosts[e.reply_to_post_number];
+              // Create link to reply's target
+              var rendered = $tpl({
+                post: e,
+                replyDest: replyDest
+              }, 'discourse__reply-link');
+              // Append markup
+              $('#reply-link-' + e.id).append(rendered);
+            }
           }
+          // Append markup with comment to the comments box
         })
       });
 
@@ -146,7 +141,7 @@ module.exports = discourseComments = (function ($) {
           features.push('top=' + right);
           features.push('menubar=no');
           features.push('location=no');
-
+          
           var win = window.open(Discourse.authLink(), 'Discourse Authentication', features);
           return win;
         };
@@ -156,7 +151,7 @@ module.exports = discourseComments = (function ($) {
       }
 
       // Handle login-button click
-      $('.btn.login-button').bind('click', function () {
+      $('.login-button').bind('click', function () {
         ppWin();
       });
 
@@ -165,6 +160,7 @@ module.exports = discourseComments = (function ($) {
         evt.preventDefault();
         var $form = $(this);
         var $body = $form.find('.new-comment__body');
+        var $submit = $form.find('.new-comment__submit');
         var $errorsBox = $form.find('.new-comment__errors-box');
         var topic_id = $form.data('topic');
         var body_value = $body.val();
@@ -173,24 +169,27 @@ module.exports = discourseComments = (function ($) {
           return false;
         } else {
           $form.addClass('sending');
-          setTimeout(function () {
-            Discourse.posts.post(body_value)
-              // Success
-              .then(function (results) {
-                $form.removeClass('sending');
-                $body.val('');
-                Discourse.posts.get(topic_id, false).then(function (data) {
-                  // Re-init current modules, to update comments list
-                  module.exports.init(results.data.id, results);
-                });
-              })
-              // Error
-              .catch(function (error) {
-                var errorsString = error.response.data.errors.join('<br>');
-                $form.removeClass('sending');
-                $errorsBox.append(errorsString);
+          // Disable textarea & submit button
+          $body.attr('disabled', true);
+          $submit.attr('disabled', true);
+          Discourse.posts.post(body_value)
+            // Success
+            .then(function (results) {
+              $form.removeClass('sending');
+              $body.val('');
+              $body.attr('disabled', false);
+              Discourse.posts.get(topic_id, false).then(function (data) {
+                // Re-init current modules, to update comments list
+                module.exports.init(results.data.id, results);
               });
-          }, 1500);
+            })
+            // Error
+            .catch(function (error) {
+              var errorsString = error.response.data.errors.join('<br>');
+              $form.removeClass('sending');
+              $body.attr('disabled', false);
+              $errorsBox.text(errorsString);
+            });
         }
       });
 
@@ -198,33 +197,33 @@ module.exports = discourseComments = (function ($) {
       $('textarea.new-comment__body').bind('input', function () {
         $parent = $(this).parents('form');
         $req = $parent.find('.required-chars');
-        var currentLength = -20 + $(this).val().replace(/ /g,'').length;
-        if (currentLength < 0) {
+        var $span = $($parent.find('span')[1]);
+
+        var currentLength = 20 - $(this).val().replace(/ /g,'').length;
+        $span.data('required-chars', currentLength);
+        if (currentLength > 0) {
+          $span.show();
           $req.text(currentLength);
-          $parent.find('input[type="submit"]').attr('disabled', true);
+          $parent.find('button[type="submit"]').attr('disabled', true);
         } else {
           $req.text('0');
-          $parent.find('input[type="submit"]').attr('disabled', false);
+          $span.hide();
+          $parent.find('button[type="submit"]').attr('disabled', false);
         }
       });
 
       // Show form elements on focus and hide on blur
       $('textarea.new-comment__body').bind('focus', function () {
-          $parent = $(this).parents('form');
+        $parent = $(this).parents('form');
+      });
 
-          $parent.find('.new-comment__buttons').removeClass('d-none');
-          $parent.find('.new-comment__legend').removeClass('d-none');
-          $parent.find('.new-comment__required').removeClass('d-none');
-        })
-        .bind('blur', function () {
-          if ($(this).val() === '') {
-            $parent = $(this).parents('form');
-
-            $parent.find('.new-comment__buttons').addClass('d-none');
-            $parent.find('.new-comment__legend').addClass('d-none');
-            $parent.find('.new-comment__required').addClass('d-none');
-          }
-        });
+      // Suggestions button click
+      $('.new-comment__suggestions').popover({
+        template: $tpl({}, 'discourse__markup__tooltip'),
+        container: 'body',
+        offset:'175px , 40px',
+        trigger: 'focus',
+      });
 
       // Logout icon click
       $('#logout-modal__submit').bind('click', function (evt) {
@@ -236,15 +235,6 @@ module.exports = discourseComments = (function ($) {
       $(window).bind('keyCreated', function () {
         $('.btn.login-button').removeClass('disabled');
       });
-
-      // After new post
-      if (postObject !== null && typeof postObject !== "undefined") {
-        var beforeLast = Discourse.posts.postStream[Discourse.posts.postStream.length-(Discourse.posts.postStream.length > 2 ? 2 : 1)];
-        var idTarget = '#reply-to-' + beforeLast.post_number;
-        setTimeout(function () {
-          location.hash = idTarget;
-        }, 500);
-      }
     }
   }
 })(jQuery);
