@@ -1,6 +1,7 @@
 {% raw %}
 <script id="discourse__comment" type="text/template">
-  <li id='{{ commentHTMLId }}' class='row mb-5 block-comments__item comment-{{ post.id }} {{ isNew }}'
+  <li id='{{ commentHTMLId }}'
+			class='row mb-5 block-comments__item comment-{{ post.id }} {{ isNew }} {{ reported }}'
       data-topic='{{ tid }}' data-comment='{{ post.id }}'>
     <div id='reply-to-{{ post.post_number }}'></div>
     <figure class='col-auto mb-0'>

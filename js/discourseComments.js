@@ -29,8 +29,8 @@ function _parseUserRefs (text) {
 
 // Create the comment markup with given topic id and post
 function _createMarkup (target, tid, post, nPId, reported) {
-  // Create a javascript Date object starts from post.updated_at date value
-  var d = new Date(post.updated_at);
+  // Create a javascript Date object starts from post.created_at date value
+  var d = new Date(post.created_at);
   post.cooked = _parseUserRefs(post.cooked);
 
   var rendered = $tpl({
@@ -75,7 +75,6 @@ module.exports = discourseComments = (function ($) {
           });
         }
       }
-
       // Foreach get comments from discourse
       $commentBox.each(function (idx, cB) {
         var topicId = $(cB).data('topic');
@@ -83,8 +82,8 @@ module.exports = discourseComments = (function ($) {
 
         // Get all posts for given topic id
         topicPosts.forEach(function (e) {
-          if (!e.hidden) {
-            _createMarkup($commentBox, topicId, e, newPostId);
+          if (typeof e.action_code === "undefined") {
+            _createMarkup($commentBox, topicId, e, newPostId, e.hidden && typeof e.hidden_reason_id !== "undefined");
             if (e.reply_to_post_number !== null) {
               // Get the reply's target
               var replyDest = topicPosts[e.reply_to_post_number];
@@ -188,7 +187,7 @@ module.exports = discourseComments = (function ($) {
               var errorsString = error.response.data.errors.join('<br>');
               $form.removeClass('sending');
               $body.attr('disabled', false);
-              $errorsBox.text(errorsString);
+              $errorsBox.html(errorsString);
             });
         }
       });
