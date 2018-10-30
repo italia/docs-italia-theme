@@ -49,6 +49,19 @@
   </div>
 </script>
 
+<script id="discourse__missing_permission" type="text/template">
+	<div class="pl-2 block-comments__input missing_permission error error--{{ errorCode }} row">
+		<figure class="col-auto mb-0 mr-2">
+			<img class="block-comments__img new-comment__figure rounded-circle" src="">
+			<figcaption>
+				<a href='#logout' class="block-comments__logout-link block-comments__logout-link--visible" data-toggle="modal" data-target="#logout-modal" title="Logout" alt="Logout">Logout</a>
+			</figcaption>
+		</figure>
+
+		<div class="missing_permission__text col pt-2">{{ errorText }}</div>
+	</div>
+</script>
+
 <script id="discourse__markup__tooltip" type="text/template">
   <div class='tooltip tooltip--active doc-tooltip new-comment__suggestions__tooltip' role='tooltip'>
     <div class='tooltip__wrap'>

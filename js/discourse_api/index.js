@@ -192,6 +192,10 @@ function DiscourseApi() {
             that.user.fields[field.data.user.username] = field.data.user.user_fields[1];
           })
         })
+      }).catch(function (data) {
+        var response = data.response.data;
+        that.requestError = data.response.status;
+        that.requestErrorText = response.errors[0];
       })
     },
     post: function (raw) {

@@ -3,6 +3,8 @@ var $tpl = require('./getTpl');
 
 // Remaps topic's posts object
 function _remapPosts(posts) {
+  if (posts == null)
+    return [];
   var remappedObject = [];
 
   posts.forEach(function (e) {
@@ -68,17 +70,17 @@ module.exports = discourseComments = (function ($) {
       // Set comment-write-box user picture
       if (Discourse.user.logged()) {
         if (Object.keys(Discourse.user.object).length !== 0) {
-          $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.object.avatar_template, 110));
+          $('.new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.object.avatar_template, 110));
         } else {
           Discourse.user.current().then(function (currentUser) {
-            $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 110));
+            $('.new-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 110));
           });
         }
       }
       // Foreach get comments from discourse
       $commentBox.each(function (idx, cB) {
         var topicId = $(cB).data('topic');
-        var topicPosts = _remapPosts(Discourse.posts.postStream);
+        var topicPosts = typeof Discourse.posts.postStream !== "undefined" ? _remapPosts(Discourse.posts.postStream) : [];
 
         // Get all posts for given topic id
         topicPosts.forEach(function (e) {
@@ -147,7 +149,15 @@ module.exports = discourseComments = (function ($) {
 
         var loginMarkup = $tpl({}, 'discourse__login');
         $('form[id^="new-comment-"]').html(loginMarkup);
+      } else {
+        if (typeof Discourse.requestError !== "undefined") {
+          $('.block-comments__input').html($tpl({
+            errorCode: Discourse.requestError,
+            errorText: Discourse.requestErrorText
+          }, 'discourse__missing_permission'));
+        }
       }
+      
 
       // Handle login-button click
       $('.login-button').bind('click', function () {
