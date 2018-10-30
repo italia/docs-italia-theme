@@ -12,7 +12,6 @@ H1 Titolo del documento, molto probabile su 2/3 righe
    :Licenza: CC-BY 4.0
 
 .. admonition:: consultation
-   :class: admonition-consultation
 
    Questo documento è in consultazione pubblica dal 3 aprile al 4 maggio 2018,
    come previsto dall'`art. 71 comma 1 del decreto legislativo 7 marzo 2005, n.
