@@ -151,6 +151,11 @@ module.exports = discourseComments = (function ($) {
         $('form[id^="new-comment-"]').html(loginMarkup);
       } else {
         if (typeof Discourse.requestError !== "undefined") {
+          if (Discourse.user.object.can_create_topic !== 'undefined') {
+            Discourse.requestErrorText = 'Il tuo account su Forum Italia non ha i permessi necessari per visualizzare questi commenti. Se ti serve aiuto vieni a trovarci sul workspace Slack di Developers Italia.'
+          } else {
+            console.log('undefined')
+          }
           $('.block-comments__input').html($tpl({
             errorCode: Discourse.requestError,
             errorText: Discourse.requestErrorText
@@ -194,7 +199,18 @@ module.exports = discourseComments = (function ($) {
             })
             // Error
             .catch(function (error) {
-              var errorsString = error.response.data.errors.join('<br>');
+              console.log(error.response)
+              var errorsString = '';
+              if (error.response.status === 422) {
+                if (!Discourse.user.object.can_create_topic) {
+                  errorsString = $tpl({
+                    baseUrl: Discourse.restUrl,
+                    username: Discourse.user.object.username,
+                  }, 'discourse__silenced');
+                } else {
+                  errorsString = error.response.data.errors.join('<br>');
+                }
+              }
               $form.removeClass('sending');
               $body.attr('disabled', false);
               $errorsBox.html(errorsString);

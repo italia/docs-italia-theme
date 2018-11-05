@@ -46,7 +46,19 @@ function DiscourseApi() {
       that.user.state('logged', false);
     } else {
       // Get current user
-      that.user.current();
+      that.user.current().catch(function (error) {
+        if (typeof error === 'undefined' || error.response.status) {
+          that.user.logout().catch(function () {
+            var $modal = $('#suspended-modal');
+            that.user.state('logged', false);
+            that.utility._cookie_delete('docs-italia_uak');
+            $modal.modal('show');
+            $modal.on('hide.bs.modal', function () {
+              window.location.href = location.href;
+            });
+          })
+        }
+      })
       // Get csrf token
       that.user.csrf();
       // Scroll to comment-box
@@ -149,7 +161,7 @@ function DiscourseApi() {
       var userId = that.user.object.id;
 
       var headers = that.getHeaders(['X-CSRF-Token', 'User-Api-Key']);
-      that.cm.call('userLogout', '/admin/users/$/log_out!', [userId], null, headers).post().then(function (response) {
+      return that.cm.call('userLogout', '/admin/users/$/log_out!', [userId], null, headers).post().then(function (response) {
         that.user.state('logged', false);
         that.utility._cookie_delete('docs-italia_uak');
         window.location.href = location.href;
@@ -206,6 +218,22 @@ function DiscourseApi() {
 
       return that.cm.call('createPost', '/posts', null, body, that.getHeaderObject('User-Api-Key')).post().then(function (response) {
         return response;
+      }).catch(function (error) {
+        if (typeof error.response.status !== 'undefined' && error.response.status === 403) {
+          that.user.logout().catch(function () {
+            var $modal = $('#suspended-modal');
+            that.user.state('logged', false);
+            that.utility._cookie_delete('docs-italia_uak');
+            $modal.modal('show');
+            $modal.on('hide.bs.modal', function () {
+              window.location.href = location.href;
+            });
+          })
+        } else {
+          return new Promise(function (resolve, reject) {
+            reject(error)
+          });
+        }
       })
     }
   };

@@ -103,7 +103,7 @@ def add_context_data(app, pagename, templatename, context, doctree):
     else:
         language = app.site_data['default_language']
     context['t'] = app.site_data['data']['l10n'][language]['t']
-    
+
     # Run only for local development
     if os.environ.get('READTHEDOCS', None) != 'True':
         context['LOCAL'] = True
@@ -127,7 +127,7 @@ def add_context_data(app, pagename, templatename, context, doctree):
             ('demo', '#'),
             ('docs italia', '#')
         ]
-    
+
     if 'docsitalia_data' in context:
         context['docstitle'] = context['docsitalia_data']['document']['name']
 
@@ -387,9 +387,31 @@ class DiscourseCommentsDirective(Directive):
               </div>
             </div>
         """
+        # Create "account suspended" modal
+        suspended_modal = """
+            <div class="modal suspended-modal" id="suspended-modal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Account sospeso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p> Il tuo account è stato sospeso, se ti serve aiuto vieni a trovarci sul workspace Slack di Developers Italia. </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="logout-modal__cancel">Chiudi</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        """
         #node += nodes.raw(text="<div class='section' id='docs-comments-box-"+options['topic_id']+"' data-topic='"+options['topic_id']+"'></div>", format='html')
         node += nodes.raw(text=cbox_template, format='html')
         node += nodes.raw(text=logout_modal, format='html')
+        node += nodes.raw(text=suspended_modal , format='html')
 
         #form = nodes.raw(text=form_template, format='html')
         #node += form
