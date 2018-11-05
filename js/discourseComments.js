@@ -56,21 +56,22 @@ module.exports = discourseComments = (function ($) {
     init: function (newPostId, postObject) {
       // Obtains all comments boxes
       var $commentBox = $('ul.block-comments__list.items');
-      var topicId = $commentBox.data('topic');
+
       // Before flush set fixed height, to avoid blink
       $commentBox.css('min-height', $commentBox.height() + 'px');
       // Flush commentBox
       $commentBox.html('');
+
       // Set required characters
       $('form[id^="new-comment-"] .required-chars').text('20');
 
       // Set comment-write-box user picture
       if (Discourse.user.logged()) {
         if (Object.keys(Discourse.user.object).length !== 0) {
-          $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.object.avatar_template, 110));
+          $('.box-comment__figure').attr('src', _createAvatarUrl(Discourse.user.object.avatar_template, 110));
         } else {
           Discourse.user.current().then(function (currentUser) {
-            $('form[id^="new-comment-"] .new-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 110));
+            $('.box-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 110));
           });
         }
       }
@@ -78,12 +79,12 @@ module.exports = discourseComments = (function ($) {
       // Foreach get comments from discourse
       $commentBox.each(function (idx, cB) {
         var topicId = $(cB).data('topic');
-        var topicPosts = _remapPosts(Discourse.posts.postStream);
+        var topicPosts = _remapPosts(Discourse.posts[topicId].postStream);
 
         // Get all posts for given topic id
         topicPosts.forEach(function (e) {
           if (!e.hidden) {
-            _createMarkup($commentBox, topicId, e, newPostId);
+            _createMarkup($(cB), topicId, e, newPostId);
             if (e.reply_to_post_number !== null) {
               // Get the reply's target
               var replyDest = topicPosts[e.reply_to_post_number];
@@ -147,7 +148,7 @@ module.exports = discourseComments = (function ($) {
         };
 
         var loginMarkup = $tpl({}, 'discourse__login');
-        $('form[id^="new-comment-"]').html(loginMarkup);
+        $('div.box-comment').html(loginMarkup);
       }
 
       // Handle login-button click
@@ -156,37 +157,40 @@ module.exports = discourseComments = (function ($) {
       });
 
       // Manage new comment posting
-      $('form[id^="new-comment-"]').bind('submit', function (evt) {
+      $('button.box-comment__submit').bind('click', function (evt) {
+        var that = this;
         evt.preventDefault();
-        var $form = $(this);
-        var $body = $form.find('.new-comment__body');
-        var $submit = $form.find('.new-comment__submit');
-        var $errorsBox = $form.find('.new-comment__errors-box');
-        var topic_id = $form.data('topic');
+        var $parent = $(that).parents('.box-comment');
+        var $body = $parent.find('.box-comment__body');
+        var $submit = $parent.find('.box-comment__submit');
+        var $errorsBox = $parent.find('.box-comment__errors-box');
+        var topic_id = $parent.data('topic');
         var body_value = $body.val();
 
         if (typeof body_value === 'undefined') {
           return false;
         } else {
-          $form.addClass('sending');
+          $parent.addClass('sending');
           // Disable textarea & submit button
           $body.attr('disabled', true);
           $submit.attr('disabled', true);
-          Discourse.posts.post(body_value)
+          Discourse.posts.post(body_value, topic_id)
             // Success
             .then(function (results) {
-              $form.removeClass('sending');
+              $parent.removeClass('sending');
               $body.val('');
               $body.attr('disabled', false);
-              Discourse.posts.get(topic_id, false).then(function (data) {
+              Discourse.posts.get([ topic_id ], false).then(function (data) {
                 // Re-init current modules, to update comments list
                 module.exports.init(results.data.id, results);
               });
+              // Ubinds binded click events to avoid duplicates
+              $('button.box-comment__submit').unbind('click');
             })
             // Error
             .catch(function (error) {
               var errorsString = error.response.data.errors.join('<br>');
-              $form.removeClass('sending');
+              $parent.removeClass('sending');
               $body.attr('disabled', false);
               $errorsBox.text(errorsString);
             });
@@ -194,8 +198,8 @@ module.exports = discourseComments = (function ($) {
       });
 
       // Handles min. characters nedeed to post
-      $('textarea.new-comment__body').bind('input', function () {
-        $parent = $(this).parents('form');
+      $('textarea.box-comment__body').bind('input', function () {
+        $parent = $(this).parents('div.box-comment');
         $req = $parent.find('.required-chars');
         var $span = $($parent.find('span')[1]);
 
@@ -213,7 +217,7 @@ module.exports = discourseComments = (function ($) {
       });
 
       // Show form elements on focus and hide on blur
-      $('textarea.new-comment__body').bind('focus', function () {
+      $('textarea.box-comment__body').bind('focus', function () {
         $parent = $(this).parents('form');
       });
 

@@ -103,7 +103,7 @@ def add_context_data(app, pagename, templatename, context, doctree):
     else:
         language = app.site_data['default_language']
     context['t'] = app.site_data['data']['l10n'][language]['t']
-    
+
     # Run only for local development
     if os.environ.get('READTHEDOCS', None) != 'True':
         context['LOCAL'] = True
@@ -127,7 +127,7 @@ def add_context_data(app, pagename, templatename, context, doctree):
             ('demo', '#'),
             ('docs italia', '#')
         ]
-    
+
     if 'docsitalia_data' in context:
         context['docstitle'] = context['docsitalia_data']['document']['name']
 
@@ -316,43 +316,44 @@ class DiscourseCommentsDirective(Directive):
         #############
 
         # Form for write new comment
+        print(options)
         form_template = """
-            <form id='new-comment-""" + options['topic_id'] + """' data-topic='""" + options['topic_id'] + """'>
+            <div class='box-comment-""" + options['topic_id'] + """ box-comment' data-topic='""" + options['topic_id'] + """'>
                 <div class="form group">
-                    <div class="new-comment__errors-box"></div>
+                    <div class="box-comment__errors-box"></div>
                     <!-- Write -->
-                    <div class="row align-items-center mt-4 mb-4 block-comments__input new-comment__write">
+                    <div class="row align-items-center mt-4 mb-4 block-comments__input box-comment__write">
                         <figure class="col-auto mb-0">
-                            <img class="block-comments__img new-comment__figure rounded-circle" src="">
+                            <img class="block-comments__img box-comment__figure rounded-circle" src="">
                             <figcaption>
                                 <!-- <a href='#logout' class="block-comments__logout-link block-comments__logout-link--icon" alt="Logout">&#10060;</a> -->
                                 <a href='#logout' class="block-comments__logout-link block-comments__logout-link--visible" data-toggle="modal" data-target="#logout-modal" title="Logout" alt="Logout">Logout</a>
                             </figcaption>
                         </figure>
-                        <textarea class='form-control new-comment__body col ml-2 p-2' id="comments-input" placeholder='Scrivi qui un commento. Per formattare il testo puoi usare Markdown, clicca sul bottone "suggerimenti" per vedere degli esempi.' rows="4"></textarea>
+                        <textarea class='form-control box-comment__body col ml-2 p-2' id="comments-input" placeholder='Scrivi qui un commento. Per formattare il testo puoi usare Markdown, clicca sul bottone "suggerimenti" per vedere degli esempi.' rows="4"></textarea>
                     </div>
                     <!-- Buttons -->
-                    <div class='new-comment__buttons'>
-                        <button type='submit' class='btn btn-primary btn-sm new-comment__submit mr-2' disabled='true'><div>invia</div></button>
-                        <button type="button" class="btn btn-sm btn-secondary new-comment__suggestions" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="lorem"> suggerimenti </button><span class="loading no-bg">&nbsp;</span>
+                    <div class='box-comment__buttons'>
+                        <button type='submit' class='btn btn-primary btn-sm box-comment__submit mr-2' disabled='true'><div>invia</div></button>
+                        <button type="button" class="btn btn-sm btn-secondary box-comment__suggestions" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="lorem"> suggerimenti </button><span class="loading no-bg">&nbsp;</span>
                     </div>
-                    <div class="new-comment__required">
+                    <div class="box-comment__required">
                         <span>Scrivi almeno altri <span class='required-chars'></span> caratteri</span>
                     </div>
                 </div>
-            </from>
+            </div>
         """
         cbox_template = """
-            <div class="block-comments container-fluid" id="accordion-comments">
+            <div class="block-comments container-fluid" id='accordion-comments-""" + options['topic_id'] + """'>
                 <!-- Top header -->
                 <div class="block-comments__header border-top border-bottom border-width-2 pt-3 pb-3 row align-items-center justify-content-between">
                     <h6 class="col-auto text-uppercase mb-0">Commenti</h6>
-                    <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-collapsed0" aria-expanded="true"><span class="docs-icon-plus"></span><span class="docs-icon-minus"></span></button>
+                    <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target='#comments-""" + options['topic_id'] + """' aria-expanded="true"><span class="docs-icon-plus"></span><span class="docs-icon-minus"></span></button>
                 </div>
             </div>
-            <div class="block-comments__body collapse show" data-parent="#accordion-comments" id="comments-collapsed0" style="">
+            <div class="block-comments__body collapse show" data-parent='#accordion-comments-""" + options['topic_id'] + """' id='comments-""" + options['topic_id'] + """'>
                 <!-- Input row -->
-                <div class="row align-items-center mt-4 mb-4 block-comments__input">
+                <div class="d-flex align-items-center mt-4 mb-4 block-comments__input">
                     """ + form_template + """
                 </div>
                 <div class="row">

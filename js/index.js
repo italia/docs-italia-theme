@@ -55,8 +55,16 @@ $(document).ready(function() {
 });
 
 window.onload = function() {
+  var topicId = [];
   var $commentBox = $('ul.block-comments__list.items');
-  var topicId = $commentBox.first().data('topic');
+
+  if ($commentBox.length > 1) {
+    $commentBox.each(function (idx, cB) {
+      topicId.push($(cB).data('topic'));
+    });
+  } else {
+    topicId = [$commentBox.first().data('topic')];
+  }
   if (typeof topicId !== "undefined" || location.href.indexOf('payload') > 0) {
     discourseAuth.init(topicId).then(function() {
       discourseComments.init();
