@@ -353,7 +353,7 @@ class DiscourseCommentsDirective(Directive):
             </div>
             <div class="block-comments__body collapse show" data-parent='#accordion-comments-""" + options['topic_id'] + """' id='comments-""" + options['topic_id'] + """'>
                 <!-- Input row -->
-                <div class="row align-items-center mt-4 mb-4 block-comments__input">
+                <div class="d-flex align-items-center mt-4 mb-4 block-comments__input">
                     """ + form_template + """
                 </div>
                 <div class="row">
