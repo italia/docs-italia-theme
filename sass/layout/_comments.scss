@@ -136,7 +136,7 @@ $letter_spacing: 0.88px;
   }
 }
 
-form[id^="new-comment-"] {
+div[class^="box-comment-"] {
   &:not(.sending) {
     .loading {
       display: none;
@@ -185,7 +185,7 @@ form[id^="new-comment-"] {
     }
   }
 
-  .new-comment {
+  .box-comment {
     &__login {
       display: flex;
       border: 1px solid $lightgrey-a2;
