@@ -148,6 +148,8 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             toctree_element.children.remove(toc_caption)
         except StopIteration:
             pass
+        except AttributeError:
+            continue
         if 'glossary_toc' in toctreenode.parent.attributes['names']:
             glossary_tocs.append(toctree_element)
         else:
@@ -157,7 +159,10 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
     if content_tocs:
         content_toc = content_tocs[0]
         for content_element in content_tocs[1:]:
-            content_toc.extend(content_element.children)
+            try:
+                content_toc.extend(content_element.children)
+            except AttributeError:
+                continue
     if glossary_tocs:
         glossary_toc = glossary_tocs[0]
         for glossary_element in glossary_tocs[1:]:
