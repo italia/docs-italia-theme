@@ -64,28 +64,30 @@ module.exports = discourseComments = (function ($) {
       $commentBox.css('min-height', $commentBox.height() + 'px');
       // Flush commentBox
       $commentBox.html('');
+
       // Set required characters
       $('form[id^="new-comment-"] .required-chars').text('20');
 
       // Set comment-write-box user picture
       if (Discourse.user.logged()) {
         if (Object.keys(Discourse.user.object).length !== 0) {
-          $('.new-comment__figure').attr('src', _createAvatarUrl(Discourse.user.object.avatar_template, 110));
+          $('.box-comment__figure').attr('src', _createAvatarUrl(Discourse.user.object.avatar_template, 110));
         } else {
           Discourse.user.current().then(function (currentUser) {
-            $('.new-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 110));
+            $('.box-comment__figure').attr('src', _createAvatarUrl(currentUser.avatar_template, 110));
           });
         }
       }
+
       // Foreach get comments from discourse
       $commentBox.each(function (idx, cB) {
         var topicId = $(cB).data('topic');
-        var topicPosts = typeof Discourse.posts.postStream !== "undefined" ? _remapPosts(Discourse.posts.postStream) : [];
+        var topicPosts = _remapPosts(Discourse.posts[topicId].postStream);
 
         // Get all posts for given topic id
         topicPosts.forEach(function (e) {
-          if (typeof e.action_code === "undefined") {
-            _createMarkup($commentBox, topicId, e, newPostId, e.hidden && typeof e.hidden_reason_id !== "undefined");
+          if (!e.hidden) {
+            _createMarkup($(cB), topicId, e, newPostId);
             if (e.reply_to_post_number !== null) {
               // Get the reply's target
               var replyDest = topicPosts[e.reply_to_post_number];
@@ -148,7 +150,7 @@ module.exports = discourseComments = (function ($) {
         };
 
         var loginMarkup = $tpl({}, 'discourse__login');
-        $('form[id^="new-comment-"]').html(loginMarkup);
+        $('div.box-comment').html(loginMarkup);
       } else {
         if (typeof Discourse.requestError !== "undefined") {
           if (Discourse.user.object.can_create_topic !== 'undefined') {
@@ -162,7 +164,6 @@ module.exports = discourseComments = (function ($) {
           }, 'discourse__missing_permission'));
         }
       }
-      
 
       // Handle login-button click
       $('.login-button').bind('click', function () {
@@ -170,32 +171,35 @@ module.exports = discourseComments = (function ($) {
       });
 
       // Manage new comment posting
-      $('form[id^="new-comment-"]').bind('submit', function (evt) {
+      $('button.box-comment__submit').bind('click', function (evt) {
+        var that = this;
         evt.preventDefault();
-        var $form = $(this);
-        var $body = $form.find('.new-comment__body');
-        var $submit = $form.find('.new-comment__submit');
-        var $errorsBox = $form.find('.new-comment__errors-box');
-        var topic_id = $form.data('topic');
+        var $parent = $(that).parents('.box-comment');
+        var $body = $parent.find('.box-comment__body');
+        var $submit = $parent.find('.box-comment__submit');
+        var $errorsBox = $parent.find('.box-comment__errors-box');
+        var topic_id = $parent.data('topic');
         var body_value = $body.val();
 
         if (typeof body_value === 'undefined') {
           return false;
         } else {
-          $form.addClass('sending');
+          $parent.addClass('sending');
           // Disable textarea & submit button
           $body.attr('disabled', true);
           $submit.attr('disabled', true);
-          Discourse.posts.post(body_value)
+          Discourse.posts.post(body_value, topic_id)
             // Success
             .then(function (results) {
-              $form.removeClass('sending');
+              $parent.removeClass('sending');
               $body.val('');
               $body.attr('disabled', false);
-              Discourse.posts.get(topic_id, false).then(function (data) {
+              Discourse.posts.get([ topic_id ], false).then(function (data) {
                 // Re-init current modules, to update comments list
                 module.exports.init(results.data.id, results);
               });
+              // Ubinds binded click events to avoid duplicates
+              $('button.box-comment__submit').unbind('click');
             })
             // Error
             .catch(function (error) {
@@ -219,8 +223,8 @@ module.exports = discourseComments = (function ($) {
       });
 
       // Handles min. characters nedeed to post
-      $('textarea.new-comment__body').bind('input', function () {
-        $parent = $(this).parents('form');
+      $('textarea.box-comment__body').bind('input', function () {
+        $parent = $(this).parents('div.box-comment');
         $req = $parent.find('.required-chars');
         var $span = $($parent.find('span')[1]);
 
@@ -238,7 +242,7 @@ module.exports = discourseComments = (function ($) {
       });
 
       // Show form elements on focus and hide on blur
-      $('textarea.new-comment__body').bind('focus', function () {
+      $('textarea.box-comment__body').bind('focus', function () {
         $parent = $(this).parents('form');
       });
 

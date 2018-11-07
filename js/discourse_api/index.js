@@ -63,7 +63,7 @@ function DiscourseApi() {
       that.user.csrf();
       // Scroll to comment-box
       $('html, body').animate({
-        scrollTop: $('form[id^="new-comment-"]').offset().top
+        scrollTop: $('div[class^="box-comment-"]').offset().top
       }, 0);
     }
   };
@@ -187,6 +187,31 @@ function DiscourseApi() {
         cache = true;
       }
 
+      for (var i = 0; i < topicId.length; i++) {
+        var callName = 'postsGet_' + topicId[i];
+        that.cm.call(callName, '/t/$/posts', [ topicId[i] ], null, null, cache);
+        that.cm.queue('posts', callName);
+      }
+      return that.cm.executeQueue('posts').then(function (data) {
+        that.multiple = true;
+        $(data).each(function (idx, post) {
+          that.posts[post.data.id] = { postStream: post.data.post_stream.posts };
+          that.posts[post.data.id].postStream.forEach(function (post) {
+            if (typeof that.user.fields[post.username] === "undefined") {
+              that.user.fields[post.username] = null;
+              that.user.get(post.username)
+            }
+          });
+        });
+
+        // Execute created users' fields queue
+        return that.cm.executeQueue('user').then(function (responseQueue) {
+          responseQueue.forEach(function (field) {
+            that.user.fields[field.data.user.username] = field.data.user.user_fields[1];
+          })
+        });
+      });
+      /*
       return that.cm.call('topicPosts', '/t/$/posts', [topicId], null, null, cache).get().then(function (response) {
         that.posts.postStream = response.data.post_stream.posts;
         that.posts.topicId = topicId;
@@ -197,7 +222,7 @@ function DiscourseApi() {
             that.user.get(post.username)
           }
         });
-
+  
         // Execute created users' fields queue
         return that.cm.executeQueue('user').then(function (responseQueue) {
           responseQueue.forEach(function (field) {
@@ -209,11 +234,12 @@ function DiscourseApi() {
         that.requestError = data.response.status;
         that.requestErrorText = response.errors[0];
       })
+      */
     },
-    post: function (raw) {
+    post: function (raw, topicId) {
       var body = {
         raw: raw,
-        topic_id: that.posts.topicId,
+        topic_id: topicId,
       };
 
       return that.cm.call('createPost', '/posts', null, body, that.getHeaderObject('User-Api-Key')).post().then(function (response) {

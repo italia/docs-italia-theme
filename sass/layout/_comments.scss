@@ -4,11 +4,15 @@ $letter_spacing: 0.88px;
 
 .block-comments {
   margin-top: 2rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 3rem;
 }
 
-.block-comments__body p {
-  font-family: $font-family-sans-serif;
+.block-comments__body {
+  margin-top: -3rem;
+
+  p {
+    font-family: $font-family-sans-serif;
+  }
 }
 
 .block-comments__header {
@@ -136,7 +140,7 @@ $letter_spacing: 0.88px;
   }
 }
 
-form[id^="new-comment-"] {
+div[class^="box-comment-"] {
   &:not(.sending) {
     .loading {
       display: none;
@@ -185,7 +189,7 @@ form[id^="new-comment-"] {
     }
   }
 
-  .new-comment {
+  .box-comment {
     &__login {
       display: flex;
       border: 1px solid $lightgrey-a2;
