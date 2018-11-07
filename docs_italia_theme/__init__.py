@@ -1,3 +1,5 @@
+# coding=utf-8
+
 """Docs Italia theme"""
 
 import os
