@@ -210,7 +210,6 @@ module.exports = discourseComments = (function ($) {
             })
             // Error
             .catch(function (error) {
-              console.log(error.response)
               var errorsString = '';
               if (error.response.status === 422) {
                 if (!Discourse.user.object.can_create_topic) {

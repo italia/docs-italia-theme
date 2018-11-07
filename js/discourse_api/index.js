@@ -256,6 +256,10 @@ function DiscourseApi() {
       }).catch(function (error) {
         if (typeof error.response.status !== 'undefined' && error.response.status === 403) {
           that.forceLogout()
+        } else {
+          return new Promise (function (resolve, reject) {
+            reject(error);
+          });
         }
       })
     }
