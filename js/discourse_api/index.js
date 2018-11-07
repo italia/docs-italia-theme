@@ -137,6 +137,8 @@ function DiscourseApi() {
       return that.cm.call('userCurrent', '/session/current', null, null, that.getHeaderObject('User-Api-Key')).get().then(function (response) {
         that.user.object = response.data.current_user;
         return that.user.object;
+      }).catch(function () {
+        that.forceLogout();
       });
     },
 
@@ -195,13 +197,20 @@ function DiscourseApi() {
       return that.cm.executeQueue('posts').then(function (data) {
         that.multiple = true;
         $(data).each(function (idx, post) {
-          that.posts[post.data.id] = { postStream: post.data.post_stream.posts };
-          that.posts[post.data.id].postStream.forEach(function (post) {
-            if (typeof that.user.fields[post.username] === "undefined") {
-              that.user.fields[post.username] = null;
-              that.user.get(post.username)
+          if (typeof post.error === "undefined") {
+            that.posts[post.data.id] = { postStream: post.data.post_stream.posts };
+            that.posts[post.data.id].postStream.forEach(function (post) {
+              if (typeof that.user.fields[post.username] === "undefined") {
+                that.user.fields[post.username] = null;
+                that.user.get(post.username)
+              }
+            });
+          } else {
+            that.posts[post.data.id] = {
+              postStream: [],
+              error: post.error
             }
-          });
+          }
         });
 
         // Execute created users' fields queue
@@ -246,23 +255,23 @@ function DiscourseApi() {
         return response;
       }).catch(function (error) {
         if (typeof error.response.status !== 'undefined' && error.response.status === 403) {
-          that.user.logout().catch(function () {
-            var $modal = $('#suspended-modal');
-            that.user.state('logged', false);
-            that.utility._cookie_delete('docs-italia_uak');
-            $modal.modal('show');
-            $modal.on('hide.bs.modal', function () {
-              window.location.href = location.href;
-            });
-          })
-        } else {
-          return new Promise(function (resolve, reject) {
-            reject(error)
-          });
+          that.forceLogout()
         }
       })
     }
   };
+  
+  this.forceLogout = function () {
+    that.user.logout().catch(function () {
+      var $modal = $('#suspended-modal');
+      that.user.state('logged', false);
+      that.utility._cookie_delete('docs-italia_uak');
+      $modal.modal('show');
+      $modal.on('hide.bs.modal', function () {
+        window.location.href = location.href;
+      });
+    })
+  }
 };
 
 DiscourseApi.prototype = new DConfig;

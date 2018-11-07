@@ -86,7 +86,7 @@ module.exports = discourseComments = (function ($) {
 
         // Get all posts for given topic id
         topicPosts.forEach(function (e) {
-          if (!e.hidden) {
+          if (!e.hidden && typeof e.error === "undefined") {
             _createMarkup($(cB), topicId, e, newPostId);
             if (e.reply_to_post_number !== null) {
               // Get the reply's target
@@ -152,17 +152,24 @@ module.exports = discourseComments = (function ($) {
         var loginMarkup = $tpl({}, 'discourse__login');
         $('div.box-comment').html(loginMarkup);
       } else {
-        if (typeof Discourse.requestError !== "undefined") {
-          if (Discourse.user.object.can_create_topic !== 'undefined') {
-            Discourse.requestErrorText = 'Il tuo account su Forum Italia non ha i permessi necessari per visualizzare questi commenti. Se ti serve aiuto vieni a trovarci sul workspace Slack di Developers Italia.'
-          } else {
-            console.log('undefined')
+        $(Discourse.posts.topicId).each(function (id, postKey) {
+          if (typeof Discourse.posts[postKey].error !== "undefined") {
+            $boxInput = $('div.box-comment[data-topic=' + postKey + '] .block-comments__input')
+            $boxFigure = $boxInput.parent().find('figure');
+            $boxButtons = $boxInput.parent().find('.box-comment__buttons');
+            $boxCharsInfo = $boxInput.parent().find('.box-comment__required');
+
+            // Sets error instead of textarea
+            $boxInput.html($tpl({
+              errorCode: Discourse.posts[postKey].error,
+              errorText: 'Il tuo account su Forum Italia non ha i permessi necessari per visualizzare questi commenti. Se ti serve aiuto vieni a trovarci sul workspace Slack di Developers Italia.'
+            }, 'discourse__missing_permission'));
+            // Hide some elments
+            $boxInput.find('figure').hide();
+            $boxButtons.hide();
+            $boxCharsInfo.hide();
           }
-          $('.block-comments__input').html($tpl({
-            errorCode: Discourse.requestError,
-            errorText: Discourse.requestErrorText
-          }, 'discourse__missing_permission'));
-        }
+        })
       }
 
       // Handle login-button click
@@ -215,7 +222,7 @@ module.exports = discourseComments = (function ($) {
                   errorsString = error.response.data.errors.join('<br>');
                 }
               }
-              $form.removeClass('sending');
+              $parent.removeClass('sending');
               $body.attr('disabled', false);
               $errorsBox.html(errorsString);
             });
