@@ -19,10 +19,10 @@ var themeSidebarNav = require('./sidebar_nav.js');
 var themeGlossaryPage = require('./glossary_page.js');
 var themeScrollProgressBar = require('./scroll_progressbar.js');
 var themeStickyHeader = require('./sticky_header.js');
-var themeStickySidebar = require('./sticky_sidebar.js');
+// var themeStickySidebar = require('./sticky_sidebar.js');
 var themeOffcanvasFeature = require('./offcanvas_feature.js');
 var themeSearchboxCollapse = require('./searchbox_collapse.js');
-var themeScrollspy = require('./scrollspy.js');
+// var themeScrollspy = require('./scrollspy.js');
 
 // Init all
 $(document).ready(function() {
