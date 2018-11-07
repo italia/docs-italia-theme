@@ -577,14 +577,8 @@
   }
 
   // Keywords
-  .glossary.docutils {
+  .question-and-answers .glossary.docutils {
     display: none;
-  }
-
-  #glossary-page {
-    .glossary.docutils {
-      display: block;
-    }
   }
 
   .highlighted {
