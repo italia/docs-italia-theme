@@ -318,7 +318,6 @@ class DiscourseCommentsDirective(Directive):
         #############
 
         # Form for write new comment
-        print(options)
         form_template = """
             <div class='box-comment-""" + options['topic_id'] + """ box-comment' data-topic='""" + options['topic_id'] + """'>
                 <div class="form group">
