@@ -61,19 +61,19 @@
         <span class="docs-icon-download"></span>
       </a>
       <div class="dropdown-menu dropdown-menu-right my-4" aria-labelledby="downloadsDropdown">
-        {% set downloads = {'htmlzip': 'htmlzip', 'pdf': 'pdf', 'epub': 'epub'} %}
-        {# {% if READTHEDOCS %} #}
-          {% for type, url in downloads.items() %}
-          <a class="dropdown-item" href="{{ url }}">
-            {{ type }}
-          </a>
-          {% if not loop.last %}
-          <li>
-            <span class="divider"></span>
-          </li>
-          {% endif %}
-          {% endfor %}
-        {# {% endif %} #}
+        {% if LOCAL %}
+          {% set downloads = {'htmlzip': 'htmlzip', 'pdf': 'pdf', 'epub': 'epub'} %}
+        {% endif %}
+        {% for type, url in downloads.items() %}
+        <a class="dropdown-item" href="{{ url }}">
+          {{ type }}
+        </a>
+        {% if not loop.last %}
+        <li>
+          <span class="divider"></span>
+        </li>
+        {% endif %}
+        {% endfor %}
       </div>
     </div>
     <!-- GITHUB -->
