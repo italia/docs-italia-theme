@@ -62,9 +62,13 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right my-4" aria-labelledby="downloadsDropdown">
         {% if LOCAL %}
-          {% set downloads = {'htmlzip': 'htmlzip', 'pdf': 'pdf', 'epub': 'epub'} %}
+          {% set downloads = [ 
+            ("pdf", "pdf"),
+            ("htmlzip", "htmlzip"),
+            ("epub", "epub"),
+          ] %}
         {% endif %}
-        {% for type, url in downloads.items() %}
+        {% for type, url in downloads %}
         <a class="dropdown-item" href="{{ url }}">
           {{ type }}
         </a>
