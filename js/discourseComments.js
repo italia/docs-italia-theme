@@ -207,6 +207,8 @@ module.exports = discourseComments = (function ($) {
               });
               // Ubinds binded click events to avoid duplicates
               $('button.box-comment__submit').unbind('click');
+              // Remove, if exists, errors
+              $errorsBox.html('');
             })
             // Error
             .catch(function (error) {
