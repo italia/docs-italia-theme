@@ -401,7 +401,7 @@ class DiscourseCommentsDirective(Directive):
                     </button>
                   </div>
                   <div class="modal-body">
-                    <p> Il tuo account è stato sospeso, se ti serve aiuto vieni a trovarci sul workspace Slack di Developers Italia. </p>
+                    <p> Il tuo account e&grave; stato sospeso, se ti serve aiuto vieni a trovarci sul workspace Slack di Developers Italia. </p>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="logout-modal__cancel">Chiudi</button>
