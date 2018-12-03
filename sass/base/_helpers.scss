@@ -16,8 +16,20 @@
   color: $grey;
 }
 
+.font-sans-serif {
+  font-family: $titillium-font;
+}
+
+.font-serif {
+  font-family: $stack-font;
+}
+
 .text-light-blue {
   color: $light-blue;
+}
+
+.text-blue {
+  color: $blue;
 }
 
 /* Border colors */

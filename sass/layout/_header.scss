@@ -47,14 +47,15 @@
 
   .navbar-toggler {
     .navbar__icon {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
+      line-height: 3em;
       display: inline-block;
+      transform: scaleY(-1);
+      transition: transform 0.3s;
     }
 
     &.collapsed .navbar__icon {
-      -ms-transform: rotate(180deg); /* IE 9 */
-      -webkit-transform: rotate(180deg); /* Safari 3-8 */
-      transform: rotate(180deg);
+      transform: scaleY(1);
     }
 
     .dropdown-toggle::after {
@@ -225,25 +226,6 @@
 
 // *********************
 
-.doc-header {
-  box-shadow: 0 0 120px 0 rgba($black, 0.1);
-  position: relative;
-  z-index: 10;
-
-  // Feature progress-bar
-  .progress-container {
-    width: 100%;
-    height: 0.25rem;
-    background: $light-blue;
-  }
-
-  .progress-bar {
-    height: 0.25rem;
-    background: $medium-blue;
-    width: 0%;
-  }
-}
-
 .h1--header {
   font-size: 1.333rem;
   font-weight: 600;
@@ -276,21 +258,53 @@
   letter-spacing: unset;
 }
 
-.docs-italia__document-title {
-  .docs-italia__document-title__label {
-    font-size: 0.9rem;
-    font-weight: 400;
-    margin: 0;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    line-height: 1.2rem;
+.docs-italia__document-info {
+  color: $white;
+  font-size: 0.9rem;
+  vertical-align: bottom;
+
+  .docs-italia__document-info__icon {
+    font-size: 1.2rem;
+    vertical-align: bottom;
   }
 
-  .docs-italia__document-title__icon {
-    font-size: 2rem;
-    float: left;
-    margin-right: 0.625rem;
+  .docs-italia__document-info__ownership {
+    .docs-italia__document-info__label {
+      font-size: 0.8rem;
+    }
+
+    .docs-italia__document-info__icon {
+      font-size: 1rem;
+    }
+  }
+}
+
+.doc-header {
+  box-shadow: 0 0 120px 0 rgba($black, 0.1);
+  position: relative;
+  z-index: 10;
+  color: $blue;
+  font-size: 16px;
+  font-weight: 600;
+
+  // .btn {
+  //   span {
+  //     font-size: 1.3rem;
+  //     display: block;
+  //   }
+  // }
+
+  // Feature progress-bar
+  .progress-container {
+    width: 100%;
+    height: 0.25rem;
+    background: $light-blue;
+  }
+
+  .progress-bar {
+    height: 0.25rem;
+    background: $medium-blue;
+    width: 0%;
   }
 }
 
@@ -302,19 +316,6 @@
 
     &::placeholder {
       color: $grey;
-    }
-  }
-}
-
-.docs-italia__header-col {
-  flex: 0 0 auto;
-
-  .btn {
-    padding: 0;
-
-    span {
-      font-size: 1.3rem;
-      display: block;
     }
   }
 }

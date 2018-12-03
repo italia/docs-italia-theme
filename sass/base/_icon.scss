@@ -22,6 +22,9 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
+  vertical-align: middle;
+  color: inherit;
+  font-size: 1.3rem;
 
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
@@ -176,5 +179,23 @@
 .docs-icon-html {
   &::before {
     content: unicode($docs-icon-html);
+  }
+}
+
+.docs-icon-project {
+  &::before {
+    content: unicode($docs-icon-project);
+  }
+}
+
+.docs-icon-publisher {
+  &::before {
+    content: unicode($docs-icon-publisher);
+  }
+}
+
+.docs-icon-docs {
+  &::before {
+    content: unicode($docs-icon-docs);
   }
 }
