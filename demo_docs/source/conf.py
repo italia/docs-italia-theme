@@ -36,10 +36,8 @@ settings_file_name = 'docs-italia-demo'
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
     'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
     'docs_italia_theme',
 ]
 
