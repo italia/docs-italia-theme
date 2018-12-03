@@ -1,11 +1,11 @@
 @font-face {
-  font-family: $docs-italia-font-icon;
-  src: url('#{$icon-font-path}/docs-italia.eot');
+  font-family: $docs-font-icon;
+  src: url('#{$icon-font-path}/docs.eot');
   src:
     url('#{$icon-font-path}/docs-italia.eot#iefix') format('embedded-opentype'),
     url('#{$icon-font-path}/docs-italia.ttf') format('truetype'),
     url('#{$icon-font-path}/docs-italia.woff') format('woff'),
-    url('#{$icon-font-path}/docs-italia.svg#docs-italia') format('svg');
+    url('#{$icon-font-path}/docs-italia.svg#docs') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 [class*=" docs-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   /* stylelint-disable */
-  font-family: $docs-italia-font-icon !important;
+  font-family: $docs-font-icon !important;
   /* stylelint-enable */
   speak: none;
   font-style: normal;

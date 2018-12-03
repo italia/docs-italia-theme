@@ -258,22 +258,22 @@
   letter-spacing: unset;
 }
 
-.docs-italia__document-info {
+.docs__document-info {
   color: $white;
   font-size: 0.9rem;
   vertical-align: bottom;
 
-  .docs-italia__document-info__icon {
+  .docs__document-info__icon {
     font-size: 1.2rem;
     vertical-align: bottom;
   }
 
-  .docs-italia__document-info__ownership {
-    .docs-italia__document-info__label {
+  .docs__document-info__ownership {
+    .docs__document-info__label {
       font-size: 0.8rem;
     }
 
-    .docs-italia__document-info__icon {
+    .docs__document-info__icon {
       font-size: 1rem;
     }
   }

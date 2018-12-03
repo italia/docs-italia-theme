@@ -72,24 +72,24 @@
         <h2 class="text-white mb-0 h2--header">{{ _(t.site_subtitle | default(site.subtitle) | escape) }}</h2>
       </div>
     </div>
-    <div class="row mt-4 w-100 docs-italia__document-info">
+    <div class="row mt-4 w-100 docs__document-info">
       <div class="col-md-6">
-        <i class="docs-icon-document docs-italia__document-info__icon"></i>
+        <i class="docs-icon-document docs__document-info__icon"></i>
         <a href="{{ pathto(master_doc) }}" class="text-white">
           H1 Titolo del documento, molto probabilmente su più righe, lorem ipsum sit dolor est dunquer coteur seint cuoire summo coerent sinea long
         </a>
       </div>
-      <div class="docs-italia__document-info__ownership col-md-5 offset-md-1 mt-3 mt-md-0">
+      <div class="docs__document-info__ownership col-md-5 offset-md-1 mt-3 mt-md-0">
         <div class="w-100">
-          <i class="docs-icon-project docs-italia__document-info__icon"></i>
-          <span class="docs-italia__document-info__label ml-1">{{ t.project }}:</span>
+          <i class="docs-icon-project docs__document-info__icon"></i>
+          <span class="docs__document-info__label ml-1">{{ t.project }}:</span>
           <a href="/{{ publisher_slug }}/{{ publisher_project_slug }}" class="text-white">
             {{ publisher_project }}
           </a>
         </div>
         <div class="w-100 mt-1">
-          <i class="docs-icon-publisher docs-italia__document-info__icon"></i>
-          <span class="docs-italia__document-info__label ml-1">{{ t.administration }}:</span>
+          <i class="docs-icon-publisher docs__document-info__icon"></i>
+          <span class="docs__document-info__label ml-1">{{ t.administration }}:</span>
           <a href="/{{ publisher_slug }}" class="text-white">
             {{ publisher }}
           </a>
