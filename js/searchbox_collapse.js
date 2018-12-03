@@ -8,9 +8,9 @@ module.exports = themeSearchboxCollapse = (function ($) {
       var $searchbox = $('#rtd-search-form'),
         $searchboxDesktopContainer = $searchbox.parent(),
         $searchboxMobileContainer = $('.doc-header'),
-        wrapper = $tpl({}, 'searchbox_collapse__row');
+        wrapper = $tpl({}, 'searchbox-collapse');
 
-      $('#di-show-searchbox').on('click', function(event) {
+      $('#searchbox-toggle').on('click', function(event) {
         $(this).toggleClass('active');
         if($(this).hasClass('active')) {
           $searchbox.detach();
