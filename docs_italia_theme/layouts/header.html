@@ -1,23 +1,21 @@
 <header class="container-fluid container-fluid--desktop px-0 header">
-  <nav class="navbar navbar-expand-lg primary-bg-a7 navbar-dark justify-content-between slim-header p-0 pl-lg-4 pr-lg-5">
-    <span class="navbar-brand d-none d-lg-block order-lg-1 ml-4"><a class="text-white" href="https://www.agid.gov.it">{{ site.agid_short }}</a> + <a class="text-white" href="https://teamdigitale.governo.it">{{ site.team_short }}</a></span>
-    <button class="navbar-toggler collapsed order-1 text-white py-2"
+  <nav class="navbar navbar-expand-lg primary-bg-a7 navbar-dark slim-header justify-content-start p-0 pl-lg-4 pr-lg-5">
+    <span class="navbar-brand ml-4"><a class="text-white" href="https://www.agid.gov.it">{{ site.agid_short }}</a> + <a class="text-white" href="https://teamdigitale.governo.it">{{ site.team_short }}</a></span>
+    <button class="navbar-toggler collapsed text-white px-2 py-0 mr-3"
       type="button"
       data-toggle="collapse"
       data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation">
-    <small class="d-inline-block">{{ site.agid_short }} + {{ site.team_short }}</small>&nbsp;<span class="navbar__icon it-expand my-auto ml-1"></span></button>
+    <span class="navbar__icon it-expand my-auto ml-1"></span></button>
+    
+    <div class="ml-auto">
+      {% include 'layouts/lang_switch.html' %}
+    </div>
 
-    {# {% include 'layouts/lang_switch.html' %} #}
-
-    <div class="collapse navbar-collapse order-2" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-        <!-- <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li> -->
-        <li role="separator" class="nav-item divider divider--w-100 ml-0 "></li>
         <li class="nav-item px-lg-2 pl-3">
           <a class="nav-link" href="http://pianotriennale-ict.italia.it">{{ _(t.header_link_trasformazione) }}</a>
         </li>
@@ -49,57 +47,55 @@
   </nav>
 
   <div class="row p-4 px-lg-5 m-0 bg-primary--dark align-items-center">
-    <nav class="navbar navbar-expand-lg navbar-dark px-0">
-      <div class="Header-hamb mx-2 d-block d-lg-none">
-        <a href="#" data-activate-element data-activeid="offcanvasMenu" class="">
-          <span class="navbar-toggler-icon"></span>
+    <div class="row w-100">
+      <nav class="navbar navbar-expand-lg navbar-dark px-0">
+        <div class="Header-hamb mx-2 d-block d-lg-none">
+          <a href="#" data-activate-element data-activeid="offcanvasMenu" class="">
+            <span class="navbar-toggler-icon"></span>
+          </a>
+        </div>
+      </nav>
+      <div class="logo--header">
+        <a href="/" tabindex="-1" aria-hidden="true" class="d-block">
+          <svg class="svg--header align-bottom" xmlns="http://www.w3.org/2000/svg" height="78.187" width="97.387" viewBox="0 0 91.300002 73.300002"><g fill="#fff"><path d="M31.799 71.9V15.7h15.1V72h-15.1zM91.099 28.5h-13.8v23.1c0 2.3.1 3.8.2 4.8.1.9.5 1.7 1.2 2.4s1.8 1 3.3 1l8.6-.2.7 12c-5 1.1-8.9 1.7-11.5 1.7-6.8 0-11.4-1.5-13.8-4.6-2.5-3-3.7-8.6-3.7-16.8V0h15.1v15.6h13.8v12.9zM9.099 32.8c-2.6 0-4.8-.9-6.5-2.7s-2.6-4-2.6-6.6.9-4.8 2.5-6.6c1.7-1.8 3.9-2.6 6.5-2.6s4.8.9 6.5 2.7 2.5 4 2.5 6.7-.8 4.8-2.5 6.6c-1.6 1.6-3.7 2.5-6.4 2.5z"/></g></svg>
         </a>
       </div>
-    </nav>
-    <div class="logo--header">
-      <a href="/" tabindex="-1" aria-hidden="true" class="d-block">
-        <svg class="svg--header align-bottom" xmlns="http://www.w3.org/2000/svg" height="78.187" width="97.387" viewBox="0 0 91.300002 73.300002"><g fill="#fff"><path d="M31.799 71.9V15.7h15.1V72h-15.1zM91.099 28.5h-13.8v23.1c0 2.3.1 3.8.2 4.8.1.9.5 1.7 1.2 2.4s1.8 1 3.3 1l8.6-.2.7 12c-5 1.1-8.9 1.7-11.5 1.7-6.8 0-11.4-1.5-13.8-4.6-2.5-3-3.7-8.6-3.7-16.8V0h15.1v15.6h13.8v12.9zM9.099 32.8c-2.6 0-4.8-.9-6.5-2.7s-2.6-4-2.6-6.6.9-4.8 2.5-6.6c1.7-1.8 3.9-2.6 6.5-2.6s4.8.9 6.5 2.7 2.5 4 2.5 6.7-.8 4.8-2.5 6.6c-1.6 1.6-3.7 2.5-6.4 2.5z"/></g></svg>
-      </a>
+      <div class="col pl-3 pl-sm-4">
+        <h1 class="h1--header mb-1">
+          <a href="/" class="site-title text-white">
+            {{ _(t.site_title | default(site.title) | escape) }}
+            {% if site.pill %}
+              <span class="badge badge-pill bg-primary--mid-dark align-middle">{{ _(site.pill) }}</span>
+            {% endif %}
+          </a>
+        </h1>
+        <h2 class="text-white mb-0 h2--header">{{ _(t.site_subtitle | default(site.subtitle) | escape) }}</h2>
+      </div>
     </div>
-    <div class="col pl-3 pl-sm-4">
-      <h1 class="h1--header mb-1">
-        <a href="/" class="site-title text-white">
-          {{ _(t.site_title | default(site.title) | escape) }}
-          {% if site.pill %}
-            <span class="badge badge-pill bg-primary--mid-dark align-middle">{{ _(site.pill) }}</span>
-          {% endif %}
+    <div class="row mt-4 w-100 docs-italia__document-info">
+      <div class="col-md-6">
+        <i class="docs-icon-document docs-italia__document-info__icon"></i>
+        <a href="{{ pathto(master_doc) }}" class="text-white">
+          H1 Titolo del documento, molto probabilmente su più righe, lorem ipsum sit dolor est dunquer coteur seint cuoire summo coerent sinea long
         </a>
-      </h1>
-      <h2 class="text-white mb-0 h2--header">{{ _(t.site_subtitle | default(site.subtitle) | escape) }}</h2>
-    </div>
-    <!--<div class="col mx-l-auto d-none d-lg-block">
-      <div class="text-center text-lg-right social d-flex align-items-center justify-content-center justify-content-lg-end flex-column flex-lg-row">
-        <div class="mr-lg-1 mb-2 mb-lg-0 social__label">{{ t.follow_us | capitalize }}</div>
-        <div>
-          <a href="https://github.com/italia/" class="d-inline-flex small-prints mx-1 social__link"><i class="d-inline-block it-github"></i></a>
-          <a href="https://twitter.com/teamdigitaleIT" class="d-inline-flex small-prints mx-1 social__link"><i class="d-inline-block it-twitter"></i></a>
-          <a href="https://www.linkedin.com/company/teamdigitale/" class="d-finline-lex small-prints mx-1 social__link"><i class="d-inline-block it-linkedin"></i></a>
+      </div>
+      <div class="docs-italia__document-info__ownership col-md-5 offset-md-1 mt-3 mt-md-0">
+        <div class="w-100">
+          <i class="docs-icon-project docs-italia__document-info__icon"></i>
+          <span class="docs-italia__document-info__label ml-1">{{ t.project }}:</span>
+          <a href="/{{ publisher_slug }}/{{ publisher_project_slug }}" class="text-white">
+            {{ publisher_project }}
+          </a>
+        </div>
+        <div class="w-100 mt-1">
+          <i class="docs-icon-publisher docs-italia__document-info__icon"></i>
+          <span class="docs-italia__document-info__label ml-1">{{ t.administration }}:</span>
+          <a href="/{{ publisher_slug }}" class="text-white">
+            {{ publisher }}
+          </a>
         </div>
       </div>
-    </div>-->
+    </div>
   </div>
-  <!--<div class="row pt-4 pl-4 pl-md-5 pr-4 pr-lg-5 m-0 d-none d-lg-block bg-primary--dark secondary-nav">
-    <nav class="navbar navbar-expand-lg navbar-dark justify-content-between mx-r-auto">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">{{ t.header_link_projects }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">{{ t.header_link_documents }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">{{ t.header_link_administrations }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">{{ t.header_link_whatis }}</a>
-        </li>
-      </ul>
-    </nav>
-  </div>-->
 </header>
 {% include 'layouts/doc_header.html' %}
