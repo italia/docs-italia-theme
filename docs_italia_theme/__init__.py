@@ -109,14 +109,6 @@ def add_context_data(app, pagename, templatename, context, doctree):
         context['slug'] = 'demo-document'
         context['current_version'] = 'bozza'
         context['rtd_language'] = 'it'
-        
-        try:
-            with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
-                data = document_settings.read()
-                data = yaml.safe_load(data)
-        except:
-            data = {}
-        context['docsitalia_data'] = data
         context['publisher_project'] = u'Progetto demo'
         context['publisher_project_slug'] = 'progetto-demo'
         context['publisher'] = u'Organizzazione demo'
@@ -125,7 +117,21 @@ def add_context_data(app, pagename, templatename, context, doctree):
             ('demo', '#'),
             ('docs italia', '#')
         ]
-    
+        
+    try:
+        with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
+            data = document_settings.read()
+            data = yaml.safe_load(data)
+            print(data)
+    except:
+        data = {
+            'document': {
+                'name': 'Tiolo del documento non impostato'
+            }
+        }
+
+    context['docsitalia_data'] = data
+        
     if 'docsitalia_data' in context:
         context['docstitle'] = context['docsitalia_data']['document']['name']
 
