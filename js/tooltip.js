@@ -7,7 +7,7 @@ module.exports = themeToolTip = (function($) {
   return {
 
     $: {
-      btn: $('#doc-content .reference.internal'),
+      btn: $('#doc-content .reference.internal').not('.download'),
       $btnKeywords: {},
       $btnGlossary: {},
       docWindow: $(window),
