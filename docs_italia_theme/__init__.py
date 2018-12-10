@@ -122,7 +122,6 @@ def add_context_data(app, pagename, templatename, context, doctree):
         with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
             data = document_settings.read()
             data = yaml.safe_load(data)
-            print(data)
     except:
         data = {
             'document': {
