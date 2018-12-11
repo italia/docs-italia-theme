@@ -1,0 +1,78 @@
+<div class="modal fade modal-sm-full" id="document-info" tabindex="-1" role="dialog" aria-labelledby="document-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content rounded">
+      <div class="modal-header">
+        <h4 class="modal-title" id="document-title">{{ docsitalia_data.document.name or docstitle }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ docsitalia_data.document.description }}</p>
+        <p class="text-sans-serif">
+          <i class="docs-icon-project font-weight-bold"></i>
+          <span class="font-weight-bold ml-1 align-middle">{{ t.project }}:</span>
+          <a href="/{{ publisher_slug }}/{{ publisher_project_slug }}" class="align-middle">
+            {{ publisher_project }}
+          </a>
+        </p>
+        <p class="text-sans-serif">
+          <i class="docs-icon-publisher font-weight-bold"></i>
+          <span class="font-weight-bold ml-1 align-middle">{{ t.administration }}:</span>
+          <a href="/{{ publisher_slug }}/" class="align-middle">
+            {{ publisher }}
+          </a>
+        </p>
+        <div class="d-flex text-sans-serif my-4">
+          <div class="d-flex font-weight-bold align-items-center"><span class="mr-2">{{ t.tags }}:</span></div>
+          <div class="d-flex flex-wrap">
+            {% for tag, url in tags %}
+            <span class="border border-primary rounded m-1 py-1 px-2 tag"><a href="{{ url }}">{{ tag }}</a></span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="document-actions" aria-hidden="true">
+  <div class="modal-dialog mt-5" role="document">
+     <div class="modal-content rounded">
+        <div class="modal-body p-1">
+          {% include 'layouts/document_actions.html' %}
+        </div>
+     </div>
+  </div>
+</div>
+{#
+<div class="modal fade modal-sm-full" tabindex="-1" role="dialog" id="document-relationships" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+     <div class="modal-content rounded">
+       <div class="modal-header">
+         <h4 class="modal-title" id="document-title">{{ t.related }}</h4>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+        <div class="modal-body px-4 pb-4 pt-0">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active text-nowrap" id="same-tags-tab" data-toggle="tab" href="#same-tags" role="tab" aria-controls="same-tags" aria-selected="true">Simili per argomento</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-nowrap" id="same-project-tab" data-toggle="tab" href="#same-project" role="tab" aria-controls="same-project" aria-selected="false">Dello stesso progetto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-nowrap" id="same-publisher-tab" data-toggle="tab" href="#same-publisher" role="tab" aria-controls="same-publisher" aria-selected="false">Dello stesso publisher</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane p-4 fade show active" id="same-tags" role="tabpanel" aria-labelledby="same-tags-tab">Simili per argomento</div>
+            <div class="tab-pane p-4 fade" id="same-project" role="tabpanel" aria-labelledby="same-project-tab">Dello stesso progetto</div>
+            <div class="tab-pane p-4 fade" id="same-publisher" role="tabpanel" aria-labelledby="same-publisher-tab">Dello stesso publisher</div>
+          </div>
+        </div>
+     </div>
+  </div>
+</div>
+#}

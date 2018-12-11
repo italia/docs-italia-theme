@@ -3,7 +3,7 @@ module.exports = themeStickySidebar = (function ($) {
 
   return {
     init: function(callback) {
-      new StickySidebar('.docs-italia-menu', {
+      new StickySidebar('.docs-menu', {
         containerSelector: '#main',
         innerWrapperSelector: '#desktop-menu',
         topSpacing: 68,

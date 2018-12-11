@@ -8,7 +8,7 @@ module.exports = themeSidebarNav = (function ($) {
       $openToggle: $('.navbar-toggler--open'),
       $backToggle: $('.navbar-toggler--back'),
       $tab: $('.sidebar-tabs'),
-      $nav: $('.docs-italia-offcanvas-menu'),
+      $nav: $('.docs-offcanvas-menu'),
       $navItem: $('.sidebar-list--wrapper a'),
       $currentItem: {} // last menù item selected
     },

@@ -1,5 +1,5 @@
 {% if READTHEDOCS and translations %}
-<ul class="navbar-nav lang-selector col-lg-offset-12 order-2 order-lg-3 pr-4 pr-lg-0 m-0 list-unstyled">
+<ul class="navbar-nav lang-selector pr-4 pr-lg-0 m-0 list-unstyled">
   <li role="separator" class="nav-item divider ml-lg-0 ml-3 d-none d-lg-block"></li>
   <li class="nav-item dropdown nav-item--no-underline pl-2">
     <a class="nav-link dropdown-toggle pr-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -7,7 +7,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" data-placement="bottom-start">
       {% for lang, lang_code in translations.items() %}
-      <a class="dropdown-item pl-2 right-icon" href="/{{ lang }}/{{ current_version }}">
+      <a class="dropdown-item pl-2 right-icon" href="/{{ publisher_slug }}/{{ publisher_project_slug }}/{{ lang }}/{{ current_version }}">
         <span lang="{{ lang }}">{{ lang_code }}</span>
         {% if language == lang %}
         <span class="it-check float-right"></span>

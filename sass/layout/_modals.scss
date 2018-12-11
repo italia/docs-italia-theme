@@ -1,0 +1,16 @@
+@include media-breakpoint-down(sm) {
+  .modal.modal-sm-full {
+    .modal-dialog {
+      margin: 0;
+      max-width: none;
+
+      .modal-content {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0 !important;
+        border: none;
+      }
+    }
+  }
+}

@@ -11,7 +11,7 @@ it:
     cookiebar_privacy_policy: Cookie policy
     copyright: Copyright
     documents: Documentazione
-    downloads: Downloads
+    download: Scarica
     footer_link_privacy_policy: Privacy policy
     footer_link_legal_notes: Note legali
     go_to: Vai a
@@ -34,7 +34,7 @@ it:
     skiplink_goto_navigation: vai alla navigazione del sito
     toggle_menu_label: accedi al menu
     version: versione
-    compare_versions: confronta versioni
+    compare: Confronta
     copy_link: copia link
     copied_link: link copiato
     see_actions: vedi azioni
@@ -71,11 +71,14 @@ it:
     no_figures: nessuna figura
     no_tables: nessuna tabella
     introduction: introduzione
+    project: Progetto
+    administration: Amministrazione
+    info: Informazioni
+    related: Documenti correlati
+    actions: Azioni
+    tags: Tag
 
-    view_on_github: Visualizza sorgente su GitHub
-    view_on_bitbucket: Visualizza sorgente su Bitbucket
-    view_on_gitlab: Visualizza sorgente su GitLab
-    view_page_source: Visualizza sorgente della pagina
+    view_source: Sorgente
 
     previous: precedente
     next: successivo
@@ -113,7 +116,7 @@ en:
     cookiebar_privacy_policy: Cookie policy
     copyright: Copyright
     documents: Documents
-    downloads: Downloads
+    download: Download
     footer_link_privacy_policy: Privacy policy
     footer_link_legal_notes: Legal notes
     go_to: Go to
@@ -136,7 +139,7 @@ en:
     skiplinks_goto_navigation: go to site navigation
     toggle_menu_label: go to navigation
     version: version
-    compare_versions: compare versions
+    compare: Compare
     copy_link: copy link
     copied_link: copied link
     see_actions: see actions
@@ -173,11 +176,14 @@ en:
     no_figures: no figures
     no_tables: no tables
     introduction: introduction
+    project: Project
+    administration: Administration
+    info: About this document
+    related: Related documents
+    actions: Actions
+    tags: Tags
 
-    view_on_github: View source on GitHub
-    view_on_bitbucket: View source on Bitbucket
-    view_on_gitlab: View source on GitLab
-    view_page_source: View source page source
+    view_source: Source
 
     previous: previous
     next: next
