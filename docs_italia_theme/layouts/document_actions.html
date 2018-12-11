@@ -15,7 +15,7 @@
             ] %}
           {% endif %}
           {% for type, url in downloads %}
-          <a class="dropdown-item" href="{{ url }}">
+          <a class="dropdown-item" href="{{ url }}" download>
             {{ type }}
           </a>
           {% if not loop.last %}
