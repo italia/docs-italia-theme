@@ -38,7 +38,7 @@
   </div>
   #}
   {% if github_user %}
-    {% set github_url = "https://github.com/" + github_user + "/" + github_repo + "/blob/" + github_version + conf_py_path + pagename + source_suffix %}
+    {% set github_url = "https://github.com/" + github_user + "/" + github_repo + "/blob/" + github_version + conf_py_path + pagename + page_source_suffix %}
   {% endif %}
   <div class="p-3 px-md-2 py-md-0">
     <a href="{{ github_url | default('#') }}" role="button" class="btn p-2">
