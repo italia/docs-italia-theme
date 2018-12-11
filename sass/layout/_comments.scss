@@ -268,3 +268,13 @@ div[class^="box-comment-"] {
     }
   }
 }
+
+.missing_permission {
+  width: 100%;
+
+  &__text {
+    border: 1px solid $lightgrey-a2;
+    border-radius: 5px;
+    padding: 1em;
+  }
+}

@@ -46,7 +46,19 @@ function DiscourseApi() {
       that.user.state('logged', false);
     } else {
       // Get current user
-      that.user.current();
+      that.user.current().catch(function (error) {
+        if (typeof error === 'undefined' || error.response.status) {
+          that.user.logout().catch(function () {
+            var $modal = $('#suspended-modal');
+            that.user.state('logged', false);
+            that.utility._cookie_delete('docs-italia_uak');
+            $modal.modal('show');
+            $modal.on('hide.bs.modal', function () {
+              window.location.href = location.href;
+            });
+          })
+        }
+      })
       // Get csrf token
       that.user.csrf();
       // Scroll to comment-box
@@ -125,6 +137,8 @@ function DiscourseApi() {
       return that.cm.call('userCurrent', '/session/current', null, null, that.getHeaderObject('User-Api-Key')).get().then(function (response) {
         that.user.object = response.data.current_user;
         return that.user.object;
+      }).catch(function () {
+        that.forceLogout();
       });
     },
 
@@ -149,7 +163,7 @@ function DiscourseApi() {
       var userId = that.user.object.id;
 
       var headers = that.getHeaders(['X-CSRF-Token', 'User-Api-Key']);
-      that.cm.call('userLogout', '/admin/users/$/log_out!', [userId], null, headers).post().then(function (response) {
+      return that.cm.call('userLogout', '/admin/users/$/log_out!', [userId], null, headers).post().then(function (response) {
         that.user.state('logged', false);
         that.utility._cookie_delete('docs-italia_uak');
         window.location.href = location.href;
@@ -183,13 +197,20 @@ function DiscourseApi() {
       return that.cm.executeQueue('posts').then(function (data) {
         that.multiple = true;
         $(data).each(function (idx, post) {
-          that.posts[post.data.id] = { postStream: post.data.post_stream.posts };
-          that.posts[post.data.id].postStream.forEach(function (post) {
-            if (typeof that.user.fields[post.username] === "undefined") {
-              that.user.fields[post.username] = null;
-              that.user.get(post.username)
+          if (typeof post.error === "undefined") {
+            that.posts[post.data.id] = { postStream: post.data.post_stream.posts };
+            that.posts[post.data.id].postStream.forEach(function (post) {
+              if (typeof that.user.fields[post.username] === "undefined") {
+                that.user.fields[post.username] = null;
+                that.user.get(post.username)
+              }
+            });
+          } else {
+            that.posts[post.data.id] = {
+              postStream: [],
+              error: post.error
             }
-          });
+          }
         });
 
         // Execute created users' fields queue
@@ -217,6 +238,10 @@ function DiscourseApi() {
             that.user.fields[field.data.user.username] = field.data.user.user_fields[1];
           })
         })
+      }).catch(function (data) {
+        var response = data.response.data;
+        that.requestError = data.response.status;
+        that.requestErrorText = response.errors[0];
       })
       */
     },
@@ -228,9 +253,29 @@ function DiscourseApi() {
 
       return that.cm.call('createPost', '/posts', null, body, that.getHeaderObject('User-Api-Key')).post().then(function (response) {
         return response;
+      }).catch(function (error) {
+        if (typeof error.response.status !== 'undefined' && error.response.status === 403) {
+          that.forceLogout()
+        } else {
+          return new Promise (function (resolve, reject) {
+            reject(error);
+          });
+        }
       })
     }
   };
+  
+  this.forceLogout = function () {
+    that.user.logout().catch(function () {
+      var $modal = $('#suspended-modal');
+      that.user.state('logged', false);
+      that.utility._cookie_delete('docs-italia_uak');
+      $modal.modal('show');
+      $modal.on('hide.bs.modal', function () {
+        window.location.href = location.href;
+      });
+    })
+  }
 };
 
 DiscourseApi.prototype = new DConfig;

@@ -14,6 +14,7 @@ var http = axios.create({
  * @constructor
  */
 function DCall(baseUrl, name, endpoint, token, body, headers, cache) {
+  this.token = token;
   if (endpoint.indexOf('$') >= 0) {
     var count = 0;
     var avoidJSONExt = false;
@@ -51,16 +52,35 @@ DCall.prototype.set = function (name, endpoint, body, headers, cache) {
 
 // Execute axios get call
 DCall.prototype.get = function () {
+  var that = this;
   if (typeof this.cache === "undefined")
     this.cache = true;
 
-  return http.get(this.endpoint, {
+  var call = http.get(this.endpoint, {
     data: this.body,
     cache: this.cache,
     headers: this.headers
-  }).then(function (response) {
-    return response;
   });
+  console.log(this.endpoint)
+  if (this.name === 'userCurrent' || this.name === 'createPost') {
+    return call.then(function (response) {
+      return response;
+    })
+  } else {
+    return call
+      .then(function (response) {
+        return response;
+      })
+      .catch(function (error) {
+      return {
+        error: error.response.status,
+        data: {
+          id: that.token,
+          error: error.response.status,
+        }
+      };
+    });
+  }
 };
 // Execute axios post call
 DCall.prototype.post = function () {

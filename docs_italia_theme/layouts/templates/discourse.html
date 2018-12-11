@@ -1,6 +1,6 @@
 {% raw %}
 <script id="discourse__comment" type="text/template">
-  <li id='{{ commentHTMLId }}' class='row mb-5 block-comments__item comment-{{ post.id }} {{ isNew }}'
+  <li id='{{ commentHTMLId }}' class='row mb-5 block-comments__item comment-{{ post.id }} {{ isNew }} {{ reported }}'
       data-topic='{{ tid }}' data-comment='{{ post.id }}'>
     <div id='reply-to-{{ post.post_number }}'></div>
     <figure class='col-auto mb-0'>
@@ -48,6 +48,19 @@
   </div>
 </script>
 
+<script id="discourse__missing_permission" type="text/template">
+	<div class="pl-2 block-comments__input missing_permission error error--{{ errorCode }} row">
+		<figure class="col-auto mb-0 mr-2">
+			<img class="block-comments__img new-comment__figure rounded-circle" src="">
+			<figcaption>
+				<a href='#logout' class="block-comments__logout-link block-comments__logout-link--visible" data-toggle="modal" data-target="#logout-modal" title="Logout" alt="Logout">Logout</a>
+			</figcaption>
+		</figure>
+
+		<div class="missing_permission__text col pt-2">{{ errorText }}</div>
+	</div>
+</script>
+
 <script id="discourse__markup__tooltip" type="text/template">
   <div class='tooltip tooltip--active doc-tooltip box-comment__suggestions__tooltip' role='tooltip'>
     <div class='tooltip__wrap'>
@@ -60,5 +73,13 @@
       </ul>
     </div>
   </div>
+</script>
+
+<script id="discourse__silenced" type="text/template">
+	<div class="error error__silenced">
+		Il tuo account è stato temporaneamente sospeso, scopri di più leggendo
+		<a href="{{ baseUrl }}/u/{{username}}/notifications" target="_blank">le tue notifiche su Forum Italia</a>
+		<br>
+	</div>
 </script>
 {% endraw %}

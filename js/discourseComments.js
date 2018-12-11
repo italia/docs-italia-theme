@@ -3,6 +3,8 @@ var $tpl = require('./getTpl');
 
 // Remaps topic's posts object
 function _remapPosts(posts) {
+  if (posts == null)
+    return [];
   var remappedObject = [];
 
   posts.forEach(function (e) {
@@ -28,14 +30,15 @@ function _parseUserRefs (text) {
 }
 
 // Create the comment markup with given topic id and post
-function _createMarkup (target, tid, post, nPId) {
-  // Create a javascript Date object starts from post.updated_at date value
-  var d = new Date(post.updated_at);
+function _createMarkup (target, tid, post, nPId, reported) {
+  // Create a javascript Date object starts from post.created_at date value
+  var d = new Date(post.created_at);
   post.cooked = _parseUserRefs(post.cooked);
 
   var rendered = $tpl({
     post: post,
     tid: tid,
+    reported: reported ? 'reported' : '',
     // Get user role and then return html for comment
     customField: typeof Discourse.user.fields[post.username] === "undefined" ? 'utente' : Discourse.user.fields[post.username],
     // Id attribute for comment div
@@ -56,7 +59,7 @@ module.exports = discourseComments = (function ($) {
     init: function (newPostId, postObject) {
       // Obtains all comments boxes
       var $commentBox = $('ul.block-comments__list.items');
-
+      var topicId = $commentBox.data('topic');
       // Before flush set fixed height, to avoid blink
       $commentBox.css('min-height', $commentBox.height() + 'px');
       // Flush commentBox
@@ -83,7 +86,7 @@ module.exports = discourseComments = (function ($) {
 
         // Get all posts for given topic id
         topicPosts.forEach(function (e) {
-          if (!e.hidden) {
+          if (!e.hidden && typeof e.error === "undefined") {
             _createMarkup($(cB), topicId, e, newPostId);
             if (e.reply_to_post_number !== null) {
               // Get the reply's target
@@ -97,7 +100,6 @@ module.exports = discourseComments = (function ($) {
               $('#reply-link-' + e.id).append(rendered);
             }
           }
-          // Append markup with comment to the comments box
         })
       });
 
@@ -149,6 +151,25 @@ module.exports = discourseComments = (function ($) {
 
         var loginMarkup = $tpl({}, 'discourse__login');
         $('div.box-comment').html(loginMarkup);
+      } else {
+        $(Discourse.posts.topicId).each(function (id, postKey) {
+          if (typeof Discourse.posts[postKey].error !== "undefined") {
+            $boxInput = $('div.box-comment[data-topic=' + postKey + '] .block-comments__input')
+            $boxFigure = $boxInput.parent().find('figure');
+            $boxButtons = $boxInput.parent().find('.box-comment__buttons');
+            $boxCharsInfo = $boxInput.parent().find('.box-comment__required');
+
+            // Sets error instead of textarea
+            $boxInput.html($tpl({
+              errorCode: Discourse.posts[postKey].error,
+              errorText: 'Il tuo account su Forum Italia non ha i permessi necessari per visualizzare questi commenti. Se ti serve aiuto vieni a trovarci sul workspace Slack di Developers Italia.'
+            }, 'discourse__missing_permission'));
+            // Hide some elments
+            $boxInput.find('figure').hide();
+            $boxButtons.hide();
+            $boxCharsInfo.hide();
+          }
+        })
       }
 
       // Handle login-button click
@@ -186,13 +207,25 @@ module.exports = discourseComments = (function ($) {
               });
               // Ubinds binded click events to avoid duplicates
               $('button.box-comment__submit').unbind('click');
+              // Remove, if exists, errors
+              $errorsBox.html('');
             })
             // Error
             .catch(function (error) {
-              var errorsString = error.response.data.errors.join('<br>');
+              var errorsString = '';
+              if (error.response.status === 422) {
+                if (!Discourse.user.object.can_create_topic) {
+                  errorsString = $tpl({
+                    baseUrl: Discourse.restUrl,
+                    username: Discourse.user.object.username,
+                  }, 'discourse__silenced');
+                } else {
+                  errorsString = error.response.data.errors.join('<br>');
+                }
+              }
               $parent.removeClass('sending');
               $body.attr('disabled', false);
-              $errorsBox.text(errorsString);
+              $errorsBox.html(errorsString);
             });
         }
       });
