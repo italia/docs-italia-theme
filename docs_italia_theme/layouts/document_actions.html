@@ -37,11 +37,11 @@
     </a>
   </div>
   #}
-  {% if github_user %}
+  {% if github_user and page_source_suffix %}
     {% set github_url = "https://github.com/" + github_user + "/" + github_repo + "/blob/" + github_version + conf_py_path + pagename + page_source_suffix %}
   {% endif %}
   <div class="p-3 px-md-2 py-md-0">
-    <a href="{{ github_url | default('#') }}" role="button" class="btn p-2">
+    <a href="{{ github_url | default('#') }}" role="button" class="btn p-2{{ '' if github_url else ' disabled' }}" aria-disabled="{{ 'false' if github_url else 'true' }}">
         <span class="docs-icon-github"></span>
         <span class="align-middle">{{ t.view_source }}</span>
     </a>
