@@ -61,7 +61,7 @@ DCall.prototype.get = function () {
     cache: this.cache,
     headers: this.headers
   });
-  console.log(this.endpoint)
+
   if (this.name === 'userCurrent' || this.name === 'createPost') {
     return call.then(function (response) {
       return response;
