@@ -70,13 +70,12 @@ function DiscourseApi() {
   };
 
   this.authLink = function () {
-    var authRedirect = location.protocol + '//' + location.hostname + (location.port !== "" ? ':' + location.port : '');
     var data = {
       application_name: that.name,
       public_key: that.utility.rsaKey.public,
       nonce: that.utility.randomBytes(16),
       client_id: that.utility.randomBytes(32),
-      auth_redirect: authRedirect,
+      auth_redirect: location.href,
       scopes: 'write'
     };
     return  that.restUrl + '/user-api-key/new?' + that.utility._serializeParams(data);
