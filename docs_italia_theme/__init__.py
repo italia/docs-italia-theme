@@ -420,13 +420,10 @@ class DiscourseCommentsDirective(Directive):
               </div>
             </div>
         """
-        #node += nodes.raw(text="<div class='section' id='docs-comments-box-"+options['topic_id']+"' data-topic='"+options['topic_id']+"'></div>", format='html')
+
         node += nodes.raw(text=cbox_template, format='html')
         node += nodes.raw(text=logout_modal, format='html')
-        node += nodes.raw(text=suspended_modal , format='html')
-
-        #form = nodes.raw(text=form_template, format='html')
-        #node += form
+        node += nodes.raw(text=suspended_modal, format='html')
 
         node['data-topic-id'] = options['topic_id']
 
@@ -435,11 +432,15 @@ class DiscourseCommentsDirective(Directive):
 
 def setup(app):
     app.site_data = load_theme_data()
+    app.add_html_theme('docs_italia_theme', os.path.abspath(os.path.dirname(__file__)))
     app.connect('html-page-context', add_context_data)
     app.connect('html-page-context', generate_additonal_tocs)
     app.connect('doctree-resolved', generate_glossary_json)
     app.connect('doctree-resolved', glossary_page_id)
     # Setup for forum_italia custom directive
-    app.add_node(DiscourseCommentsNode, html=(DiscourseCommentsNode.visit, DiscourseCommentsNode.depart))
+    app.add_node(DiscourseCommentsNode,
+        html=(DiscourseCommentsNode.visit, DiscourseCommentsNode.depart),
+        latex=(DiscourseCommentsNode.visit, DiscourseCommentsNode.depart)
+    )
     app.add_directive('forum_italia', DiscourseCommentsDirective)
-    app.add_html_theme('docs_italia_theme', os.path.abspath(os.path.dirname(__file__)))
+    
