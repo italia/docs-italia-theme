@@ -94,21 +94,21 @@ $letter_spacing: 0.88px;
   height: 1.5rem;
   border: 0;
 
-  .docs-icon-collapse,
-  .docs-icon-expand {
+  .it-collapse,
+  .it-expand {
     color: $medium-blue;
   }
 
-  .docs-icon-expand {
+  .it-expand {
     display: none;
   }
 
   &.collapsed {
-    .docs-icon-collapse {
+    .it-collapse {
       display: none;
     }
 
-    .docs-icon-expand {
+    .it-expand {
       display: inline-block;
     }
   }

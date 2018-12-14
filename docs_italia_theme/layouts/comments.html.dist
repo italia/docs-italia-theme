@@ -24,7 +24,7 @@
                            <div class="col-auto"><span class="block-comments__name text-capitalize mb-0">paola turcini</span></div>
                            <div class="col-auto">
                               <p class="d-inline-block mr-2 block-comments__date mb-0">16 apr 2018, 16:24</p>
-                              <button class="block-comments__item-btn collapsed" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1"><span class="docs-icon-collapse"></span><span class="docs-icon-expand"></span></button>
+                              <button class="block-comments__item-btn collapsed" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1"><i class="it-collapse"></i><i class="it-expand"></i></button>
                            </div>
                         </div>
                         <p class="text-uppercase block-comments__role">giornalista</p>
@@ -39,7 +39,7 @@
                            <div class="col-auto"><span class="block-comments__name text-capitalize mb-0">paola turcini</span></div>
                            <div class="col-auto">
                               <p class="d-inline-block mr-2 block-comments__date mb-0">16 apr 2018, 16:24</p>
-                              <button class="block-comments__item-btn" data-toggle="collapse" data-target="#collapse-2" aria-expanded="true" aria-controls="collapse-2"><span class="docs-icon-collapse"></span><span class="docs-icon-expand"></span></button>
+                              <button class="block-comments__item-btn" data-toggle="collapse" data-target="#collapse-2" aria-expanded="true" aria-controls="collapse-2"><i class="it-collapse"></i><i class="it-expand"></i></button>
                            </div>
                         </div>
                         <p class="text-uppercase block-comments__role">giornalista</p>
