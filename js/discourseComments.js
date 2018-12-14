@@ -257,6 +257,8 @@ module.exports = discourseComments = (function ($) {
       // Suggestions button click
       $('.new-comment__suggestions').popover({
         template: $tpl({}, 'discourse__markup__tooltip'),
+        html: true,
+        placement: 'bottom',
         container: 'body',
         offset:'175px , 40px',
         trigger: 'focus',
