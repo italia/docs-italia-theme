@@ -1,125 +1,21 @@
 #doc-content {
-  .admonition-display-page {
-    background-color: $grey-light;
-    padding: 2rem;
-    position: relative;
-    margin-top: 2rem;
-
-    &::before,
-    &::after {
-      content: "";
-      width: 0;
-      height: 0;
-      right: 0;
-      top: 0;
-      position: absolute;
-      z-index: 1;
-    }
-
-    &::before {
-      border-bottom: 50px solid transparent;
-      border-right: 50px solid $white;
-    }
-
-    &::after {
-      border-top: 50px solid transparent;
-      border-bottom: 50px solid $grey;
-      border-right: 50px solid transparent;
-      transform: translateY(-50%);
-    }
-
-    > p,
-    .admonition__hidden-paragraph p,
-    li {
-      font-size: 0.8rem;
-      color: $dark-blue;
-    }
-
-    ol {
-      counter-reset: list;
-
-      li {
-        margin-bottom: 1rem;
-        position: relative;
-        list-style-type: none;
-        counter-increment: list;
-        color: $dark-blue;
-        font-family: $stack-font;
-        text-indent: 1rem;
-
-        &::after {
-          position: absolute;
-          left: -1rem;
-          top: 0;
-          width: 1.1rem;
-          height: 1.5rem;
-          z-index: 1;
-          content: counter(list) ".";
-          text-align: center;
-          font-weight: 700;
-        }
-
-        &::before {
-          position: absolute;
-          left: -2rem;
-          top: 0.65em;
-          height: 1px;
-          z-index: 1;
-          content: "";
-          font-weight: 700;
-          background-color: $dark-blue;
-          width: 1rem;
-        }
-      }
-    }
-
-    .code-block__header,
-    .admonition-title {
-      color: $mid-dark-blue;
-      font-family: $titillium-font;
-    }
-
-    .admonition-title {
-      padding-bottom: 0.2rem;
-      display: inline-block;
-      background: linear-gradient($mid-dark-blue, $mid-dark-blue) no-repeat right bottom / calc(100% - 2rem) 2px;
-      margin-bottom: 1rem;
-      overflow: hidden;
-    }
-
-    .admonition-internal-title {
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: $dark-blue;
-      font-family: $titillium-font;
-    }
-
-    .linenodiv {
-      pre {
-        color: $grey-mid-01;
-        font-weight: 400;
-      }
-    }
-
-    .highlighttable {
-      pre {
-        font-size: 0.8rem;
-      }
-    }
-  }
-
   // Admonition.
   .admonition {
     margin-bottom: 2rem;
+    margin-top: 2rem;
+    padding-left: 2rem;
+    border-left: 4px solid;
+    color: $grey-mid;
 
     .admonition-title {
+      font-family: $titillium-font;
       text-transform: uppercase;
       font-weight: 700;
 
       [class^="docs-icon-"],
       [class*=" docs-icon-"] {
         font-size: 1.5rem;
+        margin-right: 0.5rem;
       }
     }
 
@@ -185,7 +81,117 @@
       }
     }
 
-    &.admonition-consultazione {
+    &.display-page {
+      background-color: $grey-light;
+      padding: 2rem;
+      position: relative;
+      border: none;
+
+      &::before,
+      &::after {
+        content: "";
+        width: 0;
+        height: 0;
+        right: 0;
+        top: 0;
+        position: absolute;
+        z-index: 1;
+      }
+
+      &::before {
+        border-bottom: 50px solid transparent;
+        border-right: 50px solid $white;
+      }
+
+      &::after {
+        border-top: 50px solid transparent;
+        border-bottom: 50px solid $grey;
+        border-right: 50px solid transparent;
+        transform: translateY(-50%);
+      }
+
+      > p,
+      .admonition__hidden-paragraph p,
+      li {
+        font-size: 0.8rem;
+        color: $dark-blue;
+      }
+
+      ol {
+        counter-reset: list;
+
+        li {
+          margin-bottom: 1rem;
+          position: relative;
+          list-style-type: none;
+          counter-increment: list;
+          color: $dark-blue;
+          font-family: $stack-font;
+          text-indent: 1rem;
+
+          &::after {
+            position: absolute;
+            left: -1rem;
+            top: 0;
+            width: 1.1rem;
+            height: 1.5rem;
+            z-index: 1;
+            content: counter(list) ".";
+            text-align: center;
+            font-weight: 700;
+          }
+
+          &::before {
+            position: absolute;
+            left: -2rem;
+            top: 0.65em;
+            height: 1px;
+            z-index: 1;
+            content: "";
+            font-weight: 700;
+            background-color: $dark-blue;
+            width: 1rem;
+          }
+        }
+      }
+
+      .code-block__header,
+      .admonition-title {
+        color: $mid-dark-blue;
+        font-family: $titillium-font;
+      }
+
+      .admonition-title {
+        padding-bottom: 0.2rem;
+        display: inline-block;
+        background: linear-gradient($mid-dark-blue, $mid-dark-blue) no-repeat right bottom / calc(100% - 2.2rem) 2px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+      }
+
+      .admonition-internal-title {
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: $dark-blue;
+        font-family: $titillium-font;
+      }
+
+      .linenodiv {
+        pre {
+          color: $grey-mid-01;
+          font-weight: 400;
+        }
+      }
+
+      .highlighttable {
+        pre {
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    &.admonition-consultation {
       padding-bottom: 1rem;
       border-bottom: 1px $grey solid;
       position: relative;
@@ -209,29 +215,17 @@
       }
     }
 
-    &.important,
-    &.error,
-    &.hint,
-    &.note,
-    &.attention,
-    &.warning {
-      margin-top: 2rem;
-      padding-left: 2rem;
-      border-left: 1px $grey solid;
-      color: $grey-mid;
-
-      .admonition-title {
-        font-family: $titillium-font;
-      }
-    }
-
     &.error {
+      border-color: $red;
+
       .admonition-title {
         color: $red;
       }
     }
 
     &.note {
+      border-color: $mid-dark-blue;
+
       .admonition-title {
         color: $mid-dark-blue;
       }
@@ -239,12 +233,16 @@
 
     &.attention,
     &.warning {
+      border-color: $orange;
+
       .admonition-title {
         color: $orange;
       }
     }
 
     &.important {
+      border-color: $green;
+
       .admonition-title {
         color: $green;
       }
@@ -256,6 +254,8 @@
     }
 
     &.hint {
+      border-color: $green;
+
       .admonition-title {
         color: $green;
       }
@@ -276,6 +276,122 @@
           top: 50%;
         }
       }
+    }
+
+    &.admonition-must,
+    &.admonition-must-not,
+    &.admonition-should,
+    &.admonition-should-not,
+    &.admonition-may,
+    &.admonition-use,
+    &.admonition-use-not {
+      margin-top: 2rem;
+      border: 2px solid;
+      border-radius: 1em;
+      padding: 2em;
+      position: relative;
+
+      .admonition__header {
+        display: inline-block;
+        position: relative;
+        padding: 0 1em;
+        background: $white;
+
+        .admonition-title {
+          font-family: $titillium-font;
+          margin: 0;
+        }
+      }
+
+      &::before {
+        position: absolute;
+        right: 4em;
+        top: -0.65em;
+        width: 6em;
+        padding: 0 1em;
+        display: inline-block;
+        background-color: $white;
+      }
+    }
+
+    &.admonition-must,
+    &.admonition-must-not,
+    &.admonition-should,
+    &.admonition-should-not,
+    &.admonition-may {
+      border-color: $darker-blue;
+
+      .admonition__header {
+        top: -2.8em;
+
+        .admonition-title {
+          color: $darker-blue;
+        }
+      }
+    }
+
+    &.admonition-use {
+      border-color: $green-alt;
+
+      .admonition__header {
+        .admonition-title {
+          color: $green-alt;
+
+          &::before {
+            content: $docs-icon-check;
+          }
+        }
+      }
+    }
+
+    &.admonition-use-not {
+      border-color: $red-alt;
+
+      .admonition__header {
+        .admonition-title {
+          color: $red-alt;
+
+          &::before {
+            content: $docs-icon-not;
+          }
+        }
+      }
+    }
+
+    &.admonition-use,
+    &.admonition-use-not {
+      .admonition__header {
+        top: -3.2em;
+
+        .admonition-title {
+          &::before {
+            font-family: $docs-font-icon;
+            margin-right: 0.5rem;
+            font-size: 1.6em;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+
+    &.admonition-must::before {
+      content: url('../images/must.svg');
+    }
+
+    &.admonition-should::before {
+      content: url('../images/should.svg');
+    }
+
+    &.admonition-must-not::before {
+      content: url('../images/must_not.svg');
+    }
+
+    &.admonition-should-not::before {
+      content: url('../images/should_not.svg');
+    }
+
+    &.admonition-may::before {
+      content: url('../images/may.svg');
     }
   }
 }

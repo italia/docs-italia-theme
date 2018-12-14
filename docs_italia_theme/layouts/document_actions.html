@@ -1,0 +1,49 @@
+<div class="document-actions d-flex flex-column flex-md-row justify-content-around w-100 p-2 p-md-0 text-blue">
+  <div class="dropdown p-3 px-md-2 py-md-0 d-flex flex-wrap">
+    <a class="btn dropdown-toggle p-2 flex-grow-1 text-left" href="#" id="downloads-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="docs-icon-download align-middle"></span>
+      <span class="align-middle">{{ t.download }}</span>
+    </a>
+    <div class="dropdown-menu w-100" aria-labelledby="downloads-dropdown">
+      <div class="link-list-wrapper">
+        <ul class="link-list">
+          {% if LOCAL %}
+            {% set downloads = [ 
+              ("pdf", "pdf"),
+              ("htmlzip", "htmlzip"),
+              ("epub", "epub"),
+            ] %}
+          {% endif %}
+          {% for type, url in downloads %}
+          <a class="dropdown-item" href="{{ url }}" download>
+            {{ type }}
+          </a>
+          {% if not loop.last %}
+          <li>
+            <span class="divider"></span>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  {#
+  <div class="p-3 px-md-2 py-md-0">
+    <a href="#" role="button" class="btn p-2">
+        <span class="docs-icon-compare"></span>
+        <span class="align-middle">{{ t.compare }}</span>
+    </a>
+  </div>
+  #}
+  {% if github_user %}
+    {% set github_url = "https://github.com/" + github_user + "/" + github_repo + "/blob/" + github_version + conf_py_path + pagename + source_suffix %}
+  {% endif %}
+  <div class="p-3 px-md-2 py-md-0">
+    <a href="{{ github_url | default('#') }}" role="button" class="btn p-2">
+        <span class="docs-icon-github"></span>
+        <span class="align-middle">{{ t.view_source }}</span>
+    </a>
+  </div>
+</div>

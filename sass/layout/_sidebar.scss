@@ -21,7 +21,7 @@
   }
 }
 
-.docs-italia-menu {
+.docs-menu {
   // See https://abouolia.github.io/sticky-sidebar/#configure-your-css
   will-change: min-height;
   display: none;
@@ -31,7 +31,7 @@
   }
 }
 
-.docs-italia-offcanvas-menu {
+.docs-offcanvas-menu {
   @include media-breakpoint-down(sm) {
     transform: translateX(100%);
     z-index: 10;

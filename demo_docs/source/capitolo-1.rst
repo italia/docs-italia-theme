@@ -333,7 +333,6 @@ summo exerci. Eum in natum modus, in viderer phaedrum splendide. Dicit everti
 tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis choro
 reprehendunt cour deiro sant.
 
-
 .. forum_italia::
    :topic_id: 32
 
@@ -347,7 +346,6 @@ reprehendunt cour deiro sant.
 .. forum_italia::
    :topic_id: 29
 
-
 Per quem habeo democritum at, mundi legere reformidans id qui. At qui mutat
 sanctus definiebas, vix dicam necessitatibus no. An debet urbanitas nam. Ut sit
 summo exerci. Eum in natum modus, in viderer phaedrum splendide. Dicit everti
@@ -357,3 +355,57 @@ reprehendunt cour deiro sant.
 
 .. forum_italia::
    :topic_id: 22
+
+Box RFC 2119
+~~~~~~~~~~~~
+
+Per quem habeo democritum at, mundi legere reformidans id qui. At qui mutat
+sanctus definiebas, vix dicam necessitatibus no. An debet urbanitas nam. Ut sit
+summo exerci. Eum in natum modus, in viderer phaedrum splendide. Dicit everti
+tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis choro
+reprehendunt cour deiro sant `RFC 2119 <https://www.ietf.org/rfc/rfc2119.txt>`_.
+
+.. admonition:: must
+
+   Ut sit summo exerci. Eum in natum modus, in viderer phaedrum splendide. Dicit
+   everti tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis
+   choro reprehendunt cour deiro sant.
+
+.. admonition:: should
+
+   Per quem habeo democritum at, mundi legere reformidans id qui. At qui mutat
+   sanctus definiebas, vix dicam necessitatibus no. An debet urbanitas nam. Ut
+   sit summo exerci.
+
+.. admonition:: may
+
+   Ut sit summo exerci. Eum in natum modus, in viderer phaedrum splendide. Dicit
+   everti tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis
+   choro reprehendunt cour deiro sant.
+
+.. admonition:: must-not
+
+   Per quem habeo democritum at, mundi legere reformidans id qui. At qui mutat
+   sanctus definiebas, vix dicam necessitatibus no. An debet urbanitas nam. Ut
+   sit summo exerci.
+
+.. admonition:: should-not
+
+   Ut sit summo exerci. Eum in natum modus, in viderer phaedrum splendide. Dicit
+   everti tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis
+   choro reprehendunt cour deiro sant.
+
+Ulteriori box
+~~~~~~~~~~~~~
+
+.. admonition:: use
+
+   Per quem habeo democritum at, mundi legere reformidans id qui. At qui mutat
+   sanctus definiebas, vix dicam necessitatibus no. An debet urbanitas nam. Ut
+   sit summo exerci.
+
+.. admonition:: use-not
+
+   Ut sit summo exerci. Eum in natum modus, in viderer phaedrum splendide. Dicit
+   everti tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis
+   choro reprehendunt cour deiro sant.

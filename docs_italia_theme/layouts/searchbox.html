@@ -1,7 +1,6 @@
 {%- if builder != 'singlehtml' %}
-  <div role="search">
-    <form class="mx-3" id="rtd-search-form" action="{{ pathto('search') }}" method="get">
-
+  <div class="w-100" role="search">
+    <form class="mr-md-3" id="rtd-search-form" action="{{ pathto('search') }}" method="get">
       <div class="input-group" role="search">
         <input type="hidden" name="check_keywords" value="yes" />
         <input type="hidden" name="area" value="default" />

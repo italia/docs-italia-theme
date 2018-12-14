@@ -1,130 +1,54 @@
 <div class="doc-header container-fluid container-fluid--desktop bg-white">
-  <div class="row py-2 px-4 px-lg-5 justify-content-between justify-content-lg-start">
-    <div class="col col-sm-4 col-md-3 col-xl-5 d-none d-md-flex align-items-center docs-italia__document-title">
-      <!-- TITOLO -->
-      <span class="docs-icon-document docs-italia__document-title__icon"></span>
-      <span class="docs-italia__document-title__label">{{ docstitle }}</span>
+  <div class="row py-3 px-4 px-lg-5 align-items-center flex-nowrap justify-content-between">
+    <div class="col-auto d-md-none d-flex align-items-center order-1">
+      <a href="#" class="btn p-2" role="button" id="searchbox-toggle" data-toggle="collapse" data-target="#searchbox" aria-controls="searchbox" aria-expanded="false" aria-label="Toggle searchbox">
+        <span class="docs-icon-search d-inline-block">
+          <span class="sr-only">{{ t.search_form_label }}</span>
+        </span>
+      </a>
     </div>
-
-    <div class="col d-flex align-items-center">
-      <div class="row w-100">
-        <div class="d-flex align-items-center">
-          <a class="btn btn-default d-block d-sm-none p-2"
-             role="button"
-             id="di-show-searchbox"
-             data-toggle="collapse"
-             data-target="#searchboxSupportedContent"
-             aria-controls="searchboxSupportedContent"
-             aria-expanded="false"
-             aria-label="Toggle searchbox">
-            <span class="d-block docs-icon-search">
-              <span class="sr-only">{{ t.search_form_label }}</span>
-            </span>
-          </a>
-        </div>
-        <div class="col-8 d-none d-sm-block">
-          <!-- SEARCH -->
-          {% include 'layouts/searchbox.html' %}
-        </div>
-        <!-- VERSIONS -->
-        <div class="col- mx-auto d-flex align-items-center">
-          <div id="rst-menu">
-            <div class="dropdown" id="version-list">
-                <button class="btn btn-primary dropdown-toggle badge badge-pill bg-primary" type="button" id="dropdownVersionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="current-version">{{ current_version }}</span>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownVersionButton">
-                  <div class="version-list-wrapper"></div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="col-3 d-none d-md-flex pl-0">
+      {% include 'layouts/searchbox.html' %}
     </div>
-    <!-- INFO -->
-    <div class="docs-italia__header-col docs-italia__header-col--info p-2 order-first order-lg-1 d-flex align-items-center">
+    <div class="col-auto d-flex align-items-center justify-content-center flex-md-grow-1 order-0 order-md-1 pl-0">
       {% if docsitalia_data %}
-      <a href="#" role="button" class="btn" data-toggle="modal" data-target="#documentInfo">
+      <a href="#" role="button" class="btn p-2" data-toggle="modal" data-target="#document-info">
         <span class="docs-icon-info"></span>
+        <span class="d-none d-md-inline align-middle">{{ t.info }}</span>
       </a>
       {% endif %}
     </div>
-    <!-- EYE -->
-    {#
-    <div class="docs-italia__header-col docs-italia__header-col--eye p-2 di-nav_menu-item d-none d-lg-flex align-items-center order-lg-2">
-      <a href="#" role="button" class="btn"><span class="docs-icon-compare"></span></a>
-    </div>
-    #}
-    <!-- DOWNLOAD -->
-    <div class="docs-italia__header-col docs-italia__header-col--downloads dropdown p-2 di-nav_menu-item d-none d-lg-flex align-items-center order-lg-3">
-      <a class="btn" href="#" id="downloadsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="docs-icon-download"></span>
-      </a>
-      <div class="dropdown-menu dropdown-menu-right my-4" aria-labelledby="downloadsDropdown">
-        {% set downloads = {'htmlzip': 'htmlzip', 'pdf': 'pdf', 'epub': 'epub'} %}
-        {# {% if READTHEDOCS %} #}
-          {% for type, url in downloads.items() %}
-          <a class="dropdown-item" href="{{ url }}">
-            {{ type }}
-          </a>
-          {% if not loop.last %}
-          <li>
-            <span class="divider"></span>
-          </li>
-          {% endif %}
-          {% endfor %}
-        {# {% endif %} #}
+    <div class="col-4 col-sm-auto d-flex flex-md-grow-1 align-items-center justify-content-center order-1">
+      <div id="rst-menu" class="px-2">
+        <div class="dropdown" id="version-list">
+            <button class="btn btn-primary dropdown-toggle badge badge-pill bg-primary text-nowrap px-3 py-2" type="button" id="dropdownVersionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="current-version">{{ current_version }}</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownVersionButton">
+              <div class="version-list-wrapper"></div>
+            </div>
+        </div>
       </div>
     </div>
-    <!-- GITHUB -->
-    {% if github_user %}
-      {% set github_url = "https://github.com/" + github_user + "/" + github_repo + "/blob/" + github_version + conf_py_path + pagename + source_suffix %}
-    {% endif %}
-    <div class="docs-italia__header-col docs-italia__header-col--github p-2 di-nav_menu-item d-none d-lg-flex align-items-center order-lg-4">
-      <a href="{{ github_url | default('#') }}" role="button" class="btn" title="{{ t.view_on_github }}"><span class="docs-icon-github"></span></a>
+    <div class="col-auto d-none d-md-flex flex-grow-1 align-items-center order-1">
+      {% include 'layouts/document_actions.html' %}
     </div>
-
-
-    <div class="docs-italia__header-col docs-italia__header-col--article-intro-more article-intro-more p-2 di-nav_menu-button d-lg-none d-flex align-items-center">
-      <!-- menu mobile -->
-      <div class="dropdown">
-        <a href="#" role="button" class="btn dropdown-toggle" id="article-intro-moreDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="dropdown__icon docs-icon-more"></span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="article-intro-moreDropdown">
-            <!-- DOWNLOAD -->
-            <a href="#" role="button" class="dropdown-item pl-2">
-              <span class="dropdown-item__icon d-inline-bock py-2 pr-2">
-                <span class=" docs-icon-download"></span>
-              </span>
-              <span class="dropdown-item__label d-inline-bock">
-                Download
-              </span>
-            </a>
-            <!-- EYE -->
-            {#
-            <a href="#" role="button" class="dropdown-item pl-2">
-              <span class="dropdown-item__icon d-inline-bock py-2 pr-2">
-                <span class=" docs-icon-compare"></span>
-              </span>
-              <span class="dropdown-item__label d-inline-bock">
-                Confronta versioni su GitHub
-              </span>
-            </a>
-            #}
-            <!-- GITHUB -->
-            <a href="{{ github_url | default('#') }}" role="button" class="dropdown-item pl-2">
-              <span class="dropdown-item__icon d-inline-bock py-2 pr-2">
-                <span class=" docs-icon-github"></span>
-              </span>
-              <span class="dropdown-item__label d-inline-bock">
-                {{ t.view_on_github }}
-              </span>
-            </a>
-          </div>
-        </div>
+    {#
+    <div class="col-auto d-flex align-items-center justify-content-end order-1">
+      {% if docsitalia_data %}
+      <a href="#" role="button" class="btn p-2" data-toggle="modal" data-target="#document-relationships">
+        <span class="docs-icon-docs align-middle"></span>
+        <span class="d-none d-lg-inline align-middle">{{ t.related }}</span>
+      </a>
+      {% endif %}
     </div>
-    <!-- </div> <!~~ /.col .docs-italia__header-col(s) ~~> -->
+    #}
+    <div class="col-auto pr-0 d-md-none d-flex align-items-center justify-content-end order-1">
+      <a href="#" role="button" class="btn py-2 px-0" data-toggle="modal" data-target="#document-actions">
+        <span class="docs-icon-more"></span>
+        <span class="sr-only">{{ t.actions }}</span>
+      </a>
+    </div>
   </div>
   <div class="row">
     <div class="progress-container">

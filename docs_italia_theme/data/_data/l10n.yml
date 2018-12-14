@@ -11,7 +11,7 @@ it:
     cookiebar_privacy_policy: Cookie policy
     copyright: Copyright
     documents: Documentazione
-    downloads: Downloads
+    download: Scarica
     footer_link_privacy_policy: Privacy policy
     footer_link_legal_notes: Note legali
     go_to: Vai a
@@ -34,18 +34,25 @@ it:
     skiplink_goto_navigation: vai alla navigazione del sito
     toggle_menu_label: accedi al menu
     version: versione
-    compare_versions: confronta versioni
+    compare: Confronta
     copy_link: copia link
     copied_link: link copiato
     see_actions: vedi azioni
     other_actions: altre azioni
     comments: commenti
     back_to_text: torna al testo
-    glossay_empty: informazione non trovata
+    glossary_empty: informazione non trovata
     glossary: glossario
     go_to_glossary: vai al glossario
     deepening: approfondimento
     example: esempio
+    must: si deve
+    must_not: non si deve
+    should: si dovrebbe
+    should_not: non si dovrebbe
+    may: si può
+    use: usa
+    use_not: non usare
     consultation: consultazione
     show_more: mostra tutto
     show_less: mostra meno
@@ -64,11 +71,14 @@ it:
     no_figures: nessuna figura
     no_tables: nessuna tabella
     introduction: introduzione
+    project: Progetto
+    administration: Amministrazione
+    info: Informazioni
+    related: Documenti correlati
+    actions: Azioni
+    tags: Tag
 
-    view_on_github: Visualizza sorgente su GitHub
-    view_on_bitbucket: Visualizza sorgente su Bitbucket
-    view_on_gitlab: Visualizza sorgente su GitLab
-    view_page_source: Visualizza sorgente della pagina
+    view_source: Sorgente
 
     previous: precedente
     next: successivo
@@ -106,7 +116,7 @@ en:
     cookiebar_privacy_policy: Cookie policy
     copyright: Copyright
     documents: Documents
-    downloads: Downloads
+    download: Download
     footer_link_privacy_policy: Privacy policy
     footer_link_legal_notes: Legal notes
     go_to: Go to
@@ -129,18 +139,25 @@ en:
     skiplinks_goto_navigation: go to site navigation
     toggle_menu_label: go to navigation
     version: version
-    compare_versions: compare versions
+    compare: Compare
     copy_link: copy link
     copied_link: copied link
     see_actions: see actions
     other_actions: other actions
     comments: comments
     back_to_text: back to the text
-    glossay_empty: information not found
+    glossary_empty: information not found
     glossary: glossary
     go_to_glossary: vai al glossario
     deepening: deepening
     example: example
+    must: must
+    must_not: must not
+    should: should
+    should_not: should not
+    may: may
+    use: use
+    use_not: don't use
     consultation: consultation
     show_more: show more
     show_less: show less
@@ -159,11 +176,14 @@ en:
     no_figures: no figures
     no_tables: no tables
     introduction: introduction
+    project: Project
+    administration: Administration
+    info: About this document
+    related: Related documents
+    actions: Actions
+    tags: Tags
 
-    view_on_github: View source on GitHub
-    view_on_bitbucket: View source on Bitbucket
-    view_on_gitlab: View source on GitLab
-    view_page_source: View source page source
+    view_source: Source
 
     previous: previous
     next: next

@@ -113,14 +113,6 @@ def add_context_data(app, pagename, templatename, context, doctree):
         context['slug'] = 'demo-document'
         context['current_version'] = 'bozza'
         context['rtd_language'] = 'it'
-
-        try:
-            with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
-                data = document_settings.read()
-                data = yaml.safe_load(data)
-        except:
-            data = {}
-        context['docsitalia_data'] = data
         context['publisher_project'] = u'Progetto demo'
         context['publisher_project_slug'] = 'progetto-demo'
         context['publisher'] = u'Organizzazione demo'
@@ -132,6 +124,19 @@ def add_context_data(app, pagename, templatename, context, doctree):
 
     if 'docsitalia_data' in context:
         context['docstitle'] = context['docsitalia_data']['document']['name']
+    else:
+        try:
+            with open(os.path.join(app.builder.srcdir,'document_settings.yml')) as document_settings:
+                data = document_settings.read()
+                data = yaml.safe_load(data)
+        except:
+            data = {
+                'document': {
+                    'name': 'Titolo del documento non impostato'
+                }
+            }
+
+        context['docsitalia_data'] = data
 
 def generate_additonal_tocs(app, pagename, templatename, context, doctree):
     """Generate and add additional tocs to Sphinx context"""
@@ -152,6 +157,8 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             toctree_element.children.remove(toc_caption)
         except StopIteration:
             pass
+        except AttributeError:
+            continue
         if 'glossary_toc' in toctreenode.parent.attributes['names']:
             glossary_tocs.append(toctree_element)
         else:
@@ -161,7 +168,10 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
     if content_tocs:
         content_toc = content_tocs[0]
         for content_element in content_tocs[1:]:
-            content_toc.extend(content_element.children)
+            try:
+                content_toc.extend(content_element.children)
+            except AttributeError:
+                continue
     if glossary_tocs:
         glossary_toc = glossary_tocs[0]
         for glossary_element in glossary_tocs[1:]:

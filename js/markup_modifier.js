@@ -123,7 +123,8 @@ module.exports = themeMarkupModifier = (function ($) {
           $numericList = $('.procedure ol li'),
           $codeTitle = $('.admonition-example .admonition-title');
           $deepeningTitle = $('.admonition-deepening .admonition-title');
-          $consultationTitle = $('.admonition-consultazione .admonition-title');
+          $consultationTitle = $('.admonition-consultation .admonition-title');
+          $procedureTitle = $('.procedure .topic-title');
 
       $note.prepend(this.iconMarkup('note'));
       $error.prepend(this.iconMarkup('procedure'));
@@ -137,6 +138,7 @@ module.exports = themeMarkupModifier = (function ($) {
       $codeTitle.prepend(this.iconMarkup('example'));
       $deepeningTitle.prepend(this.iconMarkup('attention'));
       $consultationTitle.prepend(this.iconMarkup('edit'));
+      $procedureTitle.prepend(this.iconMarkup('procedure'));
     },
 
     noteModifier: function() {
@@ -158,10 +160,10 @@ module.exports = themeMarkupModifier = (function ($) {
         var $element = $(this),
             str =  $element.text(),
             newStr = str.replace(/[\[\]]/g,''),
-            backToText = themeTranslate.getTranslation().backToText,
+            backToText = t.back_to_text,
             stringToAppend = $tpl({ text: stringToAppend }, 'markup_modifier__note-action');
 
-        $element.text(themeTranslate.getTranslation().note +  ' ' + newStr);
+        $element.text(t.note +  ' ' + newStr);
 
         // Add btn ( x | back) if popover isn't showed inside table checking the 'footnote-from-table' class
         if( $element.closest('.footnote-from-table').length == 0 ) {
@@ -182,16 +184,17 @@ module.exports = themeMarkupModifier = (function ($) {
         var title = $el.html(),
             str = $el.closest('.admonition').attr('class'),
             // Find the value between name- and ' ' the last class is always 'admonition' insert by sphinx
-            regex = /name-(.*)(\s)/,
+            regex = /admonition-(\S*)(\s)/,
             matches = str.match(regex),
             idName = '';
 
         if(matches != null) {
           idName = matches[1];
+          idName = idName.replace('-', '_');
         }
 
-        if( idName != undefined && themeTranslate.getTranslation()[idName] != undefined ) {
-          return themeTranslate.getTranslation()[idName];
+        if(idName != undefined && t[idName] != undefined) {
+          return t[idName];
         } else {
           return title;
         }
@@ -200,8 +203,8 @@ module.exports = themeMarkupModifier = (function ($) {
 
     deepeninModifier: function() {
       var $hiddenBlock = that.$deepeningParagraph.slice(4,that.$deepeningParagraph.length),
-        more = themeTranslate.getTranslation().showMore,
-        less = themeTranslate.getTranslation().showLess,
+        more = t.show_more,
+        less = t.show_less,
         btn = $tpl({ more: more, less: less }, 'markup_modifier__admonition');
 
       $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');
