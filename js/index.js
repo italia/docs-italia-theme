@@ -63,7 +63,7 @@ window.onload = function() {
   } else {
     topicId = [$commentBox.first().data('topic')];
   }
-  if (typeof topicId !== "undefined" || location.href.indexOf('payload') > 0) {
+  if (typeof topicId[0] !== "undefined" || location.href.indexOf('payload') > 0) {
     discourseAuth.init(topicId).then(function() {
       discourseComments.init();
     });
