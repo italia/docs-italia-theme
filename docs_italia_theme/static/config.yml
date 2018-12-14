@@ -1,6 +1,0 @@
-discourse:
-  app_name: 'docs'
-  rest_url: 'http://ec2-52-212-9-50.eu-west-1.compute.amazonaws.com'
-  prvk_cookie_name: 'docs-pk_'
-  pubk_cookie_name: 'docs-pb_'
-

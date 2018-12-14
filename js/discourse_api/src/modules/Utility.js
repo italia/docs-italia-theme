@@ -1,19 +1,20 @@
 var keypair = require('keypair');
 var $ = require('jquery');
+var config = require('../../config.json');
 require('jsencrypt');
 
 /**
  * Utility Class
  */
-module.exports = function (pk_name, puk_name, uak_name, expire_days) {
+module.exports = function () {
   this.jsenc = new JSEncrypt();
   // Private key cookie's name
-  this.pk_cookie_name = pk_name; // 'docs-italia_pk'
-  this.puk_cookie_name = puk_name;
+  this.prvk_cookie_name = config.prvk_cookie_name;
+  this.pubk_cookie_name = config.pubk_cookie_name;
   // User API Key cookie's name
-  this.uak_cookie_name = uak_name; // 'docs-italia_uak';
+  this.uak_cookie_name = config.uak_cookie_name;
   // Expires days (for now: 10 days)
-  this.expires_cookie = expire_days; // 10;
+  this.expires_cookie = config.expires_cookie;
 
   /**
    * Create an event
@@ -74,8 +75,8 @@ module.exports = function (pk_name, puk_name, uak_name, expire_days) {
       that.jsenc.setPublicKey(that.rsaKey.public);
       that.jsenc.setPrivateKey(that.rsaKey.private);
       // Seve private kay to a cookie
-      that._cookie_create(that.pk_cookie_name, encodeURI(that.rsaKey.private), 1, true);
-      that._cookie_create(that.puk_cookie_name, encodeURI(that.rsaKey.public), 1, true);
+      that._cookie_create(that.prvk_cookie_name, encodeURI(that.rsaKey.private), 1, true);
+      that._cookie_create(that.pubk_cookie_name, encodeURI(that.rsaKey.public), 1, true);
     })
   };
   // Get search parameters
@@ -89,12 +90,12 @@ module.exports = function (pk_name, puk_name, uak_name, expire_days) {
   };
   // Decrypts payload
   this.decryptPayload = function (payload) {
-    this.jsenc.setPrivateKey(decodeURI(this._cookie_read(this.pk_cookie_name)));
+    this.jsenc.setPrivateKey(decodeURI(this._cookie_read(this.prvk_cookie_name)));
     this.payload = this.jsenc.decrypt(payload);
     // Check if decryption is correct
     if (this.payload !== null) {
       // then delete previously created private key cookie
-      this._cookie_delete(this.pk_cookie_name);
+      this._cookie_delete(this.prvk_cookie_name);
       // Create cookie for the user key.
       this._cookie_create(this.uak_cookie_name, this.payload, this.expires_cookie);
     }

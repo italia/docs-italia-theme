@@ -1,0 +1,8 @@
+{ 
+  "app_name": "docs",
+  "rest_url": "https://davide.space",
+  "prvk_cookie_name": "docs-pk_",
+  "pubk_cookie_name": "docs-pb_",
+  "uak_cookie_name": "docs-uk_",
+  "expires_cookie": 10
+}

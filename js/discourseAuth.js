@@ -1,9 +1,10 @@
 var Discourse = require('./discourse_api');
+var config = require('./discourse_api/config.json');
 
 module.exports = discourseAuth = {
   init: function (topicId) {
     return new Promise(function (resolve) {
-      Discourse.restUrl = 'http://ec2-52-212-9-50.eu-west-1.compute.amazonaws.com';
+      Discourse.restUrl = config.restUrl;
       Discourse.init('docs');
       Discourse.posts.topicId = topicId;
       resolve(Discourse.posts.get(topicId));

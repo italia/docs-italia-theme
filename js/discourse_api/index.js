@@ -1,6 +1,7 @@
 var Utility = require('./src/modules/Utility');
 var DConfig = require('./src/modules/DConfig');
 var DCallsManager = require('./src/modules/DCallsManager');
+var config = require('./config.json');
 
 function DiscourseApi() {
   var that = this;
@@ -12,7 +13,7 @@ function DiscourseApi() {
 
   // Discourse's Calls Manager
   this.cm = new DCallsManager(this);
-  this.utility = new Utility('docs-italia_pk', 'docs-italia_puk', 'docs-italia_uak', 10);
+  this.utility = new Utility();
 
   /**
    * Api object
@@ -51,7 +52,7 @@ function DiscourseApi() {
           that.user.logout().catch(function () {
             var $modal = $('#suspended-modal');
             that.user.state('logged', false);
-            that.utility._cookie_delete('docs-italia_uak');
+            that.utility._cookie_delete(config.uak_cookie_name);
             $modal.modal('show');
             $modal.on('hide.bs.modal', function () {
               window.location.href = location.href;
@@ -93,11 +94,11 @@ function DiscourseApi() {
       }
     },
     create: function () {
-      if (that.utility._cookie_read(that.utility.pk_cookie_name)) {
-        // Fix: if already exists pk_cookie_name it's needed to load public/private kays into jsenc objecet
+      if (that.utility._cookie_read(that.utility.prvk_cookie_name)) {
+        // Fix: if already exists prvk_cookie_name it's needed to load public/private kays into jsenc objecet
         // Set public and private keys
-        var pub_key = decodeURI(that.utility._cookie_read(that.utility.puk_cookie_name));
-        var prv_key = decodeURI(that.utility._cookie_read(that.utility.pk_cookie_name));
+        var pub_key = decodeURI(that.utility._cookie_read(that.utility.pubk_cookie_name));
+        var prv_key = decodeURI(that.utility._cookie_read(that.utility.prvk_cookie_name));
         // Here is the fix
         that.utility.rsaKey = { public : pub_key, private: prv_key };
         
@@ -165,7 +166,7 @@ function DiscourseApi() {
       var headers = that.getHeaders(['X-CSRF-Token', 'User-Api-Key']);
       return that.cm.call('userLogout', '/admin/users/$/log_out!', [userId], null, headers).post().then(function (response) {
         that.user.state('logged', false);
-        that.utility._cookie_delete('docs-italia_uak');
+        that.utility._cookie_delete(config.uak_cookie_name);
         window.location.href = location.href;
       });
     },
@@ -269,7 +270,7 @@ function DiscourseApi() {
     that.user.logout().catch(function () {
       var $modal = $('#suspended-modal');
       that.user.state('logged', false);
-      that.utility._cookie_delete('docs-italia_uak');
+      that.utility._cookie_delete(config.uak_cookie_name);
       $modal.modal('show');
       $modal.on('hide.bs.modal', function () {
         window.location.href = location.href;
