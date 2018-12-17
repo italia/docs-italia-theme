@@ -53,6 +53,8 @@
   <meta name="theme-color" content="#0066CC">
   {% endif %}
   
-  <!-- No Index - remove after migration from readthedocs -->
+  <!-- No Index - keep if out of docs.italia.it -->
+  {% if PRODUCTION_DOMAIN != "docs.italia.it" %}
   <meta name="robots" content="noindex, nofollow">
+  {% endif %}
 </head>
