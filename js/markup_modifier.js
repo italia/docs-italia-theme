@@ -206,14 +206,15 @@ module.exports = themeMarkupModifier = (function ($) {
       btn = $tpl({ more: more, less: less }, 'markup_modifier__admonition');
 
       that.$admonitionDeepenings.each(function() {
-        var $deepeningParagraph = $(this).children('p:not(.admonition-title)');
+        var $hiddenBlock = $(this).find('.more.container');
+        var $deepeningElements = $(this).children(':not(.admonition-title)');
 
-        if ($deepeningParagraph.length > 4) {
-          var $hiddenBlock = $deepeningParagraph.slice(4, $deepeningParagraph.length);
-
-          $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');
-          $(this).append(btn);
+        if ($hiddenBlock.length === 0 && $deepeningElements.length > 4) {
+          $hiddenBlock = $deepeningElements.slice(4, $deepeningElements.length);
         }
+
+        $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');
+        $(this).append(btn);
       });
     }
 
