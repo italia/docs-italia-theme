@@ -7,6 +7,10 @@
     border-left: 4px solid;
     color: $grey-mid;
 
+    .more {
+      padding: 0;
+    }
+
     .admonition-title {
       font-family: $titillium-font;
       text-transform: uppercase;
