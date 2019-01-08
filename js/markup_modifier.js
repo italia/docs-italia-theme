@@ -213,8 +213,10 @@ module.exports = themeMarkupModifier = (function ($) {
           $hiddenBlock = $deepeningElements.slice(4, $deepeningElements.length);
         }
 
-        $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');
-        $(this).append(btn);
+        if ($hiddenBlock.length > 0) {
+          $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');
+          $(this).append(btn);
+        }
       });
     }
 
