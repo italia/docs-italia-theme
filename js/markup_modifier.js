@@ -15,14 +15,13 @@ module.exports = themeMarkupModifier = (function ($) {
       $noteBackref: $('.fn-backref'),
       $imgFixed: $('.figure-fixed'),
       $admonitionTitle: $('.admonition .admonition-title'),
-      $admonitionDeepening: $('.admonition-deepening'),
-      $deepeningParagraph: $('.admonition-deepening > p:not(.admonition-title)'),
+      $admonitionDeepenings: $('.admonition-deepening'),
       titleReady: false
     },
 
     init: function() {
       that = this.$;
-      themeMarkupModifier.deepeninModifier();
+      themeMarkupModifier.deepeningModifier();
       themeMarkupModifier.titleModifier();
       themeMarkupModifier.tableModifier();
       themeMarkupModifier.captionModifier();
@@ -201,14 +200,21 @@ module.exports = themeMarkupModifier = (function ($) {
       }
     },
 
-    deepeninModifier: function() {
-      var $hiddenBlock = that.$deepeningParagraph.slice(4,that.$deepeningParagraph.length),
-        more = t.show_more,
-        less = t.show_less,
-        btn = $tpl({ more: more, less: less }, 'markup_modifier__admonition');
+    deepeningModifier: function() {
+      var more = t.show_more,
+      less = t.show_less,
+      btn = $tpl({ more: more, less: less }, 'markup_modifier__admonition');
 
-      $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');
-      that.$admonitionDeepening.append(btn);
+      that.$admonitionDeepenings.each(function() {
+        var $deepeningParagraph = $(this).children('p:not(.admonition-title)');
+
+        if ($deepeningParagraph.length > 4) {
+          var $hiddenBlock = $deepeningParagraph.slice(4, $deepeningParagraph.length);
+
+          $hiddenBlock.wrapAll('<div class="admonition__hidden-paragraph">');
+          $(this).append(btn);
+        }
+      });
     }
 
   }
