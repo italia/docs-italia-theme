@@ -199,3 +199,9 @@
     content: unicode($docs-icon-docs);
   }
 }
+
+.docs-icon-user {
+  &::before {
+    content: unicode($docs-icon-user);
+  }
+}
