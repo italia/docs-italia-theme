@@ -1,4 +1,4 @@
-// Notes
+// Active versions
 module.exports = activeVersions = (function ($) {
   var that;
 
