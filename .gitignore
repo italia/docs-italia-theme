@@ -12,6 +12,7 @@
 .ruby-version
 .python-version
 .idea/
+TODO
 dist/
 bower_components/
 node_modules/
