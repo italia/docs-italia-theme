@@ -32,13 +32,13 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'node_modules/bootstrap-italia/src/icons/font',
-          src: ['**'], 
+          src: ['**'],
           dest: 'docs_italia_theme/static/font'
         },
         {
           expand: true,
           cwd: 'node_modules/bootstrap-italia/src/icons/css',
-          src: 'italia-icon-font.css', 
+          src: 'italia-icon-font.css',
           dest: 'docs_italia_theme/static/css'
         }],
       },
@@ -87,10 +87,7 @@ module.exports = function(grunt) {
 
       build: {
         options: {
-          map: {
-              inline: false,
-              annotation: 'docs_italia_theme/static/css'
-          },
+          map: false,
           processors: [
             require('pixrem')(),
             require('autoprefixer')({browsers: 'last 2 versions'}),
@@ -120,7 +117,7 @@ module.exports = function(grunt) {
     },
 
     browserify: {
-      all: {
+      build: {
         options: {
           alias: {
             'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js',
@@ -128,7 +125,21 @@ module.exports = function(grunt) {
           }
         },
         src: ['js/index.js'],
-        dest: 'docs_italia_theme/static/js/theme.js'
+        dest: 'docs_italia_theme/static/js/theme.js',
+      },
+
+      dev: {
+        options: {
+          alias: {
+            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js',
+            'modernizr': './js/modernizr.min.js'
+          },
+          browserifyOptions: {
+            debug: true
+          }
+        },
+        src: ['js/index.js'],
+        dest: 'docs_italia_theme/static/js/theme.js',
       }
     },
 
@@ -188,7 +199,7 @@ module.exports = function(grunt) {
       /* JavaScript */
       browserify: {
         files: ['js/*.js'],
-        tasks: ['browserify']
+        tasks: ['browserify:dev']
       },
       /* live-reload the demo_docs if sphinx re-builds */
       livereload: {
@@ -209,7 +220,7 @@ module.exports = function(grunt) {
     'clean:css',
     'postcss:dev',
     'modernizr',
-    'browserify',
+    'browserify:dev',
     'exec:build_sphinx',
     'connect',
     'watch'
@@ -224,7 +235,7 @@ module.exports = function(grunt) {
     'clean:css',
     'postcss:build',
     'modernizr',
-    'browserify',
+    'browserify:build',
     'uglify',
     'exec:build_sphinx'
   ]);
@@ -238,7 +249,7 @@ module.exports = function(grunt) {
     'clean:css',
     'postcss:build',
     'modernizr',
-    'browserify',
+    'browserify:build',
     'uglify',
     'cacheBust',
     'exec:build_sphinx'
