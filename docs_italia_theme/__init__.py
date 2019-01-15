@@ -3,9 +3,12 @@
 """Docs Italia theme"""
 
 import os
+import sys
 import re
 import yaml
 import json
+
+from forum_italia import *
 from docutils.nodes import figure
 from docutils.nodes import table
 from docutils.nodes import bullet_list
@@ -89,7 +92,7 @@ def add_context_data(app, pagename, templatename, context, doctree):
     else:
         language = app.site_data['default_language']
     context['t'] = app.site_data['data']['l10n'][language]['t']
-    
+
     # Run only for local development
     if os.environ.get('READTHEDOCS', None) != 'True':
         context['LOCAL'] = True
@@ -281,8 +284,14 @@ def glossary_page_id(app, doctree, docname):
 
 def setup(app):
     app.site_data = load_theme_data()
+    app.add_html_theme('docs_italia_theme', os.path.abspath(os.path.dirname(__file__)))
     app.connect('html-page-context', add_context_data)
     app.connect('html-page-context', generate_additonal_tocs)
     app.connect('doctree-resolved', generate_glossary_json)
     app.connect('doctree-resolved', glossary_page_id)
-    app.add_html_theme('docs_italia_theme', os.path.abspath(os.path.dirname(__file__)))
+    # Setup for forum_italia custom directive
+    app.add_node(ForumItaliaCommentsNode,
+        html=(ForumItaliaCommentsNode.visit, ForumItaliaCommentsNode.depart),
+        latex=(ForumItaliaCommentsNode.visit, ForumItaliaCommentsNode.depart)
+    )
+    app.add_directive('forum_italia', ForumItaliaCommentsDirective)
