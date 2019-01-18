@@ -7,7 +7,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" data-placement="bottom-start">
       {% for lang, lang_code in translations.items() %}
-      <a class="dropdown-item pl-2 right-icon" href="/{{ publisher_slug }}/{{ publisher_project_slug }}/{{ lang }}/{{ current_version }}">
+      <a class="dropdown-item pl-2 right-icon" href="/{{ publisher_slug }}/{{ publisher_project_slug }}/{{ slug }}/{{ lang }}/{{ current_version }}">
         <span lang="{{ lang }}">{{ lang_code }}</span>
         {% if language == lang %}
         <span class="it-check float-right"></span>

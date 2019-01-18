@@ -9,10 +9,6 @@
       aria-expanded="false"
       aria-label="Toggle navigation">
     <span class="navbar__icon it-expand my-auto ml-1"></span></button>
-    
-    <div class="ml-auto">
-      {% include 'layouts/lang_switch.html' %}
-    </div>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
@@ -43,6 +39,10 @@
           <a class="nav-link" href="https://github.com/italia">{{ _(t.header_link_github) }}</a>
         </li>
       </ul>
+    </div>
+    
+    <div class="ml-auto">
+      {% include 'layouts/lang_switch.html' %}
     </div>
   </nav>
 
