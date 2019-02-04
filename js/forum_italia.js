@@ -176,7 +176,7 @@ module.exports = forumItalia = (function ($) {
     // Create the comment markup with given $topicCommentsElement and post
     commentsMarkup: function($topicCommentsElement, posts, newPostId) {
       var topicComments = posts.map(function(post) {
-        return that.client.api.getFirstPublicUserField(post.username).then(function(publicUserField) {
+        return that.client.api.getPublicUserField(post.username, '1').then(function(publicUserField) {
           return tpl({
             displayName: post.name || post.username,
             post: post,
