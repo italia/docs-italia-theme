@@ -1,6 +1,6 @@
 {% raw %}
 <script id="forum-italia-comments" type="text/template">
-  <div class="block-comments" id="accordion-comments-{{ topicId}}" data-topic="{{ topicId }}">
+  <div class="block-comments" id="accordion-comments-{{ topicId }}" data-topic="{{ topicId }}">
     <!-- Top header -->
     <div class="block-comments__header d-flex border-top border-bottom border-width-2 pt-3 pb-3 align-items-center justify-content-between">
       <h6 class="col-auto text-uppercase mb-0">Commenti</h6>
@@ -28,7 +28,7 @@
 <script id="forum-italia__comment" type="text/template">
   <li id="docs-comment-{{ post.topic_id }}-{{ post.id }}" class="row mb-4 block-comments__item comment-{{ post.id }} {{ hidden }} {{ isNew }}"
       data-topic="{{ post.topic_id }}" data-comment="{{ post.id }}">
-    <div id="reply-to-{{ post.post_number }}"></div>
+    <div id="reply-to-{{ post.post_number }}" class="block-comments__reply-anchor"></div>
     <figure class="col-auto mb-0">
       <img class="block-comments__img rounded-circle" src="{{ avatarUrl }}">
     </figure>
@@ -36,7 +36,6 @@
       <div class="row align-items-center justify-content-between" id="comment-heading-1">
         <div class="col-auto">
           <span class="block-comments__name text-capitalize mb-0">{{ displayName }}</span>
-          <div id="reply-link-{{ post.id }}"></div>
         </div>
         <div class="col-auto">
           <p class="d-inline-block mr-2 block-comments__date mb-0">{{ date }}</p>
@@ -48,6 +47,7 @@
         </div>
       </div>
       <p class="text-uppercase block-comments__role">{{ publicUserField }}</p>
+      <div class="my-3">{{ replyLink }}</div>
       <div id="collapse-{{ post.id }}" class="block-comments__paragraph pl-3 border-left collapse show"
            aria-labelledby="comment-heading-1">
         {{ post.cooked }}
@@ -58,10 +58,11 @@
 
 <script id="forum-italia__reply-link" type="text/template">
   <div>
-    <a class="reply-to-post" href="#reply-to-{{ post.reply_to_post_number }}">
-      In risposta a {{ replyDest.username }}
-      <small>(#{{ post.reply_to_post_number }})</small>
-    </a>
+    <small>In risposta al 
+      <a class="reply-to-post" href="#reply-to-{{ post.reply_to_post_number }}">
+        commento di {{ replyDest.name }}
+      </a>
+    </small>
   </div>
 </script>
 

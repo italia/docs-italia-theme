@@ -16,6 +16,7 @@ module.exports = forumItalia = (function ($) {
       suggestionsMarkup: tpl({}, 'forum-italia__markup__tooltip'),
       logoutModal: tpl({}, 'forum__logout--modal'),
       userAvatarClass: '.box-comment__figure',
+      publicUserFieldIndex: '2',
       client: null
     },
 
@@ -176,7 +177,13 @@ module.exports = forumItalia = (function ($) {
     // Create the comment markup with given $topicCommentsElement and post
     commentsMarkup: function($topicCommentsElement, posts, newPostId) {
       var topicComments = posts.map(function(post) {
-        return that.client.api.getPublicUserField(post.username, '1').then(function(publicUserField) {
+        return that.client.api.getPublicUserField(post.username, that.publicUserFieldIndex).then(function(publicUserField) {
+          var replyLink = post.reply_to_post_number
+            ? tpl({
+              replyDest: posts[post.reply_to_post_number],
+              post: post
+            }, 'forum-italia__reply-link')
+            : null;
           return tpl({
             displayName: post.name || post.username,
             post: post,
@@ -184,7 +191,8 @@ module.exports = forumItalia = (function ($) {
             hidden: post.hidden && 'hidden',
             avatarUrl: that.client.getApiBaseUrl() + post.avatar_template.replace('{size}', 110),
             date: new Date(post.created_at).toLocaleString('it-IT', { day:'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric'}),
-            publicUserField: publicUserField || 'utente'
+            publicUserField: publicUserField || 'utente',
+            replyLink: replyLink
           }, 'forum-italia__comment');
         });
       });
