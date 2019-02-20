@@ -37,7 +37,7 @@ module.exports = themeCopyToClipboard = (function ($) {
       themeCopyToClipboard.copyToClipboard(location, $span);
     },
 
-    copyNav: function() {
+    copyNav: function(event) {
       event.preventDefault();
 
       var $el = $(this).find('.chapter-link'),
@@ -49,7 +49,7 @@ module.exports = themeCopyToClipboard = (function ($) {
       themeCopyToClipboard.copyToClipboard(location, $el);
     },
 
-    copyGlossaryLink: function() {
+    copyGlossaryLink: function(event) {
       event.preventDefault();
 
       var $el = $(event.target),
@@ -70,7 +70,7 @@ module.exports = themeCopyToClipboard = (function ($) {
       return location;
     },
 
-    copyToClipboard: function(text,$button) {
+    copyToClipboard: function(text, $button) {
       if (window.clipboardData && window.clipboardData.setData) {
              return clipboardData.setData("Text", text);
 
