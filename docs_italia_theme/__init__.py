@@ -16,8 +16,6 @@ from sphinx.addnodes import glossary
 from sphinx.addnodes import toctree
 from sphinx.environment.adapters.toctree import TocTree
 
-# This part would be better placed as an extension:
-# It loads yaml data files to set them as variables
 def get_html_theme_path():
     """Return list of HTML theme paths."""
     cur_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
@@ -68,18 +66,6 @@ def load_theme_data():
                  'docs', 'github']:
         link_data = context['data']['network_links'].get(link, {}).copy()
         link_data['name'] = link
-
-        # Alter classes
-        class_str = link_data.get('class', '')
-        classes = class_str.split(' ')
-        try:
-            del classes[classes.index('current')]
-        except (IndexError, ValueError):
-            pass
-        if link == 'docs':
-            classes.append('current')
-        link_data['class'] = ' '.join(classes)
-
         network_links.append(link_data)
     context['data']['network_links'] = network_links
 
