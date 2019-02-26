@@ -13,6 +13,7 @@ it:
     documents: Documentazione
     download: Scarica
     footer_link_privacy_policy: Privacy policy
+    footer_link_cookies: Cookie policy
     footer_link_legal_notes: Note legali
     go_to: Vai a
     index: Indice
@@ -118,6 +119,7 @@ en:
     documents: Documents
     download: Download
     footer_link_privacy_policy: Privacy policy
+    footer_link_cookies: Cookie policy
     footer_link_legal_notes: Legal notes
     go_to: Go to
     index: Index

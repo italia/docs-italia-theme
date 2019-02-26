@@ -84,7 +84,7 @@ def load_theme_data():
     context['data']['network_links'] = network_links
 
     footer_links = []
-    for link in ['privacy', 'legal']:
+    for link in ['privacy', 'cookies', 'legal']:
         link_data = context['data']['footer_links'].get(link, {}).copy()
         footer_links.append(link_data)
     context['data']['footer_links'] = footer_links
