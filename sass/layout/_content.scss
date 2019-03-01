@@ -257,6 +257,10 @@
       }
     }
 
+    .figure {
+      width: 100%;
+    }
+
     .figure,
     .table,
     .section {
@@ -481,6 +485,11 @@
         text-decoration: underline;
       }
     }
+  }
+
+  // Definition lists
+  dd > p {
+    font-family: $titillium-font;
   }
 
   // Block quote.
