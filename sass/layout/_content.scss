@@ -172,6 +172,10 @@
     float: left;
   }
 
+  a.reference[href] {
+    text-decoration: underline;
+  }
+
   .useful-docs {
     .mimetype {
       display: none;
@@ -255,6 +259,10 @@
       @include media-breakpoint-up(lg) {
         width: 100%;
       }
+    }
+
+    .figure {
+      width: 100%;
     }
 
     .figure,
@@ -481,6 +489,11 @@
         text-decoration: underline;
       }
     }
+  }
+
+  // Definition lists
+  dd > p {
+    font-family: $titillium-font;
   }
 
   // Block quote.

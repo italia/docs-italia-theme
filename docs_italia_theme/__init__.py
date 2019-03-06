@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Docs Italia theme"""
 
 import os
@@ -145,7 +147,9 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             glossary_tocs.append(toctree_element)
         else:
             content_tocs.append(toctree_element)
-            pages_list = toctreenode['includefiles']
+            for page_in_toc in toctreenode['includefiles']:
+                if page_in_toc not in pages_list:
+                    pages_list.append(page_in_toc)
 
     if content_tocs:
         content_toc = content_tocs[0]
@@ -154,6 +158,7 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
                 content_toc.extend(content_element.children)
             except AttributeError:
                 continue
+
     if glossary_tocs:
         glossary_toc = glossary_tocs[0]
         for glossary_element in glossary_tocs[1:]:
@@ -172,9 +177,9 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             figure_number = toc_fig_tables.get(figure_id)
             if figure_number is None:
                 continue
-            figure_title = figurenode.children[0].get('alt') or context['t']['no_description']
+            figure_title = figurenode.children[-1].children[0] or context['t']['no_description']
             try:
-                figure_text_string = 'Fig. {}.{} - {}'.format(
+                figure_text_string = u'Fig. {}.{} - {}'.format(
                     figure_number[0], figure_number[1], figure_title)
             except IndexError:
                 continue
