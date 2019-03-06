@@ -172,6 +172,10 @@
     float: left;
   }
 
+  a.reference[href] {
+    text-decoration: underline;
+  }
+
   .useful-docs {
     .mimetype {
       display: none;
