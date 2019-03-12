@@ -146,7 +146,8 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
         if 'glossary_toc' in toctreenode.parent.attributes['names']:
             glossary_tocs.append(toctree_element)
         else:
-            content_tocs.append(toctree_element)
+            if not toctreenode.attributes['hidden']:
+                content_tocs.append(toctree_element)
             for page_in_toc in toctreenode['includefiles']:
                 if page_in_toc not in pages_list:
                     pages_list.append(page_in_toc)
@@ -155,8 +156,7 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
         content_toc = content_tocs[0]
         for content_element in content_tocs[1:]:
             try:
-                if not toctreenode.attributes['hidden']:
-                    content_toc.extend(content_element.children)
+                content_toc.extend(content_element.children)
             except AttributeError:
                 continue
 
