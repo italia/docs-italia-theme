@@ -155,7 +155,8 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
         content_toc = content_tocs[0]
         for content_element in content_tocs[1:]:
             try:
-                content_toc.extend(content_element.children)
+                if not toctreenode.attributes['hidden']:
+                    content_toc.extend(content_element.children)
             except AttributeError:
                 continue
 
