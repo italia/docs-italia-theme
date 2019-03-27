@@ -267,9 +267,10 @@
 
     .figure,
     .table,
-    .section {
+    .section,
+    .rubric.ref {
       &[id] {
-        border-top: 4rem solid transparent;
+        border-top: 4.2rem solid transparent;
       }
     }
 
