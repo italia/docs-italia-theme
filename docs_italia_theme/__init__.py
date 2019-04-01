@@ -46,7 +46,7 @@ def load_theme_data():
 
     # Load site config
     config_h = open(config_path)
-    config_data = yaml.load(config_h)
+    config_data = yaml.safe_load(config_h)
     context.update(config_data)
 
     # Load Jekyll data files
@@ -57,7 +57,7 @@ def load_theme_data():
             datafile_source = filename_re.sub('', filename)
             datafile_path = os.path.join(data_path, filename)
             datafile_h = open(datafile_path)
-            datafile_data = yaml.load(datafile_h)
+            datafile_data = yaml.safe_load(datafile_h)
             context['data'].update({datafile_source: datafile_data})
 
     # Transform network links to ordered mapping. Doing this dynamically
