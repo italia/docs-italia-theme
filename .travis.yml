@@ -11,6 +11,7 @@ install:
   - gem install sass
   - nvm install --lts
   - nvm use --lts
+  - npm cache clean --force
   - npm install
 script:
   - tox
