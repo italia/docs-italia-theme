@@ -15,8 +15,4 @@ install:
   - npm install
 script:
   - tox
-cache:
-  directories:
-    - ~/.cache/pip
-    - ~/.nvm/
-    - ~/.rvm/
+cache: false
