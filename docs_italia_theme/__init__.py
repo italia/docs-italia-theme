@@ -135,6 +135,18 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
     doctree_index = app.env.get_doctree(index)
 
     for toctreenode in doctree_index.traverse(toctree):
+        page_index = 0
+        while page_index < len(toctreenode['includefiles']):
+            page_in_toc = toctreenode['includefiles'][page_index]
+            if page_in_toc not in pages_list:
+                pages_list.append(page_in_toc)
+                page_index += 1
+            else:
+                toctreenode['includefiles'].remove(page_in_toc)
+                for entry in toctreenode['entries']:
+                    if page_in_toc in entry:
+                        toctreenode['entries'].remove(entry)
+
         toctree_element = TocTree(app.env).resolve(pagename, app.builder, toctreenode, includehidden=True)
         try:
             toc_caption = next(child for child in toctree_element.children if isinstance(child, caption))
@@ -146,11 +158,7 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
         if 'glossary_toc' in toctreenode.parent.attributes['names']:
             glossary_tocs.append(toctree_element)
         else:
-            if not toctreenode.attributes['hidden']:
-                content_tocs.append(toctree_element)
-            for page_in_toc in toctreenode['includefiles']:
-                if page_in_toc not in pages_list:
-                    pages_list.append(page_in_toc)
+            content_tocs.append(toctree_element)
 
     if content_tocs:
         content_toc = content_tocs[0]
