@@ -4,23 +4,29 @@
     <!-- Top header -->
     <div class="block-comments__header d-flex border-top border-bottom border-width-2 pt-3 pb-3 align-items-center justify-content-between">
       <h6 class="col-auto text-uppercase mb-0">{{ commentsCount }} Commenti</h6>
-      <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2" data-toggle="collapse" data-target="#comments-{{ topicId }}" aria-expanded="true">
+      <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2 collapsed" data-toggle="collapse" data-target="#comments-{{ topicId }}" aria-expanded="false">
         <span class="docs-icon-plus"></span>
         <span class="docs-icon-minus"></span>
       </button>
     </div>
   </div>
-  <div class="block-comments__body collapse show" data-parent="#accordion-comments-{{ topicId }}" id="comments-{{ topicId }}">
+  <div class="block-comments__body collapse" data-parent="#accordion-comments-{{ topicId }}" id="comments-{{ topicId }}">
     <!-- Input row -->
     <div class="d-flex align-items-center mb-4 block-comments__input">
       <div class="box-comment {{ canPost }}" data-topic="{{ topicId }}"></div>
     </div>
     <div class="row">
       <div class="block-comments__container col">
-        <div class="row mt-4 mb-4">
-          <ul class="block-comments__list col items" id="accordion-comment-item" data-topic="{{ topicId }}"></ul>
+        <div class="row mt-4">
+          <ul class="block-comments__list col items mb-0" id="accordion-comment-item" data-topic="{{ topicId }}"></ul>
         </div>
       </div>
+    </div>
+    <div class="block-comments__header d-flex border-bottom border-width-2 pt-3 pb-3 mb-4 align-items-center justify-content-end">
+      <button class="col-auto block-comments__toggle-btn rounded-circle border border-medium-blue border-width-2 collapsed" data-toggle="collapse" data-target="#comments-{{ topicId }}" aria-expanded="false">
+        <span class="docs-icon-plus"></span>
+        <span class="docs-icon-minus"></span>
+      </button>
     </div>
   </div>
 </script>
