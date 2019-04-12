@@ -22,6 +22,7 @@
     "browserify": "^14.5.0",
     "connect-livereload": "^0.6.0",
     "cssnano": "^4.1.10",
+    "discourse-client": "^0.1.0",
     "grunt": "^1.0.4",
     "grunt-browserify": "^5.2.0",
     "grunt-cache-bust": "1.4.1",

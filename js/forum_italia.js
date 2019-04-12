@@ -42,6 +42,7 @@ module.exports = forumItalia = (function ($) {
 
           $forumItaliaComment.html(tpl({
             topicId: topicId,
+            commentsCount: topic.posts_count,
             canPost: (!topic.archived && !topic.closed) ? 'can-post' : ''
           }, 'forum-italia-comments'))
           
