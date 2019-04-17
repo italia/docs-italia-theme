@@ -73,6 +73,7 @@
         </a>
       </div>
       <div class="docs__document-info__ownership col-md-5 offset-md-1 mt-3 mt-md-0">
+        {% if publisher_project %}
         <div class="w-100">
           <i class="docs-icon-project docs__document-info__icon"></i>
           <span class="docs__document-info__label ml-1">{{ t.project }}:</span>
@@ -80,6 +81,8 @@
             <u>{{ publisher_project }}</u>
           </a>
         </div>
+        {% endif %}
+        {% if publisher %}
         <div class="w-100 mt-1">
           <i class="docs-icon-publisher docs__document-info__icon"></i>
           <span class="docs__document-info__label ml-1">{{ t.administration }}:</span>
@@ -87,6 +90,7 @@
             <u>{{ publisher }}</u>
           </a>
         </div>
+        {% endif %}
       </div>
     </div>
   </div>
