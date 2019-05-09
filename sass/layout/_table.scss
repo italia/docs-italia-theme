@@ -27,10 +27,12 @@
     tr {
       font-size: 0.75rem;
 
-      td:nth-of-type(1) {
-        font-weight: 700;
-        color: $dark-blue;
-      }
+      // This rule is not working for tables having rowspan
+      // Consider using colgroups (supporting only few css properties)
+      // td:nth-of-type(1) {
+      //   font-weight: 700;
+      //   color: $dark-blue;
+      // }
     }
   }
 }
