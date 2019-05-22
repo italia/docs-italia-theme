@@ -93,9 +93,6 @@ molestias excepturi sint occaecati cupiditate non provident, similique sunt in
 culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
 harum quidem rerum facilis est et expedita distinctio.
 
-.. forum_italia::
-   :topic_id: 23
-
 ****
 
 Primo paragrafo che potrebbe andare su diverse righe
@@ -333,26 +330,6 @@ sanctus definiebas, vix dicam necessitatibus no. An debet urbanitas nam. Ut sit
 summo exerci. Eum in natum modus, in viderer phaedrum splendide. Dicit everti
 tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis choro
 reprehendunt cour deiro sant.
-
-Per quem habeo democritum at, mundi legere reformidans id qui. At qui mutat
-sanctus definiebas, vix dicam necessitatibus no. An debet urbanitas nam. Ut sit
-summo exerci. Eum in natum modus, in viderer phaedrum splendide. Dicit everti
-tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis choro
-reprehendunt cour deiro sant.
-
-
-.. forum_italia::
-   :topic_id: 24
-
-Per quem habeo democritum at, mundi legere reformidans id qui. At qui mutat
-sanctus definiebas, vix dicam necessitatibus no. An debet urbanitas nam. Ut sit
-summo exerci. Eum in natum modus, in viderer phaedrum splendide. Dicit everti
-tur pertinacia cu eam, laudem option iracundia nam an, eu mei duis choro
-reprehendunt cour deiro sant.
-
-
-.. forum_italia::
-   :topic_id: 25
 
 Box RFC 2119
 ~~~~~~~~~~~~
