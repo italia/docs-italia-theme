@@ -32,9 +32,9 @@
 </script>
 
 <script id="forum-italia__comment" type="text/template">
-  <li id="docs-comment-{{ post.topic_id }}-{{ post.id }}" class="row mb-4 block-comments__item comment-{{ post.id }} {{ hidden }} {{ isNew }}"
+  <li id="comment-{{ post.id }}" class="row mb-4 block-comments__item {{ hidden }} {{ isNew }}"
       data-topic="{{ post.topic_id }}" data-comment="{{ post.id }}">
-    <div id="reply-to-{{ post.post_number }}" class="block-comments__reply-anchor"></div>
+    <div id="reply-to-{{ post.id }}" class="block-comments__reply-anchor"></div>
     <figure class="col-auto mb-0">
       <img class="block-comments__img rounded-circle" src="{{ avatarUrl }}">
     </figure>
@@ -58,14 +58,37 @@
            aria-labelledby="comment-heading-1">
         {{ post.cooked }}
       </div>
+      <div class="block-comments__actions mb-2 mt-3">
+        {{ postActions }}
+      </div>
     </div>
   </li>
+</script>
+
+<script id="forum-italia__like-button" type="text/template">
+  <small>
+      <button id="{{ buttonAction }}-like-{{ post.id }}" type="button" class="btn btn-primary btn-sm mr-2 px-2 py-1">
+        {{ likeCount }}
+        <i class="it-favorite ml-1 mr-0"></i>
+      </button>
+      {{ likeDone }}
+    </small>
+</script>
+
+<script id="forum-italia__like-info" type="text/template">
+  <small>
+      <span id="like-{{ post.id }}" class="border rounded btn-sm mr-2 px-2 py-1">
+        {{ likeCount }}
+        <i class="it-favorite ml-1 mr-0"></i>
+      </span>
+      {{ likeDone }}
+    </small>
 </script>
 
 <script id="forum-italia__reply-link" type="text/template">
   <div>
     <small>In risposta al 
-      <a class="reply-to-post" href="#reply-to-{{ post.reply_to_post_number }}">
+      <a class="reply-to-post" href="#reply-to-{{ replyDest.id }}">
         commento di {{ replyDest.name }}
       </a>
     </small>
@@ -167,5 +190,14 @@
     Questa discussione è in sola lettura.
     <br>
   </div>
+</script>
+
+<script id="section_navigation__comments" type="text/template">
+  <li class="chapter-nav__item">
+      <span class="it-comment mr-2 align-middle"></span>
+      <a href="#forum-italia-comments-{{ topicId }}" class="chapter-link chapter-link--expand">
+          {{ postsCount }} commenti
+      </a>
+  </li>
 </script>
 {% endraw %}
