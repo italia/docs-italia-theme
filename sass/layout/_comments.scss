@@ -3,7 +3,7 @@ $comment_line_height: 21px;
 $letter_spacing: 0.88px;
 
 .block-comments {
-  margin-top: 2rem;
+  margin-top: 4.4rem;
   padding-bottom: 2rem;
 }
 
@@ -198,15 +198,6 @@ $letter_spacing: 0.88px;
 
     &::placeholder {
       color: $grey;
-    }
-  }
-
-  li[id^="docs-comment-"] {
-    &.is-new {
-      background: lightyellow;
-      padding-top: 0.5em;
-      border-radius: 5px;
-      box-shadow: 0 0 10px lightblue;
     }
   }
 
