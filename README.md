@@ -72,12 +72,4 @@ upcoming Docs Italia.
 
     This will compile static assets and watch files required for the theme to reload at runtime.
 
-6. Update modernizr.js
-
-  ```
-  ./node_modules/.bin/modernizr -uc ./modernizr.json -d ./js/modernizr.min.js
-  ```
-  
-  This will compile modernizr.js starting form the configuration present in ./modernizr.json
-
 **TODO:** building a release, handling versioning system to enable automatic update on Docs Italia platform

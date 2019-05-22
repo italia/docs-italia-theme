@@ -17,7 +17,7 @@ module.exports = themeSectionNav = (function ($) {
       that = this.$;
       $('.chapter-nav').remove();
 
-      that.$title = $('.chapter-header.has-nav h1,.chapter-header.has-nav h2,.chapter-header.has-nav h3'),
+      that.$title = $('.chapter-header.has-nav h1, .chapter-header.has-nav h2, .chapter-header.has-nav h3'),
       that.$title.each(function(index) {
         var $element = $(this),
             title = $element.html();
@@ -26,7 +26,7 @@ module.exports = themeSectionNav = (function ($) {
       themeSectionNav.addHandler();
     },
 
-    // Add navigation markdown, in case of mobile ( window width <=  991) the class for bootsrapp modale will be applied.
+    // Add navigation markdown, in case of mobile (window width <=  991) the class for bootstrap modal will be applied.
     addNav: function(element,title) {
       var modalClass = detectCModal(),
           modalContentClass = detectCModalContent(),
@@ -43,7 +43,7 @@ module.exports = themeSectionNav = (function ($) {
       container.append(nav);
 
       function detectCModal(){
-        if( that.$window.outerWidth() <=  991 ) {
+        if (isMobile.any && that.$window.outerWidth() <=  991) {
           return 'modal fade ';
         } else {
           return '';
@@ -51,7 +51,7 @@ module.exports = themeSectionNav = (function ($) {
       }
 
       function detectCModalContent(){
-        if( that.$window.outerWidth() <=  991 ) {
+        if (that.$window.outerWidth() <=  991) {
           return 'modal-content ';
         } else {
           return '';
@@ -59,7 +59,7 @@ module.exports = themeSectionNav = (function ($) {
       }
 
       function detectCModalContainer(){
-        if( that.$window.outerWidth() <=  991 ) {
+        if (that.$window.outerWidth() <=  991) {
           return 'modal-dialog modal-dialog-centered modal-sm ';
         } else {
           return '';
@@ -68,9 +68,9 @@ module.exports = themeSectionNav = (function ($) {
     },
 
     addHandler: function(element) {
-      // Display nav on mouseover ( desktop width no tochevents )
-      $('.chapter-header.has-nav').on('mouseover' , function(){
-        if (!Modernizr.touchevents && that.$window.outerWidth() > 992) {
+      // Display nav on mouseover (desktop)
+      $('.chapter-header.has-nav').on('mouseover', function() {
+        if (!isMobile.any && that.$window.outerWidth() > 992) {
           var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
           $wrap = $(this).find('.title-wrap');
           lineHeight = parseInt($(this).find('.title-has-nav').css('line-height'))+2;
@@ -81,9 +81,9 @@ module.exports = themeSectionNav = (function ($) {
         }
       });
 
-      // Close nav on mouseout ( desktop width no tochevents )
-      $('.chapter-header.has-nav').on('mouseout' , function(){
-        if (!Modernizr.touchevents && that.$window.outerWidth() > 992) {
+      // Close nav on mouseout (desktop)
+      $('.chapter-header.has-nav').on('mouseout', function() {
+        if (!isMobile.any && that.$window.outerWidth() > 992) {
           var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
               $wrap = $(this).find('.title-wrap');
           $nav.removeClass('active');
@@ -92,13 +92,13 @@ module.exports = themeSectionNav = (function ($) {
       });
 
       // Display nav on click, dropdown on desktop and modal on mobile/tablet
-      $('.chapter-link--expand').on('click' , function(){
+      $('.chapter-link--expand').on('click', function() {
         var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
             $wrap = $(this).closest('.chapter-header').find('.title-wrap'),
             lineHeight = parseInt($(this).closest('.chapter-header').find('.title-has-nav').css('line-height'))+4;
 
-        if( that.$window.outerWidth() > 992 ) {
-          if( $nav.hasClass('active') ) {
+        if (that.$window.outerWidth() > 992) {
+          if ($nav.hasClass('active')) {
             $nav.removeClass('active');
             $wrap.removeClass('active');
           }
@@ -110,15 +110,15 @@ module.exports = themeSectionNav = (function ($) {
               that.$body.addClass('no-scroll');
             }
           }
-        } else if ( that.$window.outerWidth() <= 991 ) {
+        } else if (that.$window.outerWidth() <= 991) {
           var $modal = $(this).closest('.chapter-nav__wrap').find('.chapter-nav__list--hidden');
           $modal.modal('show')
         }
       });
 
-      // Close when body is clikked ( Desktop with touchevents ).
-      that.$body.on('click' , function(event){
-        if ( Modernizr.touchevents && that.$window.outerWidth() > 992 ) {
+      // Close when body is clicked (desktop)
+      that.$body.on('click', function(event){
+        if (isMobile.any && that.$window.outerWidth() > 992) {
           var $nav = that.$title.closest('.chapter-header').find('.chapter-nav__list--hidden');
           if( !$('.chapter-header').has(event.target).length > 0 ) {
             $('.chapter-nav__list--hidden').removeClass('active');
