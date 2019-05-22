@@ -1,5 +1,5 @@
 // Forum Italia integration
-var DiscourseClient = require('discourse-client').default;
+var Discourse = require('discourse-client').default;
 var tpl = require('./getTpl');
 
 module.exports = forumItalia = (function ($) {
@@ -27,30 +27,40 @@ module.exports = forumItalia = (function ($) {
         return;
       }
 
-      that.client = new DiscourseClient({
+      that.client = new Discourse({
         appName: 'Docs Italia',
-        apiBaseUrl: 'https://davide.space',
+        apiBaseUrl: 'https://forum.italia.it',
         scopes: ['write']
       });
 
       var forumItaliaComments = that.$forumItaliaComments.toArray().map(function(forumItaliaComment) {
         var $forumItaliaComment = $(forumItaliaComment);
         var topicId = $forumItaliaComment.data('topic');
+        var postsCount;
 
-        return that.client.api.getTopic(topicId, true).then(function(topic) {
+        return that.client.getTopic(topicId, true).then(function(topic) {
           var posts = topic.post_stream.posts;
 
+          $forumItaliaComment.attr('id', 'forum-italia-comments-' + topicId);
           $forumItaliaComment.html(tpl({
             topicId: topicId,
             commentsCount: topic.posts_count,
             canPost: (!topic.archived && !topic.closed) ? 'can-post' : ''
           }, 'forum-italia-comments'))
-          
+
           forumItalia.commentsMarkup($forumItaliaComment.find(that.topicCommentsSelector), posts);
+          
+          return {
+            $element: $forumItaliaComment,
+            topic: topic,
+          }
         }).catch(function(error) { /* topic not found or not public */ });
       });
 
-      Promise.all(forumItaliaComments).then(function() {
+      Promise.all(forumItaliaComments).then(function(forumItaliaCommentsTopics) {
+        forumItaliaCommentsTopics.map(function(forumItaliaCommentsTopic) {
+          forumItalia.headingMarkup(forumItaliaCommentsTopic.$element.closest('.section'), forumItaliaCommentsTopic.topic.id, forumItaliaCommentsTopic.topic.posts_count);
+        });
         that.client.init().then(function() {
           that.client.isLoggedIn().then(function(isLoggedIn) {
             if (isLoggedIn) {
@@ -62,6 +72,13 @@ module.exports = forumItalia = (function ($) {
           });
         });
       });
+    },
+
+    headingMarkup: function($section, topicId, postsCount) {
+      $section.find('.chapter-nav__list.chapter-nav__list--visible').first().children('.chapter-nav__item').last().before(tpl({
+        postsCount: postsCount,
+        topicId: topicId
+      }, 'section_navigation__comments'));
     },
 
     login: function() {
@@ -138,7 +155,7 @@ module.exports = forumItalia = (function ($) {
           // Disable textarea & submit button
           $messageTextArea.attr('disabled', true);
           $sendButton.attr('disabled', true);
-          that.client.api.postMessage(topicId, messageBody)
+          that.client.postMessage(topicId, messageBody)
             .then(function(response) {
               $messageTextArea.val('');
               $errors.removeClass('text-danger').html('');
@@ -154,12 +171,16 @@ module.exports = forumItalia = (function ($) {
             });
         }
       });
+
+      forumItalia.refrestAllCommentsMarkup();
     },
 
     setLoggedOutMarkup: function() {
       $(that.commentBoxesSelector).each(function() {
         $(this).html(that.forumLoginMarkup).find('.login-button').click(forumItalia.login);
       });
+
+      forumItalia.refrestAllCommentsMarkup();
     },
     
     setSilencedMarkup: function() {
@@ -177,38 +198,97 @@ module.exports = forumItalia = (function ($) {
 
     // Create the comment markup with given $topicCommentsElement and post
     commentsMarkup: function($topicCommentsElement, posts, newPostId) {
-      var topicComments = posts.map(function(post) {
-        return that.client.api.getPublicUserField(post.username, that.publicUserFieldIndex).then(function(publicUserField) {
-          var replyLink = post.reply_to_post_number
-            ? tpl({
-              replyDest: posts[post.reply_to_post_number],
-              post: post
-            }, 'forum-italia__reply-link')
-            : null;
-          return tpl({
+      var topicCommentsPromises = posts.map(function(post) {
+        var replyDest = posts[post.reply_to_post_number];
+        var isNew = (post.id === newPostId);
+        return forumItalia.commentMarkup(post, replyDest, isNew);
+      });
+      
+      Promise.all(topicCommentsPromises).then(function(topicComments) {
+        $topicCommentsElement.html('');
+        topicComments.sort(function(a, b) { return b.commentId - a.commentId; });
+        topicComments.map(function(topicComment) {
+          $topicCommentsElement.append(topicComment.renderedCommment);
+          forumItalia.likeButton(topicComment);
+          forumItalia.undoLikeButton(topicComment);
+        });
+      });
+    },
+
+    likeButton: function(topicComment) {
+      $('button#do-like-' + topicComment.commentId).click(function() {
+        that.client.likePost(topicComment.commentId).then(function(post) {
+          forumItalia.commentMarkup(post, topicComment.replyDest).then(function(likedComment) {
+            $('#comment-' + likedComment.commentId).replaceWith(likedComment.renderedCommment);
+            forumItalia.undoLikeButton(topicComment);
+          })
+        });
+      });
+    },
+
+    undoLikeButton: function(topicComment) {
+      $('button#undo-like-' + topicComment.commentId).click(function() {
+        that.client.undoLikePost(topicComment.commentId).then(function(post) {
+          forumItalia.commentMarkup(post, topicComment.replyDest).then(function(undoLikedComment) {
+            $('#comment-' + undoLikedComment.commentId).replaceWith(undoLikedComment.renderedCommment);
+            forumItalia.likeButton(topicComment);
+          })
+        });
+      });
+    },
+
+    commentMarkup: function(post, replyDest, isNew) {
+      return that.client.getPublicUserField(post.username, that.publicUserFieldIndex).then(function(publicUserField) {
+        var replyLink = post.reply_to_post_number
+          ? tpl({
+            replyDest: replyDest
+          }, 'forum-italia__reply-link')
+          : null;
+        var likeAction = post.actions_summary.find(function(action) { return action.id == 2 });
+        var showLike = likeAction
+          ? likeAction['can_act'] || likeAction['can_undo']
+          : that.client.getCurrentUserId() && (post.user_id != that.client.getCurrentUserId());
+        var likeTemplate = showLike ? 'forum-italia__like-button' : 'forum-italia__like-info'
+        var postActions = likeAction && tpl({
+          post: post,
+          buttonAction: likeAction['can_undo'] ? 'undo' : 'do',
+          likeCount: likeAction['count'],
+          likeDone: likeAction['acted'] && 'Hai messo mi piace.'
+        }, likeTemplate);
+        return {
+          renderedCommment: tpl({
             displayName: post.name || post.username,
             post: post,
-            isNew: (post.id === newPostId) ? 'is-new' : '',
+            isNew: isNew ? 'is-new' : '',
             hidden: post.hidden && 'hidden',
             avatarUrl: that.client.getApiBaseUrl() + post.avatar_template.replace('{size}', 110),
             date: new Date(post.created_at).toLocaleString('it-IT', { day:'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric'}),
             publicUserField: publicUserField || 'utente',
-            replyLink: replyLink
-          }, 'forum-italia__comment');
-        });
-      });
-      
-      Promise.all(topicComments).then(function(renderedComments) {
-        $topicCommentsElement.html('');
-        renderedComments.map(function(renderedComment) {
-          $topicCommentsElement.append(renderedComment);
-        });
+            replyLink: replyLink,
+            postActions: postActions,
+          }, 'forum-italia__comment'),
+          commentId: post.id,
+          replyDest: replyDest
+        }
       });
     },
     
     refreshCommentsMarkup: function(topicId, $commentList, newPostId) {
-      that.client.api.getPostsInTopic(topicId, true, true).then(function(posts) {
+      that.client.getPostsInTopic(topicId, true, true).then(function(posts) {
         forumItalia.commentsMarkup($commentList, posts, newPostId);
+      });
+    },
+
+    refrestAllCommentsMarkup: function() {
+      var forumItaliaComments = that.$forumItaliaComments.toArray().map(function(forumItaliaComment) {
+        var $forumItaliaComment = $(forumItaliaComment);
+        var topicId = $forumItaliaComment.data('topic');
+
+        return that.client.getTopic(topicId, true, true).then(function(topic) {
+          var posts = topic.post_stream.posts;
+
+          forumItalia.commentsMarkup($forumItaliaComment.find(that.topicCommentsSelector), posts);
+        }).catch(function(error) { /* topic not found or not public */ });
       });
     }
   }
