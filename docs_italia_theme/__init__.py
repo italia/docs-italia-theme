@@ -8,7 +8,7 @@ import re
 import yaml
 import json
 
-from forum_italia import *
+from . forum_italia import *
 from docutils.nodes import figure
 from docutils.nodes import table
 from docutils.nodes import bullet_list
