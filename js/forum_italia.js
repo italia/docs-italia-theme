@@ -33,35 +33,35 @@ module.exports = forumItalia = (function ($) {
         scopes: ['write']
       });
 
-      var forumItaliaComments = that.$forumItaliaComments.toArray().map(function(forumItaliaComment) {
-        var $forumItaliaComment = $(forumItaliaComment);
-        var topicId = $forumItaliaComment.data('topic');
-        var postsCount;
+      that.client.init().then(function() {
+        var forumItaliaComments = that.$forumItaliaComments.toArray().map(function(forumItaliaComment) {
+          var $forumItaliaComment = $(forumItaliaComment);
+          var topicId = $forumItaliaComment.data('topic');
+          var postsCount;
 
-        return that.client.getTopic(topicId, true).then(function(topic) {
-          var posts = topic.post_stream.posts;
+          return that.client.getTopic(topicId, true).then(function(topic) {
+            var posts = topic.post_stream.posts;
 
-          $forumItaliaComment.attr('id', 'forum-italia-comments-' + topicId);
-          $forumItaliaComment.html(tpl({
-            topicId: topicId,
-            commentsCount: topic.posts_count,
-            canPost: (!topic.archived && !topic.closed) ? 'can-post' : ''
-          }, 'forum-italia-comments'))
+            $forumItaliaComment.attr('id', 'forum-italia-comments-' + topicId);
+            $forumItaliaComment.html(tpl({
+              topicId: topicId,
+              commentsCount: topic.posts_count,
+              canPost: (!topic.archived && !topic.closed) ? 'can-post' : ''
+            }, 'forum-italia-comments'))
 
-          forumItalia.commentsMarkup($forumItaliaComment.find(that.topicCommentsSelector), posts);
-          
-          return {
-            $element: $forumItaliaComment,
-            topic: topic,
-          }
-        }).catch(function(error) { /* topic not found or not public */ });
-      });
-
-      Promise.all(forumItaliaComments).then(function(forumItaliaCommentsTopics) {
-        forumItaliaCommentsTopics.map(function(forumItaliaCommentsTopic) {
-          forumItalia.headingMarkup(forumItaliaCommentsTopic.$element.closest('.section'), forumItaliaCommentsTopic.topic.id, forumItaliaCommentsTopic.topic.posts_count);
+            forumItalia.commentsMarkup($forumItaliaComment.find(that.topicCommentsSelector), posts);
+            
+            return {
+              $element: $forumItaliaComment,
+              topic: topic,
+            }
+          }).catch(function(error) { /* topic not found or not public */ });
         });
-        that.client.init().then(function() {
+
+        Promise.all(forumItaliaComments).then(function(forumItaliaCommentsTopics) {
+          forumItaliaCommentsTopics.map(function(forumItaliaCommentsTopic) {
+            forumItalia.headingMarkup(forumItaliaCommentsTopic.$element.closest('.section'), forumItaliaCommentsTopic.topic.id, forumItaliaCommentsTopic.topic.posts_count);
+          });
           that.client.isLoggedIn().then(function(isLoggedIn) {
             if (isLoggedIn) {
               forumItalia.setLoggedInMarkup();
