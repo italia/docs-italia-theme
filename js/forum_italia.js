@@ -1,6 +1,12 @@
 // Forum Italia integration
+var appName = 'Docs Italia';
+var apiBaseUrl = 'https://forum.italia.it';
 var Discourse = require('discourse-client').default;
 var tpl = require('./getTpl');
+var t = {
+  liked: 'Hai messo mi piace.',
+  user: 'utente'
+};
 
 module.exports = forumItalia = (function ($) {
   var that;
@@ -28,8 +34,8 @@ module.exports = forumItalia = (function ($) {
       }
 
       that.client = new Discourse({
-        appName: 'Docs Italia',
-        apiBaseUrl: 'https://forum.italia.it',
+        appName: appName,
+        apiBaseUrl: apiBaseUrl,
         scopes: ['write']
       });
 
@@ -55,7 +61,9 @@ module.exports = forumItalia = (function ($) {
               $element: $forumItaliaComment,
               topic: topic,
             }
-          }).catch(function(error) { /* topic not found or not public */ });
+          }).catch(function(error) {
+            reportError('topic not found or not public');
+          });
         });
 
         Promise.all(forumItaliaComments).then(function(forumItaliaCommentsTopics) {
@@ -75,7 +83,7 @@ module.exports = forumItalia = (function ($) {
     },
 
     headingMarkup: function($section, topicId, postsCount) {
-      $section.find('.chapter-nav__list.chapter-nav__list--visible').first().children('.chapter-nav__item').last().before(tpl({
+      $section.find('.chapter-nav__list--visible').prepend(tpl({
         postsCount: postsCount,
         topicId: topicId
       }, 'section_navigation__comments'));
@@ -85,7 +93,7 @@ module.exports = forumItalia = (function ($) {
       that.client.login().then(function() {
         forumItalia.setLoggedInMarkup();
       }).catch(function(error) {
-        console.log('error', error);
+        reportError(error);
       });
     },
 
@@ -122,24 +130,26 @@ module.exports = forumItalia = (function ($) {
       }
 
       // Minimum characters
-      $('textarea.box-comment__body').bind('input', function() {
-        $requiredChars = $(this).parents('div.box-comment').find('.required-chars');
-        $requiredMessage = $(this).parents('div.box-comment').find('.box-comment__required');
-        $sendButton = $(this).parents('div.box-comment').find('.box-comment__submit');
+      $('textarea.box-comment__body').on('input', function() {
+        var $boxComment = $(this).parents('div.box-comment');
+        var $requiredChars = $boxComment.find('.required-chars');
+        var $requiredMessage = $boxComment.find('.box-comment__required');
+        var $sendButton = $boxComment.find('.box-comment__submit');
 
-        var nedeedChars = 20 - $(this).val().replace(/ /g,'').length;
-        if (nedeedChars > 0) {
+        // Discourse comments length must be at least 20 chars
+        var neededChars = 20 - $(this).val().replace(/ /g,'').length;
+        if (neededChars > 0) {
           $requiredMessage.show();
-          $requiredChars.text(nedeedChars);
-          $sendButton.attr('disabled', true);
+          $requiredChars.text(neededChars);
+          $sendButton.prop('disabled', true);
         } else {
           $requiredMessage.hide();
-          $sendButton.attr('disabled', false);
+          $sendButton.prop('disabled', false);
         }
       });
 
       // Send message button
-      $('button.box-comment__submit').click(function() {
+      $('button.box-comment__submit').on('click', function() {
         var $boxComment = $(this).parents('.box-comment');
         var $messageTextArea = $boxComment.find('.box-comment__body')
         var $sendButton = $boxComment.find('.box-comment__submit');
@@ -153,8 +163,8 @@ module.exports = forumItalia = (function ($) {
         } else {
           $boxComment.addClass('sending');
           // Disable textarea & submit button
-          $messageTextArea.attr('disabled', true);
-          $sendButton.attr('disabled', true);
+          $messageTextArea.prop('disabled', true);
+          $sendButton.prop('disabled', true);
           that.client.postMessage(topicId, messageBody)
             .then(function(response) {
               $messageTextArea.val('');
@@ -166,8 +176,8 @@ module.exports = forumItalia = (function ($) {
             }).finally(function() {
               $boxComment.removeClass('sending');
               // Enable textarea & submit button
-              $messageTextArea.attr('disabled', false);
-              $sendButton.attr('disabled', false);
+              $messageTextArea.prop('disabled', false);
+              $sendButton.prop('disabled', false);
             });
         }
       });
@@ -184,8 +194,8 @@ module.exports = forumItalia = (function ($) {
     },
     
     setSilencedMarkup: function() {
-      $('textarea.box-comment__body').attr('disabled', true);
-      $('button.box-comment__submit').attr('disabled', true);
+      $('textarea.box-comment__body').prop('disabled', true);
+      $('button.box-comment__submit').prop('disabled', true);
       $('.box-comment__errors-box').html(tpl({
         notificationsUrl: that.client.getCurrentUserNotificationsUrl(),
         }, 'forum-italia__silenced')
@@ -253,7 +263,7 @@ module.exports = forumItalia = (function ($) {
           post: post,
           buttonAction: likeAction['can_undo'] ? 'undo' : 'do',
           likeCount: likeAction['count'],
-          likeDone: likeAction['acted'] && 'Hai messo mi piace.'
+          likeDone: likeAction['acted'] && t.liked
         }, likeTemplate);
         return {
           renderedCommment: tpl({
@@ -263,7 +273,7 @@ module.exports = forumItalia = (function ($) {
             hidden: post.hidden && 'hidden',
             avatarUrl: that.client.getApiBaseUrl() + post.avatar_template.replace('{size}', 110),
             date: new Date(post.created_at).toLocaleString('it-IT', { day:'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric'}),
-            publicUserField: publicUserField || 'utente',
+            publicUserField: publicUserField || t.user,
             replyLink: replyLink,
             postActions: postActions,
           }, 'forum-italia__comment'),
@@ -288,8 +298,14 @@ module.exports = forumItalia = (function ($) {
           var posts = topic.post_stream.posts;
 
           forumItalia.commentsMarkup($forumItaliaComment.find(that.topicCommentsSelector), posts);
-        }).catch(function(error) { /* topic not found or not public */ });
+        }).catch(function(error) {
+          reportError('topic not found or not public');
+        });
       });
+    },
+
+    reportError: function(errorMessage) {
+      console.error('Forum Italia integration error: ' + errorMessage);
     }
   }
 })(jQuery);
