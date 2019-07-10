@@ -43,7 +43,7 @@ module.exports = themeSectionNav = (function ($) {
       container.append(nav);
 
       function detectCModal(){
-        if (isMobile.any && that.$window.outerWidth() <=  991) {
+        if (Modernizr.touchevents && that.$window.outerWidth() <=  991) {
           return 'modal fade ';
         } else {
           return '';
@@ -70,7 +70,7 @@ module.exports = themeSectionNav = (function ($) {
     addHandler: function(element) {
       // Display nav on mouseover (desktop)
       $('.chapter-header.has-nav').on('mouseover', function() {
-        if (!isMobile.any && that.$window.outerWidth() > 992) {
+        if (!Modernizr.touchevents && that.$window.outerWidth() > 992) {
           var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
           $wrap = $(this).find('.title-wrap');
           lineHeight = parseInt($(this).find('.title-has-nav').css('line-height'))+2;
@@ -83,7 +83,7 @@ module.exports = themeSectionNav = (function ($) {
 
       // Close nav on mouseout (desktop)
       $('.chapter-header.has-nav').on('mouseout', function() {
-        if (!isMobile.any && that.$window.outerWidth() > 992) {
+        if (!Modernizr.touchevents && that.$window.outerWidth() > 992) {
           var $nav = $(this).closest('.chapter-header').find('.chapter-nav__list--hidden'),
               $wrap = $(this).find('.title-wrap');
           $nav.removeClass('active');
@@ -118,7 +118,7 @@ module.exports = themeSectionNav = (function ($) {
 
       // Close when body is clicked (desktop)
       that.$body.on('click', function(event){
-        if (isMobile.any && that.$window.outerWidth() > 992) {
+        if (Modernizr.touchevents && that.$window.outerWidth() > 992) {
           var $nav = that.$title.closest('.chapter-header').find('.chapter-nav__list--hidden');
           if( !$('.chapter-header').has(event.target).length > 0 ) {
             $('.chapter-nav__list--hidden').removeClass('active');

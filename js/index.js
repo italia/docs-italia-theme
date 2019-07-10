@@ -1,6 +1,6 @@
 global.$ = global.jQuery = require('jquery');
 global.Popper = require('popper.js');
-global.isMobile = require('ismobilejs');
+require('modernizr');
 require('bootstrap-italia');
 
 

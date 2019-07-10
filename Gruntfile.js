@@ -101,11 +101,27 @@ module.exports = function(grunt) {
       }
     },
 
+    modernizr: {	
+      all: {	
+        'crawl': false,	
+        'customTests': [],	
+        'dest': 'js/modernizr.min.js',	
+        'tests': [	
+          'touchevents'	
+        ],	
+        'options': [	
+          'setClasses'	
+        ],	
+        'uglify' : true	
+      }	
+    },
+
     browserify: {
       build: {
         options: {
           alias: {
-            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js'
+            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js',
+            'modernizr': './js/modernizr.min.js'
           }
         },
         src: ['js/index.js'],
@@ -115,7 +131,8 @@ module.exports = function(grunt) {
       dev: {
         options: {
           alias: {
-            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js'
+            'bootstrap-italia': './node_modules/bootstrap-italia/dist/js/bootstrap-italia.min.js',
+            'modernizr': './js/modernizr.min.js'
           },
           browserifyOptions: {
             debug: true
@@ -202,6 +219,7 @@ module.exports = function(grunt) {
     'concat',
     'clean:css',
     'postcss:dev',
+    'modernizr',
     'browserify:dev',
     'exec:build_sphinx',
     'connect',
@@ -216,6 +234,7 @@ module.exports = function(grunt) {
     'concat',
     'clean:css',
     'postcss:build',
+    'modernizr',
     'browserify:build',
     'uglify',
     'exec:build_sphinx'
@@ -229,6 +248,7 @@ module.exports = function(grunt) {
     'concat',
     'clean:css',
     'postcss:build',
+    'modernizr',
     'browserify:build',
     'uglify',
     'cacheBust',
