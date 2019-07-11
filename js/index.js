@@ -1,10 +1,7 @@
 global.$ = global.jQuery = require('jquery');
 global.Popper = require('popper.js');
-global.stickybits = require('stickybits');
-// global.ResizeSensor = require('resize-sensor'); // needed by themeStickySidebar.
-// require('sticky-sidebar')
-require('bootstrap-italia');
 require('modernizr');
+require('bootstrap-italia');
 
 
 var themeMarkupModifier = require('./markup_modifier.js');
@@ -19,10 +16,9 @@ var themeSidebarNav = require('./sidebar_nav.js');
 var themeGlossaryPage = require('./glossary_page.js');
 var themeScrollProgressBar = require('./scroll_progressbar.js');
 var themeStickyHeader = require('./sticky_header.js');
-// var themeStickySidebar = require('./sticky_sidebar.js');
 var themeOffcanvasFeature = require('./offcanvas_feature.js');
 var themeSearchboxCollapse = require('./searchbox_collapse.js');
-// var themeScrollspy = require('./scrollspy.js');
+var forumItalia = require('./forum_italia.js');
 
 // Init all
 $(document).ready(function() {
@@ -38,10 +34,9 @@ $(document).ready(function() {
   themeActiveVersions.init();
   themeScrollProgressBar.init();
   themeStickyHeader.init();
-  // themeStickySidebar.init();
   themeOffcanvasFeature.init();
   themeSearchboxCollapse.init();
-  // themeScrollspy.init();
+  forumItalia.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossaryReady() {

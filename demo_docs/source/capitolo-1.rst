@@ -1,7 +1,7 @@
 Primo capitolo del documento
 ============================
 
-.. highlights:: 
+.. highlights::
 
    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aean commodo ligula
    eget dolor. Aenean massa cumera sociis natoque penatibus et magnis disser
@@ -38,7 +38,7 @@ dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
    laboris nisi ut aliquea commodo consequat dearen musol caolin neste.
    :class: first-column
    :name: quattro colonne
-   
+
    +---------------------+-----------------------+-------------+---------------+
    | COLONNA 1           | COLONNA 2             | COLONNA 3   | COLONNA 4     |
    +=====================+=======================+=============+===============+
@@ -92,8 +92,6 @@ praesentium :term:`voluptatum` deleniti atque corrupti quos dolores et quas
 molestias excepturi sint occaecati cupiditate non provident, similique sunt in
 culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
 harum quidem rerum facilis est et expedita distinctio.
-
-.. Direttiva per i commenti da implementare.
 
 ****
 
@@ -223,7 +221,7 @@ reprehendunt cour deiro sant.
    adipisci corrumpit mel, vis te omnes indoctum intellegat. Nos trud suscipit
    theophrastus no vel, an nam quaeque habemus deterruisset. In iuvaret quat
    definiebas quo, ex eligendi inciderint per.
-   
+
    **In est unum utamur appareat. Te sumo civibus invenire qui.** Omnis atqui
    exerci an his, ad quo omnes copiosae. Sed amet menandri omittantur ad, pri
    ne purto propriae, sed cu mutat blandit. Vix prima lorem interesset at.
@@ -318,7 +316,7 @@ reprehendunt cour deiro sant.
    :class: useful-docs
 
    - :mimetype:`application/pdf` `Predisposizione e invio del file di
-     pre-subentro [204kb] <https://www.example.com>`_ 
+     pre-subentro [204kb] <https://www.example.com>`_
 
    - :mimetype:`application/pdf` `Guida rapida per il censimento degli utenti e
      delle postazioni per i Comuni [82kb] <https://www.example.com>`_
