@@ -43,7 +43,7 @@ module.exports = forumItalia = (function ($) {
         var forumItaliaComments = that.$forumItaliaComments.toArray().map(function(forumItaliaComment) {
           var $forumItaliaComment = $(forumItaliaComment);
           var topicId = $forumItaliaComment.data('topic');
-          var postsCount;
+          var scope = $forumItaliaComment.data('scope');
 
           return that.client.getTopic(topicId, true).then(function(topic) {
             var posts = topic.post_stream.posts;
@@ -60,15 +60,16 @@ module.exports = forumItalia = (function ($) {
             return {
               $element: $forumItaliaComment,
               topic: topic,
+              scope: scope,
             }
-          }).catch(function(error) {
-            reportError('topic not found or not public');
           });
         });
 
         Promise.all(forumItaliaComments).then(function(forumItaliaCommentsTopics) {
           forumItaliaCommentsTopics.map(function(forumItaliaCommentsTopic) {
-            forumItalia.headingMarkup(forumItaliaCommentsTopic.$element.closest('.section'), forumItaliaCommentsTopic.topic.id, forumItaliaCommentsTopic.topic.posts_count);
+            if ('section' === forumItaliaCommentsTopic.scope) {
+              forumItalia.headingMarkup(forumItaliaCommentsTopic.$element.closest('.section'), forumItaliaCommentsTopic.topic.id, forumItaliaCommentsTopic.topic.posts_count);
+            }
           });
           that.client.isLoggedIn().then(function(isLoggedIn) {
             if (isLoggedIn) {
@@ -78,6 +79,8 @@ module.exports = forumItalia = (function ($) {
             }
             forumItalia.setClosedTopicsMarkup();
           });
+        }).catch(function(error) {
+          forumItalia.reportError('topic not found or not public');
         });
       });
     },
@@ -93,7 +96,7 @@ module.exports = forumItalia = (function ($) {
       that.client.login().then(function() {
         forumItalia.setLoggedInMarkup();
       }).catch(function(error) {
-        reportError(error);
+        forumItalia.reportError(error);
       });
     },
 
@@ -299,7 +302,7 @@ module.exports = forumItalia = (function ($) {
 
           forumItalia.commentsMarkup($forumItaliaComment.find(that.topicCommentsSelector), posts);
         }).catch(function(error) {
-          reportError('topic not found or not public');
+          forumItalia.reportError('topic not found or not public');
         });
       });
     },

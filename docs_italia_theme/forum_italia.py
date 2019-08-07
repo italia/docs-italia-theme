@@ -20,18 +20,23 @@ class ForumItaliaCommentsDirective(Directive):
     required_arguments = 0
     optional_arguments = 0
     option_spec = {
-        'topic_id': directives.unchanged
+        'topic_id': directives.unchanged_required,
+        'scope': directives.unchanged
     }
     final_argument_whitespace = True
 
     def run(self):
         options = self.options
+        scope = options['scope'] if 'scope' in options else 'section'
 
         node = ForumItaliaCommentsNode()
 
-        topic_markup = """
-            <div class="forum-italia-comments" data-topic='""" + options['topic_id'] + """'></div>
-        """
+        topic_markup = ' '.join([
+            '<div class="forum-italia-comments"',
+            'data-topic="' + options['topic_id'] + '"',
+            'data-scope="' + scope + '"',
+            '></div>'
+        ])
 
         node += nodes.raw(text=topic_markup, format='html')
         node['data-topic-id'] = options['topic_id']
