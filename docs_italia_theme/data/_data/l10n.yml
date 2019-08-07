@@ -71,7 +71,7 @@ it:
     no_glossary: nessun glossario
     no_figures: nessuna figura
     no_tables: nessuna tabella
-    introduction: introduzione
+    summary: sommario
     project: Progetto
     administration: Amministrazione
     info: Informazioni
@@ -177,7 +177,7 @@ en:
     no_glossary: no glossary
     no_figures: no figures
     no_tables: no tables
-    introduction: introduction
+    summary: summary
     project: Project
     administration: Administration
     info: About this document

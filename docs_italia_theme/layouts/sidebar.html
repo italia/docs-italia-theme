@@ -13,7 +13,7 @@
     <div id="content-index" class="content-index--menu sidebar-list--wrapper sidebar-accordion-content collapse show">
       <ul class="{% if pagename == master_doc %}current{% endif %}">
         <li class="toctree-l1 {% if pagename == master_doc %}current{% endif %}">
-          <a href='{{ pathto(master_doc) }}'>{{ _(t.introduction|capitalize) }}</a>
+          <a href='{{ pathto(master_doc) }}'>{{ _(t.summary|capitalize) }}</a>
         </li>
       </ul>
       {% if content_toc %}

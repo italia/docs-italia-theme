@@ -54,7 +54,7 @@
       <div id="content-index-mobile" class="content-index--menu tab-pane sidebar-list--wrapper fade show active" role="tabpanel" aria-labelledby="content-index-mobile-tab">
         <ul class="{% if pagename == master_doc %}current{% endif %}">
           <li class="toctree-l1 {% if pagename == master_doc %}current{% endif %}">
-            <a href='{{ pathto(master_doc) }}'>{{ _(t.introduction|capitalize) }}</a>
+            <a href='{{ pathto(master_doc) }}'>{{ _(t.summary|capitalize) }}</a>
           </li>
         </ul>
         {{ content_toc }}
