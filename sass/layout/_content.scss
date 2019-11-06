@@ -290,6 +290,11 @@
       list-style: upper-alpha;
     }
 
+    ol.upperroman,
+    ol.upperroman li {
+      list-style: upper-roman;
+    }
+
     ol,
     ol.arabic {
       list-style: decimal;
