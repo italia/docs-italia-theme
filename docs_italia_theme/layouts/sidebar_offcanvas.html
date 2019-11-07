@@ -57,7 +57,11 @@
             <a href='{{ pathto(master_doc) }}'>{{ _(t.summary|capitalize) }}</a>
           </li>
         </ul>
+        {% if content_toc and 'singlehtml' not in builder %}
         {{ content_toc }}
+        {% else %}
+        {{ toc }}
+        {% endif %}
       </div>
 
       <div id="figures-index-mobile" class="figures-index--menu tab-pane sidebar-list--wrapper fade" role="tabpanel" aria-labelledby="figures-index-mobile-tab">

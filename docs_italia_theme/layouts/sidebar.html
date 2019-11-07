@@ -16,8 +16,10 @@
           <a href='{{ pathto(master_doc) }}'>{{ _(t.summary|capitalize) }}</a>
         </li>
       </ul>
-      {% if content_toc %}
+      {% if content_toc and 'singlehtml' not in builder %}
       {{ content_toc }}
+      {% else %}
+      {{ toc }}
       {% endif %}
     </div>
 
