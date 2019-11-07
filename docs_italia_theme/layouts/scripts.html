@@ -4,7 +4,7 @@ var DOCSITALIA_DATA = {
   publisher_slug: '{{ publisher_slug }}',
   publisher_project_slug: '{{ publisher_project_slug }}'
 }
-{% if not READTHEDOCS %}
+{% if LOCAL %}
 LOCAL = true;
 READTHEDOCS_DATA = {
   project: '{{ slug }}',

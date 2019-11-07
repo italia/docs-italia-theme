@@ -249,6 +249,13 @@
       }
     }
 
+    // fix for singlehtml format
+    > .toctree-wrapper.compound {
+      @include media-breakpoint-up(lg) {
+        width: 100%;
+      }
+    }
+
     // Exception
     .section,
     .chapter-header,

@@ -4,16 +4,9 @@
       <span class="docs-icon-download align-middle"></span>
       <span class="align-middle">{{ t.download }}</span>
     </a>
-    <div class="dropdown-menu w-100" aria-labelledby="downloads-dropdown">
+    <div class="dropdown-menu w-100{{ '' if LOCAL else ' disabled' }}" aria-labelledby="downloads-dropdown" aria-disabled="{{ 'false' if LOCAL else 'true' }}">
       <div class="link-list-wrapper">
         <ul class="link-list">
-          {% if LOCAL %}
-            {% set downloads = [ 
-              ("pdf", "pdf"),
-              ("htmlzip", "htmlzip"),
-              ("epub", "epub"),
-            ] %}
-          {% endif %}
           {% for type, url in downloads %}
           <a class="dropdown-item" href="{{ url }}" download>
             {{ type }}
