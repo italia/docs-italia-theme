@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="32px" viewBox="0 0 26 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 6 Copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="0%" x2="0%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#2079D4" offset="0%"></stop>
+            <stop stop-color="#0059B3" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="–-Documento" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="docs_article_nav_documenti-correlati" transform="translate(-104.000000, -491.000000)">
+            <g id="Group-6-Copy-2" transform="translate(104.000000, 491.000000)">
+                <path d="M2.35294118,0.0799979695 L18.8235294,0.0799979695 L25.0980392,6.35450777 L25.0980392,29.0996058 C25.0980392,30.3990993 24.0445916,31.452547 22.745098,31.452547 L2.35294118,31.452547 C1.05344765,31.452547 -7.29036361e-16,30.3990993 -8.8817842e-16,29.0996058 L0,2.43293915 C-1.59142059e-16,1.13344562 1.05344765,0.0799979695 2.35294118,0.0799979695 Z" id="Rectangle-3" fill="#2079D4"></path>
+                <path d="M18.8235294,0.0799979695 L25.0980392,6.35450777 L20.3921569,6.35450777 C19.5258278,6.35450777 18.8235294,5.65220934 18.8235294,4.78588032 L18.8235294,0.0799979695 Z" id="Rectangle-7" fill="#66A5E3"></path>
+                <polygon id="Rectangle-7" fill="url(#linearGradient-1)" transform="translate(22.588235, 8.864312) scale(-1, 1) rotate(90.000000) translate(-22.588235, -8.864312) " points="20.0784314 6.35450777 25.0980392 11.3741156 20.0784314 11.3741156"></polygon>
+                <path d="M5.01960784,14.745098 L13.8541979,14.745098" id="Line-3" stroke="#FFFFFF" stroke-width="1.56862745" stroke-linecap="square"></path>
+                <path d="M5.01960784,18.4052288 L20.0784314,18.4052288" id="Line-3-Copy" stroke="#FFFFFF" stroke-width="1.56862745" stroke-linecap="square"></path>
+                <path d="M5.01960784,22.0653595 L20.0784314,22.0653595" id="Line-3-Copy-2" stroke="#FFFFFF" stroke-width="1.56862745" stroke-linecap="square"></path>
+            </g>
+        </g>
+    </g>
+</svg>
