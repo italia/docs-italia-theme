@@ -1,3 +1,5 @@
+var $tpl = require('./getTpl')
+
 var relatedDocuments = null
 
 function createCardElement (card, group) {
@@ -5,24 +7,12 @@ function createCardElement (card, group) {
     ? 'Publisher' + ' <a href="' + card.extra_data.publisher.canonical_url + '" target="_blank">' + card.extra_data.publisher.name + '</a>'
     : 'Progetto' + ' <a href="' + card.extra_data.publisher_project.canonical_url + '" target="_blank">' + card.extra_data.publisher_project.name + '</a>'
 
-  return (
-    '<div class="card-custom col-xs-12 col-sm-6 col-md-3 col-lg-3 p-2 p-md-3">' +
-      '<div class="card-wrapper">' +
-        '<div class="card">' +
-          '<div class="card-body p-0">' +
-            '<div class="categoryicon-top pb-3">' +
-              '<img src="_static/images/document.svg" alt="' + card.name + '">' +
-            '</div>' +
-            '<a href="' + card.canonical_url + '">' +
-              '<h5 class="card-title">' + card.name + '</h5>' +
-            '</a>' +
-            '<p class="card-text">' + card.description + '</p>' +
-          '</div>' +
-          '<div class="card-footer border-0 px-0 pb-0">' + footerContent + '</div>' +
-        '</div>' +
-      '</div>' +
-    '</div>'
-  )
+  return $tpl({
+    name: card.name,
+    url: card.canonical_url,
+    description: card.description,
+    footerContent: footerContent
+  }, 'related-document-card')
 }
 
 module.exports = {
