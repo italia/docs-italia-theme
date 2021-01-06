@@ -1,0 +1,121 @@
+.related-documents-modal {
+  .modal-dialog {
+    margin-top: 230px;
+    margin-bottom: 0;
+    min-height: calc(100% - 230px);
+    background-color: #fff;
+
+    .modal-content {
+      box-shadow: none;
+      border: none;
+      padding: 25px;
+
+      // Sections title
+      h5 {
+        color: #06c;
+      }
+
+      // Close modal button
+      button.close {
+        position: relative;
+        height: 35px;
+        width: 35px;
+
+        span {
+          &:first-child {
+            height: 23px;
+            width: 2px;
+            background: #5a6671;
+            display: block;
+            transform: rotate(45deg);
+            position: absolute;
+            top: 20%;
+            left: 48%;
+          }
+
+          &:last-child {
+            height: 23px;
+            width: 2px;
+            background: #5a6671;
+            display: block;
+            transform: rotate(-45deg);
+            position: absolute;
+            top: 20%;
+            left: 48%;
+          }
+        }
+      }
+
+      // Card
+      .card-custom {
+        .card-wrapper {
+          min-height: 27rem;
+          height: 27rem;
+
+          @media (max-width: 992px) {
+            min-height: 42rem;
+            height: 42rem;
+          }
+
+          @media (max-width: 767px) {
+            min-height: 27rem;
+            height: 27rem;
+          }
+
+          @media (max-width: 575px) {
+            min-height: auto;
+            height: auto;
+            margin-bottom: 32px;
+          }
+
+          &::before {
+            content: ' ';
+            background: #d8d8d8;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            width: 1px;
+            top: 0;
+          }
+
+          .card {
+            height: 100%;
+            border: 0;
+
+            .card-body {
+              .card-title {
+                color: #06c;
+                font-size: 1rem;
+                line-height: 1.44444rem;
+                font-weight: 700;
+                margin-bottom: 16px;
+                transition: 0.3s;
+              }
+
+              .card-text {
+                font-family: Lora, Georgia, serif;
+                font-size: 0.77778rem;
+                line-height: 1.2rem;
+                color: #435a70;
+              }
+            }
+
+            .card-footer {
+              font-size: 16px;
+              line-height: 1.2rem;
+              color: #435a70;
+            }
+          }
+        }
+
+        &:last-child {
+          .card-wrapper {
+            &::before {
+              background: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+}

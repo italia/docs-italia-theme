@@ -1,0 +1,47 @@
+<!-- Modal -->
+<div class="modal fade related-documents-modal" tabindex="1" role="dialog" id="related-documents-modal">
+  <div class="modal-dialog container-fluid container-fluid--desktop px-0" role="document">
+    <div class="modal-content">
+      <div class="d-flex justify-content-between align-items-center mt-5 mb-5">
+        <h2 class="mb-0">Documenti correlati</h2>
+        <button type="button" class="close p-0 pt-2" data-dismiss="modal" aria-label="Close">
+          <span></span><span></span>
+        </button>
+      </div>
+
+      <br />
+
+      <!-- Publisher -->
+      <!-- Title -->
+      <div id="related-documents-publisher-title" class="row" style="display: none">
+        <div class="col-12">
+          <h5 class="border-bottom pb-2 text-uppercase">{{publisher}}</h5>
+        </div>
+      </div>
+      <!-- Cards -->
+      <div id="related-documents-publisher-cards" class="row"></div>
+      <br />
+
+      <!-- Projects -->
+      <!-- Title -->
+      <div id="related-documents-projects-title" class="row" style="display: none">
+        <div class="col-12">
+          <h5 class="border-bottom pb-2 mt-4 text-uppercase">Altri documenti del progetto "{{publisher_project}}"</h5>
+        </div>
+      </div>
+      <!-- Cards -->
+      <div id="related-documents-projects-cards" class="row"></div>
+      <br />
+
+      <!-- Tags -->
+      <!-- Title -->
+      <div id="related-documents-tags-title" class="row" style="display: none">
+        <div class="col-12">
+          <h5 class="border-bottom pb-2 mt-4 text-uppercase">Altri documenti con tag simili</h5>
+        </div>
+      </div>
+      <!-- Cards -->
+      <div id="related-documents-tags-cards" class="row"></div>
+    </div>
+  </div>
+</div>

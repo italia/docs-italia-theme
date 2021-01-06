@@ -19,6 +19,7 @@ var themeStickyHeader = require('./sticky_header.js');
 var themeOffcanvasFeature = require('./offcanvas_feature.js');
 var themeSearchboxCollapse = require('./searchbox_collapse.js');
 var forumItalia = require('./forum_italia.js');
+var relatedDocuments = require('./related_documents');
 
 // Init all
 $(document).ready(function() {
@@ -37,6 +38,7 @@ $(document).ready(function() {
   themeOffcanvasFeature.init();
   themeSearchboxCollapse.init();
   forumItalia.init();
+  relatedDocuments.init();
 
   // Load tooltips when the ajax request for glossary terms is completed.
   function glossaryReady() {
