@@ -22,7 +22,7 @@ upcoming Docs Italia.
 
     # Add the Sphinx extension 'docs_italia_theme' in the extensions list
     extensions = [
-      ...,
+      # ...,
       'docs_italia_theme'
     ]
 
