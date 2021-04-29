@@ -257,7 +257,7 @@ def generate_glossary_json(app, doctree, docname):
         for node in doctree.traverse(glossary):
             for definition_list in node.children:
                 for definition_list_item in definition_list.children:
-                    term = definition_list_item.children[0].rawsource
+                    term = definition_list_item.children[0].attributes['ids'][0][5:]
                     definition = ''
                     for paragraphs in definition_list_item.children[1].children:
                         definition += paragraphs.rawsource + '\n'
