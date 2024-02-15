@@ -3,7 +3,7 @@ privacy:
   url: '/privacy-policy/'
 cookies:
   title: footer_link_cookies
-  url: '/cookies-policy'
+  url: '/cookies-policy/'
 legal:
   title: footer_link_legal_notes
-  url: '/note-legali'
+  url: '/note-legali/'
