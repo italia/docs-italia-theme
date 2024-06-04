@@ -108,6 +108,16 @@ def add_context_data(app, pagename, templatename, context, doctree):
             ('demo', '#'),
             ('docs italia', '#')
         ]
+    else:
+        try:
+            with open(os.path.join(app.builder.srcdir,'context.yml')) as context_settings:
+                data = context_settings.read()
+                data = yaml.safe_load(data)
+        except:
+            data = {
+            }
+
+        context.update(data)
 
     if 'docsitalia_data' in context:
         context['docstitle'] = context['docsitalia_data']['document']['name']
