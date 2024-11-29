@@ -189,8 +189,8 @@ def generate_additonal_tocs(app, pagename, templatename, context, doctree):
             figure_number = toc_fig_tables.get(figure_id)
             if figure_number is None:
                 continue
-            figure_title = figurenode.children[-1].children[0] or context['t']['no_description']
             try:
+                figure_title = figurenode.children[-1].children[0] or context['t']['no_description']
                 figure_text_string = u'Fig. {}.{} - {}'.format(
                     figure_number[0], figure_number[1], figure_title)
             except IndexError:
